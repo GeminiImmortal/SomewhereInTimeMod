@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "package": "net.geminiimmortal.mobius.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "mobius.refmap.json",
+  "mixins": [
+    "DimensionGeneratorSettingsMixin"
+  ],
+  "minVersion": "0.8"
+}

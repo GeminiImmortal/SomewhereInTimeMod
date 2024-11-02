@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bark",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "mobius:marrowood_log"
+    }
+  },
+  "result": {
+    "item": "mobius:marrowood_wood",
+    "count": 3
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "mobius:block/marrowood_pressure_plate"
+    },
+    "powered=true": {
+      "model": "mobius:block/marrowood_pressure_plate_down"
+    }
+  }
+}

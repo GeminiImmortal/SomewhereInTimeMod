@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_right_open",
+  "textures": {
+    "bottom": "mobius:block/marrowood_door_bottom",
+    "top": "mobius:block/marrowood_door_top"
+  }
+}

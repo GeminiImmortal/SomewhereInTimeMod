@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_slab",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "mobius:marrowood_planks"
+    }
+  },
+  "result": {
+    "item": "mobius:marrowood_slab",
+    "count": 6
+  }
+}

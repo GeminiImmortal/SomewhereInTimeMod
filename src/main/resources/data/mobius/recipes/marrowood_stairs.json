@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_stairs",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "mobius:marrowood_planks"
+    }
+  },
+  "result": {
+    "item": "mobius:marrowood_stairs",
+    "count": 4
+  }
+}

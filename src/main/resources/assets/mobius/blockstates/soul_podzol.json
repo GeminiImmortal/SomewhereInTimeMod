@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "mobius:block/soul_podzol"
+      },
+      {
+        "model": "mobius:block/soul_podzol",
+        "y": 90
+      },
+      {
+        "model": "mobius:block/soul_podzol",
+        "y": 180
+      },
+      {
+        "model": "mobius:block/soul_podzol",
+        "y": 270
+      }
+    ]
+  }
+}

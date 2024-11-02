@@ -1,0 +1,11 @@
+{
+  "type": "mobius:soul_forge",
+  "ingredients": [
+    {
+      "item": "mobius:living_manawood_log"
+    }
+  ],
+  "output": {
+    "item": "mobius:raw_mana"
+  }
+}

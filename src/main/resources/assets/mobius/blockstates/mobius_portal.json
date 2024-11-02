@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "mobius:block/mobius_portal_ns"
+    },
+    "axis=z": {
+      "model": "mobius:block/mobius_portal_ew"
+    }
+  }
+}

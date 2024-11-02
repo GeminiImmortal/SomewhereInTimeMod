@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "item": "mobius:hunting_table"
+    },
+    "title": "Kill Or Be Killed",
+    "description": "Craft or obtain a hunting table.",
+    "background": "mobius:textures/block/marrowood_log.png",
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "mobius:root",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "mobius:hunting_table"
+          }
+        ]
+      }
+    }
+  }
+}

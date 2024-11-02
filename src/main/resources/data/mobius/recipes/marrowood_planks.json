@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "mobius:marrowood_logs"
+    }
+  ],
+  "result": {
+    "item": "mobius:marrowood_planks",
+    "count": 4
+  }
+}

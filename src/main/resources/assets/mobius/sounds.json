@@ -1,0 +1,58 @@
+{
+  "upside_down": {
+    "sounds": [
+      "mobius:upside_down"
+    ]
+  },
+  "mobius_portal": {
+    "sounds": [
+      "mobius:mobius_portal"
+    ],
+    "subtitle": "Mobius portal hums"
+  },
+  "heart_golem_heal": {
+    "sounds": [
+      "mobius:heart_golem_heal"
+    ],
+    "subtitle": "Golem of hearts casts"
+  },
+  "winding_woods_ambient_mood": {
+    "sounds": [
+      "mobius:winding_woods_ambient_mood"
+    ],
+    "subtitle": "Eerie woodland noises"
+  },
+  "winding_woods_ambient_loop": {
+    "sounds": [
+      "mobius:winding_woods_ambient_loop"
+    ]
+  },
+  "faedeer_hurt": {
+    "sounds": [
+      "mobius:faedeer_hurt"
+    ],
+    "subtitle": "Faedeer hurts"
+  },
+  "colors": {
+    "sounds": [
+      "mobius:colors"
+    ]
+  },
+  "monster_hunter_working": {
+    "sounds": [
+      "mobius:monster_hunter_working"
+    ],
+    "subtitle": "Monster Hunter works"
+  },
+  "music_disc_march_of_the_illagers": {
+    "sounds": [
+      "mobius:music_disc_march_of_the_illagers"
+    ]
+  },
+  "magismith_works": {
+    "sounds": [
+      "mobius:magismith_works"
+    ],
+    "subtitle": "Magismith works"
+  }
+}

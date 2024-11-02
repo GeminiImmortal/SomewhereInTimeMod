@@ -1,0 +1,48 @@
+{
+  "item.mobius.candy_ring": "Candy Ring",
+  "item.mobius.fae_leather": "Fae Leather",
+  "item.mobius.vorpal_sword": "Vorpal Sword",
+  "item.mobius.marrowood_sign": "Marrowood Sign",
+  "item.mobius.raw_mana": "Refined Mana",
+
+  "entity.mobius.club_golem": "Golem of Clubs",
+  "entity.mobius.heart_golem": "Golem of Hearts",
+  "entity.mobius.diamond_golem": "Golem of Diamonds",
+  "entity.mobius.spade_golem": "Golem of Spades",
+  
+  "block.mobius.bone_leaves": "Bone Leaves",
+  "block.mobius.living_manawood_leaves": "Living Manawood Leaves",
+  "block.mobius.marrowood_door": "Marrowood Door",
+  "block.mobius.marrowood_fence": "Marrowood Fence",
+  "block.mobius.marrowood_fence_gate": "Marrowood Fence Gate",
+  "block.mobius.marrowood_log": "Marrowood Log",
+  "block.mobius.marrowood_planks": "Marrowood Planks",
+  "block.mobius.marrowood_slab": "Marrowood Slab",
+  "block.mobius.marrowood_stairs": "Marrowood Stairs",
+  "block.mobius.marrowood_trapdoor": "Marrowood Trapdoor",
+  "block.mobius.soul_podzol": "Soul Podzol",
+  "block.mobius.stripped_marrowood_log": "Stripped Marrowood Log",
+  "block.mobius.wasp_paper_block": "Wasp Paper Block",
+  "block.mobius.candycane_bricks": "Candycane Bricks",
+  "block.mobius.hunting_table": "Hunting Table",
+  "block.mobius.marrowood_sapling": "Marrowood Sapling",
+  "block.mobius.marrowood_button": "Marrowood Button",
+  "block.mobius.marrowood_pressure_plate": "Marrowood Pressure Plate",
+  "block.mobius.marrowood_wood": "Marrowood Wood",
+  "block.mobius.stripped_marrowood_wood": "Stripped Marrowood Wood",
+  "block.mobius.marrowood_sign": "Marrowood Sign",
+  "block.mobius.marrowood_wall_sign": "Marrowood Wall Sign",
+  "block.mobius.soul_forge": "Soul Forge",
+  "block.mobius.living_manawood_log": "Living Manawood Log",
+  "block.mobius.manawood_log": "Manawood Log",
+  "block.mobius.manawood_planks": "Manawood Planks",
+  "block.mobius.hematite": "Hematite",
+
+  "entity.minecraft.villager.mobius.monster_hunter": "Monster Hunter",
+  "entity.minecraft.villager.mobius.magismith": "Magismith",
+
+  "item.mobius.music_disc_march_of_the_illagers": "Music Disc",
+  "item.mobius.music_disc_march_of_the_illagers.desc": "SPiRiT - March of the Illagers",
+
+  "screen.mobius.soul_forge": "Soul Forge"
+}

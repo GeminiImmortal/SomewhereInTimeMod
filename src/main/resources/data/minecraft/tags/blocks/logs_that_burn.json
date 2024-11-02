@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "mobius:marrowood_log",
+    "mobius:stripped_marrowood_log",
+    "mobius:marrowood_wood",
+    "mobius:stripped_marrowood_wood",
+    "mobius:living_manawood_log",
+    "mobius:manawood_log"
+  ]
+}

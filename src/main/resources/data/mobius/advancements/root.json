@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "item": "mobius:candycane_bricks"
+    },
+    "title": "Mobius",
+    "description": "Travel to Mobius.",
+    "background": "mobius:textures/block/soul_podzol.png",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "location": {
+          "dimension": "mobius:mobius"
+        }
+      }
+    }
+  }
+}
+

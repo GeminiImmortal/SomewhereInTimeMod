@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "mobius:block/soul_forge",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "mobius:block/soul_forge"
+    },
+
+    "facing=south": {
+      "model": "mobius:block/soul_forge",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mobius:block/soul_forge",
+      "y": 270
+    }
+  }
+}

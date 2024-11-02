@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_pressure_plate",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "mobius:marrowood_planks"
+    }
+  },
+  "result": {
+    "item": "mobius:marrowood_pressure_plate"
+  }
+}

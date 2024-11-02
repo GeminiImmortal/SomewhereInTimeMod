@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "@X",
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "@": {
+      "item": "minecraft:leather"
+    },
+    "X": {
+      "item": "mobius:fae_leather"
+    }
+  },
+  "result": {
+    "item": "mobius:hunting_table"
+  }
+}
