@@ -4,6 +4,9 @@ import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.world.worldgen.CustomSurfaceBuilders;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.GrassBlock;
+import net.minecraft.block.SnowyDirtBlock;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
@@ -23,7 +26,7 @@ public class ModConfiguredSurfaceBuilders {
     ));
 
     public static ConfiguredSurfaceBuilder<?> FORSAKEN_THICKET = register("forsaken_thicket", SurfaceBuilder.DEFAULT.configured(new SurfaceBuilderConfig(
-            Blocks.GRASS_BLOCK.defaultBlockState(),
+            Blocks.GRASS_BLOCK.defaultBlockState().setValue(SnowyDirtBlock.SNOWY, true),
             Blocks.DIRT.defaultBlockState(),
             ModBlocks.HEMATITE.get().defaultBlockState()
     )));

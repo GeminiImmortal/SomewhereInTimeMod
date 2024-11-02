@@ -27,19 +27,21 @@ public class ModTreeGeneration {
                     .decorated(Placement.CHANCE.configured(
                             new ChanceConfig(50))));
 
+
             base.add(() -> ModConfiguredFeatures.CONFIGURED_MARROWOOD_TREE
                     .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
                     .decorated(Placement.COUNT_EXTRA.configured(
-                            new AtSurfaceWithExtraConfig(2, 0.2f, 1)))
+                            new AtSurfaceWithExtraConfig(2, 0.4f, 1)))
                     .decorated(Placement.CHANCE.configured(
-                            new ChanceConfig(4))));
+                            new ChanceConfig(2))));
 
             base.add(() -> ModConfiguredFeatures.CONFIGURED_MANAWOOD_TREE
                     .decorated(Features.Placements.HEIGHTMAP_DOUBLE)
                     .decorated(Placement.COUNT_EXTRA.configured(
                             new AtSurfaceWithExtraConfig(1,0.4f, 2)))
                     .decorated(Placement.CHANCE.configured(
-                            new ChanceConfig(2))));
+                            new ChanceConfig(2)))
+                    .countRandom(5));
 
         }
     }
