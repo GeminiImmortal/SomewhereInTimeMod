@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "mobius:block/manawood_slab"
+    },
+    "type=double": {
+      "model": "mobius:block/manawood_planks"
+    },
+    "type=top": {
+      "model": "mobius:block/manawood_slab_top"
+    }
+  }
+}

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "mobius:marrowood_slab"
+    "mobius:marrowood_slab",
+    "mobius:manawood_slab"
   ]
 }

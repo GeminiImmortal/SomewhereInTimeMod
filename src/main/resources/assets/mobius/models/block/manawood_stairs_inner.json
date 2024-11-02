@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "mobius:block/manawood_planks",
+    "side": "mobius:block/manawood_planks",
+    "top": "mobius:block/manawood_planks"
+  }
+}

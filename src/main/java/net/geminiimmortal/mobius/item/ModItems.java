@@ -55,6 +55,10 @@ public class ModItems {
     public static final RegistryObject<Item> LIVING_MANAWOOD_LEAVES = ITEMS.register("living_manawood_leaves", () -> new BlockItem(ModBlocks.LIVING_MANAWOOD_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> HEMATITE = ITEMS.register("hematite", () -> new BlockItem(ModBlocks.HEMATITE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MANAWOOD_LEAVES = ITEMS.register("manawood_leaves", () -> new BlockItem(ModBlocks.MANAWOOD_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> MANAWOOD_FENCE = ITEMS.register("manawood_fence", () -> new BlockItem(ModBlocks.MANAWOOD_FENCE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> MANAWOOD_FENCE_GATE = ITEMS.register("manawood_fence_gate", () -> new BlockItem(ModBlocks.MANAWOOD_FENCE_GATE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> MANAWOOD_SLAB = ITEMS.register("manawood_slab", () -> new BlockItem(ModBlocks.MANAWOOD_SLAB.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> MANAWOOD_STAIRS = ITEMS.register("manawood_stairs", () -> new BlockItem(ModBlocks.MANAWOOD_STAIRS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
 
     public static void register(IEventBus eventBus) {

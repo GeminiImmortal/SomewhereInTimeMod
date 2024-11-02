@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "mobius:marrowood_fence"
+    "mobius:marrowood_fence",
+    "mobius:manawood_fence"
   ]
 }
