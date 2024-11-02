@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top",
+  "textures": {
+    "top": "mobius:block/manawood_door_top",
+    "bottom": "mobius:block/manawood_door_bottom"
+  }
+}

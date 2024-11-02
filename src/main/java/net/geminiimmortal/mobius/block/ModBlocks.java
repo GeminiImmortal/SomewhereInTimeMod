@@ -118,6 +118,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> MANAWOOD_STAIRS = registerBlock("manawood_stairs",
             () -> new StairsBlock(MANAWOOD_PLANKS.get().defaultBlockState(), AbstractBlock.Properties.copy(Blocks.OAK_STAIRS)));
 
+    public static final RegistryObject<Block> MANAWOOD_DOOR = registerBlock("manawood_door",
+            () -> new DoorBlock(AbstractBlock.Properties.copy(Blocks.OAK_DOOR)));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         return toReturn;

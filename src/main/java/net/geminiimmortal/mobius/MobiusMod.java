@@ -145,6 +145,7 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.BONE_LEAVES.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.LIVING_MANAWOOD_LEAVES.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.MARROWOOD_SAPLING.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.MANAWOOD_DOOR.get(), RenderType.cutout());
 
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.SIGN_TILE_ENTITIES.get(),
                     SignTileEntityRenderer::new);
