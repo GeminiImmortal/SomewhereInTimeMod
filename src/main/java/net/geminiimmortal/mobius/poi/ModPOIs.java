@@ -1,16 +1,12 @@
-package net.geminiimmortal.mobius.ModPOIs;
+package net.geminiimmortal.mobius.poi;
 
 
-import com.google.common.collect.ImmutableSet;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.ModBlocks;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.village.PointOfInterest;
 import net.minecraft.village.PointOfInterestType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import static net.minecraftforge.registries.ForgeRegistries.POI_TYPES;
 

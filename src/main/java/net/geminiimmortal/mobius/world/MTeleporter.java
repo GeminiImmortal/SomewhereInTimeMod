@@ -1,6 +1,6 @@
 package net.geminiimmortal.mobius.world;
 
-import net.geminiimmortal.mobius.ModPOIs.ModPOIs;
+import net.geminiimmortal.mobius.poi.ModPOIs;
 import net.geminiimmortal.mobius.block.custom.MobiusPortalBlock;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;

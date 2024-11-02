@@ -2,13 +2,9 @@ package net.geminiimmortal.mobius.villager;
 
 import com.google.common.collect.ImmutableSet;
 import net.geminiimmortal.mobius.MobiusMod;
-import net.geminiimmortal.mobius.ModPOIs.ModPOIs;
+import net.geminiimmortal.mobius.poi.ModPOIs;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
-import net.minecraft.entity.villager.VillagerType;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

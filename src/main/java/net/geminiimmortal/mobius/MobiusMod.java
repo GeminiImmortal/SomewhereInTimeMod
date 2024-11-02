@@ -1,7 +1,7 @@
 package net.geminiimmortal.mobius;
 
 import com.google.common.collect.Maps;
-import net.geminiimmortal.mobius.ModPOIs.ModPOIs;
+import net.geminiimmortal.mobius.poi.ModPOIs;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.block.ModWoodTypes;
 import net.geminiimmortal.mobius.container.ModContainers;
