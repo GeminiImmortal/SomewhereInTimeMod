@@ -131,6 +131,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> MANAWOOD_PRESSURE_PLATE = registerBlock("manawood_pressure_plate",
             () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,AbstractBlock.Properties.copy(Blocks.OAK_PRESSURE_PLATE)));
 
+    public static final RegistryObject<Block> MANAWOOD_TRAPDOOR = registerBlock("manawood_trapdoor",
+            () -> new TrapDoorBlock(AbstractBlock.Properties.copy(Blocks.OAK_TRAPDOOR)));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         return toReturn;

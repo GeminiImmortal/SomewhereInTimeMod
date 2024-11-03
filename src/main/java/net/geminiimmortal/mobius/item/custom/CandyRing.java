@@ -5,6 +5,7 @@ import net.geminiimmortal.mobius.block.custom.MobiusPortalBlock;
 import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.item.Rarity;
 import net.minecraft.util.ActionResultType;
@@ -19,6 +20,7 @@ public class CandyRing extends Item {
         super(new Properties()
                 .stacksTo(1)
                 .rarity(Rarity.RARE)
+                .tab(ItemGroup.TAB_MISC)
         );
     }
 
