@@ -43,12 +43,18 @@
   "block.mobius.manawood_door": "Manawood Door",
   "block.mobius.hematite": "Hematite",
   "block.mobius.essence_channeler": "Essence Channeler",
+  "block.mobius.manawood_sapling": "Manawood Sapling",
+  "block.mobius.manawood_leaves": "Manawood Leaves",
+  "block.mobius.manawood_button": "Manawood Button",
+  "block.mobius.manawood_pressure_plate": "Manawood Pressure Plate",
 
   "entity.minecraft.villager.mobius.monster_hunter": "Monster Hunter",
   "entity.minecraft.villager.mobius.magismith": "Magismith",
 
   "item.mobius.music_disc_march_of_the_illagers": "Music Disc",
   "item.mobius.music_disc_march_of_the_illagers.desc": "SPiRiT - March of the Illagers",
+  "item.mobius.manawood_boat": "Manawood Boat",
+  "item.mobius.marrowood_boat": "Marrowood Boat",
 
   "screen.mobius.soul_forge": "Soul Forge"
 }

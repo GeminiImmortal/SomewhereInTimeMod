@@ -52,6 +52,12 @@ public class ModEntityTypes {
                                     EntityClassification.MISC).sized(0.5f, 0.5f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "marrowood_boat").toString()));
 
+    public static final RegistryObject<EntityType<ManawoodBoatEntity>> MANAWOOD_BOAT =
+            ENTITY_TYPES.register("manawood_boat",
+                    () -> EntityType.Builder.<ManawoodBoatEntity>of(ManawoodBoatEntity::new,
+                                    EntityClassification.MISC).sized(0.5f, 0.5f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "manawood_boat").toString()));
+
 
 
     public static void register(IEventBus eventBus) {

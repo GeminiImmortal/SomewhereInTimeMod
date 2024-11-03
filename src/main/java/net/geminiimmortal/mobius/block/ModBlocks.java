@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.block;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.custom.*;
+import net.geminiimmortal.mobius.block.custom.trees.ManawoodTree;
 import net.geminiimmortal.mobius.block.custom.trees.MarrowoodTree;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -120,6 +121,15 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> ESSENCE_CHANNELER = registerBlock("essence_channeler",
             () -> new EssenceChannelerBlock(AbstractBlock.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
+
+    public static final RegistryObject<Block> MANAWOOD_SAPLING = registerBlock("manawood_sapling",
+            () -> new SaplingBlock(new ManawoodTree(), AbstractBlock.Properties.copy(Blocks.OAK_SAPLING)));
+
+    public static final RegistryObject<Block> MANAWOOD_BUTTON = registerBlock("manawood_button",
+            () -> new WoodButtonBlock(AbstractBlock.Properties.copy(Blocks.OAK_BUTTON)));
+
+    public static final RegistryObject<Block> MANAWOOD_PRESSURE_PLATE = registerBlock("manawood_pressure_plate",
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,AbstractBlock.Properties.copy(Blocks.OAK_PRESSURE_PLATE)));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

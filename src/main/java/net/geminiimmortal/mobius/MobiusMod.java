@@ -147,11 +147,13 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.MARROWOOD_SAPLING.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.MANAWOOD_DOOR.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.ESSENCE_CHANNELER.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.MANAWOOD_SAPLING.get(), RenderType.cutout());
 
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.SIGN_TILE_ENTITIES.get(),
                     SignTileEntityRenderer::new);
 
             Atlases.addWoodType(ModWoodTypes.MARROWOOD);
+            Atlases.addWoodType(ModWoodTypes.MANAWOOD);
 
             ScreenManager.register(ModContainers.SOUL_FORGE_CONTAINER.get(),
                     SoulForgeScreen::new);
@@ -163,6 +165,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SPADE_GOLEM.get(), SpadeGolemRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.FAEDEER.get(), FaedeerRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MARROWOOD_BOAT.get(), CustomBoatRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MANAWOOD_BOAT.get(), ManawoodBoatRenderer::new);
 
     }
 

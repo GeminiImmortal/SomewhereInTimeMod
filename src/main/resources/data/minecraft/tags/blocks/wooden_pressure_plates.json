@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "mobius:marrowood_pressure_plate"
+    "mobius:marrowood_pressure_plate",
+    "mobius:manawood_pressure_plate"
   ]
 }
