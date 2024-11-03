@@ -54,5 +54,11 @@
       "mobius:magismith_works"
     ],
     "subtitle": "Magismith works"
+  },
+  "sage_works": {
+    "sounds": [
+      "mobius:sage_works"
+    ],
+    "subtitle": "Sage works"
   }
 }

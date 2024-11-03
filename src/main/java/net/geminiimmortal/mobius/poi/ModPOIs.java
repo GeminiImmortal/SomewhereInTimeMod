@@ -26,6 +26,10 @@ public class ModPOIs {
             POI.register("soul_forge_poi", () -> new PointOfInterestType("soul_forge_poi",
                     PointOfInterestType.getBlockStates(ModBlocks.SOUL_FORGE.get()), 1, 1));
 
+    public static final RegistryObject<PointOfInterestType> ESSENCE_CHANNELER =
+            POI.register("essence_channeler_poi", () -> new PointOfInterestType("essence_channeler_poi",
+                    PointOfInterestType.getBlockStates(ModBlocks.ESSENCE_CHANNELER.get()), 1, 1));
+
     public static void register(IEventBus eventBus) {
         POI.register(eventBus);
     }

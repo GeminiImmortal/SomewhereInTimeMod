@@ -1,10 +1,7 @@
 package net.geminiimmortal.mobius.block;
 
 import net.geminiimmortal.mobius.MobiusMod;
-import net.geminiimmortal.mobius.block.custom.MobiusPortalBlock;
-import net.geminiimmortal.mobius.block.custom.ModStandingSignBlock;
-import net.geminiimmortal.mobius.block.custom.ModWallSignBlock;
-import net.geminiimmortal.mobius.block.custom.SoulForgeBlock;
+import net.geminiimmortal.mobius.block.custom.*;
 import net.geminiimmortal.mobius.block.custom.trees.MarrowoodTree;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
@@ -120,6 +117,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> MANAWOOD_DOOR = registerBlock("manawood_door",
             () -> new DoorBlock(AbstractBlock.Properties.copy(Blocks.OAK_DOOR)));
+
+    public static final RegistryObject<Block> ESSENCE_CHANNELER = registerBlock("essence_channeler",
+            () -> new EssenceChannelerBlock(AbstractBlock.Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

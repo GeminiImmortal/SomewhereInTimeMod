@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "mobius:block/essence_channeler_east"
+    },
+    "facing=north": {
+      "model": "mobius:block/essence_channeler"
+    },
+
+    "facing=south": {
+      "model": "mobius:block/essence_channeler_south"
+    },
+    "facing=west": {
+      "model": "mobius:block/essence_channeler_west"
+    }
+  }
+}

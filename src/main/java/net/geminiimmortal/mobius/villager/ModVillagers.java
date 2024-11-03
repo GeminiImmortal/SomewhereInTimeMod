@@ -22,6 +22,10 @@ public class ModVillagers {
             VILLAGER_PROFESSIONS.register("magismith", () -> new VillagerProfession("magismith",
                     ModPOIs.SOUL_FORGE.get(), ImmutableSet.of(), ImmutableSet.of(), ModSounds.MAGISMITH_WORKS.get()));
 
+    public static final RegistryObject<VillagerProfession> SAGE =
+            VILLAGER_PROFESSIONS.register("sage", () -> new VillagerProfession("sage",
+                    ModPOIs.ESSENCE_CHANNELER.get(), ImmutableSet.of(), ImmutableSet.of(), ModSounds.SAGE_WORKS.get()));
+
     public static void register(IEventBus eventBus){
         VILLAGER_PROFESSIONS.register(eventBus);
     }

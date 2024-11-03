@@ -12,9 +12,6 @@ public class ModSounds {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MobiusMod.MOD_ID);
 
-    public static final RegistryObject<SoundEvent> UPSIDE_DOWN =
-            registerSoundEvent("upside_down");
-
     public static final RegistryObject<SoundEvent> MOBIUS_PORTAL_HUM =
             registerSoundEvent("mobius_portal");
 
@@ -38,6 +35,9 @@ public class ModSounds {
 
     public static final RegistryObject<SoundEvent> MAGISMITH_WORKS =
             registerSoundEvent("magismith_works");
+
+    public static final RegistryObject<SoundEvent> SAGE_WORKS =
+            registerSoundEvent("sage_works");
 
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, name)));

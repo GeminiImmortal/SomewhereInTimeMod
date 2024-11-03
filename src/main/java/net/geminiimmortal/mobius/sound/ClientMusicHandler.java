@@ -1,7 +1,6 @@
 package net.geminiimmortal.mobius.sound;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.BackgroundMusicSelector;
 import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -11,30 +10,26 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Mod.EventBusSubscriber(modid = "mobius", value = Dist.CLIENT)
 public class ClientMusicHandler {
 
     private static final ResourceLocation CUSTOM_DIMENSION = new ResourceLocation("mobius", "mobius");
-
-    public static final SoundEvent UPSIDE_DOWN_MUSIC = new SoundEvent(new ResourceLocation("mobius", "upside_down"));
     public static final SoundEvent COLORS_MUSIC = new SoundEvent(new ResourceLocation("mobius", "colors"));
 
     private static final List<SoundEvent> CUSTOM_MUSIC_TRACKS = new ArrayList<>();
+    private static final Map<SoundEvent, Integer> TRACK_DURATIONS = new HashMap<>();
+
     static {
-        CUSTOM_MUSIC_TRACKS.add(0,UPSIDE_DOWN_MUSIC);
-        CUSTOM_MUSIC_TRACKS.add(1,COLORS_MUSIC);
+        CUSTOM_MUSIC_TRACKS.add(COLORS_MUSIC);
+        TRACK_DURATIONS.put(COLORS_MUSIC, 140000); // Duration in milliseconds (e.g., 3 minutes)
     }
 
-    private static final int TRACK_SWITCH_DELAY = 6000; // Time between tracks
     private static final Random RANDOM = new Random();
 
     private static long trackStartTime = 0;
-
-
+    private static int currentTrackDuration = 0;
     private static boolean isPlayingCustomMusic = false;
 
     @SubscribeEvent
@@ -53,9 +48,14 @@ public class ClientMusicHandler {
     }
 
     private static void startCustomMusic(Minecraft minecraft) {
-        if (!isPlayingCustomMusic) {
+        long currentTime = System.currentTimeMillis();
+
+        if (!isPlayingCustomMusic || currentTime - trackStartTime > currentTrackDuration) {
             SoundEvent track = CUSTOM_MUSIC_TRACKS.get(RANDOM.nextInt(CUSTOM_MUSIC_TRACKS.size()));
             minecraft.getSoundManager().play(SimpleSound.forMusic(track));
+
+            trackStartTime = currentTime;  // Set the start time for the new track
+            currentTrackDuration = TRACK_DURATIONS.getOrDefault(track, 180000);  // Set duration for the track, default 3 mins
             isPlayingCustomMusic = true;
         }
     }
@@ -64,6 +64,7 @@ public class ClientMusicHandler {
         if (isPlayingCustomMusic) {
             minecraft.getSoundManager().stop();
             isPlayingCustomMusic = false;
+            trackStartTime = 0;
         }
     }
 
@@ -71,6 +72,6 @@ public class ClientMusicHandler {
         if (isPlayingCustomMusic) {
             minecraft.getMusicManager().stopPlaying();
         }
-
     }
 }
+
