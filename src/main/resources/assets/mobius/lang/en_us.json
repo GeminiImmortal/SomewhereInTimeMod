@@ -4,11 +4,22 @@
   "item.mobius.vorpal_sword": "Vorpal Sword",
   "item.mobius.marrowood_sign": "Marrowood Sign",
   "item.mobius.raw_mana": "Raw Mana",
+  "item.mobius.music_disc_march_of_the_illagers": "Music Disc",
+  "item.mobius.music_disc_march_of_the_illagers.desc": "SPiRiT - March of the Illagers",
+  "item.mobius.music_disc_bullyrag": "Music Disc",
+  "item.mobius.music_disc_bullyrag.desc": "SPiRiT - Bullyrag",
+  "item.mobius.manawood_boat": "Manawood Boat",
+  "item.mobius.marrowood_boat": "Marrowood Boat",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
   "entity.mobius.diamond_golem": "Golem of Diamonds",
   "entity.mobius.spade_golem": "Golem of Spades",
+  "entity.mobius.faedeer": "Faedeer",
+
+  "entity.minecraft.villager.mobius.monster_hunter": "Monster Hunter",
+  "entity.minecraft.villager.mobius.magismith": "Magismith",
+  "entity.minecraft.villager.mobius.sage": "Sage",
   
   "block.mobius.bone_leaves": "Bone Leaves",
   "block.mobius.living_manawood_leaves": "Living Manawood Leaves",
@@ -48,16 +59,6 @@
   "block.mobius.manawood_button": "Manawood Button",
   "block.mobius.manawood_pressure_plate": "Manawood Pressure Plate",
   "block.mobius.manawood_trapdoor": "Manawood Trapdoor",
-
-  "entity.minecraft.villager.mobius.monster_hunter": "Monster Hunter",
-  "entity.minecraft.villager.mobius.magismith": "Magismith",
-
-  "item.mobius.music_disc_march_of_the_illagers": "Music Disc",
-  "item.mobius.music_disc_march_of_the_illagers.desc": "SPiRiT - March of the Illagers",
-  "item.mobius.music_disc_bullyrag": "Music Disc",
-  "item.mobius.music_disc_bullyrag.desc": "SPiRiT - Bullyrag",
-  "item.mobius.manawood_boat": "Manawood Boat",
-  "item.mobius.marrowood_boat": "Marrowood Boat",
 
   "screen.mobius.soul_forge": "Soul Forge"
 }
