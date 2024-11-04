@@ -60,5 +60,10 @@
       "mobius:sage_works"
     ],
     "subtitle": "Sage works"
+  },
+  "music_disc_bullyrag": {
+    "sounds": [
+      "mobius:music_disc_bullyrag"
+    ]
   }
 }

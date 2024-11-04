@@ -39,6 +39,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> SAGE_WORKS =
             registerSoundEvent("sage_works");
 
+    public static final RegistryObject<SoundEvent> MUSIC_DISC_BULLYRAG =
+            registerSoundEvent("music_disc_bullyrag");
+
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, name)));
     }
