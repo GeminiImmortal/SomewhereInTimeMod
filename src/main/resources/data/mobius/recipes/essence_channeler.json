@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X",
+    "###",
+    "O O"
+  ],
+  "key": {
+    "#": {
+      "item": "mobius:manawood_slab"
+    },
+    "X": {
+      "item": "minecraft:bowl"
+    },
+    "O": {
+      "item": "mobius:living_manawood_log"
+    }
+  },
+  "result": {
+    "item": "mobius:essence_channeler"
+  }
+}
+

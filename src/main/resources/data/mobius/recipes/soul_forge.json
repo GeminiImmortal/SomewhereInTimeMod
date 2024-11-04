@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:dark_prismarine"
+    },
+    "X": {
+      "item": "minecraft:soul_campfire"
+    }
+  },
+  "result": {
+    "item": "mobius:soul_forge"
+  }
+}
