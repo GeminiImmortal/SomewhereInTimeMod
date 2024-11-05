@@ -89,6 +89,7 @@ public class ModItems {
     public static final RegistryObject<Item> HEMATITE = ITEMS.register("hematite", () -> new BlockItem(ModBlocks.HEMATITE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> HEMATITE_SLAB = ITEMS.register("hematite_slab", () -> new BlockItem(ModBlocks.HEMATITE_SLAB.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> HEMATITE_STAIRS = ITEMS.register("hematite_stairs", () -> new BlockItem(ModBlocks.HEMATITE_STAIRS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> HEMATITE_WALL = ITEMS.register("hematite_wall", () -> new BlockItem(ModBlocks.HEMATITE_WALL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Polished Hematite
     public static final RegistryObject<Item> POLISHED_HEMATITE = ITEMS.register("polished_hematite", () -> new BlockItem(ModBlocks.POLISHED_HEMATITE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
@@ -116,7 +117,7 @@ public class ModItems {
     //Music Discs
     public static final RegistryObject<Item> MUSIC_DISC_MARCH_OF_THE_ILLAGERS = ITEMS.register("music_disc_march_of_the_illagers", () -> new MusicDiscItem(1 , ModSounds.MUSIC_DISC_MARCH_OF_THE_ILLAGERS, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> MUSIC_DISC_BULLYRAG = ITEMS.register("music_disc_bullyrag", () -> new MusicDiscItem(2 , ModSounds.MUSIC_DISC_BULLYRAG, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> MUSIC_DISC_THE_LADY_RED = ITEMS.register("music_disc_the_lady_red", () -> new MusicDiscItem(1 , ModSounds.MUSIC_DISC_THE_LADY_RED, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> MUSIC_DISC_THE_LADY_RED = ITEMS.register("music_disc_the_lady_red", () -> new MusicDiscItem(3 , ModSounds.MUSIC_DISC_THE_LADY_RED, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
