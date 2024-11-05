@@ -68,6 +68,7 @@ public class ModItems {
     public static final RegistryObject<Item> MANAWOOD_PRESSURE_PLATE = ITEMS.register("manawood_pressure_plate", () -> new BlockItem(ModBlocks.MANAWOOD_PRESSURE_PLATE.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
     public static final RegistryObject<Item> MANAWOOD_TRAPDOOR = ITEMS.register("manawood_trapdoor", () -> new BlockItem(ModBlocks.MANAWOOD_TRAPDOOR.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
     public static final RegistryObject<Item> MUSIC_DISC_BULLYRAG = ITEMS.register("music_disc_bullyrag", () -> new MusicDiscItem(2 , ModSounds.MUSIC_DISC_BULLYRAG, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> MUSIC_DISC_THE_LADY_RED = ITEMS.register("music_disc_the_lady_red", () -> new MusicDiscItem(1 , ModSounds.MUSIC_DISC_THE_LADY_RED, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
 
 
     public static void register(IEventBus eventBus) {

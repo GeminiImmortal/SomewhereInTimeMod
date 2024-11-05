@@ -46,7 +46,7 @@
   },
   "music_disc_march_of_the_illagers": {
     "sounds": [
-      "mobius:music_disc_march_of_the_illagers"
+      { "name":"mobius:music_disc_march_of_the_illagers", "stream": true }
     ]
   },
   "magismith_works": {
@@ -63,7 +63,12 @@
   },
   "music_disc_bullyrag": {
     "sounds": [
-      "mobius:music_disc_bullyrag"
+      { "name":"mobius:music_disc_bullyrag", "stream": true }
+    ]
+  },
+  "music_disc_the_lady_red": {
+    "sounds": [
+      { "name":"mobius:music_disc_the_lady_red", "stream": true }
     ]
   }
 }
