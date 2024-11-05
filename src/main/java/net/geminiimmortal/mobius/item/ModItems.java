@@ -18,6 +18,10 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, MobiusMod.MOD_ID);
 
+    //Soil
+    public static final RegistryObject<Item> AURORA_GRASS_BLOCK = ITEMS.register("aurora_grass_block", () -> new BlockItem(ModBlocks.AURORA_GRASS_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> AURORA_DIRT = ITEMS.register("aurora_dirt", () -> new BlockItem(ModBlocks.AURORA_DIRT.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+
     //Leaves
     public static final RegistryObject<Item> BONE_LEAVES = ITEMS.register("bone_leaves", () -> new BlockItem(ModBlocks.BONE_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MANAWOOD_LEAVES = ITEMS.register("manawood_leaves", () -> new BlockItem(ModBlocks.MANAWOOD_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
@@ -30,6 +34,7 @@ public class ModItems {
 
     //Stripped Logs
     public static final RegistryObject<Item> STRIPPED_MARROWOOD_LOG = ITEMS.register("stripped_marrowood_log", () -> new BlockItem(ModBlocks.STRIPPED_MARROWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> STRIPPED_MANAWOOD_LOG = ITEMS.register("stripped_manawood_log", () -> new BlockItem(ModBlocks.STRIPPED_MANAWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Bark Blocks
     public static final RegistryObject<Item> MARROWOOD_WOOD = ITEMS.register("marrowood_wood", () -> new BlockItem(ModBlocks.MARROWOOD_WOOD.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
@@ -37,6 +42,7 @@ public class ModItems {
 
     //Stripped Bark Blocks
     public static final RegistryObject<Item> STRIPPED_MARROWOOD_WOOD = ITEMS.register("stripped_marrowood_wood", () -> new BlockItem(ModBlocks.STRIPPED_MARROWOOD_WOOD.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> STRIPPED_MANAWOOD_WOOD = ITEMS.register("stripped_manawood_wood", () -> new BlockItem(ModBlocks.STRIPPED_MANAWOOD_WOOD.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Planks
     public static final RegistryObject<Item> MARROWOOD_PLANKS = ITEMS.register("marrowood_planks", () -> new BlockItem(ModBlocks.MARROWOOD_PLANKS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));

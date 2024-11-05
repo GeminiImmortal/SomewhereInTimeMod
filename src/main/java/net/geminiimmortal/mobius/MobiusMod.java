@@ -113,6 +113,8 @@ public class MobiusMod
             AxeItem.STRIPABLES = Maps.newHashMap(AxeItem.STRIPABLES);
             AxeItem.STRIPABLES.put(ModBlocks.MARROWOOD_LOG.get(), ModBlocks.STRIPPED_MARROWOOD_LOG.get());
             AxeItem.STRIPABLES.put(ModBlocks.MARROWOOD_WOOD.get(), ModBlocks.STRIPPED_MARROWOOD_WOOD.get());
+            AxeItem.STRIPABLES.put(ModBlocks.MANAWOOD_LOG.get(), ModBlocks.STRIPPED_MANAWOOD_LOG.get());
+            AxeItem.STRIPABLES.put(ModBlocks.MANAWOOD_WOOD.get(), ModBlocks.STRIPPED_MANAWOOD_WOOD.get());
 
         });
     }

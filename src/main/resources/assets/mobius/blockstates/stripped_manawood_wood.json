@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "mobius:block/stripped_manawood_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "mobius:block/stripped_manawood_wood"
+    },
+    "axis=z": {
+      "model": "mobius:block/stripped_manawood_wood",
+      "x": 90
+    }
+  }
+}

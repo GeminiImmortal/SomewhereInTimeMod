@@ -68,6 +68,10 @@
   "block.mobius.polished_hematite_stairs": "Polished Hematite Stairs",
   "block.mobius.hematite_wall": "Hematite Wall",
   "block.mobius.manawood_wood": "Manawood Wood",
+  "block.mobius.stripped_manawood_log": "Stripped Manawood Log",
+  "block.mobius.stripped_manawood_wood": "Stripped Manawood Wood",
+  "block.mobius.aurora_dirt": "Aurora Dirt",
+  "block.mobius.aurora_grass_block": "Aurora Grass Block",
 
   "screen.mobius.soul_forge": "Soul Forge"
 }

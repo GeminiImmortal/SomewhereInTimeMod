@@ -3,6 +3,8 @@
   "values": [
     "mobius:manawood_log",
     "mobius:living_manawood_log",
-    "mobius:manawood_wood"
+    "mobius:manawood_wood",
+    "mobius:stripped_manawood_log",
+    "mobius:stripped_manawood_wood"
   ]
 }

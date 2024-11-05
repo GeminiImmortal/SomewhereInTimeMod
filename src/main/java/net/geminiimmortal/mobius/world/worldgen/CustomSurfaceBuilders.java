@@ -20,6 +20,10 @@ public class CustomSurfaceBuilders {
             "lake_gen_helper", () -> new LakeGenHelper(SurfaceBuilderConfig.CODEC)
     );
 
+    public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> DRACONIC_FORELANDS_SURFACE_BUILDER = SURFACE_BUILDERS.register(
+            "draconic_forelands_surface_builder", () -> new DraconicForelandsSurfaceBuilder(SurfaceBuilderConfig.CODEC)
+    );
+
     // Call this method in your main mod class
     public static void register(IEventBus eventBus) {
         SURFACE_BUILDERS.register(eventBus);

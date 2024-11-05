@@ -23,6 +23,12 @@ public class ModBlocks {
             () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)
                     .harvestLevel(2).harvestTool(ToolType.PICKAXE).strength(8f)));
 
+    public static final RegistryObject<Block> AURORA_DIRT = registerBlock("aurora_dirt",
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.DIRT)));
+
+    public static final RegistryObject<Block> AURORA_GRASS_BLOCK = registerBlock("aurora_grass_block",
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.DIRT)));
+
     public static final RegistryObject<Block> HEMATITE = registerBlock("hematite",
             () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
 
@@ -72,9 +78,12 @@ public class ModBlocks {
             () -> new TrapDoorBlock(AbstractBlock.Properties.copy(Blocks.OAK_TRAPDOOR)));
 
     public static final RegistryObject<Block> SOUL_PODZOL = registerBlock("soul_podzol",
-            () -> new Block(AbstractBlock.Properties.copy(Blocks.DIRT)));
+            () -> new SoulPodzol(AbstractBlock.Properties.copy(Blocks.GRASS_BLOCK)));
 
     public static final RegistryObject<Block> STRIPPED_MARROWOOD_LOG = registerBlock("stripped_marrowood_log",
+            () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+
+    public static final RegistryObject<Block> STRIPPED_MANAWOOD_LOG = registerBlock("stripped_manawood_log",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
 
     public static final RegistryObject<Block> WASP_PAPER_BLOCK = registerBlock("wasp_paper_block",
@@ -99,6 +108,9 @@ public class ModBlocks {
             () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_WOOD)));
 
     public static final RegistryObject<Block> STRIPPED_MARROWOOD_WOOD = registerBlock("stripped_marrowood_wood",
+            () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+
+    public static final RegistryObject<Block> STRIPPED_MANAWOOD_WOOD = registerBlock("stripped_manawood_wood",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
 
     public static final RegistryObject<Block> MARROWOOD_SIGN = registerBlock("marrowood_sign",
