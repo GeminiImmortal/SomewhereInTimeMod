@@ -60,8 +60,8 @@ public class ModBiomes {
 
         return (new Biome.Builder()).precipitation(Biome.RainType.NONE).biomeCategory(Biome.Category.MUSHROOM).depth(depth).scale(scale)
                 .temperature(1.5F).downfall(0.9F).specialEffects((new BiomeAmbience.Builder()).waterColor(16220377).waterFogColor(-3407872)
-                        .fogColor(-65536).skyColor(getSkyColorWithTemperatureModifier(0.8F)).foliageColorOverride(16220377).grassColorOverride(-3407872)
-                        .ambientParticle(new ParticleEffectAmbience(ParticleTypes.BUBBLE_POP, 0.003f)).skyColor(16220377)
+                        .fogColor(7535809).skyColor(11532160).foliageColorOverride(16220377).grassColorOverride(-3407872)
+                        .ambientParticle(new ParticleEffectAmbience(ParticleTypes.BUBBLE_POP, 0.003f))
                         .ambientLoopSound(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
                         .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_WARPED_FOREST_MOOD, 6000, 8, 2.0D))
                         .ambientAdditionsSound(new SoundAdditionsAmbience(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS, 0.0111D))
@@ -92,8 +92,8 @@ public class ModBiomes {
 
         return (new Biome.Builder()).precipitation(Biome.RainType.NONE).biomeCategory(Biome.Category.OCEAN).depth(depth).scale(scale)
                 .temperature(1.5F).downfall(0.9F).specialEffects((new BiomeAmbience.Builder()).waterColor(16220377).waterFogColor(-3407872)
-                        .fogColor(-65536).skyColor(getSkyColorWithTemperatureModifier(0.8F)).foliageColorOverride(16220377).grassColorOverride(-3407872)
-                        .ambientParticle(new ParticleEffectAmbience(ParticleTypes.BUBBLE_POP, 0.003f)).skyColor(16220377)
+                        .fogColor(7535809).skyColor(11532160).foliageColorOverride(16220377).grassColorOverride(-3407872)
+                        .ambientParticle(new ParticleEffectAmbience(ParticleTypes.BUBBLE_POP, 0.003f))
                         .ambientLoopSound(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP)
                         .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_WARPED_FOREST_MOOD, 6000, 8, 2.0D))
                         .ambientAdditionsSound(new SoundAdditionsAmbience(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS, 0.0111D))
@@ -116,7 +116,7 @@ public class ModBiomes {
 
         return (new Biome.Builder()).precipitation(Biome.RainType.SNOW).biomeCategory(Biome.Category.TAIGA).depth(depth).scale(scale)
                 .temperature(0.0F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(16220377).waterFogColor(4658242)
-                        .fogColor(4658242).skyColor(1381653).foliageColorOverride(4658242).grassColorOverride(4658242)
+                        .fogColor(7535809).skyColor(11532160).foliageColorOverride(4658242).grassColorOverride(4658242)
                         .ambientParticle(new ParticleEffectAmbience(ModParticles.FAEDEER_PARTICLE.get(), 0.001f))
                         .ambientLoopSound(ModSounds.WINDING_WOODS_AMBIENT_LOOP.get())
                         .ambientMoodSound(new MoodSoundAmbience(ModSounds.WINDING_WOODS_AMBIENT_MOOD.get(), 6000, 8, 2.0D))
