@@ -95,6 +95,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> MARROWOOD_WOOD = registerBlock("marrowood_wood",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_WOOD)));
 
+    public static final RegistryObject<Block> MANAWOOD_WOOD = registerBlock("manawood_wood",
+            () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_WOOD)));
+
     public static final RegistryObject<Block> STRIPPED_MARROWOOD_WOOD = registerBlock("stripped_marrowood_wood",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
 
