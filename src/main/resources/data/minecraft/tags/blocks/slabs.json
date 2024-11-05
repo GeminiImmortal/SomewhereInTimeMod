@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "mobius:marrowood_slab",
-    "mobius:manawood_slab"
+    "mobius:manawood_slab",
+    "mobius:hematite_slab",
+    "mobius:polished_hematite_slab"
   ]
 }

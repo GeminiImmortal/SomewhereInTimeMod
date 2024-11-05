@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "mobius:hematite_stairs"
+          "name": "mobius:polished_hematite_stairs"
         }
       ],
       "conditions": [

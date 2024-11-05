@@ -35,6 +35,12 @@ public class ModBlocks {
     public static final RegistryObject<Block> POLISHED_HEMATITE = registerBlock("polished_hematite",
             () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
 
+    public static final RegistryObject<Block> POLISHED_HEMATITE_SLAB = registerBlock("polished_hematite_slab",
+            () -> new SlabBlock(AbstractBlock.Properties.copy(Blocks.STONE_SLAB)));
+
+    public static final RegistryObject<Block> POLISHED_HEMATITE_STAIRS = registerBlock("polished_hematite_stairs",
+            () -> new StairsBlock(POLISHED_HEMATITE.get().defaultBlockState(), AbstractBlock.Properties.copy(Blocks.STONE_STAIRS)));
+
     public static final RegistryObject<Block> BONE_LEAVES = registerBlock("bone_leaves",
             () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES)));
 

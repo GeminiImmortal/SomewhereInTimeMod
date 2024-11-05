@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "mobius:hematite_slab",
+          "name": "mobius:polished_hematite_slab",
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -14,7 +14,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "mobius:hematite_slab",
+                  "block": "mobius:polished_hematite_slab",
                   "properties": {
                     "type": "double"
                   }

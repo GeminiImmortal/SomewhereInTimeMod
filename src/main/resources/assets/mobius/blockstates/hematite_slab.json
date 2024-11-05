@@ -4,7 +4,7 @@
       "model": "mobius:block/hematite_slab"
     },
     "type=double": {
-      "model": "mobius:block/hematite_planks"
+      "model": "mobius:block/hematite"
     },
     "type=top": {
       "model": "mobius:block/hematite_slab_top"

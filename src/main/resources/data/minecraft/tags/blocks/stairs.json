@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "mobius:marrowood_stairs",
-    "mobius:manawood_stairs"
+    "mobius:manawood_stairs",
+    "mobius:hematite_stairs",
+    "mobius:polished_hematite_stairs"
   ]
 }
