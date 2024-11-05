@@ -61,6 +61,9 @@
   "block.mobius.manawood_button": "Manawood Button",
   "block.mobius.manawood_pressure_plate": "Manawood Pressure Plate",
   "block.mobius.manawood_trapdoor": "Manawood Trapdoor",
+  "block.mobius.polished_hematite": "Polished Hematite",
+  "block.mobius.hematite_slab": "Hematite Slab",
+  "block.mobius.hematite_stairs": "Hematite Stairs",
 
   "screen.mobius.soul_forge": "Soul Forge"
 }

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "mobius:hematite"
+    }
+  },
+  "result": {
+    "item": "mobius:hematite_stairs",
+    "count": 4
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "mobius:block/hematite_slab"
+    },
+    "type=double": {
+      "model": "mobius:block/hematite_planks"
+    },
+    "type=top": {
+      "model": "mobius:block/hematite_slab_top"
+    }
+  }
+}

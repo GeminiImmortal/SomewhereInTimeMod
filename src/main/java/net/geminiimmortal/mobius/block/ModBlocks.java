@@ -23,6 +23,18 @@ public class ModBlocks {
             () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)
                     .harvestLevel(2).harvestTool(ToolType.PICKAXE).strength(8f)));
 
+    public static final RegistryObject<Block> HEMATITE = registerBlock("hematite",
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
+
+    public static final RegistryObject<Block> HEMATITE_SLAB = registerBlock("hematite_slab",
+            () -> new SlabBlock(AbstractBlock.Properties.copy(Blocks.STONE_SLAB)));
+
+    public static final RegistryObject<Block> HEMATITE_STAIRS = registerBlock("hematite_stairs",
+            () -> new StairsBlock(HEMATITE.get().defaultBlockState(), AbstractBlock.Properties.copy(Blocks.STONE_STAIRS)));
+
+    public static final RegistryObject<Block> POLISHED_HEMATITE = registerBlock("polished_hematite",
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
+
     public static final RegistryObject<Block> BONE_LEAVES = registerBlock("bone_leaves",
             () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES)));
 
@@ -106,9 +118,6 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> MANAWOOD_FENCE_GATE = registerBlock("manawood_fence_gate",
             () -> new FenceGateBlock(AbstractBlock.Properties.copy(Blocks.OAK_FENCE_GATE)));
-
-    public static final RegistryObject<Block> HEMATITE = registerBlock("hematite",
-            () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
 
     public static final RegistryObject<Block> MANAWOOD_SLAB = registerBlock("manawood_slab",
             () -> new SlabBlock(AbstractBlock.Properties.copy(Blocks.OAK_SLAB)));

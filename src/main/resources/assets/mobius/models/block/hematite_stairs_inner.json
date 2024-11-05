@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "mobius:block/hematite",
+    "side": "mobius:block/hematite",
+    "top": "mobius:block/hematite"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "mobius:hematite"
+    }
+  },
+  "result": {
+    "item": "mobius:polished_hematite",
+    "count": 4
+  }
+}
