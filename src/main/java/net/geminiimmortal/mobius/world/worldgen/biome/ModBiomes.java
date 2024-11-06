@@ -29,7 +29,7 @@ public class ModBiomes {
     public static final DeferredRegister<Biome> BIOMES
             = DeferredRegister.create(ForgeRegistries.BIOMES, MobiusMod.MOD_ID);
 
-    public static final RegistryKey<Biome> ROLLING_EXPANSE_KEY = RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation("mobius", "my_custom_biome"));
+    public static final RegistryKey<Biome> ROLLING_EXPANSE_KEY = RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation("mobius", "rolling_expanse"));
 
     public static final RegistryObject<Biome> MUSHROOM_FOREST = BIOMES.register("mushroom_forest",
             () -> makeMushroomForest(() -> ModConfiguredSurfaceBuilders.MUSHROOM_FOREST, 0.125f, 0.05f));
