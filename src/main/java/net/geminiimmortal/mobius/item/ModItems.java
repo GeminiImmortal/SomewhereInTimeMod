@@ -82,6 +82,7 @@ public class ModItems {
 
     //Signs
     public static final RegistryObject<Item> MARROWOOD_SIGN = ITEMS.register("marrowood_sign", () -> new SignItem(new Item.Properties().tab(ItemGroup.TAB_DECORATIONS).stacksTo(16),ModBlocks.MARROWOOD_SIGN.get(), ModBlocks.MARROWOOD_WALL_SIGN.get()));
+    public static final RegistryObject<Item> MANAWOOD_SIGN = ITEMS.register("manawood_sign", () -> new SignItem(new Item.Properties().tab(ItemGroup.TAB_DECORATIONS).stacksTo(16),ModBlocks.MANAWOOD_SIGN.get(), ModBlocks.MANAWOOD_WALL_SIGN.get()));
 
     //Saplings
     public static final RegistryObject<Item> MARROWOOD_SAPLING = ITEMS.register("marrowood_sapling", () -> new BlockItem(ModBlocks.MARROWOOD_SAPLING.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));

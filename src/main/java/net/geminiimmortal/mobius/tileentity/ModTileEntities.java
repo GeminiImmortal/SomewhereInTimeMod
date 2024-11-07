@@ -17,7 +17,9 @@ public class ModTileEntities {
     public static final RegistryObject<TileEntityType<ModSignsTileEntity>> SIGN_TILE_ENTITIES =
             TILE_ENTITIES.register("sign", () -> TileEntityType.Builder.of(ModSignsTileEntity::new,
                     ModBlocks.MARROWOOD_SIGN.get(),
-                    ModBlocks.MARROWOOD_WALL_SIGN.get())
+                    ModBlocks.MARROWOOD_WALL_SIGN.get(),
+                    ModBlocks.MANAWOOD_SIGN.get(),
+                    ModBlocks.MANAWOOD_WALL_SIGN.get())
                     .build(null));
 
     public static final RegistryObject<TileEntityType<SoulForgeTileEntity>> SOUL_FORGE_TILE_ENTITY =
