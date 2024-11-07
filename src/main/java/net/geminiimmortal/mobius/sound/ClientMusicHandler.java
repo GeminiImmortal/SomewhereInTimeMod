@@ -17,13 +17,16 @@ public class ClientMusicHandler {
 
     private static final ResourceLocation CUSTOM_DIMENSION = new ResourceLocation("mobius", "mobius");
     public static final SoundEvent COLORS_MUSIC = new SoundEvent(new ResourceLocation("mobius", "colors"));
+    public static final SoundEvent DREAM_STATE_MUSIC = new SoundEvent(new ResourceLocation("mobius", "dream_state"));
 
     private static final List<SoundEvent> CUSTOM_MUSIC_TRACKS = new ArrayList<>();
     private static final Map<SoundEvent, Integer> TRACK_DURATIONS = new HashMap<>();
 
     static {
         CUSTOM_MUSIC_TRACKS.add(COLORS_MUSIC);
-        TRACK_DURATIONS.put(COLORS_MUSIC, 140000); // Duration in milliseconds (e.g., 3 minutes)
+        CUSTOM_MUSIC_TRACKS.add(DREAM_STATE_MUSIC);
+        TRACK_DURATIONS.put(COLORS_MUSIC, 140000); // Duration in milliseconds
+        TRACK_DURATIONS.put(DREAM_STATE_MUSIC, 126000);
     }
 
     private static final Random RANDOM = new Random();
