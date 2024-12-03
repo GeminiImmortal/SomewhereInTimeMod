@@ -25,14 +25,14 @@ public class ClientMusicHandler {
     static {
         CUSTOM_MUSIC_TRACKS.add(COLORS_MUSIC);
         CUSTOM_MUSIC_TRACKS.add(DREAM_STATE_MUSIC);
-        TRACK_DURATIONS.put(COLORS_MUSIC, 140000); // Duration in milliseconds
-        TRACK_DURATIONS.put(DREAM_STATE_MUSIC, 126000);
+        TRACK_DURATIONS.put(COLORS_MUSIC, 2460); // Duration in ticks (20 ticks = 1 second)
+        TRACK_DURATIONS.put(DREAM_STATE_MUSIC, 2520);
     }
 
     private static final Random RANDOM = new Random();
 
-    private static long trackStartTime = 0;
-    private static int currentTrackDuration = 0;
+    private static long trackStartTime = 0; // In ticks
+    private static int currentTrackDuration = 0; // In ticks
     private static boolean isPlayingCustomMusic = false;
 
     @SubscribeEvent
@@ -43,22 +43,20 @@ public class ClientMusicHandler {
             World world = minecraft.level;
             if (world.dimension().location().equals(CUSTOM_DIMENSION)) {
                 stopVanillaMusic(minecraft);
-                startCustomMusic(minecraft);
+                startCustomMusic(minecraft, world.getGameTime());
             } else {
                 stopCustomMusic(minecraft);
             }
         }
     }
 
-    private static void startCustomMusic(Minecraft minecraft) {
-        long currentTime = System.currentTimeMillis();
-
-        if (!isPlayingCustomMusic || currentTime - trackStartTime > currentTrackDuration) {
+    private static void startCustomMusic(Minecraft minecraft, long gameTime) {
+        if (!isPlayingCustomMusic || gameTime - trackStartTime > currentTrackDuration) {
             SoundEvent track = CUSTOM_MUSIC_TRACKS.get(RANDOM.nextInt(CUSTOM_MUSIC_TRACKS.size()));
             minecraft.getSoundManager().play(SimpleSound.forMusic(track));
 
-            trackStartTime = currentTime;  // Set the start time for the new track
-            currentTrackDuration = TRACK_DURATIONS.getOrDefault(track, 180000);  // Set duration for the track, default 3 mins
+            trackStartTime = gameTime;  // Set the start time for the new track
+            currentTrackDuration = TRACK_DURATIONS.getOrDefault(track, 3600);  // Set duration for the track, default 3 minutes (3600 ticks)
             isPlayingCustomMusic = true;
         }
     }
