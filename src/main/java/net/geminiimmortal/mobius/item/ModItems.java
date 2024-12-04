@@ -92,6 +92,9 @@ public class ModItems {
     public static final RegistryObject<Item> MARROWOOD_BOAT = ITEMS.register("marrowood_boat", () -> new CustomBoatItem(new Item.Properties().tab(ItemGroup.TAB_TRANSPORTATION), "marrowood"));
     public static final RegistryObject<Item> MANAWOOD_BOAT = ITEMS.register("manawood_boat", () -> new ManawoodBoatItem(new Item.Properties().tab(ItemGroup.TAB_TRANSPORTATION), "manawood"));
 
+    //Flora
+    public static final RegistryObject<Item> CANDY_CANE = ITEMS.register("candy_cane", () -> new BlockItem(ModBlocks.CANDY_CANE.get() ,new Item.Properties().tab(ItemGroup.TAB_DECORATIONS).stacksTo(64)));
+
     //Hematite
     public static final RegistryObject<Item> HEMATITE = ITEMS.register("hematite", () -> new BlockItem(ModBlocks.HEMATITE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> HEMATITE_SLAB = ITEMS.register("hematite_slab", () -> new BlockItem(ModBlocks.HEMATITE_SLAB.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));

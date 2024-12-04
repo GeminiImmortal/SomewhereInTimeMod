@@ -11,6 +11,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -23,8 +24,10 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.geminiimmortal.mobius.tileentity.ModTileEntities;
+import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
@@ -73,6 +76,27 @@ public class SoulForgeBlock extends Block {
 
         return ActionResultType.SUCCESS;
     }
+
+    @Override
+    public void onRemove(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!state.is(newState.getBlock())) { // Check if the block is being replaced by the same type
+            TileEntity tileEntity = world.getBlockEntity(pos);
+            if (tileEntity instanceof SoulForgeTileEntity) {
+                // Drop inventory
+                ItemStackHandler inventory = ((SoulForgeTileEntity) tileEntity).getItemHandler();
+                for (int i = 0; i < inventory.getSlots(); i++) {
+                    ItemStack stack = inventory.getStackInSlot(i);
+                    if (!stack.isEmpty()) {
+                        popResource(world, pos, stack);
+                    }
+                }
+                // Remove the tile entity
+                world.removeBlockEntity(pos);
+            }
+            super.onRemove(state, world, pos, newState, isMoving); // Call the super method to finalize
+        }
+    }
+
 
     private INamedContainerProvider createContainerProvider(World worldIn, BlockPos pos) {
         return new INamedContainerProvider() {

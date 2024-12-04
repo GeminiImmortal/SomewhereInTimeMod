@@ -1,12 +1,16 @@
 package net.geminiimmortal.mobius.container.custom;
 
 import net.geminiimmortal.mobius.container.ModContainers;
+import net.geminiimmortal.mobius.tileentity.SoulForgeTileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IIntArray;
+import net.minecraft.util.IntArray;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -18,14 +22,30 @@ public class SoulForgeContainer extends Container {
     private final TileEntity tileEntity;
     private final PlayerEntity playerEntity;
     private final IItemHandler playerInventory;
+    private IIntArray fields;
+
+
 
     public SoulForgeContainer(int windowId, World world, BlockPos pos,
                               PlayerInventory playerInventory, PlayerEntity player) {
         super(ModContainers.SOUL_FORGE_CONTAINER.get(), windowId);
         this.tileEntity = world.getBlockEntity(pos);
+
+        if (tileEntity instanceof SoulForgeTileEntity) {
+            this.fields = ((SoulForgeTileEntity) tileEntity).getFields();
+            addDataSlots(fields); // Synchronize the fields
+            tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
+                addSlot(new SlotItemHandler(h, 0, 80, 13));
+                addSlot(new SlotItemHandler(h, 1, 80, 61));
+            });
+        } else {
+            this.fields = fields; // Fallback if tileEntity is null or of the wrong type
+        }
         playerEntity = player;
         this.playerInventory = new InvWrapper(playerInventory);
         layoutPlayerInventorySlots(8, 86);
+
+
 
         if (tileEntity != null) {
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
@@ -33,6 +53,22 @@ public class SoulForgeContainer extends Container {
                 addSlot(new SlotItemHandler(h, 1, 80, 61));
             });
         }
+    }
+
+
+
+    public int getProgressArrowScale() {
+
+        int progress = fields.get(0);
+        int workTime = fields.get(1);
+        if (progress > 0) {
+            return progress > 0 ? progress * 24 / workTime : 0;
+        }
+        return 0;
+    }
+
+    public SoulForgeTileEntity getTileEntity() {
+        return (SoulForgeTileEntity) tileEntity;
     }
 
     @Override

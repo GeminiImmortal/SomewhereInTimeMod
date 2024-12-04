@@ -12,7 +12,7 @@ import net.minecraft.util.text.ITextComponent;
 
 public class SoulForgeScreen extends ContainerScreen<SoulForgeContainer> {
     private final ResourceLocation GUI = new ResourceLocation(MobiusMod.MOD_ID,
-            "textures/gui/soul_forge_gui.png");
+            "textures/gui/soul_forge_gui_2.png");
 
     public SoulForgeScreen(SoulForgeContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
@@ -28,20 +28,15 @@ public class SoulForgeScreen extends ContainerScreen<SoulForgeContainer> {
     @Override
     protected void renderBg(MatrixStack matrixStack, float partialTicks, int x, int y) {
         RenderSystem.color4f(1f, 1f, 1f, 1f);
+        assert this.minecraft != null;
         this.minecraft.getTextureManager().bind(GUI);
-        int i = this.getGuiLeft();
-        int j = this.getGuiTop() + 2;
-        this.blit(matrixStack, i, j, 0, 0, this.getXSize(), this.getYSize());
+        int posX = (this.width - this.imageWidth) / 2;
+        int posY = (this.height - this.imageHeight) / 2;
 
+        blit(matrixStack, posX, posY + 2, 0, 0, this.imageWidth, this.imageHeight);
 
-            int arrowProgress = 0;
-            this.blit(matrixStack, x + 79, y + 34, 176, 0, arrowProgress + 1, 16);
+        // Progess arrow
+        blit(matrixStack, posX + 79, posY + 34, 176, 14, 16, menu.getProgressArrowScale() + 1);
 
     }
-
-   /* private int getArrowProgress() {
-        int progress = So;
-        int maxProgress = SoulForgeTileEntity.getMaxProgress();
-        return progress > 0 && maxProgress > 0 ? (progress * 24) / maxProgress : 0; // Assuming the arrow is 24 pixels wide
-    }*/
 }

@@ -10,12 +10,12 @@ import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.IIntArray;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import net.geminiimmortal.mobius.item.ModItems;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -24,6 +24,7 @@ import java.util.Optional;
 public class SoulForgeTileEntity extends TileEntity implements ITickableTileEntity {
     private int progress = 0;
     private static final int maxProgress = 100;
+    public static final int WORK_TIME = 2 * 60;
 
     private final ItemStackHandler itemHandler = createHandler();
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
@@ -34,6 +35,29 @@ public class SoulForgeTileEntity extends TileEntity implements ITickableTileEnti
 
     public SoulForgeTileEntity() {
         this(ModTileEntities.SOUL_FORGE_TILE_ENTITY.get());
+    }
+
+    private final IIntArray fields = new IIntArray() {
+        @Override
+        public int get(int index) {
+            if (index == 0) return progress;
+            if (index == 1) return WORK_TIME;
+            return 0;
+        }
+
+        @Override
+        public void set(int index, int value) {
+            if (index == 0) progress = value;
+        }
+
+        @Override
+        public int getCount() {
+            return 2; // Number of synchronized fields
+        }
+    };
+
+    public IIntArray getFields() {
+        return this.fields;
     }
 
     @Override
@@ -49,6 +73,8 @@ public class SoulForgeTileEntity extends TileEntity implements ITickableTileEnti
         compound.putInt("Progress", this.progress);
         return super.save(compound);
     }
+
+
 
     private ItemStackHandler createHandler() {
         return new ItemStackHandler(2) {
@@ -105,24 +131,33 @@ public class SoulForgeTileEntity extends TileEntity implements ITickableTileEnti
 
         recipe.ifPresent(iRecipe -> {
 
-            ItemStack output = iRecipe.getResultItem();
+            if (progress < WORK_TIME) {
+                ++progress;
+            }
 
-            craftTheItem(output);
-            System.out.println("Crafted: " + output);
+            if (progress >= WORK_TIME) {
+                ItemStack output = iRecipe.getResultItem();
 
-            setChanged();
+                craftTheItem(output);
+                System.out.println("Crafted: " + output);
+                progress = 0;
+                setChanged();
+            }
         });
 
     }
+
+    public ItemStackHandler getItemHandler() {
+        return this.itemHandler;
+    }
+
 
     private void craftTheItem(ItemStack output) {
         itemHandler.extractItem(0, 1, false);
         itemHandler.insertItem(1, output, false);
     }
 
-    public int getProgress() {
-        return progress;
-    }
+
 
     public static int getMaxProgress() {
         return maxProgress;

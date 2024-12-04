@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.block;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.custom.*;
+import net.geminiimmortal.mobius.block.custom.flora.CandyCane;
 import net.geminiimmortal.mobius.block.custom.trees.ManawoodTree;
 import net.geminiimmortal.mobius.block.custom.trees.MarrowoodTree;
 import net.minecraft.block.*;
@@ -125,8 +126,11 @@ public class ModBlocks {
     public static final RegistryObject<Block> MANAWOOD_WALL_SIGN = registerBlock("manawood_wall_sign",
             () -> new ModWallSignBlock(AbstractBlock.Properties.of(Material.WOOD), ModWoodTypes.MANAWOOD));
 
+    public static final RegistryObject<Block> CANDY_CANE = registerBlock("candy_cane",
+            () -> new CandyCane(AbstractBlock.Properties.of(Material.PLANT)));
+
     public static final RegistryObject<Block> SOUL_FORGE = registerBlock("soul_forge",
-            () -> new SoulForgeBlock(AbstractBlock.Properties.of(Material.STONE)));
+            () -> new SoulForgeBlock(AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3).strength(30F, 1200F)));
 
     public static final RegistryObject<Block> LIVING_MANAWOOD_LOG = registerBlock("living_manawood_log",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_LOG)));
