@@ -130,7 +130,7 @@ public class ModBlocks {
             () -> new CandyCane(AbstractBlock.Properties.of(Material.PLANT)));
 
     public static final RegistryObject<Block> SOUL_FORGE = registerBlock("soul_forge",
-            () -> new SoulForgeBlock(AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3).strength(30F, 1200F)));
+            () -> new SoulForgeBlock(AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3).strength(30F, 1200F).requiresCorrectToolForDrops()));
 
     public static final RegistryObject<Block> LIVING_MANAWOOD_LOG = registerBlock("living_manawood_log",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_LOG)));
