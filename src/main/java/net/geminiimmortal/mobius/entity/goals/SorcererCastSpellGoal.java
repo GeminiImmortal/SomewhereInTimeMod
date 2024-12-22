@@ -57,6 +57,7 @@ public class SorcererCastSpellGoal extends Goal {
 
     @Override
     public void tick() {
+        super.tick();
         chargeTime++;
 
         // Rotate to face the target during charging

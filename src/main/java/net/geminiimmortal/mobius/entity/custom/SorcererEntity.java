@@ -68,13 +68,14 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(5, new SorcererBackAwayGoal(this, 1.4, 12));
-        this.goalSelector.addGoal(2, new SorcererCastSpellGoal(this, 16));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 0.2f));
-        this.goalSelector.addGoal(1, new SwimGoal(this));
-        this.goalSelector.addGoal(3, new SorcererLightningStrikeGoal(this, 20, 24));
+        this.goalSelector.addGoal(1, new SwimGoal(this)); // High priority for swimming
+        this.goalSelector.addGoal(2, new SorcererBackAwayGoal(this, 1.4, 12)); // Defensive behavior
+        this.goalSelector.addGoal(4, new SorcererLightningStrikeGoal(this, 20, 24)); // Lightning attack
+        this.goalSelector.addGoal(3, new SorcererCastSpellGoal(this, 16)); // Main spell-casting behavior
+        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 0.2f)); // Passive observation
+        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true)); // Target acquisition
     }
+
 
     protected int getXpToDrop() {
         int baseXp = this.random.nextInt(5) + 2;
