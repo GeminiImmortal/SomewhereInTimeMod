@@ -68,12 +68,11 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new SwimGoal(this)); // High priority for swimming
-        this.goalSelector.addGoal(2, new SorcererBackAwayGoal(this, 1.4, 12)); // Defensive behavior
-        this.goalSelector.addGoal(4, new SorcererLightningStrikeGoal(this, 20, 24)); // Lightning attack
-        this.goalSelector.addGoal(3, new SorcererCastSpellGoal(this, 16)); // Main spell-casting behavior
-        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 0.2f)); // Passive observation
-        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true)); // Target acquisition
+        this.goalSelector.addGoal(1, new SwimGoal(this));
+        this.goalSelector.addGoal(2, new SorcererBackAwayGoal(this, 1.4, 12));
+        this.goalSelector.addGoal(3, new SorcererCastSpellGoal(this, 28));
+        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 0.2f));
+        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
 
@@ -123,6 +122,16 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn){
         return SoundEvents.PILLAGER_HURT;
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.VINDICATOR_AMBIENT;
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.PILLAGER_DEATH;
     }
 
 

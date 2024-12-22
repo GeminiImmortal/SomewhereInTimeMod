@@ -1,7 +1,9 @@
 package net.geminiimmortal.mobius.entity.goals;
 
 import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 
@@ -50,7 +52,10 @@ public class SorcererBackAwayGoal extends Goal {
         // Calculate the direction to move away from the player
         // Example of clamping rotation within valid bounds when moving the sorcerer away
         double dx = this.sorcerer.getX() - nearestPlayer.getX();
+        double dt = nearestPlayer.getX();
+        double ty = nearestPlayer.getY();
         double dz = this.sorcerer.getZ() - nearestPlayer.getZ();
+        double tz = nearestPlayer.getZ();
 
         double distance = MathHelper.sqrt(dx * dx + dz * dz);
 
@@ -64,6 +69,16 @@ public class SorcererBackAwayGoal extends Goal {
 
         // Move the sorcerer in the opposite direction
         this.sorcerer.getMoveControl().setWantedPosition(this.sorcerer.getX() + dx, this.sorcerer.getY(), this.sorcerer.getZ() + dz, this.speed);
+        strikeLightning(dt, ty, tz);
+    }
+
+    private void strikeLightning(double x, double y, double z) {
+        // Create and spawn a lightning bolt entity
+        LightningBoltEntity lightning = EntityType.LIGHTNING_BOLT.create(this.sorcerer.level);
+        if (lightning != null) {
+            lightning.moveTo(x, y, z, 0.0f, 0.0f); // Set position
+            this.sorcerer.level.addFreshEntity(lightning);
+        }
     }
 }
 
