@@ -54,6 +54,16 @@
       { "name": "mobius:march_of_the_illagers", "stream": true }
     ]
   },
+  "bullyrag": {
+    "sounds": [
+      { "name": "mobius:bullyrag", "stream": true }
+    ]
+  },
+  "the_lady_red": {
+    "sounds": [
+      { "name": "mobius:the_lady_red","stream": true }
+    ]
+  },
   "magismith_works": {
     "sounds": [
       "mobius:magismith_works"

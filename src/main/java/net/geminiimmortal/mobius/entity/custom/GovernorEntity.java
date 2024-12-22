@@ -1,16 +1,18 @@
 package net.geminiimmortal.mobius.entity.custom;
 
-import net.geminiimmortal.mobius.entity.goals.*;
-import net.geminiimmortal.mobius.particle.ModParticles;
+import net.geminiimmortal.mobius.entity.goals.GovernorKnivesOutSpellGoal;
+import net.geminiimmortal.mobius.entity.goals.SorcererBackAwayGoal;
+import net.geminiimmortal.mobius.entity.goals.SorcererCastSpellGoal;
+import net.geminiimmortal.mobius.entity.goals.TeleportAwayGoal;
 import net.geminiimmortal.mobius.sound.ClientMusicHandler;
-import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -22,8 +24,10 @@ import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.*;
+import net.minecraft.util.text.IFormattableTextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.Style;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerBossInfo;
@@ -36,33 +40,32 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class SorcererEntity extends MobEntity implements IAnimatable {
+public class GovernorEntity extends MobEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
-    private static final DataParameter<Boolean> CASTING = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> FLEEING = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> CASTING = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> FLEEING = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
     public GroundPathNavigator moveControl;
     private int particleTickCounter = 0;
     private static final int PARTICLE_SPAWN_INTERVAL = 5;
 
-    IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[CHAMPION FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.GOLD).withBold(true));
-    IFormattableTextComponent name = (StringTextComponent) new StringTextComponent("The Court Wizard").setStyle(Style.EMPTY.withColor(TextFormatting.AQUA).withBold(false));
+    IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[LEGENDARY FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.DARK_PURPLE).withBold(true));
+    IFormattableTextComponent name = (StringTextComponent) new StringTextComponent("His Lordship, The Governor").setStyle(Style.EMPTY.withColor(TextFormatting.DARK_BLUE).withBold(false));
     IFormattableTextComponent namePlate = rank.append(name);
 
     private final ServerBossInfo bossInfo = new ServerBossInfo(
             namePlate,  // Boss name
-            BossInfo.Color.BLUE,
-            BossInfo.Overlay.NOTCHED_10
+            BossInfo.Color.PURPLE,
+            BossInfo.Overlay.NOTCHED_20
     );
 
 
 
 
 
-    public SorcererEntity(EntityType<? extends MobEntity> type, World worldIn) {
+    public GovernorEntity(EntityType<? extends MobEntity> type, World worldIn) {
         super(type, worldIn);
         this.dropExperience();
         this.maxUpStep = 1;
-        this.setPersistenceRequired();
     }
 
     @Override
@@ -75,7 +78,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 150.0D)
+                .add(Attributes.MAX_HEALTH, 300.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.ATTACK_DAMAGE, 0.0D)
                 .add(Attributes.FOLLOW_RANGE, 0.0D)
@@ -88,16 +91,15 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new SwimGoal(this));
-        this.goalSelector.addGoal(4, new SorcererBackAwayGoal(this, 1.4, 5));
-        this.goalSelector.addGoal(2, new SorcererCastSpellGoal(this, 28, 100));
-        this.goalSelector.addGoal(3, new BubbleAttackGoal(this, 4, 20, 80));
-        this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 40f));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.goalSelector.addGoal(2, new TeleportAwayGoal(this, 8,(int) this.getX(), (int) this.getY(), (int) this.getZ(), (int) this.getX() + 8, (int) this.getY(), (int) this.getZ() + 8));
+        this.goalSelector.addGoal(3, new GovernorKnivesOutSpellGoal(this, 24));
+        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 0.2f));
+        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
 
     protected int getXpToDrop() {
-        int baseXp = this.random.nextInt(5) + 2;
+        int baseXp = this.random.nextInt(50) + 20;
         return baseXp;
     }
 
@@ -134,7 +136,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     public void startSeenByPlayer(ServerPlayerEntity player) {
         super.startSeenByPlayer(player);
         this.bossInfo.addPlayer(player);
-        ClientMusicHandler.playCourtWizardBossMusic(Minecraft.getInstance());
+        ClientMusicHandler.playGovernorBossMusic(Minecraft.getInstance());
     }
 
     @Override
@@ -147,7 +149,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
 
     private void spawnGlowParticle() {
         for (int i = 0; i < 1; i++) {
-            this.level.addParticle(ParticleTypes.DRAGON_BREATH,
+            this.level.addParticle(ParticleTypes.FLAME,
                     this.getX() + (Math.random() - 0.5) * 2,
                     this.getY() + 1.0,
                     this.getZ() + (Math.random() - 0.5) * 2,
@@ -173,16 +175,16 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
 
     @Override
     public void registerControllers(AnimationData data) {
-        AnimationController<SorcererEntity> controller = new AnimationController<>(this, "controller", 0, this::predicate);
-        AnimationController<SorcererEntity> alertedController = new AnimationController<>(this, "alertedController", 0, this::alertedPredicate);
+        AnimationController<GovernorEntity> controller = new AnimationController<>(this, "controller", 0, this::predicate);
+        AnimationController<GovernorEntity> alertedController = new AnimationController<>(this, "alertedController", 0, this::alertedPredicate);
 
         data.addAnimationController(controller);
         data.addAnimationController(alertedController);
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (this.getFleeing()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.walk", true));
+        if (this.onGround) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.idle", true));
             return PlayState.CONTINUE;
         }
         return PlayState.STOP;
@@ -191,10 +193,10 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
 
     private <E extends IAnimatable> PlayState alertedPredicate(AnimationEvent<E> event) {
         if (this.getCasting()) {
-           event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.cast", false));
+           event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.attack", false));
             return PlayState.CONTINUE;
         }
-        return PlayState.CONTINUE;
+        return PlayState.STOP;
     }
 
 

@@ -42,11 +42,12 @@ public class SorcererBackAwayGoal extends Goal {
 
     @Override
     public void tick() {
-        // Keep backing away while the player is too close
-        if (this.sorcerer.distanceTo(nearestPlayer) < safeDistance) {
+        super.tick();
+        if (this.sorcerer.distanceTo(nearestPlayer) < safeDistance * 0.9) { // Add a buffer
             moveAwayFromPlayer();
         }
     }
+
 
     private void moveAwayFromPlayer() {
         // Calculate the direction to move away from the player

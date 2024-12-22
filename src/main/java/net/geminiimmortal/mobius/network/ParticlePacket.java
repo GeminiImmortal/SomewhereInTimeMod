@@ -55,7 +55,11 @@ public class ParticlePacket {
             assert Minecraft.getInstance().level != null;
             Minecraft.getInstance().level.addParticle(ModParticles.KNIFE_RAIN_PARTICLE.get(), x, y, z, 0.0D, 0.0D, 0.0D);
         }
-        // Add more particle types as needed
+
+        if (particleType.equals("tornado")) {
+            assert Minecraft.getInstance().level != null;
+            Minecraft.getInstance().level.addParticle(ParticleTypes.SWEEP_ATTACK, x, y, z, 0.0D, 0.0D, 0.0D);
+        }
     }
 }
 

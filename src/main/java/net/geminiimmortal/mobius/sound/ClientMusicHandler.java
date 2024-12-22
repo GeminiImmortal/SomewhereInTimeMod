@@ -80,7 +80,14 @@ public class ClientMusicHandler {
     public static void playCourtWizardBossMusic(Minecraft minecraft) {
         if (isPlayingCustomMusic) {
             minecraft.getSoundManager().stop();
-            minecraft.getSoundManager().play(SimpleSound.forMusic(ModSounds.MARCH_OF_THE_ILLAGERS.get()));
+            minecraft.getSoundManager().play(SimpleSound.forMusic(ModSounds.THE_LADY_RED.get()));
+        }
+    }
+
+    public static void playGovernorBossMusic(Minecraft minecraft) {
+        if (isPlayingCustomMusic) {
+            minecraft.getSoundManager().stop();
+            minecraft.getSoundManager().play(SimpleSound.forMusic(ModSounds.BULLYRAG.get()));
         }
     }
 }
