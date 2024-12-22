@@ -75,5 +75,7 @@
   "block.mobius.aurora_dirt": "Aurora Dirt",
   "block.mobius.aurora_grass_block": "Aurora Grass Block",
 
-  "screen.mobius.soul_forge": "Soul Forge"
+  "screen.mobius.soul_forge": "Soul Forge",
+
+  "death.attack.knives_out": "%1$s was cut to ribbons."
 }

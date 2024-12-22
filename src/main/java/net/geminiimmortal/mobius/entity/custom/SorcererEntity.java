@@ -63,6 +63,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
         this.dropExperience();
         this.maxUpStep = 1;
         this.setPersistenceRequired();
+        this.fireImmune();
     }
 
     @Override
@@ -97,7 +98,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
 
 
     protected int getXpToDrop() {
-        int baseXp = this.random.nextInt(5) + 2;
+        int baseXp = this.random.nextInt(50) + 2;
         return baseXp;
     }
 

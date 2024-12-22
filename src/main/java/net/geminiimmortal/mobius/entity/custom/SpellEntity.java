@@ -1,7 +1,9 @@
 package net.geminiimmortal.mobius.entity.custom;
 
+import net.geminiimmortal.mobius.damage.KnivesOutDamageSource;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.geminiimmortal.mobius.util.CustomDamageEventHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -47,7 +49,7 @@ public class SpellEntity extends Entity {
         List<PlayerEntity> players = level.getEntitiesOfClass(PlayerEntity.class, knifeBoundingBox);
         for (PlayerEntity player : players) {
             if (knifeBoundingBox.intersects(player.getBoundingBox())) {
-                player.hurt(DamageSource.MAGIC, 2.5f); // Apply damage
+                player.hurt(KnivesOutDamageSource.KNIVES_OUT, 4f); // Apply damage
             }
         }
         spawnKnifeParticle();
