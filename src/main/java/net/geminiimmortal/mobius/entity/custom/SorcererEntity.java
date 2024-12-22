@@ -2,7 +2,10 @@ package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.entity.goals.*;
 import net.geminiimmortal.mobius.particle.ModParticles;
+import net.geminiimmortal.mobius.sound.ClientMusicHandler;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -10,6 +13,7 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -19,7 +23,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.*;
+import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerBossInfo;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -36,6 +43,17 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     public GroundPathNavigator moveControl;
     private int particleTickCounter = 0;
     private static final int PARTICLE_SPAWN_INTERVAL = 5;
+
+    IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[Minor Boss] ").setStyle(Style.EMPTY.withColor(TextFormatting.GOLD).withBold(true));
+    IFormattableTextComponent name = (StringTextComponent) new StringTextComponent("His Lordship's Court Wizard").setStyle(Style.EMPTY.withColor(TextFormatting.DARK_PURPLE));
+    IFormattableTextComponent namePlate = rank.append(name);
+
+    private final ServerBossInfo bossInfo = new ServerBossInfo(
+            namePlate,  // Boss name
+            BossInfo.Color.BLUE,
+            BossInfo.Overlay.NOTCHED_10
+    );
+
 
 
 
@@ -56,14 +74,14 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 50.0D)
+                .add(Attributes.MAX_HEALTH, 150.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.ATTACK_DAMAGE, 0.0D)
                 .add(Attributes.FOLLOW_RANGE, 0.0D)
-                .add(Attributes.ARMOR, 0.0D)
-                .add(Attributes.ARMOR_TOUGHNESS, 0.0D)
+                .add(Attributes.ARMOR, 15.0D)
+                .add(Attributes.ARMOR_TOUGHNESS, 2.5D)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.7D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.05D);
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.8D);
     }
 
     @Override
@@ -100,14 +118,30 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     @Override
     public void tick() {
         super.tick();
-
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
         particleTickCounter++;
 
         if (particleTickCounter >= PARTICLE_SPAWN_INTERVAL) {
             spawnGlowParticle();
             particleTickCounter = 0;
         }
+        ClientMusicHandler.stopVanillaMusic(Minecraft.getInstance());
     }
+
+    @Override
+    public void startSeenByPlayer(ServerPlayerEntity player) {
+        super.startSeenByPlayer(player);
+        this.bossInfo.addPlayer(player);
+        ClientMusicHandler.playCourtWizardBossMusic(Minecraft.getInstance());
+    }
+
+    @Override
+    public void stopSeenByPlayer(ServerPlayerEntity player) {
+        super.stopSeenByPlayer(player);
+        this.bossInfo.removePlayer(player);
+        ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
+    }
+
 
     private void spawnGlowParticle() {
         for (int i = 0; i < 1; i++) {

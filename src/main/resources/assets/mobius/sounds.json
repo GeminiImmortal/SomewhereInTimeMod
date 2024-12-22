@@ -49,6 +49,11 @@
       { "name":"mobius:music_disc_march_of_the_illagers", "stream": true }
     ]
   },
+  "march_of_the_illagers": {
+    "sounds": [
+      { "name": "mobius:march_of_the_illagers", "stream": true }
+    ]
+  },
   "magismith_works": {
     "sounds": [
       "mobius:magismith_works"

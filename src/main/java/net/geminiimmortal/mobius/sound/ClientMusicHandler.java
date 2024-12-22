@@ -1,9 +1,11 @@
 package net.geminiimmortal.mobius.sound;
 
+import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
@@ -61,7 +63,7 @@ public class ClientMusicHandler {
         }
     }
 
-    private static void stopCustomMusic(Minecraft minecraft) {
+    public static void stopCustomMusic(Minecraft minecraft) {
         if (isPlayingCustomMusic) {
             minecraft.getSoundManager().stop();
             isPlayingCustomMusic = false;
@@ -69,9 +71,16 @@ public class ClientMusicHandler {
         }
     }
 
-    private static void stopVanillaMusic(Minecraft minecraft) {
+    public static void stopVanillaMusic(Minecraft minecraft) {
         if (isPlayingCustomMusic) {
             minecraft.getMusicManager().stopPlaying();
+        }
+    }
+
+    public static void playCourtWizardBossMusic(Minecraft minecraft) {
+        if (isPlayingCustomMusic) {
+            minecraft.getSoundManager().stop();
+            minecraft.getSoundManager().play(SimpleSound.forMusic(ModSounds.MARCH_OF_THE_ILLAGERS.get()));
         }
     }
 }
