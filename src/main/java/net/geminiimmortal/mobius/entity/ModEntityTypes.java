@@ -46,6 +46,18 @@ public class ModEntityTypes {
                                     EntityClassification.CREATURE).sized(1f, 1f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "faedeer").toString()));
 
+    public static final RegistryObject<EntityType<SorcererEntity>> SORCERER =
+            ENTITY_TYPES.register("sorcerer",
+                    () -> EntityType.Builder.of(SorcererEntity::new,
+                                    EntityClassification.MONSTER).sized(1f, 2f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "sorcerer").toString()));
+
+    public static final RegistryObject<EntityType<SpellEntity>> SPELL =
+            ENTITY_TYPES.register("spell",
+                    () -> EntityType.Builder.of(SpellEntity::new,
+                                    EntityClassification.MISC).sized(1f, 1f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "spell").toString()));
+
     public static final RegistryObject<EntityType<ModBoatEntity>> MARROWOOD_BOAT =
             ENTITY_TYPES.register("marrowood_boat",
                     () -> EntityType.Builder.<ModBoatEntity>of(ModBoatEntity::new,

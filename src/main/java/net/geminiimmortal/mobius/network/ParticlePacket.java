@@ -1,5 +1,6 @@
 package net.geminiimmortal.mobius.network;
 
+import net.geminiimmortal.mobius.particle.ModParticles;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.ParticleTypes;
@@ -48,6 +49,11 @@ public class ParticlePacket {
             // Spawn flame particles at the specified location
             assert Minecraft.getInstance().level != null;
             Minecraft.getInstance().level.addParticle(ParticleTypes.HAPPY_VILLAGER, x, y, z, 0.0D, 0.05D, 0.0D);
+        }
+
+        if (particleType.equals("knife_rain")) {
+            assert Minecraft.getInstance().level != null;
+            Minecraft.getInstance().level.addParticle(ModParticles.KNIFE_RAIN_PARTICLE.get(), x, y, z, 0.0D, 0.0D, 0.0D);
         }
         // Add more particle types as needed
     }

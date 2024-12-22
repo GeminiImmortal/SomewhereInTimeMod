@@ -14,6 +14,9 @@ public class ModParticles {
     public static final RegistryObject<BasicParticleType> FAEDEER_PARTICLE = PARTICLES.register("faedeer_particle",
             () -> new BasicParticleType(true));
 
+    public static final RegistryObject<BasicParticleType> KNIFE_RAIN_PARTICLE = PARTICLES.register("knife_rain",
+            () -> new BasicParticleType(true));
+
     public static void register(IEventBus eventBus) {
         PARTICLES.register(eventBus);
     }

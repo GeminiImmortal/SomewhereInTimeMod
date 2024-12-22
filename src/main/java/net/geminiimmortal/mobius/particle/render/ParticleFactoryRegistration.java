@@ -16,6 +16,10 @@ public class ParticleFactoryRegistration {
                 ModParticles.FAEDEER_PARTICLE.get(),
                 FaedeerParticleRenderer::new
         );
+        Minecraft.getInstance().particleEngine.register(
+                ModParticles.KNIFE_RAIN_PARTICLE.get(),
+                KnifeRainParticleRenderer::new
+        );
     }
 }
 

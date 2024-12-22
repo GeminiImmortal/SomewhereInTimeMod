@@ -61,6 +61,12 @@
     ],
     "subtitle": "Sage works"
   },
+  "knife_rain": {
+    "sounds": [
+      "mobius:knife_rain"
+    ],
+    "subtitle": "Raining knives"
+  },
   "music_disc_bullyrag": {
     "sounds": [
       { "name":"mobius:music_disc_bullyrag", "stream": true }

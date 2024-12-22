@@ -39,6 +39,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> SAGE_WORKS =
             registerSoundEvent("sage_works");
 
+    public static final RegistryObject<SoundEvent> KNIFE_RAIN =
+            registerSoundEvent("knife_rain");
+
     public static final RegistryObject<SoundEvent> MUSIC_DISC_BULLYRAG =
             registerSoundEvent("music_disc_bullyrag");
 

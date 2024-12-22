@@ -169,6 +169,8 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.FAEDEER.get(), FaedeerRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MARROWOOD_BOAT.get(), CustomBoatRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MANAWOOD_BOAT.get(), ManawoodBoatRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SORCERER.get(), SorcererRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SPELL.get(), SpellRenderer::new);
 
     }
 
@@ -214,6 +216,7 @@ public class MobiusMod
             event.put(ModEntityTypes.HEART_GOLEM.get(), HeartGolemEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.SPADE_GOLEM.get(), SpadeGolemEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.FAEDEER.get(), FaedeerEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.SORCERER.get(), SorcererEntity.setCustomAttributes().build());
         }
 
     }
