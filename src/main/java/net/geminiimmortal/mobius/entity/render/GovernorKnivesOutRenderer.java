@@ -31,7 +31,7 @@ public class GovernorKnivesOutRenderer extends EntityRenderer<GovernorKnivesOutE
 
 
         float rotation = entity.getRotationAngle() + (partialTicks * 1.0f); // Smooth interpolation for rotation
-
+        matrixStack.mulPose(Vector3f.YP.rotationDegrees(rotation));
 
         // Render the spell (e.g., using a custom texture or a particle-like effect)
         IVertexBuilder vertexBuilder = buffer.getBuffer(RenderType.entityCutout(TEXTURE));
