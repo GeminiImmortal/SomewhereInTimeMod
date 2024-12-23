@@ -39,6 +39,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> MAGISMITH_WORKS =
             registerSoundEvent("magismith_works");
 
+    public static final RegistryObject<SoundEvent> DASH_IMPACT =
+            registerSoundEvent("dash_impact");
+
     public static final RegistryObject<SoundEvent> SAGE_WORKS =
             registerSoundEvent("sage_works");
 

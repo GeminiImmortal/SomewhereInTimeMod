@@ -82,6 +82,12 @@
     ],
     "subtitle": "Raining knives"
   },
+  "dash_impact": {
+    "sounds": [
+      "mobius:dash_impact"
+    ],
+    "subtitle": "Court Wizard impacts"
+  },
   "music_disc_bullyrag": {
     "sounds": [
       { "name":"mobius:music_disc_bullyrag", "stream": true }

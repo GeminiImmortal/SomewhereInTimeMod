@@ -31,7 +31,7 @@ public class AerialLightningBarrageGoal extends Goal {
             cooldownTimer--;  // Decrease cooldown
         }
         // Activate when health is 10% or below
-        return boss.getHealth() <= boss.getMaxHealth() * 0.25 && !isExecuting && cooldownTimer <= 0;
+        return boss.getHealth() <= boss.getMaxHealth() * 0.66 && boss.getHealth() >= boss.getMaxHealth() * 0.34 && !isExecuting && cooldownTimer <= 0;
     }
 
     @Override
@@ -77,8 +77,8 @@ public class AerialLightningBarrageGoal extends Goal {
         executedStrikes = 0;
         strikeTimer = 0;
         isExecuting = false;
-        cooldownTimer = cooldownDuration;
         boss.setNoGravity(false);
+        cooldownTimer = cooldownDuration;
     }
 }
 

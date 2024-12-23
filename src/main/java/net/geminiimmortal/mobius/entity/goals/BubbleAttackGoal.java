@@ -29,7 +29,7 @@ public class BubbleAttackGoal extends Goal {
     @Override
     public boolean canUse() {
         // Perform this attack if a player is nearby
-        return this.mob.getTarget() != null && this.mob.getTarget().distanceTo(this.mob) <= 8;
+        return this.mob.getTarget() != null && this.mob.getTarget().distanceTo(this.mob) <= 8 && this.mob.getHealth() > this.mob.getMaxHealth() * 0.34;
     }
 
     @Override

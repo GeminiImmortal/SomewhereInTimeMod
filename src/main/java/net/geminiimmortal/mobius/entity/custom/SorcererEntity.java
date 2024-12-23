@@ -51,6 +51,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final DataParameter<Boolean> CASTING = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> FLEEING = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> DASHING = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
     public GroundPathNavigator moveControl;
     private int particleTickCounter = 0;
     private static final int PARTICLE_SPAWN_INTERVAL = 5;
@@ -83,6 +84,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
         this.entityData.define(CASTING, false);
         this.entityData.define(FLEEING, false);
         this.entityData.define(doesCircleExist, false);
+        this.entityData.define(DASHING, false);
     }
 
 
@@ -102,6 +104,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new SwimGoal(this));
         this.goalSelector.addGoal(2, new AerialLightningBarrageGoal(this, 12, 4, 10));
+        this.goalSelector.addGoal(3, new MagiDashGoal(this));
         this.goalSelector.addGoal(6, new SorcererBackAwayGoal(this, 1.4, 5));
         this.goalSelector.addGoal(4, new SorcererCastSpellGoal(this, 28, 100));
         this.goalSelector.addGoal(5, new BubbleAttackGoal(this, 4, 20, 80));
@@ -177,6 +180,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
         ClientMusicHandler.stopVanillaMusic(Minecraft.getInstance());
         this.removeEffect(Effects.LEVITATION);
         summonCircle(this);
+
     }
 
     private void summonCircle(SorcererEntity boss) {
@@ -255,6 +259,10 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
             controller.markNeedsReload(); // Ensures GeckoLib resets its animation state
             controller.setAnimation(new AnimationBuilder().addAnimation("animation.model.cast", false));
             return PlayState.CONTINUE;
+        } else if (this.getDashing()) {
+            controller.markNeedsReload();
+            controller.setAnimation(new AnimationBuilder().addAnimation("animation.model.kneel", false));
+            return PlayState.CONTINUE;
         }
 
         // Clear animations if not casting
@@ -276,11 +284,16 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     public void setCasting(boolean alerted) {
         this.entityData.set(CASTING, alerted);
     }
+    public void setDashing(boolean dashing) { this.entityData.set(DASHING, dashing); }
     public void setFleeing(boolean fleeing) { this.entityData.set(FLEEING, fleeing); }
     public void setDoesCircleExist(boolean exists) { this.entityData.set(doesCircleExist,exists); }
 
     public boolean getCasting() {
         return this.entityData.get(CASTING);
+    }
+
+    public boolean getDashing() {
+        return this.entityData.get(DASHING);
     }
 
     public boolean getFleeing() {
