@@ -1,26 +1,36 @@
 package net.geminiimmortal.mobius.entity.custom;
 
-import net.geminiimmortal.mobius.entity.goals.*;
+import net.geminiimmortal.mobius.MobiusMod;
+import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.entity.goals.GovernorKnivesOutSpellGoal;
+import net.geminiimmortal.mobius.entity.goals.ShatterCloneGoal;
+import net.geminiimmortal.mobius.entity.goals.TeleportAwayGoal;
+import net.geminiimmortal.mobius.network.ParticlePacket;
 import net.geminiimmortal.mobius.sound.ClientMusicHandler;
+import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
-import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.brain.task.WalkToTargetTask;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.entity.projectile.TridentEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.Style;
@@ -28,6 +38,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerBossInfo;
+import net.minecraftforge.fml.network.PacketDistributor;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -37,32 +48,17 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-import java.util.List;
-
-public class GovernorEntity extends MobEntity implements IAnimatable {
+public class CloneEntity extends MobEntity implements IAnimatable, IRangedAttackMob {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
-    private static final DataParameter<Boolean> CASTING = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> FLEEING = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> CLONED = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
-    public GroundPathNavigator moveControl;
+    private static final DataParameter<Boolean> CASTING = EntityDataManager.defineId(CloneEntity.class, DataSerializers.BOOLEAN);
     private int particleTickCounter = 0;
     private static final int PARTICLE_SPAWN_INTERVAL = 5;
 
-    IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[LEGENDARY FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.DARK_PURPLE).withBold(true));
-    IFormattableTextComponent name = (StringTextComponent) new StringTextComponent("His Lordship, The Governor").setStyle(Style.EMPTY.withColor(TextFormatting.DARK_BLUE).withBold(false));
-    IFormattableTextComponent namePlate = rank.append(name);
-
-    private final ServerBossInfo bossInfo = new ServerBossInfo(
-            namePlate,  // Boss name
-            BossInfo.Color.PURPLE,
-            BossInfo.Overlay.NOTCHED_20
-    );
 
 
 
 
-
-    public GovernorEntity(EntityType<? extends MobEntity> type, World worldIn) {
+    public CloneEntity(EntityType<? extends MobEntity> type, World worldIn) {
         super(type, worldIn);
         this.dropExperience();
         this.maxUpStep = 1;
@@ -72,17 +68,15 @@ public class GovernorEntity extends MobEntity implements IAnimatable {
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(CASTING, false);
-        this.entityData.define(FLEEING, false);
-        this.entityData.define(CLONED, false);
     }
 
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 300.0D)
+                .add(Attributes.MAX_HEALTH, 10.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.ATTACK_DAMAGE, 0.0D)
-                .add(Attributes.FOLLOW_RANGE, 30.0D)
+                .add(Attributes.FOLLOW_RANGE, 0.0D)
                 .add(Attributes.ARMOR, 15.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 2.5D)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.7D)
@@ -91,17 +85,38 @@ public class GovernorEntity extends MobEntity implements IAnimatable {
 
     @Override
     protected void registerGoals() {
+        super.registerGoals();
         this.goalSelector.addGoal(1, new SwimGoal(this));
-        this.goalSelector.addGoal(2, new TeleportAwayGoal(this, 8,(int) this.getX(), (int) this.getY(), (int) this.getZ(), (int) this.getX() + 8, (int) this.getY(), (int) this.getZ() + 8));
-        this.goalSelector.addGoal(3, new CloneSpellGoal(this, this.getTarget()));
-        this.goalSelector.addGoal(4, new GovernorKnivesOutSpellGoal(this, 24));
+        this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 20, 15.0F));
+        this.goalSelector.addGoal(3, new ShatterCloneGoal(this.level.getNearestPlayer(this, 20), this));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 30f));
-        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+
+    }
+
+    @Override
+    public void performRangedAttack(LivingEntity target, float distanceFactor) {
+        // Create a new trident entity
+        TridentEntity trident = new TridentEntity(this.level, this, new ItemStack(Items.TRIDENT));
+        double dx = target.getX() - this.getX();
+        double dy = target.getY(0.5D) - trident.getY();
+        double dz = target.getZ() - this.getZ();
+        double distance = Math.sqrt(dx * dx + dz * dz);
+
+        // Set velocity for the trident
+        trident.shoot(dx, dy + distance * 0.2, dz, 1.5F, 0.5F);
+
+        // Set additional properties
+        trident.setOwner(this);
+        trident.pickup = AbstractArrowEntity.PickupStatus.DISALLOWED;
+
+        // Spawn the trident in the world
+        this.level.addFreshEntity(trident);
     }
 
 
     protected int getXpToDrop() {
-        int baseXp = this.random.nextInt(50) + 20;
+        int baseXp = 0;
         return baseXp;
     }
 
@@ -124,34 +139,19 @@ public class GovernorEntity extends MobEntity implements IAnimatable {
     @Override
     public void tick() {
         super.tick();
-        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
         particleTickCounter++;
+
 
         if (particleTickCounter >= PARTICLE_SPAWN_INTERVAL) {
             spawnGlowParticle();
             particleTickCounter = 0;
         }
-        ClientMusicHandler.stopVanillaMusic(Minecraft.getInstance());
-    }
-
-    @Override
-    public void startSeenByPlayer(ServerPlayerEntity player) {
-        super.startSeenByPlayer(player);
-        this.bossInfo.addPlayer(player);
-        ClientMusicHandler.playGovernorBossMusic(Minecraft.getInstance());
-    }
-
-    @Override
-    public void stopSeenByPlayer(ServerPlayerEntity player) {
-        super.stopSeenByPlayer(player);
-        this.bossInfo.removePlayer(player);
-        ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
     }
 
 
     private void spawnGlowParticle() {
         for (int i = 0; i < 1; i++) {
-            this.level.addParticle(ParticleTypes.FLAME,
+            this.level.addParticle(ParticleTypes.PORTAL,
                     this.getX() + (Math.random() - 0.5) * 2,
                     this.getY() + 1.0,
                     this.getZ() + (Math.random() - 0.5) * 2,
@@ -166,7 +166,7 @@ public class GovernorEntity extends MobEntity implements IAnimatable {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.BEACON_AMBIENT;
+        return SoundEvents.VINDICATOR_AMBIENT;
     }
 
     @Override
@@ -177,8 +177,8 @@ public class GovernorEntity extends MobEntity implements IAnimatable {
 
     @Override
     public void registerControllers(AnimationData data) {
-        AnimationController<GovernorEntity> controller = new AnimationController<>(this, "controller", 0, this::predicate);
-        AnimationController<GovernorEntity> alertedController = new AnimationController<>(this, "alertedController", 0, this::alertedPredicate);
+        AnimationController<CloneEntity> controller = new AnimationController<>(this, "controller", 0, this::predicate);
+        AnimationController<CloneEntity> alertedController = new AnimationController<>(this, "alertedController", 0, this::alertedPredicate);
 
         data.addAnimationController(controller);
         data.addAnimationController(alertedController);
@@ -195,7 +195,7 @@ public class GovernorEntity extends MobEntity implements IAnimatable {
 
     private <E extends IAnimatable> PlayState alertedPredicate(AnimationEvent<E> event) {
         if (this.getCasting()) {
-           event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.attack", false));
+           event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.attack", true));
             return PlayState.CONTINUE;
         }
         return PlayState.STOP;
@@ -210,14 +210,8 @@ public class GovernorEntity extends MobEntity implements IAnimatable {
     public void setCasting(boolean alerted) {
         this.entityData.set(CASTING, alerted);
     }
-    public void setFleeing(boolean fleeing) { this.entityData.set(FLEEING, fleeing); }
-    public void setCloned(boolean cloned) { this.entityData.set(CLONED, cloned); }
     public boolean getCasting() {
         return this.entityData.get(CASTING);
-    }
-    public boolean getCloned() { return this.entityData.get(CLONED); }
-    public boolean getFleeing() {
-        return this.entityData.get(FLEEING);
     }
 
 

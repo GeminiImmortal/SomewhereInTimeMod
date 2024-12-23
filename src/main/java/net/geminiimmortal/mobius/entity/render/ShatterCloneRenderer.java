@@ -2,7 +2,7 @@ package net.geminiimmortal.mobius.entity.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.geminiimmortal.mobius.entity.custom.SpellEntity;
+import net.geminiimmortal.mobius.entity.custom.ShatterCloneEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -12,21 +12,22 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Vector3f;
 
-public class SpellRenderer extends EntityRenderer<SpellEntity> {
-    private static final ResourceLocation TEXTURE = new ResourceLocation("mobius", "textures/entity/spell.png");
+public class ShatterCloneRenderer extends EntityRenderer<ShatterCloneEntity> {
+    private static final ResourceLocation TEXTURE = new ResourceLocation("mobius", "textures/entity/shatter_clone.png");
 
-    public SpellRenderer(EntityRendererManager renderManager) {
+    public ShatterCloneRenderer(EntityRendererManager renderManager) {
         super(renderManager);
     }
 
     @Override
-    public void render(SpellEntity entity, float entityYaw, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int packedLight) {
+    public void render(ShatterCloneEntity entity, float entityYaw, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int packedLight) {
         // Push matrix to handle custom transformations
         matrixStack.pushPose();
 
         // Apply transformations (position, rotation, scale)
         matrixStack.translate(0.0, 0.025, 0.0);
-        matrixStack.scale(8.0f, 1.0f, 8.0f);
+        matrixStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
+        matrixStack.scale(10.0f, 1.0f, 10.0f);
 
         float rotation = entity.getRotationAngle() + (partialTicks * 1.0f); // Smooth interpolation for rotation
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(rotation)); // Rotate around the Y-axis
@@ -69,7 +70,7 @@ public class SpellRenderer extends EntityRenderer<SpellEntity> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SpellEntity entity) {
+    public ResourceLocation getTextureLocation(ShatterCloneEntity entity) {
         return TEXTURE;
     }
 }

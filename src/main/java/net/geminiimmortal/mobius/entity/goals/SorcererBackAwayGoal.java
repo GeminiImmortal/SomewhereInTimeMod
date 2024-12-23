@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
 
 import java.util.EnumSet;
@@ -19,7 +20,7 @@ public class SorcererBackAwayGoal extends Goal {
         this.sorcerer = sorcerer;
         this.speed = speed;
         this.safeDistance = safeDistance;
-        this.setFlags(EnumSet.of(Flag.MOVE));
+    //    this.setFlags(EnumSet.of(Flag.MOVE));
     }
 
     @Override
@@ -57,7 +58,7 @@ public class SorcererBackAwayGoal extends Goal {
         double ty = nearestPlayer.getY();
         double dz = this.sorcerer.getZ() - nearestPlayer.getZ();
         double tz = nearestPlayer.getZ();
-
+    /*
         double distance = MathHelper.sqrt(dx * dx + dz * dz);
 
         if (distance > 0) {
@@ -69,8 +70,8 @@ public class SorcererBackAwayGoal extends Goal {
 
 
         // Move the sorcerer in the opposite direction
-        this.sorcerer.getMoveControl().setWantedPosition(this.sorcerer.getX() + dx, this.sorcerer.getY(), this.sorcerer.getZ() + dz, this.speed);
-        strikeLightning(dt, ty, tz);
+        this.sorcerer.getMoveControl().setWantedPosition(this.sorcerer.getX() + dx, this.sorcerer.getY(), this.sorcerer.getZ() + dz, this.speed); */
+        nearestPlayer.hurt(DamageSource.MAGIC, 2.5f);
     }
 
     private void strikeLightning(double x, double y, double z) {

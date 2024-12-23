@@ -1,12 +1,15 @@
 package net.geminiimmortal.mobius.entity.custom;
 
+import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.goals.*;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.sound.ClientMusicHandler;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SimpleSound;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -19,14 +22,19 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.GroundPathNavigator;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.*;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerBossInfo;
+import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -36,6 +44,8 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
+import java.util.List;
+
 public class SorcererEntity extends MobEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final DataParameter<Boolean> CASTING = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
@@ -43,6 +53,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     public GroundPathNavigator moveControl;
     private int particleTickCounter = 0;
     private static final int PARTICLE_SPAWN_INTERVAL = 5;
+    private static final DataParameter<Boolean> doesCircleExist = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
 
     IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[CHAMPION FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.GOLD).withBold(true));
     IFormattableTextComponent name = (StringTextComponent) new StringTextComponent("The Court Wizard").setStyle(Style.EMPTY.withColor(TextFormatting.AQUA).withBold(false));
@@ -64,6 +75,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
         this.maxUpStep = 1;
         this.setPersistenceRequired();
         this.fireImmune();
+        this.isImmobile();
     }
 
     @Override
@@ -71,6 +83,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
         super.defineSynchedData();
         this.entityData.define(CASTING, false);
         this.entityData.define(FLEEING, false);
+        this.entityData.define(doesCircleExist, false);
     }
 
 
@@ -106,6 +119,24 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     @Override
     public void die(DamageSource source) {
         super.die(source);
+
+        AxisAlignedBB boundingBox = new AxisAlignedBB(
+                this.getX() - 20, this.getY() - 20, this.getZ() - 20, // Adjust range as needed
+                this.getX() + 20, this.getY() + 20, this.getZ() + 20
+        );
+
+        List<Entity> nearbyEntities = this.level.getEntities(this, boundingBox);
+
+        for (Entity entity : nearbyEntities) {
+            if (entity instanceof ShatterCloneEntity) { // Replace with your entity class
+                entity.kill(); // Remove the entity
+            }
+        }
+
+        this.level.setSkyFlashTime(5);
+        this.level.playSound(null, this.position().x, this.position().y, this.position().z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundCategory.HOSTILE, 100.0f, 1.1f);
+        this.level.playSound(null, this.position().x, this.position().y, this.position().z, SoundEvents.ENDER_CHEST_CLOSE, SoundCategory.HOSTILE, 100.0f, 0.8f);
+
         if (!this.level.isClientSide()) {
             int experiencePoints = this.getXpToDrop();
 
@@ -129,6 +160,19 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
             particleTickCounter = 0;
         }
         ClientMusicHandler.stopVanillaMusic(Minecraft.getInstance());
+        this.removeEffect(Effects.LEVITATION);
+        this.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE));
+        summonCircle(this);
+    }
+
+    private void summonCircle(SorcererEntity boss) {
+        LivingEntity target = this.getTarget();
+        ShatterCloneEntity spell = new ShatterCloneEntity(ModEntityTypes.SHATTER_CLONE.get(), this.level);
+        if (target != null && target.isAlive() && !getDoesCircleExist()) {
+            this.level.addFreshEntity(spell);
+            setDoesCircleExist(true);
+        }
+        spell.setPos(boss.getX(), boss.getY(), boss.getZ());
     }
 
     @Override
@@ -163,7 +207,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.VINDICATOR_AMBIENT;
+        return SoundEvents.BEACON_AMBIENT;
     }
 
     @Override
@@ -191,12 +235,24 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
 
 
     private <E extends IAnimatable> PlayState alertedPredicate(AnimationEvent<E> event) {
+        AnimationController<?> controller = event.getController();
+
         if (this.getCasting()) {
-           event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.cast", false));
+            // Force animation replay
+            controller.markNeedsReload(); // Ensures GeckoLib resets its animation state
+            controller.setAnimation(new AnimationBuilder().addAnimation("animation.model.cast", false));
             return PlayState.CONTINUE;
+        }
+
+        // Clear animations if not casting
+        if (controller.getCurrentAnimation() != null) {
+            controller.setAnimation(new AnimationBuilder().clearAnimations());
         }
         return PlayState.CONTINUE;
     }
+
+
+
 
 
     @Override
@@ -208,6 +264,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
         this.entityData.set(CASTING, alerted);
     }
     public void setFleeing(boolean fleeing) { this.entityData.set(FLEEING, fleeing); }
+    public void setDoesCircleExist(boolean exists) { this.entityData.set(doesCircleExist,exists); }
 
     public boolean getCasting() {
         return this.entityData.get(CASTING);
@@ -215,6 +272,10 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
 
     public boolean getFleeing() {
         return this.entityData.get(FLEEING);
+    }
+
+    public boolean getDoesCircleExist() {
+        return this.entityData.get(doesCircleExist);
     }
 
 
