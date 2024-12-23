@@ -17,6 +17,7 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -74,8 +75,6 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
         this.dropExperience();
         this.maxUpStep = 1;
         this.setPersistenceRequired();
-        this.fireImmune();
-        this.isImmobile();
     }
 
     @Override
@@ -89,23 +88,24 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 150.0D)
+                .add(Attributes.MAX_HEALTH, 200.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.ATTACK_DAMAGE, 0.0D)
                 .add(Attributes.FOLLOW_RANGE, 0.0D)
                 .add(Attributes.ARMOR, 15.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 2.5D)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.7D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.8D);
+                .add(Attributes.KNOCKBACK_RESISTANCE, 1D);
     }
 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new SwimGoal(this));
-        this.goalSelector.addGoal(4, new SorcererBackAwayGoal(this, 1.4, 5));
-        this.goalSelector.addGoal(2, new SorcererCastSpellGoal(this, 28, 100));
-        this.goalSelector.addGoal(3, new BubbleAttackGoal(this, 4, 20, 80));
-        this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 40f));
+        this.goalSelector.addGoal(2, new AerialLightningBarrageGoal(this, 12, 4, 10));
+        this.goalSelector.addGoal(6, new SorcererBackAwayGoal(this, 1.4, 5));
+        this.goalSelector.addGoal(4, new SorcererCastSpellGoal(this, 28, 100));
+        this.goalSelector.addGoal(5, new BubbleAttackGoal(this, 4, 20, 80));
+        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 40f));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
@@ -113,6 +113,21 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     protected int getXpToDrop() {
         int baseXp = this.random.nextInt(50) + 2;
         return baseXp;
+    }
+
+    public void teleportTo(double x, double y, double z) {
+        this.level.addParticle(ParticleTypes.PORTAL, this.getX(), this.getY(), this.getZ(), 0.5, 0.5, 0.5);
+        super.teleportTo(x, y, z);
+        this.level.playSound(null, x, y, z, SoundEvents.ENDERMAN_TELEPORT, SoundCategory.HOSTILE, 10.0F, 1.0F);
+    }
+
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+        if (this.isNoGravity()) {
+            return false; // Ignore damage during barrage
+        }
+        if (source == DamageSource.FALL) return false;
+        return super.hurt(source, amount);
     }
 
 
@@ -135,7 +150,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
 
         this.level.setSkyFlashTime(5);
         this.level.playSound(null, this.position().x, this.position().y, this.position().z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundCategory.HOSTILE, 100.0f, 1.1f);
-        this.level.playSound(null, this.position().x, this.position().y, this.position().z, SoundEvents.ENDER_CHEST_CLOSE, SoundCategory.HOSTILE, 100.0f, 0.8f);
+        this.level.playSound(null, this.position().x, this.position().y, this.position().z, SoundEvents.ENDER_CHEST_OPEN, SoundCategory.HOSTILE, 100.0f, 0.8f);
 
         if (!this.level.isClientSide()) {
             int experiencePoints = this.getXpToDrop();
@@ -161,7 +176,6 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
         }
         ClientMusicHandler.stopVanillaMusic(Minecraft.getInstance());
         this.removeEffect(Effects.LEVITATION);
-        this.addEffect(new EffectInstance(Effects.FIRE_RESISTANCE));
         summonCircle(this);
     }
 
@@ -214,7 +228,6 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     protected SoundEvent getDeathSound() {
         return SoundEvents.PILLAGER_DEATH;
     }
-
 
     @Override
     public void registerControllers(AnimationData data) {

@@ -27,7 +27,7 @@ public class ShatterCloneRenderer extends EntityRenderer<ShatterCloneEntity> {
         // Apply transformations (position, rotation, scale)
         matrixStack.translate(0.0, 0.025, 0.0);
         matrixStack.mulPose(Vector3f.XP.rotationDegrees(180.0F));
-        matrixStack.scale(10.0f, 1.0f, 10.0f);
+        matrixStack.scale(14.0f, 1.0f, 14.0f);
 
         float rotation = entity.getRotationAngle() + (partialTicks * 1.0f); // Smooth interpolation for rotation
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(rotation)); // Rotate around the Y-axis

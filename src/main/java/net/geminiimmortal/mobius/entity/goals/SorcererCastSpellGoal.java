@@ -91,7 +91,7 @@ public class SorcererCastSpellGoal extends Goal {
             double endZ = target.getZ();
 
             // Calculate the number of particles and interpolate their position
-            int particleCount = 300; // Example count
+            int particleCount = 50; // Example count
             for (int i = 0; i < particleCount; i++) {
                 double t = (double) i / (particleCount - 1);
                 double particleX = startX + (endX - startX) * t;
