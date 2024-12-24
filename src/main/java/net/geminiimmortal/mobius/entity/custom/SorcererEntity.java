@@ -56,6 +56,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     private int particleTickCounter = 0;
     private static final int PARTICLE_SPAWN_INTERVAL = 5;
     private static final DataParameter<Boolean> doesCircleExist = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
+    ShatterCloneEntity spell = new ShatterCloneEntity(ModEntityTypes.SHATTER_CLONE.get(), this.level);
 
     IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[CHAMPION FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.GOLD).withBold(true));
     IFormattableTextComponent name = (StringTextComponent) new StringTextComponent("The Court Wizard").setStyle(Style.EMPTY.withColor(TextFormatting.AQUA).withBold(false));
@@ -151,6 +152,8 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
             }
         }
 
+        spell.kill();
+
         this.level.setSkyFlashTime(5);
         this.level.playSound(null, this.position().x, this.position().y, this.position().z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundCategory.HOSTILE, 100.0f, 1.1f);
         this.level.playSound(null, this.position().x, this.position().y, this.position().z, SoundEvents.ENDER_CHEST_OPEN, SoundCategory.HOSTILE, 100.0f, 0.8f);
@@ -185,7 +188,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
 
     private void summonCircle(SorcererEntity boss) {
         LivingEntity target = this.getTarget();
-        ShatterCloneEntity spell = new ShatterCloneEntity(ModEntityTypes.SHATTER_CLONE.get(), this.level);
+
         if (target != null && target.isAlive() && !getDoesCircleExist()) {
             this.level.addFreshEntity(spell);
             setDoesCircleExist(true);
