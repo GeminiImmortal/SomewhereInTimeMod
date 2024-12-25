@@ -102,6 +102,10 @@ public class ModItems {
     public static final RegistryObject<Item> HEMATITE_STAIRS = ITEMS.register("hematite_stairs", () -> new BlockItem(ModBlocks.HEMATITE_STAIRS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> HEMATITE_WALL = ITEMS.register("hematite_wall", () -> new BlockItem(ModBlocks.HEMATITE_WALL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
+    //Ores
+    public static final RegistryObject<Item> NICKEL_ORE = ITEMS.register("nickel_ore", () -> new BlockItem(ModBlocks.NICKEL_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> HEMATITE_IRON_ORE = ITEMS.register("hematite_iron_ore", () -> new BlockItem(ModBlocks.HEMATITE_IRON_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+
     //Polished Hematite
     public static final RegistryObject<Item> POLISHED_HEMATITE = ITEMS.register("polished_hematite", () -> new BlockItem(ModBlocks.POLISHED_HEMATITE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> POLISHED_HEMATITE_SLAB = ITEMS.register("polished_hematite_slab", () -> new BlockItem(ModBlocks.POLISHED_HEMATITE_SLAB.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
@@ -134,8 +138,6 @@ public class ModItems {
     public static final RegistryObject<Item> MUSIC_DISC_BULLYRAG = ITEMS.register("music_disc_bullyrag", () -> new MusicDiscItem(2 , ModSounds.MUSIC_DISC_BULLYRAG, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> MUSIC_DISC_THE_LADY_RED = ITEMS.register("music_disc_the_lady_red", () -> new MusicDiscItem(3 , ModSounds.MUSIC_DISC_THE_LADY_RED, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
 
-    //Ores
-    public static final RegistryObject<Item> NICKEL_ORE = ITEMS.register("nickel_ore", () -> new BlockItem(ModBlocks.NICKEL_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

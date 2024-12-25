@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "mobius:nickel_ore"
+    "mobius:nickel_ore",
+    "mobius:hematite_iron_ore"
   ]
 }

@@ -1,19 +1,19 @@
 package net.geminiimmortal.mobius.world.worldgen.features;
 
+import net.geminiimmortal.mobius.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.util.Lazy;
-import net.geminiimmortal.mobius.block.ModBlocks;
 
-public enum OreType {
+public enum HematiteIronOreType {
 
-    NICKEL(Lazy.of(ModBlocks.NICKEL_ORE), 8, 25, 50);
+    HEMATITE_IRON_ORE_TYPE(Lazy.of(ModBlocks.HEMATITE_IRON_ORE), 16, 15, 50);
 
     private final Lazy<Block> block;
     private final int maxVeinSize;
     private final int minHeight;
     private final int maxHeight;
 
-    OreType(Lazy<Block> block, int maxVeinSize, int minHeight, int maxHeight) {
+    HematiteIronOreType(Lazy<Block> block, int maxVeinSize, int minHeight, int maxHeight) {
         this.block = block;
         this.maxVeinSize = maxVeinSize;
         this.minHeight = minHeight;
@@ -36,8 +36,8 @@ public enum OreType {
         return maxHeight;
     }
 
-    public static net.geminiimmortal.mobius.world.worldgen.features.OreType get(Block block) {
-        for (net.geminiimmortal.mobius.world.worldgen.features.OreType ore : values()) {
+    public static HematiteIronOreType get(Block block) {
+        for (HematiteIronOreType ore : values()) {
             if(block == ore.block) {
                 return ore;
             }
