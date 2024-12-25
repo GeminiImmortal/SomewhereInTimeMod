@@ -15,6 +15,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -40,6 +41,7 @@ public class MolvanEntity extends CreatureEntity implements IAnimatable {
         super(type, worldIn);
         this.dropExperience();
         this.maxUpStep = 1;
+        this.setPersistenceRequired();
     }
 
     @Override
@@ -47,6 +49,7 @@ public class MolvanEntity extends CreatureEntity implements IAnimatable {
         super.defineSynchedData();
         this.entityData.define(ANGRY, false);
     }
+
 
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -69,7 +72,7 @@ public class MolvanEntity extends CreatureEntity implements IAnimatable {
         this.goalSelector.addGoal(3, new AngryOnChestOpenGoal(this, 16));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 30f));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this, LivingEntity.class));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this, PlayerEntity.class));
     }
 
     protected int getXpToDrop() {

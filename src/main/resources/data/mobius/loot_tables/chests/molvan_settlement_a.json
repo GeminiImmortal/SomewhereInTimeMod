@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 5,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mobius:molvansteel_ingot",
+          "weight": 45,
+          "conditions": []
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mobius:music_disc_bullyrag",
+          "weight": 5,
+          "conditions": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 package net.geminiimmortal.mobius.item.custom;
 
 import net.geminiimmortal.mobius.MobiusMod;
+import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.entity.custom.MolvanEntity;
 import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.minecraft.entity.player.PlayerEntity;
@@ -39,6 +41,14 @@ public class VorpalSwordLifeSteal {
                 }
             }
         }
+        if (event.getSource().getDirectEntity() instanceof PlayerEntity) {
+            PlayerEntity player = (PlayerEntity) event.getSource().getDirectEntity();
+
+            if (event.getEntity() instanceof MolvanEntity) {
+                ((MolvanEntity) event.getEntity()).setTarget(player);
+            }
+        }
     }
 }
+
 
