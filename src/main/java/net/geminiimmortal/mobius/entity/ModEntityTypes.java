@@ -16,6 +16,12 @@ public class ModEntityTypes {
     public static DeferredRegister<EntityType<?>> ENTITY_TYPES
             = DeferredRegister.create(ForgeRegistries.ENTITIES, MobiusMod.MOD_ID);
 
+    public static final RegistryObject<EntityType<MolvanEntity>> MOLVAN =
+            ENTITY_TYPES.register("molvan",
+                    () -> EntityType.Builder.of(MolvanEntity::new,
+                                    EntityClassification.CREATURE).sized(0.75f, 0.75f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "molvan").toString()));
+
     public static final RegistryObject<EntityType<ClubGolemEntity>> CLUB_GOLEM =
             ENTITY_TYPES.register("club_golem",
                     () -> EntityType.Builder.of(ClubGolemEntity::new,

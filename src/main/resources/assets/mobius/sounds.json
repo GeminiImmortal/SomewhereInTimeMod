@@ -76,6 +76,12 @@
     ],
     "subtitle": "Sage works"
   },
+  "molvan_angry": {
+    "sounds": [
+      "mobius:molvan_angry"
+    ],
+    "subtitle": "Annoying molvan yelp"
+  },
   "knife_rain": {
     "sounds": [
       "mobius:knife_rain"

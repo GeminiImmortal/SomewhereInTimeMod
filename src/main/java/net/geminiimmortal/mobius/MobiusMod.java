@@ -215,6 +215,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.KNIVES_OUT.get(), GovernorKnivesOutRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.CLONE.get(), CloneRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SHATTER_CLONE.get(), ShatterCloneRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MOLVAN.get(), MolvanRenderer::new);
 
     }
 
@@ -263,6 +264,7 @@ public class MobiusMod
             event.put(ModEntityTypes.SORCERER.get(), SorcererEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.GOVERNOR.get(), GovernorEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.CLONE.get(), CloneEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.MOLVAN.get(), MolvanEntity.setCustomAttributes().build());
         }
 
     }

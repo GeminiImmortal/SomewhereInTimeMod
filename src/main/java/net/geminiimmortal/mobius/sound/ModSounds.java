@@ -27,6 +27,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> FAEDEER_HURT =
             registerSoundEvent("faedeer_hurt");
 
+    public static final RegistryObject<SoundEvent> MOLVAN_ANGRY =
+            registerSoundEvent("molvan_angry");
+
     public static final RegistryObject<SoundEvent> MARCH_OF_THE_ILLAGERS =
             registerSoundEvent("march_of_the_illagers");
 
