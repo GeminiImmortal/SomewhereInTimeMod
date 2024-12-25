@@ -4,6 +4,7 @@ import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.item.custom.CandyRing;
 import net.geminiimmortal.mobius.item.custom.CustomBoatItem;
+import net.geminiimmortal.mobius.item.custom.GaiaStar;
 import net.geminiimmortal.mobius.item.custom.ManawoodBoatItem;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.item.*;
@@ -115,12 +116,14 @@ public class ModItems {
     public static final RegistryObject<Item> SOUL_PODZOL = ITEMS.register("soul_podzol", () -> new BlockItem(ModBlocks.SOUL_PODZOL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> WASP_PAPER_BLOCK = ITEMS.register("wasp_paper_block", () -> new BlockItem(ModBlocks.WASP_PAPER_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> CANDYCANE_BRICKS = ITEMS.register("candycane_bricks", () -> new BlockItem(ModBlocks.CANDYCANE_BRICKS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> MAGIC_KEYSTONE = ITEMS.register("magic_keystone", () -> new BlockItem(ModBlocks.MAGIC_KEYSTONE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Weapons and Tools
     public static final RegistryObject<Item> VORPAL_SWORD = ITEMS.register("vorpal_sword", () -> new SwordItem(ItemTier.NETHERITE, 5, -2.8f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(4096).fireResistant()));
 
     //Misc Gizmos
     public static final RegistryObject<Item> CANDY_RING = ITEMS.register("candy_ring", CandyRing::new);
+    public static final RegistryObject<Item> GAIA_STAR = ITEMS.register("gaia_star", GaiaStar::new);
     public static final RegistryObject<Item> FAE_LEATHER = ITEMS.register("fae_leather", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<Item> RAW_MANA = ITEMS.register("raw_mana", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<Item> MOLVANSTEEL_INGOT = ITEMS.register("molvansteel_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));

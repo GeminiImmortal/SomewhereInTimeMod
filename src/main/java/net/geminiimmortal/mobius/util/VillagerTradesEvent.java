@@ -55,8 +55,8 @@ public class VillagerTradesEvent {
 
             // Level 5
             trades.get(5).add((pTrader, pRandom) -> new MerchantOffer(
-                    new ItemStack(Items.EMERALD, 10),
-                    new ItemStack(ModItems.CANDY_RING.get(), 1),
+                    new ItemStack(Items.EMERALD, 40),
+                    new ItemStack(ModItems.GAIA_STAR.get(), 1),
                     6, 12, 0.1f));
         }
 
@@ -72,9 +72,21 @@ public class VillagerTradesEvent {
                         new ItemStack(Items.EMERALD, 8),
                         6, 12, 0.05f));
                 trades.get(2).add((pTrader, pRandom) -> new MerchantOffer(
-                        new ItemStack(Items.EMERALD, 12),
+                        new ItemStack(ModItems.NICKEL_ORE.get(), 4),
+                        new ItemStack(Items.EMERALD, 1),
+                        10, 8, 0.065f));
+                trades.get(3).add((pTrader, pRandom) -> new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 24),
+                        new ItemStack(ModItems.RAW_MANA.get(), 4),
+                        6, 12, 0.069f));
+                trades.get(4).add((pTrader, pRandom) -> new MerchantOffer(
+                        new ItemStack(Items.IRON_INGOT, 4),
+                        new ItemStack(Items.EMERALD, 16),
+                        6, 12, 0.08f));
+                trades.get(5).add((pTrader, pRandom) -> new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 10),
                         new ItemStack(ModItems.NICKEL_INGOT.get(), 1),
-                        10, 8, 0.035f));
+                        6, 12, 0.1f));
             }
     }
 }

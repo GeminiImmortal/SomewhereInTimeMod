@@ -14,6 +14,7 @@
   "item.mobius.marrowood_boat": "Marrowood Boat",
   "item.mobius.molvansteel_ingot": "Molvan-Steel Ingot",
   "item.mobius.nickel_ingot": "Nickel Ingot",
+  "item.mobius.gaia_star": "Gaia Star",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
@@ -79,6 +80,7 @@
   "block.mobius.aurora_dirt": "Aurora Dirt",
   "block.mobius.aurora_grass_block": "Aurora Grass Block",
   "block.mobius.nickel_ore": "Nickel Ore",
+  "block.mobius.magic_keystone": "Sorcerer's Enchanted Keystone",
 
   "screen.mobius.soul_forge": "Soul Forge",
 
