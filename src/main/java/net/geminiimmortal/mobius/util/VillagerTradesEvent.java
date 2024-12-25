@@ -71,6 +71,10 @@ public class VillagerTradesEvent {
                         new ItemStack(Items.COAL_BLOCK, 1),
                         new ItemStack(Items.EMERALD, 8),
                         6, 12, 0.05f));
+                trades.get(2).add((pTrader, pRandom) -> new MerchantOffer(
+                        new ItemStack(Items.EMERALD, 12),
+                        new ItemStack(ModItems.NICKEL_INGOT.get(), 1),
+                        10, 8, 0.035f));
             }
     }
 }

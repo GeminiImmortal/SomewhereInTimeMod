@@ -129,6 +129,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> CANDY_CANE = registerBlock("candy_cane",
             () -> new CandyCane(AbstractBlock.Properties.of(Material.PLANT)));
 
+    public static final RegistryObject<Block> NICKEL_ORE = registerBlock("nickel_ore",
+            () -> new OreBlock(AbstractBlock.Properties.of(Material.STONE).strength(30F, 1200F).requiresCorrectToolForDrops()));
+
     public static final RegistryObject<Block> SOUL_FORGE = registerBlock("soul_forge",
             () -> new SoulForgeBlock(AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3).strength(30F, 1200F).requiresCorrectToolForDrops()));
 

@@ -13,6 +13,7 @@
   "item.mobius.manawood_boat": "Manawood Boat",
   "item.mobius.marrowood_boat": "Marrowood Boat",
   "item.mobius.molvansteel_ingot": "Molvan-Steel Ingot",
+  "item.mobius.nickel_ingot": "Nickel Ingot",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
@@ -77,6 +78,7 @@
   "block.mobius.stripped_manawood_wood": "Stripped Manawood Wood",
   "block.mobius.aurora_dirt": "Aurora Dirt",
   "block.mobius.aurora_grass_block": "Aurora Grass Block",
+  "block.mobius.nickel_ore": "Nickel Ore",
 
   "screen.mobius.soul_forge": "Soul Forge",
 
