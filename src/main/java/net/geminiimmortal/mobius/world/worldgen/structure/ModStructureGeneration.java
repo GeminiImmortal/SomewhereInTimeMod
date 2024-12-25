@@ -1,0 +1,33 @@
+package net.geminiimmortal.mobius.world.worldgen.structure;
+
+import net.geminiimmortal.mobius.MobiusMod;
+import net.geminiimmortal.mobius.world.worldgen.biome.ModBiomes;
+import net.minecraft.util.RegistryKey;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.WorldGenRegistries;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraftforge.common.BiomeDictionary;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.function.Supplier;
+
+public class ModStructureGeneration {
+
+    public static void generateStructures(final BiomeLoadingEvent event) {
+
+        ResourceLocation valid = ModBiomes.DRACONIC_FORELANDS.getId();
+
+        if(Objects.equals(event.getName(), valid)) {
+            List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
+            structures.add(() -> ModStructures.MOLVAN_SETTLEMENT_A.get().configured(NoFeatureConfig.INSTANCE));
+        }
+    }
+}
+

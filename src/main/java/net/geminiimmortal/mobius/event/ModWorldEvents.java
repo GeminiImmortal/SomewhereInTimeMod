@@ -1,45 +1,29 @@
-package net.geminiimmortal.mobius.world.worldgen;
+package net.geminiimmortal.mobius.event;
 
+import net.geminiimmortal.mobius.world.dimension.ModChunkGenerator;
+import net.geminiimmortal.mobius.world.worldgen.structure.ModStructures;
 import com.mojang.serialization.Codec;
-import net.geminiimmortal.mobius.MobiusMod;
-import net.geminiimmortal.mobius.world.worldgen.features.ModMountainGeneration;
-import net.geminiimmortal.mobius.world.worldgen.features.ModTreeGeneration;
-import net.geminiimmortal.mobius.world.worldgen.structure.ModStructureGeneration;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import org.apache.logging.log4j.LogManager;
-import net.geminiimmortal.mobius.world.worldgen.structure.ModStructures;
-import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
-
-@Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModWorldEvents {
-
-    @SubscribeEvent
-    public static void biomeLoadingEvent(final BiomeLoadingEvent event) {
-        ModStructureGeneration.generateStructures(event);
-
-        ModTreeGeneration.generateTrees(event);
-        ModMountainGeneration.generateMountains(event);
-
-
-    }
-
     @SubscribeEvent
     public static void addDimensionalSpacing(final WorldEvent.Load event) {
         if(event.getWorld() instanceof ServerWorld) {
@@ -55,13 +39,13 @@ public class ModWorldEvents {
                     return;
                 }
             } catch (Exception e) {
-                LogManager.getLogger().error("Was unable to check if " + serverWorld.dimension().location()
+                LogManager.getLogger().error("Was unable to check if " + serverWorld.getLevel().dimension().location()
                         + " is using Terraforged's ChunkGenerator.");
             }
 
             // Prevent spawning our structure in Vanilla's superflat world
             if (serverWorld.getChunkSource().generator instanceof FlatChunkGenerator &&
-                    serverWorld.dimension().equals(World.OVERWORLD)) {
+                    serverWorld.getLevel().dimension().equals(World.OVERWORLD)) {
                 return;
             }
 
@@ -71,6 +55,8 @@ public class ModWorldEvents {
             tempMap.putIfAbsent(ModStructures.MOLVAN_SETTLEMENT_A.get(),
                     DimensionStructuresSettings.DEFAULTS.get(ModStructures.MOLVAN_SETTLEMENT_A.get()));
             serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
+
+            System.out.println("Generator: " + serverWorld.getChunkSource().generator.toString() + "was used to try and spawn the village.");
         }
     }
 }

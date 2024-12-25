@@ -22,6 +22,7 @@ import net.geminiimmortal.mobius.villager.ModVillagers;
 import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.geminiimmortal.mobius.world.worldgen.CustomSurfaceBuilders;
 import net.geminiimmortal.mobius.world.worldgen.biome.ModBiomes;
+import net.geminiimmortal.mobius.world.worldgen.structure.ModStructures;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.WoodType;
@@ -32,8 +33,11 @@ import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.AxeItem;
+import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.registry.Registry;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.event.RegistryEvent;
@@ -86,6 +90,7 @@ public class MobiusMod
         ModVillagers.register(eventBus);
         ModTileEntities.register(eventBus);
         ModContainers.register(eventBus);
+        ModStructures.register(eventBus);
         ModRecipeTypes.register(eventBus);
 
         
@@ -107,10 +112,43 @@ public class MobiusMod
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
         
         event.enqueueWork(() -> {
+            BiomeDictionary.addTypes(
+                    RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MobiusMod.MOD_ID, "draconic_forelands")),
+                    BiomeDictionary.Type.MOUNTAIN,
+                    BiomeDictionary.Type.COLD
+            );
+
+            BiomeDictionary.addTypes(
+                    RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MobiusMod.MOD_ID, "rolling_expanse")),
+                    BiomeDictionary.Type.PLAINS,
+                    BiomeDictionary.Type.LUSH
+            );
+
+            BiomeDictionary.addTypes(
+                    RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MobiusMod.MOD_ID, "goo_lagoon")),
+                    BiomeDictionary.Type.OCEAN,
+                    BiomeDictionary.Type.LUSH
+            );
+
+            BiomeDictionary.addTypes(
+                    RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MobiusMod.MOD_ID, "mushroom_forest")),
+                    BiomeDictionary.Type.JUNGLE,
+                    BiomeDictionary.Type.LUSH,
+                    BiomeDictionary.Type.DENSE
+            );
+
+            BiomeDictionary.addTypes(
+                    RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MobiusMod.MOD_ID, "forsaken_thicket")),
+                    BiomeDictionary.Type.FOREST,
+                    BiomeDictionary.Type.CONIFEROUS,
+                    BiomeDictionary.Type.COLD
+            );
+
             WoodType.register(ModWoodTypes.MARROWOOD);
             WoodType.register(ModWoodTypes.MANAWOOD);
 
             ModDimensions.setupDimension();
+            ModStructures.setupStructures();
 
             AxeItem.STRIPABLES = Maps.newHashMap(AxeItem.STRIPABLES);
             AxeItem.STRIPABLES.put(ModBlocks.MARROWOOD_LOG.get(), ModBlocks.STRIPPED_MARROWOOD_LOG.get());

@@ -4,6 +4,8 @@ import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.geminiimmortal.mobius.world.worldgen.structure.ModStructures;
+import net.geminiimmortal.mobius.world.worldgen.structure.structures.MolvanSettlementA;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -135,6 +137,7 @@ public class ModBiomes {
         DefaultBiomeFeatures.addDefaultUndergroundVariety(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addMountainTrees(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addDefaultSoftDisks(biomegenerationsettings$builder);
+        biomegenerationsettings$builder.addStructureStart(MolvanSettlementA.IGLOO.configured(IFeatureConfig.NONE));
 
         return (new Biome.Builder()).precipitation(Biome.RainType.SNOW).biomeCategory(Biome.Category.EXTREME_HILLS).depth(depth).scale(scale)
                 .temperature(0.0F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(4159204).waterFogColor(329011)
