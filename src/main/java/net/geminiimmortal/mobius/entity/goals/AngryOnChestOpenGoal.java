@@ -37,7 +37,7 @@ public class AngryOnChestOpenGoal extends Goal {
             if (isPlayerOpeningChest(player) && mob.getSensing().canSee(player)) {
                 mob.setAngry(true);
                 mob.setTarget(player);
-                mob.level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.MOLVAN_ANGRY.get(), SoundCategory.HOSTILE, 2.0F, 0.8f);
+//                mob.level.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.MOLVAN_ANGRY.get(), SoundCategory.HOSTILE, 2.0F, 0.8f);
                 return true;
             }
         }

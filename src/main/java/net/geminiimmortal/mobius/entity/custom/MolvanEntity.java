@@ -8,14 +8,13 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -25,6 +24,8 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
+
+import java.util.Objects;
 
 public class MolvanEntity extends CreatureEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
@@ -47,10 +48,28 @@ public class MolvanEntity extends CreatureEntity implements IAnimatable {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
+        this.setPersistenceRequired();
         this.entityData.define(ANGRY, false);
     }
 
+    @Override
+    public boolean save(CompoundNBT compoundNBT) {
+        super.save(compoundNBT);
 
+        return true;
+    }
+
+    @Override
+    public void load(CompoundNBT compoundNBT) {
+        super.load(compoundNBT);
+    }
+
+    @Override
+    public void checkDespawn() {
+        if (!this.level.isClientSide) {
+            this.setPersistenceRequired();
+        }
+    }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
