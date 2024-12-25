@@ -12,12 +12,15 @@
   "item.mobius.music_disc_the_lady_red.desc": "rainydaysgone - The Lady Red",
   "item.mobius.manawood_boat": "Manawood Boat",
   "item.mobius.marrowood_boat": "Marrowood Boat",
+  "item.mobius.molvansteel_ingot": "Molvan-Steel Ingot",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
   "entity.mobius.diamond_golem": "Golem of Diamonds",
   "entity.mobius.spade_golem": "Golem of Spades",
   "entity.mobius.faedeer": "Faedeer",
+  "entity.mobius.molvan": "Molvan",
+  "entity.mobius.sorcerer": "Court Wizard",
 
   "entity.minecraft.villager.mobius.monster_hunter": "Monster Hunter",
   "entity.minecraft.villager.mobius.magismith": "Magismith",
