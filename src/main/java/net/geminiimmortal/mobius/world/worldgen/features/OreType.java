@@ -6,7 +6,7 @@ import net.geminiimmortal.mobius.block.ModBlocks;
 
 public enum OreType {
 
-    NICKEL(Lazy.of(ModBlocks.NICKEL_ORE), 4, 9, 30);
+    NICKEL(Lazy.of(ModBlocks.NICKEL_ORE), 2, 9, 30);
 
     private final Lazy<Block> block;
     private final int maxVeinSize;
