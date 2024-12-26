@@ -2,10 +2,7 @@ package net.geminiimmortal.mobius.item;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.ModBlocks;
-import net.geminiimmortal.mobius.item.custom.CandyRing;
-import net.geminiimmortal.mobius.item.custom.CustomBoatItem;
-import net.geminiimmortal.mobius.item.custom.GaiaStar;
-import net.geminiimmortal.mobius.item.custom.ManawoodBoatItem;
+import net.geminiimmortal.mobius.item.custom.*;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -124,6 +121,7 @@ public class ModItems {
 
     //Weapons and Tools
     public static final RegistryObject<Item> VORPAL_SWORD = ITEMS.register("vorpal_sword", () -> new SwordItem(ItemTier.NETHERITE, 5, -2.8f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(4096).fireResistant()));
+    public static final RegistryObject<Item> STAFF_OF_PROTECTION = ITEMS.register("staff_of_protection", () -> new StaffOfProtection(new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1).rarity(Rarity.RARE).durability(64)));
 
     //Misc Gizmos
     public static final RegistryObject<Item> CANDY_RING = ITEMS.register("candy_ring", CandyRing::new);

@@ -88,5 +88,18 @@ public class VillagerTradesEvent {
                         new ItemStack(ModItems.NICKEL_INGOT.get(), 1),
                         6, 12, 0.1f));
             }
+
+        if (event.getType() == ModVillagers.SAGE.get()) {
+            Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
+
+            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(ModItems.FAE_LEATHER.get(), 8),
+                    new ItemStack(ModItems.RAW_MANA.get(), 4),
+                    10, 8, 0.06f));
+            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(ModItems.RAW_MANA.get(), 48),
+                    new ItemStack(ModItems.STAFF_OF_PROTECTION.get(), 1),
+                    6, 12, 0.095f));
+        }
     }
 }
