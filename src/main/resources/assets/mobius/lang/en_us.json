@@ -17,6 +17,7 @@
   "item.mobius.gaia_star": "Gaia Star",
   "item.mobius.staff_of_protection": "Staff of Protection",
   "item.mobius.staff_of_protection.used": "Cooldown: 120s",
+  "item.mobius.staff_of_protection.cooldown": "The staff is recharging!",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",

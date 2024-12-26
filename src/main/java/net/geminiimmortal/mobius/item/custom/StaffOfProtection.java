@@ -33,11 +33,7 @@ public class StaffOfProtection extends Item {
             if (tag.contains("LastUsedTime")) {
                 long lastUsedTime = tag.getLong("LastUsedTime");
                 if (currentTime - lastUsedTime < COOLDOWN_SECONDS * 20) { // 20 ticks per second
-                    player.displayClientMessage(new TextComponent() {
-                        @Override
-                        public TextComponent plainCopy() {
-                            return new TranslationTextComponent("mobius.item.staff_of_protection.cooldown");
-                        }
+                    player.displayClientMessage(new TranslationTextComponent("item.mobius.staff_of_protection.cooldown") {
                     }, true);
                     return ActionResult.fail(stack);
                 }
@@ -51,7 +47,7 @@ public class StaffOfProtection extends Item {
             tag.putLong("LastUsedTime", currentTime);
             stack.setTag(tag);
 
-            player.displayClientMessage(new TranslationTextComponent("item.mymod.staff_of_protection.used"), true);
+            player.displayClientMessage(new TranslationTextComponent("item.mobius.staff_of_protection.used"), true);
         }
 
         return ActionResult.sidedSuccess((stack), level.isClientSide());
