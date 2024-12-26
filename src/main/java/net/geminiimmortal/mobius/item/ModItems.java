@@ -4,6 +4,7 @@ import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.item.custom.*;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
@@ -122,6 +123,23 @@ public class ModItems {
     //Weapons and Tools
     public static final RegistryObject<Item> VORPAL_SWORD = ITEMS.register("vorpal_sword", () -> new SwordItem(ItemTier.NETHERITE, 5, -2.8f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(4096).fireResistant()));
     public static final RegistryObject<Item> STAFF_OF_PROTECTION = ITEMS.register("staff_of_protection", () -> new StaffOfProtection(new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1).rarity(Rarity.RARE).durability(64)));
+
+    //Armor
+    public static final RegistryObject<Item> NICKEL_BOOTS = ITEMS.register("nickel_boots",
+            () -> new ArmorItem(ModArmorMaterial.NICKEL, EquipmentSlotType.FEET,
+                    new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
+
+    public static final RegistryObject<Item> NICKEL_CHESTPLATE = ITEMS.register("nickel_chestplate",
+            () -> new ArmorItem(ModArmorMaterial.NICKEL, EquipmentSlotType.CHEST,
+                    new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
+
+    public static final RegistryObject<Item> NICKEL_LEGGINGS = ITEMS.register("nickel_leggings",
+            () -> new ArmorItem(ModArmorMaterial.NICKEL, EquipmentSlotType.LEGS,
+                    new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
+
+    public static final RegistryObject<Item> NICKEL_HELMET = ITEMS.register("nickel_helmet",
+            () -> new ArmorItem(ModArmorMaterial.NICKEL, EquipmentSlotType.HEAD,
+                    new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
 
     //Misc Gizmos
     public static final RegistryObject<Item> CANDY_RING = ITEMS.register("candy_ring", CandyRing::new);
