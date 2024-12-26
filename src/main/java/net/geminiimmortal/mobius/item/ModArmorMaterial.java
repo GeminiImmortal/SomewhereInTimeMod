@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 
 public enum ModArmorMaterial implements IArmorMaterial {
 
-    NICKEL("nickel", 37, new int[] { 3, 8, 6, 3 }, 18,
+    NICKEL("nickel", 37, new int[] { 3, 6, 8, 3 }, 18,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 3.25f, 0.15f, () -> {
         return Ingredient.of(ModItems.NICKEL_INGOT.get());
     });
