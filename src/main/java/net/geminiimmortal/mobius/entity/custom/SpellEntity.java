@@ -49,7 +49,7 @@ public class SpellEntity extends Entity {
         List<PlayerEntity> players = level.getEntitiesOfClass(PlayerEntity.class, knifeBoundingBox);
         for (PlayerEntity player : players) {
             if (knifeBoundingBox.intersects(player.getBoundingBox())) {
-                player.hurt(KnivesOutDamageSource.KNIVES_OUT, 4f); // Apply damage
+                player.hurt(KnivesOutDamageSource.KNIVES_OUT, 1f); // Apply damage
             }
         }
         spawnKnifeParticle();
