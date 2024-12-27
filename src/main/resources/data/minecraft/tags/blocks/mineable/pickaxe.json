@@ -2,6 +2,16 @@
   "replace": false,
   "values": [
     "mobius:nickel_ore",
-    "mobius:hematite_iron_ore"
+    "mobius:hematite_iron_ore",
+    "mobius:hematite",
+    "mobius:hematite_slab",
+    "mobius:hematite_stairs",
+    "mobius:hematite_wall",
+    "mobius:polished_hematite",
+    "mobius:polished_hematite_slab",
+    "mobius:polished_hematite_stairs",
+    "mobius:block_of_nickel",
+    "mobius:soul_forge",
+    "mobius:astral_conduit"
   ]
 }

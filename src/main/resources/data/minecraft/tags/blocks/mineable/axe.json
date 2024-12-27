@@ -1,0 +1,30 @@
+{
+  "replace": false,
+  "values": [
+    "mobius:living_manawood_log",
+    "mobius:manawood_log",
+    "mobius:manawood_wood",
+    "mobius:stripped_manawood_log",
+    "mobius:manawood_door",
+    "mobius:manawood_planks",
+    "mobius:manawood_trapdoor",
+    "mobius:manawood_fence",
+    "mobius:manawood_slab",
+    "mobius:manawood_sign",
+    "mobius:manawood_button",
+    "mobius:manawood_pressure_plate",
+    "mobius:marrowood_door",
+    "mobius:marrowood_planks",
+    "mobius:marrowood_trapdoor",
+    "mobius:marrowood_fence",
+    "mobius:marrowood_slab",
+    "mobius:marrowood_sign",
+    "mobius:marrowood_button",
+    "mobius:marrowood_pressure_plate",
+    "mobius:marrowood_log",
+    "mobius:marrowood_wood",
+    "mobius:stripped_marrowood_log",
+    "mobius:essence_channeler",
+    "mobius:hunting_table"
+  ]
+}

@@ -48,7 +48,7 @@ public class GovernorKnivesOutEntity extends Entity {
         List<PlayerEntity> players = level.getEntitiesOfClass(PlayerEntity.class, knifeBoundingBox);
         for (PlayerEntity player : players) {
             if (knifeBoundingBox.intersects(player.getBoundingBox())) {
-                player.hurt(DamageSource.MAGIC, 2.5f); // Apply damage
+                player.hurt(DamageSource.MAGIC, 1f); // Apply damage
             }
         }
         spawnKnivesOutParticle();
