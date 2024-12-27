@@ -15,6 +15,7 @@ import net.geminiimmortal.mobius.recipe.ModRecipeTypes;
 import net.geminiimmortal.mobius.sound.ClientMusicHandler;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.tileentity.ModTileEntities;
+import net.geminiimmortal.mobius.tileentity.render.AstralConduitScreen;
 import net.geminiimmortal.mobius.tileentity.render.SoulForgeScreen;
 import net.geminiimmortal.mobius.util.CustomDamageEventHandler;
 import net.geminiimmortal.mobius.util.GolemTransformationHandler;
@@ -191,6 +192,7 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.ESSENCE_CHANNELER.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.MANAWOOD_SAPLING.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.MANAWOOD_TRAPDOOR.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.ASTRAL_CONDUIT.get(), RenderType.cutout());
 
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.SIGN_TILE_ENTITIES.get(),
                     SignTileEntityRenderer::new);
@@ -200,6 +202,8 @@ public class MobiusMod
 
             ScreenManager.register(ModContainers.SOUL_FORGE_CONTAINER.get(),
                     SoulForgeScreen::new);
+            ScreenManager.register(ModContainers.ASTRAL_CONDUIT_CONTAINER.get(),
+                    AstralConduitScreen::new);
         });
 
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.CLUB_GOLEM.get(), ClubGolemRenderer::new);

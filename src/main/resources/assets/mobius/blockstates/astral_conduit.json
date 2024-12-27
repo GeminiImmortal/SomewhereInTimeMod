@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "mobius:block/astral_conduit_east"
+    },
+    "facing=north": {
+      "model": "mobius:block/astral_conduit"
+    },
+
+    "facing=south": {
+      "model": "mobius:block/astral_conduit_south"
+    },
+    "facing=west": {
+      "model": "mobius:block/astral_conduit_west"
+    }
+  }
+}

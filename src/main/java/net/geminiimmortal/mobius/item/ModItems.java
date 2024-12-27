@@ -114,11 +114,15 @@ public class ModItems {
     public static final RegistryObject<Item> SOUL_FORGE = ITEMS.register("soul_forge", () -> new BlockItem(ModBlocks.SOUL_FORGE.get(), new Item.Properties().stacksTo(64).tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> ESSENCE_CHANNELER = ITEMS.register("essence_channeler", () -> new BlockItem(ModBlocks.ESSENCE_CHANNELER.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
+    //Workstations Misc.
+    public static final RegistryObject<Item> ASTRAL_CONDUIT = ITEMS.register("astral_conduit", () -> new BlockItem(ModBlocks.ASTRAL_CONDUIT.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+
     //Uncategorized Building Blocks
     public static final RegistryObject<Item> SOUL_PODZOL = ITEMS.register("soul_podzol", () -> new BlockItem(ModBlocks.SOUL_PODZOL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> WASP_PAPER_BLOCK = ITEMS.register("wasp_paper_block", () -> new BlockItem(ModBlocks.WASP_PAPER_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> CANDYCANE_BRICKS = ITEMS.register("candycane_bricks", () -> new BlockItem(ModBlocks.CANDYCANE_BRICKS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MAGIC_KEYSTONE = ITEMS.register("magic_keystone", () -> new BlockItem(ModBlocks.MAGIC_KEYSTONE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> BLOCK_OF_NICKEL = ITEMS.register("block_of_nickel", () -> new BlockItem(ModBlocks.BLOCK_OF_NICKEL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Weapons and Tools
     public static final RegistryObject<Item> VORPAL_SWORD = ITEMS.register("vorpal_sword", () -> new SwordItem(ItemTier.NETHERITE, 5, -2.8f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(4096).fireResistant()));
@@ -146,6 +150,9 @@ public class ModItems {
     public static final RegistryObject<Item> GAIA_STAR = ITEMS.register("gaia_star", GaiaStar::new);
     public static final RegistryObject<Item> FAE_LEATHER = ITEMS.register("fae_leather", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<Item> RAW_MANA = ITEMS.register("raw_mana", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<Item> BALL_OF_CONDENSED_MANA = ITEMS.register("ball_of_condensed_mana", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<Item> CUBE_OF_STABILIZED_VOID_ENERGY = ITEMS.register("cube_of_stabilized_void_energy", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<Item> MAGICALLY_REINFORCED_NETHERITE_INGOT = ITEMS.register("magically_reinforced_netherite_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<Item> MOLVANSTEEL_INGOT = ITEMS.register("molvansteel_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<Item> NICKEL_INGOT = ITEMS.register("nickel_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
 

@@ -27,6 +27,11 @@ public class ModTileEntities {
                     ModBlocks.SOUL_FORGE.get())
                     .build(null));
 
+    public static final RegistryObject<TileEntityType<AstralConduitTileEntity>> ASTRAL_CONDUIT_TILE_ENTITY =
+            TILE_ENTITIES.register("astral_conduit_tile_entity", () -> TileEntityType.Builder.of(AstralConduitTileEntity::new,
+                            ModBlocks.ASTRAL_CONDUIT.get())
+                    .build(null));
+
 
     public static void register(IEventBus eventBus) {
         TILE_ENTITIES.register(eventBus);

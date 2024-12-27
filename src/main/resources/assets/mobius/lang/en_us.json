@@ -22,6 +22,9 @@
   "item.mobius.nickel_chestplate": "Nickel Chestplate",
   "item.mobius.nickel_leggings": "Nickel Leggings",
   "item.mobius.nickel_boots": "Nickel Boots",
+  "item.mobius.ball_of_condensed_mana": "Ball of Condensed Mana",
+  "item.mobius.cube_of_stabilized_void_energy": "Cube of Stabilized Void Energy",
+  "item.mobius.magically_reinforced_netherite_ingot": "Magically Reinforced Netherite Ingot",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
@@ -89,8 +92,11 @@
   "block.mobius.nickel_ore": "Nickel Ore",
   "block.mobius.magic_keystone": "Sorcerer's Enchanted Keystone",
   "block.mobius.hematite_iron_ore": "Hematite Iron Ore",
+  "block.mobius.astral_conduit": "Astral Conduit",
+  "block.mobius.block_of_nickel": "Block of Nickel",
 
   "screen.mobius.soul_forge": "Soul Forge",
+  "screen.mobius.astral_conduit": "Astral Conduit",
 
   "death.attack.knives_out": "%1$s was cut to ribbons."
 }

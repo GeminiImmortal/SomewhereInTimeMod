@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smithing",
+  "base": {
+    "item": "minecraft:netherite_sword"
+  },
+  "addition": {
+    "item": "mobius:magically_reinforced_netherite_ingot"
+  },
+  "result": {
+    "item": "mobius:vorpal_sword"
+  }
+}

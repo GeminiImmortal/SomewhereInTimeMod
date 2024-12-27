@@ -16,13 +16,19 @@ public class ModRecipeTypes {
     public static final RegistryObject<SoulForgeRecipe.Serializer> SOUL_FORGE_SERIALIZER
             = RECIPE_SERIALIZER.register("soul_forge", SoulForgeRecipe.Serializer::new);
 
+    public static final RegistryObject<AstralConduitRecipe.Serializer> ASTRAL_CONDUIT_SERIALIZER
+            = RECIPE_SERIALIZER.register("astral_conduit", AstralConduitRecipe.Serializer::new);
+
     public static IRecipeType<SoulForgeRecipe> SOUL_FORGE_RECIPE
             = new SoulForgeRecipe.SoulForgeRecipeType();
 
+    public static IRecipeType<AstralConduitRecipe> ASTRAL_CONDUIT_RECIPE
+            = new AstralConduitRecipe.AstralConduitRecipeType();
 
     public static void register(IEventBus eventBus) {
         RECIPE_SERIALIZER.register(eventBus);
 
         Registry.register(Registry.RECIPE_TYPE, SoulForgeRecipe.TYPE_ID, SOUL_FORGE_RECIPE);
+        Registry.register(Registry.RECIPE_TYPE, AstralConduitRecipe.TYPE_ID, ASTRAL_CONDUIT_RECIPE);
     }
 }

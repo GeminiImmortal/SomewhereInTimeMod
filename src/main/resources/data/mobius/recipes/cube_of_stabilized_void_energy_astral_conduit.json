@@ -1,0 +1,17 @@
+{
+  "type": "mobius:astral_conduit",
+  "ingredients": [
+    {
+      "item": "mobius:ball_of_condensed_mana"
+    },
+    {
+      "item": "mobius:molvansteel_ingot"
+    },
+    {
+      "item": "minecraft:nether_star"
+    }
+  ],
+  "output": {
+    "item": "mobius:cube_of_stabilized_void_energy"
+  }
+}

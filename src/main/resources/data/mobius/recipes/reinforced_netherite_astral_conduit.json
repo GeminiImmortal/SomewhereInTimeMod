@@ -1,0 +1,17 @@
+{
+  "type": "mobius:astral_conduit",
+  "ingredients": [
+    {
+      "item": "mobius:cube_of_stabilized_void_energy"
+    },
+    {
+      "item": "mobius:block_of_nickel"
+    },
+    {
+      "item": "minecraft:netherite_ingot"
+    }
+  ],
+  "output": {
+    "item": "mobius:magically_reinforced_netherite_ingot"
+  }
+}

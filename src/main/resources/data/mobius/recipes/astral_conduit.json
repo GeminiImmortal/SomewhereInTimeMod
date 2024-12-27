@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LXL",
+    "OXO",
+    "###"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "X": {
+      "item": "mobius:raw_mana"
+    },
+    "#": {
+      "item": "mobius:polished_hematite"
+    },
+    "L": {
+      "item": "mobius:living_manawood_log"
+    }
+  },
+  "result": {
+    "item": "mobius:astral_conduit",
+    "count": 1
+  }
+}
