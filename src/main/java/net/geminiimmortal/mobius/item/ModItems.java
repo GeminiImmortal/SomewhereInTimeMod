@@ -131,7 +131,7 @@ public class ModItems {
     public static final RegistryObject<Item> ASTRAL_SHOVEL = ITEMS.register("astral_shovel", () -> new ShovelItem(ItemTier.NETHERITE, 3, -3.0f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
     public static final RegistryObject<Item> ASTRAL_PICKAXE = ITEMS.register("astral_pickaxe", () -> new PickaxeItem(ItemTier.NETHERITE, 3, -2.8f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
     public static final RegistryObject<Item> ASTRAL_AXE = ITEMS.register("astral_axe", () -> new AxeItem(ItemTier.NETHERITE, 5.5f, -3.0f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
-    public static final RegistryObject<Item> ASTRAL_HOE = ITEMS.register("astral_hoe", () -> new HoeItem(ItemTier.NETHERITE, 1, -0f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
+    public static final RegistryObject<Item> ASTRAL_HOE = ITEMS.register("astral_hoe", () -> new HoeItem(ItemTier.NETHERITE, -4, -0f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
 
     //Armor
     public static final RegistryObject<Item> NICKEL_BOOTS = ITEMS.register("nickel_boots",
