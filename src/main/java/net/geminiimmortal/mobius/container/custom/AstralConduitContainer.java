@@ -40,8 +40,8 @@ public class AstralConduitContainer extends Container {
             addDataSlots(fields); // Synchronize the fields
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
                 addSlot(new SlotItemHandler(h, 0, 80, 13));
-                addSlot(new SlotItemHandler(h, 1, 104, 16));
-                addSlot(new SlotItemHandler(h, 2, 52, 16));
+                addSlot(new SlotItemHandler(h, 1, 106, 22));
+                addSlot(new SlotItemHandler(h, 2, 54, 22));
                 addSlot(new SlotItemHandler(h, 3, 80, 61));
             });
         } else {
@@ -56,8 +56,8 @@ public class AstralConduitContainer extends Container {
         if (tileEntity != null) {
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
                 addSlot(new SlotItemHandler(h, 0, 80, 13));
-                addSlot(new SlotItemHandler(h, 1, 104, 16));
-                addSlot(new SlotItemHandler(h, 2, 52, 16));
+                addSlot(new SlotItemHandler(h, 1, 106, 22));
+                addSlot(new SlotItemHandler(h, 2, 54, 22));
                 addSlot(new SlotItemHandler(h, 3, 80, 61));
             });
         }
