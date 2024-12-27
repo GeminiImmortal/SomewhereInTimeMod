@@ -6,6 +6,7 @@ import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.recipe.AstralConduitRecipe;
 import net.geminiimmortal.mobius.recipe.IAstralConduitRecipe;
 import net.geminiimmortal.mobius.recipe.ModRecipeTypes;
+import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
@@ -19,6 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IIntArray;
+import net.minecraft.util.SoundCategory;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -191,6 +193,7 @@ public class AstralConduitTileEntity extends TileEntity implements ITickableTile
                     // Set the output slot and mark as crafted
                     itemHandler.setStackInSlot(3, recipeOutput.copy());
                     hasCrafted = true;
+                    this.level.playSound(null,this.getBlockPos(), ModSounds.ASTRAL_CONDUIT.get(), SoundCategory.BLOCKS, 5.0f, 1.0f);
                 }
             }
 

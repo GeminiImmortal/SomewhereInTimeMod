@@ -25,7 +25,11 @@
   "item.mobius.ball_of_condensed_mana": "Ball of Condensed Mana",
   "item.mobius.cube_of_stabilized_void_energy": "Cube of Stabilized Void Energy",
   "item.mobius.magically_reinforced_netherite_ingot": "Magically Reinforced Netherite Ingot",
-  "item.mobius.astral_ingot": "Astral Ingot",
+  "item.mobius.astral_ingot": "Aurora Ingot",
+  "item.mobius.astral_axe": "Aurora Axe",
+  "item.mobius.astral_hoe": "Aurora Hoe",
+  "item.mobius.astral_pickaxe": "Aurora Pickaxe",
+  "item.mobius.astral_shovel": "Aurora Shovel",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",

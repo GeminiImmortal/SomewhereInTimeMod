@@ -1,0 +1,31 @@
+{
+  "parent": "mobius:root",
+  "display": {
+    "icon": {
+      "item": "mobius:astral_ingot"
+    },
+    "title": "I Sing Perfect Metre",
+    "description": "Use an astral conduit to infuse a reinforced netherite ingot",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "used_astral_conduit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "mobius:astral_ingot"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "used_astral_conduit"
+    ]
+  ]
+}

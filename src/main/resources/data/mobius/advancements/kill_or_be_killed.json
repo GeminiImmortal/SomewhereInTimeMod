@@ -4,7 +4,7 @@
       "item": "mobius:hunting_table"
     },
     "title": "Kill Or Be Killed",
-    "description": "Craft or obtain a hunting table.",
+    "description": "Craft or obtain a hunting table",
     "background": "mobius:textures/block/marrowood_log.png",
     "frame": "task",
     "show_toast": false,

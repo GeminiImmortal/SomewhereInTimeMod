@@ -38,6 +38,12 @@
       { "name": "mobius:colors", "stream": true }
     ]
   },
+  "astral_conduit": {
+    "sounds": [
+      { "name": "mobius:astral_conduit" }
+    ],
+    "subtitle": "Astral energy coalesces"
+  },
   "monster_hunter_working": {
     "sounds": [
       "mobius:monster_hunter_working"

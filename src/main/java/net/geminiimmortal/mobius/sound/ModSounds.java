@@ -63,6 +63,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> THE_LADY_RED =
             registerSoundEvent("the_lady_red");
 
+    public static final RegistryObject<SoundEvent> ASTRAL_CONDUIT =
+            registerSoundEvent("astral_conduit");
+
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, name)));
     }

@@ -125,8 +125,13 @@ public class ModItems {
     public static final RegistryObject<Item> BLOCK_OF_NICKEL = ITEMS.register("block_of_nickel", () -> new BlockItem(ModBlocks.BLOCK_OF_NICKEL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Weapons and Tools
-    public static final RegistryObject<Item> VORPAL_SWORD = ITEMS.register("vorpal_sword", () -> new SwordItem(ItemTier.NETHERITE, 5, -2.8f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(4096).fireResistant()));
+
     public static final RegistryObject<Item> STAFF_OF_PROTECTION = ITEMS.register("staff_of_protection", () -> new StaffOfProtection(new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1).rarity(Rarity.RARE).durability(64)));
+    public static final RegistryObject<Item> VORPAL_SWORD = ITEMS.register("vorpal_sword", () -> new SwordItem(ItemTier.NETHERITE, 5, -2.4f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(4096).fireResistant()));
+    public static final RegistryObject<Item> ASTRAL_SHOVEL = ITEMS.register("astral_shovel", () -> new ShovelItem(ItemTier.NETHERITE, 3, -3.0f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
+    public static final RegistryObject<Item> ASTRAL_PICKAXE = ITEMS.register("astral_pickaxe", () -> new PickaxeItem(ItemTier.NETHERITE, 3, -2.8f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
+    public static final RegistryObject<Item> ASTRAL_AXE = ITEMS.register("astral_axe", () -> new AxeItem(ItemTier.NETHERITE, 5.5f, -3.0f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
+    public static final RegistryObject<Item> ASTRAL_HOE = ITEMS.register("astral_hoe", () -> new HoeItem(ItemTier.NETHERITE, 1, -0f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
 
     //Armor
     public static final RegistryObject<Item> NICKEL_BOOTS = ITEMS.register("nickel_boots",

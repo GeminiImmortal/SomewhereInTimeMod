@@ -1,11 +1,11 @@
 {
   "display": {
     "icon": {
-      "item": "mobius:candycane_bricks"
+      "item": "mobius:gaia_star"
     },
     "title": "Mobius",
-    "description": "Travel to Mobius.",
-    "background": "mobius:textures/block/soul_podzol.png",
+    "description": "Travel to Mobius",
+    "background": "mobius:textures/block/aurora_grass_block_top.png",
     "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true,
