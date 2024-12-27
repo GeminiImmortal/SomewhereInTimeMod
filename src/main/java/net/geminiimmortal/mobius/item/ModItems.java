@@ -151,10 +151,11 @@ public class ModItems {
     public static final RegistryObject<Item> FAE_LEATHER = ITEMS.register("fae_leather", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<Item> RAW_MANA = ITEMS.register("raw_mana", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<Item> BALL_OF_CONDENSED_MANA = ITEMS.register("ball_of_condensed_mana", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
-    public static final RegistryObject<Item> CUBE_OF_STABILIZED_VOID_ENERGY = ITEMS.register("cube_of_stabilized_void_energy", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
-    public static final RegistryObject<Item> MAGICALLY_REINFORCED_NETHERITE_INGOT = ITEMS.register("magically_reinforced_netherite_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
-    public static final RegistryObject<Item> MOLVANSTEEL_INGOT = ITEMS.register("molvansteel_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<Item> CUBE_OF_STABILIZED_VOID_ENERGY = ITEMS.register("cube_of_stabilized_void_energy", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> MAGICALLY_REINFORCED_NETHERITE_INGOT = ITEMS.register("magically_reinforced_netherite_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> MOLVANSTEEL_INGOT = ITEMS.register("molvansteel_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> NICKEL_INGOT = ITEMS.register("nickel_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<Item> ASTRAL_INGOT = ITEMS.register("astral_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.EPIC)));
 
     //Music Discs
     public static final RegistryObject<Item> MUSIC_DISC_MARCH_OF_THE_ILLAGERS = ITEMS.register("music_disc_march_of_the_illagers", () -> new MusicDiscItem(1 , ModSounds.MUSIC_DISC_MARCH_OF_THE_ILLAGERS, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));

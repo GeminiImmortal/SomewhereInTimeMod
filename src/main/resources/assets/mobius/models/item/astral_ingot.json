@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "minecraft:item/generated",
 	"textures": {
-		"layer0": "mobius:item/magically_reinforced_netherite_ingot"
+		"layer0": "mobius:item/astral_ingot"
 	},
 	"display": {
 		"thirdperson_righthand": {

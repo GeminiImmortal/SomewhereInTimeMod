@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "mobius:item/raw_mana",
+		"0": "mobius:item/ball_of_condensed_mana",
 		"particle": "mobius:item/raw_mana"
 	},
 	"elements": [

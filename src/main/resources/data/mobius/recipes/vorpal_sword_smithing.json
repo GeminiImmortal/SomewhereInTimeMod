@@ -4,7 +4,7 @@
     "item": "minecraft:netherite_sword"
   },
   "addition": {
-    "item": "mobius:magically_reinforced_netherite_ingot"
+    "item": "mobius:astral_ingot"
   },
   "result": {
     "item": "mobius:vorpal_sword"
