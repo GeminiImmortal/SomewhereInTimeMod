@@ -2,12 +2,12 @@
   "type": "minecraft:chest",
   "pools": [
     {
-      "rolls": 5,
+      "rolls": 10,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "mobius:molvansteel_ingot",
-          "weight": 45,
+          "name": "mobius:nickel_ore",
+          "weight": 80,
           "conditions": []
         }
       ]
@@ -18,8 +18,48 @@
         {
           "type": "minecraft:item",
           "name": "mobius:music_disc_bullyrag",
-          "weight": 5,
+          "weight": 1,
           "conditions": []
+        }
+      ]
+    },
+    {
+      "rolls": 3,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mobius:molvansteel_ingot",
+          "weight": 10
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mobius:music_disc_march_of_the_illagers",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 10,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond",
+          "weight": 45
+        }
+      ]
+    },
+    {
+      "rolls": 20,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:iron_ingot",
+          "weight": 60
         }
       ]
     }
