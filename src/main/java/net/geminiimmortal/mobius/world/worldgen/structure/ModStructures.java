@@ -3,6 +3,7 @@ package net.geminiimmortal.mobius.world.worldgen.structure;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import net.geminiimmortal.mobius.MobiusMod;
+import net.geminiimmortal.mobius.world.worldgen.structure.structures.MobiusPortal;
 import net.geminiimmortal.mobius.world.worldgen.structure.structures.MolvanSettlementA;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.NoiseChunkGenerator;
@@ -26,6 +27,9 @@ public class ModStructures {
     public static final RegistryObject<Structure<NoFeatureConfig>> MOLVAN_SETTLEMENT_A =
             STRUCTURES.register("molvan_settlement_a", MolvanSettlementA::new);
 
+    public static final RegistryObject<Structure<NoFeatureConfig>> MOBIUS_PORTAL =
+            STRUCTURES.register("mobius_portal", MobiusPortal::new);
+
     /* average distance apart in chunks between spawn attempts */
     /* minimum distance apart in chunks between spawn attempts. MUST BE LESS THAN ABOVE VALUE*/
     /* this modifies the seed of the structure so no two structures always spawn over each-other.
@@ -33,6 +37,9 @@ public class ModStructures {
     public static void setupStructures() {
         setupMapSpacingAndLand(MOLVAN_SETTLEMENT_A.get(),
                 new StructureSeparationSettings(10,5, 1234567890),
+                true);
+        setupMapSpacingAndLand(MOBIUS_PORTAL.get(),
+                new StructureSeparationSettings(30,20,1238091384),
                 true);
     }
 

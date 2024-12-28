@@ -7,6 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraftforge.common.BiomeDictionary;
@@ -23,10 +24,16 @@ public class ModStructureGeneration {
     public static void generateStructures(final BiomeLoadingEvent event) {
 
         ResourceLocation valid = ModBiomes.DRACONIC_FORELANDS.getId();
+        ResourceLocation validPortal = Biomes.PLAINS.location();
 
         if(Objects.equals(event.getName(), valid)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructures.MOLVAN_SETTLEMENT_A.get().configured(NoFeatureConfig.INSTANCE));
+        }
+
+        if(Objects.equals(event.getName(), validPortal)) {
+            List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
+            structures.add(() -> ModStructures.MOBIUS_PORTAL.get().configured(NoFeatureConfig.INSTANCE));
         }
     }
 }
