@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:adventure/root",
+  "display": {
+    "icon": {
+      "item": "mobius:magic_keystone"
+    },
+    "title": "Gift From The World",
+    "description": "Now, create a gaia star and travel to unknown lands...",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "found_mobius_portal": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "feature": "mobius:mobius_portal",
+        "dimension": "minecraft:overworld"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "found_mobius_portal"
+    ]
+  ]
+}
