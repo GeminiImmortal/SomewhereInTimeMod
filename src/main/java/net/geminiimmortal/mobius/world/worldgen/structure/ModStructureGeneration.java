@@ -10,6 +10,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
+import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -30,6 +32,11 @@ public class ModStructureGeneration {
         if(Objects.equals(event.getName(), valid)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructures.MOLVAN_SETTLEMENT_A.get().configured(NoFeatureConfig.INSTANCE));
+        }
+
+        if(Objects.equals(event.getName(), validTower)) {
+            List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
+            structures.add(() -> ModStructures.MOBIUS_VILLAGE.get().configured(NoFeatureConfig.INSTANCE));
         }
 
         if(Objects.equals(event.getName(), validTower)) {

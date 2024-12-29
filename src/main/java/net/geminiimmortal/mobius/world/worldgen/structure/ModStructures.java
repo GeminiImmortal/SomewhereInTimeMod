@@ -3,14 +3,12 @@ package net.geminiimmortal.mobius.world.worldgen.structure;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import net.geminiimmortal.mobius.MobiusMod;
-import net.geminiimmortal.mobius.world.worldgen.structure.structures.ImperialWatchtower;
-import net.geminiimmortal.mobius.world.worldgen.structure.structures.MobiusPortal;
-import net.geminiimmortal.mobius.world.worldgen.structure.structures.MolvanSettlementA;
-import net.geminiimmortal.mobius.world.worldgen.structure.structures.MolvanSettlementB;
+import net.geminiimmortal.mobius.world.worldgen.structure.structures.*;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.NoiseChunkGenerator;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.NoiseSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
@@ -32,6 +30,9 @@ public class ModStructures {
     public static final RegistryObject<Structure<NoFeatureConfig>> MOBIUS_PORTAL =
             STRUCTURES.register("mobius_portal", MobiusPortal::new);
 
+    public static final RegistryObject<Structure<NoFeatureConfig>> MOBIUS_VILLAGE =
+            STRUCTURES.register("mobius_village", MobiusVillage::new);
+
     public static final RegistryObject<Structure<NoFeatureConfig>> IMPERIAL_WATCHTOWER =
             STRUCTURES.register("imperial_watchtower", ImperialWatchtower::new);
 
@@ -48,6 +49,9 @@ public class ModStructures {
                 true);
         setupMapSpacingAndLand(MOLVAN_SETTLEMENT_B.get(),
                 new StructureSeparationSettings(25,18, 875667890),
+                true);
+        setupMapSpacingAndLand(MOBIUS_VILLAGE.get(),
+                new StructureSeparationSettings(35,25, 87135897),
                 true);
         setupMapSpacingAndLand(MOBIUS_PORTAL.get(),
                 new StructureSeparationSettings(30,20,1238091384),
