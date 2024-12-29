@@ -1,11 +1,11 @@
 {
-  "name": "mobius:villages/houses/sage_houses/start_pool_sage_house_a",
+  "name": "mobius:villages/houses/monster_hunter_houses/start_pool_monster_hunter_houses_a",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
       "element": {
-        "location": "mobius:villages/sage_houses/sage_house_a",
+        "location": "mobius:villages/monster_hunter_houses/monster_hunter_house_a",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
