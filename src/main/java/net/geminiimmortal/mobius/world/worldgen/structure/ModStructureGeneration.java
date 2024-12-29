@@ -24,6 +24,7 @@ public class ModStructureGeneration {
     public static void generateStructures(final BiomeLoadingEvent event) {
 
         ResourceLocation valid = ModBiomes.DRACONIC_FORELANDS.getId();
+        ResourceLocation validTower = ModBiomes.ROLLING_EXPANSE.getId();
         ResourceLocation validPortal = Biomes.PLAINS.location();
 
         if(Objects.equals(event.getName(), valid)) {
@@ -34,6 +35,11 @@ public class ModStructureGeneration {
         if(Objects.equals(event.getName(), validPortal)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructures.MOBIUS_PORTAL.get().configured(NoFeatureConfig.INSTANCE));
+        }
+
+        if(Objects.equals(event.getName(), validTower)) {
+            List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
+            structures.add(() -> ModStructures.IMPERIAL_WATCHTOWER.get().configured(NoFeatureConfig.INSTANCE));
         }
     }
 }
