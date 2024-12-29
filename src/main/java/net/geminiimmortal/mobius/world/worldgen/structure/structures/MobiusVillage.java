@@ -17,10 +17,7 @@ import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
-import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructureStart;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
+import net.minecraft.world.gen.feature.structure.*;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -65,20 +62,16 @@ public class MobiusVillage extends Structure<NoFeatureConfig> {
         public void generatePieces(DynamicRegistries dynamicRegistryManager, ChunkGenerator chunkGenerator,
                                    TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn,
                                    NoFeatureConfig config) {
-            // Turns the chunk coordinates into actual coordinates we can use. (Gets center of that chunk)
+
             int x = (chunkX << 4) + 7;
             int z = (chunkZ << 4) + 7;
             BlockPos blockpos = new BlockPos(x, 0, z);
 
-            //addpieces()
             JigsawManager.addPieces(dynamicRegistryManager,
                     new VillageConfig(() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY)
-                            .get(new ResourceLocation(MobiusMod.MOD_ID, "villages/houses/start_pool_houses")),
-                            10), AbstractVillagePiece::new, chunkGenerator, templateManagerIn,
+                            .get(new ResourceLocation(MobiusMod.MOD_ID, "villages/centers/start_pool_center")),
+                            6), AbstractVillagePiece::new, chunkGenerator, templateManagerIn,
                     blockpos, this.pieces, this.random, false, true);
-
-            this.pieces.forEach(piece -> piece.move(0, 1, 0));
-            this.pieces.forEach(piece -> piece.getBoundingBox().y0 -= 1);
 
             this.calculateBoundingBox();
 
@@ -88,5 +81,6 @@ public class MobiusVillage extends Structure<NoFeatureConfig> {
                     this.pieces.get(0).getBoundingBox().z0);
         }
     }
+
 }
 
