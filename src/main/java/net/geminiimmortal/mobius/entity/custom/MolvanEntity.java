@@ -118,25 +118,8 @@ public class MolvanEntity extends CreatureEntity implements IAnimatable {
     @Override
     public void tick() {
         super.tick();
-        particleTickCounter++;
-
-
-        if (particleTickCounter >= PARTICLE_SPAWN_INTERVAL) {
-            spawnGlowParticle();
-            particleTickCounter = 0;
-        }
     }
 
-
-    private void spawnGlowParticle() {
-        for (int i = 0; i < 1; i++) {
-            this.level.addParticle(ParticleTypes.PORTAL,
-                    this.getX() + (Math.random() - 0.5) * 2,
-                    this.getY() + 1.0,
-                    this.getZ() + (Math.random() - 0.5) * 2,
-                    0, 0.01, 0);
-        }
-    }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn){

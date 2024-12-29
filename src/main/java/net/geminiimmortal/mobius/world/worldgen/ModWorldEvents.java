@@ -71,6 +71,8 @@ public class ModWorldEvents {
                     new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig);
             tempMap.putIfAbsent(ModStructures.MOLVAN_SETTLEMENT_A.get(),
                     DimensionStructuresSettings.DEFAULTS.get(ModStructures.MOLVAN_SETTLEMENT_A.get()));
+            tempMap.putIfAbsent(ModStructures.MOLVAN_SETTLEMENT_B.get(),
+                    DimensionStructuresSettings.DEFAULTS.get(ModStructures.MOLVAN_SETTLEMENT_B.get()));
             tempMap.putIfAbsent(ModStructures.MOBIUS_PORTAL.get(),
                     DimensionStructuresSettings.DEFAULTS.get(ModStructures.MOBIUS_PORTAL.get()));
             tempMap.putIfAbsent(ModStructures.IMPERIAL_WATCHTOWER.get(),

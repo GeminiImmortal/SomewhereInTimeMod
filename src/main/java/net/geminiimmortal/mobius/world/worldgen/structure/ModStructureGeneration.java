@@ -32,6 +32,11 @@ public class ModStructureGeneration {
             structures.add(() -> ModStructures.MOLVAN_SETTLEMENT_A.get().configured(NoFeatureConfig.INSTANCE));
         }
 
+        if(Objects.equals(event.getName(), validTower)) {
+            List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
+            structures.add(() -> ModStructures.MOLVAN_SETTLEMENT_B.get().configured(NoFeatureConfig.INSTANCE));
+        }
+
         if(Objects.equals(event.getName(), validPortal)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructures.MOBIUS_PORTAL.get().configured(NoFeatureConfig.INSTANCE));
