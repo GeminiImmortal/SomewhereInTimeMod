@@ -3,7 +3,7 @@
   "fallback": "minecraft:empty",
   "elements": [
     {
-      "weight": 2,
+      "weight": 1,
       "element": {
         "location": "mobius:villages/houses/monster_hunter_house_a",
         "processors": "minecraft:empty",
@@ -14,7 +14,7 @@
     {
       "weight": 1,
       "element": {
-        "location": "mobius:villages/houses/farmer_house_a",
+        "location": "mobius:villages/houses/farmer_house",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
@@ -24,15 +24,6 @@
       "weight": 1,
       "element": {
         "location": "mobius:villages/houses/sage_house_a",
-        "processors": "minecraft:empty",
-        "projection": "rigid",
-        "element_type": "minecraft:single_pool_element"
-      }
-    },
-    {
-      "weight": 0,
-      "element": {
-        "location": "mobius:villages/houses/magismith_house_a",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
