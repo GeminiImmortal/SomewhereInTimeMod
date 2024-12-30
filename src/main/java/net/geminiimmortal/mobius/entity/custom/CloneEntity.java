@@ -1,22 +1,12 @@
 package net.geminiimmortal.mobius.entity.custom;
 
-import net.geminiimmortal.mobius.MobiusMod;
-import net.geminiimmortal.mobius.entity.ModEntityTypes;
-import net.geminiimmortal.mobius.entity.goals.GovernorKnivesOutSpellGoal;
 import net.geminiimmortal.mobius.entity.goals.ShatterCloneGoal;
-import net.geminiimmortal.mobius.entity.goals.TeleportAwayGoal;
-import net.geminiimmortal.mobius.network.ParticlePacket;
-import net.geminiimmortal.mobius.sound.ClientMusicHandler;
-import net.geminiimmortal.mobius.sound.ModSounds;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.brain.task.WalkToTargetTask;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.ItemStack;
@@ -25,20 +15,11 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerBossInfo;
-import net.minecraftforge.fml.network.PacketDistributor;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -51,6 +32,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 public class CloneEntity extends MobEntity implements IAnimatable, IRangedAttackMob {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final DataParameter<Boolean> CASTING = EntityDataManager.defineId(CloneEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> RUNNING = EntityDataManager.defineId(CloneEntity.class, DataSerializers.BOOLEAN);
     private int particleTickCounter = 0;
     private static final int PARTICLE_SPAWN_INTERVAL = 5;
 
@@ -68,15 +50,16 @@ public class CloneEntity extends MobEntity implements IAnimatable, IRangedAttack
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(CASTING, false);
+        this.entityData.define(RUNNING, false);
     }
 
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 10.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.3D)
+                .add(Attributes.MOVEMENT_SPEED, 0.6D)
                 .add(Attributes.ATTACK_DAMAGE, 0.0D)
-                .add(Attributes.FOLLOW_RANGE, 0.0D)
+                .add(Attributes.FOLLOW_RANGE, 30.0D)
                 .add(Attributes.ARMOR, 15.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 2.5D)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.7D)
@@ -87,12 +70,37 @@ public class CloneEntity extends MobEntity implements IAnimatable, IRangedAttack
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(1, new SwimGoal(this));
-        this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 20, 15.0F));
-        this.goalSelector.addGoal(3, new ShatterCloneGoal(this.level.getNearestPlayer(this, 20), this));
+        //this.goalSelector.addGoal(5, new RangedAttackGoal(this, 1.0D, 20, 15.0F));
+        this.goalSelector.addGoal(2, new ShatterCloneGoal(this));
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 30f));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 
     }
+
+    private void createExpandingCircleParticles(World world, double centerX, double centerY, double centerZ) {
+        int particleCount = 50; // Number of particles in the circle
+        double radius = 0.5; // Initial radius of the circle
+        double radiusIncrement = 0.1; // How much the radius expands per tick
+        int duration = 30; // Number of ticks the effect lasts
+
+        for (int tick = 0; tick < duration; tick++) {
+            double currentRadius = radius + (tick * radiusIncrement);
+            for (int i = 0; i < particleCount; i++) {
+                double angle = 2 * Math.PI * i / particleCount; // Calculate angle for each particle
+                double offsetX = Math.cos(angle) * currentRadius;
+                double offsetZ = Math.sin(angle) * currentRadius;
+
+                // Schedule the particle spawn with a delay
+                int finalTick = tick;
+                world.getServer().execute(() -> {
+                    world.addParticle(ParticleTypes.PORTAL, // Replace with your particle type
+                            centerX + offsetX, centerY, centerZ + offsetZ,
+                            offsetX * 0.1, 0, offsetZ * 0.1); // Apply slight velocity outward
+                });
+            }
+        }
+    }
+
 
     @Override
     public void performRangedAttack(LivingEntity target, float distanceFactor) {
@@ -124,6 +132,8 @@ public class CloneEntity extends MobEntity implements IAnimatable, IRangedAttack
     @Override
     public void die(DamageSource source) {
         super.die(source);
+        createExpandingCircleParticles(this.level, this.getX(), this.getY(), this.getZ());
+
         if (!this.level.isClientSide()) {
             int experiencePoints = this.getXpToDrop();
 
@@ -146,6 +156,21 @@ public class CloneEntity extends MobEntity implements IAnimatable, IRangedAttack
             spawnGlowParticle();
             particleTickCounter = 0;
         }
+        // Get the mob's velocity
+        Vector3d motion = this.getDeltaMovement();
+
+        // Check if the mob is moving
+        if (motion.x != 0 || motion.y != 0 || motion.z != 0) {
+            this.setRunning(true);
+        }
+    }
+
+    public boolean getRunning() {
+        return this.entityData.get(RUNNING);
+    }
+
+    public void setRunning(boolean running) {
+        this.entityData.set(RUNNING,running);
     }
 
 
@@ -185,11 +210,13 @@ public class CloneEntity extends MobEntity implements IAnimatable, IRangedAttack
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (this.onGround) {
+        if (!this.getRunning()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.idle", true));
             return PlayState.CONTINUE;
+        } else {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.run", true));
+            return PlayState.CONTINUE;
         }
-        return PlayState.STOP;
     }
 
 

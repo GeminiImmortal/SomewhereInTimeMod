@@ -104,5 +104,7 @@
   "screen.mobius.soul_forge": "Soul Forge",
   "screen.mobius.astral_conduit": "Astral Conduit",
 
-  "death.attack.knives_out": "%1$s was cut to ribbons."
+  "death.attack.knives_out": "%1$s was cut to ribbons.",
+
+  "effect.mobius.lord_decree": "Lord's Decree"
 }

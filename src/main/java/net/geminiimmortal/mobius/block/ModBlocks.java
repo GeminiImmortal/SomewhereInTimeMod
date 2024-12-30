@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.block;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.custom.*;
+import net.geminiimmortal.mobius.block.custom.boss_blocks.GovernorBossBlock;
 import net.geminiimmortal.mobius.block.custom.flora.CandyCane;
 import net.geminiimmortal.mobius.block.custom.trees.ManawoodTree;
 import net.geminiimmortal.mobius.block.custom.trees.MarrowoodTree;
@@ -56,6 +57,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> MARROWOOD_DOOR = registerBlock("marrowood_door",
             () -> new DoorBlock(AbstractBlock.Properties.copy(Blocks.OAK_DOOR)));
+
+    public static final RegistryObject<Block> GOVERNOR_BOSS_BLOCK = registerBlock("governor_boss_block",
+            () -> new GovernorBossBlock(AbstractBlock.Properties.copy(Blocks.BEDROCK)));
 
     public static final RegistryObject<Block> MARROWOOD_FENCE = registerBlock("marrowood_fence",
             () -> new FenceBlock(AbstractBlock.Properties.copy(Blocks.OAK_FENCE)));

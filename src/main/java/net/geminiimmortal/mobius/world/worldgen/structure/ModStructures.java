@@ -39,6 +39,9 @@ public class ModStructures {
     public static final RegistryObject<Structure<NoFeatureConfig>> MOLVAN_SETTLEMENT_B =
             STRUCTURES.register("molvan_settlement_b", MolvanSettlementB::new);
 
+    public static final RegistryObject<Structure<NoFeatureConfig>> GOVERNOR_TOWER =
+            STRUCTURES.register("governor_tower", GovernorTower::new);
+
     /* average distance apart in chunks between spawn attempts */
     /* minimum distance apart in chunks between spawn attempts. MUST BE LESS THAN ABOVE VALUE*/
     /* this modifies the seed of the structure so no two structures always spawn over each-other.
@@ -58,6 +61,9 @@ public class ModStructures {
                 true);
         setupMapSpacingAndLand(IMPERIAL_WATCHTOWER.get(),
                 new StructureSeparationSettings(30, 15, 91358318),
+                true);
+        setupMapSpacingAndLand(GOVERNOR_TOWER.get(),
+                new StructureSeparationSettings(50, 35, 867530939),
                 true);
     }
 

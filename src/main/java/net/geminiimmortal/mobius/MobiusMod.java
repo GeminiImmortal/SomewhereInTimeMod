@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius;
 
 import com.google.common.collect.Maps;
+import net.geminiimmortal.mobius.effects.ModEffects;
 import net.geminiimmortal.mobius.poi.ModPOIs;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.block.ModWoodTypes;
@@ -84,6 +85,7 @@ public class MobiusMod
         ModItems.register(eventBus);
         ModSounds.register(eventBus);
         ModPOIs.register(eventBus);
+        ModEffects.register(eventBus);
         CustomSurfaceBuilders.register(eventBus);
         ModBiomes.register(eventBus);
         ModEntityTypes.register(eventBus);

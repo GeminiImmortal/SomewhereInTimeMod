@@ -1,0 +1,15 @@
+{
+  "name": "mobius:boss_dungeons/governor_tower_up_pool.json",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "mobius:boss_dungeons/governor_tower_up",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

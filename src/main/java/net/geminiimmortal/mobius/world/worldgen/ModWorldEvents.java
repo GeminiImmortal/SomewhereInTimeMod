@@ -79,6 +79,8 @@ public class ModWorldEvents {
                     DimensionStructuresSettings.DEFAULTS.get(ModStructures.MOBIUS_PORTAL.get()));
             tempMap.putIfAbsent(ModStructures.IMPERIAL_WATCHTOWER.get(),
                     DimensionStructuresSettings.DEFAULTS.get(ModStructures.IMPERIAL_WATCHTOWER.get()));
+            tempMap.putIfAbsent(ModStructures.GOVERNOR_TOWER.get(),
+                    DimensionStructuresSettings.DEFAULTS.get(ModStructures.GOVERNOR_TOWER.get()));
             serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
         }
     }

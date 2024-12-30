@@ -3,6 +3,7 @@ package net.geminiimmortal.mobius.entity.model;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.custom.GovernorEntity;
 import net.geminiimmortal.mobius.entity.custom.GovernorEntity;
+import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 

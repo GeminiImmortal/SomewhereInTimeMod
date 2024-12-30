@@ -1,26 +1,30 @@
 package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.entity.goals.*;
+import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.sound.ClientMusicHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
+import net.minecraft.entity.monster.VindicatorEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.Style;
@@ -37,16 +41,14 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-import java.util.List;
-
-public class GovernorEntity extends MobEntity implements IAnimatable {
+public class GovernorEntity extends VindicatorEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final DataParameter<Boolean> CASTING = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> FLEEING = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> CLONED = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
-    public GroundPathNavigator moveControl;
-    private int particleTickCounter = 0;
-    private static final int PARTICLE_SPAWN_INTERVAL = 5;
+    private static final DataParameter<Integer> GLOBAL_COOLDOWN = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.INT);
+    private static final int G_COOLDOWN_DURATION = 160;
+    private int gcd = 160;
 
     IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[LEGENDARY FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.DARK_PURPLE).withBold(true));
     IFormattableTextComponent name = (StringTextComponent) new StringTextComponent("His Lordship, The Governor").setStyle(Style.EMPTY.withColor(TextFormatting.DARK_BLUE).withBold(false));
@@ -62,10 +64,11 @@ public class GovernorEntity extends MobEntity implements IAnimatable {
 
 
 
-    public GovernorEntity(EntityType<? extends MobEntity> type, World worldIn) {
+    public GovernorEntity(EntityType<? extends VindicatorEntity> type, World worldIn) {
         super(type, worldIn);
         this.dropExperience();
         this.maxUpStep = 1;
+        this.setItemInHand(Hand.MAIN_HAND, new ItemStack(ModItems.VORPAL_SWORD.get()));
     }
 
     @Override
@@ -74,6 +77,7 @@ public class GovernorEntity extends MobEntity implements IAnimatable {
         this.entityData.define(CASTING, false);
         this.entityData.define(FLEEING, false);
         this.entityData.define(CLONED, false);
+        this.entityData.define(GLOBAL_COOLDOWN, 160);
     }
 
 
@@ -81,7 +85,7 @@ public class GovernorEntity extends MobEntity implements IAnimatable {
         return MobEntity.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 300.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
-                .add(Attributes.ATTACK_DAMAGE, 0.0D)
+                .add(Attributes.ATTACK_DAMAGE, 5.0D)
                 .add(Attributes.FOLLOW_RANGE, 30.0D)
                 .add(Attributes.ARMOR, 15.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 2.5D)
@@ -92,11 +96,9 @@ public class GovernorEntity extends MobEntity implements IAnimatable {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(1, new SwimGoal(this));
-        this.goalSelector.addGoal(2, new TeleportAwayGoal(this, 8,(int) this.getX(), (int) this.getY(), (int) this.getZ(), (int) this.getX() + 8, (int) this.getY(), (int) this.getZ() + 8));
-        this.goalSelector.addGoal(3, new CloneSpellGoal(this, this.getTarget()));
-        this.goalSelector.addGoal(4, new GovernorKnivesOutSpellGoal(this, 24));
-        this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 30f));
-        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.goalSelector.addGoal(8, new MeleeAttackGoal(this, 1.0, true));
+        this.goalSelector.addGoal(7, new GovernorCloneSummonGoal(this));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
 
@@ -125,13 +127,19 @@ public class GovernorEntity extends MobEntity implements IAnimatable {
     public void tick() {
         super.tick();
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
-        particleTickCounter++;
-
-        if (particleTickCounter >= PARTICLE_SPAWN_INTERVAL) {
-            spawnGlowParticle();
-            particleTickCounter = 0;
-        }
+        if (this.gcd < 0) { this.gcd = G_COOLDOWN_DURATION; }
+           else { this.gcd--; }
+        System.out.println("[BOSS] Governor is targeting " + this.getTarget());
+        System.out.println("[BOSS] Governor's GCD is " + gcd);
         ClientMusicHandler.stopVanillaMusic(Minecraft.getInstance());
+
+        // Get the mob's velocity
+        Vector3d motion = this.getDeltaMovement();
+
+        // Check if the mob is moving
+        if (motion.x != 0 || motion.y != 0 || motion.z != 0) {
+            this.setFleeing(true);
+        }
     }
 
     @Override
@@ -185,11 +193,13 @@ public class GovernorEntity extends MobEntity implements IAnimatable {
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (this.onGround) {
+        if (!this.getFleeing()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.idle", true));
             return PlayState.CONTINUE;
+        } else {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.run", true));
+            return PlayState.CONTINUE;
         }
-        return PlayState.STOP;
     }
 
 
@@ -210,6 +220,15 @@ public class GovernorEntity extends MobEntity implements IAnimatable {
     public void setCasting(boolean alerted) {
         this.entityData.set(CASTING, alerted);
     }
+
+    public void setGlobalCooldown(int cd) {
+        this.entityData.set(GLOBAL_COOLDOWN, cd);
+    }
+
+    public int getGlobalCooldown() {
+        return this.entityData.get(GLOBAL_COOLDOWN);
+    }
+
     public void setFleeing(boolean fleeing) { this.entityData.set(FLEEING, fleeing); }
     public void setCloned(boolean cloned) { this.entityData.set(CLONED, cloned); }
     public boolean getCasting() {

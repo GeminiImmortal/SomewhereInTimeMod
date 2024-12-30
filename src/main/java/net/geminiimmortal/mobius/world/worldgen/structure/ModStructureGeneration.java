@@ -54,6 +54,11 @@ public class ModStructureGeneration {
             List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructures.IMPERIAL_WATCHTOWER.get().configured(NoFeatureConfig.INSTANCE));
         }
+
+        if(Objects.equals(event.getName(), validTower)) {
+            List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
+            structures.add(() -> ModStructures.GOVERNOR_TOWER.get().configured(NoFeatureConfig.INSTANCE));
+        }
     }
 }
 
