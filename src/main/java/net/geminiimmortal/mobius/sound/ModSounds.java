@@ -15,6 +15,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> MOBIUS_PORTAL_HUM =
             registerSoundEvent("mobius_portal");
 
+    public static final RegistryObject<SoundEvent> BOREALIS_MUSIC =
+            registerSoundEvent("borealis");
+
     public static final RegistryObject<SoundEvent> HEART_GOLEM_HEAL =
             registerSoundEvent("heart_golem_heal");
 

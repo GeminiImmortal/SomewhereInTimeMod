@@ -4,6 +4,11 @@
       "mobius:upside_down"
     ]
   },
+  "borealis": {
+    "sounds": [
+      "mobius:borealis"
+    ]
+  },
   "mobius_portal": {
     "sounds": [
       "mobius:mobius_portal"

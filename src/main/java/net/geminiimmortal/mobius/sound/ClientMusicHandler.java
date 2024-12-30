@@ -1,11 +1,9 @@
 package net.geminiimmortal.mobius.sound;
 
-import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
@@ -20,6 +18,7 @@ public class ClientMusicHandler {
     private static final ResourceLocation CUSTOM_DIMENSION = new ResourceLocation("mobius", "mobius");
     public static final SoundEvent COLORS_MUSIC = new SoundEvent(new ResourceLocation("mobius", "colors"));
     public static final SoundEvent DREAM_STATE_MUSIC = new SoundEvent(new ResourceLocation("mobius", "dream_state"));
+    public static final SoundEvent BOREALIS_MUSIC = new SoundEvent(new ResourceLocation("mobius", "borealis"));
 
     private static final List<SoundEvent> CUSTOM_MUSIC_TRACKS = new ArrayList<>();
     private static final Map<SoundEvent, Integer> TRACK_DURATIONS = new HashMap<>();
@@ -27,8 +26,10 @@ public class ClientMusicHandler {
     static {
         CUSTOM_MUSIC_TRACKS.add(COLORS_MUSIC);
         CUSTOM_MUSIC_TRACKS.add(DREAM_STATE_MUSIC);
+        CUSTOM_MUSIC_TRACKS.add(BOREALIS_MUSIC);
         TRACK_DURATIONS.put(COLORS_MUSIC, 2460); // Duration in ticks (20 ticks = 1 second)
         TRACK_DURATIONS.put(DREAM_STATE_MUSIC, 2520);
+        TRACK_DURATIONS.put(BOREALIS_MUSIC, 3080);
     }
 
     private static final Random RANDOM = new Random();
