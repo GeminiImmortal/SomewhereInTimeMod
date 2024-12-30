@@ -1,11 +1,11 @@
 {
-  "name": "mobius:villages/houses/magismith_houses/start_pool_magismith_house_a",
+  "name": "mobius:villages/other/tavern.json",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
       "element": {
-        "location": "mobius:villages/magismith_houses/magismith_house_a",
+        "location": "mobius:villages/other/tavern",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
