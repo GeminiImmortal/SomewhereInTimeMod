@@ -3,7 +3,6 @@ package net.geminiimmortal.mobius.entity.custom;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.*;
 import net.geminiimmortal.mobius.sound.ClientMusicHandler;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -16,13 +15,15 @@ import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.monster.VindicatorEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -56,6 +57,7 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
     private int gcd = 160;
     private final List<CloneEntity> activeClones = new ArrayList<>();
     private static final int MAX_CLONES = 6;
+    private static boolean isAttacking;
 
     IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[LEGENDARY FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.DARK_PURPLE).withBold(true));
     IFormattableTextComponent name = (StringTextComponent) new StringTextComponent("His Lordship, The Governor").setStyle(Style.EMPTY.withColor(TextFormatting.DARK_BLUE).withBold(false));
@@ -84,6 +86,7 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
         this.dropExperience();
         this.maxUpStep = 1;
         this.setPersistenceRequired();
+        this.setItemInHand(Hand.MAIN_HAND, new ItemStack(Items.DIAMOND_SWORD));
     }
 
     @Override
@@ -171,6 +174,13 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
     @Override
     public void tick() {
         super.tick();
+
+        if(!(this.getTarget() == null)) {
+            if (shouldAttackPlayer((PlayerEntity) this.getTarget())) {
+                isAttacking = true;
+            }
+        }
+
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
         if (this.gcd < 0) { this.gcd = G_COOLDOWN_DURATION; }
            else { this.gcd--; }
@@ -229,9 +239,12 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
     public void registerControllers(AnimationData data) {
         AnimationController<GovernorEntity> controller = new AnimationController<>(this, "controller", 0, this::predicate);
         AnimationController<GovernorEntity> alertedController = new AnimationController<>(this, "alertedController", 0, this::alertedPredicate);
+        AnimationController<GovernorEntity> attackController = new AnimationController<>(this, "attackController", 0, this::attackPredicate);
 
+        data.addAnimationController(attackController);
         data.addAnimationController(controller);
         data.addAnimationController(alertedController);
+
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
@@ -251,6 +264,22 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
             return PlayState.CONTINUE;
         }
         return PlayState.STOP;
+    }
+
+    private <E extends IAnimatable> PlayState attackPredicate(AnimationEvent<E> event) {
+        if (this.swinging) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.sword_attack", false));
+            return PlayState.CONTINUE;
+        } else {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.idle", true));
+            isAttacking = false;
+            return PlayState.CONTINUE;
+        }
+    }
+
+    public boolean shouldAttackPlayer(PlayerEntity player) {
+        double distance = this.distanceTo(player);
+        return distance < 2.4;
     }
 
 

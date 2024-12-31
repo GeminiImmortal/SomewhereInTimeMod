@@ -116,6 +116,27 @@
 					}
 				}
 			}
+		},
+		"animation.model.sword_attack": {
+			"animation_length": 0.5,
+			"bones": {
+				"right_arm": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.25": {
+							"vector": [-114.68877, 16.66577, 106.26748]
+						},
+						"0.375": {
+							"vector": [25.31123, 16.66577, 106.26748]
+						},
+						"0.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
 		}
 	},
 	"geckolib_format_version": 2

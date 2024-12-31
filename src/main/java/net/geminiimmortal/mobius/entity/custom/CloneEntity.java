@@ -141,7 +141,7 @@ public class CloneEntity extends MobEntity implements IAnimatable, IRangedAttack
     @Override
     public void die(DamageSource source) {
         super.die(source);
-        createExpandingCircleParticles(this.level, this.getX(), this.getY(), this.getZ());
+    //    createExpandingCircleParticles(this.level, this.getX(), this.getY(), this.getZ());
 
         if (!this.level.isClientSide()) {
             int experiencePoints = this.getXpToDrop();
