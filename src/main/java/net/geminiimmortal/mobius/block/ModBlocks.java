@@ -61,6 +61,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> GOVERNOR_BOSS_BLOCK = registerBlock("governor_boss_block",
             () -> new GovernorBossBlock(AbstractBlock.Properties.copy(Blocks.BEDROCK)));
 
+    public static final RegistryObject<Block> DUNGEON_BLOCK = registerBlock("dungeon_block",
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.BEDROCK)));
+
     public static final RegistryObject<Block> MARROWOOD_FENCE = registerBlock("marrowood_fence",
             () -> new FenceBlock(AbstractBlock.Properties.copy(Blocks.OAK_FENCE)));
 

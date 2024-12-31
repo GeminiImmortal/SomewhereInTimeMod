@@ -5,7 +5,11 @@ import net.geminiimmortal.mobius.entity.custom.GovernorEntity;
 import net.geminiimmortal.mobius.entity.custom.GovernorEntity;
 import net.minecraft.client.renderer.entity.model.BipedModel;
 import net.minecraft.util.ResourceLocation;
+import software.bernie.geckolib3.core.AnimationState;
+import software.bernie.geckolib3.core.processor.IBone;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
+
+import javax.annotation.Nonnull;
 
 public class GovernorModel extends AnimatedGeoModel<GovernorEntity> {
     @Override

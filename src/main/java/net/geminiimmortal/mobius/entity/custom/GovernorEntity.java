@@ -1,7 +1,6 @@
 package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.entity.goals.*;
-import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.sound.ClientMusicHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityType;
@@ -15,13 +14,11 @@ import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.monster.VindicatorEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.vector.Vector3d;
@@ -81,7 +78,6 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
         super(type, worldIn);
         this.dropExperience();
         this.maxUpStep = 1;
-        this.setItemInHand(Hand.MAIN_HAND, new ItemStack(ModItems.VORPAL_SWORD.get()));
     }
 
     @Override
