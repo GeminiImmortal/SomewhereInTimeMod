@@ -1,7 +1,6 @@
 package net.geminiimmortal.mobius.block.custom.boss_blocks;
 
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
-import net.geminiimmortal.mobius.sound.ClientMusicHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -40,10 +39,8 @@ public class GovernorBossBlock extends Block {
             EntityType<?> bossEntityType = ModEntityTypes.GOVERNOR.get();
             Entity bossEntity = bossEntityType.create(world);
             if (bossEntity != null) {
-                bossEntity.moveTo(targetX, targetY, targetZ, 0.0F, 0.0F); // Set position and rotation
-                world.addFreshEntity(bossEntity); // Add the boss to the world
-
-                // Notify the player or world
+                bossEntity.moveTo(targetX, targetY, targetZ, 0.0F, 0.0F);
+                world.addFreshEntity(bossEntity);
                 world.playSound(null, targetX, targetY, targetZ, SoundEvents.WITHER_SPAWN, SoundCategory.HOSTILE, 1.0F, 1.0F);
                 player.sendMessage(new StringTextComponent("The Governor challenges you to a duel!"), player.getUUID());
             }

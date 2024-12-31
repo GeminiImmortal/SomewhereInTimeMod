@@ -14,6 +14,7 @@ import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.monster.VindicatorEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -78,7 +79,34 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
         super(type, worldIn);
         this.dropExperience();
         this.maxUpStep = 1;
+        this.setPersistenceRequired();
     }
+
+    @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return false; // Prevent despawning when the player moves far away
+    }
+
+    @Override
+    public boolean save(CompoundNBT tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putBoolean("IsPersistentBoss", true);
+        return true;
+    }
+
+    @Override
+    public void load(CompoundNBT tag) {
+        super.readAdditionalSaveData(tag);
+        if (tag.getBoolean("IsPersistentBoss")) {
+            this.setPersistenceRequired();
+        }
+    }
+
+    @Override
+    public void checkDespawn() {
+        // Do nothing to prevent the boss from despawning
+    }
+
 
     @Override
     protected void defineSynchedData() {
