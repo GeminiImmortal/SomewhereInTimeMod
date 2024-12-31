@@ -3,6 +3,7 @@ package net.geminiimmortal.mobius.block;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.custom.*;
 import net.geminiimmortal.mobius.block.custom.boss_blocks.GovernorBossBlock;
+import net.geminiimmortal.mobius.block.custom.boss_blocks.GovernorBossExitBlock;
 import net.geminiimmortal.mobius.block.custom.flora.CandyCane;
 import net.geminiimmortal.mobius.block.custom.trees.ManawoodTree;
 import net.geminiimmortal.mobius.block.custom.trees.MarrowoodTree;
@@ -60,6 +61,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> GOVERNOR_BOSS_BLOCK = registerBlock("governor_boss_block",
             () -> new GovernorBossBlock(AbstractBlock.Properties.copy(Blocks.BEDROCK)));
+
+    public static final RegistryObject<Block> GOVERNOR_BOSS_EXIT_BLOCK = registerBlock("governor_boss_exit_block",
+            () -> new GovernorBossExitBlock(AbstractBlock.Properties.copy(Blocks.BEDROCK)));
 
     public static final RegistryObject<Block> DUNGEON_BLOCK = registerBlock("dungeon_block",
             () -> new Block(AbstractBlock.Properties.copy(Blocks.BEDROCK)));

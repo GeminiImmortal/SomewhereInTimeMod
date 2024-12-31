@@ -1,7 +1,9 @@
 package net.geminiimmortal.mobius.entity.custom;
 
+import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.*;
 import net.geminiimmortal.mobius.sound.ClientMusicHandler;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -20,8 +22,10 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Direction;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.IFormattableTextComponent;
 import net.minecraft.util.text.StringTextComponent;
@@ -159,6 +163,8 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
             }
             ClientMusicHandler.setGovernor(false);
             ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
+            BlockPos deathSpot = new BlockPos(this.getX(), this.getY() + 1, this.getZ());
+            this.level.setBlock(deathSpot, ModBlocks.GOVERNOR_BOSS_EXIT_BLOCK.get().defaultBlockState(), 3);
         }
     }
 

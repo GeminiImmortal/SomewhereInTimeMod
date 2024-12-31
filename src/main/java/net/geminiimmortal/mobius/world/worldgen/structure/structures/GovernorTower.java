@@ -52,8 +52,9 @@ public class GovernorTower extends Structure<NoFeatureConfig> {
 
     @Override
     public IStartFactory<NoFeatureConfig> getStartFactory() {
-        return GovernorTower.Start::new;
+        return Start::new;
     }
+
 
     public static class Start extends StructureStart<NoFeatureConfig> {
         public Start(Structure<NoFeatureConfig> structureIn, int chunkX, int chunkZ,
@@ -65,12 +66,12 @@ public class GovernorTower extends Structure<NoFeatureConfig> {
         public void generatePieces(DynamicRegistries dynamicRegistryManager, ChunkGenerator chunkGenerator,
                                    TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn,
                                    NoFeatureConfig config) {
-            // Turns the chunk coordinates into actual coordinates we can use. (Gets center of that chunk)
+
             int x = (chunkX << 4) + 7;
             int z = (chunkZ << 4) + 7;
             BlockPos blockpos = new BlockPos(x, 0, z);
 
-            //addpieces()
+
             JigsawManager.addPieces(dynamicRegistryManager,
                     new VillageConfig(() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY)
                             .get(new ResourceLocation(MobiusMod.MOD_ID, "boss_dungeons/governor_tower_base_pool")),

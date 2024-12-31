@@ -7,6 +7,7 @@ import net.geminiimmortal.mobius.world.worldgen.features.ModOreGeneration;
 import net.geminiimmortal.mobius.world.worldgen.features.ModTreeGeneration;
 import net.geminiimmortal.mobius.world.worldgen.structure.ModStructureGeneration;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.ChunkGenerator;
@@ -37,8 +38,6 @@ public class ModWorldEvents {
         ModOreGeneration.generateOres(event);
         ModTreeGeneration.generateTrees(event);
         ModMountainGeneration.generateMountains(event);
-
-
     }
 
     @SubscribeEvent
