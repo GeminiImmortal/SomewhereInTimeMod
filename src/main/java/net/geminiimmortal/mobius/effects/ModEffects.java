@@ -1,9 +1,9 @@
 package net.geminiimmortal.mobius.effects;
 
 import net.geminiimmortal.mobius.MobiusMod;
+import net.geminiimmortal.mobius.effects.custom.ExposedEffect;
 import net.geminiimmortal.mobius.effects.custom.LordDecreeEffect;
 import net.minecraft.potion.Effect;
-import net.minecraft.potion.Effects;
 
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -18,6 +18,9 @@ public class ModEffects {
 
     public static final RegistryObject<Effect> LORD_DECREE_EFFECT = EFFECTS.register("lord_decree",
             () -> new LordDecreeEffect(EffectType.HARMFUL, 0xFFD700));
+
+    public static final RegistryObject<Effect> EXPOSED_EFFECT = EFFECTS.register("exposed",
+            () -> new ExposedEffect(EffectType.HARMFUL, 0xFF00FF));
 
     public static void register(IEventBus eventBus) {
         EFFECTS.register(eventBus);

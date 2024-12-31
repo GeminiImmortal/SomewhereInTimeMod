@@ -41,6 +41,9 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GovernorEntity extends VindicatorEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final DataParameter<Boolean> CASTING = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
@@ -49,6 +52,8 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
     private static final DataParameter<Integer> GLOBAL_COOLDOWN = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.INT);
     private static final int G_COOLDOWN_DURATION = 160;
     private int gcd = 160;
+    private final List<CloneEntity> activeClones = new ArrayList<>();
+    private static final int MAX_CLONES = 6;
 
     IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[LEGENDARY FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.DARK_PURPLE).withBold(true));
     IFormattableTextComponent name = (StringTextComponent) new StringTextComponent("His Lordship, The Governor").setStyle(Style.EMPTY.withColor(TextFormatting.DARK_BLUE).withBold(false));
@@ -60,9 +65,17 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
             BossInfo.Overlay.NOTCHED_20
     );
 
+    public List<CloneEntity> getActiveClones() {
+        return activeClones;
+    }
 
+    public void addClone(CloneEntity cloneEntity) {
+        activeClones.add(cloneEntity);
+    }
 
-
+    public boolean canSummonMoreClones() {
+        return activeClones.size() < MAX_CLONES;
+    }
 
     public GovernorEntity(EntityType<? extends VindicatorEntity> type, World worldIn) {
         super(type, worldIn);
@@ -120,6 +133,8 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
                 experiencePoints -= experienceToDrop;
                 this.level.addFreshEntity(new ExperienceOrbEntity(this.level, this.getX(), this.getY(), this.getZ(), experienceToDrop));
             }
+            ClientMusicHandler.setGovernor(false);
+            ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
         }
     }
 
@@ -129,9 +144,6 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
         if (this.gcd < 0) { this.gcd = G_COOLDOWN_DURATION; }
            else { this.gcd--; }
-        System.out.println("[BOSS] Governor is targeting " + this.getTarget());
-        System.out.println("[BOSS] Governor's GCD is " + gcd);
-        ClientMusicHandler.stopVanillaMusic(Minecraft.getInstance());
 
         // Get the mob's velocity
         Vector3d motion = this.getDeltaMovement();
@@ -146,14 +158,14 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
     public void startSeenByPlayer(ServerPlayerEntity player) {
         super.startSeenByPlayer(player);
         this.bossInfo.addPlayer(player);
-        ClientMusicHandler.playGovernorBossMusic(Minecraft.getInstance());
+        ClientMusicHandler.playGovernorBossMusic(Minecraft.getInstance(), this);
+        ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
     }
 
     @Override
     public void stopSeenByPlayer(ServerPlayerEntity player) {
         super.stopSeenByPlayer(player);
         this.bossInfo.removePlayer(player);
-        ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
     }
 
 

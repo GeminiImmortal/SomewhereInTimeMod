@@ -105,6 +105,8 @@
   "screen.mobius.astral_conduit": "Astral Conduit",
 
   "death.attack.knives_out": "%1$s was cut to ribbons.",
+  "death.attack.clone_shatter": "%1$s had their mind scrambled.",
 
-  "effect.mobius.lord_decree": "Lord's Decree"
+  "effect.mobius.lord_decree": "Lord's Decree",
+  "effect.mobius.exposed": "Exposed"
 }

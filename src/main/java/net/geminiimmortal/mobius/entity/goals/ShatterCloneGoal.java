@@ -1,14 +1,12 @@
 package net.geminiimmortal.mobius.entity.goals;
 
 
+import net.geminiimmortal.mobius.damage.CloneShatterDamageSource;
 import net.geminiimmortal.mobius.effects.ModEffects;
 import net.geminiimmortal.mobius.entity.custom.CloneEntity;
 import net.minecraft.entity.AreaEffectCloudEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 
@@ -27,18 +25,24 @@ public class ShatterCloneGoal extends Goal {
 
     @Override
     public void start() {
-            this.clone.getNavigation().moveTo(Objects.requireNonNull(clone.getTarget()), 0.6f);
+            this.clone.getNavigation().moveTo(Objects.requireNonNull(clone.getTarget()), 0.65f);
         
     }
 
     @Override
     public void tick() {
         if (clone.getTarget() != null && clone.getTarget().isAlive()) {
-            if (!this.clone.getNavigation().isInProgress()) {
-                this.clone.getNavigation().moveTo(clone.getTarget(), 0.35f);
-            }
+        //    if (!this.clone.getNavigation().isInProgress()) {
+                this.clone.getNavigation().moveTo(clone.getTarget(), 0.65f);
+        //    }
             if (this.clone.distanceTo(clone.getTarget()) <= 2) {
-                this.clone.getTarget().hurt(DamageSource.IN_FIRE, 7f);
+                if (!clone.getTarget().isBlocking()) {
+
+                    this.clone.getTarget().hurt(CloneShatterDamageSource.CLONE_SHATTER, 7f);
+                    this.clone.getTarget().addEffect(new EffectInstance(ModEffects.EXPOSED_EFFECT.get(), 100));
+                } else {
+                    this.clone.level.playSound(null, this.clone.getTarget().getX(), this.clone.getTarget().getY(), this.clone.getTarget().getZ(), SoundEvents.SHIELD_BLOCK, SoundCategory.HOSTILE, 1f, 1f);
+                }
                 AreaEffectCloudEntity cloud = new AreaEffectCloudEntity(this.clone.level, this.clone.getX(), this.clone.getY(), this.clone.getZ());
                 this.clone.level.addFreshEntity(cloud);
                 this.clone.level.playSound(null, this.clone.getTarget().getX(), this.clone.getTarget().getY(), this.clone.getTarget().getZ(), SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 1.0f, 1.0f);

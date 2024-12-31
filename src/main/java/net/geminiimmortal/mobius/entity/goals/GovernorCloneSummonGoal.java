@@ -30,10 +30,7 @@ public class GovernorCloneSummonGoal extends Goal {
             cooldown--;
         }
 
-        // Debug output
-        System.out.println("[GOAL] Cooldown is: " + cooldown + " for: " + boss.getTarget());
-
-        if (boss.getTarget() != null && cooldown <= 0) {
+        if (boss.getTarget() != null && cooldown <= 0 && boss.canSummonMoreClones()) {
             cooldown = 200;
             return true;
         }
@@ -44,13 +41,12 @@ public class GovernorCloneSummonGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-        return boss.getTarget() != null && cooldown <= 0;
+        return boss.getTarget() != null && cooldown <= 0 && boss.canSummonMoreClones();
     }
 
     @Override
     public void start() {
         boss.setCasting(true);
-        //summonCircle();
         summonClones(Objects.requireNonNull(boss.getTarget()));
     }
 
@@ -78,8 +74,6 @@ public class GovernorCloneSummonGoal extends Goal {
                 this.stop();
             }
         }
-        System.out.println("[GOAL] Governor is targeting " + boss.getTarget());
-        System.out.println("[GOAL] GCD is " + cooldown);
     }
 
     private void summonClones(LivingEntity target) {
@@ -92,6 +86,8 @@ public class GovernorCloneSummonGoal extends Goal {
             double zOffset = (i < 2) ? distance : -distance;
 
             CloneEntity clone = new CloneEntity(ModEntityTypes.CLONE.get(), boss.level);
+            clone.setOwner(boss);
+            boss.addClone(clone);
             clone.setPos(targetPos.x + xOffset, targetPos.y, targetPos.z + zOffset);
             clone.lookAt(EntityAnchorArgument.Type.EYES, targetPos);
             boss.level.addFreshEntity(clone);

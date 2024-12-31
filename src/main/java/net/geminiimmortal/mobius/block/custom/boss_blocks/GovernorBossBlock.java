@@ -46,7 +46,6 @@ public class GovernorBossBlock extends Block {
                 // Notify the player or world
                 world.playSound(null, targetX, targetY, targetZ, SoundEvents.WITHER_SPAWN, SoundCategory.HOSTILE, 1.0F, 1.0F);
                 player.sendMessage(new StringTextComponent("The Governor challenges you to a duel!"), player.getUUID());
-                ClientMusicHandler.playGovernorBossMusic(minecraft);
             }
 
             world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);

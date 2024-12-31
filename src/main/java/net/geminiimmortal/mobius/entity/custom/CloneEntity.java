@@ -35,6 +35,7 @@ public class CloneEntity extends MobEntity implements IAnimatable, IRangedAttack
     private static final DataParameter<Boolean> RUNNING = EntityDataManager.defineId(CloneEntity.class, DataSerializers.BOOLEAN);
     private int particleTickCounter = 0;
     private static final int PARTICLE_SPAWN_INTERVAL = 5;
+    private GovernorEntity owner = null;
 
 
 
@@ -44,6 +45,14 @@ public class CloneEntity extends MobEntity implements IAnimatable, IRangedAttack
         super(type, worldIn);
         this.dropExperience();
         this.maxUpStep = 1;
+    }
+
+    public GovernorEntity getOwner() {
+        return this.owner;
+    }
+
+    public void setOwner(GovernorEntity boss) {
+        this.owner = boss;
     }
 
     @Override

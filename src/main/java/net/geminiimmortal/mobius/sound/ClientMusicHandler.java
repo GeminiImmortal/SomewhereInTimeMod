@@ -1,5 +1,7 @@
 package net.geminiimmortal.mobius.sound;
 
+import net.geminiimmortal.mobius.MobiusMod;
+import net.geminiimmortal.mobius.entity.custom.GovernorEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.util.ResourceLocation;
@@ -19,9 +21,11 @@ public class ClientMusicHandler {
     public static final SoundEvent COLORS_MUSIC = new SoundEvent(new ResourceLocation("mobius", "colors"));
     public static final SoundEvent DREAM_STATE_MUSIC = new SoundEvent(new ResourceLocation("mobius", "dream_state"));
     public static final SoundEvent BOREALIS_MUSIC = new SoundEvent(new ResourceLocation("mobius", "borealis"));
+    public static final SoundEvent BULLYRAG = new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID,"bullyrag"));
 
     private static final List<SoundEvent> CUSTOM_MUSIC_TRACKS = new ArrayList<>();
     private static final Map<SoundEvent, Integer> TRACK_DURATIONS = new HashMap<>();
+    private static boolean governor;
 
     static {
         CUSTOM_MUSIC_TRACKS.add(COLORS_MUSIC);
@@ -37,6 +41,10 @@ public class ClientMusicHandler {
     private static long trackStartTime = 0; // In ticks
     private static int currentTrackDuration = 0; // In ticks
     private static boolean isPlayingCustomMusic = false;
+
+    public static void setGovernor(boolean alive) {
+        governor = alive;
+    }
 
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
@@ -54,7 +62,16 @@ public class ClientMusicHandler {
     }
 
     private static void startCustomMusic(Minecraft minecraft, long gameTime) {
-        if (!isPlayingCustomMusic || gameTime - trackStartTime > currentTrackDuration) {
+        if (governor && (!isPlayingCustomMusic || gameTime - trackStartTime > currentTrackDuration)) {
+            stopVanillaMusic(minecraft);
+            stopCustomMusic(minecraft);
+            minecraft.getSoundManager().play(SimpleSound.forMusic(BULLYRAG));
+
+            trackStartTime = gameTime;
+            currentTrackDuration = 2610;
+            isPlayingCustomMusic = true;
+        } else if (!isPlayingCustomMusic || gameTime - trackStartTime > currentTrackDuration) {
+
             SoundEvent track = CUSTOM_MUSIC_TRACKS.get(RANDOM.nextInt(CUSTOM_MUSIC_TRACKS.size()));
             minecraft.getSoundManager().play(SimpleSound.forMusic(track));
 
@@ -62,6 +79,7 @@ public class ClientMusicHandler {
             currentTrackDuration = TRACK_DURATIONS.getOrDefault(track, 3600);  // Set duration for the track, default 3 minutes (3600 ticks)
             isPlayingCustomMusic = true;
         }
+
     }
 
     public static void stopCustomMusic(Minecraft minecraft) {
@@ -78,6 +96,11 @@ public class ClientMusicHandler {
         }
     }
 
+    public static void pauseCustomMusic(Minecraft minecraft) {
+        stopCustomMusic(minecraft);
+        stopVanillaMusic(minecraft);
+    }
+
     public static void playCourtWizardBossMusic(Minecraft minecraft) {
         if (isPlayingCustomMusic) {
             minecraft.getSoundManager().stop();
@@ -85,10 +108,9 @@ public class ClientMusicHandler {
         }
     }
 
-    public static void playGovernorBossMusic(Minecraft minecraft) {
-        if (isPlayingCustomMusic) {
-            minecraft.getSoundManager().stop();
-            minecraft.getSoundManager().play(SimpleSound.forMusic(ModSounds.BULLYRAG.get()));
+    public static void playGovernorBossMusic(Minecraft minecraft, GovernorEntity boss) {
+        if (boss.isAlive()) {
+            governor = true;
         }
     }
 }
