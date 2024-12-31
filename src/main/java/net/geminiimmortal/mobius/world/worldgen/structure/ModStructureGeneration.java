@@ -28,6 +28,7 @@ public class ModStructureGeneration {
 
         ResourceLocation valid = ModBiomes.DRACONIC_FORELANDS.getId();
         ResourceLocation validTower = ModBiomes.ROLLING_EXPANSE.getId();
+        ResourceLocation governorTowerValid = ModBiomes.GOO_LAGOON.getId();
         ResourceLocation validPortal = Biomes.PLAINS.location();
 
         if(Objects.equals(event.getName(), valid)) {
@@ -55,7 +56,7 @@ public class ModStructureGeneration {
             structures.add(() -> ModStructures.IMPERIAL_WATCHTOWER.get().configured(NoFeatureConfig.INSTANCE));
         }
 
-        if(Objects.equals(event.getName(), validTower)) {
+        if(Objects.equals(event.getName(), governorTowerValid)) {
             List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructures.GOVERNOR_TOWER.get().configured(NoFeatureConfig.INSTANCE));
         }

@@ -74,11 +74,11 @@ public class GovernorTower extends Structure<NoFeatureConfig> {
 
             JigsawManager.addPieces(dynamicRegistryManager,
                     new VillageConfig(() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY)
-                            .get(new ResourceLocation(MobiusMod.MOD_ID, "boss_dungeons/governor_tower_base_pool")),
-                            1), AbstractVillagePiece::new, chunkGenerator, templateManagerIn,
+                            .get(new ResourceLocation(MobiusMod.MOD_ID, "boss_dungeons/floating_island_pool")),
+                            2), AbstractVillagePiece::new, chunkGenerator, templateManagerIn,
                     blockpos, this.pieces, this.random, false, true);
 
-            this.pieces.forEach(piece -> piece.move(0, 0, 0));
+            this.pieces.forEach(piece -> piece.move(0, 70, 0));
             this.pieces.forEach(piece -> piece.getBoundingBox().y0 -= 1);
 
             this.calculateBoundingBox();
