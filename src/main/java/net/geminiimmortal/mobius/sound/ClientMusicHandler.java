@@ -71,7 +71,8 @@ public class ClientMusicHandler {
             currentTrackDuration = 2610;
             isPlayingCustomMusic = true;
         } else if (!isPlayingCustomMusic || gameTime - trackStartTime > currentTrackDuration) {
-
+            minecraft.getSoundManager().stop();
+            trackStartTime = 0;
             SoundEvent track = CUSTOM_MUSIC_TRACKS.get(RANDOM.nextInt(CUSTOM_MUSIC_TRACKS.size()));
             minecraft.getSoundManager().play(SimpleSound.forMusic(track));
 
