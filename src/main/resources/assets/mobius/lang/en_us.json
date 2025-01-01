@@ -31,6 +31,7 @@
   "item.mobius.astral_pickaxe": "Astral Pickaxe",
   "item.mobius.astral_shovel": "Astral Shovel",
   "item.mobius.vial_of_liquid_screams": "Vial of Liquid Screams",
+  "item.mobius.astral_sword": "Astral Sword",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
@@ -110,5 +111,7 @@
   "death.attack.clone_shatter": "%1$s had their mind scrambled.",
 
   "effect.mobius.lord_decree": "Lord's Decree",
-  "effect.mobius.exposed": "Exposed"
+  "effect.mobius.exposed": "Exposed",
+
+  "tooltip.mobius.vorpal_sword": "Steals life on hit"
 }

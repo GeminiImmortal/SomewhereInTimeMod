@@ -22,9 +22,9 @@ public class ModItems {
     public static final RegistryObject<Item> AURORA_DIRT = ITEMS.register("aurora_dirt", () -> new BlockItem(ModBlocks.AURORA_DIRT.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Leaves
-    public static final RegistryObject<Item> BONE_LEAVES = ITEMS.register("bone_leaves", () -> new BlockItem(ModBlocks.BONE_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-    public static final RegistryObject<Item> MANAWOOD_LEAVES = ITEMS.register("manawood_leaves", () -> new BlockItem(ModBlocks.MANAWOOD_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-    public static final RegistryObject<Item> LIVING_MANAWOOD_LEAVES = ITEMS.register("living_manawood_leaves", () -> new BlockItem(ModBlocks.LIVING_MANAWOOD_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> BONE_LEAVES = ITEMS.register("bone_leaves", () -> new BlockItem(ModBlocks.BONE_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> MANAWOOD_LEAVES = ITEMS.register("manawood_leaves", () -> new BlockItem(ModBlocks.MANAWOOD_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> LIVING_MANAWOOD_LEAVES = ITEMS.register("living_manawood_leaves", () -> new BlockItem(ModBlocks.LIVING_MANAWOOD_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     //Logs
     public static final RegistryObject<Item> MARROWOOD_LOG = ITEMS.register("marrowood_log", () -> new BlockItem(ModBlocks.MARROWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
@@ -110,12 +110,12 @@ public class ModItems {
     public static final RegistryObject<Item> POLISHED_HEMATITE_STAIRS = ITEMS.register("polished_hematite_stairs", () -> new BlockItem(ModBlocks.POLISHED_HEMATITE_STAIRS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Workstations for Villagers
-    public static final RegistryObject<Item> HUNTING_TABLE = ITEMS.register("hunting_table", () -> new BlockItem(ModBlocks.HUNTING_TABLE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-    public static final RegistryObject<Item> SOUL_FORGE = ITEMS.register("soul_forge", () -> new BlockItem(ModBlocks.SOUL_FORGE.get(), new Item.Properties().stacksTo(64).tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-    public static final RegistryObject<Item> ESSENCE_CHANNELER = ITEMS.register("essence_channeler", () -> new BlockItem(ModBlocks.ESSENCE_CHANNELER.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> HUNTING_TABLE = ITEMS.register("hunting_table", () -> new BlockItem(ModBlocks.HUNTING_TABLE.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> SOUL_FORGE = ITEMS.register("soul_forge", () -> new BlockItem(ModBlocks.SOUL_FORGE.get(), new Item.Properties().stacksTo(64).tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> ESSENCE_CHANNELER = ITEMS.register("essence_channeler", () -> new BlockItem(ModBlocks.ESSENCE_CHANNELER.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     //Workstations Misc.
-    public static final RegistryObject<Item> ASTRAL_CONDUIT = ITEMS.register("astral_conduit", () -> new BlockItem(ModBlocks.ASTRAL_CONDUIT.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> ASTRAL_CONDUIT = ITEMS.register("astral_conduit", () -> new BlockItem(ModBlocks.ASTRAL_CONDUIT.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     //Uncategorized Building Blocks
     public static final RegistryObject<Item> SOUL_PODZOL = ITEMS.register("soul_podzol", () -> new BlockItem(ModBlocks.SOUL_PODZOL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
@@ -128,11 +128,13 @@ public class ModItems {
     //Weapons and Tools
 
     public static final RegistryObject<Item> STAFF_OF_PROTECTION = ITEMS.register("staff_of_protection", () -> new StaffOfProtection(new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1).rarity(Rarity.RARE).durability(64)));
-    public static final RegistryObject<Item> VORPAL_SWORD = ITEMS.register("vorpal_sword", () -> new SwordItem(ItemTier.NETHERITE, 5, -2.4f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(4096).fireResistant()));
-    public static final RegistryObject<Item> ASTRAL_SHOVEL = ITEMS.register("astral_shovel", () -> new ShovelItem(ItemTier.NETHERITE, 3, -3.0f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
-    public static final RegistryObject<Item> ASTRAL_PICKAXE = ITEMS.register("astral_pickaxe", () -> new PickaxeItem(ItemTier.NETHERITE, 3, -2.8f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
-    public static final RegistryObject<Item> ASTRAL_AXE = ITEMS.register("astral_axe", () -> new AxeItem(ItemTier.NETHERITE, 5.5f, -3.0f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
-    public static final RegistryObject<Item> ASTRAL_HOE = ITEMS.register("astral_hoe", () -> new HoeItem(ItemTier.NETHERITE, -4, -0f, new Item.Properties().rarity(Rarity.EPIC).tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
+    public static final RegistryObject<Item> VORPAL_SWORD = ITEMS.register("vorpal_sword", () -> new VorpalSword(ItemTier.NETHERITE, 3, -2.8f, new Item.Properties().rarity(Rarity.RARE).tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(2032)));
+
+    public static final RegistryObject<Item> ASTRAL_SWORD = ITEMS.register("astral_sword", () -> new SwordItem(ItemTier.NETHERITE, 5, -2.4f, new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(4096)));
+    public static final RegistryObject<Item> ASTRAL_SHOVEL = ITEMS.register("astral_shovel", () -> new ShovelItem(ItemTier.NETHERITE, 3, -3.0f, new Item.Properties().tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
+    public static final RegistryObject<Item> ASTRAL_PICKAXE = ITEMS.register("astral_pickaxe", () -> new PickaxeItem(ItemTier.NETHERITE, 3, -2.8f, new Item.Properties().tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
+    public static final RegistryObject<Item> ASTRAL_AXE = ITEMS.register("astral_axe", () -> new AxeItem(ItemTier.NETHERITE, 5.5f, -3.0f, new Item.Properties().tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
+    public static final RegistryObject<Item> ASTRAL_HOE = ITEMS.register("astral_hoe", () -> new HoeItem(ItemTier.NETHERITE, -4, -0f, new Item.Properties().tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
 
     //Armor
     public static final RegistryObject<Item> NICKEL_BOOTS = ITEMS.register("nickel_boots",
