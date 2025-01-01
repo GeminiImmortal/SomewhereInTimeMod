@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius;
 
 import com.google.common.collect.Maps;
 import net.geminiimmortal.mobius.effects.ModEffects;
+import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.poi.ModPOIs;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.block.ModWoodTypes;
@@ -10,7 +11,6 @@ import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.*;
 import net.geminiimmortal.mobius.entity.render.*;
 import net.geminiimmortal.mobius.item.ModItems;
-import net.geminiimmortal.mobius.network.ParticlePacket;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.recipe.ModRecipeTypes;
 import net.geminiimmortal.mobius.sound.ClientMusicHandler;
@@ -53,13 +53,10 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fml.network.NetworkDirection;
-import net.minecraftforge.fml.network.NetworkRegistry;
-import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -80,7 +77,10 @@ public class MobiusMod
         // Register the processIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
         // Register the doClientStuff method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        }
+
         ModBlocks.register(eventBus);
         ModItems.register(eventBus);
         ModSounds.register(eventBus);
@@ -113,7 +113,9 @@ public class MobiusMod
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-        
+
+        ModNetwork.init();
+
         event.enqueueWork(() -> {
             BiomeDictionary.addTypes(
                     RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MobiusMod.MOD_ID, "draconic_forelands")),
@@ -153,6 +155,8 @@ public class MobiusMod
             ModDimensions.setupDimension();
             ModStructures.setupStructures();
 
+
+
             AxeItem.STRIPABLES = Maps.newHashMap(AxeItem.STRIPABLES);
             AxeItem.STRIPABLES.put(ModBlocks.MARROWOOD_LOG.get(), ModBlocks.STRIPPED_MARROWOOD_LOG.get());
             AxeItem.STRIPABLES.put(ModBlocks.MARROWOOD_WOOD.get(), ModBlocks.STRIPPED_MARROWOOD_WOOD.get());
@@ -164,7 +168,7 @@ public class MobiusMod
 
 
 
-    @Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+ /*   @Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class NetworkHandler {
         public static final String PROTOCOL_VERSION = "1";
         public static SimpleChannel INSTANCE;
@@ -182,7 +186,8 @@ public class MobiusMod
 
 
         }
-    }
+    }*/
+
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
@@ -282,6 +287,7 @@ public class MobiusMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MinecraftForge.EVENT_BUS.register(new ClientMusicHandler());
+
             LOGGER.info("Setting up music manager.");
         }
     }

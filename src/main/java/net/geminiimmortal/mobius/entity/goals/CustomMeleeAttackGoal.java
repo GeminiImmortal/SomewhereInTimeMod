@@ -1,7 +1,6 @@
 package net.geminiimmortal.mobius.entity.goals;
 
 import net.geminiimmortal.mobius.entity.custom.ClubGolemEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 
 public class CustomMeleeAttackGoal extends MeleeAttackGoal {

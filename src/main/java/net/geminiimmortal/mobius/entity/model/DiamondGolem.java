@@ -2,11 +2,9 @@ package net.geminiimmortal.mobius.entity.model;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.geminiimmortal.mobius.entity.custom.ClubGolemEntity;
 import net.geminiimmortal.mobius.entity.custom.DiamondGolemEntity;
 import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.util.math.MathHelper;
 

@@ -1,18 +1,11 @@
 package net.geminiimmortal.mobius.tileentity;
 
-import net.geminiimmortal.mobius.container.ModContainers;
-import net.geminiimmortal.mobius.container.custom.AstralConduitContainer;
-import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.recipe.AstralConduitRecipe;
-import net.geminiimmortal.mobius.recipe.IAstralConduitRecipe;
 import net.geminiimmortal.mobius.recipe.ModRecipeTypes;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
@@ -29,7 +22,6 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Optional;
 
 public class AstralConduitTileEntity extends TileEntity implements ITickableTileEntity {

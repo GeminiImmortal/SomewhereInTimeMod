@@ -2,9 +2,7 @@ package net.geminiimmortal.mobius.entity.render;
 
 
 import net.geminiimmortal.mobius.MobiusMod;
-import net.geminiimmortal.mobius.entity.custom.ClubGolemEntity;
 import net.geminiimmortal.mobius.entity.custom.SpadeGolemEntity;
-import net.geminiimmortal.mobius.entity.model.ClubGolem;
 import net.geminiimmortal.mobius.entity.model.SpadeGolem;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;

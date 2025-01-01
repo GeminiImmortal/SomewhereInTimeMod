@@ -1,19 +1,13 @@
 package net.geminiimmortal.mobius.entity.custom;
 
-import net.geminiimmortal.mobius.particle.ModParticles;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
-import java.util.List;
 
 public class ShatterCloneEntity extends Entity {
     private float rotationAngle = 0;

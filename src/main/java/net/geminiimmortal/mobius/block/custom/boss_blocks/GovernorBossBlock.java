@@ -25,7 +25,6 @@ public class GovernorBossBlock extends Block {
     @Override
     public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
         if (!world.isClientSide && hand == Hand.MAIN_HAND) {
-            Minecraft minecraft = Minecraft.getInstance();
             int offsetX = 0;
             int offsetY = 5;
             int offsetZ = -20;

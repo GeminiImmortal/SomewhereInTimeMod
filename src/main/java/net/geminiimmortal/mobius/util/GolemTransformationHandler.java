@@ -78,7 +78,7 @@ public class GolemTransformationHandler {
     public void startGolemTransformation(IronGolemEntity ironGolem) {
         // Set 600 ticks (30 seconds)
         golemTransformationTimers.put(ironGolem.getUUID(), 600);
-        System.out.println("Starting transformation countdown for Golem UUID: " + ironGolem.getUUID());
+
     }
 
 
@@ -104,7 +104,6 @@ public class GolemTransformationHandler {
         double oldZ = ironGolem.getZ();
 
         // Log the transformation
-        System.out.println("Transforming Golem at position: " + oldX + ", " + oldY + ", " + oldZ);
 
         // Remove the iron golem
         ironGolem.remove();
@@ -136,7 +135,7 @@ public class GolemTransformationHandler {
 
         // Add the new suit golem to the world
         ironGolem.level.addFreshEntity(suitGolem);
-        System.out.println("New Golem spawned at position: " + oldX + ", " + oldY + ", " + oldZ);
+
         applyTransformationParticles(ironGolem);
         playTransformationSound(ironGolem);
     }
@@ -148,11 +147,10 @@ public class GolemTransformationHandler {
             IronGolemEntity ironGolem = (IronGolemEntity) event.getEntity();
 
             // Log when an Iron Golem is spawned
-            System.out.println("Iron Golem spawned in dimension: " + event.getWorld().dimension());
+
 
             // Add your dimension check here if needed
             if (event.getWorld().dimension() == ModDimensions.MOBIUS_WORLD) {
-                System.out.println("Iron Golem spawned in the custom dimension!");
                 startGolemTransformation(ironGolem); // This should also log
             }
         }

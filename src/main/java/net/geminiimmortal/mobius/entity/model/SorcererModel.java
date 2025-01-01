@@ -2,7 +2,6 @@ package net.geminiimmortal.mobius.entity.model;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
-import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 

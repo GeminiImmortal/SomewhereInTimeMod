@@ -1,6 +1,5 @@
 package net.geminiimmortal.mobius.world.worldgen.structure.structures;
 
-import com.mojang.serialization.Codec;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;

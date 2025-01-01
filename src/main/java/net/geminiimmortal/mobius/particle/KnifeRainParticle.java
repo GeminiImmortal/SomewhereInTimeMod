@@ -1,18 +1,8 @@
 package net.geminiimmortal.mobius.particle;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.particle.IParticleRenderType;
 import net.minecraft.client.particle.SpriteTexturedParticle;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-
-import java.util.List;
 
 public class KnifeRainParticle extends SpriteTexturedParticle {
     public KnifeRainParticle(ClientWorld world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {

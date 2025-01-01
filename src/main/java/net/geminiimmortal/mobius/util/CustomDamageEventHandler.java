@@ -2,8 +2,6 @@ package net.geminiimmortal.mobius.util;
 
 import net.geminiimmortal.mobius.effects.ModEffects;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 

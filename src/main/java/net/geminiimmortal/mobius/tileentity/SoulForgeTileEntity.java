@@ -139,7 +139,7 @@ public class SoulForgeTileEntity extends TileEntity implements ITickableTileEnti
                 ItemStack output = iRecipe.getResultItem();
 
                 craftTheItem(output);
-                System.out.println("Crafted: " + output);
+
                 progress = 0;
                 setChanged();
             }

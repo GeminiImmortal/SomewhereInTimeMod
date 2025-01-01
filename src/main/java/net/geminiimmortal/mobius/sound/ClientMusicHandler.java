@@ -109,10 +109,8 @@ public class ClientMusicHandler {
         }
     }
 
-    public static void playGovernorBossMusic(Minecraft minecraft, GovernorEntity boss) {
-        if (boss.isAlive()) {
+    public static void playGovernorBossMusic() {
             governor = true;
-        }
     }
 }
 

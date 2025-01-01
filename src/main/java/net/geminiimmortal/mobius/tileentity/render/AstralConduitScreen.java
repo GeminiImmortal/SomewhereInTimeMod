@@ -4,7 +4,6 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.container.custom.AstralConduitContainer;
-import net.geminiimmortal.mobius.container.custom.SoulForgeContainer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;

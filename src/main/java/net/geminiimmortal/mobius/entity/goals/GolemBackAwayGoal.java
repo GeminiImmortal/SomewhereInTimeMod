@@ -7,8 +7,6 @@ import net.minecraft.util.math.MathHelper;
 
 import java.util.EnumSet;
 
-import static org.jline.terminal.MouseEvent.Modifier.Control;
-
 public class GolemBackAwayGoal extends Goal {
     private final SpadeGolemEntity golem;
     private final double speed;

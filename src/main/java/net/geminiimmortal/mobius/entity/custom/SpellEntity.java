@@ -2,14 +2,11 @@ package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.damage.KnivesOutDamageSource;
 import net.geminiimmortal.mobius.particle.ModParticles;
-import net.geminiimmortal.mobius.sound.ModSounds;
-import net.geminiimmortal.mobius.util.CustomDamageEventHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;

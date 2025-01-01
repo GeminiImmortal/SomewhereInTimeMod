@@ -1,10 +1,10 @@
 {
   "display": {
     "icon": {
-      "item": "mobius:living_manawood_log"
+      "item": "mobius:dungeon_block"
     },
-    "title": "You're a Wizard, Harry!",
-    "description": "Defeat a Court Wizard",
+    "title": "Big Government",
+    "description": "Defeat the Governor",
     "background": "mobius:textures/block/marrowood_log.png",
     "frame": "task",
     "show_toast": false,
@@ -13,14 +13,14 @@
   },
   "parent": "mobius:root",
   "criteria": {
-    "killed_court_wizard": {
+    "killed_governor": {
       "trigger": "minecraft:player_killed_entity",
       "conditions": {
         "entity": [
           {
             "condition": "minecraft:entity_properties",
             "predicate": {
-              "type": "mobius:sorcerer"
+              "type": "mobius:governor"
             },
             "entity": "this"
           }
@@ -30,7 +30,7 @@
     },
   "requirements": [
     [
-      "killed_court_wizard"
+      "killed_governor"
     ]
   ]
 }

@@ -35,7 +35,7 @@ public class ModChunkGenerator extends NoiseChunkGenerator {
     @OnlyIn(Dist.CLIENT)
     @Override
     public ChunkGenerator withSeed(long seed) {
-        System.out.println("Generated new 'Mobius' dimension with seed: " + seed);
+
         return new ModChunkGenerator(this.biomeSource.withSeed(seed), seed, this.settings);
     }
 }

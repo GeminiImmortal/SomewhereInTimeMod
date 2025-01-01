@@ -1,7 +1,6 @@
 package net.geminiimmortal.mobius.world.dimension;
 
 import net.geminiimmortal.mobius.MobiusMod;
-import net.minecraft.client.world.DimensionRenderInfo;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;

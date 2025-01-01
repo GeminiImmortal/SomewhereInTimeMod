@@ -2,6 +2,8 @@ package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.*;
+import net.geminiimmortal.mobius.network.ModNetwork;
+import net.geminiimmortal.mobius.network.PlayMusicPacket;
 import net.geminiimmortal.mobius.sound.ClientMusicHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityType;
@@ -35,6 +37,9 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerBossInfo;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.fml.network.PacketDistributor;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -164,8 +169,7 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
                 experiencePoints -= experienceToDrop;
                 this.level.addFreshEntity(new ExperienceOrbEntity(this.level, this.getX(), this.getY(), this.getZ(), experienceToDrop));
             }
-            ClientMusicHandler.setGovernor(false);
-            ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
+
             BlockPos deathSpot = new BlockPos(this.getX(), this.getY() + 1, this.getZ());
             this.level.setBlock(deathSpot, ModBlocks.GOVERNOR_BOSS_EXIT_BLOCK.get().defaultBlockState(), 3);
         }
@@ -198,13 +202,30 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
     public void startSeenByPlayer(ServerPlayerEntity player) {
         super.startSeenByPlayer(player);
         this.bossInfo.addPlayer(player);
-        ClientMusicHandler.playGovernorBossMusic(Minecraft.getInstance(), this);
-        ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
+        if(FMLEnvironment.dist == Dist.CLIENT) {
+            ClientMusicHandler.playGovernorBossMusic();
+            ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
+        }
+        if(FMLEnvironment.dist == Dist.DEDICATED_SERVER) {
+            PlayMusicPacket packet = new PlayMusicPacket("governor_start");
+            ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), packet);
+        }
     }
 
     @Override
     public void stopSeenByPlayer(ServerPlayerEntity player) {
         super.stopSeenByPlayer(player);
+
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            ClientMusicHandler.setGovernor(false);
+            ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
+        }
+        if(FMLEnvironment.dist == Dist.DEDICATED_SERVER) {
+
+            PlayMusicPacket packet = new PlayMusicPacket("governor_stop");
+            ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), packet);
+        }
+
         this.bossInfo.removePlayer(player);
     }
 

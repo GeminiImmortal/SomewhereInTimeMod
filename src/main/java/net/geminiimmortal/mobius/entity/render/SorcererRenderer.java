@@ -1,8 +1,6 @@
 package net.geminiimmortal.mobius.entity.render;
 
-import net.geminiimmortal.mobius.entity.custom.FaedeerEntity;
 import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
-import net.geminiimmortal.mobius.entity.model.FaedeerModel;
 import net.geminiimmortal.mobius.entity.model.SorcererModel;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.util.ResourceLocation;

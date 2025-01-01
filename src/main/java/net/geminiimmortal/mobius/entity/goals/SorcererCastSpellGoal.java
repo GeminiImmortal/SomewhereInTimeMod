@@ -3,16 +3,14 @@ package net.geminiimmortal.mobius.entity.goals;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.*;
+import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.network.ParticlePacket;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.fml.network.PacketDistributor;
-
-import java.util.EnumSet;
 
 public class SorcererCastSpellGoal extends Goal {
     private final SorcererEntity sorcerer;
@@ -98,7 +96,7 @@ public class SorcererCastSpellGoal extends Goal {
                 double particleY = startY + (endY - startY) * t;
                 double particleZ = startZ + (endZ - startZ) * t;
                 ParticlePacket packet = new ParticlePacket(particleX, particleY, particleZ, "knife_rain"); // or your chosen particle type
-                MobiusMod.NetworkHandler.INSTANCE.send(PacketDistributor.ALL.noArg(), packet);
+                ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.ALL.noArg(), packet);
             }
         }
 

@@ -5,23 +5,16 @@ import net.geminiimmortal.mobius.entity.custom.ClubGolemEntity;
 import net.geminiimmortal.mobius.entity.custom.DiamondGolemEntity;
 import net.geminiimmortal.mobius.entity.custom.HeartGolemEntity;
 import net.geminiimmortal.mobius.entity.custom.SpadeGolemEntity;
-import net.geminiimmortal.mobius.entity.model.SpadeGolem;
+import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.network.ParticlePacket;
 import net.geminiimmortal.mobius.sound.ModSounds;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.NetworkManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 import java.util.EnumSet;
@@ -155,7 +148,7 @@ public class HealInjuredAllyGoal extends Goal {
                 if (this.attackAnimationTimer >= 0) {
                     attackAnimationTimer--;
                     ParticlePacket packet = new ParticlePacket(particleX, particleY, particleZ, "HAPPY_VILLAGER"); // or your chosen particle type
-                    MobiusMod.NetworkHandler.INSTANCE.send(PacketDistributor.ALL.noArg(), packet);
+                    ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.ALL.noArg(), packet);
                 } else {
                     this.golem.setHealing(false);
                     this.stop();

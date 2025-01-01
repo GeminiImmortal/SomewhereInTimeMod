@@ -4,7 +4,6 @@ package net.geminiimmortal.mobius.entity.render;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.custom.DiamondGolemEntity;
 import net.geminiimmortal.mobius.entity.model.DiamondGolem;
-import net.geminiimmortal.mobius.entity.model.DiamondGolem;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;

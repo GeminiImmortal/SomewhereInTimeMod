@@ -1,6 +1,5 @@
 package net.geminiimmortal.mobius.entity.goals;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
@@ -10,7 +9,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.EnumSet;
-import java.util.Objects;
 import java.util.Random;
 
 public class TeleportAwayGoal extends Goal {

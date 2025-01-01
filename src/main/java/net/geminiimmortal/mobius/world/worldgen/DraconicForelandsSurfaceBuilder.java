@@ -2,7 +2,6 @@ package net.geminiimmortal.mobius.world.worldgen;
 
 import com.mojang.serialization.Codec;
 import net.geminiimmortal.mobius.block.ModBlocks;
-import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
 import net.minecraft.block.BlockState;

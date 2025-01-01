@@ -29,8 +29,13 @@ public class ParticlePacket {
     }
 
     public static ParticlePacket decode(PacketBuffer buf) {
-        return new ParticlePacket(buf.readDouble(), buf.readDouble(), buf.readDouble(), buf.readUtf());
+        double x = buf.readDouble();
+        double y = buf.readDouble();
+        double z = buf.readDouble();
+        String particleType = buf.readUtf(256); // Limit string length to 256 characters
+        return new ParticlePacket(x, y, z, particleType);
     }
+
 
     public static void handle(ParticlePacket packet, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
@@ -40,6 +45,7 @@ public class ParticlePacket {
             spawnParticles(packet.x, packet.y, packet.z, packet.particleType);
         });
         ctx.get().setPacketHandled(true);
+
     }
 
     private static void spawnParticles(double x, double y, double z, String particleType) {

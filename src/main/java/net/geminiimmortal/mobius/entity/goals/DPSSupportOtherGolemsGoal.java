@@ -1,7 +1,6 @@
 package net.geminiimmortal.mobius.entity.goals;
 
 import net.geminiimmortal.mobius.entity.custom.ClubGolemEntity;
-import net.geminiimmortal.mobius.entity.custom.DiamondGolemEntity;
 import net.geminiimmortal.mobius.entity.custom.HeartGolemEntity;
 import net.minecraft.entity.ai.goal.Goal;
 

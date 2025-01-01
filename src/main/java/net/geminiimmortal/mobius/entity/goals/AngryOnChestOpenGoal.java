@@ -1,16 +1,10 @@
 package net.geminiimmortal.mobius.entity.goals;
 
 import net.geminiimmortal.mobius.entity.custom.MolvanEntity;
-import net.geminiimmortal.mobius.item.ModItems;
-import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.container.ChestContainer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.SoundCategory;
-import net.minecraftforge.event.world.BlockEvent;
 
 import java.util.EnumSet;
 import java.util.List;

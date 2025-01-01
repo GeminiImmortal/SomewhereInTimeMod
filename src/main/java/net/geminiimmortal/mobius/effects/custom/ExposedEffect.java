@@ -4,9 +4,7 @@ import net.geminiimmortal.mobius.effects.ModEffects;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.EffectType;
-import net.minecraft.potion.Effects;
 
 public class ExposedEffect extends Effect {
     public ExposedEffect(EffectType type, int color) {

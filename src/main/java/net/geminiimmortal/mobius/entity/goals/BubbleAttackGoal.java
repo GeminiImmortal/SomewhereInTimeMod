@@ -7,8 +7,6 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 
-import java.util.EnumSet;
-
 public class BubbleAttackGoal extends Goal {
     private final MobEntity mob;
     private final double attackRange;

@@ -95,7 +95,7 @@ public class AstralConduitRecipe implements IAstralConduitRecipe {
         @Nullable
         @Override
         public AstralConduitRecipe fromNetwork(ResourceLocation recipeId, PacketBuffer buffer) {
-            NonNullList<Ingredient> inputs = NonNullList.withSize(3, Ingredient.EMPTY);
+            NonNullList<Ingredient> inputs = NonNullList.withSize(buffer.readInt(), Ingredient.EMPTY);
 
             for (int i = 0; i < inputs.size(); i++) {
                 inputs.set(i, Ingredient.fromNetwork(buffer));

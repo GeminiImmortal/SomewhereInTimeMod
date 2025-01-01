@@ -3,7 +3,6 @@ package net.geminiimmortal.mobius.entity.goals;
 import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.util.math.vector.Vector3d;
 
 import java.util.EnumSet;

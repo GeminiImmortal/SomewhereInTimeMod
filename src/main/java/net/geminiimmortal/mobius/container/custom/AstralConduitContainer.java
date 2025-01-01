@@ -2,7 +2,6 @@ package net.geminiimmortal.mobius.container.custom;
 
 import net.geminiimmortal.mobius.container.ModContainers;
 import net.geminiimmortal.mobius.tileentity.AstralConduitTileEntity;
-import net.geminiimmortal.mobius.tileentity.AstralConduitTileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -147,7 +146,6 @@ public class AstralConduitContainer extends Container {
                 return ItemStack.EMPTY;
             }
         } else {
-            System.out.println("Invalid slotIndex:" + index);
             return ItemStack.EMPTY;
         }
         // If stack size == 0 (the entire stack was moved) set slot contents to null

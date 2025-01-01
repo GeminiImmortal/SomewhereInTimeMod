@@ -1,9 +1,7 @@
 package net.geminiimmortal.mobius.event;
 
-import net.geminiimmortal.mobius.world.dimension.ModChunkGenerator;
 import net.geminiimmortal.mobius.world.worldgen.structure.ModStructures;
 import com.mojang.serialization.Codec;
-import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -21,7 +19,6 @@ import org.apache.logging.log4j.LogManager;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 public class ModWorldEvents {
     @SubscribeEvent
@@ -55,8 +52,6 @@ public class ModWorldEvents {
             tempMap.putIfAbsent(ModStructures.MOLVAN_SETTLEMENT_A.get(),
                     DimensionStructuresSettings.DEFAULTS.get(ModStructures.MOLVAN_SETTLEMENT_A.get()));
             serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
-
-            System.out.println("Generator: " + serverWorld.getChunkSource().generator.toString() + "was used to try and spawn the village.");
         }
     }
 }

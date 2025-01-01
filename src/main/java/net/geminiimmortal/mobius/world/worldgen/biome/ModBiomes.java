@@ -4,7 +4,6 @@ import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.sound.ModSounds;
-import net.geminiimmortal.mobius.world.worldgen.structure.ModStructures;
 import net.geminiimmortal.mobius.world.worldgen.structure.structures.MolvanSettlementA;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;

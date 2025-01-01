@@ -1,12 +1,9 @@
 package net.geminiimmortal.mobius.block.custom.boss_blocks;
 
-import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -16,7 +13,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 
 public class GovernorBossExitBlock extends Block {
@@ -27,7 +23,6 @@ public class GovernorBossExitBlock extends Block {
     @Override
     public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
         if (!world.isClientSide && hand == Hand.MAIN_HAND) {
-            Minecraft minecraft = Minecraft.getInstance();
             int offsetX = 0;
             int offsetY = -10;
             int offsetZ = 0;

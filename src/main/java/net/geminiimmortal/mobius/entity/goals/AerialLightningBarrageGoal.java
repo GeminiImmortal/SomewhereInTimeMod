@@ -1,7 +1,6 @@
 package net.geminiimmortal.mobius.entity.goals;
 
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.effect.LightningBoltEntity;

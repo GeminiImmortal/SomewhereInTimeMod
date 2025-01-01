@@ -6,9 +6,6 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.MathHelper;
-
-import java.util.EnumSet;
 
 public class SorcererBackAwayGoal extends Goal {
     private final SorcererEntity sorcerer;

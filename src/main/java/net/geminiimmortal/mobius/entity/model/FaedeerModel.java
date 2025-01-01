@@ -4,8 +4,6 @@ import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.custom.FaedeerEntity;
 import net.minecraft.util.ResourceLocation;
 
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
 public class FaedeerModel extends AnimatedGeoModel<FaedeerEntity> {
