@@ -30,6 +30,7 @@ public class ModItems {
     public static final RegistryObject<Item> MARROWOOD_LOG = ITEMS.register("marrowood_log", () -> new BlockItem(ModBlocks.MARROWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MANAWOOD_LOG = ITEMS.register("manawood_log", () -> new BlockItem(ModBlocks.MANAWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> LIVING_MANAWOOD_LOG = ITEMS.register("living_manawood_log", () -> new BlockItem(ModBlocks.LIVING_MANAWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> GLOAMTHORN_LOG = ITEMS.register("gloamthorn_log", () -> new BlockItem(ModBlocks.GLOAMTHORN_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Stripped Logs
     public static final RegistryObject<Item> STRIPPED_MARROWOOD_LOG = ITEMS.register("stripped_marrowood_log", () -> new BlockItem(ModBlocks.STRIPPED_MARROWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));

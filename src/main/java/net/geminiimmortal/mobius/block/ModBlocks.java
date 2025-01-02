@@ -30,7 +30,7 @@ public class ModBlocks {
             () -> new Block(AbstractBlock.Properties.copy(Blocks.DIRT)));
 
     public static final RegistryObject<Block> AURORA_GRASS_BLOCK = registerBlock("aurora_grass_block",
-            () -> new Block(AbstractBlock.Properties.copy(Blocks.DIRT)));
+            () -> new AuroraGrassBlock(AbstractBlock.Properties.copy(Blocks.GRASS_BLOCK)));
 
     public static final RegistryObject<Block> HEMATITE = registerBlock("hematite",
             () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
@@ -202,6 +202,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> BLOCK_OF_NICKEL = registerBlock("block_of_nickel",
             () -> new Block(AbstractBlock.Properties.copy(Blocks.IRON_BLOCK)));
+
+    public static final RegistryObject<Block> GLOAMTHORN_LOG = registerBlock("gloamthorn_log",
+            () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_LOG)));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
