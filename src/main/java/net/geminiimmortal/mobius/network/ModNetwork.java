@@ -19,13 +19,12 @@ public class ModNetwork {
                 .networkProtocolVersion(() -> PROTOCOL_VERSION)
                 .simpleChannel();
 
-        int index = 0;
-        NETWORK_CHANNEL.messageBuilder(ParticlePacket.class, index++, NetworkDirection.PLAY_TO_CLIENT)
+        NETWORK_CHANNEL.messageBuilder(ParticlePacket.class, 0, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(ParticlePacket::encode)
                 .decoder(ParticlePacket::decode)
                 .consumer(ParticlePacket::handle)
                 .add();
-        NETWORK_CHANNEL.messageBuilder(PlayMusicPacket.class, index++, NetworkDirection.PLAY_TO_CLIENT)
+        NETWORK_CHANNEL.messageBuilder(PlayMusicPacket.class, 1, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(PlayMusicPacket::encode)
                 .decoder(PlayMusicPacket::decode)
                 .consumer(PlayMusicPacket::handle)

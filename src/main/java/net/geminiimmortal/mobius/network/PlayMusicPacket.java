@@ -19,7 +19,8 @@ public class PlayMusicPacket {
     }
 
     public static PlayMusicPacket decode(PacketBuffer buf) {
-        return new PlayMusicPacket(buf.readUtf());
+        String music = buf.readUtf(256);
+        return new PlayMusicPacket(music);
     }
 
     public static void handle(PlayMusicPacket packet, Supplier<NetworkEvent.Context> ctx) {
