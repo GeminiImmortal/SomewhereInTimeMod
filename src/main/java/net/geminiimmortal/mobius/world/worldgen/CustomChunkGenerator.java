@@ -55,5 +55,4 @@ public class CustomChunkGenerator extends ChunkGenerator {
         return null;
     }
 
-    // Optionally override methods for custom terrain generation
 }

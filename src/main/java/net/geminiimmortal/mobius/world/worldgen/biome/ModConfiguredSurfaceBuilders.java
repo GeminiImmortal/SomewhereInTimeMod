@@ -15,7 +15,7 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 public class ModConfiguredSurfaceBuilders {
 
     public static ConfiguredSurfaceBuilder<?> MUSHROOM_FOREST = register("mushroom_forest", SurfaceBuilder.DEFAULT.configured(new SurfaceBuilderConfig(
-            Blocks.MYCELIUM.defaultBlockState(),
+            ModBlocks.SOUL_PODZOL.get().defaultBlockState(),
             ModBlocks.AURORA_DIRT.get().defaultBlockState(),
             ModBlocks.HEMATITE.get().defaultBlockState()
     )));

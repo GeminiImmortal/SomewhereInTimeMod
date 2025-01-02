@@ -1,17 +1,22 @@
 package net.geminiimmortal.mobius.world.worldgen.structure;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.world.worldgen.structure.structures.*;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,17 +43,14 @@ public class ModStructures {
     public static final RegistryObject<Structure<NoFeatureConfig>> GOVERNOR_TOWER =
             STRUCTURES.register("governor_tower", GovernorTower::new);
 
-    /* average distance apart in chunks between spawn attempts */
-    /* minimum distance apart in chunks between spawn attempts. MUST BE LESS THAN ABOVE VALUE*/
-    /* this modifies the seed of the structure so no two structures always spawn over each-other.
-    Make this large and unique. */
+
     public static void setupStructures() {
         setupMapSpacingAndLand(MOLVAN_SETTLEMENT_A.get(),
                 new StructureSeparationSettings(10,5, 1234567890),
-                true);
+                false);
         setupMapSpacingAndLand(MOLVAN_SETTLEMENT_B.get(),
                 new StructureSeparationSettings(25,18, 875667890),
-                true);
+                false);
         setupMapSpacingAndLand(MOBIUS_VILLAGE.get(),
                 new StructureSeparationSettings(35,25, 87135897),
                 true);
@@ -60,7 +62,7 @@ public class ModStructures {
                 true);
         setupMapSpacingAndLand(GOVERNOR_TOWER.get(),
                 new StructureSeparationSettings(50, 35, 867530939),
-                true);
+                false);
     }
 
     /**
@@ -80,12 +82,12 @@ public class ModStructures {
          * Doesn't work well on structure that have pieces stacked vertically or change in heights.
          *
          */
-        /*if (transformSurroundingLand) {
-            Structure.STRUCTURES_REGISTRY = ImmutableList.<Structure<?>>builder()
-                    .addAll(Structure.STRUCTURES_REGISTRY)
+        if (transformSurroundingLand) {
+            Structure.NOISE_AFFECTING_FEATURES = ImmutableList.<Structure<?>>builder()
+                    .addAll(Structure.NOISE_AFFECTING_FEATURES)
                     .add(structure)
                     .build();
-        }*/
+        }
 
         /*
          * This is the map that holds the default spacing of all structures.

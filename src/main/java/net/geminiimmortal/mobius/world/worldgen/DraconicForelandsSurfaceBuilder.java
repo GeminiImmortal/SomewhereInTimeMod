@@ -27,8 +27,8 @@ public class DraconicForelandsSurfaceBuilder extends MountainSurfaceBuilder {
     }
 
     public static final SurfaceBuilderConfig DRACONIC_FORELANDS_SURFACE_CONFIG = new SurfaceBuilderConfig(
-            ModBlocks.AURORA_GRASS_BLOCK.get().defaultBlockState(),  // Surface block (Water)
-            ModBlocks.AURORA_DIRT.get().defaultBlockState(),   // Subsurface block (Dirt)
-            ModBlocks.HEMATITE.get().defaultBlockState()  // Lower layer block (Gravel or Stone)
+            ModBlocks.AURORA_GRASS_BLOCK.get().defaultBlockState(),
+            ModBlocks.AURORA_DIRT.get().defaultBlockState(),
+            ModBlocks.HEMATITE.get().defaultBlockState()
     );
 }
