@@ -150,7 +150,7 @@ dependencies {
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
     // compile "some.group:artifact:version"
-
+    annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
     // Real examples
     // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
     // compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
@@ -177,7 +177,8 @@ jar {
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
             "Implementation-Vendor" :"mobiussareus",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+            "MixinConfigs": "mobius.mixins.json"
         ])
     }
 }
@@ -197,6 +198,47 @@ publishing {
     repositories {
         maven {
             url "file:///${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+
+// Generate a fixed tsrg file after generating the default tsrg file
+createMcpToSrg {
+    outputs.upToDateWhen {false}
+    doLast {
+        fixFG5TsrgForMixinAP(output.get().asFile, file("${buildDir}/fixMcpToSrg/output.tsrg"))
+    }
+}
+
+// Tell mixin to use the fixed TSRG file
+mixin {
+    reobfSrgFile = file("${buildDir}/fixMcpToSrg/output.tsrg")
+}
+
+// Function that actually fixes the TSRG file
+static def fixFG5TsrgForMixinAP(File inFile, File outFile) {
+    // Make directory if needed
+    outFile.parentFile.mkdirs()
+
+    try (Scanner scanner = new Scanner(inFile); PrintWriter out = new PrintWriter(outFile)) {
+        boolean firstLine = true
+        while (scanner.hasNextLine()) {
+            String next = scanner.nextLine()
+
+            // Skip first 'tsrg left right' header line
+            if (firstLine) {
+                firstLine = false
+                continue
+            }
+
+            // Skip 'static' indicators
+            if (next.trim() == "static") {
+                continue
+            }
+
+            // Export line otherwise
+            out.println(next)
         }
     }
 }

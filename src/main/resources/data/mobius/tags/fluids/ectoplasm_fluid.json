@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "mobius:flowing_ectoplasm",
-    "mobius:ectoplasm_fluid",
-    "mobius:ectoplasm"
+    "mobius:ectoplasm_fluid"
   ]
 }

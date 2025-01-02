@@ -19,6 +19,9 @@ public abstract class LivingEntityMixin {
     @Inject(method = "travel", at = @At("HEAD"))
     private void modifyMovementInFluid(Vector3d travelVector, CallbackInfo ci) {
         LivingEntity entity = (LivingEntity) (Object) this;
+
+        if (entity.level.isClientSide()) return;
+
         FluidState fluidState = entity.level.getFluidState(entity.blockPosition());
 
         if (mobius$isInEctoplasm(fluidState)) {
