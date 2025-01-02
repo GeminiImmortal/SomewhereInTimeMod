@@ -32,7 +32,8 @@
   "item.mobius.astral_shovel": "Astral Shovel",
   "item.mobius.vial_of_liquid_screams": "Vial of Liquid Screams",
   "item.mobius.astral_sword": "Astral Sword",
-  "item.mobius.bog_water_bucket": "Bog Water Bucket",
+  "item.mobius.bog_water_bucket": "Bucket of Bog Water",
+  "item.mobius.ectoplasm_bucket": "Bucket of Ectoplasm",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
@@ -112,6 +113,7 @@
 
   "death.attack.knives_out": "%1$s was cut to ribbons.",
   "death.attack.clone_shatter": "%1$s had their mind scrambled.",
+  "death.attack.ectoplasm": "%1$s was spirited away while trying to swim in ectoplasm.",
 
   "effect.mobius.lord_decree": "Lord's Decree",
   "effect.mobius.exposed": "Exposed",

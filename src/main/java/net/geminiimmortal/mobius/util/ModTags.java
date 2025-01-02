@@ -1,12 +1,20 @@
 package net.geminiimmortal.mobius.util;
 
 import net.geminiimmortal.mobius.MobiusMod;
+import net.geminiimmortal.mobius.fluid.ModFluids;
 import net.minecraft.block.Block;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.util.LazyOptional;
+
+import java.util.Collections;
+import java.util.List;
 
 public class ModTags {
 
@@ -33,7 +41,6 @@ public class ModTags {
         }
 
 
-
     }
 
     public static class Items {
@@ -51,7 +58,16 @@ public class ModTags {
         private static Tags.IOptionalNamedTag<Item> createForgeTag(String name) {
             return ItemTags.createOptional(new ResourceLocation("forge", name));
         }
+    }
+
+    public static final class Fluids {
+
+        public static final ITag<Fluid> ECTOPLASM_FLUID = FluidTags.createOptional(new ResourceLocation(MobiusMod.MOD_ID, "ectoplasm_fluid"));
 
 
+        private static Tags.IOptionalNamedTag<Fluid> createTag(String name) {
+            return FluidTags.createOptional(new ResourceLocation(MobiusMod.MOD_ID, name));
+        }
     }
 }
+

@@ -186,6 +186,10 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_BOG_WATER.get(), RenderType.translucent());
             RenderTypeLookup.setRenderLayer(ModFluids.BOG_WATER_FLUID.get(), RenderType.translucent());
 
+            RenderTypeLookup.setRenderLayer(ModFluids.ECTOPLASM_BLOCK.get(), RenderType.translucent());
+            RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_ECTOPLASM.get(), RenderType.translucent());
+            RenderTypeLookup.setRenderLayer(ModFluids.ECTOPLASM_FLUID.get(), RenderType.translucent());
+
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.SIGN_TILE_ENTITIES.get(),
                     SignTileEntityRenderer::new);
 

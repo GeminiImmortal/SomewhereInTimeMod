@@ -7,7 +7,7 @@
     "Name": "mobius:hematite"
   },
   "default_fluid": {
-    "Name": "minecraft:water",
+    "Name": "mobius:ectoplasm",
     "Properties": {
       "level": "0"
     }

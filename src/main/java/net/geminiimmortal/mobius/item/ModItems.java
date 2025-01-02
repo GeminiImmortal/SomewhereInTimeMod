@@ -170,6 +170,7 @@ public class ModItems {
     public static final RegistryObject<Item> VIAL_OF_LIQUID_SCREAMS = ITEMS.register("vial_of_liquid_screams", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE)));
 
     //Fluid Bucket Items
+    public static final RegistryObject<Item> ECTOPLASM_BUCKET = ITEMS.register("ectoplasm_bucket", () -> new BucketItem(() -> ModFluids.ECTOPLASM_FLUID.get(), new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<Item> BOG_WATER_BUCKET = ITEMS.register("bog_water_bucket", () -> new BucketItem(() -> ModFluids.BOG_WATER_FLUID.get(), new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_MISC)));
 
     //Music Discs

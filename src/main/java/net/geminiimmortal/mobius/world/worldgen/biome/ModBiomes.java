@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.world.worldgen.biome;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.fluid.ModFluids;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.world.worldgen.structure.structures.MolvanSettlementA;
@@ -84,11 +85,11 @@ public class ModBiomes {
                 new MobSpawnInfo.Spawners(EntityType.TROPICAL_FISH, 100, 7, 10));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
-        DefaultBiomeFeatures.addLukeWarmKelp(biomegenerationsettings$builder);
-        DefaultBiomeFeatures.addDefaultSeagrass(biomegenerationsettings$builder);
-        DefaultBiomeFeatures.addWaterTrees(biomegenerationsettings$builder);
-        biomegenerationsettings$builder.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS,
-                        Feature.LAKE.configured(new BlockStateFeatureConfig(Blocks.WATER.defaultBlockState())).decorated(Placement.WATER_LAKE.configured(new ChanceConfig(4))));
+        //DefaultBiomeFeatures.addLukeWarmKelp(biomegenerationsettings$builder);
+        //DefaultBiomeFeatures.addDefaultSeagrass(biomegenerationsettings$builder);
+        //DefaultBiomeFeatures.addWaterTrees(biomegenerationsettings$builder);
+        //biomegenerationsettings$builder.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS,
+        //                Feature.LAKE.configured(new BlockStateFeatureConfig(ModFluids.ECTOPLASM_BLOCK.get().defaultBlockState())).decorated(Placement.WATER_LAKE.configured(new ChanceConfig(4))));
 
 
         return (new Biome.Builder()).precipitation(Biome.RainType.NONE).biomeCategory(Biome.Category.OCEAN).depth(depth).scale(scale)
