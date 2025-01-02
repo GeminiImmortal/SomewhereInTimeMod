@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius;
 
 import com.google.common.collect.Maps;
 import net.geminiimmortal.mobius.effects.ModEffects;
+import net.geminiimmortal.mobius.fluid.ModFluids;
 import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.poi.ModPOIs;
 import net.geminiimmortal.mobius.block.ModBlocks;
@@ -83,6 +84,7 @@ public class MobiusMod
 
         ModBlocks.register(eventBus);
         ModItems.register(eventBus);
+        ModFluids.register(eventBus);
         ModSounds.register(eventBus);
         ModPOIs.register(eventBus);
         ModEffects.register(eventBus);
@@ -179,6 +181,10 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.MANAWOOD_TRAPDOOR.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.ASTRAL_CONDUIT.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_BRAMBLE.get(), RenderType.cutout());
+
+            RenderTypeLookup.setRenderLayer(ModFluids.BOG_WATER_BLOCK.get(), RenderType.translucent());
+            RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_BOG_WATER.get(), RenderType.translucent());
+            RenderTypeLookup.setRenderLayer(ModFluids.BOG_WATER_FLUID.get(), RenderType.translucent());
 
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.SIGN_TILE_ENTITIES.get(),
                     SignTileEntityRenderer::new);

@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "mobius:flowing_bog_water",
+    "mobius:bog_water_fluid"
+  ]
+}
