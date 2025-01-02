@@ -46,7 +46,7 @@ public class ModStructures {
 
     public static void setupStructures() {
         setupMapSpacingAndLand(MOLVAN_SETTLEMENT_A.get(),
-                new StructureSeparationSettings(10,5, 1234567890),
+                new StructureSeparationSettings(15,10, 1234567890),
                 false);
         setupMapSpacingAndLand(MOLVAN_SETTLEMENT_B.get(),
                 new StructureSeparationSettings(25,18, 875667890),
@@ -58,7 +58,7 @@ public class ModStructures {
                 new StructureSeparationSettings(30,20,1238091384),
                 true);
         setupMapSpacingAndLand(IMPERIAL_WATCHTOWER.get(),
-                new StructureSeparationSettings(30, 15, 91358318),
+                new StructureSeparationSettings(40, 30, 91358318),
                 true);
         setupMapSpacingAndLand(GOVERNOR_TOWER.get(),
                 new StructureSeparationSettings(50, 35, 867530939),

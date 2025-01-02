@@ -15,22 +15,22 @@ public class ModStructureGeneration {
 
     public static void generateStructures(final BiomeLoadingEvent event) {
 
-        ResourceLocation valid = ModBiomes.DRACONIC_FORELANDS.getId();
-        ResourceLocation validTower = ModBiomes.ROLLING_EXPANSE.getId();
-        ResourceLocation governorTowerValid = ModBiomes.GOO_LAGOON.getId();
+        ResourceLocation draconicForelandsValid = ModBiomes.DRACONIC_FORELANDS.getId();
+        ResourceLocation rollingExpanseValid = ModBiomes.ROLLING_EXPANSE.getId();
+        ResourceLocation gooLagoonValid = ModBiomes.GOO_LAGOON.getId();
         ResourceLocation validPortal = Biomes.PLAINS.location();
 
-        if(Objects.equals(event.getName(), valid)) {
+        if(Objects.equals(event.getName(), draconicForelandsValid)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructures.MOLVAN_SETTLEMENT_A.get().configured(NoFeatureConfig.INSTANCE));
         }
 
-        if(Objects.equals(event.getName(), validTower)) {
+        if(Objects.equals(event.getName(), rollingExpanseValid)) {
             List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructures.MOBIUS_VILLAGE.get().configured(NoFeatureConfig.INSTANCE));
         }
 
-        if(Objects.equals(event.getName(), validTower)) {
+        if(Objects.equals(event.getName(), rollingExpanseValid)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructures.MOLVAN_SETTLEMENT_B.get().configured(NoFeatureConfig.INSTANCE));
         }
@@ -40,12 +40,12 @@ public class ModStructureGeneration {
             structures.add(() -> ModStructures.MOBIUS_PORTAL.get().configured(NoFeatureConfig.INSTANCE));
         }
 
-        if(Objects.equals(event.getName(), validTower)) {
+        if(Objects.equals(event.getName(), rollingExpanseValid)) {
             List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructures.IMPERIAL_WATCHTOWER.get().configured(NoFeatureConfig.INSTANCE));
         }
 
-        if(Objects.equals(event.getName(), governorTowerValid)) {
+        if(Objects.equals(event.getName(), gooLagoonValid)) {
             List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructures.GOVERNOR_TOWER.get().configured(NoFeatureConfig.INSTANCE));
         }
