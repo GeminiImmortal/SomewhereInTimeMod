@@ -1,7 +1,7 @@
 package net.geminiimmortal.mobius.world.worldgen.features;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
-import net.minecraft.block.Blocks;
+import net.geminiimmortal.mobius.block.custom.trees.GloamthornTree;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
@@ -45,15 +45,15 @@ public class ModConfiguredFeatures {
                             new TwoLayerFeature(1, 0, 1)))
                             .build()));
 
-    public static final ConfiguredFeature<?, ?> DRACONIC_FORELANDS_MOUNTAIN =
-            register("draconic_forelands_mountain", ObsidianCappedMountainFeature.NO_SURFACE_ORE.configured(
-                    new OreFeatureConfig(
-                            OreFeatureConfig.FillerBlockType.NATURAL_STONE,
-                            Blocks.OBSIDIAN.defaultBlockState(),
-                            6 // This value determines the size of the feature; adjust to fit mountain scale
-                    )
-            ));
-
+    public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CONFIGURED_GLOAMTHORN_TREE =
+            register("gloamthorn_tree", GloamthornTreeFeature.TREE.configured(
+                    (new BaseTreeFeatureConfig.Builder(
+                            new SimpleBlockStateProvider(ModBlocks.GLOAMTHORN_LOG.get().defaultBlockState()),
+                            new SimpleBlockStateProvider(ModBlocks.GLOAMTHORN_BRAMBLE.get().defaultBlockState()),
+                            new DarkOakFoliagePlacer(FeatureSpread.fixed(0), FeatureSpread.fixed(1)),
+                            new FancyTrunkPlacer(6, 3, 4),
+                            new TwoLayerFeature(1, 2, 1)))
+                            .build()));
 
 
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key,

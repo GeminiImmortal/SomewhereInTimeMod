@@ -5,6 +5,7 @@ import net.geminiimmortal.mobius.block.custom.*;
 import net.geminiimmortal.mobius.block.custom.boss_blocks.GovernorBossBlock;
 import net.geminiimmortal.mobius.block.custom.boss_blocks.GovernorBossExitBlock;
 import net.geminiimmortal.mobius.block.custom.flora.CandyCane;
+import net.geminiimmortal.mobius.block.custom.trees.GloamthornTree;
 import net.geminiimmortal.mobius.block.custom.trees.ManawoodTree;
 import net.geminiimmortal.mobius.block.custom.trees.MarrowoodTree;
 import net.minecraft.block.*;
@@ -163,6 +164,12 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> LIVING_MANAWOOD_LEAVES = registerBlock("living_manawood_leaves",
             () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES)));
+
+    public static final RegistryObject<Block> GLOAMTHORN_BRAMBLE = registerBlock("gloamthorn_bramble",
+            () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES)));
+
+    public static final RegistryObject<Block> GLOAMTHORN_SAPLING = registerBlock("gloamthorn_sapling",
+            () -> new SaplingBlock(new GloamthornTree(), AbstractBlock.Properties.copy(Blocks.OAK_SAPLING)));
 
     public static final RegistryObject<Block> MANAWOOD_LEAVES = registerBlock("manawood_leaves",
             () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES)));

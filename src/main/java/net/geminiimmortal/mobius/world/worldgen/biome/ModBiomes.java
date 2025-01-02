@@ -55,11 +55,11 @@ public class ModBiomes {
                 new MobSpawnInfo.Spawners(EntityType.MOOSHROOM, 100, 7, 10));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
-        DefaultBiomeFeatures.addBambooVegetation(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addMushroomFieldVegetation(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);
+        DefaultBiomeFeatures.addSparseBerryBushes(biomegenerationsettings$builder);
 
-        return (new Biome.Builder()).precipitation(Biome.RainType.NONE).biomeCategory(Biome.Category.MUSHROOM).depth(depth).scale(scale)
+        return (new Biome.Builder()).precipitation(Biome.RainType.NONE).biomeCategory(Biome.Category.FOREST).depth(depth).scale(scale)
                 .temperature(1.5F).downfall(0.9F).specialEffects((new BiomeAmbience.Builder()).waterColor(16220377).waterFogColor(-3407872)
                         .fogColor(7535809).skyColor(11532160).foliageColorOverride(16220377).grassColorOverride(-3407872)
                         .ambientParticle(new ParticleEffectAmbience(ParticleTypes.BUBBLE_POP, 0.003f))
@@ -112,8 +112,8 @@ public class ModBiomes {
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addBerryBushes(biomegenerationsettings$builder);
-        DefaultBiomeFeatures.addTaigaTrees(biomegenerationsettings$builder);
-        DefaultBiomeFeatures.addDefaultUndergroundVariety(biomegenerationsettings$builder);
+        //DefaultBiomeFeatures.addTaigaTrees(biomegenerationsettings$builder);
+        //DefaultBiomeFeatures.addDefaultUndergroundVariety(biomegenerationsettings$builder);
 
         return (new Biome.Builder()).precipitation(Biome.RainType.SNOW).biomeCategory(Biome.Category.TAIGA).depth(depth).scale(scale)
                 .temperature(0.0F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(16220377).waterFogColor(4658242)
@@ -136,7 +136,6 @@ public class ModBiomes {
         DefaultBiomeFeatures.addDefaultUndergroundVariety(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addMountainTrees(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addDefaultSoftDisks(biomegenerationsettings$builder);
-        biomegenerationsettings$builder.addStructureStart(MolvanSettlementA.IGLOO.configured(IFeatureConfig.NONE));
 
         return (new Biome.Builder()).precipitation(Biome.RainType.SNOW).biomeCategory(Biome.Category.EXTREME_HILLS).depth(depth).scale(scale)
                 .temperature(0.0F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(4159204).waterFogColor(329011)

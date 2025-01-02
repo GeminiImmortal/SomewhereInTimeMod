@@ -151,6 +151,7 @@ public class MobiusMod
 
             WoodType.register(ModWoodTypes.MARROWOOD);
             WoodType.register(ModWoodTypes.MANAWOOD);
+            WoodType.register(ModWoodTypes.GLOAMTHORN);
 
             ModDimensions.setupDimension();
             ModStructures.setupStructures();
@@ -166,29 +167,6 @@ public class MobiusMod
         });
     }
 
-
-
- /*   @Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class NetworkHandler {
-        public static final String PROTOCOL_VERSION = "1";
-        public static SimpleChannel INSTANCE;
-
-        @SubscribeEvent
-        public static void setup(FMLCommonSetupEvent event) {
-            INSTANCE = NetworkRegistry.newSimpleChannel(
-                    new ResourceLocation(MobiusMod.MOD_ID, "particles"),
-                    () -> PROTOCOL_VERSION,
-                    PROTOCOL_VERSION::equals,
-                    PROTOCOL_VERSION::equals
-            );
-
-            INSTANCE.registerMessage(0, ParticlePacket.class, ParticlePacket::encode, ParticlePacket::decode, ParticlePacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
-
-
-        }
-    }*/
-
-
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
         event.enqueueWork(() -> {
@@ -200,6 +178,7 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.MANAWOOD_SAPLING.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.MANAWOOD_TRAPDOOR.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.ASTRAL_CONDUIT.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_BRAMBLE.get(), RenderType.cutout());
 
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.SIGN_TILE_ENTITIES.get(),
                     SignTileEntityRenderer::new);
@@ -247,7 +226,7 @@ public class MobiusMod
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {
         // do something when the server starts
-        LOGGER.info("HELLO from server starting");
+        LOGGER.info("[MOBIUS] Mod has initialized successfully.");
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
@@ -257,7 +236,7 @@ public class MobiusMod
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
             // register a new block here
-            LOGGER.info("HELLO from Register Block");
+            //LOGGER.info("HELLO from Register Block");
         }
     }
 
@@ -288,7 +267,7 @@ public class MobiusMod
         public static void onClientSetup(FMLClientSetupEvent event) {
             MinecraftForge.EVENT_BUS.register(new ClientMusicHandler());
 
-            LOGGER.info("Setting up music manager.");
+            LOGGER.info("[MOBIUS] Setting up music manager.");
         }
     }
 
