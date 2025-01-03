@@ -11,6 +11,8 @@
     "mobius:stripped_manawood_log",
     "mobius:stripped_manawood_wood",
     "mobius:gloamthorn_log",
-    "mobius:gloamthorn_wood"
+    "mobius:gloamthorn_wood",
+    "mobius:stripped_gloamthorn_log",
+    "mobius:stripped_gloamthorn_wood"
   ]
 }

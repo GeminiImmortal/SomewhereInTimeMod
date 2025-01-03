@@ -99,6 +99,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> STRIPPED_MANAWOOD_LOG = registerBlock("stripped_manawood_log",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
 
+    public static final RegistryObject<Block> STRIPPED_GLOAMTHORN_LOG = registerBlock("stripped_gloamthorn_log",
+            () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+
     public static final RegistryObject<Block> WASP_PAPER_BLOCK = registerBlock("wasp_paper_block",
             () -> new Block(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES)));
 
@@ -127,6 +130,9 @@ public class ModBlocks {
             () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
 
     public static final RegistryObject<Block> STRIPPED_MANAWOOD_WOOD = registerBlock("stripped_manawood_wood",
+            () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+
+    public static final RegistryObject<Block> STRIPPED_GLOAMTHORN_WOOD = registerBlock("stripped_gloamthorn_wood",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
 
     public static final RegistryObject<Block> MARROWOOD_SIGN = registerBlock("marrowood_sign",
