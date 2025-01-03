@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "mobius:block/giant_gloomcap/giant_gloomcap_stem_side"
+  }
+}
+

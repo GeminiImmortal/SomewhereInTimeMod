@@ -113,6 +113,8 @@ public class ModItems {
 
     //Flora
     public static final RegistryObject<Item> CANDY_CANE = ITEMS.register("candy_cane", () -> new BlockItem(ModBlocks.CANDY_CANE.get() ,new Item.Properties().tab(ItemGroup.TAB_DECORATIONS).stacksTo(64)));
+    public static final RegistryObject<Item> GIANT_GLOOMCAP_CAP = ITEMS.register("giant_gloomcap_cap", () -> new BlockItem(ModBlocks.GIANT_GLOOMCAP_CAP.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> GIANT_GLOOMCAP_STEM = ITEMS.register("giant_gloomcap_stem", () -> new BlockItem(ModBlocks.GIANT_GLOOMCAP_STEM.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     //Hematite
     public static final RegistryObject<Item> HEMATITE = ITEMS.register("hematite", () -> new BlockItem(ModBlocks.HEMATITE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));

@@ -259,6 +259,12 @@ public class ModBlocks {
     public static final RegistryObject<Block> STANDING_GLOOMCAP = registerBlock("standing_gloomcap",
             () -> new StandingGloomcap(AbstractBlock.Properties.copy(Blocks.BROWN_MUSHROOM).lightLevel(state -> 8).instabreak()));
 
+    public static final RegistryObject<Block> GIANT_GLOOMCAP_CAP = registerBlock("giant_gloomcap_cap",
+            () -> new Block(AbstractBlock.Properties.of(Material.PLANT).lightLevel(state -> 12).strength(0.5f)));
+
+    public static final RegistryObject<Block> GIANT_GLOOMCAP_STEM = registerBlock("giant_gloomcap_stem",
+            () -> new Block(AbstractBlock.Properties.of(Material.WOOD).strength(1.0f)));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         return toReturn;

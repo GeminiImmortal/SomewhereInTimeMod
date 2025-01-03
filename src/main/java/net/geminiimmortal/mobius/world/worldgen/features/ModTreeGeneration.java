@@ -71,6 +71,14 @@ public class ModTreeGeneration {
                     .decorated(Placement.CHANCE.configured(
                             new ChanceConfig(1)))
                     .countRandom(10));
+
+            base.add(() -> ModConfiguredFeatures.CONFIGURED_GIANT_GLOOMCAP_FEATURE
+                    .decorated(Features.Placements.HEIGHTMAP_DOUBLE)
+                    .decorated(DenserTreesPlacement.COUNT_EXTRA.configured(
+                            new AtSurfaceWithExtraConfig(3, 0.7f, 1)))
+                    .decorated(Placement.CHANCE.configured(
+                            new ChanceConfig(2)))
+                    .countRandom(5));
         }
     }
 }
