@@ -150,6 +150,12 @@ public class ModBlocks {
     public static final RegistryObject<Block> MANAWOOD_SIGN = registerBlock("manawood_sign",
             () -> new ModStandingSignBlock(AbstractBlock.Properties.of(Material.WOOD), ModWoodTypes.MANAWOOD));
 
+    public static final RegistryObject<Block> GLOAMTHORN_WALL_SIGN = registerBlock("gloamthorn_wall_sign",
+            () -> new ModWallSignBlock(AbstractBlock.Properties.of(Material.WOOD), ModWoodTypes.GLOAMTHORN));
+
+    public static final RegistryObject<Block> GLOAMTHORN_SIGN = registerBlock("gloamthorn_sign",
+            () -> new ModStandingSignBlock(AbstractBlock.Properties.of(Material.WOOD), ModWoodTypes.GLOAMTHORN));
+
     public static final RegistryObject<Block> MANAWOOD_WALL_SIGN = registerBlock("manawood_wall_sign",
             () -> new ModWallSignBlock(AbstractBlock.Properties.of(Material.WOOD), ModWoodTypes.MANAWOOD));
 

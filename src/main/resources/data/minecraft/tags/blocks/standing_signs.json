@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "mobius:marrowood_sign",
-    "mobius:manawood_sign"
+    "mobius:manawood_sign",
+    "mobius:gloamthorn_sign"
   ]
 }

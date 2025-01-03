@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "mobius:marrowood_wall_sign",
-    "mobius:manawood_wall_sign"
+    "mobius:manawood_wall_sign",
+    "mobius:gloamthorn_wall_sign"
   ]
 }
