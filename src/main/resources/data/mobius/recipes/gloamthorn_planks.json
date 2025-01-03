@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "mobius:gloamthorn_logs"
+    }
+  ],
+  "result": {
+    "item": "mobius:gloamthorn_planks",
+    "count": 4
+  }
+}

@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
-    "mobius:marrowood_planks"
+    "mobius:marrowood_planks",
+    "mobius:manawood_planks",
+    "mobius:gloamthorn_planks"
   ]
 }

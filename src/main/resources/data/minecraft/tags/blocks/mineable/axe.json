@@ -5,6 +5,7 @@
     "mobius:manawood_log",
     "mobius:manawood_wood",
     "mobius:stripped_manawood_log",
+    "mobius:stripped_manawood_wood",
     "mobius:manawood_door",
     "mobius:manawood_planks",
     "mobius:manawood_trapdoor",
@@ -13,6 +14,9 @@
     "mobius:manawood_sign",
     "mobius:manawood_button",
     "mobius:manawood_pressure_plate",
+    "mobius:manawood_stairs",
+    "mobius:manawood_fence_gate",
+    "mobius:marrowood_stairs",
     "mobius:marrowood_door",
     "mobius:marrowood_planks",
     "mobius:marrowood_trapdoor",
@@ -23,8 +27,18 @@
     "mobius:marrowood_pressure_plate",
     "mobius:marrowood_log",
     "mobius:marrowood_wood",
+    "mobius:marrowood_fence_gate",
     "mobius:stripped_marrowood_log",
+    "mobius:stripped_marrowood_wood",
     "mobius:essence_channeler",
-    "mobius:hunting_table"
+    "mobius:hunting_table",
+    "mobius:gloamthorn_log",
+    "mobius:gloamthorn_planks",
+    "mobius:gloamthorn_stairs",
+    "mobius:gloamthorn_slab",
+    "mobius:gloamthorn_fence",
+    "mobius:gloamthorn_fence_gate",
+    "mobius:gloamthorn_button",
+    "mobius:gloamthorn_pressure_plate"
   ]
 }

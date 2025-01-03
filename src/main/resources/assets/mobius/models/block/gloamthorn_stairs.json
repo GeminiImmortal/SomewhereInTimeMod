@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "mobius:block/gloamthorn_planks",
+    "side": "mobius:block/gloamthorn_planks",
+    "top": "mobius:block/gloamthorn_planks"
+  }
+}

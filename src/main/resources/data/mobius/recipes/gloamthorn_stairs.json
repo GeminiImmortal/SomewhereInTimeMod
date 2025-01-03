@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_stairs",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "mobius:gloamthorn_planks"
+    }
+  },
+  "result": {
+    "item": "mobius:gloamthorn_stairs",
+    "count": 4
+  }
+}

@@ -1,7 +1,6 @@
 package net.geminiimmortal.mobius.util;
 
 import net.geminiimmortal.mobius.MobiusMod;
-import net.geminiimmortal.mobius.fluid.ModFluids;
 import net.minecraft.block.Block;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
@@ -11,10 +10,6 @@ import net.minecraft.tags.ITag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.util.LazyOptional;
-
-import java.util.Collections;
-import java.util.List;
 
 public class ModTags {
 
@@ -31,6 +26,9 @@ public class ModTags {
 
         public static final Tags.IOptionalNamedTag<Block> MANAWOOD_LOGS =
                 createTag("manawood_logs");
+
+        public static final Tags.IOptionalNamedTag<Block> GLOAMTHORN_LOGS =
+                createTag("gloamthorn_logs");
 
         private static Tags.IOptionalNamedTag<Block> createTag(String name) {
             return BlockTags.createOptional(new ResourceLocation(MobiusMod.MOD_ID, name));
@@ -50,6 +48,9 @@ public class ModTags {
 
         public static final Tags.IOptionalNamedTag<Item> MANAWOOD_LOGS =
                 createTag("manawood_logs");
+
+        public static final Tags.IOptionalNamedTag<Item> GLOAMTHORN_LOGS =
+                createTag("gloamthorn_logs");
 
         private static Tags.IOptionalNamedTag<Item> createTag(String name) {
             return ItemTags.createOptional(new ResourceLocation(MobiusMod.MOD_ID, name));

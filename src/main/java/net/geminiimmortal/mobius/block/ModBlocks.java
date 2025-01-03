@@ -213,6 +213,27 @@ public class ModBlocks {
     public static final RegistryObject<Block> GLOAMTHORN_LOG = registerBlock("gloamthorn_log",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_LOG)));
 
+    public static final RegistryObject<Block> GLOAMTHORN_PLANKS = registerBlock("gloamthorn_planks",
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.OAK_PLANKS)));
+
+    public static final RegistryObject<Block> GLOAMTHORN_SLAB = registerBlock("gloamthorn_slab",
+            () -> new SlabBlock(AbstractBlock.Properties.copy(Blocks.OAK_SLAB)));
+
+    public static final RegistryObject<Block> GLOAMTHORN_STAIRS = registerBlock("gloamthorn_stairs",
+            () -> new StairsBlock(GLOAMTHORN_PLANKS.get().defaultBlockState(), AbstractBlock.Properties.copy(Blocks.OAK_STAIRS)));
+
+    public static final RegistryObject<Block> GLOAMTHORN_FENCE = registerBlock("gloamthorn_fence",
+            () -> new FenceBlock(AbstractBlock.Properties.copy(Blocks.OAK_FENCE)));
+
+    public static final RegistryObject<Block> GLOAMTHORN_FENCE_GATE = registerBlock("gloamthorn_fence_gate",
+            () -> new FenceGateBlock(AbstractBlock.Properties.copy(Blocks.OAK_FENCE_GATE)));
+
+    public static final RegistryObject<Block> GLOAMTHORN_BUTTON = registerBlock("gloamthorn_button",
+            () -> new WoodButtonBlock(AbstractBlock.Properties.copy(Blocks.OAK_BUTTON)));
+
+    public static final RegistryObject<Block> GLOAMTHORN_PRESSURE_PLATE = registerBlock("gloamthorn_pressure_plate",
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,AbstractBlock.Properties.copy(Blocks.OAK_PRESSURE_PLATE)));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         return toReturn;

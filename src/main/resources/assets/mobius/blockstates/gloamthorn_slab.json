@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "mobius:block/gloamthorn_slab"
+    },
+    "type=double": {
+      "model": "mobius:block/gloamthorn_planks"
+    },
+    "type=top": {
+      "model": "mobius:block/gloamthorn_slab_top"
+    }
+  }
+}

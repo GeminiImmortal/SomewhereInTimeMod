@@ -184,6 +184,7 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.MANAWOOD_TRAPDOOR.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.ASTRAL_CONDUIT.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_BRAMBLE.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_SAPLING.get(), RenderType.cutout());
 
             RenderTypeLookup.setRenderLayer(ModFluids.BOG_WATER_BLOCK.get(), RenderType.translucent());
             RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_BOG_WATER.get(), RenderType.translucent());
@@ -198,6 +199,7 @@ public class MobiusMod
 
             Atlases.addWoodType(ModWoodTypes.MARROWOOD);
             Atlases.addWoodType(ModWoodTypes.MANAWOOD);
+            Atlases.addWoodType(ModWoodTypes.GLOAMTHORN);
 
             ScreenManager.register(ModContainers.SOUL_FORGE_CONTAINER.get(),
                     SoulForgeScreen::new);

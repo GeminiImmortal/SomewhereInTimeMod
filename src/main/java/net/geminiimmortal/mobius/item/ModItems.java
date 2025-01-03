@@ -50,22 +50,27 @@ public class ModItems {
     //Planks
     public static final RegistryObject<Item> MARROWOOD_PLANKS = ITEMS.register("marrowood_planks", () -> new BlockItem(ModBlocks.MARROWOOD_PLANKS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MANAWOOD_PLANKS = ITEMS.register("manawood_planks", () -> new BlockItem(ModBlocks.MANAWOOD_PLANKS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> GLOAMTHORN_PLANKS = ITEMS.register("gloamthorn_planks", () -> new BlockItem(ModBlocks.GLOAMTHORN_PLANKS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Wooden Stairs
     public static final RegistryObject<Item> MARROWOOD_STAIRS = ITEMS.register("marrowood_stairs", () -> new BlockItem(ModBlocks.MARROWOOD_STAIRS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MANAWOOD_STAIRS = ITEMS.register("manawood_stairs", () -> new BlockItem(ModBlocks.MANAWOOD_STAIRS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> GLOAMTHORN_STAIRS = ITEMS.register("gloamthorn_stairs", () -> new BlockItem(ModBlocks.GLOAMTHORN_STAIRS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Wooden Slabs
     public static final RegistryObject<Item> MARROWOOD_SLAB = ITEMS.register("marrowood_slab", () -> new BlockItem(ModBlocks.MARROWOOD_SLAB.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MANAWOOD_SLAB = ITEMS.register("manawood_slab", () -> new BlockItem(ModBlocks.MANAWOOD_SLAB.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> GLOAMTHORN_SLAB = ITEMS.register("gloamthorn_slab", () -> new BlockItem(ModBlocks.GLOAMTHORN_SLAB.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Wooden Fences
     public static final RegistryObject<Item> MARROWOOD_FENCE = ITEMS.register("marrowood_fence", () -> new BlockItem(ModBlocks.MARROWOOD_FENCE.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> MANAWOOD_FENCE = ITEMS.register("manawood_fence", () -> new BlockItem(ModBlocks.MANAWOOD_FENCE.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> GLOAMTHORN_FENCE = ITEMS.register("gloamthorn_fence", () -> new BlockItem(ModBlocks.GLOAMTHORN_FENCE.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     //Wooden Fence Gates
     public static final RegistryObject<Item> MARROWOOD_FENCE_GATE = ITEMS.register("marrowood_fence_gate", () -> new BlockItem(ModBlocks.MARROWOOD_FENCE_GATE.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
     public static final RegistryObject<Item> MANAWOOD_FENCE_GATE = ITEMS.register("manawood_fence_gate", () -> new BlockItem(ModBlocks.MANAWOOD_FENCE_GATE.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
+    public static final RegistryObject<Item> GLOAMTHORN_FENCE_GATE = ITEMS.register("gloamthorn_fence_gate", () -> new BlockItem(ModBlocks.GLOAMTHORN_FENCE_GATE.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
 
     //Wooden Doors
     public static final RegistryObject<Item> MARROWOOD_DOOR = ITEMS.register("marrowood_door", () -> new BlockItem(ModBlocks.MARROWOOD_DOOR.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
@@ -78,10 +83,12 @@ public class ModItems {
     //Wooden Pressure Plates
     public static final RegistryObject<Item> MARROWOOD_PRESSURE_PLATE = ITEMS.register("marrowood_pressure_plate", () -> new BlockItem(ModBlocks.MARROWOOD_PRESSURE_PLATE.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
     public static final RegistryObject<Item> MANAWOOD_PRESSURE_PLATE = ITEMS.register("manawood_pressure_plate", () -> new BlockItem(ModBlocks.MANAWOOD_PRESSURE_PLATE.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
+    public static final RegistryObject<Item> GLOAMTHORN_PRESSURE_PLATE = ITEMS.register("gloamthorn_pressure_plate", () -> new BlockItem(ModBlocks.GLOAMTHORN_PRESSURE_PLATE.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
 
     //Wooden Buttons
     public static final RegistryObject<Item> MARROWOOD_BUTTON = ITEMS.register("marrowood_button", () -> new BlockItem(ModBlocks.MARROWOOD_BUTTON.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
     public static final RegistryObject<Item> MANAWOOD_BUTTON = ITEMS.register("manawood_button", () -> new BlockItem(ModBlocks.MANAWOOD_BUTTON.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
+    public static final RegistryObject<Item> GLOAMTHORN_BUTTON = ITEMS.register("gloamthorn_button", () -> new BlockItem(ModBlocks.GLOAMTHORN_BUTTON.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
 
     //Signs
     public static final RegistryObject<Item> MARROWOOD_SIGN = ITEMS.register("marrowood_sign", () -> new SignItem(new Item.Properties().tab(ItemGroup.TAB_DECORATIONS).stacksTo(16),ModBlocks.MARROWOOD_SIGN.get(), ModBlocks.MARROWOOD_WALL_SIGN.get()));
@@ -90,6 +97,7 @@ public class ModItems {
     //Saplings
     public static final RegistryObject<Item> MARROWOOD_SAPLING = ITEMS.register("marrowood_sapling", () -> new BlockItem(ModBlocks.MARROWOOD_SAPLING.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> MANAWOOD_SAPLING = ITEMS.register("manawood_sapling", () -> new BlockItem(ModBlocks.MANAWOOD_SAPLING.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> GLOAMTHORN_SAPLING = ITEMS.register("gloamthorn_sapling", () -> new BlockItem(ModBlocks.GLOAMTHORN_SAPLING.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     //Boats
     public static final RegistryObject<Item> MARROWOOD_BOAT = ITEMS.register("marrowood_boat", () -> new CustomBoatItem(new Item.Properties().tab(ItemGroup.TAB_TRANSPORTATION), "marrowood"));
