@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_trapdoor",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "mobius:gloamthorn_planks"
+    }
+  },
+  "result": {
+    "item": "mobius:gloamthorn_trapdoor",
+    "count": 2
+  }
+}

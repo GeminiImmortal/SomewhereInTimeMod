@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "mobius:marrowood_trapdoor",
-    "mobius:manawood_trapdoor"
+    "mobius:manawood_trapdoor",
+    "mobius:gloamthorn_trapdoor"
   ]
 }

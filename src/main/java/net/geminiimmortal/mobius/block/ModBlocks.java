@@ -237,6 +237,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> GLOAMTHORN_DOOR = registerBlock("gloamthorn_door",
             () -> new DoorBlock(AbstractBlock.Properties.copy(Blocks.OAK_DOOR)));
 
+    public static final RegistryObject<Block> GLOAMTHORN_TRAPDOOR = registerBlock("gloamthorn_trapdoor",
+            () -> new TrapDoorBlock(AbstractBlock.Properties.copy(Blocks.OAK_TRAPDOOR)));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         return toReturn;
