@@ -55,6 +55,12 @@ public class ModConfiguredFeatures {
                             new TwoLayerFeature(1, 2, 1)))
                             .build()));
 
+    public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_STANDING_GLOOMCAP_FEATURE =
+            register("standing_gloomcap",
+                    ModFeatures.CLUSTERED_STANDING_GLOOMCAP_FEATURE.configured(new NoFeatureConfig()));
+
+
+
 
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key,
                                                                                  ConfiguredFeature<FC, ?> configuredFeature) {

@@ -59,6 +59,21 @@ public class ModTreeGeneration {
                             new ChanceConfig(2)))
                     .countRandom(6));
         }
+
+        if(Objects.equals(event.getName(), mushroomForest)) {
+            List<Supplier<ConfiguredFeature<?, ?>>> base =
+                    event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
+
+            System.out.println("Attempting to add Gloomcap to forest.");
+
+            base.add(() -> ModConfiguredFeatures.CONFIGURED_STANDING_GLOOMCAP_FEATURE
+                    .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
+                    .decorated(DenserTreesPlacement.DARK_OAK_TREE.configured(
+                            new NoPlacementConfig()))
+                    .decorated(Placement.CHANCE.configured(
+                            new ChanceConfig(1)))
+                    .countRandom(10));
+        }
     }
 }
 

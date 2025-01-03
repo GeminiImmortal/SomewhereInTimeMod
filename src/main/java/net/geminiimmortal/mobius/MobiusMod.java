@@ -189,6 +189,7 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_SAPLING.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_DOOR.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_TRAPDOOR.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.STANDING_GLOOMCAP.get(), RenderType.cutout());
 
             RenderTypeLookup.setRenderLayer(ModFluids.BOG_WATER_BLOCK.get(), RenderType.translucent());
             RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_BOG_WATER.get(), RenderType.translucent());

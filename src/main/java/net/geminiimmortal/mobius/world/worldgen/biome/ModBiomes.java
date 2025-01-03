@@ -5,6 +5,7 @@ import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.fluid.ModFluids;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.geminiimmortal.mobius.world.worldgen.features.ModConfiguredFeatures;
 import net.geminiimmortal.mobius.world.worldgen.structure.structures.MolvanSettlementA;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
@@ -56,9 +57,10 @@ public class ModBiomes {
                 new MobSpawnInfo.Spawners(EntityType.MOOSHROOM, 100, 7, 10));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
-        DefaultBiomeFeatures.addMushroomFieldVegetation(biomegenerationsettings$builder);
+        //DefaultBiomeFeatures.addMushroomFieldVegetation(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);
-        DefaultBiomeFeatures.addSparseBerryBushes(biomegenerationsettings$builder);
+        //DefaultBiomeFeatures.addSparseBerryBushes(biomegenerationsettings$builder);
+        biomegenerationsettings$builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, ModConfiguredFeatures.CONFIGURED_STANDING_GLOOMCAP_FEATURE);
 
         return (new Biome.Builder()).precipitation(Biome.RainType.NONE).biomeCategory(Biome.Category.FOREST).depth(depth).scale(scale)
                 .temperature(1.5F).downfall(0.9F).specialEffects((new BiomeAmbience.Builder()).waterColor(16220377).waterFogColor(-3407872)
