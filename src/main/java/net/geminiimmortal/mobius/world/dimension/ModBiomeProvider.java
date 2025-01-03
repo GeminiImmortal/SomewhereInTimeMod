@@ -9,8 +9,6 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.biome.provider.NetherBiomeProvider;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 import java.util.Optional;
@@ -57,9 +55,9 @@ public class ModBiomeProvider extends NetherBiomeProvider {
         return CODEC;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
     public BiomeProvider withSeed(long seed) {
+        System.out.println("Seed provided to biome provider: " + seed);
         return new ModBiomeProvider(seed, this.parameters, this.preset);
     }
 }

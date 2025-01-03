@@ -18,6 +18,5 @@ public class DimensionGeneratorSettingsMixin {
     @Inject(method = "<init>(JZZLnet/minecraft/util/registry/SimpleRegistry;Ljava/util/Optional;)V", at = @At(value = "RETURN"))
     private void getSeedFromConstructor(long seed, boolean generateFeatures, boolean bonusChest, SimpleRegistry<Dimension> options, Optional<String> legacyOptions, CallbackInfo ci) {
         SeedBearer.putInSeed(seed);
-
     }
 }
