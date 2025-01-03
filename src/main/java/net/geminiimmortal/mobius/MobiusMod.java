@@ -3,6 +3,7 @@ package net.geminiimmortal.mobius;
 import com.google.common.collect.Maps;
 import net.geminiimmortal.mobius.effects.ModEffects;
 import net.geminiimmortal.mobius.fluid.ModFluids;
+import net.geminiimmortal.mobius.item.custom.ModSpawnEgg;
 import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.poi.ModPOIs;
 import net.geminiimmortal.mobius.block.ModBlocks;
@@ -35,6 +36,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.AxeItem;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
@@ -117,6 +119,7 @@ public class MobiusMod
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
 
         ModNetwork.init();
+
 
         event.enqueueWork(() -> {
             BiomeDictionary.addTypes(
@@ -265,6 +268,11 @@ public class MobiusMod
             event.put(ModEntityTypes.GOVERNOR.get(), GovernorEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.CLONE.get(), CloneEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.MOLVAN.get(), MolvanEntity.setCustomAttributes().build());
+        }
+
+        @SubscribeEvent
+        public static void onRegisterEntities(RegistryEvent.Register<EntityType<?>> event) {
+            ModSpawnEgg.initSpawnEggs();
         }
 
     }

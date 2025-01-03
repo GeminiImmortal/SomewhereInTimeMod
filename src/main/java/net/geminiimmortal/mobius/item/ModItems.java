@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.item;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.ModBlocks;
+import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.fluid.ModFluids;
 import net.geminiimmortal.mobius.item.custom.*;
 import net.geminiimmortal.mobius.sound.ModSounds;
@@ -155,6 +156,14 @@ public class ModItems {
     public static final RegistryObject<Item> NICKEL_HELMET = ITEMS.register("nickel_helmet",
             () -> new ArmorItem(ModArmorMaterial.NICKEL, EquipmentSlotType.HEAD,
                     new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
+
+    //Spawn Eggs
+    public static final RegistryObject<ModSpawnEgg> CLUB_GOLEM_SPAWN_EGG = ITEMS.register("club_golem_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.CLUB_GOLEM, 0x2c615b, 0x2c5960, new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<ModSpawnEgg> DIAMOND_GOLEM_SPAWN_EGG = ITEMS.register("diamond_golem_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.DIAMOND_GOLEM, 0x2c615b, 0x2ca5b1, new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<ModSpawnEgg> HEART_GOLEM_SPAWN_EGG = ITEMS.register("heart_golem_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.HEART_GOLEM, 0x2c615b, 0x2cc590, new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<ModSpawnEgg> SPADE_GOLEM_SPAWN_EGG = ITEMS.register("spade_golem_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.SPADE_GOLEM, 0x2c615b, 0x7ba090, new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<ModSpawnEgg> FAEDEER_SPAWN_EGG = ITEMS.register("faedeer_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.FAEDEER, 0x2c7a99, 0x2ca399, new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<ModSpawnEgg> MOLVAN_SPAWN_EGG = ITEMS.register("molvan_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.MOLVAN, 0xa2a090, 0xc5a090, new Item.Properties().tab(ItemGroup.TAB_MISC)));
 
     //Misc Gizmos
     public static final RegistryObject<Item> CANDY_RING = ITEMS.register("candy_ring", CandyRing::new);

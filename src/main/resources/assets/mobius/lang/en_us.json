@@ -34,6 +34,12 @@
   "item.mobius.astral_sword": "Astral Sword",
   "item.mobius.bog_water_bucket": "Bucket of Bog Water",
   "item.mobius.ectoplasm_bucket": "Bucket of Ectoplasm",
+  "item.mobius.club_golem_spawn_egg": "Club Golem Spawn Egg",
+  "item.mobius.diamond_golem_spawn_egg": "Diamond Golem Spawn Egg",
+  "item.mobius.heart_golem_spawn_egg": "Heart Golem Spawn Egg",
+  "item.mobius.spade_golem_spawn_egg": "Spade Golem Spawn Egg",
+  "item.mobius.faedeer_spawn_egg": "Faedeer Spawn Egg",
+  "item.mobius.molvan_spawn_egg": "Molvan Spawn Egg",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
