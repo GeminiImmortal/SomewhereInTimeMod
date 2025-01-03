@@ -4,7 +4,6 @@ import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.custom.*;
 import net.geminiimmortal.mobius.block.custom.boss_blocks.GovernorBossBlock;
 import net.geminiimmortal.mobius.block.custom.boss_blocks.GovernorBossExitBlock;
-import net.geminiimmortal.mobius.block.custom.flora.CandyCane;
 import net.geminiimmortal.mobius.block.custom.flora.StandingGloomcap;
 import net.geminiimmortal.mobius.block.custom.trees.GloamthornTree;
 import net.geminiimmortal.mobius.block.custom.trees.ManawoodTree;
@@ -23,10 +22,6 @@ public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MobiusMod.MOD_ID);
 
     public static final RegistryObject<Block> MOBIUS_PORTAL = BLOCKS.register("mobius_portal", MobiusPortalBlock::new);
-
-    public static final RegistryObject<Block> CANDYCANE_BRICKS = registerBlock("candycane_bricks",
-            () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)
-                    .harvestLevel(2).harvestTool(ToolType.PICKAXE).strength(8f)));
 
     public static final RegistryObject<Block> AURORA_DIRT = registerBlock("aurora_dirt",
             () -> new Block(AbstractBlock.Properties.copy(Blocks.DIRT)));
@@ -159,9 +154,6 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> MANAWOOD_WALL_SIGN = registerBlock("manawood_wall_sign",
             () -> new ModWallSignBlock(AbstractBlock.Properties.of(Material.WOOD), ModWoodTypes.MANAWOOD));
-
-    public static final RegistryObject<Block> CANDY_CANE = registerBlock("candy_cane",
-            () -> new CandyCane(AbstractBlock.Properties.of(Material.PLANT)));
 
     public static final RegistryObject<Block> NICKEL_ORE = registerBlock("nickel_ore",
             () -> new OreBlock(AbstractBlock.Properties.of(Material.STONE).strength(30F, 1200F).requiresCorrectToolForDrops()));

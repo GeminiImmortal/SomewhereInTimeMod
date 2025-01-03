@@ -112,7 +112,6 @@ public class ModItems {
     public static final RegistryObject<Item> GLOAMTHORN_BOAT = ITEMS.register("gloamthorn_boat", () -> new GloamthornBoatItem(new Item.Properties().tab(ItemGroup.TAB_TRANSPORTATION), "gloamthorn"));
 
     //Flora
-    public static final RegistryObject<Item> CANDY_CANE = ITEMS.register("candy_cane", () -> new BlockItem(ModBlocks.CANDY_CANE.get() ,new Item.Properties().tab(ItemGroup.TAB_DECORATIONS).stacksTo(64)));
     public static final RegistryObject<Item> GIANT_GLOOMCAP_CAP = ITEMS.register("giant_gloomcap_cap", () -> new BlockItem(ModBlocks.GIANT_GLOOMCAP_CAP.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> GIANT_GLOOMCAP_STEM = ITEMS.register("giant_gloomcap_stem", () -> new BlockItem(ModBlocks.GIANT_GLOOMCAP_STEM.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
@@ -141,7 +140,6 @@ public class ModItems {
 
     //Uncategorized Building Blocks
     public static final RegistryObject<Item> WASP_PAPER_BLOCK = ITEMS.register("wasp_paper_block", () -> new BlockItem(ModBlocks.WASP_PAPER_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-    public static final RegistryObject<Item> CANDYCANE_BRICKS = ITEMS.register("candycane_bricks", () -> new BlockItem(ModBlocks.CANDYCANE_BRICKS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MAGIC_KEYSTONE = ITEMS.register("magic_keystone", () -> new BlockItem(ModBlocks.MAGIC_KEYSTONE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> BLOCK_OF_NICKEL = ITEMS.register("block_of_nickel", () -> new BlockItem(ModBlocks.BLOCK_OF_NICKEL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> DUNGEON_BLOCK = ITEMS.register("dungeon_block", () -> new BlockItem(ModBlocks.DUNGEON_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
@@ -183,7 +181,6 @@ public class ModItems {
     public static final RegistryObject<ModSpawnEgg> MOLVAN_SPAWN_EGG = ITEMS.register("molvan_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.MOLVAN, 0xa2a090, 0xc5a090, new Item.Properties().tab(ItemGroup.TAB_MISC)));
 
     //Misc Gizmos
-    public static final RegistryObject<Item> CANDY_RING = ITEMS.register("candy_ring", CandyRing::new);
     public static final RegistryObject<Item> GAIA_STAR = ITEMS.register("gaia_star", GaiaStar::new);
     public static final RegistryObject<Item> FAE_LEATHER = ITEMS.register("fae_leather", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<Item> RAW_MANA = ITEMS.register("raw_mana", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
