@@ -22,6 +22,7 @@ public class ModItems {
     //Soil
     public static final RegistryObject<Item> AURORA_GRASS_BLOCK = ITEMS.register("aurora_grass_block", () -> new BlockItem(ModBlocks.AURORA_GRASS_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> AURORA_DIRT = ITEMS.register("aurora_dirt", () -> new BlockItem(ModBlocks.AURORA_DIRT.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> SOUL_PODZOL = ITEMS.register("soul_podzol", () -> new BlockItem(ModBlocks.SOUL_PODZOL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Leaves
     public static final RegistryObject<Item> BONE_LEAVES = ITEMS.register("bone_leaves", () -> new BlockItem(ModBlocks.BONE_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
@@ -132,7 +133,6 @@ public class ModItems {
     public static final RegistryObject<Item> ASTRAL_CONDUIT = ITEMS.register("astral_conduit", () -> new BlockItem(ModBlocks.ASTRAL_CONDUIT.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     //Uncategorized Building Blocks
-    public static final RegistryObject<Item> SOUL_PODZOL = ITEMS.register("soul_podzol", () -> new BlockItem(ModBlocks.SOUL_PODZOL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> WASP_PAPER_BLOCK = ITEMS.register("wasp_paper_block", () -> new BlockItem(ModBlocks.WASP_PAPER_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> CANDYCANE_BRICKS = ITEMS.register("candycane_bricks", () -> new BlockItem(ModBlocks.CANDYCANE_BRICKS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MAGIC_KEYSTONE = ITEMS.register("magic_keystone", () -> new BlockItem(ModBlocks.MAGIC_KEYSTONE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
