@@ -218,6 +218,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.FAEDEER.get(), FaedeerRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MARROWOOD_BOAT.get(), CustomBoatRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MANAWOOD_BOAT.get(), ManawoodBoatRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GLOAMTHORN_BOAT.get(), GloamthornBoatRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SORCERER.get(), SorcererRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SPELL.get(), SpellRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GOVERNOR.get(), GovernorRenderer::new);

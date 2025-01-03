@@ -100,6 +100,12 @@ public class ModEntityTypes {
                                     EntityClassification.MISC).sized(0.5f, 0.5f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "manawood_boat").toString()));
 
+    public static final RegistryObject<EntityType<GloamthornBoatEntity>> GLOAMTHORN_BOAT =
+            ENTITY_TYPES.register("gloamthorn_boat",
+                    () -> EntityType.Builder.<GloamthornBoatEntity>of(GloamthornBoatEntity::new,
+                                    EntityClassification.MISC).sized(0.5f, 0.5f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "gloamthorn_boat").toString()));
+
 
 
     public static void register(IEventBus eventBus) {

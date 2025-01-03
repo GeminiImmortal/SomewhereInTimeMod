@@ -12,7 +12,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-//TODO: gloamthorn boat
+
 
 public class ModItems {
 
@@ -109,6 +109,7 @@ public class ModItems {
     //Boats
     public static final RegistryObject<Item> MARROWOOD_BOAT = ITEMS.register("marrowood_boat", () -> new CustomBoatItem(new Item.Properties().tab(ItemGroup.TAB_TRANSPORTATION), "marrowood"));
     public static final RegistryObject<Item> MANAWOOD_BOAT = ITEMS.register("manawood_boat", () -> new ManawoodBoatItem(new Item.Properties().tab(ItemGroup.TAB_TRANSPORTATION), "manawood"));
+    public static final RegistryObject<Item> GLOAMTHORN_BOAT = ITEMS.register("gloamthorn_boat", () -> new GloamthornBoatItem(new Item.Properties().tab(ItemGroup.TAB_TRANSPORTATION), "gloamthorn"));
 
     //Flora
     public static final RegistryObject<Item> CANDY_CANE = ITEMS.register("candy_cane", () -> new BlockItem(ModBlocks.CANDY_CANE.get() ,new Item.Properties().tab(ItemGroup.TAB_DECORATIONS).stacksTo(64)));
