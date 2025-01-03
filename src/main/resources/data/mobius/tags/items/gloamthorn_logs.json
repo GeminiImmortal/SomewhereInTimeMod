@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "mobius:gloamthorn_log"
+    "mobius:gloamthorn_log",
+    "mobius:gloamthorn_wood"
   ]
 }

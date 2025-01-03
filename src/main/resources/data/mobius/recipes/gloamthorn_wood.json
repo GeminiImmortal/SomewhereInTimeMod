@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bark",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "mobius:gloamthorn_log"
+    }
+  },
+  "result": {
+    "item": "mobius:gloamthorn_wood",
+    "count": 3
+  }
+}

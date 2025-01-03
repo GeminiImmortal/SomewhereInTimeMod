@@ -43,6 +43,7 @@ public class ModItems {
     //Bark Blocks
     public static final RegistryObject<Item> MARROWOOD_WOOD = ITEMS.register("marrowood_wood", () -> new BlockItem(ModBlocks.MARROWOOD_WOOD.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MANAWOOD_WOOD = ITEMS.register("manawood_wood", () -> new BlockItem(ModBlocks.MANAWOOD_WOOD.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> GLOAMTHORN_WOOD = ITEMS.register("gloamthorn_wood", () -> new BlockItem(ModBlocks.GLOAMTHORN_WOOD.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Stripped Bark Blocks
     public static final RegistryObject<Item> STRIPPED_MARROWOOD_WOOD = ITEMS.register("stripped_marrowood_wood", () -> new BlockItem(ModBlocks.STRIPPED_MARROWOOD_WOOD.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
