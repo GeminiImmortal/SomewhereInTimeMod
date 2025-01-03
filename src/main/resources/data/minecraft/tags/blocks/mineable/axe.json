@@ -39,6 +39,7 @@
     "mobius:gloamthorn_fence",
     "mobius:gloamthorn_fence_gate",
     "mobius:gloamthorn_button",
-    "mobius:gloamthorn_pressure_plate"
+    "mobius:gloamthorn_pressure_plate",
+    "mobius:gloamthorn_door"
   ]
 }

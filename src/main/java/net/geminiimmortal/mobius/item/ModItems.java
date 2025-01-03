@@ -12,7 +12,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-
+//TODO: gloamthorn door, trapdoor, sign, boat, bark block, stripped variants
 
 public class ModItems {
 
@@ -75,6 +75,7 @@ public class ModItems {
     //Wooden Doors
     public static final RegistryObject<Item> MARROWOOD_DOOR = ITEMS.register("marrowood_door", () -> new BlockItem(ModBlocks.MARROWOOD_DOOR.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
     public static final RegistryObject<Item> MANAWOOD_DOOR = ITEMS.register("manawood_door", () -> new BlockItem(ModBlocks.MANAWOOD_DOOR.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
+    public static final RegistryObject<Item> GLOAMTHORN_DOOR = ITEMS.register("gloamthorn_door", () -> new BlockItem(ModBlocks.GLOAMTHORN_DOOR.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
 
     //Wooden Trapdoors
     public static final RegistryObject<Item> MARROWOOD_TRAPDOOR = ITEMS.register("marrowood_trapdoor", () -> new BlockItem(ModBlocks.MARROWOOD_TRAPDOOR.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
