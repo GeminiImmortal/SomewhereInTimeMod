@@ -15,8 +15,17 @@ import java.util.Optional;
 @Mixin(DimensionGeneratorSettings.class)
 public class DimensionGeneratorSettingsMixin {
 
-    @Inject(method = "<init>(JZZLnet/minecraft/util/registry/SimpleRegistry;Ljava/util/Optional;)V", at = @At(value = "RETURN"))
-    private void getSeedFromConstructor(long seed, boolean generateFeatures, boolean bonusChest, SimpleRegistry<Dimension> options, Optional<String> legacyOptions, CallbackInfo ci) {
-        SeedBearer.putInSeed(seed);
+    @Inject(method = "<init>(JZZLnet/minecraft/util/registry/SimpleRegistry;Ljava/util/Optional;)V",
+            at = @At(value = "RETURN"))
+    private void captureSeedForWorld(long seed, boolean generateFeatures, boolean bonusChest,
+                                     SimpleRegistry<Dimension> options, Optional<String> legacyOptions,
+                                     CallbackInfo ci) {
+        if (Thread.currentThread().getName().equals("Server thread")) {
+            SeedBearer.putInSeed(seed);
+            System.out.println("Captured seed for server: " + seed);
+        } else {
+            System.out.println("Skipped capturing seed for thread: " + Thread.currentThread().getName());
+        }
     }
 }
+

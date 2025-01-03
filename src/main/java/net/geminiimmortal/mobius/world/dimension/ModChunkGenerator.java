@@ -6,6 +6,8 @@ import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.DimensionSettings;
 import net.minecraft.world.gen.NoiseChunkGenerator;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.function.Supplier;
 
@@ -23,6 +25,7 @@ public class ModChunkGenerator extends NoiseChunkGenerator {
 
     public ModChunkGenerator(BiomeProvider biomeProvider, long seed, Supplier<DimensionSettings> dimensionSettingsSupplier) {
         super(biomeProvider, seed, dimensionSettingsSupplier);
+        System.out.println("Using seed " + seed + "for Chunk Generator.");
     }
 
     @Override
@@ -30,9 +33,10 @@ public class ModChunkGenerator extends NoiseChunkGenerator {
         return CODEC;
     }
 
+    @OnlyIn(Dist.CLIENT)
     @Override
     public ChunkGenerator withSeed(long seed) {
-
+        System.out.println("Seed provided to chunk generator: " + seed);
         return new ModChunkGenerator(this.biomeSource.withSeed(seed), seed, this.settings);
     }
 }

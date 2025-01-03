@@ -8,6 +8,7 @@ import net.geminiimmortal.mobius.world.worldgen.structure.ModStructureGeneration
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.feature.structure.Structure;
@@ -41,6 +42,7 @@ public class ModWorldEvents {
     public static void addDimensionalSpacing(final WorldEvent.Load event) {
         if(event.getWorld() instanceof ServerWorld) {
             ServerWorld serverWorld = (ServerWorld) event.getWorld();
+            long seed = ((ServerWorld) event.getWorld()).getSeed();
 
             try {
                 Method GETCODEC_METHOD =
@@ -50,6 +52,10 @@ public class ModWorldEvents {
 
                 if (cgRL != null && cgRL.getNamespace().equals("terraforged")) {
                     return;
+                }
+                if (cgRL != null && cgRL.getNamespace().equals("mobius")) {
+                    System.out.println("Using Mobius chunk gen!");
+                    System.out.println("Using seed: " + seed);
                 }
             } catch (Exception e) {
                 LogManager.getLogger().error("Was unable to check if " + serverWorld.dimension().location()

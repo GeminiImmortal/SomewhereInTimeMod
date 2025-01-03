@@ -5,6 +5,7 @@
     "settings": "mobius:mobius_noise_settings",
     "biome_source": {
       "type": "mobius:mobius_biome_provider",
+      "preset": "mobius",
       "altitude_noise": {
         "firstOctave": -7,
         "amplitudes": [

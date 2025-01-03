@@ -160,8 +160,6 @@ public class MobiusMod
             ModDimensions.setupDimension();
             ModStructures.setupStructures();
 
-
-
             AxeItem.STRIPABLES = Maps.newHashMap(AxeItem.STRIPABLES);
             AxeItem.STRIPABLES.put(ModBlocks.MARROWOOD_LOG.get(), ModBlocks.STRIPPED_MARROWOOD_LOG.get());
             AxeItem.STRIPABLES.put(ModBlocks.MARROWOOD_WOOD.get(), ModBlocks.STRIPPED_MARROWOOD_WOOD.get());
