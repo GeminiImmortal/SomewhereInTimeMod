@@ -57,10 +57,8 @@ public class ModBiomes {
                 new MobSpawnInfo.Spawners(EntityType.MOOSHROOM, 100, 7, 10));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
-        //DefaultBiomeFeatures.addMushroomFieldVegetation(biomegenerationsettings$builder);
+        DefaultBiomeFeatures.addMushroomFieldVegetation(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);
-        //DefaultBiomeFeatures.addSparseBerryBushes(biomegenerationsettings$builder);
-        biomegenerationsettings$builder.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, ModConfiguredFeatures.CONFIGURED_STANDING_GLOOMCAP_FEATURE);
 
         return (new Biome.Builder()).precipitation(Biome.RainType.NONE).biomeCategory(Biome.Category.FOREST).depth(depth).scale(scale)
                 .temperature(1.5F).downfall(0.9F).specialEffects((new BiomeAmbience.Builder()).waterColor(16220377).waterFogColor(-3407872)
@@ -87,12 +85,6 @@ public class ModBiomes {
                 new MobSpawnInfo.Spawners(EntityType.TROPICAL_FISH, 100, 7, 10));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
-        //DefaultBiomeFeatures.addLukeWarmKelp(biomegenerationsettings$builder);
-        //DefaultBiomeFeatures.addDefaultSeagrass(biomegenerationsettings$builder);
-        //DefaultBiomeFeatures.addWaterTrees(biomegenerationsettings$builder);
-        //biomegenerationsettings$builder.addFeature(GenerationStage.Decoration.LOCAL_MODIFICATIONS,
-        //                Feature.LAKE.configured(new BlockStateFeatureConfig(ModFluids.ECTOPLASM_BLOCK.get().defaultBlockState())).decorated(Placement.WATER_LAKE.configured(new ChanceConfig(4))));
-
 
         return (new Biome.Builder()).precipitation(Biome.RainType.NONE).biomeCategory(Biome.Category.OCEAN).depth(depth).scale(scale)
                 .temperature(1.5F).downfall(0.9F).specialEffects((new BiomeAmbience.Builder()).waterColor(16220377).waterFogColor(-3407872)

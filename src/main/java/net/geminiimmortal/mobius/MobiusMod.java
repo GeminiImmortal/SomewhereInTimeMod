@@ -21,7 +21,6 @@ import net.geminiimmortal.mobius.tileentity.ModTileEntities;
 import net.geminiimmortal.mobius.tileentity.render.AstralConduitScreen;
 import net.geminiimmortal.mobius.tileentity.render.SoulForgeScreen;
 import net.geminiimmortal.mobius.util.CustomDamageEventHandler;
-import net.geminiimmortal.mobius.util.GolemTransformationHandler;
 import net.geminiimmortal.mobius.villager.ModVillagers;
 import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.geminiimmortal.mobius.world.worldgen.CustomSurfaceBuilders;
@@ -104,7 +103,7 @@ public class MobiusMod
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new GolemTransformationHandler());
+    //    MinecraftForge.EVENT_BUS.register(new GolemTransformationHandler());
         MinecraftForge.EVENT_BUS.register(new CustomDamageEventHandler());
 
 

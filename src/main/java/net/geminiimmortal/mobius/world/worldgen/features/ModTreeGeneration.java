@@ -64,8 +64,6 @@ public class ModTreeGeneration {
             List<Supplier<ConfiguredFeature<?, ?>>> base =
                     event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
 
-            System.out.println("Attempting to add Gloomcap to forest.");
-
             base.add(() -> ModConfiguredFeatures.CONFIGURED_STANDING_GLOOMCAP_FEATURE
                     .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
                     .decorated(DenserTreesPlacement.DARK_OAK_TREE.configured(
