@@ -59,6 +59,10 @@ public class ModConfiguredFeatures {
             register("standing_gloomcap",
                     ModFeatures.CLUSTERED_STANDING_GLOOMCAP_FEATURE.configured(new NoFeatureConfig()));
 
+    public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_WILD_MANA_WART_FEATURE =
+            register("wild_mana_wart",
+                    ModFeatures.CLUSTERED_WILD_MANA_WART_FEATURE.configured(new NoFeatureConfig()));
+
     public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_GIANT_GLOOMCAP_FEATURE =
             register("giant_gloomcap",
                     ModFeatures.GIANT_GLOOMCAP_MUSHROOM_FEATURE.configured(new NoFeatureConfig()));

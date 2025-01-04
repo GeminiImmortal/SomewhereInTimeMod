@@ -6,6 +6,7 @@ import net.geminiimmortal.mobius.block.custom.boss_blocks.GovernorBossBlock;
 import net.geminiimmortal.mobius.block.custom.boss_blocks.GovernorBossExitBlock;
 import net.geminiimmortal.mobius.block.custom.crop.ManaWartCrop;
 import net.geminiimmortal.mobius.block.custom.flora.StandingGloomcap;
+import net.geminiimmortal.mobius.block.custom.flora.WildManaWart;
 import net.geminiimmortal.mobius.block.custom.trees.GloamthornTree;
 import net.geminiimmortal.mobius.block.custom.trees.ManawoodTree;
 import net.geminiimmortal.mobius.block.custom.trees.MarrowoodTree;
@@ -259,7 +260,10 @@ public class ModBlocks {
             () -> new Block(AbstractBlock.Properties.of(Material.WOOD).strength(1.0f)));
 
     public static final RegistryObject<Block> MANA_WART = BLOCKS.register("mana_wart",
-            () -> new ManaWartCrop(AbstractBlock.Properties.copy(Blocks.WHEAT)));
+            () -> new ManaWartCrop(AbstractBlock.Properties.copy(Blocks.WHEAT).lightLevel(state -> 7)));
+
+    public static final RegistryObject<Block> WILD_MANA_WART = registerBlock("wild_mana_wart",
+            () -> new WildManaWart(AbstractBlock.Properties.copy(Blocks.BROWN_MUSHROOM).lightLevel(state -> 7).instabreak()));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

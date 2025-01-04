@@ -45,6 +45,14 @@ public class ModTreeGeneration {
                             new ChanceConfig(2)))
                     .countRandom(7));
 
+            base.add(() -> ModConfiguredFeatures.CONFIGURED_WILD_MANA_WART_FEATURE
+                    .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
+                    .decorated(DenserTreesPlacement.DARK_OAK_TREE.configured(
+                            new NoPlacementConfig()))
+                    .decorated(Placement.CHANCE.configured(
+                            new ChanceConfig(1)))
+                    .countRandom(10));
+
         }
 
         if(Objects.equals(event.getName(), mushroomForest)) {

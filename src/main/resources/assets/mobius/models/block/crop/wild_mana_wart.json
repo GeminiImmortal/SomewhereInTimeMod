@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/crop",
+  "textures": {
+    "crop": "mobius:block/crop/mana_wart_stage2"
+  }
+}
