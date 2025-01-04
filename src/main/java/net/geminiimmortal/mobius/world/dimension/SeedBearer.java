@@ -1,19 +1,15 @@
 package net.geminiimmortal.mobius.world.dimension;
 
 public class SeedBearer {
-    private static long seed;
-    private static boolean isSeedSet = false;
 
-    public static synchronized void putInSeed(long newSeed) {
-        if (!isSeedSet) {
-            seed = newSeed;
-            isSeedSet = true;
-        } else {
-            System.out.println("Seed already set; ignored new seed: " + newSeed);
-        }
+    private static long seed = 0;
+
+    public static void putInSeed(long seedInput) {
+        seed = seedInput;
     }
 
-    public static synchronized long giveMeSeed() {
+    public static long giveMeSeed() {
+        System.out.println("Seed " + seed + " provided by SeedBearer.");
         return seed;
     }
 }

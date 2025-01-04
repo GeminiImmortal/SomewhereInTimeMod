@@ -1,11 +1,13 @@
 {
   "type": "mobius:mobius_type",
+  "forge:use_server_seed": true,
   "generator": {
-    "type": "mobius:mobius_chunk_generator",
+    "type": "minecraft:noise",
+    "seed": 0,
     "settings": "mobius:mobius_noise_settings",
     "biome_source": {
-      "type": "mobius:mobius_biome_provider",
-      "preset": "mobius",
+      "type": "minecraft:multi_noise",
+      "seed": 0,
       "altitude_noise": {
         "firstOctave": -7,
         "amplitudes": [

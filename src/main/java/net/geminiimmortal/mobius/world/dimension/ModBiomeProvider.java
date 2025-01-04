@@ -50,7 +50,6 @@ public class ModBiomeProvider extends NetherBiomeProvider {
 
     private ModBiomeProvider(long seed, List<Pair<Biome.Attributes, Supplier<Biome>>> biomeAttributes, Optional<Pair<Registry<Biome>, NetherBiomeProvider.Preset>> netherProviderPreset) {
         super(seed, biomeAttributes, netherProviderPreset);
-        System.out.println("Seed provided to biome provider: " + seed);
     }
 
     @Override

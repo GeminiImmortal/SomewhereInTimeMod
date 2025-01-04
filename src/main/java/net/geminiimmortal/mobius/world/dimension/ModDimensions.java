@@ -6,6 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class ModDimensions {
         public static final RegistryKey<DimensionType> MOBIUS_DIMENSION_TYPE = RegistryKey.create(Registry.DIMENSION_TYPE_REGISTRY, name("mobius_type"));
@@ -18,7 +19,9 @@ public class ModDimensions {
         public static void setupDimension() {
                 System.out.println("Setting up Mobius...");
                 Registry.register(Registry.CHUNK_GENERATOR ,name("mobius_chunk_generator"), ModChunkGenerator.CODEC);
+                System.out.println("Seed from Chunk Generator: " + ModChunkGenerator.CODEC.fieldOf("seed"));
                 Registry.register(Registry.BIOME_SOURCE, name("mobius_biome_provider"), ModBiomeProvider.CODEC);
+                System.out.println("Seed from Biome Provider: " + ModBiomeProvider.CODEC.fieldOf("seed"));
         }
 }
 

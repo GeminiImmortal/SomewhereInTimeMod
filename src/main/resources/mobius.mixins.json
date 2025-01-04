@@ -6,6 +6,6 @@
   "mixins": [
     "DimensionGeneratorSettingsMixin",
     "LivingEntityMixin"
-  ],
+    ],
   "minVersion": "0.8"
 }

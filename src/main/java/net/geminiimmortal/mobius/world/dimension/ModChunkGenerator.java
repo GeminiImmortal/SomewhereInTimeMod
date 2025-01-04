@@ -25,7 +25,6 @@ public class ModChunkGenerator extends NoiseChunkGenerator {
 
     public ModChunkGenerator(BiomeProvider biomeProvider, long seed, Supplier<DimensionSettings> dimensionSettingsSupplier) {
         super(biomeProvider, seed, dimensionSettingsSupplier);
-        System.out.println("Using seed " + seed + "for Chunk Generator.");
     }
 
     @Override

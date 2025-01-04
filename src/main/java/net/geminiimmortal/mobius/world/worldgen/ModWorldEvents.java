@@ -2,6 +2,8 @@ package net.geminiimmortal.mobius.world.worldgen;
 
 import com.mojang.serialization.Codec;
 import net.geminiimmortal.mobius.MobiusMod;
+import net.geminiimmortal.mobius.world.dimension.ModDimensions;
+import net.geminiimmortal.mobius.world.dimension.SeedBearer;
 import net.geminiimmortal.mobius.world.worldgen.features.ModOreGeneration;
 import net.geminiimmortal.mobius.world.worldgen.features.ModTreeGeneration;
 import net.geminiimmortal.mobius.world.worldgen.structure.ModStructureGeneration;
@@ -42,7 +44,7 @@ public class ModWorldEvents {
     public static void addDimensionalSpacing(final WorldEvent.Load event) {
         if(event.getWorld() instanceof ServerWorld) {
             ServerWorld serverWorld = (ServerWorld) event.getWorld();
-            long seed = ((ServerWorld) event.getWorld()).getSeed();
+            long seed = SeedBearer.giveMeSeed();
 
             try {
                 Method GETCODEC_METHOD =
