@@ -28,7 +28,7 @@
             },
             {
               "type": "minecraft:item",
-              "name": "minecraft:brown_mushroom",
+              "name": "mobius:gloomcap",
               "conditions": [
                 {
                   "condition": "minecraft:survives_explosion"

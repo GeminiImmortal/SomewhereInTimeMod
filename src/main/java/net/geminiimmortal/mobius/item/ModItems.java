@@ -8,6 +8,8 @@ import net.geminiimmortal.mobius.item.custom.*;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -134,6 +136,15 @@ public class ModItems {
     public static final RegistryObject<Item> HUNTING_TABLE = ITEMS.register("hunting_table", () -> new BlockItem(ModBlocks.HUNTING_TABLE.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> SOUL_FORGE = ITEMS.register("soul_forge", () -> new BlockItem(ModBlocks.SOUL_FORGE.get(), new Item.Properties().stacksTo(64).tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> ESSENCE_CHANNELER = ITEMS.register("essence_channeler", () -> new BlockItem(ModBlocks.ESSENCE_CHANNELER.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+
+    //Crops and Food
+    public static final RegistryObject<Item> MANA_WART = ITEMS.register("mana_wart",
+            () -> new BlockItem(ModBlocks.MANA_WART.get(), new Item.Properties()
+                    .food(new Food.Builder().nutrition(1).saturationMod(0.1f).build())
+                    .tab(ItemGroup.TAB_FOOD)));
+    public static final RegistryObject<Item> MANAGLOOM_PIE = ITEMS.register("managloom_pie", () -> new Item(new Item.Properties().food(new Food.Builder().nutrition(8).saturationMod(0.4f).effect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 200), 1f).build())));
+    public static final RegistryObject<Item> GLOOMCAP = ITEMS.register("gloomcap",
+            () -> new Item(new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     //Workstations Misc.
     public static final RegistryObject<Item> ASTRAL_CONDUIT = ITEMS.register("astral_conduit", () -> new BlockItem(ModBlocks.ASTRAL_CONDUIT.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));

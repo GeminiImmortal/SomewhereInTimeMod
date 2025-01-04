@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "food",
+  "pattern": [
+    "#OA"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bread"
+    },
+    "O": {
+      "item": "mobius:gloomcap"
+    },
+    "A": {
+      "item": "mobius:mana_wart"
+    }
+  },
+  "result": {
+    "item": "mobius:managloom_pie",
+    "count": 1
+  }
+}

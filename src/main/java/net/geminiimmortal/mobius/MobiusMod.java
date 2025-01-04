@@ -187,6 +187,7 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_DOOR.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_TRAPDOOR.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.STANDING_GLOOMCAP.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.MANA_WART.get(), RenderType.cutout());
 
             RenderTypeLookup.setRenderLayer(ModBlocks.GIANT_GLOOMCAP_CAP.get(), RenderType.translucent());
 

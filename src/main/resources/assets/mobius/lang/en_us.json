@@ -40,6 +40,8 @@
   "item.mobius.spade_golem_spawn_egg": "Golem of Spades Spawn Egg",
   "item.mobius.faedeer_spawn_egg": "Faedeer Spawn Egg",
   "item.mobius.molvan_spawn_egg": "Molvan Spawn Egg",
+  "item.mobius.managloom_pie": "Managloom Pie",
+  "item.mobius.gloomcap": "Gloomcap",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
@@ -127,6 +129,9 @@
   "block.mobius.stripped_gloamthorn_wood": "Stripped Gloamthorn Wood",
   "block.mobius.gloamthorn_sign": "Gloamthorn Sign",
   "block.mobius.gloamthorn_wall_sign": "Gloamthorn Wall Sign",
+  "block.mobius.mana_wart": "Mana Wart",
+  "block.mobius.giant_gloomcap_cap": "Giant Gloomcap Cap",
+  "block.mobius.giant_gloomcap_stem": "Giant Gloomcap Stem",
 
   "screen.mobius.soul_forge": "Soul Forge",
   "screen.mobius.astral_conduit": "Astral Conduit",
