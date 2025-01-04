@@ -142,7 +142,7 @@ public class ModItems {
             () -> new BlockItem(ModBlocks.MANA_WART.get(), new Item.Properties()
                     .food(new Food.Builder().nutrition(1).saturationMod(0.1f).build())
                     .tab(ItemGroup.TAB_FOOD)));
-    public static final RegistryObject<Item> MANAGLOOM_PIE = ITEMS.register("managloom_pie", () -> new Item(new Item.Properties().food(new Food.Builder().nutrition(8).saturationMod(0.5f).effect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 200), 1f).build())));
+    public static final RegistryObject<Item> MANAGLOOM_PIE = ITEMS.register("managloom_pie", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(new Food.Builder().nutrition(8).saturationMod(0.5f).effect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 200), 1f).build())));
     public static final RegistryObject<Item> GLOOMCAP = ITEMS.register("gloomcap",
             () -> new Item(new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
