@@ -143,8 +143,10 @@
   "effect.mobius.lord_decree": "Lord's Decree",
   "effect.mobius.exposed": "Exposed",
 
-  "tooltip.mobius.vorpal_sword": "Steals life on hit",
-
   "effect.mobius.exposed.description": "Amplifies damage taken",
-  "effect.mobius.lord_decree.description": "Continuously applies slowness and nausea"
+  "effect.mobius.lord_decree.description": "Continuously applies slowness and nausea",
+
+  "tooltip.mobius.vorpal_sword": "Steals life on hit"
+
+
 }
