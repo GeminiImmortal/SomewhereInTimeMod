@@ -11,7 +11,8 @@
     "sounds": [
       {
         "name" : "mobius:borealis",
-        "stream" : true
+        "stream" : true,
+        "volume": 0.5
       }
     ]
   },
@@ -48,7 +49,8 @@
     "sounds": [
       {
         "name": "mobius:colors",
-        "stream": true
+        "stream": true,
+        "volume": 0.5
       }
     ]
   },
@@ -84,7 +86,8 @@
     "sounds": [
       {
         "name": "mobius:bullyrag",
-        "stream": true
+        "stream": true,
+        "volume": 0.5
       }
     ]
   },
@@ -92,7 +95,8 @@
     "sounds": [
       {
         "name": "mobius:the_lady_red",
-        "stream": true
+        "stream": true,
+        "volume": 0.5
       }
     ]
   },
@@ -146,7 +150,17 @@
     "sounds": [
       {
         "name" : "mobius:dream_state",
-        "stream" : true
+        "stream" : true,
+        "volume": 0.5
+      }
+    ]
+  },
+  "forsaken": {
+    "sounds": [
+      {
+        "name": "mobius:forsaken",
+        "stream": true,
+        "volume": 0.5
       }
     ]
   }

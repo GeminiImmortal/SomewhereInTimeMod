@@ -22,6 +22,7 @@ public class ClientMusicHandler {
     public static final SoundEvent DREAM_STATE_MUSIC = new SoundEvent(new ResourceLocation("mobius", "dream_state"));
     public static final SoundEvent BOREALIS_MUSIC = new SoundEvent(new ResourceLocation("mobius", "borealis"));
     public static final SoundEvent BULLYRAG = new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID,"bullyrag"));
+    public static final SoundEvent FORSAKEN = new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, "forsaken"));
 
     private static final List<SoundEvent> CUSTOM_MUSIC_TRACKS = new ArrayList<>();
     private static final Map<SoundEvent, Integer> TRACK_DURATIONS = new HashMap<>();
@@ -31,15 +32,17 @@ public class ClientMusicHandler {
         CUSTOM_MUSIC_TRACKS.add(COLORS_MUSIC);
         CUSTOM_MUSIC_TRACKS.add(DREAM_STATE_MUSIC);
         CUSTOM_MUSIC_TRACKS.add(BOREALIS_MUSIC);
-        TRACK_DURATIONS.put(COLORS_MUSIC, 2460); // Duration in ticks (20 ticks = 1 second)
+        CUSTOM_MUSIC_TRACKS.add(FORSAKEN);
+        TRACK_DURATIONS.put(COLORS_MUSIC, 2460);
         TRACK_DURATIONS.put(DREAM_STATE_MUSIC, 2520);
         TRACK_DURATIONS.put(BOREALIS_MUSIC, 3080);
+        TRACK_DURATIONS.put(FORSAKEN, 1440);
     }
 
     private static final Random RANDOM = new Random();
 
-    private static long trackStartTime = 0; // In ticks
-    private static int currentTrackDuration = 0; // In ticks
+    private static long trackStartTime = 0;
+    private static int currentTrackDuration = 0;
     private static boolean isPlayingCustomMusic = false;
 
     public static void setGovernor(boolean alive) {
@@ -76,7 +79,7 @@ public class ClientMusicHandler {
             SoundEvent track = CUSTOM_MUSIC_TRACKS.get(RANDOM.nextInt(CUSTOM_MUSIC_TRACKS.size()));
             minecraft.getSoundManager().play(SimpleSound.forMusic(track));
 
-            trackStartTime = gameTime;  // Set the start time for the new track
+            trackStartTime = gameTime;
             currentTrackDuration = TRACK_DURATIONS.getOrDefault(track, 3600);  // Set duration for the track, default 3 minutes (3600 ticks)
             isPlayingCustomMusic = true;
         }
