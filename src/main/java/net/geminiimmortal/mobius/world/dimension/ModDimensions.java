@@ -19,9 +19,7 @@ public class ModDimensions {
         public static void setupDimension() {
                 System.out.println("Setting up Mobius...");
                 Registry.register(Registry.CHUNK_GENERATOR ,name("mobius_chunk_generator"), ModChunkGenerator.CODEC);
-                System.out.println("Seed from Chunk Generator: " + ModChunkGenerator.CODEC.fieldOf("seed"));
                 Registry.register(Registry.BIOME_SOURCE, name("mobius_biome_provider"), ModBiomeProvider.CODEC);
-                System.out.println("Seed from Biome Provider: " + ModBiomeProvider.CODEC.fieldOf("seed"));
         }
 }
 
