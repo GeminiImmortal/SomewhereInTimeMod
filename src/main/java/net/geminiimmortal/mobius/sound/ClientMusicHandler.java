@@ -36,7 +36,7 @@ public class ClientMusicHandler {
         TRACK_DURATIONS.put(COLORS_MUSIC, 2460);
         TRACK_DURATIONS.put(DREAM_STATE_MUSIC, 2520);
         TRACK_DURATIONS.put(BOREALIS_MUSIC, 3080);
-        TRACK_DURATIONS.put(FORSAKEN, 1440);
+        TRACK_DURATIONS.put(FORSAKEN, 2750);
     }
 
     private static final Random RANDOM = new Random();
