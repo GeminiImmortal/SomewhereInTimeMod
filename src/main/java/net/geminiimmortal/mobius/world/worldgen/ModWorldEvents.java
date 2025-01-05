@@ -2,7 +2,6 @@ package net.geminiimmortal.mobius.world.worldgen;
 
 import com.mojang.serialization.Codec;
 import net.geminiimmortal.mobius.MobiusMod;
-import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.geminiimmortal.mobius.world.dimension.SeedBearer;
 import net.geminiimmortal.mobius.world.worldgen.features.ModOreGeneration;
 import net.geminiimmortal.mobius.world.worldgen.features.ModTreeGeneration;
@@ -10,7 +9,6 @@ import net.geminiimmortal.mobius.world.worldgen.structure.ModStructureGeneration
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.feature.structure.Structure;
@@ -85,6 +83,8 @@ public class ModWorldEvents {
                     DimensionStructuresSettings.DEFAULTS.get(ModStructures.IMPERIAL_WATCHTOWER.get()));
             tempMap.putIfAbsent(ModStructures.GOVERNOR_TOWER.get(),
                     DimensionStructuresSettings.DEFAULTS.get(ModStructures.GOVERNOR_TOWER.get()));
+            tempMap.putIfAbsent(ModStructures.DRAGON_BONES.get(),
+                    DimensionStructuresSettings.DEFAULTS.get(ModStructures.DRAGON_BONES.get()));
             serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
         }
     }

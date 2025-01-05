@@ -39,6 +39,9 @@ public class ModStructures {
     public static final RegistryObject<Structure<NoFeatureConfig>> GOVERNOR_TOWER =
             STRUCTURES.register("governor_tower", GovernorTower::new);
 
+    public static final RegistryObject<Structure<NoFeatureConfig>> DRAGON_BONES =
+            STRUCTURES.register("dragon_bones", DragonRibcage::new);
+
 
     public static void setupStructures() {
         setupMapSpacingAndLand(MOLVAN_SETTLEMENT_A.get(),
@@ -58,6 +61,9 @@ public class ModStructures {
                 true);
         setupMapSpacingAndLand(GOVERNOR_TOWER.get(),
                 new StructureSeparationSettings(50, 35, 867530939),
+                false);
+        setupMapSpacingAndLand(DRAGON_BONES.get(),
+                new StructureSeparationSettings(13,7, 172348790),
                 false);
     }
 
