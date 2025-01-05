@@ -1,0 +1,17 @@
+{
+  "type": "mobius:astral_conduit",
+  "ingredients": [
+    {
+      "item": "mobius:raw_mana"
+    },
+    {
+      "item": "mobius:ectoplasm_bucket"
+    },
+    {
+      "item": "mobius:mana_wart"
+    }
+  ],
+  "output": {
+    "item": "mobius:ball_of_condensed_mana"
+  }
+}
