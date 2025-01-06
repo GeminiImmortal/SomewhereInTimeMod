@@ -301,7 +301,6 @@ public class MobiusMod
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MinecraftForge.EVENT_BUS.register(new ClientMusicHandler());
-
             LOGGER.info("[MOBIUS] Setting up music manager.");
         }
     }

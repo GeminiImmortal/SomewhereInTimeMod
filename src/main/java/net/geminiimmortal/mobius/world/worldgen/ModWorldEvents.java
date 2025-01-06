@@ -3,6 +3,7 @@ package net.geminiimmortal.mobius.world.worldgen;
 import com.mojang.serialization.Codec;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.world.dimension.SeedBearer;
+import net.geminiimmortal.mobius.world.worldgen.feature.ModNoFeatureConfigGeneration;
 import net.geminiimmortal.mobius.world.worldgen.feature.ModOreGeneration;
 import net.geminiimmortal.mobius.world.worldgen.feature.ModTreeGeneration;
 import net.geminiimmortal.mobius.world.worldgen.structure.ModStructureGeneration;
@@ -35,8 +36,8 @@ public class ModWorldEvents {
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void biomeLoadingEvent(final BiomeLoadingEvent event) {
         ModOreGeneration.generateOres(event);
-
         ModStructureGeneration.generateStructures(event);
+        ModNoFeatureConfigGeneration.generateNFC(event);
         ModTreeGeneration.generateTrees(event);
     }
 
