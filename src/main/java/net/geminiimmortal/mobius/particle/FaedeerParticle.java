@@ -18,6 +18,11 @@ public class FaedeerParticle extends SpriteTexturedParticle {
         super.tick();
     }
 
+    @Override
+    public int getLightColor(float partialTick) {
+        return 0xF000F0; // Maximum brightness
+    }
+
 
     @Override
     public IParticleRenderType getRenderType() {

@@ -20,6 +20,10 @@ public class ParticleFactoryRegistration {
                 ModParticles.KNIFE_RAIN_PARTICLE.get(),
                 KnifeRainParticleRenderer::new
         );
+        Minecraft.getInstance().particleEngine.register(
+                ModParticles.SPORE_PARTICLE.get(),
+                SporeParticleRenderer::new
+        );
     }
 }
 

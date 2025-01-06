@@ -1,9 +1,9 @@
 package net.geminiimmortal.mobius.block.custom.flora;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
+import net.geminiimmortal.mobius.particle.ModParticles;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MushroomBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -29,6 +29,19 @@ public class StandingGloomcap extends Block {
     @Override
     public void randomTick(BlockState p_225542_1_, ServerWorld p_225542_2_, BlockPos p_225542_3_, Random p_225542_4_) {
 
+    }
+
+    @Override
+    public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
+        float chance = 0.09f;
+        if (chance < rand.nextFloat()) {
+            if (worldIn.isClientSide()) {
+                worldIn.addParticle(ModParticles.SPORE_PARTICLE.get(), pos.getX() + rand.nextDouble(),
+                        pos.getY() + 1.25D, pos.getZ() + rand.nextDouble(),
+                        0.04d, 0.02d, 0.04d);
+            }
+        }
+        super.animateTick(stateIn, worldIn, pos, rand);
     }
 
     @Override
