@@ -1,4 +1,4 @@
-package net.geminiimmortal.mobius.world.worldgen.features.placement;
+package net.geminiimmortal.mobius.world.worldgen.feature.placement;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.util.math.BlockPos;

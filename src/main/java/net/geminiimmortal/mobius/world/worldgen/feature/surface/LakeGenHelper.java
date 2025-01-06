@@ -1,4 +1,4 @@
-package net.geminiimmortal.mobius.world.worldgen.biome;
+package net.geminiimmortal.mobius.world.worldgen.feature.surface;
 
 import com.mojang.serialization.Codec;
 import net.geminiimmortal.mobius.block.ModBlocks;
@@ -47,9 +47,9 @@ public class LakeGenHelper extends SurfaceBuilder<SurfaceBuilderConfig> {
 
 
     public static final SurfaceBuilderConfig LAKE_SURFACE_CONFIG = new SurfaceBuilderConfig(
-            Blocks.WATER.defaultBlockState(),
+            Blocks.DIRT.defaultBlockState(),
             ModBlocks.AURORA_DIRT.get().defaultBlockState(),
-            Blocks.GRAVEL.defaultBlockState()
+            Blocks.LAVA.defaultBlockState()
     );
 
 }

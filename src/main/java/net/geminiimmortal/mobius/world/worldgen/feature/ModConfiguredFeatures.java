@@ -1,7 +1,7 @@
-package net.geminiimmortal.mobius.world.worldgen.features;
+package net.geminiimmortal.mobius.world.worldgen.feature;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
-import net.geminiimmortal.mobius.block.custom.trees.GloamthornTree;
+import net.geminiimmortal.mobius.fluid.ModFluids;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
@@ -57,17 +57,19 @@ public class ModConfiguredFeatures {
 
     public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_STANDING_GLOOMCAP_FEATURE =
             register("standing_gloomcap",
-                    ModFeatures.CLUSTERED_STANDING_GLOOMCAP_FEATURE.configured(new NoFeatureConfig()));
+                    ModFeatures.CLUSTERED_STANDING_GLOOMCAP_FEATURE.get().configured(new NoFeatureConfig()));
 
     public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_WILD_MANA_WART_FEATURE =
             register("wild_mana_wart",
-                    ModFeatures.CLUSTERED_WILD_MANA_WART_FEATURE.configured(new NoFeatureConfig()));
+                    ModFeatures.CLUSTERED_WILD_MANA_WART_FEATURE.get().configured(new NoFeatureConfig()));
 
     public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_GIANT_GLOOMCAP_FEATURE =
             register("giant_gloomcap",
-                    ModFeatures.GIANT_GLOOMCAP_MUSHROOM_FEATURE.configured(new NoFeatureConfig()));
+                    ModFeatures.GIANT_GLOOMCAP_MUSHROOM_FEATURE.get().configured(new NoFeatureConfig()));
 
-
+/*    public static final ConfiguredFeature<BlockStateFeatureConfig, ?> CONFIGURED_BOG_WATER_LAKE_FEATURE =
+            register("bog_water_lake_feature",
+                    ModFeatures.BOG_WATER_LAKE_FEATURE.get().configured(new BlockStateFeatureConfig(ModFluids.BOG_WATER_BLOCK.get().defaultBlockState())));*/
 
 
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key,

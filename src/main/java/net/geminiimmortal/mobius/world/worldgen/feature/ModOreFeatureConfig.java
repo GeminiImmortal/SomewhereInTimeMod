@@ -1,4 +1,4 @@
-package net.geminiimmortal.mobius.world.worldgen.features;
+package net.geminiimmortal.mobius.world.worldgen.feature;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

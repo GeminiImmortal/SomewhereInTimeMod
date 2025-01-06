@@ -1,4 +1,4 @@
-package net.geminiimmortal.mobius.world.worldgen.features;
+package net.geminiimmortal.mobius.world.worldgen.feature;
 
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;

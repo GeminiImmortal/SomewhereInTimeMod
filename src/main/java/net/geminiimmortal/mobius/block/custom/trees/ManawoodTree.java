@@ -1,6 +1,6 @@
 package net.geminiimmortal.mobius.block.custom.trees;
 
-import net.geminiimmortal.mobius.world.worldgen.features.ModConfiguredFeatures;
+import net.geminiimmortal.mobius.world.worldgen.feature.ModConfiguredFeatures;
 import net.minecraft.block.trees.Tree;
 import net.minecraft.world.gen.feature.BaseTreeFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;

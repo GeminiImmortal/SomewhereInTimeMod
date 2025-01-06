@@ -4,15 +4,16 @@ import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.geminiimmortal.mobius.world.worldgen.feature.ModConfiguredFeatures;
+import net.geminiimmortal.mobius.world.worldgen.feature.placement.ModFeaturePlacement;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.RegistryKey;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.*;
+import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
@@ -24,8 +25,6 @@ import java.util.function.Supplier;
 public class ModBiomes {
     public static final DeferredRegister<Biome> BIOMES
             = DeferredRegister.create(ForgeRegistries.BIOMES, MobiusMod.MOD_ID);
-
-    public static final RegistryKey<Biome> ROLLING_EXPANSE_KEY = RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation("mobius", "rolling_expanse"));
 
     public static final RegistryObject<Biome> MUSHROOM_FOREST = BIOMES.register("mushroom_forest",
             () -> makeMushroomForest(() -> ModConfiguredSurfaceBuilders.MUSHROOM_FOREST, 0.125f, 0.05f));
@@ -41,6 +40,9 @@ public class ModBiomes {
 
     public static final RegistryObject<Biome> ROLLING_EXPANSE = BIOMES.register("rolling_expanse",
             () -> makeRollingExpanse(() -> ModConfiguredSurfaceBuilders.ROLLING_EXPANSE, 0.1f, 0.01f));
+
+    public static final RegistryObject<Biome> INFECTED_BOG = BIOMES.register("infected_bog",
+            () -> makeInfectedBog(() -> ModConfiguredSurfaceBuilders.INFECTED_BOG, -0.1f, 0.01f));
 
 
     private static Biome makeMushroomForest(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
@@ -154,6 +156,29 @@ public class ModBiomes {
         DefaultBiomeFeatures.addPlainVegetation(biomegenerationsettings$builder);
 
         return (new Biome.Builder()).precipitation(Biome.RainType.RAIN).biomeCategory(Biome.Category.PLAINS).depth(depth).scale(scale)
+                .temperature(0.8F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(12057592).waterFogColor(7535809)
+                        .fogColor(7535809).skyColor(11532160).foliageColorOverride(3570695).grassColorOverride(7008979)
+                        .ambientLoopSound(SoundEvents.AMBIENT_BASALT_DELTAS_LOOP)
+                        .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_CAVE, 6000, 8, 2.0D))
+                        .ambientAdditionsSound(new SoundAdditionsAmbience(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS, 0.0111D))
+                        .build())
+                .mobSpawnSettings(mobspawninfo$builder.build()).generationSettings(biomegenerationsettings$builder.build()).build();
+    }
+
+    private static Biome makeInfectedBog(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
+        MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(EntityType.ZOGLIN, 10, 2, 3));
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(EntityType.ZOMBIE, 40, 1,3));
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(EntityType.SKELETON, 50, 1,1));
+        BiomeGenerationSettings.Builder biomegenerationsettings$builder =
+                (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
+        DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);
+        DefaultBiomeFeatures.addSwampVegetation(biomegenerationsettings$builder);
+
+        return (new Biome.Builder()).precipitation(Biome.RainType.RAIN).biomeCategory(Biome.Category.SWAMP).depth(depth).scale(scale)
                 .temperature(0.8F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(12057592).waterFogColor(7535809)
                         .fogColor(7535809).skyColor(11532160).foliageColorOverride(3570695).grassColorOverride(7008979)
                         .ambientLoopSound(SoundEvents.AMBIENT_BASALT_DELTAS_LOOP)

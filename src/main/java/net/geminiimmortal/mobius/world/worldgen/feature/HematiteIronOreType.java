@@ -1,4 +1,4 @@
-package net.geminiimmortal.mobius.world.worldgen.features;
+package net.geminiimmortal.mobius.world.worldgen.feature;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.minecraft.block.Block;

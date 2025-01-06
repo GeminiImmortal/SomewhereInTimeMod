@@ -3,8 +3,8 @@ package net.geminiimmortal.mobius.world.worldgen;
 import com.mojang.serialization.Codec;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.world.dimension.SeedBearer;
-import net.geminiimmortal.mobius.world.worldgen.features.ModOreGeneration;
-import net.geminiimmortal.mobius.world.worldgen.features.ModTreeGeneration;
+import net.geminiimmortal.mobius.world.worldgen.feature.ModOreGeneration;
+import net.geminiimmortal.mobius.world.worldgen.feature.ModTreeGeneration;
 import net.geminiimmortal.mobius.world.worldgen.structure.ModStructureGeneration;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
@@ -16,6 +16,7 @@ import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
@@ -31,10 +32,11 @@ import java.util.Map;
 @Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ModWorldEvents {
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGH)
     public static void biomeLoadingEvent(final BiomeLoadingEvent event) {
-        ModStructureGeneration.generateStructures(event);
         ModOreGeneration.generateOres(event);
+
+        ModStructureGeneration.generateStructures(event);
         ModTreeGeneration.generateTrees(event);
     }
 

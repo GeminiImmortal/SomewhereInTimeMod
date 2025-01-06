@@ -25,6 +25,8 @@ import net.geminiimmortal.mobius.villager.ModVillagers;
 import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.geminiimmortal.mobius.world.worldgen.CustomSurfaceBuilders;
 import net.geminiimmortal.mobius.world.worldgen.biome.ModBiomes;
+import net.geminiimmortal.mobius.world.worldgen.feature.ModFeatures;
+import net.geminiimmortal.mobius.world.worldgen.feature.placement.ModFeaturePlacement;
 import net.geminiimmortal.mobius.world.worldgen.structure.ModStructures;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -34,7 +36,6 @@ import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.AxeItem;
 import net.minecraft.util.RegistryKey;
@@ -43,7 +44,6 @@ import net.minecraft.util.registry.Registry;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -83,6 +83,8 @@ public class MobiusMod
             FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
         }
 
+        ModFeaturePlacement.DECORATORS.register(eventBus);
+        ModFeatures.FEATURES.register(eventBus);
         ModBlocks.register(eventBus);
         ModItems.register(eventBus);
         ModFluids.register(eventBus);
@@ -151,6 +153,13 @@ public class MobiusMod
                     BiomeDictionary.Type.FOREST,
                     BiomeDictionary.Type.CONIFEROUS,
                     BiomeDictionary.Type.COLD
+            );
+
+            BiomeDictionary.addTypes(
+                    RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MOD_ID, "infected_bog")),
+                    BiomeDictionary.Type.SPOOKY,
+                    BiomeDictionary.Type.SWAMP,
+                    BiomeDictionary.Type.LUSH
             );
 
             WoodType.register(ModWoodTypes.MARROWOOD);
@@ -295,12 +304,5 @@ public class MobiusMod
 
             LOGGER.info("[MOBIUS] Setting up music manager.");
         }
-    }
-
-
-    public void gatherData(GatherDataEvent event) {
-        DataGenerator generator = event.getGenerator();
-        ExistingFileHelper helper = event.getExistingFileHelper();
-
     }
 }

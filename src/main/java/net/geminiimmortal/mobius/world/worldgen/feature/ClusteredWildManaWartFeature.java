@@ -1,4 +1,4 @@
-package net.geminiimmortal.mobius.world.worldgen.features;
+package net.geminiimmortal.mobius.world.worldgen.feature;
 
 import com.mojang.serialization.Codec;
 import net.geminiimmortal.mobius.block.ModBlocks;
@@ -7,19 +7,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ISeedReader;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 import java.util.Random;
 
-public class ClusteredStandingGloomcapMushroomFeature extends Feature<NoFeatureConfig> {
-    public static final ClusteredStandingGloomcapMushroomFeature INSTANCE =
-            new ClusteredStandingGloomcapMushroomFeature(NoFeatureConfig.CODEC, ModBlocks.STANDING_GLOOMCAP.get().defaultBlockState());
+public class ClusteredWildManaWartFeature extends Feature<NoFeatureConfig> {
 
     private final BlockState mushroomBlock;
 
-    public ClusteredStandingGloomcapMushroomFeature(Codec<NoFeatureConfig> configCodec, BlockState mushroomBlock) {
+    public ClusteredWildManaWartFeature(Codec<NoFeatureConfig> configCodec, BlockState mushroomBlock) {
         super(configCodec);
         this.mushroomBlock = mushroomBlock;
     }
@@ -54,7 +51,7 @@ public class ClusteredStandingGloomcapMushroomFeature extends Feature<NoFeatureC
     }
 
     private boolean isValidPosition(ISeedReader world, BlockPos pos) {
-        return world.getBlockState(pos.below()).is(ModBlocks.SOUL_PODZOL.get());
+        return world.getBlockState(pos.below()).is(ModBlocks.AURORA_GRASS_BLOCK.get());
     }
 }
 

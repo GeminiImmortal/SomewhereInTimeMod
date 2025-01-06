@@ -1,4 +1,4 @@
-package net.geminiimmortal.mobius.world.worldgen.features;
+package net.geminiimmortal.mobius.world.worldgen.feature;
 
 import net.minecraft.block.Block;
 import net.minecraftforge.common.util.Lazy;
@@ -36,8 +36,8 @@ public enum OreType {
         return maxHeight;
     }
 
-    public static net.geminiimmortal.mobius.world.worldgen.features.OreType get(Block block) {
-        for (net.geminiimmortal.mobius.world.worldgen.features.OreType ore : values()) {
+    public static net.geminiimmortal.mobius.world.worldgen.feature.OreType get(Block block) {
+        for (net.geminiimmortal.mobius.world.worldgen.feature.OreType ore : values()) {
             if(block == ore.block) {
                 return ore;
             }

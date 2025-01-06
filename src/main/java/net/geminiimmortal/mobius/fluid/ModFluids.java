@@ -44,7 +44,7 @@ public class ModFluids {
 
     public static final RegistryObject<FlowingFluidBlock> BOG_WATER_BLOCK =
             ModBlocks.BLOCKS.register("bog_water", () -> new FlowingFluidBlock(() -> ModFluids.BOG_WATER_FLUID.get(),
-                    AbstractBlock.Properties.of(Material.WATER).noCollission().strength(100f).noDrops()));
+                    AbstractBlock.Properties.of(ModFluidTypes.BOG_WATER_TYPE).noCollission().strength(100f).noDrops()));
 
 
 
@@ -63,7 +63,7 @@ public class ModFluids {
 
     public static final RegistryObject<FlowingFluidBlock> ECTOPLASM_BLOCK =
             ModBlocks.BLOCKS.register("ectoplasm", () -> new FlowingFluidBlock(() -> ModFluids.ECTOPLASM_FLUID.get(),
-                    AbstractBlock.Properties.of(Material.WATER).noCollission().strength(1000f).noDrops()));
+                    AbstractBlock.Properties.of(ModFluidTypes.ECTOPLASM_TYPE).noCollission().strength(1000f).noDrops()));
 
     public static void register(IEventBus eventBus) {
         FLUIDS.register(eventBus);

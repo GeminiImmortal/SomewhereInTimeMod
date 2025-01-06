@@ -1,4 +1,4 @@
-package net.geminiimmortal.mobius.world.worldgen;
+package net.geminiimmortal.mobius.world.worldgen.feature.surface;
 
 import com.mojang.serialization.Codec;
 import net.geminiimmortal.mobius.block.ModBlocks;
