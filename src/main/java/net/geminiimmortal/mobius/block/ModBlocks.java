@@ -251,10 +251,10 @@ public class ModBlocks {
             () -> new TrapDoorBlock(AbstractBlock.Properties.copy(Blocks.OAK_TRAPDOOR)));
 
     public static final RegistryObject<Block> STANDING_GLOOMCAP = registerBlock("standing_gloomcap",
-            () -> new StandingGloomcap(AbstractBlock.Properties.copy(Blocks.BROWN_MUSHROOM).lightLevel(state -> 8).instabreak().randomTicks()));
+            () -> new StandingGloomcap(AbstractBlock.Properties.copy(Blocks.BROWN_MUSHROOM).lightLevel(state -> 15).instabreak().noOcclusion().randomTicks()));
 
     public static final RegistryObject<Block> GIANT_GLOOMCAP_CAP = registerBlock("giant_gloomcap_cap",
-            () -> new Block(AbstractBlock.Properties.of(Material.PLANT).lightLevel(state -> 12).strength(0.5f)));
+            () -> new Block(AbstractBlock.Properties.of(Material.PLANT).lightLevel(state -> 15).strength(0.5f).noOcclusion()));
 
     public static final RegistryObject<Block> GIANT_GLOOMCAP_STEM = registerBlock("giant_gloomcap_stem",
             () -> new Block(AbstractBlock.Properties.of(Material.WOOD).strength(1.0f)));

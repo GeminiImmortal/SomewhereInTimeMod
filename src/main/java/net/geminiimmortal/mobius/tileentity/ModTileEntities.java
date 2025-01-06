@@ -34,6 +34,10 @@ public class ModTileEntities {
                             ModBlocks.ASTRAL_CONDUIT.get())
                     .build(null));
 
+    public static final RegistryObject<TileEntityType<GlowingBlockTileEntity>> GLOWING_BLOCK = TILE_ENTITIES.register("glowing_block",
+            () -> TileEntityType.Builder.of(GlowingBlockTileEntity::new, ModBlocks.STANDING_GLOOMCAP.get()).build(null));
+
+
 
     public static void register(IEventBus eventBus) {
         TILE_ENTITIES.register(eventBus);

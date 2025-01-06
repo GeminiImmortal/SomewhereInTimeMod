@@ -15,6 +15,7 @@ import net.geminiimmortal.mobius.entity.render.*;
 import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.recipe.ModRecipeTypes;
+import net.geminiimmortal.mobius.render.ModRenderTypes;
 import net.geminiimmortal.mobius.sound.ClientMusicHandler;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.tileentity.ModTileEntities;
@@ -58,6 +59,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import net.geminiimmortal.mobius.tileentity.render.GlowingBlockRenderer;
 
 import java.util.stream.Collectors;
 
@@ -194,7 +196,7 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_SAPLING.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_DOOR.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_TRAPDOOR.get(), RenderType.cutout());
-            RenderTypeLookup.setRenderLayer(ModBlocks.STANDING_GLOOMCAP.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.STANDING_GLOOMCAP.get(), RenderType.translucent());
             RenderTypeLookup.setRenderLayer(ModBlocks.MANA_WART.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.WILD_MANA_WART.get(), RenderType.cutout());
 
@@ -212,6 +214,9 @@ public class MobiusMod
 
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.SIGN_TILE_ENTITIES.get(),
                     SignTileEntityRenderer::new);
+            ClientRegistry.bindTileEntityRenderer(ModTileEntities.GLOWING_BLOCK.get(),
+                    GlowingBlockRenderer::new);
+
 
             Atlases.addWoodType(ModWoodTypes.MARROWOOD);
             Atlases.addWoodType(ModWoodTypes.MANAWOOD);
@@ -222,6 +227,7 @@ public class MobiusMod
             ScreenManager.register(ModContainers.ASTRAL_CONDUIT_CONTAINER.get(),
                     AstralConduitScreen::new);
         });
+
 
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.CLUB_GOLEM.get(), ClubGolemRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.DIAMOND_GOLEM.get(), DiamondGolemRenderer::new);
@@ -238,7 +244,6 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.CLONE.get(), CloneRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SHATTER_CLONE.get(), ShatterCloneRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MOLVAN.get(), MolvanRenderer::new);
-
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

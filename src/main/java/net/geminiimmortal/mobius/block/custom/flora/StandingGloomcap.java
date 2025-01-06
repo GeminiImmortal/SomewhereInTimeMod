@@ -44,6 +44,7 @@ public class StandingGloomcap extends Block {
         super.animateTick(stateIn, worldIn, pos, rand);
     }
 
+
     @Override
     public boolean canSurvive(BlockState blockState, IWorldReader reader, BlockPos pos){
         return reader.getBlockState(pos.below()).equals(ModBlocks.SOUL_PODZOL.get().defaultBlockState());
