@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "minecraft:item/generated",
 	"textures": {
-		"layer0": "mobius:item/gloomcap_mushroom"
+		"layer0": "mobius:block/gloomcap_mushroom"
 	},
 	"display": {
 		"thirdperson_righthand": {

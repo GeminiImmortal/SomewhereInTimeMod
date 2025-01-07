@@ -144,7 +144,7 @@ public class ModItems {
                     .tab(ItemGroup.TAB_FOOD)));
     public static final RegistryObject<Item> MANAGLOOM_PIE = ITEMS.register("managloom_pie", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(new Food.Builder().nutrition(8).saturationMod(0.5f).effect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 200), 1f).build())));
     public static final RegistryObject<Item> GLOOMCAP = ITEMS.register("gloomcap",
-            () -> new Item(new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+            () -> new BlockItem(ModBlocks.GLOOMCAP.get() ,new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     //Workstations Misc.
     public static final RegistryObject<Item> ASTRAL_CONDUIT = ITEMS.register("astral_conduit", () -> new BlockItem(ModBlocks.ASTRAL_CONDUIT.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));

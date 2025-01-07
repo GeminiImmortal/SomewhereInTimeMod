@@ -41,7 +41,6 @@
   "item.mobius.faedeer_spawn_egg": "Faedeer Spawn Egg",
   "item.mobius.molvan_spawn_egg": "Molvan Spawn Egg",
   "item.mobius.managloom_pie": "Managloom Pie",
-  "item.mobius.gloomcap": "Gloomcap",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
@@ -132,6 +131,7 @@
   "block.mobius.mana_wart": "Mana Wart",
   "block.mobius.giant_gloomcap_cap": "Giant Gloomcap Cap",
   "block.mobius.giant_gloomcap_stem": "Giant Gloomcap Stem",
+  "block.mobius.gloomcap": "Gloomcap",
 
   "screen.mobius.soul_forge": "Soul Forge",
   "screen.mobius.astral_conduit": "Astral Conduit",
