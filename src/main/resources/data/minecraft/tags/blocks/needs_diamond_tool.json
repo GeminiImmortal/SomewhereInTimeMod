@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "mobius:nickel_ore"
+    "mobius:nickel_ore",
+    "mobius:magic_keystone"
   ]
 }

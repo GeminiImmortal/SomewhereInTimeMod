@@ -138,7 +138,7 @@ public class ModBlocks {
             () -> new ModStandingSignBlock(AbstractBlock.Properties.of(Material.WOOD), ModWoodTypes.MARROWOOD));
 
     public static final RegistryObject<Block> MAGIC_KEYSTONE = registerBlock("magic_keystone",
-            () -> new Block(AbstractBlock.Properties.copy(Blocks.BEDROCK).noDrops()));
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.OBSIDIAN)));
 
     public static final RegistryObject<Block> HEMATITE_IRON_ORE = registerBlock("hematite_iron_ore",
             () -> new OreBlock(AbstractBlock.Properties.copy(Blocks.STONE)));
