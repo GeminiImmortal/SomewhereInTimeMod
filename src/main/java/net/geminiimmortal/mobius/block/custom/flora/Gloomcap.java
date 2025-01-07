@@ -35,7 +35,7 @@ public class Gloomcap extends MushroomBlock {
 
     @Override
     public boolean canSurvive(BlockState blockState, IWorldReader reader, BlockPos pos){
-        return (reader.getBlockState(pos.below()).equals(ModBlocks.AURORA_GRASS_BLOCK.get().defaultBlockState())) || (reader.getBlockState(pos.below()).equals(ModBlocks.SOUL_PODZOL.get().defaultBlockState()));
+        return reader.getBlockState(pos.below()).equals(ModBlocks.SOUL_PODZOL.get().defaultBlockState());
     }
 
     @Override
