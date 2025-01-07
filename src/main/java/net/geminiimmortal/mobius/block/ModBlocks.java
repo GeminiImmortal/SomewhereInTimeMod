@@ -260,10 +260,10 @@ public class ModBlocks {
             () -> new Block(AbstractBlock.Properties.of(Material.WOOD).strength(1.0f)));
 
     public static final RegistryObject<Block> MANA_WART = BLOCKS.register("mana_wart",
-            () -> new ManaWartCrop(AbstractBlock.Properties.copy(Blocks.WHEAT).lightLevel(state -> 7)));
+            () -> new ManaWartCrop(AbstractBlock.Properties.copy(Blocks.WHEAT).lightLevel(state -> 12).instabreak().noOcclusion()));
 
     public static final RegistryObject<Block> WILD_MANA_WART = registerBlock("wild_mana_wart",
-            () -> new WildManaWart(AbstractBlock.Properties.copy(Blocks.BROWN_MUSHROOM).lightLevel(state -> 7).instabreak()));
+            () -> new WildManaWart(AbstractBlock.Properties.copy(Blocks.BROWN_MUSHROOM).lightLevel(state -> 12).instabreak().noOcclusion()));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
