@@ -4,6 +4,7 @@ import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.world.worldgen.CustomSurfaceBuilders;
 import net.geminiimmortal.mobius.world.worldgen.feature.surface.DraconicForelandsSurfaceBuilder;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
@@ -45,6 +46,12 @@ public class ModConfiguredSurfaceBuilders {
             ModBlocks.AURORA_GRASS_BLOCK.get().defaultBlockState(),
             ModBlocks.AURORA_DIRT.get().defaultBlockState(),
             ModBlocks.AURORA_DIRT.get().defaultBlockState()
+    )));
+
+    public static ConfiguredSurfaceBuilder<?> CRIMSON_CASCADES = register("crimson_cascades", SurfaceBuilder.DEFAULT.configured(new SurfaceBuilderConfig(
+            ModBlocks.BLOODSTONE.get().defaultBlockState(),
+            Blocks.MAGMA_BLOCK.defaultBlockState(),
+            ModBlocks.HEMATITE.get().defaultBlockState()
     )));
 
 

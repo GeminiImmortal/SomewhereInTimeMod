@@ -41,6 +41,7 @@
   "item.mobius.faedeer_spawn_egg": "Faedeer Spawn Egg",
   "item.mobius.molvan_spawn_egg": "Molvan Spawn Egg",
   "item.mobius.managloom_pie": "Managloom Pie",
+  "item.mobius.bone_wolf_spawn_egg": "Bone Wolf Spawn Egg",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
@@ -50,6 +51,7 @@
   "entity.mobius.molvan": "Molvan",
   "entity.mobius.sorcerer": "Court Wizard",
   "entity.mobius.governor": "The Governor",
+  "entity.mobius.bone_wolf": "Bone Wolf",
 
   "entity.minecraft.villager.mobius.monster_hunter": "Monster Hunter",
   "entity.minecraft.villager.mobius.magismith": "Magismith",
@@ -132,6 +134,7 @@
   "block.mobius.giant_gloomcap_cap": "Giant Gloomcap Cap",
   "block.mobius.giant_gloomcap_stem": "Giant Gloomcap Stem",
   "block.mobius.gloomcap": "Gloomcap",
+  "block.mobius.bloodstone": "Bloodstone",
 
   "screen.mobius.soul_forge": "Soul Forge",
   "screen.mobius.astral_conduit": "Astral Conduit",

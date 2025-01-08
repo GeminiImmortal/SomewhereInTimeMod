@@ -161,6 +161,13 @@ public class MobiusMod
                     BiomeDictionary.Type.LUSH
             );
 
+            BiomeDictionary.addTypes(
+                    RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MobiusMod.MOD_ID, "crimson_cascades")),
+                    BiomeDictionary.Type.MOUNTAIN,
+                    BiomeDictionary.Type.HOT,
+                    BiomeDictionary.Type.DRY
+            );
+
             WoodType.register(ModWoodTypes.MARROWOOD);
             WoodType.register(ModWoodTypes.MANAWOOD);
             WoodType.register(ModWoodTypes.GLOAMTHORN);
@@ -242,6 +249,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.CLONE.get(), CloneRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SHATTER_CLONE.get(), ShatterCloneRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MOLVAN.get(), MolvanRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BONE_WOLF.get(), BoneWolfRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -290,6 +298,7 @@ public class MobiusMod
             event.put(ModEntityTypes.GOVERNOR.get(), GovernorEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.CLONE.get(), CloneEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.MOLVAN.get(), MolvanEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.BONE_WOLF.get(), BoneWolfEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent

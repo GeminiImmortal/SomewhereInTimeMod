@@ -106,6 +106,12 @@ public class ModEntityTypes {
                                     EntityClassification.MISC).sized(0.5f, 0.5f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "gloamthorn_boat").toString()));
 
+    public static final RegistryObject<EntityType<BoneWolfEntity>> BONE_WOLF =
+            ENTITY_TYPES.register("bone_wolf",
+                    () -> EntityType.Builder.of(BoneWolfEntity::new,
+                                    EntityClassification.MONSTER).sized(1.5f, 1.5f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "bone_wolf").toString()));
+
 
 
     public static void register(IEventBus eventBus) {

@@ -40,6 +40,9 @@ public class ModBiomes {
     public static final RegistryObject<Biome> INFECTED_BOG = BIOMES.register("infected_bog",
             () -> makeInfectedBog(() -> ModConfiguredSurfaceBuilders.INFECTED_BOG, -0.1f, 0.01f));
 
+    public static final RegistryObject<Biome> CRIMSON_CASCADES = BIOMES.register("crimson_cascades",
+            () -> makeCrimsonCascades(() -> ModConfiguredSurfaceBuilders.CRIMSON_CASCADES, 1.3f, 1f));
+
 
     private static Biome makeMushroomForest(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
         MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
@@ -94,6 +97,8 @@ public class ModBiomes {
                 new MobSpawnInfo.Spawners(EntityType.BAT, 40, 7, 10));
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(ModEntityTypes.FAEDEER.get(), 60, 3,5));
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(ModEntityTypes.BONE_WOLF.get(), 5, 2, 3));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);
@@ -180,6 +185,26 @@ public class ModBiomes {
                         .ambientLoopSound(SoundEvents.AMBIENT_BASALT_DELTAS_LOOP)
                         .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_CAVE, 6000, 8, 2.0D))
                         .ambientAdditionsSound(new SoundAdditionsAmbience(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS, 0.0111D))
+                        .build())
+                .mobSpawnSettings(mobspawninfo$builder.build()).generationSettings(biomegenerationsettings$builder.build()).build();
+    }
+
+    private static Biome makeCrimsonCascades(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
+        MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(EntityType.MAGMA_CUBE, 100, 7, 10));
+        BiomeGenerationSettings.Builder biomegenerationsettings$builder =
+                (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
+        DefaultBiomeFeatures.addBadlandExtraVegetation(biomegenerationsettings$builder);
+        DefaultBiomeFeatures.addBadlandGrass(biomegenerationsettings$builder);
+
+        return (new Biome.Builder()).precipitation(Biome.RainType.NONE).biomeCategory(Biome.Category.EXTREME_HILLS).depth(depth).scale(scale)
+                .temperature(0.0F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(-3407872).waterFogColor(-3407872)
+                        .fogColor(-3407872).skyColor(-3407872).foliageColorOverride(-3407872).grassColorOverride(-3407872)
+                        .ambientParticle(new ParticleEffectAmbience(ParticleTypes.WHITE_ASH, 0.065f))
+                        .ambientLoopSound(SoundEvents.AMBIENT_BASALT_DELTAS_LOOP)
+                        .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_BASALT_DELTAS_MOOD, 6000, 8, 2.0D))
+                        .ambientAdditionsSound(new SoundAdditionsAmbience(SoundEvents.AMBIENT_BASALT_DELTAS_ADDITIONS, 0.0111D))
                         .build())
                 .mobSpawnSettings(mobspawninfo$builder.build()).generationSettings(biomegenerationsettings$builder.build()).build();
     }

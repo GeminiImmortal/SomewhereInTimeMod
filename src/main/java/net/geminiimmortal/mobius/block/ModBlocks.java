@@ -269,6 +269,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> GLOOMCAP = registerBlock("gloomcap",
             () -> new Gloomcap(AbstractBlock.Properties.copy(Blocks.BROWN_MUSHROOM).lightLevel(state -> 12).instabreak().noOcclusion()));
 
+    public static final RegistryObject<Block> BLOODSTONE = registerBlock("bloodstone",
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         return toReturn;
