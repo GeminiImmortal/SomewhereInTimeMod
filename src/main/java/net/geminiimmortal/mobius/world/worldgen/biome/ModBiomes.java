@@ -94,17 +94,15 @@ public class ModBiomes {
     private static Biome makeForsakenThicket(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
         MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
-                new MobSpawnInfo.Spawners(EntityType.BAT, 40, 7, 10));
+                new MobSpawnInfo.Spawners(EntityType.BAT, 35, 7, 10));
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(ModEntityTypes.FAEDEER.get(), 60, 3,5));
-        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(ModEntityTypes.BONE_WOLF.get(), 5, 2, 3));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addBerryBushes(biomegenerationsettings$builder);
-        //DefaultBiomeFeatures.addTaigaTrees(biomegenerationsettings$builder);
-        //DefaultBiomeFeatures.addDefaultUndergroundVariety(biomegenerationsettings$builder);
 
         return (new Biome.Builder()).precipitation(Biome.RainType.SNOW).biomeCategory(Biome.Category.TAIGA).depth(depth).scale(scale)
                 .temperature(0.0F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(16220377).waterFogColor(4658242)
