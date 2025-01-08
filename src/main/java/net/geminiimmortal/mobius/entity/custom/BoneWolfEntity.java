@@ -1,5 +1,6 @@
 package net.geminiimmortal.mobius.entity.custom;
 
+import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -13,7 +14,7 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -87,6 +88,11 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable {
             return ActionResultType.SUCCESS;
         }
         return super.mobInteract(player, hand);
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.BONE_WOLF_DEATH.get();
     }
 
     @Override

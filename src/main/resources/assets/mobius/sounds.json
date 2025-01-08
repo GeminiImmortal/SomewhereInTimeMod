@@ -22,6 +22,12 @@
     ],
     "subtitle": "Mobius portal hums"
   },
+  "bone_wolf_cry": {
+    "sounds": [
+      "mobius:bone_wolf_cry"
+    ],
+    "subtitle": "Bone wolf dies"
+  },
   "heart_golem_heal": {
     "sounds": [
       "mobius:heart_golem_heal"
