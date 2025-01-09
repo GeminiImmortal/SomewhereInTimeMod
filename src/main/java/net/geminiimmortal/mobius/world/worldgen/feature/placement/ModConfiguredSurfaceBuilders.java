@@ -1,4 +1,4 @@
-package net.geminiimmortal.mobius.world.worldgen.biome;
+package net.geminiimmortal.mobius.world.worldgen.feature.placement;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.ModBlocks;

@@ -4,6 +4,7 @@ import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.geminiimmortal.mobius.world.worldgen.feature.placement.ModConfiguredSurfaceBuilders;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.particles.ParticleTypes;
@@ -79,6 +80,7 @@ public class ModBiomes {
                 new MobSpawnInfo.Spawners(EntityType.TROPICAL_FISH, 100, 7, 10));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
+        DefaultBiomeFeatures.addDefaultCarvers(biomegenerationsettings$builder);
 
         return (new Biome.Builder()).precipitation(Biome.RainType.NONE).biomeCategory(Biome.Category.OCEAN).depth(depth).scale(scale)
                 .temperature(1.5F).downfall(0.9F).specialEffects((new BiomeAmbience.Builder()).waterColor(16220377).waterFogColor(-3407872)
@@ -122,7 +124,7 @@ public class ModBiomes {
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);
-        DefaultBiomeFeatures.addDefaultUndergroundVariety(biomegenerationsettings$builder);
+        DefaultBiomeFeatures.addDefaultCarvers(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addMountainTrees(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addDefaultSoftDisks(biomegenerationsettings$builder);
 
@@ -148,7 +150,6 @@ public class ModBiomes {
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);
-        DefaultBiomeFeatures.addDefaultUndergroundVariety(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addPlainGrass(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addJungleExtraVegetation(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addDefaultGrass(biomegenerationsettings$builder);
@@ -195,6 +196,7 @@ public class ModBiomes {
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addBadlandExtraVegetation(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addBadlandGrass(biomegenerationsettings$builder);
+        DefaultBiomeFeatures.addDefaultCarvers(biomegenerationsettings$builder);
 
         return (new Biome.Builder()).precipitation(Biome.RainType.NONE).biomeCategory(Biome.Category.EXTREME_HILLS).depth(depth).scale(scale)
                 .temperature(0.0F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(-3407872).waterFogColor(-3407872)

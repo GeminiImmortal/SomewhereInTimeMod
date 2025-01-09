@@ -67,10 +67,6 @@ public class ModConfiguredFeatures {
             register("giant_gloomcap",
                     ModFeatures.GIANT_GLOOMCAP_MUSHROOM_FEATURE.get().configured(new NoFeatureConfig()));
 
-/*    public static final ConfiguredFeature<BlockStateFeatureConfig, ?> CONFIGURED_BOG_WATER_LAKE_FEATURE =
-            register("bog_water_lake_feature",
-                    ModFeatures.BOG_WATER_LAKE_FEATURE.get().configured(new BlockStateFeatureConfig(ModFluids.BOG_WATER_BLOCK.get().defaultBlockState())));*/
-
 
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key,
                                                                                  ConfiguredFeature<FC, ?> configuredFeature) {
