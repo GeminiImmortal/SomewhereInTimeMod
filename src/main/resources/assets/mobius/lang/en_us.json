@@ -136,6 +136,9 @@
   "block.mobius.gloomcap": "Gloomcap",
   "block.mobius.bloodstone": "Bloodstone",
 
+  "fluid.mobius.ectoplasm_fluid": "Ectoplasm",
+  "fluid.mobius.bog_water_fluid": "Bog Water",
+
   "screen.mobius.soul_forge": "Soul Forge",
   "screen.mobius.astral_conduit": "Astral Conduit",
 
