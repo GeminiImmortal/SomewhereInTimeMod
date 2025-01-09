@@ -105,7 +105,6 @@ public class MobiusMod
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
-    //    MinecraftForge.EVENT_BUS.register(new GolemTransformationHandler());
         MinecraftForge.EVENT_BUS.register(new CustomDamageEventHandler());
 
 
@@ -248,6 +247,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SHATTER_CLONE.get(), ShatterCloneRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MOLVAN.get(), MolvanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BONE_WOLF.get(), BoneWolfRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.INFERNAL_BRIAR.get(), InfernalBriarRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -297,6 +297,7 @@ public class MobiusMod
             event.put(ModEntityTypes.CLONE.get(), CloneEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.MOLVAN.get(), MolvanEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.BONE_WOLF.get(), BoneWolfEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.INFERNAL_BRIAR.get(), InfernalBriarEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent

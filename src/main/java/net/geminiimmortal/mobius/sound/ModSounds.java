@@ -72,6 +72,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> BONE_WOLF_DEATH =
             registerSoundEvent("bone_wolf_cry");
 
+    public static final RegistryObject<SoundEvent> INFERNAL_BRIAR_AMBIENT =
+            registerSoundEvent("infernal_briar_ambient");
+
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, name)));
     }

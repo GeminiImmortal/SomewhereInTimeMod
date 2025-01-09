@@ -28,6 +28,14 @@
     ],
     "subtitle": "Bone wolf dies"
   },
+  "infernal_briar_ambient": {
+    "sounds": [
+      "mobius:infernal_briar_ambient",
+      "mobius:infernal_briar_angry"
+    ],
+    "subtitle": "Infernal briar broods",
+    "volume": 0.15
+  },
   "heart_golem_heal": {
     "sounds": [
       "mobius:heart_golem_heal"

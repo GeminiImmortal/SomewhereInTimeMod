@@ -192,6 +192,8 @@ public class ModBiomes {
         MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
         mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
                 new MobSpawnInfo.Spawners(EntityType.MAGMA_CUBE, 100, 7, 10));
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(ModEntityTypes.INFERNAL_BRIAR.get(), 2, 1, 2));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addBadlandExtraVegetation(biomegenerationsettings$builder);

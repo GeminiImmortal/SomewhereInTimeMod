@@ -112,6 +112,12 @@ public class ModEntityTypes {
                                     EntityClassification.MONSTER).sized(1.5f, 1.5f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "bone_wolf").toString()));
 
+    public static final RegistryObject<EntityType<InfernalBriarEntity>> INFERNAL_BRIAR =
+            ENTITY_TYPES.register("infernal_briar",
+                    () -> EntityType.Builder.of(InfernalBriarEntity::new,
+                                    EntityClassification.MONSTER).sized(1.0f, 2f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "infernal_briar").toString()));
+
 
 
     public static void register(IEventBus eventBus) {

@@ -42,6 +42,7 @@
   "item.mobius.molvan_spawn_egg": "Molvan Spawn Egg",
   "item.mobius.managloom_pie": "Managloom Pie",
   "item.mobius.bone_wolf_spawn_egg": "Bone Wolf Spawn Egg",
+  "item.mobius.infernal_briar_spawn_egg": "Infernal Briar Spawn Egg",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
@@ -52,6 +53,7 @@
   "entity.mobius.sorcerer": "Court Wizard",
   "entity.mobius.governor": "The Governor",
   "entity.mobius.bone_wolf": "Bone Wolf",
+  "entity.mobius.infernal_briar": "Infernal Briar",
 
   "entity.minecraft.villager.mobius.monster_hunter": "Monster Hunter",
   "entity.minecraft.villager.mobius.magismith": "Magismith",

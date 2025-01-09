@@ -1,7 +1,6 @@
 package net.geminiimmortal.mobius.world.worldgen.feature;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
-import net.geminiimmortal.mobius.fluid.ModFluids;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;

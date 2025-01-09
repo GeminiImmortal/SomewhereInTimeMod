@@ -194,6 +194,7 @@ public class ModItems {
     public static final RegistryObject<ModSpawnEgg> FAEDEER_SPAWN_EGG = ITEMS.register("faedeer_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.FAEDEER, 0x2c7a99, 0x2ca399, new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<ModSpawnEgg> MOLVAN_SPAWN_EGG = ITEMS.register("molvan_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.MOLVAN, 0xa2a090, 0xc5a090, new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<ModSpawnEgg> BONE_WOLF_SPAWN_EGG = ITEMS.register("bone_wolf_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.BONE_WOLF, 0x7A7A7A, 0x8B0000, new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<ModSpawnEgg> INFERNAL_BRIAR_SPAWN_EGG = ITEMS.register("infernal_briar_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.INFERNAL_BRIAR, 0x8B0000, 0x0f2310, new Item.Properties().tab(ItemGroup.TAB_MISC)));
 
     //Misc Gizmos
     public static final RegistryObject<Item> GAIA_STAR = ITEMS.register("gaia_star", GaiaStar::new);
