@@ -18,8 +18,8 @@ public class SoulForgeScreen extends ContainerScreen<SoulForgeContainer> {
         super(screenContainer, inv, titleIn);
     }
 
-
-    public void render(MatrixStack matrixStack,float partialTicks, int mouseX, int mouseY) {
+    @Override
+    public void render(MatrixStack matrixStack, int mouseX, int mouseY,float partialTicks) {
         this.renderBackground(matrixStack);
         super.render(matrixStack, mouseX, mouseY, partialTicks);
         this.renderTooltip(matrixStack, mouseX, mouseY);
