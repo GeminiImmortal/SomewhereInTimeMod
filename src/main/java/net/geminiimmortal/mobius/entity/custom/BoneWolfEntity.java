@@ -68,17 +68,18 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable {
 
     @Override
     public void setOrderedToSit(boolean orderedToSit) {
-        super.setOrderedToSit(orderedToSit);
         PlayerEntity owner = (PlayerEntity) this.getOwner();
-        if (this.isOrderedToSit()) {
-            assert owner != null;
-            owner.displayClientMessage(new TranslationTextComponent("entity.mobius.bone_wolf.is_sitting.true") {
-            }, true);
-        } else {
+        if (this.isOrderedToSit() && this.isTame()) {
             assert owner != null;
             owner.displayClientMessage(new TranslationTextComponent("entity.mobius.bone_wolf.is_sitting.false") {
             }, true);
-        }
+            super.setOrderedToSit(orderedToSit);
+        } else if(!this.isOrderedToSit() && this.isTame()) {
+            assert owner != null;
+            owner.displayClientMessage(new TranslationTextComponent("entity.mobius.bone_wolf.is_sitting.true") {
+            }, true);
+            super.setOrderedToSit(orderedToSit);
+        } else super.setOrderedToSit(orderedToSit);
     }
 
 
