@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "mobius:raw_fae_venison"
+  },
+  "result": "mobius:cooked_fae_venison",
+  "experience": 0.35,
+  "cookingtime": 200
+}

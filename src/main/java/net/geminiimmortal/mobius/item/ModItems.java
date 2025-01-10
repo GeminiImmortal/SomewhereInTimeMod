@@ -148,6 +148,10 @@ public class ModItems {
     public static final RegistryObject<Item> MANAGLOOM_PIE = ITEMS.register("managloom_pie", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(new Food.Builder().nutrition(8).saturationMod(0.5f).effect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 200), 1f).build())));
     public static final RegistryObject<Item> GLOOMCAP = ITEMS.register("gloomcap",
             () -> new BlockItem(ModBlocks.GLOOMCAP.get() ,new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> RAW_FAE_VENISON = ITEMS.register("raw_fae_venison", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(new Food.Builder().nutrition(3).saturationMod(0.1f).meat().build())));
+    public static final RegistryObject<Item> COOKED_FAE_VENISON = ITEMS.register("cooked_fae_venison", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(new Food.Builder().nutrition(10).saturationMod(0.8f).effect(new EffectInstance(Effects.GLOWING, 100), 1f).meat().build())));
+
+
 
     //Workstations Misc.
     public static final RegistryObject<Item> ASTRAL_CONDUIT = ITEMS.register("astral_conduit", () -> new BlockItem(ModBlocks.ASTRAL_CONDUIT.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
