@@ -15,12 +15,6 @@ public class ModDimensions {
         public static ResourceLocation name(String name) {
                 return new ResourceLocation(MobiusMod.MOD_ID + ":" + name);
         }
-
-        public static void setupDimension() {
-                System.out.println("Setting up Mobius...");
-                Registry.register(Registry.CHUNK_GENERATOR ,name("mobius_chunk_generator"), ModChunkGenerator.CODEC);
-                Registry.register(Registry.BIOME_SOURCE, name("mobius_biome_provider"), ModBiomeProvider.CODEC);
-        }
 }
 
 

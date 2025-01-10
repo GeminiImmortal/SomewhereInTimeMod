@@ -22,7 +22,6 @@ import net.geminiimmortal.mobius.tileentity.render.AstralConduitScreen;
 import net.geminiimmortal.mobius.tileentity.render.SoulForgeScreen;
 import net.geminiimmortal.mobius.util.CustomDamageEventHandler;
 import net.geminiimmortal.mobius.villager.ModVillagers;
-import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.geminiimmortal.mobius.world.worldgen.CustomSurfaceBuilders;
 import net.geminiimmortal.mobius.world.worldgen.biome.ModBiomes;
 import net.geminiimmortal.mobius.world.worldgen.feature.ModFeatures;
@@ -168,7 +167,6 @@ public class MobiusMod
             WoodType.register(ModWoodTypes.MANAWOOD);
             WoodType.register(ModWoodTypes.GLOAMTHORN);
 
-            ModDimensions.setupDimension();
             ModStructures.setupStructures();
 
             AxeItem.STRIPABLES = Maps.newHashMap(AxeItem.STRIPABLES);
