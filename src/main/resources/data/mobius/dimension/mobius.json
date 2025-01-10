@@ -92,7 +92,7 @@
           "parameters": {
             "altitude": -0.1,
             "temperature": 0.4,
-            "humidity": 0.6,
+            "humidity": 0.3,
             "weirdness": 0,
             "offset": 0
           }
@@ -101,9 +101,9 @@
           "biome": "mobius:crimson_cascades",
           "parameters": {
             "altitude": 0.5,
-            "temperature": 0.8,
-            "humidity": -0.7,
-            "weirdness": 0.4,
+            "temperature": 0.5,
+            "humidity": -0.5,
+            "weirdness": 0,
             "offset": 0
           }
         }

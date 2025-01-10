@@ -100,7 +100,6 @@ public class MobiusMod
         ModContainers.register(eventBus);
         ModStructures.register(eventBus);
         ModRecipeTypes.register(eventBus);
-
         
 
         // Register ourselves for server and other game events we are interested in

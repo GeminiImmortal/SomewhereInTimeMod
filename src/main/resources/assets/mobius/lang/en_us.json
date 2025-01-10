@@ -154,7 +154,16 @@
   "effect.mobius.exposed.description": "Amplifies damage taken",
   "effect.mobius.lord_decree.description": "Continuously applies slowness and nausea",
 
-  "tooltip.mobius.vorpal_sword": "Steals life on hit"
+  "tooltip.mobius.vorpal_sword": "Steals life on hit",
 
+  "biome.mobius.mushroom_forest": "Mushroom Forest",
+  "biome.mobius.forsaken_thicket": "Forsaken Thicket",
+  "biome.mobius.rolling_expanse": "Rolling Expanse",
+  "biome.mobius.draconic_forelands": "Draconic Forelands",
+  "biome.mobius.infected_bog": "Infected Bog",
+  "biome.mobius.crimson_cascades": "Crimson Cascades",
+  "biome.mobius.goo_lagoon": "Goo Lagoon",
+
+  "dimension.mobius.mobius": "Mobius"
 
 }
