@@ -10,6 +10,7 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -18,6 +19,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -29,6 +31,8 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
+
+import java.util.Objects;
 
 public class BoneWolfEntity extends WolfEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
@@ -60,6 +64,21 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable {
         this.goalSelector.addGoal(3, new SitGoal(this));
         this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
         this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+    }
+
+    @Override
+    public void setOrderedToSit(boolean orderedToSit) {
+        super.setOrderedToSit(orderedToSit);
+        PlayerEntity owner = (PlayerEntity) this.getOwner();
+        if (this.isOrderedToSit()) {
+            assert owner != null;
+            owner.displayClientMessage(new TranslationTextComponent("entity.mobius.bone_wolf.is_sitting.true") {
+            }, true);
+        } else {
+            assert owner != null;
+            owner.displayClientMessage(new TranslationTextComponent("entity.mobius.bone_wolf.is_sitting.false") {
+            }, true);
+        }
     }
 
 

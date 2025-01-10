@@ -164,6 +164,9 @@
   "biome.mobius.crimson_cascades": "Crimson Cascades",
   "biome.mobius.goo_lagoon": "Goo Lagoon",
 
-  "dimension.mobius.mobius": "Mobius"
+  "dimension.mobius.mobius": "Mobius",
+
+  "entity.mobius.bone_wolf.is_sitting.true": "Bone wolf is staying",
+  "entity.mobius.bone_wolf.is_sitting.false": "Bone wolf is following"
 
 }
