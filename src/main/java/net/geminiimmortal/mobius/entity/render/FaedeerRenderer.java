@@ -10,6 +10,8 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 public class FaedeerRenderer extends GeoEntityRenderer<FaedeerEntity> {
     public FaedeerRenderer(EntityRendererManager renderManager) {
         super(renderManager, new FaedeerModel());
+        this.shadowRadius = 0.5f;
+        this.addLayer(new FaedeerRendererEmissiveLayer(this));
     }
 
     @Override

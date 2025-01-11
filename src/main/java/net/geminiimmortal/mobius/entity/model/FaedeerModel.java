@@ -22,5 +22,9 @@ public class FaedeerModel extends AnimatedGeoModel<FaedeerEntity> {
         return new ResourceLocation(MobiusMod.MOD_ID, "textures/entity/faedeer_buck.png");
     }
 
+    public ResourceLocation getEmissiveTextureLocation(FaedeerEntity entity) {
+        return new ResourceLocation(MobiusMod.MOD_ID, "textures/entity/faedeer_buck_emissive.png");
+    }
+
 }
 
