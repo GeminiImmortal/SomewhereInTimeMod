@@ -175,7 +175,7 @@
   "entity.mobius.bone_wolf.is_sitting.true": "Bone wolf is staying",
   "entity.mobius.bone_wolf.is_sitting.false": "Bone wolf is following",
 
-  "advancement.mobius.cover_me_in_starlight.title": "Cover Me in Starlight",
-  "advancement.mobius.cover_me_in_starlight.description": "Get a full suit of Astral Armor"
+  "advancements.mobius.cover_me_in_starlight.title": "Cover Me in Starlight",
+  "advancements.mobius.cover_me_in_starlight.description": "Get a full suit of Astral Armor"
 
 }
