@@ -6,7 +6,7 @@
     "title": "Mobius",
     "description": "Travel to Mobius",
     "background": "mobius:textures/block/aurora_grass_block_top.png",
-    "frame": "challenge",
+    "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false

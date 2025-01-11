@@ -1,0 +1,48 @@
+{
+  "parent": "mobius:i_sing_perfect_metre",
+  "display": {
+    "icon": {
+      "item": "mobius:astral_chestplate",
+      "nbt": "{Damage:0}"
+    },
+    "title": {
+      "translate": "advancements.mobius.cover_me_in_starlight.title"
+    },
+    "description": {
+      "translate": "advancements.mobius.cover_me_in_starlight.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "rewards": {
+    "experience": 100
+  },
+  "criteria": {
+    "astral_armor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "mobius:astral_helmet"
+          },
+          {
+            "item": "mobius:astral_chestplate"
+          },
+          {
+            "item": "mobius:astral_leggings"
+          },
+          {
+            "item": "mobius:astral_boots"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "astral_armor"
+    ]
+  ]
+}

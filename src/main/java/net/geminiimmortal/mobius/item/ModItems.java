@@ -190,6 +190,22 @@ public class ModItems {
             () -> new ArmorItem(ModArmorMaterial.NICKEL, EquipmentSlotType.HEAD,
                     new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
 
+    public static final RegistryObject<Item> ASTRAL_BOOTS = ITEMS.register("astral_boots",
+            () -> new ArmorItem(AstralArmorMaterial.ASTRAL, EquipmentSlotType.FEET,
+                    new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
+
+    public static final RegistryObject<Item> ASTRAL_CHESTPLATE = ITEMS.register("astral_chestplate",
+            () -> new ArmorItem(AstralArmorMaterial.ASTRAL, EquipmentSlotType.CHEST,
+                    new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
+
+    public static final RegistryObject<Item> ASTRAL_LEGGINGS = ITEMS.register("astral_leggings",
+            () -> new ArmorItem(AstralArmorMaterial.ASTRAL, EquipmentSlotType.LEGS,
+                    new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
+
+    public static final RegistryObject<Item> ASTRAL_HELMET = ITEMS.register("astral_helmet",
+            () -> new ArmorItem(AstralArmorMaterial.ASTRAL, EquipmentSlotType.HEAD,
+                    new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
+
     //Spawn Eggs
     public static final RegistryObject<ModSpawnEgg> CLUB_GOLEM_SPAWN_EGG = ITEMS.register("club_golem_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.CLUB_GOLEM, 0x2c615b, 0x2c5960, new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<ModSpawnEgg> DIAMOND_GOLEM_SPAWN_EGG = ITEMS.register("diamond_golem_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.DIAMOND_GOLEM, 0x2c615b, 0x2ca5b1, new Item.Properties().tab(ItemGroup.TAB_MISC)));

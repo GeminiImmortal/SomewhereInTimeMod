@@ -6,7 +6,7 @@
     },
     "title": "I Sing Perfect Metre",
     "description": "Use an astral conduit to infuse a reinforced netherite ingot",
-    "frame": "challenge",
+    "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": false
