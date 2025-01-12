@@ -9,6 +9,8 @@ import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
 public class BoneWolfRenderer extends GeoEntityRenderer<BoneWolfEntity> {
     public BoneWolfRenderer(EntityRendererManager renderManager) {
         super(renderManager, new BoneWolfModel());
+        this.shadowRadius = 0.5f;
+        this.addLayer(new BoneWolfRendererEmissiveLayer(this));
     }
 
     @Override

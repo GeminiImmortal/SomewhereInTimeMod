@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.entity.model;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.custom.BoneWolfEntity;
+import net.geminiimmortal.mobius.entity.custom.FaedeerEntity;
 import net.minecraft.util.ResourceLocation;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
@@ -21,5 +22,8 @@ public class BoneWolfModel extends AnimatedGeoModel<BoneWolfEntity> {
         return new ResourceLocation(MobiusMod.MOD_ID, "textures/entity/bone_wolf.png");
     }
 
+    public ResourceLocation getEmissiveTextureLocation(FaedeerEntity entity) {
+        return new ResourceLocation(MobiusMod.MOD_ID, "textures/entity/bone_wolf_emissive.png");
+    }
 }
 
