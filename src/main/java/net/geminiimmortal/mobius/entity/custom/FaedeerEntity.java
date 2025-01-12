@@ -100,7 +100,7 @@ public class FaedeerEntity extends MobEntity implements IAnimatable {
     public void tick() {
         super.tick();
 
-        particleTickCounter++;
+        /*particleTickCounter++;
 
         if (particleTickCounter >= PARTICLE_SPAWN_INTERVAL) {
             spawnGlowParticle();
@@ -115,7 +115,7 @@ public class FaedeerEntity extends MobEntity implements IAnimatable {
                     this.getY() + 1.0,
                     this.getZ() + (Math.random() - 0.5) * 2,
                     0, 0.01, 0);
-        }
+        }*/
     }
 
     @Override

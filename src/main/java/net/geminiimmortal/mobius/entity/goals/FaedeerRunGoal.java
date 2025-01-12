@@ -28,7 +28,7 @@ public class FaedeerRunGoal extends Goal {
     @Override
     public boolean canUse() {
         this.player = this.deer.level.getNearestPlayer(this.deer, spookRadius);
-        return this.player != null && this.deer.distanceToSqr(player) < spookRadius * spookRadius;
+        return this.player != null && !this.player.isCreative() && this.deer.distanceToSqr(player) < spookRadius * spookRadius;
     }
 
     @Override
