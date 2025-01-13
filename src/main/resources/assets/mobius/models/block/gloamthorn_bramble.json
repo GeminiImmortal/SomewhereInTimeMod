@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "cross": "mobius:block/gloamthorn_bramble"
+    "all": "mobius:block/gloamthorn_bramble"
   }
 }
