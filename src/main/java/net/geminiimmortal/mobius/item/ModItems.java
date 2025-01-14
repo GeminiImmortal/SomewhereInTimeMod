@@ -126,6 +126,7 @@ public class ModItems {
 
     //Bloodstone
     public static final RegistryObject<Item> BLOODSTONE = ITEMS.register("bloodstone", () -> new BlockItem(ModBlocks.BLOODSTONE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> BLOODSTONE_GEM_ORE = ITEMS.register("bloodstone_gem_ore", () -> new BlockItem(ModBlocks.BLOODSTONE_GEM_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Ores
     public static final RegistryObject<Item> NICKEL_ORE = ITEMS.register("nickel_ore", () -> new BlockItem(ModBlocks.NICKEL_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
@@ -225,6 +226,7 @@ public class ModItems {
     public static final RegistryObject<Item> CUBE_OF_STABILIZED_VOID_ENERGY = ITEMS.register("cube_of_stabilized_void_energy", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> MAGICALLY_REINFORCED_NETHERITE_INGOT = ITEMS.register("magically_reinforced_netherite_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> MOLVANSTEEL_INGOT = ITEMS.register("molvansteel_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> BLOODROP_GEMSTONE = ITEMS.register("bloodrop_gemstone", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<Item> NICKEL_INGOT = ITEMS.register("nickel_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<Item> ASTRAL_INGOT = ITEMS.register("astral_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> VIAL_OF_LIQUID_SCREAMS = ITEMS.register("vial_of_liquid_screams", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE)));

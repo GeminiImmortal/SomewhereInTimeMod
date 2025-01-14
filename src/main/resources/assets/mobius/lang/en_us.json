@@ -49,6 +49,7 @@
   "item.mobius.astral_chestplate": "Astral Chestplate",
   "item.mobius.astral_leggings": "Astral Leggings",
   "item.mobius.astral_boots": "Astral Boots",
+  "item.mobius.bloodrop_gemstone": "Bloodrop Gemstone",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
@@ -144,6 +145,7 @@
   "block.mobius.gloomcap": "Gloomcap",
   "block.mobius.bloodstone": "Bloodstone",
   "block.mobius.standing_gloomcap": "Standing Gloomcap",
+  "block.mobius.bloodstone_gem_ore": "Bloodstone Gem Ore",
 
   "fluid.mobius.ectoplasm_fluid": "Ectoplasm",
   "fluid.mobius.bog_water_fluid": "Bog Water",

@@ -272,6 +272,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> BLOODSTONE = registerBlock("bloodstone",
             () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
 
+    public static final RegistryObject<Block> BLOODSTONE_GEM_ORE = registerBlock("bloodstone_gem_ore",
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE).lightLevel(state -> 7)));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         return toReturn;
