@@ -48,7 +48,7 @@ public class ModConfiguredFeatures {
             register("gloamthorn_tree", GloamthornTreeFeature.TREE.configured(
                     (new BaseTreeFeatureConfig.Builder(
                             new SimpleBlockStateProvider(ModBlocks.GLOAMTHORN_LOG.get().defaultBlockState()),
-                            new SimpleBlockStateProvider(ModBlocks.GLOAMTHORN_BRAMBLE.get().defaultBlockState()),
+                            new SimpleBlockStateProvider(ModBlocks.GLOAMTHORN_LEAVES.get().defaultBlockState()),
                             new DarkOakFoliagePlacer(FeatureSpread.fixed(0), FeatureSpread.fixed(1)),
                             new FancyTrunkPlacer(6, 3, 4),
                             new TwoLayerFeature(1, 2, 1)))

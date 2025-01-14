@@ -30,7 +30,7 @@ public class ModItems {
     public static final RegistryObject<Item> BONE_LEAVES = ITEMS.register("bone_leaves", () -> new BlockItem(ModBlocks.BONE_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> MANAWOOD_LEAVES = ITEMS.register("manawood_leaves", () -> new BlockItem(ModBlocks.MANAWOOD_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> LIVING_MANAWOOD_LEAVES = ITEMS.register("living_manawood_leaves", () -> new BlockItem(ModBlocks.LIVING_MANAWOOD_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
-    public static final RegistryObject<Item> GLOAMTHORN_BRAMBLE = ITEMS.register("gloamthorn_bramble", () -> new BlockItem(ModBlocks.GLOAMTHORN_BRAMBLE.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> GLOAMTHORN_LEAVES = ITEMS.register("gloamthorn_leaves", () -> new BlockItem(ModBlocks.GLOAMTHORN_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     //Logs
     public static final RegistryObject<Item> MARROWOOD_LOG = ITEMS.register("marrowood_log", () -> new BlockItem(ModBlocks.MARROWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));

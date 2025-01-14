@@ -190,7 +190,7 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.MANAWOOD_SAPLING.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.MANAWOOD_TRAPDOOR.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.ASTRAL_CONDUIT.get(), RenderType.cutout());
-            RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_BRAMBLE.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_LEAVES.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_SAPLING.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_DOOR.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_TRAPDOOR.get(), RenderType.cutout());

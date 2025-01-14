@@ -176,7 +176,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> LIVING_MANAWOOD_LEAVES = registerBlock("living_manawood_leaves",
             () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES)));
 
-    public static final RegistryObject<Block> GLOAMTHORN_BRAMBLE = registerBlock("gloamthorn_bramble",
+    public static final RegistryObject<Block> GLOAMTHORN_LEAVES = registerBlock("gloamthorn_leaves",
             () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.OAK_LEAVES)));
 
     public static final RegistryObject<Block> GLOAMTHORN_SAPLING = registerBlock("gloamthorn_sapling",

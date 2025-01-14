@@ -20,7 +20,7 @@ public class GloamthornTreeFeature extends Feature<NoFeatureConfig> {
     public boolean place(ISeedReader world, ChunkGenerator generator, Random rand, BlockPos pos, NoFeatureConfig config) {
         int height = 6 + rand.nextInt(2);
         BlockState log = ModBlocks.GLOAMTHORN_LOG.get().defaultBlockState();
-        BlockState leaves = ModBlocks.GLOAMTHORN_BRAMBLE.get().defaultBlockState();
+        BlockState leaves = ModBlocks.GLOAMTHORN_LEAVES.get().defaultBlockState();
 
         for (int y = 0; y < height; y++) {
             world.setBlock(pos.offset(0, y, 0), log, 3);
