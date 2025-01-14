@@ -1,7 +1,6 @@
 package net.geminiimmortal.mobius.sound;
 
 import net.geminiimmortal.mobius.MobiusMod;
-import net.geminiimmortal.mobius.entity.custom.GovernorEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SimpleSound;
 import net.minecraft.util.ResourceLocation;
@@ -30,12 +29,13 @@ public class ClientMusicHandler {
 
     static {
         CUSTOM_MUSIC_TRACKS.add(COLORS_MUSIC);
-//        CUSTOM_MUSIC_TRACKS.add(DREAM_STATE_MUSIC);
+        CUSTOM_MUSIC_TRACKS.add(DREAM_STATE_MUSIC);
 //        CUSTOM_MUSIC_TRACKS.add(BOREALIS_MUSIC);
 //        CUSTOM_MUSIC_TRACKS.add(FORSAKEN);
 //        TRACK_DURATIONS.put(COLORS_MUSIC, 2460);
         TRACK_DURATIONS.put(COLORS_MUSIC, 6000);
 //        TRACK_DURATIONS.put(DREAM_STATE_MUSIC, 2520);
+        TRACK_DURATIONS.put(DREAM_STATE_MUSIC, 6000);
 //        TRACK_DURATIONS.put(BOREALIS_MUSIC, 3080);
 //        TRACK_DURATIONS.put(FORSAKEN, 2750);
     }

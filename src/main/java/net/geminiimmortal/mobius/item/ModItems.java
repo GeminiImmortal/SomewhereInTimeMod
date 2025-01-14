@@ -114,6 +114,7 @@ public class ModItems {
     public static final RegistryObject<Item> GLOAMTHORN_BOAT = ITEMS.register("gloamthorn_boat", () -> new GloamthornBoatItem(new Item.Properties().tab(ItemGroup.TAB_TRANSPORTATION), "gloamthorn"));
 
     //Flora
+    public static final RegistryObject<Item> STANDING_GLOOMCAP = ITEMS.register("standing_gloomcap", () -> new BlockItem(ModBlocks.STANDING_GLOOMCAP.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> GIANT_GLOOMCAP_CAP = ITEMS.register("giant_gloomcap_cap", () -> new BlockItem(ModBlocks.GIANT_GLOOMCAP_CAP.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> GIANT_GLOOMCAP_STEM = ITEMS.register("giant_gloomcap_stem", () -> new BlockItem(ModBlocks.GIANT_GLOOMCAP_STEM.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
