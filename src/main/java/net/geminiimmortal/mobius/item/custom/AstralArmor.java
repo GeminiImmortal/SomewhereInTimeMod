@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius.item.custom;
 
 import com.google.common.collect.ImmutableMap;
+
 import net.geminiimmortal.mobius.item.AstralArmorMaterial;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -16,9 +17,9 @@ import java.util.Map;
 
 public class AstralArmor extends ArmorItem {
     private static final Map<IArmorMaterial, EffectInstance> MATERIAL_TO_EFFECT_MAP =
-            (new ImmutableMap.Builder<IArmorMaterial, EffectInstance>())
+            ImmutableMap.<IArmorMaterial, EffectInstance>builder()
                     .put(AstralArmorMaterial.ASTRAL,
-                            new EffectInstance(Effects.REGENERATION, 40, 0, true, false)).build();
+                            new EffectInstance(Effects.MOVEMENT_SPEED, 40, 0, true, false)).build();
 
     public AstralArmor(IArmorMaterial material, EquipmentSlotType slot, Properties settings) {
         super(material, slot, settings);
@@ -55,28 +56,27 @@ public class AstralArmor extends ArmorItem {
     }
 
     private boolean hasFullSuitOfArmorOn(PlayerEntity player) {
-        ItemStack boots = player.inventory.getArmor(0);
-        ItemStack leggings = player.inventory.getArmor(1);
-        ItemStack breastplate = player.inventory.getArmor(2);
-        ItemStack helmet = player.inventory.getArmor(3);
-
-        return !helmet.isEmpty() && !breastplate.isEmpty()
-                && !leggings.isEmpty() && !boots.isEmpty();
-    }
-
-    private boolean hasCorrectArmorOn(IArmorMaterial material, PlayerEntity player) {
-        for (ItemStack armorStack: player.getArmorSlots()) {
-            if(!(armorStack.getItem() instanceof ArmorItem)) {
+        for (ItemStack armorStack : player.getArmorSlots()) {
+            if (armorStack.isEmpty()) {
                 return false;
             }
         }
-
-        ArmorItem boots = ((ArmorItem)player.inventory.getArmor(0).getItem());
-        ArmorItem leggings = ((ArmorItem)player.inventory.getArmor(1).getItem());
-        ArmorItem breastplate = ((ArmorItem)player.inventory.getArmor(2).getItem());
-        ArmorItem helmet = ((ArmorItem)player.inventory.getArmor(3).getItem());
-
-        return helmet.getMaterial() == material && breastplate.getMaterial() == material &&
-                leggings.getMaterial() == material && boots.getMaterial() == material;
+        return true;
     }
+
+
+    private boolean hasCorrectArmorOn(IArmorMaterial material, PlayerEntity player) {
+        for (ItemStack armorStack : player.getArmorSlots()) {
+            if (!(armorStack.getItem() instanceof ArmorItem)) {
+                return false;
+            }
+
+            ArmorItem armorItem = (ArmorItem) armorStack.getItem();
+            if (armorItem.getMaterial() != material) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
