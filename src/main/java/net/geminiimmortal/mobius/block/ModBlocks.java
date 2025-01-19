@@ -275,6 +275,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> BLOODSTONE_GEM_ORE = registerBlock("bloodstone_gem_ore",
             () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE).lightLevel(state -> 7)));
 
+    public static final RegistryObject<Block> CELESTIAL_PILLAR = registerBlock("celestial_pillar",
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE).noOcclusion()));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         return toReturn;
