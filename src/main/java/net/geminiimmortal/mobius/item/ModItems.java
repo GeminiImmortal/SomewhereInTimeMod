@@ -193,19 +193,19 @@ public class ModItems {
                     new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
 
     public static final RegistryObject<Item> ASTRAL_BOOTS = ITEMS.register("astral_boots",
-            () -> new ArmorItem(AstralArmorMaterial.ASTRAL, EquipmentSlotType.FEET,
+            () -> new AstralArmor(AstralArmorMaterial.ASTRAL, EquipmentSlotType.FEET,
                     new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
 
     public static final RegistryObject<Item> ASTRAL_CHESTPLATE = ITEMS.register("astral_chestplate",
-            () -> new ArmorItem(AstralArmorMaterial.ASTRAL, EquipmentSlotType.CHEST,
+            () -> new AstralArmor(AstralArmorMaterial.ASTRAL, EquipmentSlotType.CHEST,
                     new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
 
     public static final RegistryObject<Item> ASTRAL_LEGGINGS = ITEMS.register("astral_leggings",
-            () -> new ArmorItem(AstralArmorMaterial.ASTRAL, EquipmentSlotType.LEGS,
+            () -> new AstralArmor(AstralArmorMaterial.ASTRAL, EquipmentSlotType.LEGS,
                     new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
 
     public static final RegistryObject<Item> ASTRAL_HELMET = ITEMS.register("astral_helmet",
-            () -> new ArmorItem(AstralArmorMaterial.ASTRAL, EquipmentSlotType.HEAD,
+            () -> new AstralArmor(AstralArmorMaterial.ASTRAL, EquipmentSlotType.HEAD,
                     new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
 
     //Spawn Eggs
