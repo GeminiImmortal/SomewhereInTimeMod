@@ -165,7 +165,7 @@ public class ModBlocks {
             () -> new SoulForgeBlock(AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3).strength(30F, 1200F).requiresCorrectToolForDrops()));
 
     public static final RegistryObject<Block> ASTRAL_CONDUIT = registerBlock("astral_conduit",
-            () -> new AstralConduitBlock(AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3).strength(30F, 1200F).requiresCorrectToolForDrops().noOcclusion()));
+            () -> new AstralConduitBlock(AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(4).strength(100F, 1200F).requiresCorrectToolForDrops().noOcclusion()));
 
     public static final RegistryObject<Block> LIVING_MANAWOOD_LOG = registerBlock("living_manawood_log",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_LOG)));
@@ -276,19 +276,19 @@ public class ModBlocks {
             () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE).lightLevel(state -> 7)));
 
     public static final RegistryObject<Block> CELESTIAL_PILLAR = registerBlock("celestial_pillar",
-            () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE).noOcclusion()));
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE).noOcclusion().strength(2000f, 2000f).noDrops()));
 
     public static final RegistryObject<Block> CELESTIAL_TILE = registerBlock("celestial_tile",
-            () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE).strength(2000f, 2000f).noDrops()));
 
     public static final RegistryObject<Block> CELESTIAL_TILE_SLAB = registerBlock("celestial_tile_slab",
-            () -> new SlabBlock(AbstractBlock.Properties.copy(Blocks.STONE_SLAB)));
+            () -> new SlabBlock(AbstractBlock.Properties.copy(Blocks.STONE_SLAB).strength(2000f, 2000f).noDrops()));
 
     public static final RegistryObject<Block> CELESTIAL_STAIRS = registerBlock("celestial_stairs",
-            () -> new StairsBlock(CELESTIAL_TILE.get().defaultBlockState(), AbstractBlock.Properties.copy(Blocks.STONE_STAIRS)));
+            () -> new StairsBlock(CELESTIAL_TILE.get().defaultBlockState(), AbstractBlock.Properties.copy(Blocks.STONE_STAIRS).strength(2000f, 2000f).noDrops()));
 
     public static final RegistryObject<Block> CELESTIAL_WALL = registerBlock("celestial_wall",
-            () -> new WallBlock(AbstractBlock.Properties.copy(Blocks.COBBLESTONE_WALL)));
+            () -> new WallBlock(AbstractBlock.Properties.copy(Blocks.COBBLESTONE_WALL).strength(2000f, 2000f).noDrops()));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

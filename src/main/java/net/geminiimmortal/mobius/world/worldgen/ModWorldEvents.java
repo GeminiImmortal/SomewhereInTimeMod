@@ -88,6 +88,8 @@ public class ModWorldEvents {
                     DimensionStructuresSettings.DEFAULTS.get(ModStructures.GOVERNOR_TOWER.get()));
             tempMap.putIfAbsent(ModStructures.DRAGON_BONES.get(),
                     DimensionStructuresSettings.DEFAULTS.get(ModStructures.DRAGON_BONES.get()));
+            tempMap.putIfAbsent(ModStructures.CELESTIAL_RUINS.get(),
+                    DimensionStructuresSettings.DEFAULTS.get(ModStructures.CELESTIAL_RUINS.get()));
             serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
         }
     }

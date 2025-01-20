@@ -18,6 +18,7 @@ public class ModStructureGeneration {
         ResourceLocation draconicForelandsValid = ModBiomes.DRACONIC_FORELANDS.getId();
         ResourceLocation rollingExpanseValid = ModBiomes.ROLLING_EXPANSE.getId();
         ResourceLocation gooLagoonValid = ModBiomes.GOO_LAGOON.getId();
+        ResourceLocation forsakenThicketValid = ModBiomes.FORSAKEN_THICKET.getId();
         ResourceLocation validPortal = Biomes.PLAINS.location();
 
         if(Objects.equals(event.getName(), draconicForelandsValid)) {
@@ -53,6 +54,11 @@ public class ModStructureGeneration {
         if(Objects.equals(event.getName(), draconicForelandsValid)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructures.DRAGON_BONES.get().configured(NoFeatureConfig.INSTANCE));
+        }
+
+        if(Objects.equals(event.getName(), forsakenThicketValid)) {
+            List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
+            structures.add(() -> ModStructures.CELESTIAL_RUINS.get().configured(NoFeatureConfig.INSTANCE));
         }
     }
 }

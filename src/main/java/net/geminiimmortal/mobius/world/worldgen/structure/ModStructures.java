@@ -42,6 +42,9 @@ public class ModStructures {
     public static final RegistryObject<Structure<NoFeatureConfig>> DRAGON_BONES =
             STRUCTURES.register("dragon_bones", DragonRibcage::new);
 
+    public static final RegistryObject<Structure<NoFeatureConfig>> CELESTIAL_RUINS =
+            STRUCTURES.register("celestial_ruins", CelestialRuins::new);
+
 
     public static void setupStructures() {
         setupMapSpacingAndLand(MOLVAN_SETTLEMENT_A.get(),
@@ -64,6 +67,9 @@ public class ModStructures {
                 false);
         setupMapSpacingAndLand(DRAGON_BONES.get(),
                 new StructureSeparationSettings(13,7, 172348790),
+                false);
+        setupMapSpacingAndLand(CELESTIAL_RUINS.get(),
+                new StructureSeparationSettings(35,25, 110924590),
                 false);
     }
 
