@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "mobius:block/celestial_tile",
+    "side": "mobius:block/celestial_tile",
+    "top": "mobius:block/celestial_tile"
+  }
+}

@@ -147,6 +147,10 @@
   "block.mobius.standing_gloomcap": "Standing Gloomcap",
   "block.mobius.bloodstone_gem_ore": "Bloodstone Gem Ore",
   "block.mobius.celestial_pillar": "Celestial Pillar",
+  "block.mobius.celestial_tile": "Celestial Tile",
+  "block.mobius.celestial_tile_slab": "Celestial Tile Slab",
+  "block.mobius.celestial_stairs": "Celestial Stairs",
+  "block.mobius.celestial_wall": "Celestial Wall",
 
   "fluid.mobius.ectoplasm_fluid": "Ectoplasm",
   "fluid.mobius.bog_water_fluid": "Bog Water",

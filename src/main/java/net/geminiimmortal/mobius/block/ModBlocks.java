@@ -278,6 +278,18 @@ public class ModBlocks {
     public static final RegistryObject<Block> CELESTIAL_PILLAR = registerBlock("celestial_pillar",
             () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE).noOcclusion()));
 
+    public static final RegistryObject<Block> CELESTIAL_TILE = registerBlock("celestial_tile",
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
+
+    public static final RegistryObject<Block> CELESTIAL_TILE_SLAB = registerBlock("celestial_tile_slab",
+            () -> new SlabBlock(AbstractBlock.Properties.copy(Blocks.STONE_SLAB)));
+
+    public static final RegistryObject<Block> CELESTIAL_STAIRS = registerBlock("celestial_stairs",
+            () -> new StairsBlock(CELESTIAL_TILE.get().defaultBlockState(), AbstractBlock.Properties.copy(Blocks.STONE_STAIRS)));
+
+    public static final RegistryObject<Block> CELESTIAL_WALL = registerBlock("celestial_wall",
+            () -> new WallBlock(AbstractBlock.Properties.copy(Blocks.COBBLESTONE_WALL)));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         return toReturn;

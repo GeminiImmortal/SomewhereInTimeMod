@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "mobius:hematite_wall"
+    "mobius:hematite_wall",
+    "mobius:celestial_wall"
   ]
 }

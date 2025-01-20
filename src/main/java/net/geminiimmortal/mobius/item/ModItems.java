@@ -130,6 +130,10 @@ public class ModItems {
 
     //Celestial Blocks
     public static final RegistryObject<Item> CELESTIAL_PILLAR = ITEMS.register("celestial_pillar", () -> new BlockItem(ModBlocks.CELESTIAL_PILLAR.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> CELESTIAL_TILE = ITEMS.register("celestial_tile", () -> new BlockItem(ModBlocks.CELESTIAL_TILE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> CELESTIAL_TILE_SLAB = ITEMS.register("celestial_tile_slab", () -> new BlockItem(ModBlocks.CELESTIAL_TILE_SLAB.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> CELESTIAL_STAIRS = ITEMS.register("celestial_stairs", () -> new BlockItem(ModBlocks.CELESTIAL_STAIRS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> CELESTIAL_WALL = ITEMS.register("celestial_wall", () -> new BlockItem(ModBlocks.CELESTIAL_WALL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Ores
     public static final RegistryObject<Item> NICKEL_ORE = ITEMS.register("nickel_ore", () -> new BlockItem(ModBlocks.NICKEL_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "mobius:block/celestial_slab"
+    },
+    "type=double": {
+      "model": "mobius:block/celestial_tile"
+    },
+    "type=top": {
+      "model": "mobius:block/celestial_slab_top"
+    }
+  }
+}
