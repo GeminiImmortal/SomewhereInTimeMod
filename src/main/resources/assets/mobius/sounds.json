@@ -7,6 +7,15 @@
       }
     ]
   },
+  "qualia": {
+    "sounds": [
+      {
+        "name": "mobius:qualia",
+        "stream": true,
+        "volume": 0.5
+      }
+    ]
+  },
   "borealis": {
     "sounds": [
       {
