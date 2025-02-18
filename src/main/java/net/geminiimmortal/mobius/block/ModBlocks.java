@@ -165,7 +165,7 @@ public class ModBlocks {
             () -> new SoulForgeBlock(AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3).strength(30F, 1200F).requiresCorrectToolForDrops()));
 
     public static final RegistryObject<Block> ASTRAL_CONDUIT = registerBlock("astral_conduit",
-            () -> new AstralConduitBlock(AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(4).strength(100F, 1200F).requiresCorrectToolForDrops().noOcclusion()));
+            () -> new AstralConduitBlock(AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(4).strength(600F, 1200F).noDrops().noOcclusion()));
 
     public static final RegistryObject<Block> LIVING_MANAWOOD_LOG = registerBlock("living_manawood_log",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_LOG)));
