@@ -8,6 +8,8 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -67,8 +69,9 @@ public class FaedeerEntity extends MobEntity implements IAnimatable {
 
     @Override
     protected void registerGoals() {
-        this.goalSelector.addGoal(1, new LookForPlayerGoal(this, 24));
-        this.goalSelector.addGoal(2, new FaedeerRunGoal(this, 12, 1.2D));
+        this.goalSelector.addGoal(1, new SwimGoal(this));
+        this.goalSelector.addGoal(2, new LookForPlayerGoal(this, 24));
+        this.goalSelector.addGoal(3, new FaedeerRunGoal(this, 12, 1.2D));
     }
 
     protected int getXpToDrop() {
