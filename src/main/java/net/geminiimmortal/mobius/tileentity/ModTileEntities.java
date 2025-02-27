@@ -34,6 +34,11 @@ public class ModTileEntities {
                             ModBlocks.ASTRAL_CONDUIT.get())
                     .build(null));
 
+    public static final RegistryObject<TileEntityType<EssenceChannelerTileEntity>> ESSENCE_CHANNELER_TILE_ENTITY =
+            TILE_ENTITIES.register("essence_channeler_tile_entity", () -> TileEntityType.Builder.of(EssenceChannelerTileEntity::new,
+                            ModBlocks.ESSENCE_CHANNELER.get())
+                    .build(null));
+
     public static final RegistryObject<TileEntityType<GlowingBlockTileEntity>> GLOWING_BLOCK = TILE_ENTITIES.register("glowing_block",
             () -> TileEntityType.Builder.of(GlowingBlockTileEntity::new, ModBlocks.STANDING_GLOOMCAP.get()).build(null));
 

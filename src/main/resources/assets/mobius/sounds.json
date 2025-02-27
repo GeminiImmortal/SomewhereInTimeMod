@@ -129,6 +129,12 @@
     ],
     "subtitle": "Magismith works"
   },
+  "essence_channeler": {
+    "sounds": [
+      "mobius:sage_works"
+    ],
+    "subtitle":"Magic coalesces"
+  },
   "sage_works": {
     "sounds": [
       "mobius:sage_works"

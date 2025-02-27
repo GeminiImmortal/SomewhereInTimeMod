@@ -19,6 +19,7 @@ import net.geminiimmortal.mobius.sound.ClientMusicHandler;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.tileentity.ModTileEntities;
 import net.geminiimmortal.mobius.tileentity.render.AstralConduitScreen;
+import net.geminiimmortal.mobius.tileentity.render.EssenceChannelerScreen;
 import net.geminiimmortal.mobius.tileentity.render.SoulForgeScreen;
 import net.geminiimmortal.mobius.util.CustomDamageEventHandler;
 import net.geminiimmortal.mobius.villager.ModVillagers;
@@ -225,6 +226,8 @@ public class MobiusMod
                     SoulForgeScreen::new);
             ScreenManager.register(ModContainers.ASTRAL_CONDUIT_CONTAINER.get(),
                     AstralConduitScreen::new);
+            ScreenManager.register(ModContainers.ESSENCE_CHANNELER_CONTAINER.get(),
+                    EssenceChannelerScreen::new);
         });
 
 

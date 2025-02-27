@@ -48,6 +48,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> DASH_IMPACT =
             registerSoundEvent("dash_impact");
 
+    public static final RegistryObject<SoundEvent> ESSENCE_CHANNELER =
+            registerSoundEvent("essence_channeler");
+
     public static final RegistryObject<SoundEvent> SAGE_WORKS =
             registerSoundEvent("sage_works");
 

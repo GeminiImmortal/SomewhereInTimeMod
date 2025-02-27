@@ -1,0 +1,17 @@
+{
+  "type": "mobius:astral_conduit",
+  "ingredients": [
+    {
+      "item": "mobius:bloodrop_gemstone"
+    },
+    {
+      "item": "mobius:fae_leather"
+    },
+    {
+      "item": "minecraft:stick"
+    }
+  ],
+  "output": {
+    "item": "mobius:staff_of_protection"
+  }
+}

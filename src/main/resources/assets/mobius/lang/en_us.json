@@ -17,7 +17,7 @@
   "item.mobius.gaia_star": "Gaia Star",
   "item.mobius.staff_of_protection": "Staff of Protection",
   "item.mobius.staff_of_protection.used": "Cooldown: 120s",
-  "item.mobius.staff_of_protection.cooldown": "The staff is recharging!",
+  "item.mobius.staff_of_protection.cooldown": "The staff is recharging! Cooldown: ",
   "item.mobius.nickel_helmet": "Nickel Helmet",
   "item.mobius.nickel_chestplate": "Nickel Chestplate",
   "item.mobius.nickel_leggings": "Nickel Leggings",
@@ -184,6 +184,7 @@
   "entity.mobius.bone_wolf.is_sitting.false": "Bone wolf is following",
 
   "advancements.mobius.cover_me_in_starlight.title": "Cover Me in Starlight",
-  "advancements.mobius.cover_me_in_starlight.description": "Get a full suit of Astral Armor"
+  "advancements.mobius.cover_me_in_starlight.description": "Get a full suit of Astral Armor",
+  "screen.mobius.essence_channeler": "Essence Channeler"
 
 }
