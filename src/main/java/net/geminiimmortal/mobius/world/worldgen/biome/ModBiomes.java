@@ -125,7 +125,6 @@ public class ModBiomes {
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addDefaultCarvers(biomegenerationsettings$builder);
-        DefaultBiomeFeatures.addMountainTrees(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addDefaultSoftDisks(biomegenerationsettings$builder);
 
         return (new Biome.Builder()).precipitation(Biome.RainType.SNOW).biomeCategory(Biome.Category.EXTREME_HILLS).depth(depth).scale(scale)
@@ -149,11 +148,9 @@ public class ModBiomes {
                 new MobSpawnInfo.Spawners(EntityType.COW, 50, 1,1));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
-        DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addPlainGrass(biomegenerationsettings$builder);
-        DefaultBiomeFeatures.addJungleExtraVegetation(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addDefaultGrass(biomegenerationsettings$builder);
-        DefaultBiomeFeatures.addPlainVegetation(biomegenerationsettings$builder);
+        DefaultBiomeFeatures.addJungleExtraVegetation(biomegenerationsettings$builder);
 
         return (new Biome.Builder()).precipitation(Biome.RainType.RAIN).biomeCategory(Biome.Category.PLAINS).depth(depth).scale(scale)
                 .temperature(0.8F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(12057592).waterFogColor(7535809)
@@ -176,7 +173,6 @@ public class ModBiomes {
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);
-        DefaultBiomeFeatures.addSwampVegetation(biomegenerationsettings$builder);
 
         return (new Biome.Builder()).precipitation(Biome.RainType.RAIN).biomeCategory(Biome.Category.SWAMP).depth(depth).scale(scale)
                 .temperature(0.8F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(12057592).waterFogColor(7535809)
