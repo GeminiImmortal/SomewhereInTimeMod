@@ -17,7 +17,7 @@
   "item.mobius.gaia_star": "Gaia Star",
   "item.mobius.staff_of_protection": "Staff of Protection",
   "item.mobius.staff_of_protection.used": "Cooldown: 120s",
-  "item.mobius.staff_of_protection.cooldown": "The staff is recharging! Cooldown: ",
+  "item.mobius.staff_of_protection.cooldown": "This staff is recharging!",
   "item.mobius.nickel_helmet": "Nickel Helmet",
   "item.mobius.nickel_chestplate": "Nickel Chestplate",
   "item.mobius.nickel_leggings": "Nickel Leggings",
@@ -50,6 +50,7 @@
   "item.mobius.astral_leggings": "Astral Leggings",
   "item.mobius.astral_boots": "Astral Boots",
   "item.mobius.bloodrop_gemstone": "Bloodrop Gemstone",
+  "item.mobius.mana_vial": "Mana Vial",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
@@ -186,6 +187,12 @@
 
   "advancements.mobius.cover_me_in_starlight.title": "Cover Me in Starlight",
   "advancements.mobius.cover_me_in_starlight.description": "Get a full suit of Astral Armor",
-  "screen.mobius.essence_channeler": "Essence Channeler"
+  "screen.mobius.essence_channeler": "Essence Channeler",
+  "item.mobius.mana_vial.active": "Absorbing mana from inventory...",
+  "item.mobius.mana_vial.inactive": "Vial absorbtion off...",
+  "item.mobius.staff_of_protection.no_mana": "You are out of mana!",
+  "item.mobius.staff_of_protection.not_enough_mana": "You don't have enough mana!",
+  "item.mobius.staff.not_enough_mana": "You don't have enough mana!",
+  "item.mobius.staff.cooldown": "This staff is recharging!"
 
 }
