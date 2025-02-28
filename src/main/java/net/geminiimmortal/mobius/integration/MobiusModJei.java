@@ -6,6 +6,7 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.recipe.AstralConduitRecipe;
+import net.geminiimmortal.mobius.recipe.EssenceChannelerRecipe;
 import net.geminiimmortal.mobius.recipe.ModRecipeTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.crafting.RecipeManager;
@@ -25,6 +26,8 @@ public class MobiusModJei implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(
                 new AstralConduitRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(
+                new EssenceChannelerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -33,5 +36,8 @@ public class MobiusModJei implements IModPlugin {
         registration.addRecipes(rm.getAllRecipesFor(ModRecipeTypes.ASTRAL_CONDUIT_RECIPE).stream()
                         .filter(r -> r instanceof AstralConduitRecipe).collect(Collectors.toList()),
                 AstralConduitRecipeCategory.UID);
+        registration.addRecipes(rm.getAllRecipesFor(ModRecipeTypes.ESSENCE_CHANNELER_RECIPE).stream()
+                        .filter(r -> r instanceof EssenceChannelerRecipe).collect(Collectors.toList()),
+                EssenceChannelerRecipeCategory.UID);
     }
 }

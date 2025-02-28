@@ -1,6 +1,6 @@
 package net.geminiimmortal.mobius.tileentity;
 
-import net.geminiimmortal.mobius.recipe.AstralConduitRecipe;
+import net.geminiimmortal.mobius.recipe.EssenceChannelerRecipe;
 import net.geminiimmortal.mobius.recipe.ModRecipeTypes;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.block.BlockState;
@@ -112,7 +112,7 @@ public class EssenceChannelerTileEntity extends TileEntity implements ITickableT
         return super.getCapability(cap, side);
     }
 
-    private void craft(AstralConduitRecipe recipe) {
+    private void craft(EssenceChannelerRecipe recipe) {
         // Consume one item from each input slot
         itemHandler.getStackInSlot(0).shrink(1);
         itemHandler.getStackInSlot(1).shrink(1);
@@ -128,7 +128,7 @@ public class EssenceChannelerTileEntity extends TileEntity implements ITickableT
     }
 
 
-    private boolean canCraft(AstralConduitRecipe recipe) {
+    private boolean canCraft(EssenceChannelerRecipe recipe) {
         ItemStack outputStack = itemHandler.getStackInSlot(3); // Slot 3 is the output slot
         ItemStack recipeOutput = recipe.getResultItem();
 
@@ -159,8 +159,8 @@ public class EssenceChannelerTileEntity extends TileEntity implements ITickableT
         assert this.level != null;
         if (!this.level.isClientSide) { // Server-side only
             RecipeManager recipeManager = this.level.getRecipeManager();
-            Optional<AstralConduitRecipe> recipe = recipeManager.getRecipeFor(
-                    ModRecipeTypes.ASTRAL_CONDUIT_RECIPE,
+            Optional<EssenceChannelerRecipe> recipe = recipeManager.getRecipeFor(
+                    ModRecipeTypes.ESSENCE_CHANNELER_RECIPE,
                     new Inventory(itemHandler.getStackInSlot(0), itemHandler.getStackInSlot(1), itemHandler.getStackInSlot(2)),
                     this.level
             );
@@ -199,7 +199,7 @@ public class EssenceChannelerTileEntity extends TileEntity implements ITickableT
 
 
 
-    private boolean hasSufficientInputs(AstralConduitRecipe recipe) {
+    private boolean hasSufficientInputs(EssenceChannelerRecipe recipe) {
         // Check if each input slot contains at least one of the required item
         return !itemHandler.getStackInSlot(0).isEmpty() && !itemHandler.getStackInSlot(1).isEmpty() && !itemHandler.getStackInSlot(2).isEmpty();
     }
