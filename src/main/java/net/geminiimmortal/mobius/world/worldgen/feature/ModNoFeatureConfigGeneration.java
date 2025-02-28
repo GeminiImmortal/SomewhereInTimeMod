@@ -20,8 +20,9 @@ public class ModNoFeatureConfigGeneration {
     public static void generateNFC(final BiomeLoadingEvent event) {
         ResourceLocation forsakenThicket = ModBiomes.FORSAKEN_THICKET.getId();
         ResourceLocation mushroomForest = ModBiomes.MUSHROOM_FOREST.getId();
+        ResourceLocation shatteredPlains = ModBiomes.SHATTERED_PLAINS.getId();
 
-        if(Objects.equals(event.getName(), mushroomForest)) {
+        if (Objects.equals(event.getName(), mushroomForest)) {
             List<Supplier<ConfiguredFeature<?, ?>>> base =
                     event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
 
@@ -42,14 +43,25 @@ public class ModNoFeatureConfigGeneration {
                     .countRandom(5));
         }
 
-        if(Objects.equals(event.getName(), forsakenThicket)) {
-            List<Supplier<ConfiguredFeature<?,?>>> base =
+        if (Objects.equals(event.getName(), forsakenThicket)) {
+            List<Supplier<ConfiguredFeature<?, ?>>> base =
                     event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
 
             base.add(() -> ModConfiguredFeatures.CONFIGURED_WILD_MANA_WART_FEATURE
                     .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
                     .decorated(DenserTreesPlacement.DARK_OAK_TREE.configured(
                             new NoPlacementConfig()))
+                    .decorated(Placement.CHANCE.configured(
+                            new ChanceConfig(1)))
+                    .countRandom(10));
+        }
+
+        if (Objects.equals(event.getName(), shatteredPlains)) {
+            List<Supplier<ConfiguredFeature<?, ?>>> base =
+                    event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
+
+            base.add(() -> ModConfiguredFeatures.CONFIGURED_FLOATING_BLOCK_FEATURE
+                    .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
                     .decorated(Placement.CHANCE.configured(
                             new ChanceConfig(1)))
                     .countRandom(10));

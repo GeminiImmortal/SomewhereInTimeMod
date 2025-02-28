@@ -44,6 +44,9 @@ public class ModBiomes {
     public static final RegistryObject<Biome> CRIMSON_CASCADES = BIOMES.register("crimson_cascades",
             () -> makeCrimsonCascades(() -> ModConfiguredSurfaceBuilders.CRIMSON_CASCADES, 1.3f, 1f));
 
+    public static final RegistryObject<Biome> SHATTERED_PLAINS = BIOMES.register("shattered_plains",
+            () -> makeShatteredPlains(() -> ModConfiguredSurfaceBuilders.SHATTERED_PLAINS, 0.111f, 0.45f));
+
 
     private static Biome makeMushroomForest(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
         MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
@@ -207,7 +210,20 @@ public class ModBiomes {
                 .mobSpawnSettings(mobspawninfo$builder.build()).generationSettings(biomegenerationsettings$builder.build()).build();
     }
 
+    private static Biome makeShatteredPlains(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
+        MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
+        BiomeGenerationSettings.Builder biomegenerationsettings$builder =
+                (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
 
+        return (new Biome.Builder()).precipitation(Biome.RainType.NONE).biomeCategory(Biome.Category.PLAINS).depth(depth).scale(scale)
+                .temperature(0.0F).downfall(0.0F).specialEffects((new BiomeAmbience.Builder()).waterColor(3242335).waterFogColor(7958391)
+                        .fogColor(3608884).skyColor(7958391).foliageColorOverride(7958391).grassColorOverride(7958391)
+                        .ambientLoopSound(SoundEvents.AMBIENT_WARPED_FOREST_LOOP)
+                        .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_WARPED_FOREST_MOOD, 6000, 8, 2.0D))
+                        .ambientAdditionsSound(new SoundAdditionsAmbience(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS, 0.0111D))
+                        .build())
+                .mobSpawnSettings(mobspawninfo$builder.build()).generationSettings(biomegenerationsettings$builder.build()).build();
+    }
 
     public static void register(IEventBus eventBus) {
         BIOMES.register(eventBus);

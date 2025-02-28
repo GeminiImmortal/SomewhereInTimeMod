@@ -21,6 +21,9 @@ public class ModFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> GIANT_GLOOMCAP_MUSHROOM_FEATURE = registerFeat("giant_gloomcap_mushroom_feature", () ->
             new GiantGloomcapMushroomFeature(NoFeatureConfig.CODEC, ModBlocks.GIANT_GLOOMCAP_STEM.get(), ModBlocks.GIANT_GLOOMCAP_CAP.get()));
 
+    public static final RegistryObject<Feature<NoFeatureConfig>> FLOATING_BLOCK_FEATURE = registerFeat("floating_block_feature", () ->
+            new FloatingBlockFeature(NoFeatureConfig.CODEC));
+
 
     private static <T extends Feature<?>> RegistryObject<T> registerFeat(String name, final Supplier<T> sup) {
         return FEATURES.register(name, sup);

@@ -54,6 +54,12 @@ public class ModConfiguredSurfaceBuilders {
             ModBlocks.HEMATITE.get().defaultBlockState()
     )));
 
+    public static ConfiguredSurfaceBuilder<?> SHATTERED_PLAINS = register("shattered_plains", SurfaceBuilder.DEFAULT.configured(new SurfaceBuilderConfig(
+            ModBlocks.OBSECFUTORIA.get().defaultBlockState(),
+            ModBlocks.HEMATITE.get().defaultBlockState(),
+            ModBlocks.HEMATITE.get().defaultBlockState()
+    )));
+
 
     private static <SC extends ISurfaceBuilderConfig>ConfiguredSurfaceBuilder<SC> register(String name, ConfiguredSurfaceBuilder<SC> csb) {
         return WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_SURFACE_BUILDER, new ResourceLocation(MobiusMod.MOD_ID, name), csb);

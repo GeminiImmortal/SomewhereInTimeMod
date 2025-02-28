@@ -54,6 +54,15 @@ public class ModConfiguredFeatures {
                             new TwoLayerFeature(1, 2, 1)))
                             .build()));
 
+    public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> BOG_TREE =
+            register("bog_tree", Feature.TREE.configured(new BaseTreeFeatureConfig.Builder(
+                            new SimpleBlockStateProvider(ModBlocks.GLOAMTHORN_LOG.get().defaultBlockState()),
+                            new SimpleBlockStateProvider(ModBlocks.GLOAMTHORN_LEAVES.get().defaultBlockState()),
+                            new BlobFoliagePlacer(FeatureSpread.fixed(2), FeatureSpread.fixed(0), 3),
+                            new StraightTrunkPlacer(6, 2, 1),
+                            new TwoLayerFeature(1, 0, 1))
+                            .build()));
+
     public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_STANDING_GLOOMCAP_FEATURE =
             register("standing_gloomcap",
                     ModFeatures.CLUSTERED_STANDING_GLOOMCAP_FEATURE.get().configured(new NoFeatureConfig()));
@@ -65,6 +74,10 @@ public class ModConfiguredFeatures {
     public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_GIANT_GLOOMCAP_FEATURE =
             register("giant_gloomcap",
                     ModFeatures.GIANT_GLOOMCAP_MUSHROOM_FEATURE.get().configured(new NoFeatureConfig()));
+
+    public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_FLOATING_BLOCK_FEATURE =
+            register("floating_block",
+                    ModFeatures.FLOATING_BLOCK_FEATURE.get().configured(new NoFeatureConfig()));
 
 
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key,

@@ -290,6 +290,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> CELESTIAL_WALL = registerBlock("celestial_wall",
             () -> new WallBlock(AbstractBlock.Properties.copy(Blocks.COBBLESTONE_WALL).strength(2000f, 2000f).noDrops()));
 
+    public static final RegistryObject<Block> OBSECFUTORIA = registerBlock("obsecfutoria",
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         return toReturn;

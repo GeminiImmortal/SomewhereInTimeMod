@@ -1,14 +1,14 @@
 {
   "display": {
     "icon": {
-      "item": "mobius:gaia_star"
+      "item": "mobius:aurora_grass_block"
     },
     "title": "Mobius",
-    "description": "Travel to Mobius",
+    "description": "Thank you for playing!",
     "background": "mobius:textures/block/aurora_grass_block_top.png",
     "frame": "task",
-    "show_toast": true,
-    "announce_to_chat": true,
+    "show_toast": false,
+    "announce_to_chat": false,
     "hidden": false
   },
   "criteria": {
@@ -16,10 +16,9 @@
       "trigger": "minecraft:location",
       "conditions": {
         "location": {
-          "dimension": "mobius:mobius"
+          "dimension": "minecraft:overworld"
         }
       }
     }
   }
 }
-

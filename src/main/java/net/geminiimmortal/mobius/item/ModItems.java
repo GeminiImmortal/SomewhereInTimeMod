@@ -128,6 +128,9 @@ public class ModItems {
     public static final RegistryObject<Item> BLOODSTONE = ITEMS.register("bloodstone", () -> new BlockItem(ModBlocks.BLOODSTONE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> BLOODSTONE_GEM_ORE = ITEMS.register("bloodstone_gem_ore", () -> new BlockItem(ModBlocks.BLOODSTONE_GEM_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
+    //Shattered Plains Blocks
+    public static final RegistryObject<Item> OBSECFUTORIA = ITEMS.register("obsecfutoria", () -> new BlockItem(ModBlocks.OBSECFUTORIA.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+
     //Celestial Blocks
     public static final RegistryObject<Item> CELESTIAL_PILLAR = ITEMS.register("celestial_pillar", () -> new BlockItem(ModBlocks.CELESTIAL_PILLAR.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> CELESTIAL_TILE = ITEMS.register("celestial_tile", () -> new BlockItem(ModBlocks.CELESTIAL_TILE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));

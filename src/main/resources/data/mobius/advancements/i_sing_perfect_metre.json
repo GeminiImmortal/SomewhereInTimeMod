@@ -1,5 +1,5 @@
 {
-  "parent": "mobius:root",
+  "parent": "mobius:a_ripple_in_time",
   "display": {
     "icon": {
       "item": "mobius:astral_ingot"

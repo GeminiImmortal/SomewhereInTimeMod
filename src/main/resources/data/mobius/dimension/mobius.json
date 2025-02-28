@@ -106,6 +106,16 @@
             "weirdness": 0,
             "offset": 0
           }
+        },
+        {
+          "biome": "mobius:shattered_plains",
+          "parameters": {
+            "altitude": 0,
+            "temperature": 0.9,
+            "humidity": -0.9,
+            "weirdness": 1,
+            "offset": 0
+          }
         }
       ]
     }

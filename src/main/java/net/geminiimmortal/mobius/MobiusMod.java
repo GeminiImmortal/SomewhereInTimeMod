@@ -164,6 +164,13 @@ public class MobiusMod
                     BiomeDictionary.Type.DRY
             );
 
+            BiomeDictionary.addTypes(
+                    RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MobiusMod.MOD_ID, "shattered_plains")),
+                    BiomeDictionary.Type.DRY,
+                    BiomeDictionary.Type.HOT,
+                    BiomeDictionary.Type.DEAD
+            );
+
             WoodType.register(ModWoodTypes.MARROWOOD);
             WoodType.register(ModWoodTypes.MANAWOOD);
             WoodType.register(ModWoodTypes.GLOAMTHORN);

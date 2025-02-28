@@ -17,6 +17,7 @@ public class ModTreeGeneration {
     public static void generateTrees(final BiomeLoadingEvent event) {
         ResourceLocation valid = ModBiomes.FORSAKEN_THICKET.getId();
         ResourceLocation mushroomForest = ModBiomes.MUSHROOM_FOREST.getId();
+        ResourceLocation infectedBog = ModBiomes.INFECTED_BOG.getId();
 
         if(Objects.equals(event.getName(), valid)) {
             List<Supplier<ConfiguredFeature<?, ?>>> base =
@@ -62,6 +63,16 @@ public class ModTreeGeneration {
                     .countRandom(6));
         }
 
+        if(Objects.equals(event.getName(), infectedBog)) {
+            List<Supplier<ConfiguredFeature<?, ?>>> base =
+                    event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
+
+            base.add(() -> ModConfiguredFeatures.BOG_TREE
+                    .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
+                    .decorated(Placement.CHANCE.configured(
+                            new ChanceConfig(2)))
+                    .countRandom(6));
+        }
 
     }
 }
