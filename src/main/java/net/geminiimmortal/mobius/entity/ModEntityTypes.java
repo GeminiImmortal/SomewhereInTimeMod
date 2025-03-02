@@ -118,6 +118,12 @@ public class ModEntityTypes {
                                     EntityClassification.MONSTER).sized(1.0f, 2f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "infernal_briar").toString()));
 
+    public static final RegistryObject<EntityType<AnglerfishEntity>> ANGLERFISH =
+            ENTITY_TYPES.register("anglerfish",
+                    () -> EntityType.Builder.of(AnglerfishEntity::new,
+                                    EntityClassification.CREATURE).sized(2f, 2f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "anglerfish").toString()));
+
 
 
     public static void register(IEventBus eventBus) {

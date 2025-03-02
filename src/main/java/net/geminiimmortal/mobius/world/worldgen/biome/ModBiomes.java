@@ -71,16 +71,10 @@ public class ModBiomes {
 
     private static Biome makeGooLagoon(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
         MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
-        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
-                new MobSpawnInfo.Spawners(EntityType.SQUID, 100, 7, 10));
-        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
-                new MobSpawnInfo.Spawners(EntityType.COD, 100, 7, 10));
-        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
-                new MobSpawnInfo.Spawners(EntityType.SALMON, 100, 7, 10));
-        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
-                new MobSpawnInfo.Spawners(EntityType.PUFFERFISH, 100, 7, 10));
-        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
-                new MobSpawnInfo.Spawners(EntityType.TROPICAL_FISH, 100, 7, 10));
+        mobspawninfo$builder.addSpawn(EntityClassification.WATER_CREATURE,
+                new MobSpawnInfo.Spawners(EntityType.SQUID, 10, 2, 6));
+        mobspawninfo$builder.addSpawn(EntityClassification.WATER_CREATURE,
+                new MobSpawnInfo.Spawners(ModEntityTypes.ANGLERFISH.get(), 90, 1, 1));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addDefaultCarvers(biomegenerationsettings$builder);
@@ -167,8 +161,6 @@ public class ModBiomes {
 
     private static Biome makeInfectedBog(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
         MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
-        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
-                new MobSpawnInfo.Spawners(EntityType.ZOGLIN, 10, 2, 3));
         mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
                 new MobSpawnInfo.Spawners(EntityType.ZOMBIE, 40, 1,3));
         mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,

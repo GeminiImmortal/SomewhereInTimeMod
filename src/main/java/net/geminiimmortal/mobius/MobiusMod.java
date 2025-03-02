@@ -35,11 +35,13 @@ import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.AxeItem;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
@@ -185,6 +187,12 @@ public class MobiusMod
             AxeItem.STRIPABLES.put(ModBlocks.GLOAMTHORN_LOG.get(), ModBlocks.STRIPPED_GLOAMTHORN_LOG.get());
             AxeItem.STRIPABLES.put(ModBlocks.GLOAMTHORN_WOOD.get(), ModBlocks.STRIPPED_GLOAMTHORN_WOOD.get());
 
+            EntitySpawnPlacementRegistry.register(
+                    ModEntityTypes.ANGLERFISH.get(),
+                    EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS,
+                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                    AnglerfishEntity::canMobSpawn
+            );
         });
     }
 
@@ -255,6 +263,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MOLVAN.get(), MolvanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BONE_WOLF.get(), BoneWolfRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.INFERNAL_BRIAR.get(), InfernalBriarRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ANGLERFISH.get(), AnglerfishRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -305,6 +314,7 @@ public class MobiusMod
             event.put(ModEntityTypes.MOLVAN.get(), MolvanEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.BONE_WOLF.get(), BoneWolfEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.INFERNAL_BRIAR.get(), InfernalBriarEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.ANGLERFISH.get(), AnglerfishEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent

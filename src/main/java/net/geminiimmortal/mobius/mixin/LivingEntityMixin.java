@@ -2,9 +2,14 @@ package net.geminiimmortal.mobius.mixin;
 
 
 import net.geminiimmortal.mobius.damage.EctoplasmDamageSource;
+import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.fluid.ModFluids;
+import net.geminiimmortal.mobius.item.AstralArmorMaterial;
+import net.geminiimmortal.mobius.item.ModArmorMaterial;
+import net.geminiimmortal.mobius.item.custom.AstralArmor;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.item.Item;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.vector.Vector3d;
@@ -21,6 +26,7 @@ public abstract class LivingEntityMixin {
         LivingEntity entity = (LivingEntity) (Object) this;
 
         if (entity.level.isClientSide()) return;
+        if (entity.getEntity().getType().equals(ModEntityTypes.ANGLERFISH.get())) return;
 
         FluidState fluidState = entity.level.getFluidState(entity.blockPosition());
 

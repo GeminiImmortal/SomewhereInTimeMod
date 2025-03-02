@@ -74,11 +74,6 @@ public class MobiusVillage extends Structure<NoFeatureConfig> {
                     blockpos, this.pieces, this.random, false, true);
 
             this.calculateBoundingBox();
-
-            LogManager.getLogger().log(Level.DEBUG, "Village at " +
-                    this.pieces.get(0).getBoundingBox().x0 + " " +
-                    this.pieces.get(0).getBoundingBox().y0 + " " +
-                    this.pieces.get(0).getBoundingBox().z0);
         }
     }
 

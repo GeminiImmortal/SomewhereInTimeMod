@@ -81,11 +81,6 @@ public class MobiusPortal extends Structure<NoFeatureConfig> {
             this.pieces.forEach(piece -> piece.getBoundingBox().y0 -= 1);
 
             this.calculateBoundingBox();
-
-            LogManager.getLogger().log(Level.DEBUG, "Portal at " +
-                    this.pieces.get(0).getBoundingBox().x0 + " " +
-                    this.pieces.get(0).getBoundingBox().y0 + " " +
-                    this.pieces.get(0).getBoundingBox().z0);
         }
     }
 }

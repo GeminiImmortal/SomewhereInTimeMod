@@ -37,6 +37,12 @@
     ],
     "subtitle": "Bone wolf dies"
   },
+  "anglerfish_death": {
+    "sounds": [
+      "mobius:anglerfish_death"
+    ],
+    "subtitle": "Anglerfish grunts aggressively"
+  },
   "infernal_briar_ambient": {
     "sounds": [
       "mobius:infernal_briar_ambient",

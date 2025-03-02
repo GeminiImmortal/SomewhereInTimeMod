@@ -22,7 +22,7 @@ public class BoneWolfModel extends AnimatedGeoModel<BoneWolfEntity> {
         return new ResourceLocation(MobiusMod.MOD_ID, "textures/entity/bone_wolf.png");
     }
 
-    public ResourceLocation getEmissiveTextureLocation(FaedeerEntity entity) {
+    public ResourceLocation getEmissiveTextureLocation(BoneWolfEntity entity) {
         return new ResourceLocation(MobiusMod.MOD_ID, "textures/entity/bone_wolf_emissive.png");
     }
 }
