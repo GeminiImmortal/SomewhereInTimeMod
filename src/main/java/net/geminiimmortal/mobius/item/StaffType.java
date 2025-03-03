@@ -4,7 +4,6 @@ import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
 import net.minecraftforge.common.util.LazyOptional;
 
 public enum StaffType {

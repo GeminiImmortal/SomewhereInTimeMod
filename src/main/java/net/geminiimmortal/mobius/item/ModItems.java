@@ -245,7 +245,10 @@ public class ModItems {
     public static final RegistryObject<Item> NICKEL_INGOT = ITEMS.register("nickel_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<Item> ASTRAL_INGOT = ITEMS.register("astral_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> VIAL_OF_LIQUID_SCREAMS = ITEMS.register("vial_of_liquid_screams", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> MANA_VIAL = ITEMS.register("mana_vial", ManaVial::new);
+    public static final RegistryObject<Item> MANA_VIAL = ITEMS.register("mana_vial", () -> new ManaVial(new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).durability(FlaskType.MANA_VIAL.getManaCapacity()).rarity(FlaskType.MANA_VIAL.getRarity()), FlaskType.MANA_VIAL, FlaskType.MANA_VIAL.getRarity()));
+    public static final RegistryObject<Item> MANA_FLASK = ITEMS.register("mana_flask", () -> new ManaVial(new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).durability(FlaskType.MANA_FLASK.getManaCapacity()).rarity(FlaskType.MANA_FLASK.getRarity()), FlaskType.MANA_FLASK, FlaskType.MANA_FLASK.getRarity()));
+    public static final RegistryObject<Item> MANA_ALEMBIC = ITEMS.register("mana_alembic", () -> new ManaVial(new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).durability(FlaskType.MANA_ALEMBIC.getManaCapacity()).rarity(FlaskType.MANA_ALEMBIC.getRarity()), FlaskType.MANA_ALEMBIC, FlaskType.MANA_ALEMBIC.getRarity()));
+    public static final RegistryObject<Item> GAIA_FLASK = ITEMS.register("gaia_flask", () -> new ManaVial(new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).durability(FlaskType.GAIA_FLASK.getManaCapacity()).rarity(FlaskType.GAIA_FLASK.getRarity()), FlaskType.GAIA_FLASK, FlaskType.GAIA_FLASK.getRarity()));
     public static final RegistryObject<Item> OBSIDIAN_ROD = ITEMS.register("obsidian_rod", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
 
     //Fluid Bucket Items

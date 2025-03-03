@@ -1,5 +1,6 @@
 package net.geminiimmortal.mobius.item.custom;
 
+import net.geminiimmortal.mobius.item.FlaskType;
 import net.geminiimmortal.mobius.item.ModItems;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,16 +19,16 @@ import java.util.Objects;
 
 public class ManaVial extends Item {
 
+    private final FlaskType flaskType;
+    private final Rarity rarity;
+
     private static final String MANA_TAG = "StoredMana";
     private boolean active = false;
 
-    public ManaVial() {
-        super(new Properties()
-                .stacksTo(1)
-                .durability(1024)
-                .setNoRepair()
-                .tab(ItemGroup.TAB_MISC)
-                .rarity(Rarity.RARE));
+    public ManaVial(Properties properties, FlaskType flaskType, Rarity rarity) {
+        super(properties);
+        this.flaskType = flaskType;
+        this.rarity = rarity;
     }
 
     @Override
@@ -38,11 +39,10 @@ public class ManaVial extends Item {
         return maxMana - storedMana;
     }
 
-    IFormattableTextComponent manaLevelTip = new StringTextComponent("Right-click to absorb mana. Mana capacity: " + getMaxManalevel()).setStyle(Style.EMPTY.withItalic(true).withColor(TextFormatting.AQUA));
-
     @Override
     @OnlyIn(Dist.CLIENT)
     public void appendHoverText(ItemStack stack, @Nullable World level, List<ITextComponent> tooltip, ITooltipFlag flag) {
+        IFormattableTextComponent manaLevelTip = new StringTextComponent("Right-click to absorb mana. Mana capacity: " + getMaxManalevel()).setStyle(Style.EMPTY.withItalic(true).withColor(TextFormatting.AQUA));
         tooltip.add(manaLevelTip);
     }
 
@@ -66,7 +66,7 @@ public class ManaVial extends Item {
     }
 
     public int getMaxManalevel() {
-        return 1024;
+        return flaskType.getManaCapacity();
     }
 
     private int absorbMana(PlayerEntity player, ItemStack vial) {
