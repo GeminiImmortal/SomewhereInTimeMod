@@ -3,6 +3,8 @@ package net.geminiimmortal.mobius.item.custom;
 import net.geminiimmortal.mobius.item.StaffType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,8 +13,14 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ModularStaff extends Item {
     private final StaffType staffType;
@@ -20,6 +28,12 @@ public class ModularStaff extends Item {
     public ModularStaff(Properties properties, StaffType staffType) {
         super(properties);
         this.staffType = staffType;
+    }
+
+    private static final List<StaffType> lightningStaffType = new ArrayList<>();
+
+    static {
+        lightningStaffType.add(StaffType.LIGHTNING_OBSIDIAN_MOLVAN_STEEL);
     }
 
     @Override
@@ -35,7 +49,7 @@ public class ModularStaff extends Item {
             return ActionResult.fail(stack);
         }
 
-        if (level.isClientSide()) {
+        if (level.isClientSide() && !manaVial.isEmpty()) {
             assert Minecraft.getInstance().player != null;
             Minecraft.getInstance().player.playSound(this.staffType.getSound().resolve().get(), 1.0F, 1.0F);
         }
@@ -62,6 +76,24 @@ public class ModularStaff extends Item {
             }
 
             setStoredMana(manaVial, currentMana - this.staffType.getManaCost());
+            if(this.staffType.equals(lightningStaffType.stream().findFirst().get())) {
+                if (!level.isClientSide()) {
+                    // Perform a ray trace (100 blocks)
+                    RayTraceResult rayTrace = player.pick(100, 0.0F, false);
+
+                    if (rayTrace.getType() == RayTraceResult.Type.BLOCK) {
+                        BlockRayTraceResult blockHit = (BlockRayTraceResult) rayTrace;
+                        BlockPos targetPos = blockHit.getBlockPos();
+
+                        // Summon lightning
+                        LightningBoltEntity lightning = EntityType.LIGHTNING_BOLT.create(level);
+                        if (lightning != null) {
+                            lightning.setPos(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+                            level.addFreshEntity(lightning);
+                        }
+                    }
+                }
+            }
             player.addEffect(new EffectInstance(this.staffType.getEffect(),this.staffType.getEffectDuration(), this.staffType.getEffectLevel()));
             player.level.playSound(null, player.getX(), player.getY(), player.getZ(), this.staffType.getSound().resolve().get(), SoundCategory.AMBIENT, 1.0f, 1.0f);
 

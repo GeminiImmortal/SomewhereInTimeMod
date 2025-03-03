@@ -37,6 +37,12 @@
     ],
     "subtitle": "Greater protection spell casts"
   },
+  "tier_two_lightning_staff_cast": {
+    "sounds": [
+      "mobius:tier_two_lightning_staff_cast"
+    ],
+    "subtitle": "Greater bolt of lightning casts"
+  },
   "mobius_portal": {
     "sounds": [
       "mobius:mobius_portal"
