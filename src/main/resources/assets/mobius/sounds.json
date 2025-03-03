@@ -37,6 +37,12 @@
     ],
     "subtitle": "Greater protection spell casts"
   },
+  "tier_one_fire_staff_cast": {
+    "sounds": [
+      "mobius:tier_one_fire_staff_cast"
+    ],
+    "subtitle": "Ember spell casts"
+  },
   "tier_two_lightning_staff_cast": {
     "sounds": [
       "mobius:tier_two_lightning_staff_cast"

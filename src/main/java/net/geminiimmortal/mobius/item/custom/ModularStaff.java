@@ -8,6 +8,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.entity.projectile.SmallFireballEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -33,6 +34,7 @@ public class ModularStaff extends Item {
 
     private static final List<StaffType> lightningStaffType = new ArrayList<>();
     private static final List<StaffType> galeStaffType = new ArrayList<>();
+    private static final List<StaffType> fireStaffType = new ArrayList<>();
 
     static {
         lightningStaffType.add(StaffType.LIGHTNING_OBSIDIAN_MOLVAN_STEEL);
@@ -40,6 +42,10 @@ public class ModularStaff extends Item {
 
     static {
         galeStaffType.add(StaffType.LIGHTNING_OBSIDIAN_FAE_LEATHER);
+    }
+
+    static {
+        fireStaffType.add(StaffType.FIRE_OBSIDIAN_FAE_LEATHER);
     }
 
     @Override
@@ -113,6 +119,30 @@ public class ModularStaff extends Item {
                             lightning.setPos(targetPos.getX(), targetPos.getY(), targetPos.getZ());
                             level.addFreshEntity(lightning);
                         }
+                    }
+                }
+            }
+            if(this.staffType.equals(fireStaffType.stream().findFirst().get())) {
+                if (!level.isClientSide()) {
+                    RayTraceResult rayTrace = player.pick(100, 0.0F, false);
+
+                    if (rayTrace.getType() == RayTraceResult.Type.BLOCK) {
+                        BlockRayTraceResult blockHit = (BlockRayTraceResult) rayTrace;
+                        BlockPos targetPos = blockHit.getBlockPos();
+
+                        double dx = targetPos.getX() - player.getX();
+                        double dy = targetPos.getY() - (player.getY(0.5) + 0.5);
+                        double dz = targetPos.getZ() - player.getZ();
+
+                        SmallFireballEntity fireball = new SmallFireballEntity(
+                                level, player, dx, dy, dz
+                        );
+                        fireball.setPos(
+                                player.getX() + dx / (targetPos.getX() * 0.5),
+                                player.getY(0.5) + 0.5,
+                                player.getZ() + dz / (targetPos.getZ() * 0.5)
+                        );
+                        level.addFreshEntity(fireball);
                     }
                 }
             }
