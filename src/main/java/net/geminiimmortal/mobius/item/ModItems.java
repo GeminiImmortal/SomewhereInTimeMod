@@ -175,14 +175,8 @@ public class ModItems {
     public static final RegistryObject<Item> DUNGEON_BLOCK = ITEMS.register("dungeon_block", () -> new BlockItem(ModBlocks.DUNGEON_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Weapons and Tools
-
-    public static final RegistryObject<Item> STAFF_OF_PROTECTION = ITEMS.register("staff_of_protection", () -> new ModularStaff(new Item.Properties().stacksTo(1), StaffType.PROTECTION));
-    //public static final Item STAFF_OF_FIREBALL = new ModularStaff(new Item.Properties().stacksTo(1).durability(500), StaffType.FIREBALL);
-    //public static final Item STAFF_OF_LIGHTNING = new ModularStaff(new Item.Properties().stacksTo(1).durability(500), StaffType.LIGHTNING);
-
-    //public static final RegistryObject<Item> STAFF_OF_PROTECTION = ITEMS.register("staff_of_protection", () -> new StaffOfProtection(new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1).rarity(Rarity.RARE).durability(64)));
+    public static final RegistryObject<Item> STAFF_OF_PROTECTION = ITEMS.register("staff_of_protection", () -> new ModularStaff(new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_COMBAT), StaffType.PROTECTION));
     public static final RegistryObject<Item> VORPAL_SWORD = ITEMS.register("vorpal_sword", () -> new VorpalSword(ItemTier.NETHERITE, 3, -2.8f, new Item.Properties().rarity(Rarity.RARE).tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(2032)));
-
     public static final RegistryObject<Item> ASTRAL_SWORD = ITEMS.register("astral_sword", () -> new SwordItem(ItemTier.NETHERITE, 5, -2.4f, new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(4096)));
     public static final RegistryObject<Item> ASTRAL_SHOVEL = ITEMS.register("astral_shovel", () -> new ShovelItem(ItemTier.NETHERITE, 3, -3.0f, new Item.Properties().tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
     public static final RegistryObject<Item> ASTRAL_PICKAXE = ITEMS.register("astral_pickaxe", () -> new PickaxeItem(ItemTier.NETHERITE, 3, -2.8f, new Item.Properties().tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
@@ -231,6 +225,7 @@ public class ModItems {
     public static final RegistryObject<ModSpawnEgg> MOLVAN_SPAWN_EGG = ITEMS.register("molvan_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.MOLVAN, 0xa2a090, 0xc5a090, new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<ModSpawnEgg> BONE_WOLF_SPAWN_EGG = ITEMS.register("bone_wolf_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.BONE_WOLF, 0x7A7A7A, 0x8B0000, new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<ModSpawnEgg> INFERNAL_BRIAR_SPAWN_EGG = ITEMS.register("infernal_briar_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.INFERNAL_BRIAR, 0x8B0000, 0x0f2310, new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<ModSpawnEgg> ANGLERFISH_SPAWN_EGG = ITEMS.register("anglerfish_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.ANGLERFISH, 0x042315, 0x09ff91, new Item.Properties().tab(ItemGroup.TAB_MISC)));
 
     //Misc Gizmos
     public static final RegistryObject<Item> GAIA_STAR = ITEMS.register("gaia_star", GaiaStar::new);

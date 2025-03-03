@@ -5,7 +5,8 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ActionResultType;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.text.*;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -23,7 +24,7 @@ public class ManaVial extends Item {
     public ManaVial() {
         super(new Properties()
                 .stacksTo(1)
-                .durability(100)
+                .durability(1024)
                 .setNoRepair()
                 .tab(ItemGroup.TAB_MISC)
                 .rarity(Rarity.RARE));
@@ -31,8 +32,10 @@ public class ManaVial extends Item {
 
     @Override
     public int getDamage(ItemStack itemStack) {
-        return 101 - ((getStoredMana(itemStack) * 100) / getMaxManalevel());
+        int storedMana = getStoredMana(itemStack);
+        int maxMana = getMaxManalevel();
 
+        return maxMana - storedMana;
     }
 
     IFormattableTextComponent manaLevelTip = new StringTextComponent("Right-click to absorb mana. Mana capacity: " + getMaxManalevel()).setStyle(Style.EMPTY.withItalic(true).withColor(TextFormatting.AQUA));
@@ -44,26 +47,26 @@ public class ManaVial extends Item {
     }
 
     @Override
-    public ActionResultType useOn (ItemUseContext context) {
-        if(!context.getLevel().isClientSide()) {
+    public ActionResult<ItemStack> use (World level, PlayerEntity player, Hand hand) {
+        if(!level.isClientSide()) {
             if (!active) {
                 active = true;
-                int absorbedMana = absorbMana(Objects.requireNonNull(context.getPlayer()), context.getItemInHand());
+                int absorbedMana = absorbMana(Objects.requireNonNull(player), player.getItemInHand(hand));
                 if (absorbedMana > 0) {
-                    context.getPlayer().displayClientMessage(new TranslationTextComponent("item.mobius.mana_vial.active"), true);
-                    absorbMana(context.getPlayer(), context.getItemInHand());
-                    return ActionResultType.SUCCESS;
+                    player.displayClientMessage(new TranslationTextComponent("item.mobius.mana_vial.active"), true);
+                    absorbMana(player, player.getItemInHand(hand));
+                    return ActionResult.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
                 }
             } else {
                 active = false;
-                return ActionResultType.SUCCESS;
+                return ActionResult.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
             }
         }
-        return ActionResultType.SUCCESS;
+        return ActionResult.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
     }
 
     public int getMaxManalevel() {
-        return 128;
+        return 1024;
     }
 
     private int absorbMana(PlayerEntity player, ItemStack vial) {
