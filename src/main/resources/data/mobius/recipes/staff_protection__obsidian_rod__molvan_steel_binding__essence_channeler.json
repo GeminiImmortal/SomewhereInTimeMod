@@ -1,0 +1,17 @@
+{
+  "type": "mobius:essence_channeler",
+  "ingredients": [
+    {
+      "item": "mobius:bloodrop_gemstone"
+    },
+    {
+      "item": "mobius:molvansteel_ingot"
+    },
+    {
+      "item": "mobius:obsidian_rod"
+    }
+  ],
+  "output": {
+    "item": "mobius:staff_protection_obsidian_rod_molvan_steel_binding"
+  }
+}

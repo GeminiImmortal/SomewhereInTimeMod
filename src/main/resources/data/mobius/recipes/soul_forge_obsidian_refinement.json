@@ -1,0 +1,11 @@
+{
+  "type": "mobius:soul_forge",
+  "ingredients": [
+    {
+      "item": "minecraft:crying_obsidian"
+    }
+  ],
+  "output": {
+    "item": "mobius:obsidian_rod"
+  }
+}

@@ -11,7 +11,6 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
@@ -59,7 +58,7 @@ public class ModularStaff extends Item {
 
             setStoredMana(manaVial, currentMana - this.staffType.getManaCost());
             player.addEffect(new EffectInstance(this.staffType.getEffect(),this.staffType.getEffectDuration(), this.staffType.getEffectLevel()));
-            player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BEACON_ACTIVATE, SoundCategory.AMBIENT, 1.0f, 1.0f);
+            player.level.playSound(null, player.getX(), player.getY(), player.getZ(), this.staffType.getSound(), SoundCategory.AMBIENT, 1.0f, 1.0f);
 
             tag.putLong("LastUsedTime", currentTime);
             stack.setTag(tag);

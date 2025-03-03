@@ -175,7 +175,8 @@ public class ModItems {
     public static final RegistryObject<Item> DUNGEON_BLOCK = ITEMS.register("dungeon_block", () -> new BlockItem(ModBlocks.DUNGEON_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Weapons and Tools
-    public static final RegistryObject<Item> STAFF_OF_PROTECTION = ITEMS.register("staff_of_protection", () -> new ModularStaff(new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_COMBAT), StaffType.PROTECTION));
+    public static final RegistryObject<Item> STAFF_PROTECTION_OBSIDIAN_ROD_FAE_LEATHER_BINDING = ITEMS.register("staff_protection_obsidian_rod_fae_leather_binding", () -> new ModularStaff(new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_COMBAT), StaffType.PROTECTION_OBSIDIAN_FAE_LEATHER));
+    public static final RegistryObject<Item> STAFF_PROTECTION_OBSIDIAN_ROD_MOLVAN_STEEL_BINDING = ITEMS.register("staff_protection_obsidian_rod_molvan_steel_binding", () -> new ModularStaff(new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_COMBAT), StaffType.PROTECTION_OBSIDIAN_MOLVAN_STEEL));
     public static final RegistryObject<Item> VORPAL_SWORD = ITEMS.register("vorpal_sword", () -> new VorpalSword(ItemTier.NETHERITE, 3, -2.8f, new Item.Properties().rarity(Rarity.RARE).tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(2032)));
     public static final RegistryObject<Item> ASTRAL_SWORD = ITEMS.register("astral_sword", () -> new SwordItem(ItemTier.NETHERITE, 5, -2.4f, new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(4096)));
     public static final RegistryObject<Item> ASTRAL_SHOVEL = ITEMS.register("astral_shovel", () -> new ShovelItem(ItemTier.NETHERITE, 3, -3.0f, new Item.Properties().tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));
@@ -240,6 +241,7 @@ public class ModItems {
     public static final RegistryObject<Item> ASTRAL_INGOT = ITEMS.register("astral_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> VIAL_OF_LIQUID_SCREAMS = ITEMS.register("vial_of_liquid_screams", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> MANA_VIAL = ITEMS.register("mana_vial", ManaVial::new);
+    public static final RegistryObject<Item> OBSIDIAN_ROD = ITEMS.register("obsidian_rod", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
 
     //Fluid Bucket Items
     public static final RegistryObject<Item> ECTOPLASM_BUCKET = ITEMS.register("ectoplasm_bucket", () -> new BucketItem(() -> ModFluids.ECTOPLASM_FLUID.get(), new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_MISC)));

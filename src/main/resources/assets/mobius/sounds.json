@@ -25,6 +25,18 @@
       }
     ]
   },
+  "tier_one_prot_staff_cast": {
+    "sounds": [
+      "mobius:tier_one_prot_staff_cast"
+    ],
+    "subtitle": "Protection spell casts"
+  },
+  "tier_two_prot_staff_cast": {
+    "sounds": [
+      "mobius:tier_two_prot_staff_cast"
+    ],
+    "subtitle": "Greater protection spell casts"
+  },
   "mobius_portal": {
     "sounds": [
       "mobius:mobius_portal"

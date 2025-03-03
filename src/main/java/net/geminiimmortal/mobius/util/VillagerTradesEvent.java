@@ -98,7 +98,7 @@ public class VillagerTradesEvent {
                     10, 8, 0.06f));
             trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
                     new ItemStack(ModItems.RAW_MANA.get(), 48),
-                    new ItemStack(ModItems.STAFF_OF_PROTECTION.get(), 1),
+                    new ItemStack(ModItems.STAFF_PROTECTION_OBSIDIAN_ROD_FAE_LEATHER_BINDING.get(), 1),
                     6, 12, 0.095f));
         }
     }
