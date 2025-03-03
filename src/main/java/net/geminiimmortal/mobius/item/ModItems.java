@@ -174,10 +174,13 @@ public class ModItems {
     public static final RegistryObject<Item> BLOCK_OF_NICKEL = ITEMS.register("block_of_nickel", () -> new BlockItem(ModBlocks.BLOCK_OF_NICKEL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> DUNGEON_BLOCK = ITEMS.register("dungeon_block", () -> new BlockItem(ModBlocks.DUNGEON_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
-    //Weapons and Tools
+    //Staffs
     public static final RegistryObject<Item> STAFF_PROTECTION_OBSIDIAN_ROD_FAE_LEATHER_BINDING = ITEMS.register("staff_protection_obsidian_rod_fae_leather_binding", () -> new ModularStaff(new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_COMBAT), StaffType.PROTECTION_OBSIDIAN_FAE_LEATHER));
     public static final RegistryObject<Item> STAFF_PROTECTION_OBSIDIAN_ROD_MOLVAN_STEEL_BINDING = ITEMS.register("staff_protection_obsidian_rod_molvan_steel_binding", () -> new ModularStaff(new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_COMBAT), StaffType.PROTECTION_OBSIDIAN_MOLVAN_STEEL));
     public static final RegistryObject<Item> STAFF_LIGHTNING_OBSIDIAN_ROD_MOLVAN_STEEL_BINDING = ITEMS.register("staff_lightning_obsidian_rod_molvan_steel_binding", () -> new ModularStaff(new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_COMBAT), StaffType.LIGHTNING_OBSIDIAN_MOLVAN_STEEL));
+    public static final RegistryObject<Item> STAFF_LIGHTNING_OBSIDIAN_ROD_FAE_LEATHER_BINDING = ITEMS.register("staff_lightning_obsidian_rod_fae_leather_binding", () -> new ModularStaff(new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_COMBAT), StaffType.LIGHTNING_OBSIDIAN_FAE_LEATHER));
+
+    //Weapons and Tools
     public static final RegistryObject<Item> VORPAL_SWORD = ITEMS.register("vorpal_sword", () -> new VorpalSword(ItemTier.NETHERITE, 3, -2.8f, new Item.Properties().rarity(Rarity.RARE).tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(2032)));
     public static final RegistryObject<Item> ASTRAL_SWORD = ITEMS.register("astral_sword", () -> new SwordItem(ItemTier.NETHERITE, 5, -2.4f, new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(4096)));
     public static final RegistryObject<Item> ASTRAL_SHOVEL = ITEMS.register("astral_shovel", () -> new ShovelItem(ItemTier.NETHERITE, 3, -3.0f, new Item.Properties().tab(ItemGroup.TAB_TOOLS).stacksTo(1).durability(4096).fireResistant()));

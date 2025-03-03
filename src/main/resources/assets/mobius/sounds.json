@@ -41,7 +41,13 @@
     "sounds": [
       "mobius:tier_two_lightning_staff_cast"
     ],
-    "subtitle": "Greater bolt of lightning casts"
+    "subtitle": "Bolt of lightning casts"
+  },
+  "tier_one_lightning_staff_cast": {
+    "sounds": [
+      "mobius:tier_one_lightning_staff_cast"
+    ],
+    "subtitle": "Wind spell whirs"
   },
   "mobius_portal": {
     "sounds": [

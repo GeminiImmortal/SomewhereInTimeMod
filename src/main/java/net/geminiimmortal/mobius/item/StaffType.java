@@ -10,7 +10,8 @@ public enum StaffType {
 
     PROTECTION_OBSIDIAN_FAE_LEATHER(20 * 20, Effects.ABSORPTION, 0, 8, 1200, LazyOptional.of(ModSounds.TIER_ONE_PROT_CAST::get)),
     PROTECTION_OBSIDIAN_MOLVAN_STEEL(20 * 20, Effects.ABSORPTION, 1, 16, 1800, LazyOptional.of(ModSounds.TIER_TWO_PROT_CAST::get)),
-    LIGHTNING_OBSIDIAN_MOLVAN_STEEL(20 * 20, Effects.MOVEMENT_SPEED, 0, 32, 160, LazyOptional.of(ModSounds.TIER_TWO_LIGHTNING_CAST::get));
+    LIGHTNING_OBSIDIAN_MOLVAN_STEEL(20 * 20, Effects.MOVEMENT_SPEED, 0, 32, 160, LazyOptional.of(ModSounds.TIER_TWO_LIGHTNING_CAST::get)),
+    LIGHTNING_OBSIDIAN_FAE_LEATHER(20 * 20, Effects.MOVEMENT_SPEED, 1, 16, 400, LazyOptional.of(ModSounds.TIER_ONE_LIGHTNING_CAST::get));
 
     private final int effectDuration;
     private final Effect effect;

@@ -1,0 +1,147 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"0": "mobius:item/staff_of_protection/obsidian_rod",
+		"1": "mobius:item/staff_of_protection/staff_prot_remaining",
+		"5": "mobius:item/staff_of_protection/fae_leather_binding",
+		"particle": "mobius:item/staff_of_protection/obsidian_rod"
+	},
+	"elements": [
+
+		{
+			"from": [7.25, 26, 7.25],
+			"to": [7.75, 31, 7.75],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 29, 7]},
+			"faces": {
+				"north": {"uv": [6, 0, 7, 5], "texture": "#1"},
+				"east": {"uv": [6, 5, 7, 10], "texture": "#1"},
+				"south": {"uv": [7, 0, 8, 5], "texture": "#1"},
+				"west": {"uv": [7, 5, 8, 10], "texture": "#1"},
+				"up": {"uv": [12, 9, 11, 8], "texture": "#1"},
+				"down": {"uv": [12, 9, 11, 10], "texture": "#1"}
+			}
+		},
+		{
+			"from": [8.25, 26, 6.25],
+			"to": [8.75, 31, 6.75],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 29, 6]},
+			"faces": {
+				"north": {"uv": [8, 0, 9, 5], "texture": "#1"},
+				"east": {"uv": [8, 5, 9, 10], "texture": "#1"},
+				"south": {"uv": [9, 0, 10, 5], "texture": "#1"},
+				"west": {"uv": [9, 5, 10, 10], "texture": "#1"},
+				"up": {"uv": [7, 13, 6, 12], "texture": "#1"},
+				"down": {"uv": [13, 6, 12, 7], "texture": "#1"}
+			}
+		},
+		{
+			"from": [9.25, 26, 7.25],
+			"to": [9.75, 31, 7.75],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 29, 7]},
+			"faces": {
+				"north": {"uv": [0, 10, 1, 15], "texture": "#1"},
+				"east": {"uv": [10, 0, 11, 5], "texture": "#1"},
+				"south": {"uv": [1, 10, 2, 15], "texture": "#1"},
+				"west": {"uv": [2, 10, 3, 15], "texture": "#1"},
+				"up": {"uv": [8, 13, 7, 12], "texture": "#1"},
+				"down": {"uv": [13, 7, 12, 8], "texture": "#1"}
+			}
+		},
+		{
+			"from": [8.25, 26, 8.25],
+			"to": [8.75, 31, 8.75],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 29, 8]},
+			"faces": {
+				"north": {"uv": [3, 10, 4, 15], "texture": "#1"},
+				"east": {"uv": [4, 10, 5, 15], "texture": "#1"},
+				"south": {"uv": [5, 10, 6, 15], "texture": "#1"},
+				"west": {"uv": [10, 5, 11, 10], "texture": "#1"},
+				"up": {"uv": [9, 13, 8, 12], "texture": "#1"},
+				"down": {"uv": [13, 8, 12, 9], "texture": "#1"}
+			}
+		},
+		{
+			"name": "obsidian_rod",
+			"from": [8, 2, 7],
+			"to": [9, 26, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 2, 7]},
+			"faces": {
+				"north": {"uv": [0, 0, 0.5, 12], "texture": "#0"},
+				"east": {"uv": [0.5, 0, 1, 12], "texture": "#0"},
+				"south": {"uv": [1, 0, 1.5, 12], "texture": "#0"},
+				"west": {"uv": [1.5, 0, 2, 12], "texture": "#0"},
+				"up": {"uv": [2.5, 0.5, 2, 0], "texture": "#0"},
+				"down": {"uv": [2.5, 0.5, 2, 1], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7.5, 17, 6.5],
+			"to": [9.5, 24, 8.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 17, 6]},
+			"faces": {
+				"north": {"uv": [0, 0, 2, 5], "texture": "#5"},
+				"east": {"uv": [2, 0, 4, 5], "texture": "#5"},
+				"south": {"uv": [4, 0, 6, 5], "texture": "#5"},
+				"west": {"uv": [0, 5, 2, 10], "texture": "#5"},
+				"up": {"uv": [4, 7, 2, 5], "texture": "#5"},
+				"down": {"uv": [6, 5, 4, 7], "texture": "#5"}
+			}
+		}
+	],
+	"gui_light": "front",
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0.5, 90, 0],
+			"translation": [0, -9.5, 1.5]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [0.5, 90, 0],
+			"translation": [0.75, -11.25, 0.75]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, -90, 25],
+			"translation": [1.13, 3.2, 1.13],
+			"scale": [0.68, 0.68, 0.68]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 90, -25],
+			"translation": [1.13, 3.2, 1.13],
+			"scale": [0.68, 0.68, 0.68]
+		},
+		"ground": {
+			"rotation": [90, 0, 0],
+			"translation": [0, 2, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"gui": {
+			"rotation": [0, 11, 47],
+			"translation": [2.5, -2.25, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"fixed": {
+			"rotation": [0, 180, 0],
+			"translation": [0, -6.25, 0]
+		}
+	},
+	"groups": [
+		{
+			"name": "lightning_staff_head",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1, 2, 3, 4, 5]
+		},
+		{
+			"name": "obsidian_rod",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [18]
+		},
+		{
+			"name": "fae_leather_binding",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [20]
+		}
+	]
+}

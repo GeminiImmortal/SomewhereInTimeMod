@@ -4,8 +4,10 @@ import net.geminiimmortal.mobius.item.StaffType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -13,9 +15,8 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.*;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
@@ -31,9 +32,14 @@ public class ModularStaff extends Item {
     }
 
     private static final List<StaffType> lightningStaffType = new ArrayList<>();
+    private static final List<StaffType> galeStaffType = new ArrayList<>();
 
     static {
         lightningStaffType.add(StaffType.LIGHTNING_OBSIDIAN_MOLVAN_STEEL);
+    }
+
+    static {
+        galeStaffType.add(StaffType.LIGHTNING_OBSIDIAN_FAE_LEATHER);
     }
 
     @Override
@@ -76,16 +82,32 @@ public class ModularStaff extends Item {
             }
 
             setStoredMana(manaVial, currentMana - this.staffType.getManaCost());
+            if(this.staffType.equals(galeStaffType.stream().findFirst().get())) {
+                if (!level.isClientSide()) {
+                    double radius = 6.0;
+                    double force = 2.5;
+
+                    AxisAlignedBB area = player.getBoundingBox().inflate(radius);
+                    List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, area,
+                            entity -> entity != player && entity.isAlive() && entity.distanceTo(player) < radius);
+
+                    for (LivingEntity entity : entities) {
+                        Vector3d pushDirection = entity.position().subtract(player.position()).normalize();
+
+                        Vector3d pushVelocity = pushDirection.scale(force);
+                        entity.setDeltaMovement(pushVelocity.x, 0.3, pushVelocity.z);
+                    }
+                }
+
+            }
             if(this.staffType.equals(lightningStaffType.stream().findFirst().get())) {
                 if (!level.isClientSide()) {
-                    // Perform a ray trace (100 blocks)
                     RayTraceResult rayTrace = player.pick(100, 0.0F, false);
 
                     if (rayTrace.getType() == RayTraceResult.Type.BLOCK) {
                         BlockRayTraceResult blockHit = (BlockRayTraceResult) rayTrace;
                         BlockPos targetPos = blockHit.getBlockPos();
 
-                        // Summon lightning
                         LightningBoltEntity lightning = EntityType.LIGHTNING_BOLT.create(level);
                         if (lightning != null) {
                             lightning.setPos(targetPos.getX(), targetPos.getY(), targetPos.getZ());

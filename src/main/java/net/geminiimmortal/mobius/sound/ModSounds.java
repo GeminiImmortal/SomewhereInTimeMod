@@ -90,6 +90,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> TIER_TWO_LIGHTNING_CAST =
             registerSoundEvent("tier_two_lightning_staff_cast");
 
+    public static final RegistryObject<SoundEvent> TIER_ONE_LIGHTNING_CAST =
+            registerSoundEvent("tier_one_lightning_staff_cast");
+
 
 
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
