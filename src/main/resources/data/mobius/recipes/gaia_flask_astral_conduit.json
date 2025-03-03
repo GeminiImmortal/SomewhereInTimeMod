@@ -1,0 +1,17 @@
+{
+  "type": "mobius:astral_conduit",
+  "ingredients": [
+    {
+      "item": "mobius:mana_alembic"
+    },
+    {
+      "item": "mobius:magically_reinforced_netherite_ingot"
+    },
+    {
+      "item": "mobius:gaia_star"
+    }
+  ],
+  "output": {
+    "item": "mobius:gaia_flask"
+  }
+}
