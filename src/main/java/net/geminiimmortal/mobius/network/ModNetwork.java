@@ -29,6 +29,11 @@ public class ModNetwork {
                 .decoder(PlayMusicPacket::decode)
                 .consumer(PlayMusicPacket::handle)
                 .add();
+        NETWORK_CHANNEL.messageBuilder(ClientPlaySoundPacket.class, 2, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(ClientPlaySoundPacket::encode)
+                .decoder(ClientPlaySoundPacket::decode)
+                .consumer(ClientPlaySoundPacket::handle)
+                .add();
     }
 }
 

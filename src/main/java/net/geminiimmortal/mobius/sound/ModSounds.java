@@ -81,6 +81,12 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> ANGLERFISH_DEATH =
             registerSoundEvent("anglerfish_death");
 
+    public static final RegistryObject<SoundEvent> TIER_ONE_PROT_CAST =
+            registerSoundEvent("tier_one_prot_staff_cast");
+
+    public static final RegistryObject<SoundEvent> TIER_TWO_PROT_CAST =
+            registerSoundEvent("tier_two_prot_staff_cast");
+
 
 
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {

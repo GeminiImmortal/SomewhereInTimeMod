@@ -35,6 +35,11 @@ public class ModularStaff extends Item {
             return ActionResult.fail(stack);
         }
 
+        if (level.isClientSide()) {
+            assert Minecraft.getInstance().player != null;
+            Minecraft.getInstance().player.playSound(this.staffType.getSound().resolve().get(), 1.0F, 1.0F);
+        }
+
         if (!level.isClientSide()) {
 
             if (tag.contains("LastUsedTime")) {
@@ -58,13 +63,12 @@ public class ModularStaff extends Item {
 
             setStoredMana(manaVial, currentMana - this.staffType.getManaCost());
             player.addEffect(new EffectInstance(this.staffType.getEffect(),this.staffType.getEffectDuration(), this.staffType.getEffectLevel()));
-            player.level.playSound(null, player.getX(), player.getY(), player.getZ(), this.staffType.getSound(), SoundCategory.AMBIENT, 1.0f, 1.0f);
+            player.level.playSound(null, player.getX(), player.getY(), player.getZ(), this.staffType.getSound().resolve().get(), SoundCategory.AMBIENT, 1.0f, 1.0f);
 
             tag.putLong("LastUsedTime", currentTime);
             stack.setTag(tag);
 
         }
-
         return ActionResult.sidedSuccess(stack, level.isClientSide());
     }
 
