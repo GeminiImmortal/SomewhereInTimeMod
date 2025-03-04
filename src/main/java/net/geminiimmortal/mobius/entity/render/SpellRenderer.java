@@ -28,45 +28,28 @@ public class SpellRenderer extends EntityRenderer<SpellEntity> {
         matrixStack.translate(0.0, 0.025, 0.0);
         matrixStack.scale(8.0f, 1.0f, 8.0f);
 
+        // Rotate the spell to face upwards (X-axis rotation)
+        matrixStack.mulPose(Vector3f.XP.rotationDegrees(-180.0f));
+
         float rotation = entity.getRotationAngle() + (partialTicks * 1.0f); // Smooth interpolation for rotation
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(rotation)); // Rotate around the Y-axis
-
 
         // Render the spell (e.g., using a custom texture or a particle-like effect)
         IVertexBuilder vertexBuilder = buffer.getBuffer(RenderType.entityCutout(TEXTURE));
         Matrix4f matrix4f = matrixStack.last().pose();
 
-        // Draw a flat quad for simplicity
-        vertexBuilder.vertex(matrix4f, -0.5f, 0.0f, -0.5f).color(255, 255, 255, 255).uv(0.0f, 0.0f).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(packedLight).normal(0.0f, 1.0f, 0.0f).endVertex();
-        vertexBuilder.vertex(matrix4f, 0.5f, 0.0f, -0.5f) // Bottom-right corner
-                .color(255, 255, 255, 255)
-                .uv(1.0f, 0.0f)
-                .overlayCoords(OverlayTexture.NO_OVERLAY)
-                .uv2(packedLight)
-                .normal(0.0f, 1.0f, 0.0f)
-                .endVertex();
-
-        vertexBuilder.vertex(matrix4f, 0.5f, 0.0f, 0.5f) // Top-right corner
-                .color(255, 255, 255, 255)
-                .uv(1.0f, 1.0f)
-                .overlayCoords(OverlayTexture.NO_OVERLAY)
-                .uv2(packedLight)
-                .normal(0.0f, 1.0f, 0.0f)
-                .endVertex();
-
-        vertexBuilder.vertex(matrix4f, -0.5f, 0.0f, 0.5f) // Top-left corner
-                .color(255, 255, 255, 255)
-                .uv(0.0f, 1.0f)
-                .overlayCoords(OverlayTexture.NO_OVERLAY)
-                .uv2(packedLight)
-                .normal(0.0f, 1.0f, 0.0f)
-                .endVertex();
+        // Adjust normal vector to (0, 0, -1) since the plane is rotated
+        vertexBuilder.vertex(matrix4f, -0.5f, 0.0f, -0.5f).color(255, 255, 255, 255).uv(0.0f, 0.0f).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(packedLight).normal(0.0f, 0.0f, -1.0f).endVertex();
+        vertexBuilder.vertex(matrix4f, 0.5f, 0.0f, -0.5f).color(255, 255, 255, 255).uv(1.0f, 0.0f).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(packedLight).normal(0.0f, 0.0f, -1.0f).endVertex();
+        vertexBuilder.vertex(matrix4f, 0.5f, 0.0f, 0.5f).color(255, 255, 255, 255).uv(1.0f, 1.0f).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(packedLight).normal(0.0f, 0.0f, -1.0f).endVertex();
+        vertexBuilder.vertex(matrix4f, -0.5f, 0.0f, 0.5f).color(255, 255, 255, 255).uv(0.0f, 1.0f).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(packedLight).normal(0.0f, 0.0f, -1.0f).endVertex();
 
         // Pop matrix
         matrixStack.popPose();
 
         super.render(entity, entityYaw, partialTicks, matrixStack, buffer, packedLight);
     }
+
 
     @Override
     public ResourceLocation getTextureLocation(SpellEntity entity) {

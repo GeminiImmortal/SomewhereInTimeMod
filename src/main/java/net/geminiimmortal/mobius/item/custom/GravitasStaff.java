@@ -1,8 +1,15 @@
 package net.geminiimmortal.mobius.item.custom;
 
+import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.entity.custom.GovernorKnivesOutEntity;
+import net.geminiimmortal.mobius.entity.custom.SpellEntity;
 import net.geminiimmortal.mobius.item.StaffType;
+import net.geminiimmortal.mobius.network.ModNetwork;
+import net.geminiimmortal.mobius.network.ParticlePacket;
+import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -13,10 +20,12 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +44,7 @@ public class GravitasStaff extends ModularStaff {
     @Override
     public void onUseTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         if (!world.isClientSide()) {
+
             double range = 10.0;
             List<ProjectileEntity> projectiles = world.getEntitiesOfClass(ProjectileEntity.class,
                     user.getBoundingBox().inflate(range),
@@ -101,6 +111,16 @@ public class GravitasStaff extends ModularStaff {
 
         player.startUsingItem(hand);
         setStoredMana(manaVial, currentMana - this.staffType.getManaCost());
+        player.level.playSound(null, player.blockPosition(), ModSounds.TIER_TWO_PROT_CAST.get(), SoundCategory.AMBIENT, 1.0F, 1.0F);
+
+        if (player.isAlive()) {
+            // Summon the spell entity
+            SpellEntity spell = new SpellEntity(ModEntityTypes.SPELL.get(), player.level);
+            spell.setPos(player.getX(), player.getY() + 0.1, player.getZ());
+            player.level.addFreshEntity(spell);
+
+        }
+
         return ActionResult.sidedSuccess(player.getItemInHand(hand), world.isClientSide());
     }
 

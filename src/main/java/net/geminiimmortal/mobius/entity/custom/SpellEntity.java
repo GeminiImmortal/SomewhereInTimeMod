@@ -22,34 +22,15 @@ public class SpellEntity extends Entity {
         super(entityType, world);
     }
 
+
     @Override
     protected void defineSynchedData() {
 
     }
 
-    private void spawnKnifeParticle() {
-        for (int i = 0; i < 1; i++) {
-            this.level.addParticle(ModParticles.KNIFE_RAIN_PARTICLE.get(),
-                    this.getX() + (Math.random() - 0.5) * 2,
-                    this.getY(),
-                    this.getZ() + (Math.random() - 0.5) * 2,
-                    0, 0.01, 0);
-        }
-    }
-
-
-
     @Override
     public void tick() {
         super.tick();
-        AxisAlignedBB knifeBoundingBox = new AxisAlignedBB(this.getX() - 3, this.getY() - 20, this.getZ() - 3, this.getX() + 3, this.getY() + 2, this.getZ() + 3);
-        List<PlayerEntity> players = level.getEntitiesOfClass(PlayerEntity.class, knifeBoundingBox);
-        for (PlayerEntity player : players) {
-            if (knifeBoundingBox.intersects(player.getBoundingBox())) {
-                player.hurt(KnivesOutDamageSource.KNIVES_OUT, 1f); // Apply damage
-            }
-        }
-        spawnKnifeParticle();
 
         rotationAngle += 1.0f; // Increment rotation angle (adjust speed as needed)
         if (rotationAngle >= 360.0f) {
