@@ -25,6 +25,7 @@ public class ModItems {
     public static final RegistryObject<Item> AURORA_GRASS_BLOCK = ITEMS.register("aurora_grass_block", () -> new BlockItem(ModBlocks.AURORA_GRASS_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> AURORA_DIRT = ITEMS.register("aurora_dirt", () -> new BlockItem(ModBlocks.AURORA_DIRT.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> SOUL_PODZOL = ITEMS.register("soul_podzol", () -> new BlockItem(ModBlocks.SOUL_PODZOL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> HUECO_SAND = ITEMS.register("hueco_sand", () -> new BlockItem(ModBlocks.HUECO_SAND.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Leaves
     public static final RegistryObject<Item> BONE_LEAVES = ITEMS.register("bone_leaves", () -> new BlockItem(ModBlocks.BONE_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));

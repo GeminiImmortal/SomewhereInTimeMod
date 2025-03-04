@@ -55,8 +55,8 @@ public class ModConfiguredSurfaceBuilders {
     )));
 
     public static ConfiguredSurfaceBuilder<?> SHATTERED_PLAINS = register("shattered_plains", SurfaceBuilder.DEFAULT.configured(new SurfaceBuilderConfig(
+            ModBlocks.HUECO_SAND.get().defaultBlockState(),
             ModBlocks.OBSECFUTORIA.get().defaultBlockState(),
-            ModBlocks.HEMATITE.get().defaultBlockState(),
             ModBlocks.HEMATITE.get().defaultBlockState()
     )));
 

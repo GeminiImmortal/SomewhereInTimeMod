@@ -293,6 +293,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> OBSECFUTORIA = registerBlock("obsecfutoria",
             () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
 
+    public static final RegistryObject<Block> HUECO_SAND = registerBlock("hueco_sand",
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.SAND)));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         return toReturn;
