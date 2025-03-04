@@ -264,6 +264,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BONE_WOLF.get(), BoneWolfRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.INFERNAL_BRIAR.get(), InfernalBriarRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ANGLERFISH.get(), AnglerfishRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.TORNADO.get(), TornadoRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

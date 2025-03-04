@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.entity;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.custom.*;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -123,6 +124,12 @@ public class ModEntityTypes {
                     () -> EntityType.Builder.of(AnglerfishEntity::new,
                                     EntityClassification.CREATURE).sized(2f, 2f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "anglerfish").toString()));
+
+    public static final RegistryObject<EntityType<TornadoEntity>> TORNADO =
+            ENTITY_TYPES.register("tornado",
+                    () -> EntityType.Builder.<TornadoEntity>of(TornadoEntity::new,
+                                    EntityClassification.MISC).sized(2f, 2f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "tornado").toString()));
 
 
 

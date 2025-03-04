@@ -99,6 +99,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> GRAVITAS =
             registerSoundEvent("gravitas");
 
+    public static final RegistryObject<SoundEvent> HURRICANE =
+            registerSoundEvent("hurricane");
+
 
 
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {

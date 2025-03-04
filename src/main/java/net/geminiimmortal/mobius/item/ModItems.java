@@ -181,6 +181,7 @@ public class ModItems {
     public static final RegistryObject<Item> STAFF_LIGHTNING_OBSIDIAN_ROD_FAE_LEATHER_BINDING = ITEMS.register("staff_lightning_obsidian_rod_fae_leather_binding", () -> new ModularStaff(new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_COMBAT), StaffType.LIGHTNING_OBSIDIAN_FAE_LEATHER));
     public static final RegistryObject<Item> STAFF_FIRE_OBSIDIAN_ROD_FAE_LEATHER_BINDING = ITEMS.register("staff_fire_obsidian_rod_fae_leather_binding", () -> new ModularStaff(new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_COMBAT), StaffType.FIRE_OBSIDIAN_FAE_LEATHER));
     public static final RegistryObject<Item> GRAVITAS = ITEMS.register("gravitas", () -> new GravitasStaff(new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1).rarity(Rarity.EPIC), StaffType.GRAVITAS));
+    public static final RegistryObject<Item> HURRICANE_STAFF = ITEMS.register("hurricane_staff", () -> new HurricaneStaff(new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1).rarity(Rarity.EPIC), StaffType.HURRICANE_STAFF));
 
     //Weapons and Tools
     public static final RegistryObject<Item> VORPAL_SWORD = ITEMS.register("vorpal_sword", () -> new VorpalSword(ItemTier.NETHERITE, 3, -2.8f, new Item.Properties().rarity(Rarity.RARE).tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(2032)));

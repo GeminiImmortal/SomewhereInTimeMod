@@ -31,6 +31,12 @@
     ],
     "subtitle": "Reality warps"
   },
+  "hurricane": {
+    "sounds": [
+      "mobius:hurricane"
+    ],
+    "subtitle": "Strong wind blows"
+  },
   "tier_one_prot_staff_cast": {
     "sounds": [
       "mobius:tier_one_prot_staff_cast"
