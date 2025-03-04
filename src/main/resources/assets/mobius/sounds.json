@@ -25,6 +25,12 @@
       }
     ]
   },
+  "gravitas": {
+    "sounds": [
+      "mobius:gravitas"
+    ],
+    "subtitle": "Reality warps"
+  },
   "tier_one_prot_staff_cast": {
     "sounds": [
       "mobius:tier_one_prot_staff_cast"
