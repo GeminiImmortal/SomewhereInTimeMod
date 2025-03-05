@@ -63,7 +63,7 @@ public class LatentManaCollectorTileEntity extends TileEntity implements ITickab
 
             @Override
             public int getSlotLimit(int slot) {
-                return 64; // Allows up to 64 items in slot 1
+                return 1; // Allows up to 64 items in slot 1
             }
 
             @Nonnull
@@ -115,7 +115,7 @@ public class LatentManaCollectorTileEntity extends TileEntity implements ITickab
     public void tick() {
         if (!level.isClientSide) {
             BlockPos pos = getBlockPos();
-            if (level.canSeeSky(pos.above()) && level.isDay()) {
+            if (level.canSeeSky(pos.above()) && level.isDay() && !level.isRaining()) {
                 manaStored = Math.min(manaStored + this.getGenerationRate(this, this.level), MAX_MANA);
                 setChanged();
             }
