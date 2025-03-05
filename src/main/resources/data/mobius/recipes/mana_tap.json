@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#O ",
+    "#  "
+  ],
+  "key": {
+    "#": {
+      "item": "mobius:manawood_wood"
+    },
+    "O": {
+      "item": "mobius:raw_mana"
+    }
+  },
+  "result": {
+    "item": "mobius:mana_tap"
+  }
+}

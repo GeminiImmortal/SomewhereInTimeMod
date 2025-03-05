@@ -253,6 +253,7 @@ public class ModItems {
     public static final RegistryObject<Item> MANA_ALEMBIC = ITEMS.register("mana_alembic", () -> new ManaVial(new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).durability(FlaskType.MANA_ALEMBIC.getManaCapacity()).rarity(FlaskType.MANA_ALEMBIC.getRarity()), FlaskType.MANA_ALEMBIC, FlaskType.MANA_ALEMBIC.getRarity()));
     public static final RegistryObject<Item> GAIA_FLASK = ITEMS.register("gaia_flask", () -> new ManaVial(new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).durability(FlaskType.GAIA_FLASK.getManaCapacity()).rarity(FlaskType.GAIA_FLASK.getRarity()), FlaskType.GAIA_FLASK, FlaskType.GAIA_FLASK.getRarity()));
     public static final RegistryObject<Item> OBSIDIAN_ROD = ITEMS.register("obsidian_rod", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<Item> MANA_TAP = ITEMS.register("mana_tap", () -> new ManaTap(new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).durability(128), ModBlocks.LIVING_MANAWOOD_LOG.get(), ModBlocks.MANAWOOD_LOG.get(), ModItems.RAW_MANA.get()));
 
     //Fluid Bucket Items
     public static final RegistryObject<Item> ECTOPLASM_BUCKET = ITEMS.register("ectoplasm_bucket", () -> new BucketItem(() -> ModFluids.ECTOPLASM_FLUID.get(), new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_MISC)));
