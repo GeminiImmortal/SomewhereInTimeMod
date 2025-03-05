@@ -106,17 +106,11 @@ public class ManaVial extends Item {
         int maxMana = this.getMaxManalevel();
         int newMana = Math.min(currentMana + amount, maxMana);
 
-        System.out.println("Current Mana: " + currentMana + " | Adding: " + amount + " | Max Mana: " + maxMana);
-
         if (newMana != currentMana) {
             tag.putInt(MANA_TAG, newMana);
-            stack.setTag(tag); // Ensure the update persists
-
-            System.out.println("Updated Mana: " + newMana);
+            stack.setTag(tag);
             return true;
         }
-
-        System.out.println("Mana unchanged.");
         return false;
     }
 }
