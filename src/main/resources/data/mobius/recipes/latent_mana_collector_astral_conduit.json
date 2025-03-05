@@ -1,0 +1,17 @@
+{
+  "type": "mobius:astral_conduit",
+  "ingredients": [
+    {
+      "item": "mobius:soul_forge"
+    },
+    {
+      "item": "minecraft:lapis_block"
+    },
+    {
+      "item": "mobius:molvansteel_ingot"
+    }
+  ],
+  "output": {
+    "item": "mobius:latent_mana_collector"
+  }
+}

@@ -17,6 +17,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 
+
 public class ManaVial extends Item {
 
     private final FlaskType flaskType;
@@ -88,17 +89,34 @@ public class ManaVial extends Item {
             }
         }
 
-        setStoredMana(vial, currentMana);
+        addMana(vial, currentMana);
         return totalAbsorbed;
     }
 
-    private int getStoredMana(ItemStack stack) {
+    public int getStoredMana(ItemStack stack) {
         CompoundNBT tag = stack.getOrCreateTag();
         return tag.getInt(MANA_TAG);
     }
 
-    private void setStoredMana(ItemStack stack, int amount) {
-        stack.getOrCreateTag().putInt(MANA_TAG, amount);
-    }
+    public boolean addMana(ItemStack stack, int amount) {
+        if (stack.isEmpty()) return false; // Prevents issues with empty stacks
 
+        CompoundNBT tag = stack.getOrCreateTag();
+        int currentMana = tag.getInt(MANA_TAG);
+        int maxMana = this.getMaxManalevel();
+        int newMana = Math.min(currentMana + amount, maxMana);
+
+        System.out.println("Current Mana: " + currentMana + " | Adding: " + amount + " | Max Mana: " + maxMana);
+
+        if (newMana != currentMana) {
+            tag.putInt(MANA_TAG, newMana);
+            stack.setTag(tag); // Ensure the update persists
+
+            System.out.println("Updated Mana: " + newMana);
+            return true;
+        }
+
+        System.out.println("Mana unchanged.");
+        return false;
+    }
 }

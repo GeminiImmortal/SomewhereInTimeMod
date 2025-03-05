@@ -39,6 +39,11 @@ public class ModTileEntities {
                             ModBlocks.ESSENCE_CHANNELER.get())
                     .build(null));
 
+    public static final RegistryObject<TileEntityType<LatentManaCollectorTileEntity>> LATENT_MANA_COLLECTOR =
+            TILE_ENTITIES.register("latent_mana_collector", () -> TileEntityType.Builder.of(LatentManaCollectorTileEntity::new,
+                            ModBlocks.LATENT_MANA_COLLECTOR.get())
+                    .build(null));
+
     public static final RegistryObject<TileEntityType<GlowingBlockTileEntity>> GLOWING_BLOCK = TILE_ENTITIES.register("glowing_block",
             () -> TileEntityType.Builder.of(GlowingBlockTileEntity::new, ModBlocks.STANDING_GLOOMCAP.get()).build(null));
 

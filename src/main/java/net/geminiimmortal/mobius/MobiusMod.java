@@ -18,9 +18,7 @@ import net.geminiimmortal.mobius.recipe.ModRecipeTypes;
 import net.geminiimmortal.mobius.sound.ClientMusicHandler;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.tileentity.ModTileEntities;
-import net.geminiimmortal.mobius.tileentity.render.AstralConduitScreen;
-import net.geminiimmortal.mobius.tileentity.render.EssenceChannelerScreen;
-import net.geminiimmortal.mobius.tileentity.render.SoulForgeScreen;
+import net.geminiimmortal.mobius.tileentity.render.*;
 import net.geminiimmortal.mobius.util.CustomDamageEventHandler;
 import net.geminiimmortal.mobius.villager.ModVillagers;
 import net.geminiimmortal.mobius.world.worldgen.CustomSurfaceBuilders;
@@ -59,7 +57,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import net.geminiimmortal.mobius.tileentity.render.GlowingBlockRenderer;
 
 import java.util.stream.Collectors;
 
@@ -214,6 +211,7 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.MANA_WART.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.WILD_MANA_WART.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOOMCAP.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.LATENT_MANA_COLLECTOR.get(), RenderType.cutout());
 
             RenderTypeLookup.setRenderLayer(ModBlocks.MOBIUS_PORTAL.get(), RenderType.translucent());
 
@@ -243,6 +241,8 @@ public class MobiusMod
                     AstralConduitScreen::new);
             ScreenManager.register(ModContainers.ESSENCE_CHANNELER_CONTAINER.get(),
                     EssenceChannelerScreen::new);
+            ScreenManager.register(ModContainers.LATENT_MANA_COLLECTOR_CONTAINER.get(),
+                    LatentManaCollectorScreen::new);
         });
 
 

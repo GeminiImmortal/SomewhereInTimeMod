@@ -164,10 +164,9 @@ public class ModItems {
     public static final RegistryObject<Item> RAW_FAE_VENISON = ITEMS.register("raw_fae_venison", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(new Food.Builder().nutrition(3).saturationMod(0.1f).meat().build())));
     public static final RegistryObject<Item> COOKED_FAE_VENISON = ITEMS.register("cooked_fae_venison", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(new Food.Builder().nutrition(10).saturationMod(0.8f).effect(new EffectInstance(Effects.GLOWING, 100), 1f).meat().build())));
 
-
-
     //Workstations Misc.
     public static final RegistryObject<Item> ASTRAL_CONDUIT = ITEMS.register("astral_conduit", () -> new BlockItem(ModBlocks.ASTRAL_CONDUIT.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> LATENT_MANA_COLLECTOR = ITEMS.register("latent_mana_collector", () -> new BlockItem(ModBlocks.LATENT_MANA_COLLECTOR.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     //Uncategorized Building Blocks
     public static final RegistryObject<Item> WASP_PAPER_BLOCK = ITEMS.register("wasp_paper_block", () -> new BlockItem(ModBlocks.WASP_PAPER_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));

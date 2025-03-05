@@ -16,6 +16,7 @@
     "mobius:magic_keystone",
     "mobius:bloodstone",
     "mobius:bloodstone_gem_ore",
-    "mobius:obsecfutoria"
+    "mobius:obsecfutoria",
+    "mobius:latent_mana_collector"
   ]
 }

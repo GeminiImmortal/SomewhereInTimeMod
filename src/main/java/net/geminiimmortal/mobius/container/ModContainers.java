@@ -3,6 +3,7 @@ package net.geminiimmortal.mobius.container;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.container.custom.AstralConduitContainer;
 import net.geminiimmortal.mobius.container.custom.EssenceChannelerContainer;
+import net.geminiimmortal.mobius.container.custom.LatentManaCollectorContainer;
 import net.geminiimmortal.mobius.container.custom.SoulForgeContainer;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.util.math.BlockPos;
@@ -41,6 +42,14 @@ public class ModContainers {
                 World world = inv.player.level;
                 return new EssenceChannelerContainer(windowId, world, pos, inv, inv.player);
             })));
+
+    public static final RegistryObject<ContainerType<LatentManaCollectorContainer>> LATENT_MANA_COLLECTOR_CONTAINER =
+            CONTAINERS.register("latent_mana_collector_container",
+                    () -> IForgeContainerType.create(((windowId, inv, data) -> {
+                        BlockPos pos = data.readBlockPos();
+                        World world = inv.player.level;
+                        return new LatentManaCollectorContainer(windowId, world, pos, inv, inv.player);
+                    })));
 
 
     public static void register(IEventBus eventBus) {

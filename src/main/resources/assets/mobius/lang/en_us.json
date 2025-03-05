@@ -167,6 +167,8 @@
   "block.mobius.celestial_stairs": "Celestial Stairs",
   "block.mobius.celestial_wall": "Celestial Wall",
   "block.mobius.obsecfutoria": "Obsecfutoria",
+  "block.mobius.hueco_sand": "Hueco Sand",
+  "block.mobius.latent_mana_collector": "Latent Mana Collector",
 
   "fluid.mobius.ectoplasm_fluid": "Ectoplasm",
   "fluid.mobius.bog_water_fluid": "Bog Water",
@@ -207,6 +209,8 @@
   "item.mobius.staff_of_protection.no_mana": "You are out of mana!",
   "item.mobius.staff_of_protection.not_enough_mana": "You don't have enough mana!",
   "item.mobius.staff.not_enough_mana": "You don't have enough mana!",
-  "item.mobius.staff.cooldown": "This staff is recharging!"
+  "item.mobius.staff.cooldown": "This staff is recharging!",
+  "container.mobius.latent_mana_collector": "Latent Mana Collector",
+  "screen.mobius.latent_mana_collector": "Latent Mana Collector"
 
 }

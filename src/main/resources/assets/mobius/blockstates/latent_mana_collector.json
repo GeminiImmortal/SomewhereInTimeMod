@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "mobius:block/latent_mana_collector",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "mobius:block/latent_mana_collector"
+    },
+
+    "facing=south": {
+      "model": "mobius:block/latent_mana_collector",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mobius:block/latent_mana_collector",
+      "y": 270
+    }
+  }
+}
