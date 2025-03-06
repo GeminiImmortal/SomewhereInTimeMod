@@ -73,8 +73,6 @@ public class ModBiomes {
         MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
         mobspawninfo$builder.addSpawn(EntityClassification.WATER_CREATURE,
                 new MobSpawnInfo.Spawners(EntityType.SQUID, 10, 2, 6));
-        mobspawninfo$builder.addSpawn(EntityClassification.WATER_CREATURE,
-                new MobSpawnInfo.Spawners(ModEntityTypes.ANGLERFISH.get(), 90, 1, 1));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addDefaultCarvers(biomegenerationsettings$builder);

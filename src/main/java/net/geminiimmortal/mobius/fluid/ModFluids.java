@@ -18,11 +18,11 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModFluids {
-    public static final ResourceLocation BOG_WATER_STILL_TEXTURE = new ResourceLocation("mobius:fluid/bog_water_still");
-    public static final ResourceLocation BOG_WATER_FLOWING_TEXTURE = new ResourceLocation("mobius:fluid/flowing_bog_water");
+    public static final ResourceLocation BOG_WATER_STILL_TEXTURE = new ResourceLocation("block/water_still");
+    public static final ResourceLocation BOG_WATER_FLOWING_TEXTURE = new ResourceLocation("block/water_flowing");
 
-    public static final ResourceLocation ECTOPLASM_STILL_TEXTURE = new ResourceLocation("mobius:fluid/ectoplasm_still");
-    public static final ResourceLocation ECTOPLASM_FLOWING_TEXTURE = new ResourceLocation("mobius:fluid/flowing_ectoplasm");
+    public static final ResourceLocation ECTOPLASM_STILL_TEXTURE = new ResourceLocation("block/water_still");
+    public static final ResourceLocation ECTOPLASM_FLOWING_TEXTURE = new ResourceLocation("block/water_flowing");
 
     public static final ResourceLocation WATER_OVERLAY_RL = new ResourceLocation("block/water_overlay");
 
@@ -38,7 +38,7 @@ public class ModFluids {
 
     public static final ForgeFlowingFluid.Properties BOG_WATER_PROPERTIES = new ForgeFlowingFluid.Properties(
             () -> BOG_WATER_FLUID.get(), () -> FLOWING_BOG_WATER.get(), FluidAttributes.builder(BOG_WATER_STILL_TEXTURE, BOG_WATER_FLOWING_TEXTURE)
-            .density(30).luminosity(2).viscosity(15).sound(SoundEvents.WATER_AMBIENT).overlay(WATER_OVERLAY_RL)
+            .density(30).luminosity(2).viscosity(15).sound(SoundEvents.WATER_AMBIENT).overlay(WATER_OVERLAY_RL).color(0x748500)
             ).slopeFindDistance(2).levelDecreasePerBlock(2)
             .block(() -> ModFluids.BOG_WATER_BLOCK.get()).bucket(() -> ModItems.BOG_WATER_BUCKET.get());
 
@@ -57,7 +57,7 @@ public class ModFluids {
 
     public static final ForgeFlowingFluid.Properties ECTOPLASM_PROPERTIES = new ForgeFlowingFluid.Properties(
             () -> ECTOPLASM_FLUID.get(), () -> FLOWING_ECTOPLASM.get(), FluidAttributes.builder(ECTOPLASM_STILL_TEXTURE, ECTOPLASM_FLOWING_TEXTURE)
-            .density(30).luminosity(2).viscosity(15).sound(SoundEvents.LAVA_POP)
+            .density(30).luminosity(2).viscosity(15).sound(SoundEvents.LAVA_POP).overlay(WATER_OVERLAY_RL).color(0xFF46A2)
     ).slopeFindDistance(2).levelDecreasePerBlock(2)
             .block(() -> ModFluids.ECTOPLASM_BLOCK.get()).bucket(() -> ModItems.ECTOPLASM_BUCKET.get());
 

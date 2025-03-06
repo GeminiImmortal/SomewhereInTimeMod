@@ -31,10 +31,10 @@ public class GooLagoonSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig
             BlockState currentState = iChunk.getBlockState(mutablePos);
 
             // Check if the current block is the default fluid
-            if (currentState.is(Blocks.WATER.getBlock())) {
+            /*if (currentState.is(Blocks.WATER.getBlock())) {
                 // Replace with your custom fluid
                 iChunk.setBlockState(mutablePos, ModFluids.ECTOPLASM_BLOCK.get().defaultBlockState(), false);
-            }
+            }*/
         }
 
         // Build the surface layers (topMaterial and underwaterMaterial)

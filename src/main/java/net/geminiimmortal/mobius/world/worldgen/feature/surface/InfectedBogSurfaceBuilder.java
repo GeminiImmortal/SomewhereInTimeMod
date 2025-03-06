@@ -31,10 +31,10 @@ public class InfectedBogSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConf
             BlockState currentState = iChunk.getBlockState(mutablePos);
 
             // Check if the current block is the default fluid
-            if (currentState.is(Blocks.WATER.getBlock())) {
+            /*if (currentState.is(Blocks.WATER.getBlock())) {
                 // Replace with your custom fluid
                 iChunk.setBlockState(mutablePos, ModFluids.BOG_WATER_BLOCK.get().defaultBlockState(), false);
-            }
+            }*/
         }
 
         // Build the surface layers (topMaterial and underwaterMaterial)
