@@ -21,6 +21,7 @@ import net.geminiimmortal.mobius.tileentity.ModTileEntities;
 import net.geminiimmortal.mobius.tileentity.render.*;
 import net.geminiimmortal.mobius.util.CustomDamageEventHandler;
 import net.geminiimmortal.mobius.villager.ModVillagers;
+import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.geminiimmortal.mobius.world.worldgen.CustomSurfaceBuilders;
 import net.geminiimmortal.mobius.world.worldgen.biome.ModBiomes;
 import net.geminiimmortal.mobius.world.worldgen.feature.ModFeatures;
@@ -117,6 +118,7 @@ public class MobiusMod
 
 
         event.enqueueWork(() -> {
+            ModDimensions.registerDimensionStuff();
             BiomeDictionary.addTypes(
                     RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MobiusMod.MOD_ID, "draconic_forelands")),
                     BiomeDictionary.Type.MOUNTAIN,

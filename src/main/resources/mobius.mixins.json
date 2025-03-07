@@ -4,8 +4,7 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "mobius.refmap.json",
   "mixins": [
-    "DimensionGeneratorSettingsMixin",
-    "LivingEntityMixin"
+    "DimensionGeneratorSettingsMixin"
     ],
   "minVersion": "0.8"
 }
