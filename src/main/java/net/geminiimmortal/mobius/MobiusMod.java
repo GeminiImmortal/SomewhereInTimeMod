@@ -166,7 +166,7 @@ public class MobiusMod
                     BiomeDictionary.Type.CONIFEROUS,
                     BiomeDictionary.Type.COLD
             );
-/*
+
             BiomeDictionary.addTypes(
                     RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MOD_ID, "infected_bog")),
                     BiomeDictionary.Type.SPOOKY,
@@ -187,7 +187,7 @@ public class MobiusMod
                     BiomeDictionary.Type.HOT,
                     BiomeDictionary.Type.DEAD
             );
-*/
+
             WoodType.register(ModWoodTypes.MARROWOOD);
             WoodType.register(ModWoodTypes.MANAWOOD);
             WoodType.register(ModWoodTypes.GLOAMTHORN);
