@@ -23,42 +23,42 @@ public class ModStructureGeneration {
 
         if(Objects.equals(event.getName(), draconicForelandsValid)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
-            structures.add(() -> ModStructures.MOLVAN_SETTLEMENT_A.get().configured(NoFeatureConfig.INSTANCE));
+            structures.add(() -> ModStructureSetup.MOLVAN_SETTLEMENT_A.get().configured(NoFeatureConfig.INSTANCE));
         }
 
         if(Objects.equals(event.getName(), rollingExpanseValid)) {
             List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
-            structures.add(() -> ModStructures.MOBIUS_VILLAGE.get().configured(NoFeatureConfig.INSTANCE));
+            structures.add(() -> ModStructureSetup.MOBIUS_VILLAGE.get().configured(NoFeatureConfig.INSTANCE));
         }
 
         if(Objects.equals(event.getName(), rollingExpanseValid)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
-            structures.add(() -> ModStructures.MOLVAN_SETTLEMENT_B.get().configured(NoFeatureConfig.INSTANCE));
+            structures.add(() -> ModStructureSetup.MOLVAN_SETTLEMENT_B.get().configured(NoFeatureConfig.INSTANCE));
         }
 
         if(Objects.equals(event.getName(), validPortal)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
-            structures.add(() -> ModStructures.MOBIUS_PORTAL.get().configured(NoFeatureConfig.INSTANCE));
+            structures.add(() -> ModStructureSetup.MOBIUS_PORTAL.get().configured(NoFeatureConfig.INSTANCE));
         }
 
         if(Objects.equals(event.getName(), rollingExpanseValid)) {
             List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
-            structures.add(() -> ModStructures.IMPERIAL_WATCHTOWER.get().configured(NoFeatureConfig.INSTANCE));
+            structures.add(() -> ModStructureSetup.IMPERIAL_WATCHTOWER.get().configured(NoFeatureConfig.INSTANCE));
         }
 
         if(Objects.equals(event.getName(), gooLagoonValid)) {
             List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
-            structures.add(() -> ModStructures.GOVERNOR_TOWER.get().configured(NoFeatureConfig.INSTANCE));
+            structures.add(() -> ModStructureSetup.GOVERNOR_TOWER.get().configured(NoFeatureConfig.INSTANCE));
         }
 
         if(Objects.equals(event.getName(), draconicForelandsValid)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
-            structures.add(() -> ModStructures.DRAGON_BONES.get().configured(NoFeatureConfig.INSTANCE));
+            structures.add(() -> ModStructureSetup.DRAGON_BONES.get().configured(NoFeatureConfig.INSTANCE));
         }
 
         if(Objects.equals(event.getName(), forsakenThicketValid)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
-            structures.add(() -> ModStructures.CELESTIAL_RUINS.get().configured(NoFeatureConfig.INSTANCE));
+            structures.add(() -> ModStructureSetup.CELESTIAL_RUINS.get().configured(NoFeatureConfig.INSTANCE));
         }
     }
 }

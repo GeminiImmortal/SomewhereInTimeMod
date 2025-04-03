@@ -9,9 +9,11 @@ public class SeedBearer {
     }
 
     public static long giveMeSeed() {
-        System.out.println("Seed " + seed + " provided by SeedBearer.");
+        System.out.println("SeedBearer got seed: " + seed);
+
         return seed;
     }
 }
+
 
 

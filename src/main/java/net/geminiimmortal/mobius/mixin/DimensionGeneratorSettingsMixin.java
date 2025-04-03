@@ -4,10 +4,7 @@ import net.geminiimmortal.mobius.world.dimension.SeedBearer;
 import net.minecraft.util.registry.SimpleRegistry;
 import net.minecraft.world.Dimension;
 import net.minecraft.world.gen.settings.DimensionGeneratorSettings;
-import org.apache.logging.log4j.Logger;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -22,4 +19,5 @@ public class DimensionGeneratorSettingsMixin {
         SeedBearer.putInSeed(seed);
     }
 }
+
 

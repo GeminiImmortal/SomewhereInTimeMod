@@ -28,6 +28,8 @@ public class MobiusChunkGenerator extends NoiseChunkGenerator {
 
     public MobiusChunkGenerator(BiomeProvider biomeProvider, long seed, Supplier<DimensionSettings> dimensionSettingsSupplier) {
         super(biomeProvider, seed, dimensionSettingsSupplier);
+        System.out.println("Chunk generator seed: " + seed);
+        Thread.dumpStack();
     }
 
     @Override

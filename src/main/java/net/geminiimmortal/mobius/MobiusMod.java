@@ -26,7 +26,7 @@ import net.geminiimmortal.mobius.world.worldgen.CustomSurfaceBuilders;
 import net.geminiimmortal.mobius.world.worldgen.biome.ModBiomes;
 import net.geminiimmortal.mobius.world.worldgen.feature.ModFeatures;
 import net.geminiimmortal.mobius.world.worldgen.feature.placement.ModFeaturePlacement;
-import net.geminiimmortal.mobius.world.worldgen.structure.ModStructures;
+import net.geminiimmortal.mobius.world.worldgen.structure.ModStructureSetup;
 import net.minecraft.block.Block;
 import net.minecraft.block.WoodType;
 import net.minecraft.client.gui.ScreenManager;
@@ -66,14 +66,22 @@ import java.util.stream.Collectors;
 public class MobiusMod
 {
 
+
+
     public static final String MOD_ID = "mobius";
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
 
     public MobiusMod() {
+
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        bus.addListener(this::setup);
+
+        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+
+        forgeBus.addListener(ModStructureSetup::addDimensionalSpacing);
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        // Register the setup method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register the enqueueIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         // Register the processIMC method for modloading
@@ -82,6 +90,8 @@ public class MobiusMod
         if (FMLEnvironment.dist == Dist.CLIENT) {
             FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
         }
+
+
 
         ModFeaturePlacement.DECORATORS.register(eventBus);
         ModFeatures.FEATURES.register(eventBus);
@@ -98,8 +108,10 @@ public class MobiusMod
         ModVillagers.register(eventBus);
         ModTileEntities.register(eventBus);
         ModContainers.register(eventBus);
-        ModStructures.register(eventBus);
+        ModStructureSetup.STRUCTURES.register(eventBus);
         ModRecipeTypes.register(eventBus);
+
+
         
 
         // Register ourselves for server and other game events we are interested in
@@ -116,9 +128,13 @@ public class MobiusMod
         
         ModNetwork.init();
 
-
         event.enqueueWork(() -> {
+
             ModDimensions.registerDimensionStuff();
+            ModStructureSetup.registerStructures();
+            ModStructureSetup.registerConfiguredStructures();
+
+
             BiomeDictionary.addTypes(
                     RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MobiusMod.MOD_ID, "draconic_forelands")),
                     BiomeDictionary.Type.MOUNTAIN,
@@ -150,7 +166,7 @@ public class MobiusMod
                     BiomeDictionary.Type.CONIFEROUS,
                     BiomeDictionary.Type.COLD
             );
-
+/*
             BiomeDictionary.addTypes(
                     RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MOD_ID, "infected_bog")),
                     BiomeDictionary.Type.SPOOKY,
@@ -171,12 +187,11 @@ public class MobiusMod
                     BiomeDictionary.Type.HOT,
                     BiomeDictionary.Type.DEAD
             );
-
+*/
             WoodType.register(ModWoodTypes.MARROWOOD);
             WoodType.register(ModWoodTypes.MANAWOOD);
             WoodType.register(ModWoodTypes.GLOAMTHORN);
 
-            ModStructures.setupStructures();
 
             AxeItem.STRIPABLES = Maps.newHashMap(AxeItem.STRIPABLES);
             AxeItem.STRIPABLES.put(ModBlocks.MARROWOOD_LOG.get(), ModBlocks.STRIPPED_MARROWOOD_LOG.get());

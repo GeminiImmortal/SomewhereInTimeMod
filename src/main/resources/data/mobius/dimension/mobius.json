@@ -1,12 +1,13 @@
 {
   "type": "mobius:mobius_type",
+  "forge:use_server_seed": true,
   "generator": {
-    "type": "mobius:chunk_generator",
-
+    "type": "minecraft:noise",
+    "seed": 0,
     "settings": "mobius:mobius_noise_settings",
     "biome_source": {
-      "type": "mobius:biome_provider",
-      "preset": "default",
+      "type": "minecraft:multi_noise",
+      "seed": 0,
       "altitude_noise": {
         "firstOctave": -7,
         "amplitudes": [
@@ -83,36 +84,6 @@
             "temperature": 0.1,
             "humidity": 0.2,
             "weirdness": 0,
-            "offset": 0
-          }
-        },
-        {
-          "biome": "mobius:infected_bog",
-          "parameters": {
-            "altitude": -0.1,
-            "temperature": 0.4,
-            "humidity": 0.3,
-            "weirdness": 0,
-            "offset": 0
-          }
-        },
-        {
-          "biome": "mobius:crimson_cascades",
-          "parameters": {
-            "altitude": 0.5,
-            "temperature": 0.5,
-            "humidity": -0.5,
-            "weirdness": 0,
-            "offset": 0
-          }
-        },
-        {
-          "biome": "mobius:shattered_plains",
-          "parameters": {
-            "altitude": 0,
-            "temperature": 0.9,
-            "humidity": -0.9,
-            "weirdness": 1,
             "offset": 0
           }
         }
