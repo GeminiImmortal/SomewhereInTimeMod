@@ -240,5 +240,14 @@
         "volume": 0.5
       }
     ]
+  },
+  "solar_eclipse": {
+    "sounds": [
+      {
+        "name": "mobius:solar_eclipse",
+        "stream": true,
+        "volume": 0.5
+      }
+    ]
   }
 }

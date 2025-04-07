@@ -16,13 +16,14 @@ import java.util.*;
 @Mod.EventBusSubscriber(modid = "mobius", value = Dist.CLIENT)
 public class ClientMusicHandler {
 
-    private static final ResourceLocation CUSTOM_DIMENSION = new ResourceLocation("mobius", "mobius");
-    public static final SoundEvent COLORS_MUSIC = new SoundEvent(new ResourceLocation("mobius", "colors"));
-    public static final SoundEvent DREAM_STATE_MUSIC = new SoundEvent(new ResourceLocation("mobius", "dream_state"));
-    public static final SoundEvent BOREALIS_MUSIC = new SoundEvent(new ResourceLocation("mobius", "borealis"));
+    private static final ResourceLocation CUSTOM_DIMENSION = new ResourceLocation(MobiusMod.MOD_ID, "mobius");
+    public static final SoundEvent COLORS_MUSIC = new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, "colors"));
+    public static final SoundEvent DREAM_STATE_MUSIC = new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, "dream_state"));
+    public static final SoundEvent BOREALIS_MUSIC = new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, "borealis"));
     public static final SoundEvent BULLYRAG = new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID,"bullyrag"));
     public static final SoundEvent FORSAKEN = new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, "forsaken"));
     public static final SoundEvent QUALIA = new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, "qualia"));
+    public static final SoundEvent SOLAR_ECLIPSE = new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, "solar_eclipse"));
 
     private static final List<SoundEvent> CUSTOM_MUSIC_TRACKS = new ArrayList<>();
     private static final Map<SoundEvent, Integer> TRACK_DURATIONS = new HashMap<>();
@@ -31,14 +32,13 @@ public class ClientMusicHandler {
     static {
         CUSTOM_MUSIC_TRACKS.add(COLORS_MUSIC);
         CUSTOM_MUSIC_TRACKS.add(DREAM_STATE_MUSIC);
-        CUSTOM_MUSIC_TRACKS.add(QUALIA);
+        CUSTOM_MUSIC_TRACKS.add(SOLAR_ECLIPSE);
+//        CUSTOM_MUSIC_TRACKS.add(QUALIA);
 //        CUSTOM_MUSIC_TRACKS.add(BOREALIS_MUSIC);
 //        CUSTOM_MUSIC_TRACKS.add(FORSAKEN);
-//        TRACK_DURATIONS.put(COLORS_MUSIC, 2460);
-        TRACK_DURATIONS.put(COLORS_MUSIC, 6000);
-//        TRACK_DURATIONS.put(DREAM_STATE_MUSIC, 2520);
-        TRACK_DURATIONS.put(DREAM_STATE_MUSIC, 6000);
-        TRACK_DURATIONS.put(QUALIA, 4500);
+        TRACK_DURATIONS.put(COLORS_MUSIC, 2460);
+        TRACK_DURATIONS.put(DREAM_STATE_MUSIC, 2520);
+        TRACK_DURATIONS.put(SOLAR_ECLIPSE, 1860);
 //        TRACK_DURATIONS.put(BOREALIS_MUSIC, 3080);
 //        TRACK_DURATIONS.put(FORSAKEN, 2750);
     }
