@@ -1,73 +1,92 @@
 package net.geminiimmortal.mobius.world.worldgen.chunkgen;
 
-import com.mojang.datafixers.util.Either;
-import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+
+import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.geminiimmortal.mobius.world.dimension.SeedBearer;
+import net.geminiimmortal.mobius.world.worldgen.biome.ModBiomes;
+import net.geminiimmortal.mobius.world.worldgen.biome.layer.MobiusLayerUtil;
+import net.minecraft.util.SharedConstants;
+import net.minecraft.util.Util;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeRegistry;
 import net.minecraft.world.biome.provider.BiomeProvider;
-import net.minecraft.world.biome.provider.NetherBiomeProvider;
+
+import net.minecraft.world.gen.layer.Layer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import javax.annotation.Nonnull;
 import java.util.stream.Collectors;
 
-public class MobiusBiomeProvider extends NetherBiomeProvider {
+public class MobiusBiomeProvider extends BiomeProvider {
+    public static final Codec<MobiusBiomeProvider> CODEC = RecordCodecBuilder.create((builder) -> {
+        return builder.group(Codec.BOOL.fieldOf("large_biomes").orElse(false).stable().forGetter((mobiusBiomeProvider) -> {
+            return mobiusBiomeProvider.largeBiomes;
+        }), net.minecraft.util.registry.RegistryLookupCodec.create(net.minecraft.util.registry.Registry.BIOME_REGISTRY).forGetter((mobiusBiomeProvider) -> {
+            return mobiusBiomeProvider.lookupRegistry;
+        }), Codec.LONG.fieldOf("seed").orElseGet(() -> ModDimensions.seed).forGetter(seed -> {
+            return SeedBearer.giveMeSeed();
+        })).apply(builder, builder.stable(MobiusBiomeProvider::new));
+    });
+    private final Layer genBiomes;
+    private final boolean largeBiomes;
+    private final net.minecraft.util.registry.Registry<Biome> lookupRegistry;
+    private final long seed;
 
-    public static final MapCodec<NetherBiomeProvider> PACKET_CODEC = RecordCodecBuilder.mapCodec(
-            (instance) -> instance.group(
-                            Codec.LONG.fieldOf("seed")
-                                    .orElseGet(SeedBearer::giveMeSeed)
-                                    .forGetter((netherProvider) -> netherProvider.seed),
-                            RecordCodecBuilder.<Pair<Biome.Attributes, Supplier<Biome>>>create(
-                                            (biomeAttributes) -> biomeAttributes.group(
-                                                            Biome.Attributes.CODEC.fieldOf("parameters")
-                                                                    .forGetter(Pair::getFirst),
-                                                            Biome.CODEC.fieldOf("biome")
-                                                                    .forGetter(Pair::getSecond))
-                                                    .apply(biomeAttributes, Pair::of))
-                                    .listOf().fieldOf("biomes")
-                                    .forGetter((netherProvider) -> netherProvider.parameters),
-                            NetherBiomeProvider.Noise.CODEC.fieldOf("temperature_noise")
-                                    .forGetter((netherProvider) -> netherProvider.temperatureParams),
-                            NetherBiomeProvider.Noise.CODEC.fieldOf("humidity_noise")
-                                    .forGetter((netherProvider) -> netherProvider.humidityParams),
-                            NetherBiomeProvider.Noise.CODEC.fieldOf("altitude_noise")
-                                    .forGetter((netherProvider) -> netherProvider.altitudeParams),
-                            NetherBiomeProvider.Noise.CODEC.fieldOf("weirdness_noise")
-                                    .forGetter((netherProvider) -> netherProvider.weirdnessParams))
-                    .apply(instance, NetherBiomeProvider::new));
+    public MobiusBiomeProvider(boolean largeBiomes, Registry<Biome> lookupRegistry, long seed) {
+        super(ModBiomes.BIOME_KEYS.stream().map(lookupRegistry::getOrThrow).collect(Collectors.toList()));
 
-    public static final Codec<NetherBiomeProvider> CODEC = Codec.mapEither(DefaultBuilder.CODEC, PACKET_CODEC).xmap((either) ->
-            either.map(DefaultBuilder::biomeSource, Function.identity()), (netherProvider) ->
-            netherProvider.preset().map(Either::<DefaultBuilder, NetherBiomeProvider>left).orElseGet(() ->
-                    Either.right(netherProvider))).codec();
-
-
-    private MobiusBiomeProvider(long seed, List<Pair<Biome.Attributes, Supplier<Biome>>> biomeAttributes, Optional<Pair<Registry<Biome>, NetherBiomeProvider.Preset>> netherProviderPreset) {
-        super(seed, biomeAttributes, netherProviderPreset);
-
+        this.seed = seed;
+        System.out.println("MobiusBiomeProvider initialized with seed: " + this.seed);
+        this.largeBiomes = largeBiomes;
+        this.lookupRegistry = lookupRegistry;
+        this.genBiomes = MobiusLayerUtil.getNoiseLayer(seed, largeBiomes ? 6 : 4, 6, lookupRegistry);
     }
 
-
     @Override
+    @Nonnull
     protected Codec<? extends BiomeProvider> codec() {
         return CODEC;
     }
 
-    @OnlyIn(Dist.CLIENT)
     @Override
+    @Nonnull
+    @OnlyIn(Dist.CLIENT)
     public BiomeProvider withSeed(long seed) {
-        return new MobiusBiomeProvider(seed, this.parameters, this.preset);
+        return new MobiusBiomeProvider(this.largeBiomes, this.lookupRegistry, this.seed);
     }
 
+    /**
+     * Returns the correct dynamic registry biome instead of using get method
+     * which actually returns the incorrect biome instance because it resolves the biome
+     * with WorldGenRegistry first instead of the dynamic registry which is... bad.
+     */
+    @Override
+    @Nonnull
+    public Biome getNoiseBiome(int x, int y, int z) {
+        int k = this.genBiomes.area.get(x, z);
+        Biome biome = this.lookupRegistry.byId(k);
 
+        if (biome != null) {
+            // Dynamic Registry biome (this should always be returned ideally)
+            return biome;
+        } else {
+            //fallback to WorldGenRegistry registry if dynamic registry doesn't have biome
+            if (SharedConstants.IS_RUNNING_IN_IDE) {
+                throw Util.pauseInIde(new IllegalStateException("Unknown biome id: " + k));
+            } else {
+                biome = this.lookupRegistry.get(BiomeRegistry.byId(0));
+                if (biome == null) {
+                    // If this is reached, it is the end of the world lol
+                    return BiomeRegistry.THE_VOID;
+                } else {
+                    // WorldGenRegistry biome (this is not good, but we need to return something)
+                    return biome;
+                }
+            }
+        }
+    }
 }
-

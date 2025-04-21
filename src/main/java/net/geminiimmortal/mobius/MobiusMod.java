@@ -24,9 +24,11 @@ import net.geminiimmortal.mobius.villager.ModVillagers;
 import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.geminiimmortal.mobius.world.worldgen.CustomSurfaceBuilders;
 import net.geminiimmortal.mobius.world.worldgen.biome.ModBiomes;
+import net.geminiimmortal.mobius.world.worldgen.biome.layer.MobiusBiomeLayer;
 import net.geminiimmortal.mobius.world.worldgen.feature.ModFeatures;
 import net.geminiimmortal.mobius.world.worldgen.feature.placement.ModFeaturePlacement;
 import net.geminiimmortal.mobius.world.worldgen.structure.ModStructureSetup;
+import net.geminiimmortal.mobius.world.worldgen.biome.layer.MobiusLayerUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.WoodType;
 import net.minecraft.client.gui.ScreenManager;
@@ -40,12 +42,14 @@ import net.minecraft.item.AxeItem;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
@@ -59,15 +63,14 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(MobiusMod.MOD_ID)
 public class MobiusMod
 {
-
-
-
     public static final String MOD_ID = "mobius";
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
@@ -79,7 +82,6 @@ public class MobiusMod
         bus.addListener(this::setup);
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
-
         forgeBus.addListener(ModStructureSetup::addDimensionalSpacing);
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         // Register the enqueueIMC method for modloading
@@ -112,7 +114,7 @@ public class MobiusMod
         ModRecipeTypes.register(eventBus);
 
 
-        
+
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -125,11 +127,12 @@ public class MobiusMod
 
     private void setup(final FMLCommonSetupEvent event)
     {
-        
+
         ModNetwork.init();
 
         event.enqueueWork(() -> {
 
+            ModBiomes.registerBiomes();
             ModDimensions.registerDimensionStuff();
             ModStructureSetup.registerStructures();
             ModStructureSetup.registerConfiguredStructures();

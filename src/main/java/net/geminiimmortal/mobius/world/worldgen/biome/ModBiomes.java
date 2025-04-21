@@ -1,5 +1,6 @@
 package net.geminiimmortal.mobius.world.worldgen.biome;
 
+import com.google.common.collect.Lists;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.particle.ModParticles;
@@ -9,19 +10,28 @@ import net.geminiimmortal.mobius.world.worldgen.feature.placement.ModConfiguredS
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.RegistryKey;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ModBiomes {
+    public static final List<RegistryKey<Biome>> BIOME_KEYS = Lists.newArrayList();
+
+
     public static final DeferredRegister<Biome> BIOMES
             = DeferredRegister.create(ForgeRegistries.BIOMES, MobiusMod.MOD_ID);
 
@@ -49,6 +59,33 @@ public class ModBiomes {
     public static final RegistryObject<Biome> SHATTERED_PLAINS = BIOMES.register("shattered_plains",
             () -> makeShatteredPlains(() -> ModConfiguredSurfaceBuilders.SHATTERED_PLAINS, 0.111f, 0.45f));
 
+
+    public static RegistryKey<Biome> registerBiomeKey(String biomeName) {
+        RegistryKey<Biome> biomeKey = RegistryKey.create(ForgeRegistries.Keys.BIOMES, new ResourceLocation(MobiusMod.MOD_ID, biomeName));
+        BIOME_KEYS.add(biomeKey);
+        return biomeKey;
+    }
+
+    public static void registerBiomes() {
+        // Actual registration code here
+        BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
+                new ResourceLocation(MobiusMod.MOD_ID, "mushroom_forest")));
+        BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
+                new ResourceLocation(MobiusMod.MOD_ID, "goo_lagoon")));
+        BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
+                new ResourceLocation(MobiusMod.MOD_ID, "forsaken_thicket")));
+        BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
+                new ResourceLocation(MobiusMod.MOD_ID, "draconic_forelands")));
+        BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
+                new ResourceLocation(MobiusMod.MOD_ID, "rolling_expanse")));
+        BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
+                new ResourceLocation(MobiusMod.MOD_ID, "infected_bog")));
+        BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
+                new ResourceLocation(MobiusMod.MOD_ID, "crimson_cascades")));
+        BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
+                new ResourceLocation(MobiusMod.MOD_ID, "shattered_plains")));
+        System.out.println("Registered: " + BIOME_KEYS);
+    }
 
     private static Biome makeMushroomForest(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
         MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
