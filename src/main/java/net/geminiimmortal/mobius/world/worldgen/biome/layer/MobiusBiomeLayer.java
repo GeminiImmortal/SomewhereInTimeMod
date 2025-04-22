@@ -32,8 +32,8 @@ public class MobiusBiomeLayer implements IC0Transformer {
                     biomeKeys.add(key);
                 }
             }
-            if (biomeKeys.size() < 8) {
-                throw new IllegalStateException("Required 8 biomes but found: " + biomeKeys.size());
+            if (biomeKeys.size() < 5) {
+                throw new IllegalStateException("Required 5 biomes but found: " + biomeKeys.size());
             }
         }
         return biomeKeys;
@@ -54,11 +54,11 @@ public class MobiusBiomeLayer implements IC0Transformer {
         addBiomeEntry(keys.get(0), 10); // Mushroom Forest
         addBiomeEntry(keys.get(1), 10); // Goo Lagoon
         addBiomeEntry(keys.get(2), 20); // Forsaken Thicket
-        addBiomeEntry(keys.get(3), 5);  // Draconic Forelands
-        addBiomeEntry(keys.get(4), 35); // Rolling Expanse
-        addBiomeEntry(keys.get(5), 10); // Infected Bog
-        addBiomeEntry(keys.get(6), 5);  // Crimson Cascades
-        addBiomeEntry(keys.get(7), 5);  // Shattered Plains
+        addBiomeEntry(keys.get(3), 20);  // Draconic Forelands
+        addBiomeEntry(keys.get(4), 40); // Rolling Expanse
+    //    addBiomeEntry(keys.get(5), 2); // Infected Bog
+    //    addBiomeEntry(keys.get(6), 2);  // Crimson Cascades
+    //    addBiomeEntry(keys.get(7), 1);  // Shattered Plains
 
     }
 

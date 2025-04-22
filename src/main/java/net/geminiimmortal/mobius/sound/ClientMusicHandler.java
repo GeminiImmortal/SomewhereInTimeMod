@@ -22,7 +22,7 @@ public class ClientMusicHandler {
     public static final SoundEvent BOREALIS_MUSIC = new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, "borealis"));
     public static final SoundEvent BULLYRAG = new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID,"bullyrag"));
     public static final SoundEvent FORSAKEN = new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, "forsaken"));
-    public static final SoundEvent QUALIA = new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, "qualia"));
+//    public static final SoundEvent QUALIA = new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, "qualia"));
     public static final SoundEvent SOLAR_ECLIPSE = new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, "solar_eclipse"));
 
     private static final List<SoundEvent> CUSTOM_MUSIC_TRACKS = new ArrayList<>();
@@ -34,13 +34,13 @@ public class ClientMusicHandler {
         CUSTOM_MUSIC_TRACKS.add(DREAM_STATE_MUSIC);
         CUSTOM_MUSIC_TRACKS.add(SOLAR_ECLIPSE);
 //        CUSTOM_MUSIC_TRACKS.add(QUALIA);
-//        CUSTOM_MUSIC_TRACKS.add(BOREALIS_MUSIC);
-//        CUSTOM_MUSIC_TRACKS.add(FORSAKEN);
+        CUSTOM_MUSIC_TRACKS.add(BOREALIS_MUSIC);
+        CUSTOM_MUSIC_TRACKS.add(FORSAKEN);
         TRACK_DURATIONS.put(COLORS_MUSIC, 2460);
         TRACK_DURATIONS.put(DREAM_STATE_MUSIC, 2520);
         TRACK_DURATIONS.put(SOLAR_ECLIPSE, 1860);
-//        TRACK_DURATIONS.put(BOREALIS_MUSIC, 3080);
-//        TRACK_DURATIONS.put(FORSAKEN, 2750);
+        TRACK_DURATIONS.put(BOREALIS_MUSIC, 3080);
+        TRACK_DURATIONS.put(FORSAKEN, 2750);
     }
 
     private static final Random RANDOM = new Random();

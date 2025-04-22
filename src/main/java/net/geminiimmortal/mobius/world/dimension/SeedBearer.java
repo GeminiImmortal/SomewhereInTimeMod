@@ -2,7 +2,7 @@ package net.geminiimmortal.mobius.world.dimension;
 
 public class SeedBearer {
 
-    private static long seed = 0;
+    private static long seed;
 
     public static void putInSeed(long seedInput) {
         seed = seedInput;

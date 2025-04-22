@@ -125,20 +125,6 @@ public class ModItems {
     public static final RegistryObject<Item> HEMATITE_STAIRS = ITEMS.register("hematite_stairs", () -> new BlockItem(ModBlocks.HEMATITE_STAIRS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> HEMATITE_WALL = ITEMS.register("hematite_wall", () -> new BlockItem(ModBlocks.HEMATITE_WALL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
-    //Bloodstone
-    public static final RegistryObject<Item> BLOODSTONE = ITEMS.register("bloodstone", () -> new BlockItem(ModBlocks.BLOODSTONE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-    public static final RegistryObject<Item> BLOODSTONE_GEM_ORE = ITEMS.register("bloodstone_gem_ore", () -> new BlockItem(ModBlocks.BLOODSTONE_GEM_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-
-    //Shattered Plains Blocks
-    public static final RegistryObject<Item> OBSECFUTORIA = ITEMS.register("obsecfutoria", () -> new BlockItem(ModBlocks.OBSECFUTORIA.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-
-    //Celestial Blocks
-    public static final RegistryObject<Item> CELESTIAL_PILLAR = ITEMS.register("celestial_pillar", () -> new BlockItem(ModBlocks.CELESTIAL_PILLAR.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-    public static final RegistryObject<Item> CELESTIAL_TILE = ITEMS.register("celestial_tile", () -> new BlockItem(ModBlocks.CELESTIAL_TILE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-    public static final RegistryObject<Item> CELESTIAL_TILE_SLAB = ITEMS.register("celestial_tile_slab", () -> new BlockItem(ModBlocks.CELESTIAL_TILE_SLAB.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-    public static final RegistryObject<Item> CELESTIAL_STAIRS = ITEMS.register("celestial_stairs", () -> new BlockItem(ModBlocks.CELESTIAL_STAIRS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-    public static final RegistryObject<Item> CELESTIAL_WALL = ITEMS.register("celestial_wall", () -> new BlockItem(ModBlocks.CELESTIAL_WALL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-
     //Ores
     public static final RegistryObject<Item> NICKEL_ORE = ITEMS.register("nickel_ore", () -> new BlockItem(ModBlocks.NICKEL_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> HEMATITE_IRON_ORE = ITEMS.register("hematite_iron_ore", () -> new BlockItem(ModBlocks.HEMATITE_IRON_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
@@ -173,6 +159,21 @@ public class ModItems {
     public static final RegistryObject<Item> MAGIC_KEYSTONE = ITEMS.register("magic_keystone", () -> new BlockItem(ModBlocks.MAGIC_KEYSTONE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> BLOCK_OF_NICKEL = ITEMS.register("block_of_nickel", () -> new BlockItem(ModBlocks.BLOCK_OF_NICKEL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> DUNGEON_BLOCK = ITEMS.register("dungeon_block", () -> new BlockItem(ModBlocks.DUNGEON_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> CRYSTAL_KEEP_BLOCK = ITEMS.register("crystal_keep_block", () -> new BlockItem(ModBlocks.CRYSTAL_KEEP_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+
+    //Bloodstone
+    public static final RegistryObject<Item> BLOODSTONE = ITEMS.register("bloodstone", () -> new BlockItem(ModBlocks.BLOODSTONE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> BLOODSTONE_GEM_ORE = ITEMS.register("bloodstone_gem_ore", () -> new BlockItem(ModBlocks.BLOODSTONE_GEM_ORE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+
+    //Shattered Plains Blocks
+    public static final RegistryObject<Item> OBSECFUTORIA = ITEMS.register("obsecfutoria", () -> new BlockItem(ModBlocks.OBSECFUTORIA.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+
+    //Celestial Blocks
+    public static final RegistryObject<Item> CELESTIAL_PILLAR = ITEMS.register("celestial_pillar", () -> new BlockItem(ModBlocks.CELESTIAL_PILLAR.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> CELESTIAL_TILE = ITEMS.register("celestial_tile", () -> new BlockItem(ModBlocks.CELESTIAL_TILE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> CELESTIAL_TILE_SLAB = ITEMS.register("celestial_tile_slab", () -> new BlockItem(ModBlocks.CELESTIAL_TILE_SLAB.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> CELESTIAL_STAIRS = ITEMS.register("celestial_stairs", () -> new BlockItem(ModBlocks.CELESTIAL_STAIRS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> CELESTIAL_WALL = ITEMS.register("celestial_wall", () -> new BlockItem(ModBlocks.CELESTIAL_WALL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Staffs
     public static final RegistryObject<Item> STAFF_PROTECTION_OBSIDIAN_ROD_FAE_LEATHER_BINDING = ITEMS.register("staff_protection_obsidian_rod_fae_leather_binding", () -> new ModularStaff(new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_COMBAT), StaffType.PROTECTION_OBSIDIAN_FAE_LEATHER));

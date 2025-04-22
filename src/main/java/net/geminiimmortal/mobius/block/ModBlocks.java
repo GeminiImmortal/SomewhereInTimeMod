@@ -299,6 +299,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> LATENT_MANA_COLLECTOR = registerBlock("latent_mana_collector",
             () -> new LatentManaCollector(AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3).strength(30F, 1200F).requiresCorrectToolForDrops().noOcclusion()));
 
+    public static final RegistryObject<Block> CRYSTAL_KEEP_BLOCK = registerBlock("crystal_keep_block",
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.BEDROCK).lightLevel(state -> 12).sound(SoundType.GLASS)));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         return toReturn;
