@@ -5,7 +5,9 @@ import net.geminiimmortal.mobius.entity.goals.*;
 import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.network.PlayMusicPacket;
 import net.geminiimmortal.mobius.sound.ClientMusicHandler;
+import net.geminiimmortal.mobius.util.TitleUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.command.impl.TitleCommand;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -49,8 +51,10 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class GovernorEntity extends VindicatorEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
@@ -160,8 +164,10 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
     @Override
     public void die(DamageSource source) {
         super.die(source);
+
         if (!this.level.isClientSide()) {
             int experiencePoints = this.getXpToDrop();
+            TitleUtils.sendTitle((ServerPlayerEntity) this.getTarget(), "DUTY COMPLETE", "Legendary foe vanquished!", 10, 100, 40);
 
             // Drop the experience orbs
             while (experiencePoints > 0) {
