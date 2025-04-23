@@ -7,11 +7,17 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particles.IParticleData;
+import net.minecraft.particles.ParticleType;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import java.util.List;
 import java.util.Objects;
@@ -92,8 +98,35 @@ public class GovernorCloneSummonGoal extends Goal {
             clone.lookAt(EntityAnchorArgument.Type.EYES, targetPos);
             boss.level.addFreshEntity(clone);
             boss.level.playSound(null, target, SoundEvents.ENDERMAN_TELEPORT, SoundCategory.HOSTILE, 1.0f, 1.0f);
+            flashAndBoom(clone.level, clone.blockPosition());
+            spawnSpiralParticles(boss.level, boss.blockPosition(), 3, ParticleTypes.END_ROD, 8, 64);
         }
     }
+
+    public static void flashAndBoom(World world, BlockPos pos) {
+        ((ServerWorld) world).sendParticles(ParticleTypes.EXPLOSION,
+                pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
+                1, 0, 0, 0, 0);
+
+        world.playSound(null, pos, SoundEvents.GENERIC_EXPLODE,
+                SoundCategory.HOSTILE, 1.0f, 1.0f);
+    }
+
+    public static void spawnSpiralParticles(World world, BlockPos center, double radius, IParticleData particle, int turns, int pointsPerTurn) {
+        for (int i = 0; i < turns * pointsPerTurn; i++) {
+            double angle = 2 * Math.PI * i / pointsPerTurn;
+            double xOffset = radius * Math.cos(angle);
+            double zOffset = radius * Math.sin(angle);
+            double yOffset = 0.2 * i / pointsPerTurn;
+
+            double x = center.getX() + 0.5 + xOffset;
+            double y = center.getY() + yOffset;
+            double z = center.getZ() + 0.5 + zOffset;
+
+            world.addParticle(particle, x, y, z, 0, 0, 0);
+        }
+    }
+
 
     private void summonCircle() {
         LivingEntity target = this.boss.getTarget();

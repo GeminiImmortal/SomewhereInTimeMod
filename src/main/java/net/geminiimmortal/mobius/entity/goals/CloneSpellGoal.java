@@ -7,9 +7,13 @@ import net.geminiimmortal.mobius.entity.custom.ShatterCloneEntity;
 import net.minecraft.command.arguments.EntityAnchorArgument;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class CloneSpellGoal extends Goal {
 
@@ -62,8 +66,19 @@ public class CloneSpellGoal extends Goal {
             clone.lookAt(EntityAnchorArgument.Type.EYES, targetPos);
             boss.level.addFreshEntity(clone);
             boss.level.playSound(null, target, SoundEvents.ENDERMAN_TELEPORT, SoundCategory.HOSTILE, 1.0f, 1.0f);
+            flashAndBoom(clone.level, clone.blockPosition());
         }
     }
+
+    public static void flashAndBoom(World world, BlockPos pos) {
+        ((ServerWorld) world).sendParticles(ParticleTypes.EXPLOSION,
+                pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
+                1, 0, 0, 0, 0);
+
+        world.playSound(null, pos, SoundEvents.GENERIC_EXPLODE,
+                SoundCategory.HOSTILE, 1.0f, 1.0f);
+    }
+
 
     private void summonCircle() {
         LivingEntity target = this.boss.getTarget();
