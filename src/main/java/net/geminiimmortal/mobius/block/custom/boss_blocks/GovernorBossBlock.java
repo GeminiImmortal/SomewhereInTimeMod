@@ -1,12 +1,14 @@
 package net.geminiimmortal.mobius.block.custom.boss_blocks;
 
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.util.TitleUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -46,9 +48,8 @@ public class GovernorBossBlock extends Block {
                 bossEntity.moveTo(bossX, bossY, bossZ, 0.0F, 0.0F);
                 world.addFreshEntity(bossEntity);
                 world.playSound(null, targetX, targetY, targetZ, SoundEvents.WITHER_SPAWN, SoundCategory.HOSTILE, 1.0F, 1.0F);
-                player.sendMessage(new StringTextComponent("The Governor challenges you to a duel!"), player.getUUID());
             }
-
+            TitleUtils.sendTitle((ServerPlayerEntity) player, "Duty Commenced!", null, 10, 40, 40);
             world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 
             return ActionResultType.SUCCESS;
