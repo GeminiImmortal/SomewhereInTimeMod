@@ -285,6 +285,8 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.INFERNAL_BRIAR.get(), InfernalBriarRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ANGLERFISH.get(), AnglerfishRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.TORNADO.get(), TornadoRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.CAPTAIN_BOSS.get(), GuardCaptainBossRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SORCERER_KNIVES_OUT.get(), SorcererKnivesOutRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -336,6 +338,7 @@ public class MobiusMod
             event.put(ModEntityTypes.BONE_WOLF.get(), BoneWolfEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.INFERNAL_BRIAR.get(), InfernalBriarEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.ANGLERFISH.get(), AnglerfishEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.CAPTAIN_BOSS.get(), GuardCaptainBossEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent

@@ -89,6 +89,12 @@ public class ModEntityTypes {
                                     EntityClassification.MISC).sized(1f, 1f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "knives_out").toString()));
 
+    public static final RegistryObject<EntityType<SorcererKnivesOutEntity>> SORCERER_KNIVES_OUT =
+            ENTITY_TYPES.register("sorcerer_knives_out",
+                    () -> EntityType.Builder.of(SorcererKnivesOutEntity::new,
+                                    EntityClassification.MISC).sized(1f, 1f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "sorcerer_knives_out").toString()));
+
     public static final RegistryObject<EntityType<ModBoatEntity>> MARROWOOD_BOAT =
             ENTITY_TYPES.register("marrowood_boat",
                     () -> EntityType.Builder.<ModBoatEntity>of(ModBoatEntity::new,
@@ -130,6 +136,12 @@ public class ModEntityTypes {
                     () -> EntityType.Builder.<TornadoEntity>of(TornadoEntity::new,
                                     EntityClassification.MISC).sized(2f, 2f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "tornado").toString()));
+
+    public static final RegistryObject<EntityType<GuardCaptainBossEntity>> CAPTAIN_BOSS =
+            ENTITY_TYPES.register("captain_boss",
+                    () -> EntityType.Builder.of(GuardCaptainBossEntity::new,
+                                    EntityClassification.MONSTER).sized(1f, 4f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "captain_boss").toString()));
 
 
 

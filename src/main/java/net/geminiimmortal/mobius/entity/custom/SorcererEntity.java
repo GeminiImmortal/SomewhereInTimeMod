@@ -52,7 +52,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     ShatterCloneEntity spell = new ShatterCloneEntity(ModEntityTypes.SHATTER_CLONE.get(), this.level);
 
     IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[CHAMPION FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.GOLD).withBold(true));
-    IFormattableTextComponent name = (StringTextComponent) new StringTextComponent("The Court Wizard").setStyle(Style.EMPTY.withColor(TextFormatting.AQUA).withBold(false));
+    IFormattableTextComponent name = (StringTextComponent) new StringTextComponent("Lucius, The Court Wizard").setStyle(Style.EMPTY.withColor(TextFormatting.AQUA).withBold(false));
     IFormattableTextComponent namePlate = rank.append(name);
 
     private final ServerBossInfo bossInfo = new ServerBossInfo(
@@ -100,7 +100,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
         this.goalSelector.addGoal(2, new AerialLightningBarrageGoal(this, 12, 4, 10));
         this.goalSelector.addGoal(3, new MagiDashGoal(this));
         this.goalSelector.addGoal(6, new SorcererBackAwayGoal(this, 1.4, 5));
-        this.goalSelector.addGoal(4, new SorcererCastSpellGoal(this, 28, 100));
+        this.goalSelector.addGoal(4, new SorcererCastSpellGoal(this, 28, 120));
         this.goalSelector.addGoal(5, new BubbleAttackGoal(this, 4, 20, 80));
         this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 40f));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));

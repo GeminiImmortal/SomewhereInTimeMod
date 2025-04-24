@@ -14,11 +14,11 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class GovernorKnivesOutEntity extends Entity {
+public class SorcererKnivesOutEntity extends Entity {
     private float rotationAngle = 180;
     private int duration = 180;
 
-    public GovernorKnivesOutEntity(EntityType<? extends GovernorKnivesOutEntity> entityType, World world) {
+    public SorcererKnivesOutEntity(EntityType<? extends SorcererKnivesOutEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -37,12 +37,23 @@ public class GovernorKnivesOutEntity extends Entity {
         }
     }
 
+    @Override
+    public AxisAlignedBB getBoundingBox() {
+        return new AxisAlignedBB(
+                this.getX() - 3, this.getY() - 1, this.getZ() - 3,
+                this.getX() + 3, this.getY() + 1, this.getZ() + 3
+        );
+    }
 
 
     @Override
     public void tick() {
         super.tick();
-        AxisAlignedBB knifeBoundingBox = new AxisAlignedBB(this.getX() - 3, this.getY() - 20, this.getZ() - 3, this.getX() + 3, this.getY() + 2, this.getZ() + 3);
+        AxisAlignedBB knifeBoundingBox = new AxisAlignedBB(
+                this.getX() - 3, this.getY() - 1, this.getZ() - 3,
+                this.getX() + 3, this.getY() + 1, this.getZ() + 3
+        );
+
         List<PlayerEntity> players = level.getEntitiesOfClass(PlayerEntity.class, knifeBoundingBox);
         for (PlayerEntity player : players) {
             if (knifeBoundingBox.intersects(player.getBoundingBox())) {

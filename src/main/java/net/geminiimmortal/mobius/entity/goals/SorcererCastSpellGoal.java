@@ -12,6 +12,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.fml.network.PacketDistributor;
 
+import java.util.Random;
+
 public class SorcererCastSpellGoal extends Goal {
     private final SorcererEntity sorcerer;
     private int chargeTime; // Time spent charging the spell
@@ -40,43 +42,40 @@ public class SorcererCastSpellGoal extends Goal {
 
     @Override
     public boolean canContinueToUse() {
-    //    return chargeTime < maxChargeTime && this.sorcerer.getTarget() != null;
-        return this.sorcerer.getTarget() != null;
+        return chargeTime < maxChargeTime && this.sorcerer.getTarget() != null;
+    //    return this.sorcerer.getTarget() != null;
     }
 
     @Override
     public void start() {
-    //    chargeTime = 0;
-        sorcerer.setCasting(true); // Optional: Add a flag or animation
-        if (sorcerer.getTarget() != null) {
-            sorcerer.getLookControl().setLookAt(sorcerer.getTarget(), 30.0F, 30.0F);
-            executeSpell();
-        }
+        chargeTime = 0;
+        sorcerer.setCasting(true);
     }
 
     @Override
     public void tick() {
-    //    chargeTime++;
+        chargeTime++;
 
-        // Rotate to face the target during charging
-        //LivingEntity target = sorcerer.getTarget();
-        if (cooldown > 0) {
-            cooldown--;
+        if (sorcerer.getTarget() != null) {
+            sorcerer.getLookControl().setLookAt(sorcerer.getTarget(), 30.0F, 30.0F);
         }
 
 
-        //if (chargeTime == maxChargeTime) {
-        //    executeSpell();
-        //}
+        if (chargeTime < maxChargeTime) {
+            executeSpell();
+        } else {
+            stop();
+        }
     }
 
     private void executeSpell() {
         LivingEntity target = sorcerer.getTarget();
         if (target != null && target.isAlive()) {
             // Summon the spell entity
-            SpellEntity spell = new SpellEntity(ModEntityTypes.SPELL.get(), sorcerer.level);
+            SorcererKnivesOutEntity spell = new SorcererKnivesOutEntity(ModEntityTypes.SORCERER_KNIVES_OUT.get(), sorcerer.level);
+            spell.setPos(target.getX(), target.getY(), target.getZ());
             sorcerer.level.addFreshEntity(spell);
-            spell.setPos(target.getX(), target.getY() + 6, target.getZ());
+
             sorcerer.level.playSound(null, target.blockPosition(), SoundEvents.ILLUSIONER_CAST_SPELL, SoundCategory.HOSTILE, 1.0F, 1.0F);
             sorcerer.level.playSound(null, target.blockPosition(), ModSounds.KNIFE_RAIN.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
 
@@ -89,15 +88,21 @@ public class SorcererCastSpellGoal extends Goal {
             double endZ = target.getZ();
 
             // Calculate the number of particles and interpolate their position
-            int particleCount = 50; // Example count
+            /*int particleCount = 50; // Example count
+            Random random = sorcerer.getRandom();
             for (int i = 0; i < particleCount; i++) {
-                double t = (double) i / (particleCount - 1);
-                double particleX = startX + (endX - startX) * t;
-                double particleY = startY + (endY - startY) * t;
-                double particleZ = startZ + (endZ - startZ) * t;
-                ParticlePacket packet = new ParticlePacket(particleX, particleY, particleZ, "knife_rain"); // or your chosen particle type
+                double xOffset = (random.nextDouble() - 0.5) * 4.0; // spread of 4 blocks
+                double zOffset = (random.nextDouble() - 0.5) * 4.0;
+                double yOffset = random.nextDouble() * 3.0 + 3.0; // 3 to 6 blocks above target
+
+                double particleX = target.getX() + xOffset;
+                double particleY = target.getY() + yOffset;
+                double particleZ = target.getZ() + zOffset;
+
+                ParticlePacket packet = new ParticlePacket(particleX, particleY, particleZ, "knife_rain");
                 ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.ALL.noArg(), packet);
-            }
+            }*/
+
         }
 
 

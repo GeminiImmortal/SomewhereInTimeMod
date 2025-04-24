@@ -3,6 +3,7 @@ package net.geminiimmortal.mobius.entity.render;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.geminiimmortal.mobius.entity.custom.GovernorKnivesOutEntity;
+import net.geminiimmortal.mobius.entity.custom.SorcererKnivesOutEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -12,30 +13,30 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Vector3f;
 
-public class GovernorKnivesOutRenderer extends EntityRenderer<GovernorKnivesOutEntity> {
+public class SorcererKnivesOutRenderer extends EntityRenderer<SorcererKnivesOutEntity> {
     private static final ResourceLocation TEXTURE = new ResourceLocation("mobius", "textures/entity/knives_out.png");
 
-    public GovernorKnivesOutRenderer(EntityRendererManager renderManager) {
+    public SorcererKnivesOutRenderer(EntityRendererManager renderManager) {
         super(renderManager);
     }
 
     @Override
-    public void render(GovernorKnivesOutEntity entity, float entityYaw, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int packedLight) {
+    public void render(SorcererKnivesOutEntity entity, float entityYaw, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int packedLight) {
         // Push matrix to handle custom transformations
         matrixStack.pushPose();
 
         // Apply transformations (position, rotation, scale)
-        matrixStack.translate(0.0, 0.025, 0.0);
+        matrixStack.translate(0.0, 6.0, 0.0);
         matrixStack.scale(8.0f, 8.0f, 8.0f);
 
         // Rotate the spell to face upwards (X-axis rotation)
-        matrixStack.mulPose(Vector3f.XP.rotationDegrees(-180.0f));
+        matrixStack.mulPose(Vector3f.XP.rotationDegrees(0.0f));
 
         float rotation = entity.getRotationAngle() + (partialTicks * 1.0f); // Smooth interpolation for rotation
         matrixStack.mulPose(Vector3f.YP.rotationDegrees(rotation));
 
         // Render the spell (e.g., using a custom texture or a particle-like effect)
-        IVertexBuilder vertexBuilder = buffer.getBuffer(RenderType.entityCutoutNoCull(TEXTURE));
+        IVertexBuilder vertexBuilder = buffer.getBuffer(RenderType.entityCutout(TEXTURE));
         Matrix4f matrix4f = matrixStack.last().pose();
 
         // Draw a flat quad for simplicity
@@ -71,7 +72,7 @@ public class GovernorKnivesOutRenderer extends EntityRenderer<GovernorKnivesOutE
     }
 
     @Override
-    public ResourceLocation getTextureLocation(GovernorKnivesOutEntity entity) {
+    public ResourceLocation getTextureLocation(SorcererKnivesOutEntity entity) {
         return TEXTURE;
     }
 }

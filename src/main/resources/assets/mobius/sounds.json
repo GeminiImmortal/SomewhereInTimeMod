@@ -25,6 +25,24 @@
       }
     ]
   },
+  "captain_hurts": {
+    "sounds": [
+      "mobius:captain_hurts"
+    ],
+    "subtitle": "Royal Captain hurts"
+  },
+  "captain_scream": {
+    "sounds": [
+      "mobius:captain_scream"
+    ],
+    "subtitle": "Royal Captain charges"
+  },
+  "captain_ulti": {
+    "sounds": [
+      "mobius:captain_ulti"
+    ],
+    "subtitle": "Sword slices"
+  },
   "gravitas": {
     "sounds": [
       "mobius:gravitas"

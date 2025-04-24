@@ -4,6 +4,7 @@ import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.GovernorEntity;
 import net.geminiimmortal.mobius.entity.custom.GovernorKnivesOutEntity;
+import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
 import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.network.ParticlePacket;
 import net.geminiimmortal.mobius.sound.ModSounds;
@@ -15,15 +16,15 @@ import net.minecraftforge.fml.network.PacketDistributor;
 
 import java.util.EnumSet;
 
-public class GovernorKnivesOutSpellGoal extends Goal {
-    private final GovernorEntity sorcerer;
+public class KnivesOutSpellGoal extends Goal {
+    private final SorcererEntity sorcerer;
     private int chargeTime; // Time spent charging the spell
     private int cooldown;   // Cooldown before the sorcerer can cast again
     private final int maxChargeTime = 20; // Ticks (3 seconds at 20 TPS)
-    private final int cooldownTime = 60; // Ticks (5 seconds cooldown)
+    private final int cooldownTime = 160; // Ticks (5 seconds cooldown)
     private final double castRange;
 
-    public GovernorKnivesOutSpellGoal(GovernorEntity sorcerer, double castRange) {
+    public KnivesOutSpellGoal(SorcererEntity sorcerer, double castRange) {
         this.sorcerer = sorcerer;
         this.castRange = castRange;
         this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK)); // Prevent movement while casting

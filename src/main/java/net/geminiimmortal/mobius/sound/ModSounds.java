@@ -102,6 +102,15 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> HURRICANE =
             registerSoundEvent("hurricane");
 
+    public static final RegistryObject<SoundEvent> CAPTAIN_HURTS =
+            registerSoundEvent("captain_hurts");
+
+    public static final RegistryObject<SoundEvent> CAPTAIN_SCREAMS =
+            registerSoundEvent("captain_scream");
+
+    public static final RegistryObject<SoundEvent> CAPTAIN_ULTI =
+            registerSoundEvent("captain_ulti");
+
 
 
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
