@@ -1,5 +1,7 @@
 package net.geminiimmortal.mobius.entity.goals;
 
+import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.entity.custom.SorcererObliteratorEntity;
 import net.geminiimmortal.mobius.network.BeamCirclePacket;
 import net.geminiimmortal.mobius.network.BeamEndPacket;
 import net.geminiimmortal.mobius.network.BeamRenderPacket;
@@ -23,9 +25,11 @@ public class ArcaneBeamAttackGoal extends Goal {
     private int attackTick;
     private BlockPos beamTarget;
     private boolean hasFired;
+    SorcererObliteratorEntity obliterator;
 
-    public ArcaneBeamAttackGoal(MobEntity boss) {
+    public ArcaneBeamAttackGoal(MobEntity boss, SorcererObliteratorEntity obliterator) {
         this.boss = boss;
+        this.obliterator = obliterator;
     }
 
     @Override
@@ -42,10 +46,13 @@ public class ArcaneBeamAttackGoal extends Goal {
         boss.getNavigation().stop();
 
         // Tell client to render the arcane circle
-        ModNetwork.NETWORK_CHANNEL.send(
+        /*ModNetwork.NETWORK_CHANNEL.send(
                 PacketDistributor.TRACKING_CHUNK.with(() -> boss.level.getChunkAt(target.blockPosition())),
                 new BeamCirclePacket(beamTarget.above(24))
-        );
+        );*/
+        this.obliterator = new SorcererObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), boss.level);
+        obliterator.setPos(beamTarget.getX(), beamTarget.getY() + 16, beamTarget.getZ());
+        boss.level.addFreshEntity(obliterator);
 
         boss.level.playSound(null, beamTarget, ModSounds.OBLITERATOR.get(), SoundCategory.HOSTILE, 2f, 0.5f);
     }
@@ -85,10 +92,12 @@ public class ArcaneBeamAttackGoal extends Goal {
     @Override
     public void stop() {
         // Optional: tell client to fade beam or stop rendering
-        ModNetwork.NETWORK_CHANNEL.send(
+        /*ModNetwork.NETWORK_CHANNEL.send(
                 PacketDistributor.TRACKING_CHUNK.with(() -> boss.level.getChunkAt(target.blockPosition())),
                 new BeamEndPacket(target.blockPosition())
-        );
+        );*/
+        obliterator.remove();
+
     }
 }
 

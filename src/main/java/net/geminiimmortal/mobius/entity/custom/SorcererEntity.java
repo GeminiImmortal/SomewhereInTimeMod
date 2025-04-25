@@ -113,7 +113,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
         this.goalSelector.addGoal(4, laserTrackerGoal);
     //    this.goalSelector.addGoal(3, new MagiDashGoal(this));
     //    this.goalSelector.addGoal(6, new SorcererBackAwayGoal(this, 1.4, 5));
-    //    this.goalSelector.addGoal(6, new ArcaneBeamAttackGoal(this));
+        this.goalSelector.addGoal(6, new ArcaneBeamAttackGoal(this, new SorcererObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), this.level)));
         this.goalSelector.addGoal(5, new BubbleAttackGoal(this, 4, 20, 80));
         this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 40f));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
