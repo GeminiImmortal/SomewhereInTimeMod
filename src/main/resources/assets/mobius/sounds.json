@@ -42,6 +42,12 @@
     ],
     "subtitle": "Massive attack charges"
   },
+  "arcane_nuke_fx": {
+    "sounds": [
+      "mobius:arcane_nuke_fx"
+    ],
+    "subtitle": "Massive energy gathers"
+  },
   "captain_hurts": {
     "sounds": [
       "mobius:captain_hurts"

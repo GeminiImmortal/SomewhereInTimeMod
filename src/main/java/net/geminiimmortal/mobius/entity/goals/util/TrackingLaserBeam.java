@@ -58,7 +58,6 @@ public class TrackingLaserBeam {
 
     public void tick() {
         ticksAlive++;
-        System.out.println("Laser beam ticking...");
 
         LivingEntity target = targetSupplier.get();
         if (target == null || !target.isAlive()) return;

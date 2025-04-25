@@ -120,6 +120,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> OBLITERATOR =
             registerSoundEvent("obliterator");
 
+    public static final RegistryObject<SoundEvent> ARCANE_NUKE_FX =
+            registerSoundEvent("arcane_nuke_fx");
+
 
 
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {

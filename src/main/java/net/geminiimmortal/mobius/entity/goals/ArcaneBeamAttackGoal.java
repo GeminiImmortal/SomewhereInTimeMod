@@ -54,7 +54,7 @@ public class ArcaneBeamAttackGoal extends Goal {
         obliterator.setPos(beamTarget.getX(), beamTarget.getY() + 16, beamTarget.getZ());
         boss.level.addFreshEntity(obliterator);
 
-        boss.level.playSound(null, beamTarget, ModSounds.OBLITERATOR.get(), SoundCategory.HOSTILE, 2f, 0.5f);
+        boss.level.playSound(null, beamTarget, ModSounds.ARCANE_NUKE_FX.get(), SoundCategory.HOSTILE, 50f, 1f);
     }
 
     @Override
@@ -70,7 +70,15 @@ public class ArcaneBeamAttackGoal extends Goal {
 
             ModNetwork.NETWORK_CHANNEL.send(
                     PacketDistributor.TRACKING_CHUNK.with(() -> boss.level.getChunkAt(target.blockPosition())),
-                    new BeamRenderPacket(new Vector3d(beamTarget.getX(), beamTarget.getY() + 24, beamTarget.getZ()), new Vector3d(beamTarget.getX(), beamTarget.getY(), beamTarget.getZ()), ParticleTypes.SOUL_FIRE_FLAME, 25f) // Adjust density and particle type
+                    new BeamRenderPacket(new Vector3d(beamTarget.getX(), beamTarget.getY() + 24, beamTarget.getZ()), new Vector3d(beamTarget.getX(), beamTarget.getY(), beamTarget.getZ()), ParticleTypes.SWEEP_ATTACK, 5f) // Adjust density and particle type
+            );
+            ModNetwork.NETWORK_CHANNEL.send(
+                    PacketDistributor.TRACKING_CHUNK.with(() -> boss.level.getChunkAt(target.blockPosition())),
+                    new BeamRenderPacket(new Vector3d(beamTarget.getX(), beamTarget.getY() + 24, beamTarget.getZ()), new Vector3d(beamTarget.getX(), beamTarget.getY(), beamTarget.getZ()), ParticleTypes.FLAME, 25f) // Adjust density and particle type
+            );
+            ModNetwork.NETWORK_CHANNEL.send(
+                    PacketDistributor.TRACKING_CHUNK.with(() -> boss.level.getChunkAt(target.blockPosition())),
+                    new BeamRenderPacket(new Vector3d(beamTarget.getX(), beamTarget.getY() + 24, beamTarget.getZ()), new Vector3d(beamTarget.getX(), beamTarget.getY(), beamTarget.getZ()), ParticleTypes.DRAGON_BREATH, 25f) // Adjust density and particle type
             );
             boss.level.playSound(null, beamTarget, SoundEvents.LIGHTNING_BOLT_IMPACT, SoundCategory.HOSTILE, 3f, 0.7f);
 
