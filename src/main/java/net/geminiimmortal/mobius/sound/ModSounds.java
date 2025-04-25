@@ -111,6 +111,15 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> CAPTAIN_ULTI =
             registerSoundEvent("captain_ulti");
 
+    public static final RegistryObject<SoundEvent> LIGHTNING_SPELL_FX =
+            registerSoundEvent("lightning_spell_fx");
+
+    public static final RegistryObject<SoundEvent> ARCANE_BOLT_FX =
+            registerSoundEvent("arcane_bolt_fx");
+
+    public static final RegistryObject<SoundEvent> OBLITERATOR =
+            registerSoundEvent("obliterator");
+
 
 
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {

@@ -89,6 +89,12 @@ public class ModEntityTypes {
                                     EntityClassification.MISC).sized(1f, 1f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "knives_out").toString()));
 
+    public static final RegistryObject<EntityType<SorcererObliteratorEntity>> OBLITERATOR =
+            ENTITY_TYPES.register("obliterator",
+                    () -> EntityType.Builder.of(SorcererObliteratorEntity::new,
+                                    EntityClassification.MISC).sized(1f, 1f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "obliterator").toString()));
+
     public static final RegistryObject<EntityType<SorcererKnivesOutEntity>> SORCERER_KNIVES_OUT =
             ENTITY_TYPES.register("sorcerer_knives_out",
                     () -> EntityType.Builder.of(SorcererKnivesOutEntity::new,
@@ -142,6 +148,13 @@ public class ModEntityTypes {
                     () -> EntityType.Builder.of(GuardCaptainBossEntity::new,
                                     EntityClassification.MONSTER).sized(1f, 4f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "captain_boss").toString()));
+
+    public static final RegistryObject<EntityType<BeamEntity>> BEAM_ENTITY = ENTITY_TYPES.register("beam", () -> EntityType.Builder.<BeamEntity>of(BeamEntity::new, EntityClassification.MISC)
+            .sized(0.2F, 0.2F)
+            .clientTrackingRange(64)
+            .updateInterval(1)
+            .build(new ResourceLocation(MobiusMod.MOD_ID, "beam_entity").toString()));
+
 
 
 

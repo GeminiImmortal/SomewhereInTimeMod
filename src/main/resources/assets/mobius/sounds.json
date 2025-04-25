@@ -25,6 +25,23 @@
       }
     ]
   },
+  "arcane_bolt_fx": {
+    "sounds": [
+      "mobius:arcane_bolt_fx"
+    ],
+    "subtitle": "Spell impacts"
+  },
+  "lightning_spell_fx": {
+    "sounds": [
+      "mobius:lightning_spell_fx"
+    ]
+  },
+  "obliterator": {
+    "sonuds": [
+      "mobius:obliterator"
+    ],
+    "subtitle": "Massive attack charges"
+  },
   "captain_hurts": {
     "sounds": [
       "mobius:captain_hurts"

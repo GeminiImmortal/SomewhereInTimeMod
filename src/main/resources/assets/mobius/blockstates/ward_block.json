@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "axis=x": { "model": "mobius:block/ward_block_x" },
+    "axis=z": { "model": "mobius:block/ward_block_z" }
+  }
+}
+
+

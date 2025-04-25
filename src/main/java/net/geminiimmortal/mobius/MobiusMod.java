@@ -29,6 +29,7 @@ import net.geminiimmortal.mobius.world.worldgen.feature.ModFeatures;
 import net.geminiimmortal.mobius.world.worldgen.feature.placement.ModFeaturePlacement;
 import net.geminiimmortal.mobius.world.worldgen.structure.ModStructureSetup;
 import net.geminiimmortal.mobius.world.worldgen.biome.layer.MobiusLayerUtil;
+import net.geminiimmortal.mobius.world.worldgen.structure.processor.ModProcessors;
 import net.minecraft.block.Block;
 import net.minecraft.block.WoodType;
 import net.minecraft.client.gui.ScreenManager;
@@ -131,7 +132,7 @@ public class MobiusMod
         ModNetwork.init();
 
         event.enqueueWork(() -> {
-
+            ModProcessors.WARD_ORIENTATION_FIX.toString();
             ModBiomes.registerBiomes();
             ModDimensions.registerDimensionStuff();
             ModStructureSetup.registerStructures();
@@ -245,6 +246,9 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModFluids.FLOWING_ECTOPLASM.get(), RenderType.translucent());
             RenderTypeLookup.setRenderLayer(ModFluids.ECTOPLASM_FLUID.get(), RenderType.translucent());
 
+            RenderTypeLookup.setRenderLayer(ModBlocks.WARD_BLOCK.get(), RenderType.translucent());
+
+
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.SIGN_TILE_ENTITIES.get(),
                     SignTileEntityRenderer::new);
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.GLOWING_BLOCK.get(),
@@ -287,6 +291,8 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.TORNADO.get(), TornadoRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.CAPTAIN_BOSS.get(), GuardCaptainBossRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SORCERER_KNIVES_OUT.get(), SorcererKnivesOutRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.OBLITERATOR.get(), SorcererObliteratorRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BEAM_ENTITY.get(), BeamRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

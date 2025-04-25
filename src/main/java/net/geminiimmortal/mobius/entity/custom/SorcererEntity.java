@@ -2,6 +2,8 @@ package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.goals.*;
+import net.geminiimmortal.mobius.network.BeamEndPacket;
+import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.sound.ClientMusicHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -29,6 +31,7 @@ import net.minecraft.util.text.*;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerBossInfo;
+import net.minecraftforge.fml.network.PacketDistributor;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -50,6 +53,8 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     private static final int PARTICLE_SPAWN_INTERVAL = 5;
     private static final DataParameter<Boolean> doesCircleExist = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
     ShatterCloneEntity spell = new ShatterCloneEntity(ModEntityTypes.SHATTER_CLONE.get(), this.level);
+    private LaserTrackerAttackGoal laserTrackerGoal;
+
 
     IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[CHAMPION FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.GOLD).withBold(true));
     IFormattableTextComponent name = (StringTextComponent) new StringTextComponent("Lucius, The Court Wizard").setStyle(Style.EMPTY.withColor(TextFormatting.AQUA).withBold(false));
@@ -95,15 +100,24 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     }
 
     @Override
+    public void setSecondsOnFire(int seconds) {
+        // Do nothing – prevents the mob from visually catching fire
+    }
+
+
+    @Override
     protected void registerGoals() {
+        this.laserTrackerGoal = new LaserTrackerAttackGoal(this, 40, 100);
         this.goalSelector.addGoal(1, new SwimGoal(this));
-        this.goalSelector.addGoal(2, new AerialLightningBarrageGoal(this, 12, 4, 10));
-        this.goalSelector.addGoal(3, new MagiDashGoal(this));
-        this.goalSelector.addGoal(6, new SorcererBackAwayGoal(this, 1.4, 5));
-        this.goalSelector.addGoal(4, new SorcererCastSpellGoal(this, 28, 120));
+        this.goalSelector.addGoal(2, new AerialLightningBarrageGoal(this, 10, 6, 15));
+        this.goalSelector.addGoal(4, laserTrackerGoal);
+    //    this.goalSelector.addGoal(3, new MagiDashGoal(this));
+    //    this.goalSelector.addGoal(6, new SorcererBackAwayGoal(this, 1.4, 5));
+    //    this.goalSelector.addGoal(6, new ArcaneBeamAttackGoal(this));
         this.goalSelector.addGoal(5, new BubbleAttackGoal(this, 4, 20, 80));
         this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 40f));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+
     }
 
 
@@ -146,6 +160,12 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
         }
 
         spell.kill();
+        if(this.getTarget() != null) {
+            ModNetwork.NETWORK_CHANNEL.send(
+                    PacketDistributor.TRACKING_CHUNK.with(() -> this.level.getChunkAt(this.getTarget().blockPosition())),
+                    new BeamEndPacket(this.getTarget().blockPosition())
+            );
+        }
 
         this.level.setSkyFlashTime(5);
         this.level.playSound(null, this.position().x, this.position().y, this.position().z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundCategory.HOSTILE, 100.0f, 1.1f);
@@ -166,6 +186,14 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     @Override
     public void tick() {
         super.tick();
+
+        this.setRemainingFireTicks(0);
+
+        if(laserTrackerGoal != null) {
+            laserTrackerGoal.tickCooldown();
+        }
+
+
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
         particleTickCounter++;
 

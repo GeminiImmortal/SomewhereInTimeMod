@@ -34,6 +34,21 @@ public class ModNetwork {
                 .decoder(ClientPlaySoundPacket::decode)
                 .consumer(ClientPlaySoundPacket::handle)
                 .add();
+        NETWORK_CHANNEL.messageBuilder(BeamRenderPacket.class, 3, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(BeamRenderPacket::encode)
+                .decoder(BeamRenderPacket::decode)
+                .consumer(BeamRenderPacket::handle)
+                .add();
+        NETWORK_CHANNEL.messageBuilder(BeamEndPacket.class, 4, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(BeamEndPacket::encode)
+                .decoder(BeamEndPacket::decode)
+                .consumer(BeamEndPacket::handle)
+                .add();
+        NETWORK_CHANNEL.messageBuilder(BeamCirclePacket.class, 5, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(BeamCirclePacket::encode)
+                .decoder(BeamCirclePacket::decode)
+                .consumer(BeamCirclePacket::handle)
+                .add();
     }
 }
 

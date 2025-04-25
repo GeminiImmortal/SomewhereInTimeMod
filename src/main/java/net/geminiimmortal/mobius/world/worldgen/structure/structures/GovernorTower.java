@@ -1,7 +1,10 @@
 package net.geminiimmortal.mobius.world.worldgen.structure.structures;
 
 import net.geminiimmortal.mobius.MobiusMod;
+import net.geminiimmortal.mobius.world.worldgen.structure.processor.WardOrientationFixProcessor;
 import net.minecraft.block.BlockState;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -17,13 +20,11 @@ import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
-import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructureStart;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
+import net.minecraft.world.gen.feature.jigsaw.JigsawPiece;
+import net.minecraft.world.gen.feature.jigsaw.SingleJigsawPiece;
+import net.minecraft.world.gen.feature.structure.*;
+import net.minecraft.world.gen.feature.template.PlacementSettings;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
 
 public class GovernorTower extends Structure<NoFeatureConfig> {
 
@@ -71,6 +72,11 @@ public class GovernorTower extends Structure<NoFeatureConfig> {
             int z = (chunkZ << 4) + 7;
             BlockPos blockpos = new BlockPos(x, 0, z);
 
+            PlacementSettings placement = new PlacementSettings()
+                    .setMirror(Mirror.NONE)
+                    .addProcessor(new WardOrientationFixProcessor())
+                    .setIgnoreEntities(false);
+
 
             JigsawManager.addPieces(dynamicRegistryManager,
                     new VillageConfig(() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY)
@@ -80,9 +86,11 @@ public class GovernorTower extends Structure<NoFeatureConfig> {
 
             this.pieces.forEach(piece -> piece.move(0, 70, 0));
             this.pieces.forEach(piece -> piece.getBoundingBox().y0 -= 1);
-
+            this.pieces.forEach(piece -> piece.setOrientation(Direction.WEST));
             this.calculateBoundingBox();
         }
+
+
     }
 }
 

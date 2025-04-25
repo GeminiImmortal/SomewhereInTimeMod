@@ -29,14 +29,14 @@ public class SorcererCastSpellGoal extends Goal {
         //this.setFlags(EnumSet.of(Flag.LOOK));
     }
 
+    @Override
     public boolean canUse() {
         if (cooldown > 0) {
             cooldown--; // Decrement even when not running
             return false;
         }
-        //if(this.sorcerer.getTarget() != null && this.sorcerer.getTarget().distanceToSqr(this.sorcerer) < castRange * castRange && this.sorcerer.getTarget().distanceToSqr(this.sorcerer) > 81) {
-        if(this.sorcerer.getTarget() != null && this.sorcerer.getTarget().distanceTo(this.sorcerer) < castRange) { return true; }
-        else return false;
+        //if(this.sorcerer.getTarget() != null && this.sorcerer.getTarget().distanceTo(this.sorcerer) < castRange) { return true; }
+        return this.sorcerer.getTarget() != null && this.sorcerer.getTarget().distanceToSqr(this.sorcerer) < castRange * castRange && this.sorcerer.getTarget().distanceToSqr(this.sorcerer) > 81;
     }
 
 
