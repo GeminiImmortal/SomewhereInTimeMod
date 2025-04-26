@@ -294,6 +294,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SORCERER_KNIVES_OUT.get(), SorcererKnivesOutRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.OBLITERATOR.get(), SorcererObliteratorRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BEAM_ENTITY.get(), BeamRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BARRIER.get(), BarrierEntityRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

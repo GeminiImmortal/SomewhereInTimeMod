@@ -155,6 +155,12 @@ public class ModEntityTypes {
             .updateInterval(1)
             .build(new ResourceLocation(MobiusMod.MOD_ID, "beam_entity").toString()));
 
+    public static final RegistryObject<EntityType<BarrierEntity>> BARRIER =
+            ENTITY_TYPES.register("barrier",
+                    () -> EntityType.Builder.<BarrierEntity>of(BarrierEntity::new,
+                                    EntityClassification.MISC).sized(4f, 0.25f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "barrier").toString()));
+
 
 
 

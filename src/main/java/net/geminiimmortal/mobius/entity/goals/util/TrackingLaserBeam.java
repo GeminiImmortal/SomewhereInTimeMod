@@ -1,21 +1,24 @@
 package net.geminiimmortal.mobius.entity.goals.util;
 
+import net.geminiimmortal.mobius.entity.custom.BarrierEntity;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceContext;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -40,10 +43,6 @@ public class TrackingLaserBeam {
         this.damageAmount = damageAmount;
     }
 
-   /* public boolean isAlive() {
-        return ticksAlive <= 0;
-    }*/
-
 
     private Vector3d interpolate(Vector3d from, Vector3d to, double t) {
         double x = from.x + (to.x - from.x) * t;
@@ -62,13 +61,11 @@ public class TrackingLaserBeam {
         LivingEntity target = targetSupplier.get();
         if (target == null || !target.isAlive()) return;
 
-        // Record eye position to track dodging more fairly
         Vector3d eyePos = target.getEyePosition(1.0f);
         targetPositionHistory.addLast(eyePos);
 
         int delayTicks = getCurrentDelayTicks();
 
-        // Cap history size
         while (targetPositionHistory.size() > delayTicks) {
             targetPositionHistory.removeFirst();
         }
@@ -77,12 +74,13 @@ public class TrackingLaserBeam {
             Vector3d delayedAim = targetPositionHistory.peekFirst();
             Vector3d from = caster.position().add(0, beamHeight, 0);
 
-            // Smooth visual: interpolate between oldest and newest
             Vector3d smoothedTarget = interpolate(delayedAim, targetPositionHistory.getLast(), 0.5);
             spawnWideLaserBeam(from, smoothedTarget);
 
-            if (isHittingTarget(from, smoothedTarget, target)) {
-                target.hurt(DamageSource.indirectMagic(caster, caster), this.damageAmount);
+            if (!isCollisionOnPath(from, smoothedTarget)) {
+                if (isHittingTarget(from, smoothedTarget, target)) {
+                    target.hurt(DamageSource.indirectMagic(caster, caster), this.damageAmount);
+                }
             }
         }
 
@@ -113,7 +111,6 @@ public class TrackingLaserBeam {
                 double t = i / (double) steps;
                 Vector3d point = interpolate(start, end, t);
 
-                // Fewer particles for better performance
                 for (int j = 0; j < 4; j++) {
                     double angle = (Math.PI * 2) * (j / 4.0);
                     double dx = Math.cos(angle) * beamRadius * rand.nextDouble();
@@ -137,4 +134,24 @@ public class TrackingLaserBeam {
         AxisAlignedBB targetBox = target.getBoundingBox().inflate(0.25);
         return targetBox.clip(from, to).isPresent();
     }
+
+    private boolean isCollisionOnPath(Vector3d from, Vector3d to) {
+        RayTraceResult result = level.clip(new RayTraceContext(from, to, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, caster));
+
+        if (result.getType() != RayTraceResult.Type.MISS) {
+            return true;
+        }
+
+        AxisAlignedBB laserBox = new AxisAlignedBB(from, to).inflate(0.25);
+        List<Entity> entities = level.getEntities(null, laserBox);
+
+        for (Entity entity : entities) {
+            if (entity instanceof BarrierEntity) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

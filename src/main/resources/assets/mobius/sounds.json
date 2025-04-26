@@ -37,6 +37,12 @@
     ],
     "subtitle": "Massive spell discharges"
   },
+  "barrier": {
+    "sounds": [
+      "mobius:barrier"
+    ],
+    "subtitle": "Ward casts"
+  },
   "lightning_spell_fx": {
     "sounds": [
       "mobius:lightning_spell_fx"

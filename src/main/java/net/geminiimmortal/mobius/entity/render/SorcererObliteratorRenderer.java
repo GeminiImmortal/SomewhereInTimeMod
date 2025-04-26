@@ -41,9 +41,16 @@ public class SorcererObliteratorRenderer extends EntityRenderer<SorcererOblitera
             float rotation = entity.getRotationAngle() + (partialTicks * 1.0f) + (i * 15); // add offset to each
             matrixStack.mulPose(Vector3f.YP.rotationDegrees(rotation));
 
-            // Calculate pulsing effect based on time
-            float pulse = MathHelper.sin(entity.tickCount * pulseSpeed + i * 1.0f) * 0.1f + 1.0f; // Sinusoidal size change
-            matrixStack.scale(pulse, pulse, pulse);
+            float pulse = MathHelper.sin(entity.tickCount * pulseSpeed + i * 1.0f) * 0.1f + 1.0f; // same pulse
+
+            float shrinkMultiplier = 1.0f;
+            if (entity.isBeamFiring()) {
+                shrinkMultiplier = (float) Math.pow(Math.max(0.0f, 1.0f - (entity.getShrinkTicks() / 4.0f)), 10);
+            }
+
+            float finalScale = pulse * shrinkMultiplier;
+            matrixStack.scale(finalScale, finalScale, finalScale);
+
 
             // Glow effect by modulating alpha over time
             int alpha = (int)(MathHelper.sin(entity.tickCount * 0.1f + i) * 127 + 128); // Sinusoidal alpha change for glowing effect

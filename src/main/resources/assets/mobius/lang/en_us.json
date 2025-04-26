@@ -64,6 +64,7 @@
   "item.mobius.gravitas": "Null Staff",
   "item.mobius.hurricane_staff": "Hurricane Staff",
   "item.mobius.mana_tap": "Mana Tap",
+  "item.mobius.ring_of_warding": "Ring of Warding",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
@@ -214,6 +215,8 @@
   "item.mobius.staff.not_enough_mana": "You don't have enough mana!",
   "item.mobius.staff.cooldown": "This staff is recharging!",
   "container.mobius.latent_mana_collector": "Latent Mana Collector",
-  "screen.mobius.latent_mana_collector": "Latent Mana Collector"
+  "screen.mobius.latent_mana_collector": "Latent Mana Collector",
+  "item.mobius.ring_of_repulsion.used": "Cooldown: 4s",
+  "item.mobius.ring_of_repulsion.cooldown": "This artifact is recharging!"
 
 }

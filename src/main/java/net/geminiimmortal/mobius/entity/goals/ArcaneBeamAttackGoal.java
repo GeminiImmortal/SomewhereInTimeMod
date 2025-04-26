@@ -61,6 +61,7 @@ public class ArcaneBeamAttackGoal extends Goal {
 
         if (this.obliterator.level.isClientSide) {
             spawnGroundTelegraph((ClientWorld) this.obliterator.level, new Vector3d(beamTarget.getX(), beamTarget.getY() + 0.25, beamTarget.getZ()), 4D, 0.5, 100, ParticleTypes.FIREWORK);
+            obliterator.startBeam();
         }
 
         boss.level.playSound(null, beamTarget, ModSounds.ARCANE_NUKE_FX.get(), SoundCategory.HOSTILE, 50f, 1f);

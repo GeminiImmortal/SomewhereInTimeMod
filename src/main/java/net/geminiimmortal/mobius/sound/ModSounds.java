@@ -129,6 +129,8 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> ARCANE_BOLT_FX_DEEP =
             registerSoundEvent("arcane_bolt_fx_deep");
 
+    public static final RegistryObject<SoundEvent> BARRIER =
+            registerSoundEvent("barrier");
 
 
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {

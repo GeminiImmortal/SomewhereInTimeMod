@@ -11,6 +11,8 @@ import javax.annotation.Nonnull;
 
 public class SorcererObliteratorEntity extends Entity {
     private float rotationAngle = 0;
+    private boolean beamFiring = false;
+    private int shrinkTicks = 0;
 
     public SorcererObliteratorEntity(EntityType<? extends SorcererObliteratorEntity> entityType, World world) {
         super(entityType, world);
@@ -22,6 +24,20 @@ public class SorcererObliteratorEntity extends Entity {
     }
 
 
+    public void startBeam() {
+        this.beamFiring = true;
+        this.shrinkTicks = 5;
+    }
+
+    public boolean isBeamFiring(){
+        return beamFiring;
+    }
+
+    public int getShrinkTicks() {
+        return shrinkTicks;
+    }
+
+
 
     @Override
     public void tick() {
@@ -30,6 +46,7 @@ public class SorcererObliteratorEntity extends Entity {
         if (rotationAngle >= 360.0f) {
             rotationAngle -= 360.0f; // Keep the angle within 0-360 degrees
         }
+        if (beamFiring) shrinkTicks++;
     }
 
     public float getRotationAngle() {

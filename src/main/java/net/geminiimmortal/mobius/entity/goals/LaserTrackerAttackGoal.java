@@ -45,7 +45,7 @@ public class LaserTrackerAttackGoal extends Goal {
                     sorcerer,
                     () -> cachedTarget, // Use cached target instead of dynamic lookup
                     duration,
-                    2f
+                    0.8f
             );
             sorcerer.setCasting(true);
         }
