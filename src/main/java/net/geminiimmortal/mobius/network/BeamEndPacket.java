@@ -29,7 +29,7 @@ public class BeamEndPacket {
         ctx.get().enqueueWork(() -> {
             Minecraft mc = Minecraft.getInstance();
             if (mc.level != null) {
-                ArcaneRenderer.stop(); // Start the rendering effect
+            //    ArcaneRenderer.stop(); // Start the rendering effect
                 mc.level.playLocalSound(packet.pos, SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 2f, 0.5f, false);
             }
         });

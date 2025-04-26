@@ -32,7 +32,7 @@ public class BeamCirclePacket {
             Minecraft mc = Minecraft.getInstance();
             if (mc.level != null) {
             //    ArcaneRenderer.startCircle(packet.pos); // Start the rendering effect
-                mc.level.playSound(null ,packet.pos, ModSounds.AOE_TELEGRAPH_FX.get(), SoundCategory.HOSTILE, 1f, 1f);
+                mc.level.playLocalSound(packet.pos, ModSounds.AOE_TELEGRAPH_FX.get(), SoundCategory.HOSTILE, 1f, 1f, false);
                 mc.level.playLocalSound(packet.pos, ModSounds.ARCANE_NUKE_FX.get(), SoundCategory.HOSTILE, 2f, 0.5f, false);
 
             }

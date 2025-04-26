@@ -31,6 +31,12 @@
     ],
     "subtitle": "Spell impacts"
   },
+  "arcane_bolt_fx_deep": {
+    "sounds": [
+      "mobius:arcane_bolt_fx_deep"
+    ],
+    "subtitle": "Massive spell discharges"
+  },
   "lightning_spell_fx": {
     "sounds": [
       "mobius:lightning_spell_fx"

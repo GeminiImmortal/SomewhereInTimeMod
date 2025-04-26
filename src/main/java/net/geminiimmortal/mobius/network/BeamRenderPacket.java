@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius.network;
 
 import net.geminiimmortal.mobius.entity.goals.util.ExpandingTelegraphEffect;
+import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.network.PacketBuffer;
@@ -8,6 +9,8 @@ import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
@@ -64,6 +67,7 @@ public class BeamRenderPacket {
         double length = diff.length();
         Vector3d step = diff.normalize().scale(1.0 / density); // space between each particle
         double thickness = 0.5; // Controls how wide the beam will be (increase for thicker beam)
+        world.playLocalSound(new BlockPos(end), ModSounds.ARCANE_BOLT_FX_DEEP.get(), SoundCategory.HOSTILE, 50f, 1f, false);
 
         // Random offsets for particle positions around the beam
         Random random = new Random();

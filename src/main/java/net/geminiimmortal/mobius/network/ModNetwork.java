@@ -2,7 +2,10 @@ package net.geminiimmortal.mobius.network;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.network.NetworkDirection;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
@@ -18,37 +21,47 @@ public class ModNetwork {
                 .serverAcceptedVersions(PROTOCOL_VERSION::equals)
                 .networkProtocolVersion(() -> PROTOCOL_VERSION)
                 .simpleChannel();
+        
 
-        NETWORK_CHANNEL.messageBuilder(ParticlePacket.class, 0, NetworkDirection.PLAY_TO_CLIENT)
+        int id = 0;
+        NETWORK_CHANNEL.messageBuilder(ParticlePacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(ParticlePacket::encode)
                 .decoder(ParticlePacket::decode)
                 .consumer(ParticlePacket::handle)
                 .add();
-        NETWORK_CHANNEL.messageBuilder(PlayMusicPacket.class, 1, NetworkDirection.PLAY_TO_CLIENT)
+        NETWORK_CHANNEL.messageBuilder(PlayMusicPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(PlayMusicPacket::encode)
                 .decoder(PlayMusicPacket::decode)
                 .consumer(PlayMusicPacket::handle)
                 .add();
-        NETWORK_CHANNEL.messageBuilder(ClientPlaySoundPacket.class, 2, NetworkDirection.PLAY_TO_CLIENT)
+        NETWORK_CHANNEL.messageBuilder(ClientPlaySoundPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(ClientPlaySoundPacket::encode)
                 .decoder(ClientPlaySoundPacket::decode)
                 .consumer(ClientPlaySoundPacket::handle)
                 .add();
-        NETWORK_CHANNEL.messageBuilder(BeamRenderPacket.class, 3, NetworkDirection.PLAY_TO_CLIENT)
+        NETWORK_CHANNEL.messageBuilder(BeamRenderPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(BeamRenderPacket::encode)
                 .decoder(BeamRenderPacket::decode)
                 .consumer(BeamRenderPacket::handle)
                 .add();
-        NETWORK_CHANNEL.messageBuilder(BeamEndPacket.class, 4, NetworkDirection.PLAY_TO_CLIENT)
+        NETWORK_CHANNEL.messageBuilder(BeamEndPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(BeamEndPacket::encode)
                 .decoder(BeamEndPacket::decode)
                 .consumer(BeamEndPacket::handle)
                 .add();
-        NETWORK_CHANNEL.messageBuilder(BeamCirclePacket.class, 5, NetworkDirection.PLAY_TO_CLIENT)
+        NETWORK_CHANNEL.messageBuilder(BeamCirclePacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(BeamCirclePacket::encode)
                 .decoder(BeamCirclePacket::decode)
                 .consumer(BeamCirclePacket::handle)
                 .add();
     }
+
+    @SubscribeEvent
+    public static void onCommonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            init();
+        });
+    }
 }
+
 

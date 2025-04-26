@@ -47,19 +47,25 @@ public class ArcaneBeamAttackGoal extends Goal {
         beamTarget = target.blockPosition();
         boss.getNavigation().stop();
 
-        // Tell client to render the arcane circle
-        ModNetwork.NETWORK_CHANNEL.send(
-                PacketDistributor.TRACKING_CHUNK.with(() -> boss.level.getChunkAt(target.blockPosition())),
-                new BeamCirclePacket(beamTarget)
-        );
+        if (!boss.level.isClientSide) {
+            // Tell clients tracking the boss to render the arcane circle
+            ModNetwork.NETWORK_CHANNEL.send(
+                    PacketDistributor.TRACKING_ENTITY.with(() -> boss),
+                    new BeamCirclePacket(beamTarget)
+            );
+        }
+
         this.obliterator = new SorcererObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), boss.level);
         obliterator.setPos(beamTarget.getX(), beamTarget.getY() + 16, beamTarget.getZ());
         boss.level.addFreshEntity(obliterator);
+
         if (this.obliterator.level.isClientSide) {
             spawnGroundTelegraph((ClientWorld) this.obliterator.level, new Vector3d(beamTarget.getX(), beamTarget.getY() + 0.25, beamTarget.getZ()), 4D, 0.5, 100, ParticleTypes.FIREWORK);
         }
+
         boss.level.playSound(null, beamTarget, ModSounds.ARCANE_NUKE_FX.get(), SoundCategory.HOSTILE, 50f, 1f);
     }
+
 
     @Override
     public void tick() {
@@ -72,18 +78,38 @@ public class ArcaneBeamAttackGoal extends Goal {
         if (attackTick == 80 && !hasFired && target != null) {
             hasFired = true;
 
-            ModNetwork.NETWORK_CHANNEL.send(
-                    PacketDistributor.TRACKING_CHUNK.with(() -> boss.level.getChunkAt(target.blockPosition())),
-                    new BeamRenderPacket(new Vector3d(beamTarget.getX(), beamTarget.getY() + 24, beamTarget.getZ()), new Vector3d(beamTarget.getX(), beamTarget.getY(), beamTarget.getZ()), ParticleTypes.SWEEP_ATTACK, 5f) // Adjust density and particle type
-            );
-            ModNetwork.NETWORK_CHANNEL.send(
-                    PacketDistributor.TRACKING_CHUNK.with(() -> boss.level.getChunkAt(target.blockPosition())),
-                    new BeamRenderPacket(new Vector3d(beamTarget.getX(), beamTarget.getY() + 24, beamTarget.getZ()), new Vector3d(beamTarget.getX(), beamTarget.getY(), beamTarget.getZ()), ParticleTypes.FLAME, 25f) // Adjust density and particle type
-            );
-            ModNetwork.NETWORK_CHANNEL.send(
-                    PacketDistributor.TRACKING_CHUNK.with(() -> boss.level.getChunkAt(target.blockPosition())),
-                    new BeamRenderPacket(new Vector3d(beamTarget.getX(), beamTarget.getY() + 24, beamTarget.getZ()), new Vector3d(beamTarget.getX(), beamTarget.getY(), beamTarget.getZ()), ParticleTypes.DRAGON_BREATH, 25f) // Adjust density and particle type
-            );
+            if (!boss.level.isClientSide) {
+                ModNetwork.NETWORK_CHANNEL.send(
+                        PacketDistributor.TRACKING_ENTITY.with(() -> boss),
+                        new BeamRenderPacket(
+                                new Vector3d(beamTarget.getX(), beamTarget.getY() + 24, beamTarget.getZ()),
+                                new Vector3d(beamTarget.getX(), beamTarget.getY(), beamTarget.getZ()),
+                                ParticleTypes.SWEEP_ATTACK,
+                                5f
+                        )
+                );
+
+                ModNetwork.NETWORK_CHANNEL.send(
+                        PacketDistributor.TRACKING_ENTITY.with(() -> boss),
+                        new BeamRenderPacket(
+                                new Vector3d(beamTarget.getX(), beamTarget.getY() + 24, beamTarget.getZ()),
+                                new Vector3d(beamTarget.getX(), beamTarget.getY(), beamTarget.getZ()),
+                                ParticleTypes.FLAME,
+                                25f
+                        )
+                );
+
+                ModNetwork.NETWORK_CHANNEL.send(
+                        PacketDistributor.TRACKING_ENTITY.with(() -> boss),
+                        new BeamRenderPacket(
+                                new Vector3d(beamTarget.getX(), beamTarget.getY() + 24, beamTarget.getZ()),
+                                new Vector3d(beamTarget.getX(), beamTarget.getY(), beamTarget.getZ()),
+                                ParticleTypes.DRAGON_BREATH,
+                                25f
+                        )
+                );
+            }
+
             boss.level.playSound(null, beamTarget, SoundEvents.LIGHTNING_BOLT_IMPACT, SoundCategory.HOSTILE, 3f, 0.7f);
 
             AxisAlignedBB aoe = new AxisAlignedBB(beamTarget).inflate(4);

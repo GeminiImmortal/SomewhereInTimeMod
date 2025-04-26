@@ -130,7 +130,7 @@ public class MobiusMod
     private void setup(final FMLCommonSetupEvent event)
     {
 
-        ModNetwork.init();
+
 
         event.enqueueWork(() -> {
             ModProcessors.WARD_ORIENTATION_FIX.toString();

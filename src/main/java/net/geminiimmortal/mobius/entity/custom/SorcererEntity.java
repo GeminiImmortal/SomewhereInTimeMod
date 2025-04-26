@@ -54,6 +54,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     private static final DataParameter<Boolean> doesCircleExist = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
     ShatterCloneEntity spell = new ShatterCloneEntity(ModEntityTypes.SHATTER_CLONE.get(), this.level);
     private LaserTrackerAttackGoal laserTrackerGoal;
+    private SonicBoomGoal sonicBoomGoal;
 
 
     IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[CHAMPION FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.GOLD).withBold(true));
@@ -108,12 +109,14 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     @Override
     protected void registerGoals() {
         this.laserTrackerGoal = new LaserTrackerAttackGoal(this, 40, 100);
+        this.sonicBoomGoal = new SonicBoomGoal(this);
         this.goalSelector.addGoal(1, new SwimGoal(this));
         this.goalSelector.addGoal(2, new AerialLightningBarrageGoal(this, 10, 6, 15));
         this.goalSelector.addGoal(4, laserTrackerGoal);
     //    this.goalSelector.addGoal(3, new MagiDashGoal(this));
     //    this.goalSelector.addGoal(6, new SorcererBackAwayGoal(this, 1.4, 5));
         this.goalSelector.addGoal(6, new ArcaneBeamAttackGoal(this, new SorcererObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), this.level)));
+    //    this.goalSelector.addGoal(3, sonicBoomGoal);
         this.goalSelector.addGoal(5, new BubbleAttackGoal(this, 4, 20, 80));
         this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 40f));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
@@ -193,6 +196,10 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
             laserTrackerGoal.tickCooldown();
         }
 
+        if (sonicBoomGoal != null) {
+            sonicBoomGoal.tickCooldown();
+        }
+
 
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
         particleTickCounter++;
@@ -201,7 +208,9 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
             spawnGlowParticle();
             particleTickCounter = 0;
         }
-        ClientMusicHandler.stopVanillaMusic(Minecraft.getInstance());
+        if (this.level.isClientSide) {
+            ClientMusicHandler.stopVanillaMusic(Minecraft.getInstance());
+        }
         this.removeEffect(Effects.LEVITATION);
         summonCircle(this);
 
@@ -221,14 +230,18 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
     public void startSeenByPlayer(ServerPlayerEntity player) {
         super.startSeenByPlayer(player);
         this.bossInfo.addPlayer(player);
-        ClientMusicHandler.playCourtWizardBossMusic(Minecraft.getInstance());
+        if (this.level.isClientSide) {
+            ClientMusicHandler.playCourtWizardBossMusic(Minecraft.getInstance());
+        }
     }
 
     @Override
     public void stopSeenByPlayer(ServerPlayerEntity player) {
         super.stopSeenByPlayer(player);
         this.bossInfo.removePlayer(player);
-        ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
+        if (this.level.isClientSide) {
+            ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
+        }
     }
 
 
