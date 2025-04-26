@@ -48,6 +48,11 @@
     ],
     "subtitle": "Massive energy gathers"
   },
+  "aoe_telegraph_fx": {
+    "sounds": [
+      "mobius:aoe_telegraph_fx"
+    ]
+  },
   "captain_hurts": {
     "sounds": [
       "mobius:captain_hurts"

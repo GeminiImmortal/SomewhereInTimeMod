@@ -1,10 +1,12 @@
 package net.geminiimmortal.mobius.network;
 
+import net.geminiimmortal.mobius.entity.goals.util.ExpandingTelegraphEffect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
@@ -13,6 +15,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -76,6 +80,49 @@ public class BeamRenderPacket {
         }
     }
 
+    public static void spawnImpactParticles(ClientWorld world, Vector3d center, ParticleType<?> particle, int count, double speed) {
+        Random random = new Random();
+
+        for (int i = 0; i < count; i++) {
+            // Random point on a unit sphere
+            double theta = random.nextDouble() * 2 * Math.PI;
+            double phi = Math.acos(2 * random.nextDouble() - 1);
+            double x = Math.sin(phi) * Math.cos(theta);
+            double y = Math.sin(phi) * Math.sin(theta);
+            double z = Math.cos(phi);
+
+            // Scale by desired speed
+            double dx = x * speed;
+            double dy = y * speed;
+            double dz = z * speed;
+
+            // Spawn the particle at the center with outward velocity
+            world.addParticle((IParticleData) particle, center.x, center.y, center.z, dx, dy, dz);
+        }
+    }
+
+    public static void spawnExpandingRing(ClientWorld world, Vector3d center, double radius, double yOffset, int particleCount, double speed, ParticleType<?> particle) {
+        double angleStep = (2 * Math.PI) / particleCount;
+
+        for (int i = 0; i < particleCount; i++) {
+            double angle = i * angleStep;
+            double x = Math.cos(angle);
+            double z = Math.sin(angle);
+
+            // Particle starting position (circle around center)
+            double px = center.x + x * radius;
+            double py = center.y + yOffset;
+            double pz = center.z + z * radius;
+
+            // Velocity is outward from center
+            double dx = x * speed;
+            double dz = z * speed;
+
+            world.addParticle((IParticleData) particle, px, py, pz, dx, 0, dz);
+        }
+    }
+
+
     public static void handle(BeamRenderPacket packet, Supplier<NetworkEvent.Context> contextSupplier) {
         // Get the context from the Supplier
         NetworkEvent.Context context = contextSupplier.get();
@@ -92,10 +139,21 @@ public class BeamRenderPacket {
             // Spawn the beam particles with added thickness
             spawnBeamParticles(world, start, end, packet.density, ForgeRegistries.PARTICLE_TYPES.getValue(packet.particleRegistryName));
 
+            // For example, spawn 3 rings stacked vertically
+            for (int i = 0; i < 3; i++) {
+                double yOffset = i * 3; // spread rings 0.5 blocks apart
+                spawnExpandingRing(world, (new Vector3d(packet.endX, packet.endY + yOffset, packet.endZ)), 4, yOffset, 100, 0.1, ParticleTypes.SMOKE);
+            }
+
+
             // Add explosion at the end of the beam (impact point)
             // Make the explosion bigger by adjusting the power and other parameters
-            world.explode(null, end.x, end.y, end.z, 10.0f, true, Explosion.Mode.NONE);
+            world.explode(null, end.x, end.y, end.z, 10.0f, false, Explosion.Mode.NONE);
+
+            spawnImpactParticles(world, end, ForgeRegistries.PARTICLE_TYPES.getValue(packet.particleRegistryName), 200, 0.5);
+
         });
     }
 
 }
+

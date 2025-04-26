@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import net.geminiimmortal.mobius.effects.ModEffects;
 import net.geminiimmortal.mobius.fluid.ModFluids;
 import net.geminiimmortal.mobius.item.custom.ModSpawnEgg;
+import net.geminiimmortal.mobius.network.ClientEffectHandler;
 import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.poi.ModPOIs;
 import net.geminiimmortal.mobius.block.ModBlocks;
@@ -364,4 +365,13 @@ public class MobiusMod
             LOGGER.info("[MOBIUS] Setting up music manager.");
         }
     }
+
+    @Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class ClientModEvents {
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            MinecraftForge.EVENT_BUS.addListener(ClientEffectHandler::onClientTick);
+        }
+    }
+
 }

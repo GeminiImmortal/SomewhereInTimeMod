@@ -3,13 +3,15 @@ package net.geminiimmortal.mobius.entity.goals;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.SorcererObliteratorEntity;
 import net.geminiimmortal.mobius.network.BeamCirclePacket;
-import net.geminiimmortal.mobius.network.BeamEndPacket;
 import net.geminiimmortal.mobius.network.BeamRenderPacket;
 import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.particles.IParticleData;
+import net.minecraft.particles.ParticleType;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
@@ -46,14 +48,16 @@ public class ArcaneBeamAttackGoal extends Goal {
         boss.getNavigation().stop();
 
         // Tell client to render the arcane circle
-        /*ModNetwork.NETWORK_CHANNEL.send(
+        ModNetwork.NETWORK_CHANNEL.send(
                 PacketDistributor.TRACKING_CHUNK.with(() -> boss.level.getChunkAt(target.blockPosition())),
-                new BeamCirclePacket(beamTarget.above(24))
-        );*/
+                new BeamCirclePacket(beamTarget)
+        );
         this.obliterator = new SorcererObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), boss.level);
         obliterator.setPos(beamTarget.getX(), beamTarget.getY() + 16, beamTarget.getZ());
         boss.level.addFreshEntity(obliterator);
-
+        if (this.obliterator.level.isClientSide) {
+            spawnGroundTelegraph((ClientWorld) this.obliterator.level, new Vector3d(beamTarget.getX(), beamTarget.getY() + 0.25, beamTarget.getZ()), 4D, 0.5, 100, ParticleTypes.FIREWORK);
+        }
         boss.level.playSound(null, beamTarget, ModSounds.ARCANE_NUKE_FX.get(), SoundCategory.HOSTILE, 50f, 1f);
     }
 
@@ -107,5 +111,24 @@ public class ArcaneBeamAttackGoal extends Goal {
         obliterator.remove();
 
     }
+
+    public static void spawnGroundTelegraph(ClientWorld level, Vector3d center, double initialRadius, double speed, int count, ParticleType<?> particle) {
+        double angleStep = (2 * Math.PI) / count;
+
+        for (int i = 0; i < count; i++) {
+            double angle = i * angleStep;
+
+            double dx = Math.cos(angle);
+            double dz = Math.sin(angle);
+
+            double px = center.x + dx * initialRadius;
+            double py = center.y + 0.05; // slightly above ground
+            double pz = center.z + dz * initialRadius;
+
+            // Velocity moves outwards
+            level.addParticle((IParticleData) particle, px, py, pz, dx * speed, 0, dz * speed);
+        }
+    }
+
 }
 

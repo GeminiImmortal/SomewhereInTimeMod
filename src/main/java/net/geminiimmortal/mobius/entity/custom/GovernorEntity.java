@@ -68,7 +68,7 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
     private static final int MAX_CLONES = 6;
     private static boolean isAttacking;
 
-    IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[LEGENDARY FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.DARK_PURPLE).withBold(true));
+    IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[CHAMPION FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.GOLD).withBold(true));
     IFormattableTextComponent name = (StringTextComponent) new StringTextComponent("His Lordship, The Governor").setStyle(Style.EMPTY.withColor(TextFormatting.DARK_BLUE).withBold(false));
     IFormattableTextComponent namePlate = rank.append(name);
 

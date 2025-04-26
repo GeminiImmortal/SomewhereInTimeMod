@@ -123,6 +123,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> ARCANE_NUKE_FX =
             registerSoundEvent("arcane_nuke_fx");
 
+    public static final RegistryObject<SoundEvent> AOE_TELEGRAPH_FX =
+            registerSoundEvent("aoe_telegraph_fx");
+
 
 
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {

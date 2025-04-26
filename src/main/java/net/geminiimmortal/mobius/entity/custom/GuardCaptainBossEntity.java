@@ -17,6 +17,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
@@ -101,6 +102,8 @@ public class GuardCaptainBossEntity extends MonsterEntity implements IAnimatable
     @Override
     public void tick() {
         super.tick();
+        this.removeEffect(Effects.LEVITATION);
+        this.setRemainingFireTicks(0);
         if (chargeCooldown > 0) chargeCooldown--;
         this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
     }
