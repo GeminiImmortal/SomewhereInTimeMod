@@ -110,6 +110,10 @@ public class TrackingLaserBeam implements SpellTypeEntity {
                 // Check collision with a BarrierEntity
                 BarrierEntity barrier = getHitBarrier(from, smoothedTarget);
                 if (barrier != null) {
+                    if (ticksAlive % 6 == 0 && !this.level.isClientSide) {
+                        Vector3d soundPos = target.position();
+                        level.playSound(null, soundPos.x, soundPos.y, soundPos.z, ModSounds.BARRIER_NEGATE.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
+                    }
                     spawnImpactParticles(barrierHit);
                     bounceOffBarrier(barrier);
                 } else {

@@ -49,6 +49,12 @@
     ],
     "subtitle": "Spell impacts on ward"
   },
+  "barrier_negate": {
+    "sounds": [
+      "mobius:barrier_negate"
+    ],
+    "subtitle": "Spell negated by ward"
+  },
   "lightning_spell_fx": {
     "sounds": [
       "mobius:lightning_spell_fx"
