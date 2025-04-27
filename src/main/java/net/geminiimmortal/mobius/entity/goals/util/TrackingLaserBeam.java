@@ -1,6 +1,11 @@
 package net.geminiimmortal.mobius.entity.goals.util;
 
 import net.geminiimmortal.mobius.entity.custom.BarrierEntity;
+import net.geminiimmortal.mobius.entity.custom.SpellEntity;
+import net.geminiimmortal.mobius.entity.custom.spell.SpellTypeEntity;
+import net.geminiimmortal.mobius.entity.custom.spell.SpellType;
+import net.geminiimmortal.mobius.network.ModNetwork;
+import net.geminiimmortal.mobius.network.ParticlePacket;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -15,14 +20,13 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.fml.network.PacketDistributor;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.List;
-import java.util.Random;
+import javax.annotation.Nullable;
+import java.util.*;
 import java.util.function.Supplier;
 
-public class TrackingLaserBeam {
+public class TrackingLaserBeam implements SpellTypeEntity {
     private final World level;
     private final Entity caster;
     private final Supplier<? extends LivingEntity> targetSupplier;
@@ -43,6 +47,22 @@ public class TrackingLaserBeam {
         this.damageAmount = damageAmount;
     }
 
+    private void bounceOffBarrier(BarrierEntity barrier) {
+        if (!level.isClientSide) {
+            Vector3d soundPos = barrier.position();
+            level.playSound(null, soundPos.x, soundPos.y, soundPos.z, ModSounds.BARRIER_IMPACT.get(), SoundCategory.HOSTILE, 50.0F, 0.8F);
+        }
+    }
+
+    @Override
+    public void onCollideWith(SpellEntity other) {
+
+    }
+
+    @Override
+    public SpellType getSpellType() {
+        return SpellType.OFFENSIVE;
+    }
 
     private Vector3d interpolate(Vector3d from, Vector3d to, double t) {
         double x = from.x + (to.x - from.x) * t;
@@ -58,7 +78,7 @@ public class TrackingLaserBeam {
     public void tick() {
         ticksAlive++;
 
-        LivingEntity target = targetSupplier.get();
+        Entity target = targetSupplier.get();
         if (target == null || !target.isAlive()) return;
 
         Vector3d eyePos = target.getEyePosition(1.0f);
@@ -75,15 +95,33 @@ public class TrackingLaserBeam {
             Vector3d from = caster.position().add(0, beamHeight, 0);
 
             Vector3d smoothedTarget = interpolate(delayedAim, targetPositionHistory.getLast(), 0.5);
-            spawnWideLaserBeam(from, smoothedTarget);
+            Vector3d to = smoothedTarget;
 
+            Vector3d barrierHit = getBarrierCollisionPoint(from, smoothedTarget);
+            if (barrierHit != null) {
+                to = barrierHit;
+            }
+
+            spawnWideLaserBeam(from, to);
+
+
+            // Check collision with the world (blocks)
             if (!isCollisionOnPath(from, smoothedTarget)) {
-                if (isHittingTarget(from, smoothedTarget, target)) {
-                    target.hurt(DamageSource.indirectMagic(caster, caster), this.damageAmount);
+                // Check collision with a BarrierEntity
+                BarrierEntity barrier = getHitBarrier(from, smoothedTarget);
+                if (barrier != null) {
+                    spawnImpactParticles(barrierHit);
+                    bounceOffBarrier(barrier);
+                } else {
+                    // If no barrier, check hitting the target
+                    if (isHittingTarget(from, smoothedTarget, (LivingEntity) target)) {
+                        target.hurt(DamageSource.indirectMagic(caster, caster), this.damageAmount);
+                    }
                 }
             }
         }
 
+        // Sound logic (unchanged)
         if (ticksAlive == 1 && !level.isClientSide) {
             Vector3d soundPos = target.position();
             level.playSound(null, soundPos.x, soundPos.y, soundPos.z, ModSounds.ARCANE_BOLT_FX.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
@@ -98,8 +136,8 @@ public class TrackingLaserBeam {
             Vector3d soundPos = target.position();
             level.playSound(null, soundPos.x, soundPos.y, soundPos.z, SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 1.0F, 1.0F);
         }
-
     }
+
 
     private void spawnWideLaserBeam(Vector3d start, Vector3d end) {
         if (!level.isClientSide && level instanceof ServerWorld) {
@@ -135,23 +173,81 @@ public class TrackingLaserBeam {
         return targetBox.clip(from, to).isPresent();
     }
 
+    private boolean isHittingBarrier(Vector3d from, Vector3d to, BarrierEntity barrier) {
+        AxisAlignedBB targetBox = barrier.getBoundingBox().inflate(0.25);
+        return targetBox.clip(from, to).isPresent();
+    }
+
     private boolean isCollisionOnPath(Vector3d from, Vector3d to) {
         RayTraceResult result = level.clip(new RayTraceContext(from, to, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, caster));
+        return result.getType() != RayTraceResult.Type.MISS;
+    }
 
-        if (result.getType() != RayTraceResult.Type.MISS) {
-            return true;
-        }
 
+    @Nullable
+    private BarrierEntity getHitBarrier(Vector3d from, Vector3d to) {
         AxisAlignedBB laserBox = new AxisAlignedBB(from, to).inflate(0.25);
         List<Entity> entities = level.getEntities(null, laserBox);
 
         for (Entity entity : entities) {
             if (entity instanceof BarrierEntity) {
-                return true;
+                BarrierEntity barrier = (BarrierEntity) entity;
+                if (isHittingBarrier(from, to, barrier)) {
+                    return barrier;
+                }
             }
         }
-
-        return false;
+        return null;
     }
+
+    @Nullable
+    private Vector3d getBarrierCollisionPoint(Vector3d from, Vector3d to) {
+        AxisAlignedBB laserBox = new AxisAlignedBB(from, to).inflate(0.25);
+        List<Entity> entities = level.getEntities(null, laserBox);
+
+        for (Entity entity : entities) {
+            if (entity instanceof BarrierEntity) {
+                AxisAlignedBB barrierBox = entity.getBoundingBox().inflate(0.25);
+                Optional<Vector3d> hitResult = barrierBox.clip(from, to);
+                if (hitResult.isPresent()) {
+                    return hitResult.get(); // Return the exact collision point
+                }
+            }
+        }
+        return null; // No collision
+    }
+
+    private void spawnImpactParticles(Vector3d impactPoint) {
+        if (level.isClientSide || !(level instanceof ServerWorld)) return;
+
+        ServerWorld serverWorld = (ServerWorld) level;
+        int particleCount = 20;
+        double baseSpeed = 0.5;
+
+        Random random = serverWorld.getRandom();
+
+        for (int i = 0; i < particleCount; i++) {
+            // Random point on a sphere
+            double theta = random.nextDouble() * 2 * Math.PI;
+            double phi = Math.acos(2 * random.nextDouble() - 1);
+
+            double xSpeed = Math.sin(phi) * Math.cos(theta) * baseSpeed * (0.5 + random.nextDouble() * 0.5);
+            double ySpeed = Math.sin(phi) * Math.sin(theta) * baseSpeed * (0.5 + random.nextDouble() * 0.5);
+            double zSpeed = Math.cos(phi) * baseSpeed * (0.5 + random.nextDouble() * 0.5);
+
+            serverWorld.sendParticles(ParticleTypes.HAPPY_VILLAGER,
+                    impactPoint.x,
+                    impactPoint.y,
+                    impactPoint.z,
+                    1,
+                    xSpeed, ySpeed, zSpeed, 1.0
+            );
+        }
+    }
+
+
+
+
+
 
 }

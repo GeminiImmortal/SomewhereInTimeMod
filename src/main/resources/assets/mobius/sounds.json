@@ -43,6 +43,12 @@
     ],
     "subtitle": "Ward casts"
   },
+  "barrier_impact": {
+    "sounds": [
+      "mobius:barrier_impact"
+    ],
+    "subtitle": "Spell impacts on ward"
+  },
   "lightning_spell_fx": {
     "sounds": [
       "mobius:lightning_spell_fx"

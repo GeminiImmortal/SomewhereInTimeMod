@@ -1,22 +1,22 @@
 package net.geminiimmortal.mobius.entity.custom;
 
+import net.geminiimmortal.mobius.entity.custom.spell.SpellType;
+import net.geminiimmortal.mobius.entity.goals.util.TrackingLaserBeam;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.UUID;
+import net.geminiimmortal.mobius.entity.custom.spell.SpellTypeEntity;
 
-public class BarrierEntity extends Entity {
+public class BarrierEntity extends Entity implements SpellTypeEntity {
     private final int MAX_LIFETIME_TICKS = 300;
     private UUID casterUUID;
     private final int WIDTH = 4;
@@ -55,6 +55,14 @@ public class BarrierEntity extends Entity {
     @Override
     public void tick() {
         super.tick();
+
+        for (Entity nearby : this.level.getEntities(this, this.getBoundingBox().inflate(0.5))) {
+            if (nearby instanceof SpellEntity) {
+                this.onCollideWith((SpellEntity) nearby);
+            }
+        }
+
+
         this.setRemainingFireTicks(0);
         if (this.tickCount > MAX_LIFETIME_TICKS) {
             this.remove();
@@ -104,6 +112,15 @@ public class BarrierEntity extends Entity {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
+    @Override
+    public void onCollideWith(net.geminiimmortal.mobius.entity.custom.SpellEntity other) {
+
+    }
+
+    @Override
+    public SpellType getSpellType() {
+        return SpellType.DEFENSIVE;
+    }
 }
 
 
