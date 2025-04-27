@@ -1,0 +1,17 @@
+{
+  "type": "mobius:essence_channeler",
+  "ingredients": [
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "mobius:fae_leather"
+    },
+    {
+      "item": "mobius:obsidian_rod"
+    }
+  ],
+  "output": {
+    "item": "mobius:staff_lightning_obsidian_rod_fae_leather_binding"
+  }
+}

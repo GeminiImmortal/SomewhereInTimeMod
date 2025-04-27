@@ -1,0 +1,17 @@
+{
+  "type": "mobius:essence_channeler",
+  "ingredients": [
+    {
+      "item": "mobius:oblivion_stone"
+    },
+    {
+      "item": "mobius:fae_leather"
+    },
+    {
+      "item": "mobius:obsidian_rod"
+    }
+  ],
+  "output": {
+    "item": "mobius:hurricane_staff"
+  }
+}

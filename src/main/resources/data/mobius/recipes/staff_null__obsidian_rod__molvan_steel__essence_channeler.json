@@ -1,0 +1,17 @@
+{
+  "type": "mobius:essence_channeler",
+  "ingredients": [
+    {
+      "item": "mobius:oblivion_stone"
+    },
+    {
+      "item": "mobius:molvansteel_ingot"
+    },
+    {
+      "item": "mobius:obsidian_rod"
+    }
+  ],
+  "output": {
+    "item": "mobius:gravitas"
+  }
+}
