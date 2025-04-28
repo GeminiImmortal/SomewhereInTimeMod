@@ -1,6 +1,5 @@
 package net.geminiimmortal.mobius.entity.custom.spell;
 
-import net.geminiimmortal.mobius.entity.custom.SpellEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
