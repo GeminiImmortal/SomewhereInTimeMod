@@ -33,9 +33,14 @@ public class ArcaneCircleEntity extends Entity implements SpellTypeEntity {
     public void damageShield(float amount) {
         this.endurance -= amount;
         if (this.endurance <= 0) {
-            if (caster != null) StunUtil.stun(caster, 40);
-                if (this.caster.level.isClientSide) caster.level.playSound(null, caster.getX(), caster.getY(), caster.getZ() ,ModSounds.DASH_IMPACT.get(), SoundCategory.PLAYERS, 10.0F, 1.0F);
-            this.remove();
+            if (caster != null) {
+                StunUtil.stun(caster, 40);
+
+                if (caster.level.isClientSide) {
+                    caster.level.playSound(null, caster.getX(), caster.getY(), caster.getZ(), ModSounds.DASH_IMPACT.get(), SoundCategory.PLAYERS, 10.0F, 1.0F);
+                }
+                this.remove();
+            }
         }
     }
 
@@ -60,8 +65,6 @@ public class ArcaneCircleEntity extends Entity implements SpellTypeEntity {
         if (level.isClientSide) {
             spawnParticles();
         }
-
-        // TODO: handle spell blocking here
     }
 
     private void spawnParticles() {
