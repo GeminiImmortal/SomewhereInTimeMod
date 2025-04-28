@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.entity;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.custom.*;
+import net.geminiimmortal.mobius.entity.custom.spell.ArcaneCircleEntity;
 import net.geminiimmortal.mobius.entity.custom.spell.BarrierEntity;
 import net.geminiimmortal.mobius.entity.custom.spell.ObliteratorEntity;
 import net.geminiimmortal.mobius.entity.custom.spell.TornadoEntity;
@@ -162,6 +163,13 @@ public class ModEntityTypes {
                     () -> EntityType.Builder.<BarrierEntity>of(BarrierEntity::new,
                                     EntityClassification.MISC).sized(4f, 0.25f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "barrier").toString()));
+
+    public static final RegistryObject<EntityType<ArcaneCircleEntity>> ARCANE_CIRCLE = ENTITY_TYPES.register("arcane_circle",
+            () -> EntityType.Builder.<ArcaneCircleEntity>of(ArcaneCircleEntity::new, EntityClassification.MISC)
+                    .sized(1.0f, 1.0f)
+                    .fireImmune()
+                    .setShouldReceiveVelocityUpdates(false)
+                    .build("arcane_circle"));
 
 
 

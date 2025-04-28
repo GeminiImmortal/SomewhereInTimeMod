@@ -96,13 +96,31 @@ public class TrackingLaserBeam implements SpellTypeEntity {
                 to = barrierHit;
             }
 
+            Vector3d shieldHit = getShieldCollisionPoint(from, smoothedTarget);
+            if (shieldHit != null) {
+                to = shieldHit;
+            }
+
             spawnWideLaserBeam(from, to);
 
 
             // Check collision with the world (blocks)
             if (!isCollisionOnPath(from, smoothedTarget)) {
                 // Check collision with a BarrierEntity
+
+                ArcaneCircleEntity shield = getHitShield(from, smoothedTarget);
                 BarrierEntity barrier = getHitBarrier(from, smoothedTarget);
+                if (shield != null) {
+                    ServerWorld serverWorld = (ServerWorld) level;
+
+                    shield.damageShield(this.damageAmount);
+
+                    serverWorld.sendParticles(ParticleTypes.FLASH, shield.getX(), shield.getY(), shield.getZ(), 5, 0, 0, 0, 0.0);
+                    serverWorld.sendParticles(ParticleTypes.CLOUD, shield.getX(), shield.getZ(), shield.getZ(), 10, 0.3, 0.3, 0.3, 0.01);
+
+                    serverWorld.playSound(null, shield.position().x, shield.position().y, shield.position().z, ModSounds.BARRIER_NEGATE.get(), SoundCategory.PLAYERS, 0.5f, 2.0f);
+                    return;
+                }
                 if (barrier != null) {
                     if (ticksAlive % 6 == 0 && !this.level.isClientSide) {
                         Vector3d soundPos = target.position();
@@ -181,6 +199,11 @@ public class TrackingLaserBeam implements SpellTypeEntity {
         return targetBox.clip(from, to).isPresent();
     }
 
+    private boolean isHittingShield(Vector3d from, Vector3d to, ArcaneCircleEntity shield) {
+        AxisAlignedBB targetBox = shield.getBoundingBox().inflate(0.25);
+        return targetBox.clip(from, to).isPresent();
+    }
+
     private boolean isCollisionOnPath(Vector3d from, Vector3d to) {
         RayTraceResult result = level.clip(new RayTraceContext(from, to, RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.NONE, caster));
         return result.getType() != RayTraceResult.Type.MISS;
@@ -204,12 +227,45 @@ public class TrackingLaserBeam implements SpellTypeEntity {
     }
 
     @Nullable
+    private ArcaneCircleEntity getHitShield(Vector3d from, Vector3d to) {
+        AxisAlignedBB laserBox = new AxisAlignedBB(from, to).inflate(0.25);
+        List<Entity> entities = level.getEntities(null, laserBox);
+
+        for (Entity entity : entities) {
+            if (entity instanceof ArcaneCircleEntity) {
+                ArcaneCircleEntity shield = (ArcaneCircleEntity) entity;
+                if (isHittingShield(from, to, shield)) {
+                    return shield;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Nullable
     private Vector3d getBarrierCollisionPoint(Vector3d from, Vector3d to) {
         AxisAlignedBB laserBox = new AxisAlignedBB(from, to).inflate(0.25);
         List<Entity> entities = level.getEntities(null, laserBox);
 
         for (Entity entity : entities) {
             if (entity instanceof BarrierEntity) {
+                AxisAlignedBB barrierBox = entity.getBoundingBox().inflate(0.25);
+                Optional<Vector3d> hitResult = barrierBox.clip(from, to);
+                if (hitResult.isPresent()) {
+                    return hitResult.get(); // Return the exact collision point
+                }
+            }
+        }
+        return null; // No collision
+    }
+
+    @Nullable
+    private Vector3d getShieldCollisionPoint(Vector3d from, Vector3d to) {
+        AxisAlignedBB laserBox = new AxisAlignedBB(from, to).inflate(0.25);
+        List<Entity> entities = level.getEntities(null, laserBox);
+
+        for (Entity entity : entities) {
+            if (entity instanceof ArcaneCircleEntity) {
                 AxisAlignedBB barrierBox = entity.getBoundingBox().inflate(0.25);
                 Optional<Vector3d> hitResult = barrierBox.clip(from, to);
                 if (hitResult.isPresent()) {

@@ -5,7 +5,6 @@ import net.geminiimmortal.mobius.effects.ModEffects;
 import net.geminiimmortal.mobius.fluid.ModFluids;
 import net.geminiimmortal.mobius.item.custom.ModSpawnEgg;
 import net.geminiimmortal.mobius.network.ClientEffectHandler;
-import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.poi.ModPOIs;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.block.ModWoodTypes;
@@ -25,11 +24,9 @@ import net.geminiimmortal.mobius.villager.ModVillagers;
 import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.geminiimmortal.mobius.world.worldgen.CustomSurfaceBuilders;
 import net.geminiimmortal.mobius.world.worldgen.biome.ModBiomes;
-import net.geminiimmortal.mobius.world.worldgen.biome.layer.MobiusBiomeLayer;
 import net.geminiimmortal.mobius.world.worldgen.feature.ModFeatures;
 import net.geminiimmortal.mobius.world.worldgen.feature.placement.ModFeaturePlacement;
 import net.geminiimmortal.mobius.world.worldgen.structure.ModStructureSetup;
-import net.geminiimmortal.mobius.world.worldgen.biome.layer.MobiusLayerUtil;
 import net.geminiimmortal.mobius.world.worldgen.structure.processor.ModProcessors;
 import net.minecraft.block.Block;
 import net.minecraft.block.WoodType;
@@ -44,14 +41,12 @@ import net.minecraft.item.AxeItem;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
@@ -65,8 +60,6 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -295,6 +288,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.OBLITERATOR.get(), SorcererObliteratorRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BEAM_ENTITY.get(), BeamRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BARRIER.get(), BarrierEntityRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ARCANE_CIRCLE.get(), ArcaneCircleRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
