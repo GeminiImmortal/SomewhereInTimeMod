@@ -44,7 +44,7 @@ public class TrackingLaserBeam implements SpellTypeEntity {
     private void bounceOffBarrier(BarrierEntity barrier) {
         if (!level.isClientSide) {
             Vector3d soundPos = barrier.position();
-            level.playSound(null, soundPos.x, soundPos.y, soundPos.z, ModSounds.BARRIER_IMPACT.get(), SoundCategory.HOSTILE, 50.0F, 0.8F);
+        //    level.playSound(null, soundPos.x, soundPos.y, soundPos.z, ModSounds.BARRIER_IMPACT.get(), SoundCategory.HOSTILE, 50.0F, 0.8F);
         }
     }
 
@@ -108,9 +108,17 @@ public class TrackingLaserBeam implements SpellTypeEntity {
                         Vector3d soundPos = target.position();
                         level.playSound(null, soundPos.x, soundPos.y, soundPos.z, ModSounds.BARRIER_NEGATE.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
                     }
+                    if (ticksAlive % 20 == 0 && !this.level.isClientSide) {
+                        Vector3d soundPos = target.position();
+                        playCollisionSound(soundPos);
+                    }
                     spawnImpactParticles(barrierHit);
                     bounceOffBarrier(barrier);
                 } else {
+                    if (ticksAlive % 4 == 0 && !level.isClientSide) {
+                        Vector3d soundPos = target.position();
+                        level.playSound(null, soundPos.x, soundPos.y, soundPos.z, SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 1.0F, 1.0F);
+                    }
                     // If no barrier, check hitting the target
                     if (isHittingTarget(from, smoothedTarget, (LivingEntity) target)) {
                         target.hurt(DamageSource.indirectMagic(caster, caster), this.damageAmount);
@@ -130,10 +138,7 @@ public class TrackingLaserBeam implements SpellTypeEntity {
             level.playSound(null, soundPos.x, soundPos.y, soundPos.z, ModSounds.ARCANE_BOLT_FX.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
         }
 
-        if (ticksAlive % 4 == 0 && !level.isClientSide) {
-            Vector3d soundPos = target.position();
-            level.playSound(null, soundPos.x, soundPos.y, soundPos.z, SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 1.0F, 1.0F);
-        }
+
     }
 
 
@@ -243,7 +248,9 @@ public class TrackingLaserBeam implements SpellTypeEntity {
         }
     }
 
-
+    private void playCollisionSound(Vector3d impactPoint) {
+        level.playSound(null, impactPoint.x, impactPoint.y, impactPoint.z, ModSounds.SPARKS.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
+    }
 
 
 

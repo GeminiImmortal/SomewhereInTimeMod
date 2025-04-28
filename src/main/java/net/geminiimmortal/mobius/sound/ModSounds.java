@@ -138,6 +138,12 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> BARRIER_NEGATE =
             registerSoundEvent("barrier_negate");
 
+    public static final RegistryObject<SoundEvent> SPELL_COLLISION =
+            registerSoundEvent("spell_collision");
+
+    public static final RegistryObject<SoundEvent> SPARKS =
+            registerSoundEvent("sparks");
+
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, name)));
     }

@@ -55,6 +55,18 @@
     ],
     "subtitle": "Spell negated by ward"
   },
+  "spell_collision": {
+    "sounds": [
+      "mobius:spell_collision"
+    ],
+    "subtitle": "Spell collides"
+  },
+  "sparks": {
+    "sounds": [
+      "mobius:sparks"
+    ],
+    "subtitle": "Sparks fly"
+  },
   "lightning_spell_fx": {
     "sounds": [
       "mobius:lightning_spell_fx"
