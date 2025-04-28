@@ -1,7 +1,7 @@
 package net.geminiimmortal.mobius.entity.goals;
 
 import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
-import net.geminiimmortal.mobius.entity.goals.util.TrackingLaserBeam;
+import net.geminiimmortal.mobius.entity.custom.spell.TrackingLaserBeam;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 

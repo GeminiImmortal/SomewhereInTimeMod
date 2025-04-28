@@ -1,7 +1,6 @@
-package net.geminiimmortal.mobius.entity.custom;
+package net.geminiimmortal.mobius.entity.custom.spell;
 
-import net.geminiimmortal.mobius.entity.custom.spell.SpellType;
-import net.geminiimmortal.mobius.entity.goals.util.TrackingLaserBeam;
+import net.geminiimmortal.mobius.entity.custom.SpellEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -14,7 +13,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.UUID;
-import net.geminiimmortal.mobius.entity.custom.spell.SpellTypeEntity;
 
 public class BarrierEntity extends Entity implements SpellTypeEntity {
     private final int MAX_LIFETIME_TICKS = 300;
@@ -57,8 +55,8 @@ public class BarrierEntity extends Entity implements SpellTypeEntity {
         super.tick();
 
         for (Entity nearby : this.level.getEntities(this, this.getBoundingBox().inflate(0.5))) {
-            if (nearby instanceof SpellEntity) {
-                this.onCollideWith((SpellEntity) nearby);
+            if (nearby instanceof SpellTypeEntity) {
+                this.onCollideWith((SpellTypeEntity) nearby);
             }
         }
 
@@ -113,7 +111,7 @@ public class BarrierEntity extends Entity implements SpellTypeEntity {
     }
 
     @Override
-    public void onCollideWith(net.geminiimmortal.mobius.entity.custom.SpellEntity other) {
+    public void onCollideWith(SpellTypeEntity other) {
 
     }
 

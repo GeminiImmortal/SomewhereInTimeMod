@@ -1,25 +1,20 @@
 package net.geminiimmortal.mobius.item.custom;
 
 
-import net.geminiimmortal.mobius.entity.custom.TornadoEntity;
+import net.geminiimmortal.mobius.entity.custom.spell.TornadoEntity;
 import net.geminiimmortal.mobius.item.StaffType;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class HurricaneStaff extends ModularStaff {
     private final StaffType staffType;

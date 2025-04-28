@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.entity.custom.spell.ObliteratorEntity;
 import net.geminiimmortal.mobius.entity.goals.*;
 import net.geminiimmortal.mobius.network.BeamEndPacket;
 import net.geminiimmortal.mobius.network.ModNetwork;
@@ -115,7 +116,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
         this.goalSelector.addGoal(4, laserTrackerGoal);
     //    this.goalSelector.addGoal(3, new MagiDashGoal(this));
     //    this.goalSelector.addGoal(6, new SorcererBackAwayGoal(this, 1.4, 5));
-        this.goalSelector.addGoal(6, new ArcaneBeamAttackGoal(this, new SorcererObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), this.level)));
+        this.goalSelector.addGoal(6, new ArcaneBeamAttackGoal(this, new ObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), this.level)));
     //    this.goalSelector.addGoal(3, sonicBoomGoal);
         this.goalSelector.addGoal(5, new BubbleAttackGoal(this, 4, 20, 80));
         this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 40f));

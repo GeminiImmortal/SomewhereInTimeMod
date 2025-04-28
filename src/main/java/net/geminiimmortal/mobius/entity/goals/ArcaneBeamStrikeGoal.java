@@ -2,8 +2,8 @@ package net.geminiimmortal.mobius.entity.goals;
 
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
-import net.geminiimmortal.mobius.entity.custom.SorcererObliteratorEntity;
-import net.geminiimmortal.mobius.entity.goals.util.TrackingLaserBeam;
+import net.geminiimmortal.mobius.entity.custom.spell.ObliteratorEntity;
+import net.geminiimmortal.mobius.entity.custom.spell.TrackingLaserBeam;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.util.DamageSource;
@@ -61,7 +61,7 @@ public class ArcaneBeamStrikeGoal extends Goal {
 
     @Override
     public void tick() {
-        SorcererObliteratorEntity obliterator = new SorcererObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), boss.level);
+        ObliteratorEntity obliterator = new ObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), boss.level);
 
 
         if (target == null || !target.isAlive()) {

@@ -1,7 +1,7 @@
 package net.geminiimmortal.mobius.entity.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import net.geminiimmortal.mobius.entity.custom.TornadoEntity;
+import net.geminiimmortal.mobius.entity.custom.spell.TornadoEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;

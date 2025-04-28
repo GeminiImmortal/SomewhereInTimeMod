@@ -1,7 +1,7 @@
 package net.geminiimmortal.mobius.item.custom;
 
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
-import net.geminiimmortal.mobius.entity.custom.BarrierEntity;
+import net.geminiimmortal.mobius.entity.custom.spell.BarrierEntity;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;

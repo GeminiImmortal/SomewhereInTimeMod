@@ -1,11 +1,6 @@
-package net.geminiimmortal.mobius.entity.goals.util;
+package net.geminiimmortal.mobius.entity.custom.spell;
 
-import net.geminiimmortal.mobius.entity.custom.BarrierEntity;
 import net.geminiimmortal.mobius.entity.custom.SpellEntity;
-import net.geminiimmortal.mobius.entity.custom.spell.SpellTypeEntity;
-import net.geminiimmortal.mobius.entity.custom.spell.SpellType;
-import net.geminiimmortal.mobius.network.ModNetwork;
-import net.geminiimmortal.mobius.network.ParticlePacket;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -20,7 +15,6 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.fml.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -55,7 +49,7 @@ public class TrackingLaserBeam implements SpellTypeEntity {
     }
 
     @Override
-    public void onCollideWith(SpellEntity other) {
+    public void onCollideWith(SpellTypeEntity other) {
 
     }
 

@@ -1,5 +1,6 @@
-package net.geminiimmortal.mobius.entity.custom;
+package net.geminiimmortal.mobius.entity.custom.spell;
 
+import net.geminiimmortal.mobius.entity.custom.SpellEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.CompoundNBT;
@@ -9,12 +10,12 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nonnull;
 
-public class SorcererObliteratorEntity extends Entity {
+public class ObliteratorEntity extends Entity implements SpellTypeEntity {
     private float rotationAngle = 0;
     private boolean beamFiring = false;
     private int shrinkTicks = 0;
 
-    public SorcererObliteratorEntity(EntityType<? extends SorcererObliteratorEntity> entityType, World world) {
+    public ObliteratorEntity(EntityType<? extends ObliteratorEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -64,5 +65,15 @@ public class SorcererObliteratorEntity extends Entity {
 
     @Override
     protected void addAdditionalSaveData(CompoundNBT nbt) {}
+
+    @Override
+    public void onCollideWith(SpellTypeEntity other) {
+
+    }
+
+    @Override
+    public SpellType getSpellType() {
+        return SpellType.NO_INTERACTION;
+    }
 }
 

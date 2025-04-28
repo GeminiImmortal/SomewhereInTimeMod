@@ -2,8 +2,7 @@ package net.geminiimmortal.mobius.entity.render;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import net.geminiimmortal.mobius.entity.custom.SorcererKnivesOutEntity;
-import net.geminiimmortal.mobius.entity.custom.SorcererObliteratorEntity;
+import net.geminiimmortal.mobius.entity.custom.spell.ObliteratorEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -14,7 +13,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Matrix4f;
 import net.minecraft.util.math.vector.Vector3f;
 
-public class SorcererObliteratorRenderer extends EntityRenderer<SorcererObliteratorEntity> {
+public class SorcererObliteratorRenderer extends EntityRenderer<ObliteratorEntity> {
     private static final ResourceLocation TEXTURE = new ResourceLocation("mobius", "textures/entity/knives_out.png");
 
     public SorcererObliteratorRenderer(EntityRendererManager renderManager) {
@@ -22,7 +21,7 @@ public class SorcererObliteratorRenderer extends EntityRenderer<SorcererOblitera
     }
 
     @Override
-    public void render(SorcererObliteratorEntity entity, float entityYaw, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int packedLight) {
+    public void render(ObliteratorEntity entity, float entityYaw, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int packedLight) {
         matrixStack.pushPose();
 
         float baseYOffset = 6.0f; // Starting Y offset
@@ -75,7 +74,7 @@ public class SorcererObliteratorRenderer extends EntityRenderer<SorcererOblitera
 
 
     @Override
-    public ResourceLocation getTextureLocation(SorcererObliteratorEntity entity) {
+    public ResourceLocation getTextureLocation(ObliteratorEntity entity) {
         return TEXTURE;
     }
 }

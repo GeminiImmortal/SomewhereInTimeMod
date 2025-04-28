@@ -1,6 +1,7 @@
-package net.geminiimmortal.mobius.entity.custom;
+package net.geminiimmortal.mobius.entity.custom.spell;
 
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.entity.custom.SpellEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -17,7 +18,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.UUID;
 
-public class TornadoEntity extends Entity implements IEntityAdditionalSpawnData {
+public class TornadoEntity extends Entity implements IEntityAdditionalSpawnData, SpellTypeEntity {
     private UUID casterUUID;
     private int lifetime = 200; // 10 seconds at 20 ticks per second
     private double rotationAngle = 0;
@@ -125,5 +126,15 @@ public class TornadoEntity extends Entity implements IEntityAdditionalSpawnData 
     @Override
     public void readSpawnData(PacketBuffer buffer) {
         casterUUID = buffer.readUUID();
+    }
+
+    @Override
+    public void onCollideWith(SpellTypeEntity other) {
+
+    }
+
+    @Override
+    public SpellType getSpellType() {
+        return SpellType.NO_INTERACTION;
     }
 }

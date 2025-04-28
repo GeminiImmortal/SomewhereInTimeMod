@@ -1,7 +1,7 @@
 package net.geminiimmortal.mobius.entity.goals;
 
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
-import net.geminiimmortal.mobius.entity.custom.SorcererObliteratorEntity;
+import net.geminiimmortal.mobius.entity.custom.spell.ObliteratorEntity;
 import net.geminiimmortal.mobius.network.BeamCirclePacket;
 import net.geminiimmortal.mobius.network.BeamRenderPacket;
 import net.geminiimmortal.mobius.network.ModNetwork;
@@ -27,9 +27,9 @@ public class ArcaneBeamAttackGoal extends Goal {
     private int attackTick;
     private BlockPos beamTarget;
     private boolean hasFired;
-    SorcererObliteratorEntity obliterator;
+    ObliteratorEntity obliterator;
 
-    public ArcaneBeamAttackGoal(MobEntity boss, SorcererObliteratorEntity obliterator) {
+    public ArcaneBeamAttackGoal(MobEntity boss, ObliteratorEntity obliterator) {
         this.boss = boss;
         this.obliterator = obliterator;
     }
@@ -55,7 +55,7 @@ public class ArcaneBeamAttackGoal extends Goal {
             );
         }
 
-        this.obliterator = new SorcererObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), boss.level);
+        this.obliterator = new ObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), boss.level);
         obliterator.setPos(beamTarget.getX(), beamTarget.getY() + 16, beamTarget.getZ());
         boss.level.addFreshEntity(obliterator);
 

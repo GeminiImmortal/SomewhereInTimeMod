@@ -2,7 +2,9 @@ package net.geminiimmortal.mobius.entity;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.custom.*;
-import net.minecraft.entity.Entity;
+import net.geminiimmortal.mobius.entity.custom.spell.BarrierEntity;
+import net.geminiimmortal.mobius.entity.custom.spell.ObliteratorEntity;
+import net.geminiimmortal.mobius.entity.custom.spell.TornadoEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -89,9 +91,9 @@ public class ModEntityTypes {
                                     EntityClassification.MISC).sized(1f, 1f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "knives_out").toString()));
 
-    public static final RegistryObject<EntityType<SorcererObliteratorEntity>> OBLITERATOR =
+    public static final RegistryObject<EntityType<ObliteratorEntity>> OBLITERATOR =
             ENTITY_TYPES.register("obliterator",
-                    () -> EntityType.Builder.of(SorcererObliteratorEntity::new,
+                    () -> EntityType.Builder.of(ObliteratorEntity::new,
                                     EntityClassification.MISC).sized(1f, 1f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "obliterator").toString()));
 

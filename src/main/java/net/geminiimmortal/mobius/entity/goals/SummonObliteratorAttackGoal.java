@@ -3,20 +3,19 @@ package net.geminiimmortal.mobius.entity.goals;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.BeamEntity;
 import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
-import net.geminiimmortal.mobius.entity.custom.SorcererObliteratorEntity;
+import net.geminiimmortal.mobius.entity.custom.spell.ObliteratorEntity;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
 public class SummonObliteratorAttackGoal extends Goal {
     private final SorcererEntity sorcerer;
-    private SorcererObliteratorEntity obliterator;
+    private ObliteratorEntity obliterator;
     private final double summonHeight = 15.0;  // Height above the player to summon the obliterator
     private final double beamSpeed = 1.0;  // Speed of particle beam
     private final int summonCooldown = 100;  // Cooldown before summoning again
@@ -45,7 +44,7 @@ public class SummonObliteratorAttackGoal extends Goal {
 
         LivingEntity target = sorcerer.getTarget();
         if (target != null) {
-            this.obliterator = new SorcererObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), sorcerer.level);
+            this.obliterator = new ObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), sorcerer.level);
 
             double yOffset = target.getY() + summonHeight;
             obliterator.setPos(target.getX(), yOffset, target.getZ());
@@ -89,7 +88,7 @@ public class SummonObliteratorAttackGoal extends Goal {
 
 
 
-    private void spawnPersistentParticleBeam(SorcererObliteratorEntity obliterator, LivingEntity target) {
+    private void spawnPersistentParticleBeam(ObliteratorEntity obliterator, LivingEntity target) {
         double dx = target.getX() - obliterator.getX();
         double dy = target.getY() - obliterator.getY();
         double dz = target.getZ() - obliterator.getZ();
