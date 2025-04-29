@@ -26,7 +26,7 @@ mixin {
     add sourceSets.main, "mobius.refmap.json"
 }
 
-version = '1.16.5-0.5.6.2-indev'
+version = '1.16.5-0.5.7-indev'
 group = 'net.geminiimmortal.mobius' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'mobius'
 
