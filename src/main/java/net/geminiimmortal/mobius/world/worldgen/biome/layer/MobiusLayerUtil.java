@@ -58,6 +58,10 @@ public class MobiusLayerUtil {
     }
 
     private static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> getBiomeLayer(IAreaFactory<T> parentLayer, LongFunction<C> context, Registry<Biome> biomeRegistry) {
+        parentLayer = new MobiusOceanLayer(biomeRegistry).run(context.apply(150L), parentLayer);
+        parentLayer = ZoomLayer.NORMAL.run(context.apply(151L), parentLayer);
+        parentLayer = new MobiusRollingExpanseLayer(biomeRegistry).run(context.apply(150L), parentLayer);
+        parentLayer = ZoomLayer.NORMAL.run(context.apply(151L), parentLayer);
         parentLayer = new MobiusBiomeLayer(biomeRegistry).run(context.apply(200L), parentLayer);
         parentLayer = LayerUtil.zoom(1000L, ZoomLayer.NORMAL, parentLayer, 2, context);
         return parentLayer;

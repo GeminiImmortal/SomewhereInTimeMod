@@ -119,6 +119,11 @@
     ],
     "subtitle": "Strong wind blows"
   },
+  "ambient_loop_goo_lagoon": {
+    "sounds": [
+      "mobius:ambient_loop_goo_lagoon"
+    ]
+  },
   "tier_one_prot_staff_cast": {
     "sounds": [
       "mobius:tier_one_prot_staff_cast"

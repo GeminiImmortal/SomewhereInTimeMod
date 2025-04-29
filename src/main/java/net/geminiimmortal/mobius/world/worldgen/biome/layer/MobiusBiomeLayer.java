@@ -76,6 +76,15 @@ public class MobiusBiomeLayer implements IC0Transformer {
     @Override
     public int apply(INoiseRandom noiseRandom, int value) {
         ensureInitialized();
+
+        if (value == biomeRegistry.getId(biomeRegistry.get(ModBiomes.BIOME_KEYS.get(1)))) {
+            return value;
+        }
+
+        if (value == biomeRegistry.getId(biomeRegistry.get(ModBiomes.BIOME_KEYS.get(4)))) {
+            return value;
+        }
+
         int totalWeight = WeightedRandom.getTotalWeight(biomes);
         int weight = noiseRandom.nextRandom(totalWeight);
         RegistryKey<Biome> selectedKey = WeightedRandom.getWeightedItem(biomes, weight).getKey();

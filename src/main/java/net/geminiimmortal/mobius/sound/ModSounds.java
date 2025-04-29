@@ -144,6 +144,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> SPARKS =
             registerSoundEvent("sparks");
 
+    public static final RegistryObject<SoundEvent> AMBIENT_LOOP_GOO_LAGOON =
+            registerSoundEvent("ambient_loop_goo_lagoon");
+
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, name)));
     }
