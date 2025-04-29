@@ -79,6 +79,10 @@ public class ModConfiguredFeatures {
             register("floating_block",
                     ModFeatures.FLOATING_BLOCK_FEATURE.get().configured(new NoFeatureConfig()));
 
+    public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_TALL_GRASS_CARPET_FEATURE =
+            register("tall_grass_carpet",
+                    ModFeatures.TALL_GRASS_CARPET_FEATURE.get().configured(new NoFeatureConfig()));
+
 
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key,
                                                                                  ConfiguredFeature<FC, ?> configuredFeature) {

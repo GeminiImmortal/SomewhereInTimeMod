@@ -24,6 +24,9 @@ public class ModFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> FLOATING_BLOCK_FEATURE = registerFeat("floating_block_feature", () ->
             new FloatingBlockFeature(NoFeatureConfig.CODEC));
 
+    public static final RegistryObject<Feature<NoFeatureConfig>> TALL_GRASS_CARPET_FEATURE = registerFeat("tall_grass_carpet_feature", () ->
+            new TallGrassCarpetFeature(NoFeatureConfig.CODEC));
+
 
     private static <T extends Feature<?>> RegistryObject<T> registerFeat(String name, final Supplier<T> sup) {
         return FEATURES.register(name, sup);

@@ -5,6 +5,7 @@ import net.geminiimmortal.mobius.world.worldgen.feature.placement.DenserTreesPla
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.FeatureSpreadConfig;
 import net.minecraft.world.gen.feature.Features;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.ChanceConfig;
@@ -21,6 +22,7 @@ public class ModNoFeatureConfigGeneration {
         ResourceLocation forsakenThicket = ModBiomes.FORSAKEN_THICKET.getId();
         ResourceLocation mushroomForest = ModBiomes.MUSHROOM_FOREST.getId();
         ResourceLocation shatteredPlains = ModBiomes.SHATTERED_PLAINS.getId();
+        ResourceLocation rollingExpanse = ModBiomes.ROLLING_EXPANSE.getId();
 
         if (Objects.equals(event.getName(), mushroomForest)) {
             List<Supplier<ConfiguredFeature<?, ?>>> base =
@@ -65,6 +67,13 @@ public class ModNoFeatureConfigGeneration {
                     .decorated(Placement.CHANCE.configured(
                             new ChanceConfig(1)))
                     .countRandom(10));
+        }
+
+        if (Objects.equals(event.getName(), rollingExpanse)) {
+            List<Supplier<ConfiguredFeature<?, ?>>> base =
+                    event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
+
+            base.add(() -> ModConfiguredFeatures.CONFIGURED_TALL_GRASS_CARPET_FEATURE);
         }
     }
 }
