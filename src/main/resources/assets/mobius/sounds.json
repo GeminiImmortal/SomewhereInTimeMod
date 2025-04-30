@@ -31,6 +31,12 @@
     ],
     "subtitle": "Spell impacts"
   },
+  "spell_of_aggression": {
+    "sounds": [
+      "mobius:spell_of_aggression"
+    ],
+    "subtitle": "Spell of aggression casts"
+  },
   "arcane_bolt_fx_deep": {
     "sounds": [
       "mobius:arcane_bolt_fx_deep"

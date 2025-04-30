@@ -117,6 +117,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> ARCANE_BOLT_FX =
             registerSoundEvent("arcane_bolt_fx");
 
+    public static final RegistryObject<SoundEvent> SPELL_OF_AGGRESSION =
+            registerSoundEvent("spell_of_aggression");
+
     public static final RegistryObject<SoundEvent> OBLITERATOR =
             registerSoundEvent("obliterator");
 

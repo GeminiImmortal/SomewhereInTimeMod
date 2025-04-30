@@ -295,6 +295,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BEAM_ENTITY.get(), BeamRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BARRIER.get(), BarrierEntityRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ARCANE_CIRCLE.get(), ArcaneCircleRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SPELL_PROJECTILE.get(), SpellProjectileRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

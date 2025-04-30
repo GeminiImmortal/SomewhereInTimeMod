@@ -2,10 +2,7 @@ package net.geminiimmortal.mobius.entity;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.custom.*;
-import net.geminiimmortal.mobius.entity.custom.spell.ArcaneCircleEntity;
-import net.geminiimmortal.mobius.entity.custom.spell.BarrierEntity;
-import net.geminiimmortal.mobius.entity.custom.spell.ObliteratorEntity;
-import net.geminiimmortal.mobius.entity.custom.spell.TornadoEntity;
+import net.geminiimmortal.mobius.entity.custom.spell.*;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -170,6 +167,12 @@ public class ModEntityTypes {
                     .fireImmune()
                     .setShouldReceiveVelocityUpdates(false)
                     .build("arcane_circle"));
+
+    public static final RegistryObject<EntityType<SpellProjectileEntity>> SPELL_PROJECTILE =
+            ENTITY_TYPES.register("spell_projectile",
+                    () -> EntityType.Builder.<SpellProjectileEntity>of(SpellProjectileEntity::new,
+                                    EntityClassification.MISC).sized(0.5f, 0.5f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "spell_projectile").toString()));
 
 
 
