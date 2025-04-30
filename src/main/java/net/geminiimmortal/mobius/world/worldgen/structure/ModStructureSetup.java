@@ -56,9 +56,9 @@ public class ModStructureSetup {
     public static void registerStructures() {
         setupStructure(MOLVAN_SETTLEMENT_A.get(), new StructureSeparationSettings(24, 8, 276320045), false);
         setupStructure(MOLVAN_SETTLEMENT_B.get(), new StructureSeparationSettings(24, 8, 276321489), false);
-        setupStructure(IMPERIAL_WATCHTOWER.get(), new StructureSeparationSettings(24, 8, 218590045), true);
-        setupStructure(GOVERNOR_TOWER.get(), new StructureSeparationSettings(24, 8, 276357495), false);
-        setupStructure(MOBIUS_VILLAGE.get(), new StructureSeparationSettings(24, 8, 221375889), true);
+        setupStructure(IMPERIAL_WATCHTOWER.get(), new StructureSeparationSettings(39, 26, 218590045), true);
+        setupStructure(GOVERNOR_TOWER.get(), new StructureSeparationSettings(70, 50, 276357495), false);
+        setupStructure(MOBIUS_VILLAGE.get(), new StructureSeparationSettings(24, 16, 221375889), true);
         setupStructure(DRAGON_BONES.get(), new StructureSeparationSettings(24, 8, 158390045), true);
         setupStructure(CELESTIAL_RUINS.get(), new StructureSeparationSettings(24, 8, 646357495), false);
         setupStructure(MOBIUS_PORTAL.get(), new StructureSeparationSettings(24, 8, 195837495), true);

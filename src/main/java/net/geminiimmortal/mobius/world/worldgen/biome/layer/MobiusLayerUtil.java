@@ -26,6 +26,7 @@ public class MobiusLayerUtil {
     public static int GOO_LAGOON;
     public static int ROLLING_EXPANSE;
     public static int INFECTED_BOG;
+    public static int DRACONIC_FOOTHILLS;
 
     public static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> buildMobiusLayers(int biomeSize, int riverSize, LongFunction<C> context, Registry<Biome> biomeRegistry) {
         IAreaFactory<T> layer = IslandLayer.INSTANCE.run(context.apply(1L));
@@ -57,15 +58,34 @@ public class MobiusLayerUtil {
         return biomeLayer;
     }
 
-    private static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> getBiomeLayer(IAreaFactory<T> parentLayer, LongFunction<C> context, Registry<Biome> biomeRegistry) {
-        parentLayer = new MobiusOceanLayer(biomeRegistry).run(context.apply(150L), parentLayer);
-        parentLayer = ZoomLayer.NORMAL.run(context.apply(151L), parentLayer);
+    private static <T extends IArea, C extends IExtendedNoiseRandom<T>>
+    IAreaFactory<T> getBiomeLayer(IAreaFactory<T> parentLayer, LongFunction<C> context, Registry<Biome> biomeRegistry) {
+
+        // Base ocean layer
+        parentLayer = new MobiusBiomeLayer(biomeRegistry).run(context.apply(150L), parentLayer);
+        parentLayer = ZoomLayer.NORMAL.run(context.apply(151L), parentLayer); // 1x zoom
+
+        // Insert mountain layer EARLY (so its cells are large)
         parentLayer = new MobiusRollingExpanseLayer(biomeRegistry).run(context.apply(150L), parentLayer);
-        parentLayer = ZoomLayer.NORMAL.run(context.apply(151L), parentLayer);
-        parentLayer = new MobiusBiomeLayer(biomeRegistry).run(context.apply(200L), parentLayer);
+        parentLayer = ZoomLayer.FUZZY.run(context.apply(151L), parentLayer); // 1x zoom
+
+        parentLayer = new MobiusForestLayer(biomeRegistry).run(context.apply(150L), parentLayer);
+        parentLayer = ZoomLayer.NORMAL.run(context.apply(151L), parentLayer); // 1x zoom
+        parentLayer = ZoomLayer.NORMAL.run(context.apply(151L), parentLayer); // 1x zoom
+
+        parentLayer = new MobiusOceanLayer(biomeRegistry).run(context.apply(150L), parentLayer);
+        parentLayer = new MobiusMountainLayer(biomeRegistry).run(context.apply(150L), parentLayer);
+        parentLayer = ZoomLayer.NORMAL.run(context.apply(151L), parentLayer); // 1x zoom
+        parentLayer = ZoomLayer.NORMAL.run(context.apply(151L), parentLayer); // 1x zoom
+
+        // Final zoom to smooth things out (7x–8x)
         parentLayer = LayerUtil.zoom(1000L, ZoomLayer.NORMAL, parentLayer, 2, context);
+
         return parentLayer;
     }
+
+
+
 
     public static Layer getNoiseLayer(long seed, int biomeSize, int riverSize, Registry<Biome> biomeRegistry) {
         setupBiomeIntIDs(biomeRegistry);
@@ -99,6 +119,7 @@ public class MobiusLayerUtil {
         MUSHROOM_FOREST = getVerifiedBiomeID(biomeRegistry, ModBiomes.MUSHROOM_FOREST.getId());
         INFECTED_BOG = getVerifiedBiomeID(biomeRegistry, ModBiomes.INFECTED_BOG.getId());
         SHATTERED_PLAINS = getVerifiedBiomeID(biomeRegistry, ModBiomes.SHATTERED_PLAINS.getId());
+        DRACONIC_FOOTHILLS = getVerifiedBiomeID(biomeRegistry, ModBiomes.DRACONIC_FOOTHILLS.getId());
     }
 
     private static int getVerifiedBiomeID(Registry<Biome> registry, ResourceLocation id) {

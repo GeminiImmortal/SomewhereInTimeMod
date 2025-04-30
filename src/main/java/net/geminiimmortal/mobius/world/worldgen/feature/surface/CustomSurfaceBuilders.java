@@ -1,9 +1,5 @@
-package net.geminiimmortal.mobius.world.worldgen;
+package net.geminiimmortal.mobius.world.worldgen.feature.surface;
 
-import net.geminiimmortal.mobius.world.worldgen.feature.surface.DraconicForelandsSurfaceBuilder;
-import net.geminiimmortal.mobius.world.worldgen.feature.surface.GooLagoonSurfaceBuilder;
-import net.geminiimmortal.mobius.world.worldgen.feature.surface.InfectedBogSurfaceBuilder;
-import net.geminiimmortal.mobius.world.worldgen.feature.surface.LakeGenHelper;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -31,6 +27,14 @@ public class CustomSurfaceBuilders {
 
     public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> DRACONIC_FORELANDS_SURFACE_BUILDER = SURFACE_BUILDERS.register(
             "draconic_forelands_surface_builder", () -> new DraconicForelandsSurfaceBuilder(SurfaceBuilderConfig.CODEC)
+    );
+
+    public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> DRACONIC_FORELANDS_MOUNTAINS_SURFACE_BUILDER = SURFACE_BUILDERS.register(
+            "draconic_forelands_mountain_builder", () -> new DraconicForelandsMountainSurfaceBuilder(SurfaceBuilderConfig.CODEC)
+    );
+
+    public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> DRACONIC_FOOTHILLS_SURFACE_BUILDER = SURFACE_BUILDERS.register(
+            "draconic_foothills_surface_builder", () -> new DraconicFoothillsSurfaceBuilder(SurfaceBuilderConfig.CODEC)
     );
 
     public static void register(IEventBus eventBus) {

@@ -62,6 +62,9 @@ public class ModBiomes {
     public static final RegistryObject<Biome> SHATTERED_PLAINS = BIOMES.register("shattered_plains",
             () -> makeShatteredPlains(() -> ModConfiguredSurfaceBuilders.SHATTERED_PLAINS, 0.111f, 0.45f));
 
+    public static final RegistryObject<Biome> DRACONIC_FOOTHILLS = BIOMES.register("draconic_foothills",
+            () -> makeDraconicFoothills(() -> ModConfiguredSurfaceBuilders.DRACONIC_FOOTHILLS, 0.111f, 0.4f));
+
 
     public static RegistryKey<Biome> registerBiomeKey(String biomeName) {
         RegistryKey<Biome> biomeKey = RegistryKey.create(ForgeRegistries.Keys.BIOMES, new ResourceLocation(MobiusMod.MOD_ID, biomeName));
@@ -82,11 +85,14 @@ public class ModBiomes {
         BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
                 new ResourceLocation(MobiusMod.MOD_ID, "rolling_expanse")));
         BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
+                new ResourceLocation(MobiusMod.MOD_ID, "draconic_foothills")));
+        BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
                 new ResourceLocation(MobiusMod.MOD_ID, "infected_bog")));
         BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
                 new ResourceLocation(MobiusMod.MOD_ID, "crimson_cascades")));
         BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
                 new ResourceLocation(MobiusMod.MOD_ID, "shattered_plains")));
+
         System.out.println("Registered: " + BIOME_KEYS);
     }
 
@@ -256,6 +262,41 @@ public class ModBiomes {
                         .build())
                 .mobSpawnSettings(mobspawninfo$builder.build()).generationSettings(biomegenerationsettings$builder.build()).build();
     }
+
+    public static Biome makeDraconicFoothills(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
+        BiomeGenerationSettings.Builder generation = new BiomeGenerationSettings.Builder();
+
+        generation.surfaceBuilder(() -> ModConfiguredSurfaceBuilders.DRACONIC_FOOTHILLS);
+        DefaultBiomeFeatures.addDefaultCarvers(generation);
+        DefaultBiomeFeatures.addDefaultFlowers(generation);
+
+        MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
+        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
+                new MobSpawnInfo.Spawners(EntityType.BAT, 35, 7, 10));
+        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
+                new MobSpawnInfo.Spawners(ModEntityTypes.FAEDEER.get(), 60, 3,5));
+        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
+                new MobSpawnInfo.Spawners(ModEntityTypes.BONE_WOLF.get(), 5, 2, 3));
+
+        return new Biome.Builder()
+                .precipitation(Biome.RainType.RAIN)
+                .biomeCategory(Biome.Category.EXTREME_HILLS)
+                .depth(0.45F)
+                .scale(0.3F)
+                .temperature(0.3F)
+                .downfall(0.4F)
+                .specialEffects(new BiomeAmbience.Builder()
+                        .fogColor(0x605070)
+                        .waterColor(0x3f76e4)
+                        .waterFogColor(0x050533)
+                        .skyColor(11532160)
+                        .ambientParticle(new ParticleEffectAmbience(ModParticles.FAEDEER_PARTICLE.get(), 0.01f))
+                        .build())
+                .mobSpawnSettings(mobspawninfo$builder.build())
+                .generationSettings(generation.build())
+                .build();
+    }
+
 
     public static void register(IEventBus eventBus) {
         BIOMES.register(eventBus);

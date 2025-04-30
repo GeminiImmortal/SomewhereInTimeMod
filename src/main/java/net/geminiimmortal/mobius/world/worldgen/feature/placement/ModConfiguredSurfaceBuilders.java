@@ -2,7 +2,7 @@ package net.geminiimmortal.mobius.world.worldgen.feature.placement;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.ModBlocks;
-import net.geminiimmortal.mobius.world.worldgen.CustomSurfaceBuilders;
+import net.geminiimmortal.mobius.world.worldgen.feature.surface.CustomSurfaceBuilders;
 import net.geminiimmortal.mobius.world.worldgen.feature.surface.DraconicForelandsSurfaceBuilder;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
@@ -32,9 +32,17 @@ public class ModConfiguredSurfaceBuilders {
             ModBlocks.HEMATITE.get().defaultBlockState()
     )));
 
-    public static ConfiguredSurfaceBuilder<?> DRACONIC_FORELANDS = register("draconic_forelands", CustomSurfaceBuilders.DRACONIC_FORELANDS_SURFACE_BUILDER.get()
-            .configured(DraconicForelandsSurfaceBuilder.DRACONIC_FORELANDS_SURFACE_CONFIG
-    ));
+    public static ConfiguredSurfaceBuilder<?> DRACONIC_FORELANDS = register("draconic_forelands", CustomSurfaceBuilders.DRACONIC_FORELANDS_MOUNTAINS_SURFACE_BUILDER.get().configured(new SurfaceBuilderConfig(
+            ModBlocks.AURORA_GRASS_BLOCK.get().defaultBlockState(),
+            ModBlocks.BLOODSTONE.get().defaultBlockState(),
+            ModBlocks.HEMATITE.get().defaultBlockState()
+    )));
+
+    public static ConfiguredSurfaceBuilder<?> DRACONIC_FOOTHILLS = register("draconic_foothills", CustomSurfaceBuilders.DRACONIC_FOOTHILLS_SURFACE_BUILDER.get().configured(new SurfaceBuilderConfig(
+            ModBlocks.AURORA_GRASS_BLOCK.get().defaultBlockState(),
+            ModBlocks.AURORA_DIRT.get().defaultBlockState(),
+            ModBlocks.HEMATITE.get().defaultBlockState()
+    )));
 
     public static ConfiguredSurfaceBuilder<?> ROLLING_EXPANSE = register("rolling_expanse", SurfaceBuilder.DEFAULT.configured(new SurfaceBuilderConfig(
             ModBlocks.AURORA_GRASS_BLOCK.get().defaultBlockState(),
