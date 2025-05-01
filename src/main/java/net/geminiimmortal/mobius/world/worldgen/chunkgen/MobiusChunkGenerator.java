@@ -51,22 +51,18 @@ public class MobiusChunkGenerator extends ChunkGenerator {
     public static final Codec<MobiusChunkGenerator> CODEC = RecordCodecBuilder.create((p_236091_0_) -> {
         return p_236091_0_.group(BiomeProvider.CODEC.fieldOf("biome_source").forGetter((p_236096_0_) -> {
             return p_236096_0_.biomeSource;
-        }), Codec.LONG.fieldOf("seed").stable().orElseGet(() -> ModDimensions.seed).forGetter((seed) -> {
+        }), Codec.LONG.fieldOf("seed").stable().orElseGet(SeedBearer::giveMeSeed).forGetter(p_236090_0_ -> {
             return SeedBearer.giveMeSeed();
         }), DimensionSettings.CODEC.fieldOf("settings").forGetter((p_236090_0_) -> {
             return p_236090_0_.settings;
         })).apply(p_236091_0_, p_236091_0_.stable(MobiusChunkGenerator::new));
     });
 
-    public MobiusChunkGenerator(BiomeProvider p_i241975_1_, long p_i241975_2_, Supplier<DimensionSettings> p_i241975_4_) {
-        this(p_i241975_1_, p_i241975_1_, p_i241975_2_, p_i241975_4_);
-    }
-
-    private MobiusChunkGenerator(BiomeProvider p_i241976_1_, BiomeProvider p_i241976_2_, long p_i241976_3_, Supplier<DimensionSettings> p_i241976_5_) {
-        super(p_i241976_1_, p_i241976_2_, ((DimensionSettings)p_i241976_5_.get()).structureSettings(), p_i241976_3_);
-        this.seed = p_i241976_3_;
+    private MobiusChunkGenerator(BiomeProvider p_i241976_1_, long p_i241976_3_, Supplier<DimensionSettings> p_i241976_5_) {
+        super(p_i241976_1_, ((DimensionSettings)p_i241976_5_.get()).structureSettings());
         DimensionSettings dimensionsettings = (DimensionSettings)p_i241976_5_.get();
         this.settings = p_i241976_5_;
+        p_i241976_3_ = SeedBearer.giveMeSeed();
         NoiseSettings noisesettings = dimensionsettings.noiseSettings();
         this.height = noisesettings.height();
         this.chunkHeight = noisesettings.noiseSizeVertical() * 4;
@@ -90,7 +86,7 @@ public class MobiusChunkGenerator extends ChunkGenerator {
         } else {
             this.islandNoise = null;
         }
-
+        System.out.println("MobiusChunkGenerator initialized with seed: " + seed);
     }
 
     private static final float[] BEARD_KERNEL = (float[])Util.make(new float[13824], (p_236094_0_) -> {
@@ -129,7 +125,7 @@ public class MobiusChunkGenerator extends ChunkGenerator {
     private final SimplexNoiseGenerator islandNoise;
     protected final BlockState defaultBlock;
     protected final BlockState defaultFluid;
-    public final long seed;
+    public final long seed = SeedBearer.giveMeSeed();
     protected final Supplier<DimensionSettings> settings;
     private final int height;
 

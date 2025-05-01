@@ -27,8 +27,8 @@ public class MobiusBiomeProvider extends BiomeProvider {
             return mobiusBiomeProvider.largeBiomes;
         }), net.minecraft.util.registry.RegistryLookupCodec.create(net.minecraft.util.registry.Registry.BIOME_REGISTRY).forGetter((mobiusBiomeProvider) -> {
             return mobiusBiomeProvider.lookupRegistry;
-        }), Codec.LONG.fieldOf("seed").orElseGet(() -> ModDimensions.seed).forGetter(seed -> {
-            return SeedBearer.giveMeSeed();
+        }), Codec.LONG.fieldOf("seed").orElseGet(SeedBearer::giveMeSeed).forGetter(mobiusBiomeProvider -> {
+            return mobiusBiomeProvider.seed;
         })).apply(builder, builder.stable(MobiusBiomeProvider::new));
     });
     private final Layer genBiomes;
@@ -39,8 +39,8 @@ public class MobiusBiomeProvider extends BiomeProvider {
     public MobiusBiomeProvider(boolean largeBiomes, Registry<Biome> lookupRegistry, long seed) {
         super(ModBiomes.BIOME_KEYS.stream().map(lookupRegistry::getOrThrow).collect(Collectors.toList()));
 
-        this.seed = seed;
-        System.out.println("MobiusBiomeProvider initialized with seed: " + this.seed);
+        this.seed = SeedBearer.giveMeSeed();
+        System.out.println("MobiusBiomeProvider initialized with seed: " + seed);
         this.largeBiomes = largeBiomes;
         this.lookupRegistry = lookupRegistry;
         this.genBiomes = MobiusLayerUtil.getNoiseLayer(seed, largeBiomes ? 6 : 4, 6, lookupRegistry);
