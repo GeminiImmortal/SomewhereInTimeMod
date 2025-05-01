@@ -359,6 +359,11 @@ public class MobiusChunkGenerator extends ChunkGenerator {
     }
 
     public void buildSurfaceAndBedrock(WorldGenRegion p_225551_1_, IChunk p_225551_2_) {
+        long actualSeed = SeedBearer.getSeed();
+        if (actualSeed != this.currentSeed) {
+            this.currentSeed = actualSeed;
+            initializeNoise(actualSeed);
+        }
         ChunkPos chunkpos = p_225551_2_.getPos();
         int i = chunkpos.x;
         int j = chunkpos.z;

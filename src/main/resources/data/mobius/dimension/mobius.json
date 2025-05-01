@@ -1,7 +1,6 @@
 {
   "type": "mobius:mobius_type",
   "generator": {
-    "seed": 0,
     "biome_source": {
       "large_biomes": true,
       "type": "mobius:biome_provider"
