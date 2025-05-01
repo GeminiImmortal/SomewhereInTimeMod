@@ -5,7 +5,6 @@ import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.sound.ModSounds;
-import net.geminiimmortal.mobius.world.worldgen.feature.ModConfiguredFeatures;
 import net.geminiimmortal.mobius.world.worldgen.feature.placement.ModConfiguredSurfaceBuilders;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -17,13 +16,12 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
-import net.minecraft.world.gen.placement.CountNoisePlacement;
-import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.gen.carver.ConfiguredCarver;
+import net.minecraft.world.gen.carver.WorldCarver;
+import net.minecraft.world.gen.feature.Features;
+import net.minecraft.world.gen.feature.ProbabilityConfig;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -191,9 +189,8 @@ public class ModBiomes {
                 new MobSpawnInfo.Spawners(EntityType.COW, 50, 1,1));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
-        DefaultBiomeFeatures.addPlainGrass(biomegenerationsettings$builder);
-        DefaultBiomeFeatures.addDefaultGrass(biomegenerationsettings$builder);
-        DefaultBiomeFeatures.addJungleExtraVegetation(biomegenerationsettings$builder);
+        biomegenerationsettings$builder.addFeature(GenerationStage.Decoration.LAKES, Features.SEAGRASS_RIVER);
+
 
         return (new Biome.Builder()).precipitation(Biome.RainType.RAIN).biomeCategory(Biome.Category.PLAINS).depth(depth).scale(scale)
                 .temperature(0.8F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(12057592).waterFogColor(7535809)

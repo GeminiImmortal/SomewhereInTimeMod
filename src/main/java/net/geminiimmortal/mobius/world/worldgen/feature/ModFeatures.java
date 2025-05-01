@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.world.worldgen.feature;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.ModBlocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.feature.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -26,6 +27,9 @@ public class ModFeatures {
 
     public static final RegistryObject<Feature<NoFeatureConfig>> TALL_GRASS_CARPET_FEATURE = registerFeat("tall_grass_carpet_feature", () ->
             new TallGrassCarpetFeature(NoFeatureConfig.CODEC));
+
+    public static final RegistryObject<Feature<NoFeatureConfig>> BOULDER = registerFeat("boulder", () ->
+            new BoulderFeature(NoFeatureConfig.CODEC, Blocks.MOSSY_COBBLESTONE.defaultBlockState()));
 
 
     private static <T extends Feature<?>> RegistryObject<T> registerFeat(String name, final Supplier<T> sup) {

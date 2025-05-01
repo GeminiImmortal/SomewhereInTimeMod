@@ -75,5 +75,13 @@ public class ModNoFeatureConfigGeneration {
 
             base.add(() -> ModConfiguredFeatures.CONFIGURED_TALL_GRASS_CARPET_FEATURE);
         }
+
+        if (Objects.equals(event.getName(), rollingExpanse) || Objects.equals(event.getName(), forsakenThicket)) {
+            List<Supplier<ConfiguredFeature<?, ?>>> base =
+                    event.getGeneration().getFeatures(GenerationStage.Decoration.LOCAL_MODIFICATIONS);
+
+            base.add(() -> ModConfiguredFeatures.CONFIGURED_BOULDER_FEATURE
+                    .decorated(Features.Placements.HEIGHTMAP_SQUARE).count(2).chance(12));
+        }
     }
 }

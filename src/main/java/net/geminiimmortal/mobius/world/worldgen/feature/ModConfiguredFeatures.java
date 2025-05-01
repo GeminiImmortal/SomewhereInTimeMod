@@ -8,6 +8,9 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliageplacer.DarkOakFoliagePlacer;
 import net.minecraft.world.gen.foliageplacer.SpruceFoliagePlacer;
+import net.minecraft.world.gen.placement.CountPlacement;
+import net.minecraft.world.gen.placement.NoPlacementConfig;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.trunkplacer.FancyTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.GiantTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
@@ -82,6 +85,10 @@ public class ModConfiguredFeatures {
     public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_TALL_GRASS_CARPET_FEATURE =
             register("tall_grass_carpet",
                     ModFeatures.TALL_GRASS_CARPET_FEATURE.get().configured(new NoFeatureConfig()));
+
+    public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_BOULDER_FEATURE =
+            register("boulder",
+                    ModFeatures.BOULDER.get().configured(new NoFeatureConfig()));
 
 
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key,
