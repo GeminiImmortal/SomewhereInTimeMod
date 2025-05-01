@@ -27,23 +27,31 @@ public class MobiusBiomeProvider extends BiomeProvider {
             return mobiusBiomeProvider.largeBiomes;
         }), net.minecraft.util.registry.RegistryLookupCodec.create(net.minecraft.util.registry.Registry.BIOME_REGISTRY).forGetter((mobiusBiomeProvider) -> {
             return mobiusBiomeProvider.lookupRegistry;
-        }), Codec.LONG.fieldOf("seed").orElseGet(SeedBearer::giveMeSeed).forGetter(mobiusBiomeProvider -> {
-            return mobiusBiomeProvider.seed;
+        }), Codec.LONG.fieldOf("seed").orElseGet(SeedBearer::getSeed).forGetter(mobiusBiomeProvider -> {
+            return mobiusBiomeProvider.lastSeed;
         })).apply(builder, builder.stable(MobiusBiomeProvider::new));
     });
-    private final Layer genBiomes;
+    private long lastSeed = Long.MIN_VALUE;
+    private Layer genBiomes;
     private final boolean largeBiomes;
     private final net.minecraft.util.registry.Registry<Biome> lookupRegistry;
-    private final long seed;
 
     public MobiusBiomeProvider(boolean largeBiomes, Registry<Biome> lookupRegistry, long seed) {
         super(ModBiomes.BIOME_KEYS.stream().map(lookupRegistry::getOrThrow).collect(Collectors.toList()));
 
-        this.seed = SeedBearer.giveMeSeed();
+
         System.out.println("MobiusBiomeProvider initialized with seed: " + seed);
         this.largeBiomes = largeBiomes;
         this.lookupRegistry = lookupRegistry;
-        this.genBiomes = MobiusLayerUtil.getNoiseLayer(seed, largeBiomes ? 6 : 4, 6, lookupRegistry);
+        updateLayers(seed);
+    }
+
+    private void updateLayers(long seed) {
+        if (seed != lastSeed) {
+            this.genBiomes = MobiusLayerUtil.getNoiseLayer(seed, largeBiomes ? 6 : 4, 6, lookupRegistry);
+            this.lastSeed = seed;
+            System.out.println("Biome layers updated with seed: " + seed);
+        }
     }
 
     @Override
@@ -56,7 +64,7 @@ public class MobiusBiomeProvider extends BiomeProvider {
     @Nonnull
     @OnlyIn(Dist.CLIENT)
     public BiomeProvider withSeed(long seed) {
-        return new MobiusBiomeProvider(this.largeBiomes, this.lookupRegistry, this.seed);
+        return new MobiusBiomeProvider(this.largeBiomes, this.lookupRegistry, this.lastSeed);
     }
 
     /**
@@ -67,6 +75,7 @@ public class MobiusBiomeProvider extends BiomeProvider {
     @Override
     @Nonnull
     public Biome getNoiseBiome(int x, int y, int z) {
+        updateLayers(SeedBearer.getSeed());
         int k = this.genBiomes.area.get(x, z);
         Biome biome = this.lookupRegistry.byId(k);
 

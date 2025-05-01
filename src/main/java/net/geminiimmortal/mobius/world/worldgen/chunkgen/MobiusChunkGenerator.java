@@ -47,12 +47,14 @@ import java.util.stream.IntStream;
 
 
 public class MobiusChunkGenerator extends ChunkGenerator {
+    private long currentSeed;
+    NoiseSettings noiseSettings;
 
     public static final Codec<MobiusChunkGenerator> CODEC = RecordCodecBuilder.create((p_236091_0_) -> {
         return p_236091_0_.group(BiomeProvider.CODEC.fieldOf("biome_source").forGetter((p_236096_0_) -> {
             return p_236096_0_.biomeSource;
-        }), Codec.LONG.fieldOf("seed").stable().orElseGet(SeedBearer::giveMeSeed).forGetter(p_236090_0_ -> {
-            return SeedBearer.giveMeSeed();
+        }), Codec.LONG.fieldOf("seed").stable().orElseGet(SeedBearer::getSeed).forGetter(p_236090_0_ -> {
+            return p_236090_0_.currentSeed;
         }), DimensionSettings.CODEC.fieldOf("settings").forGetter((p_236090_0_) -> {
             return p_236090_0_.settings;
         })).apply(p_236091_0_, p_236091_0_.stable(MobiusChunkGenerator::new));
@@ -60,33 +62,39 @@ public class MobiusChunkGenerator extends ChunkGenerator {
 
     private MobiusChunkGenerator(BiomeProvider p_i241976_1_, long p_i241976_3_, Supplier<DimensionSettings> p_i241976_5_) {
         super(p_i241976_1_, ((DimensionSettings)p_i241976_5_.get()).structureSettings());
+        this.currentSeed = p_i241976_3_;
         DimensionSettings dimensionsettings = (DimensionSettings)p_i241976_5_.get();
         this.settings = p_i241976_5_;
-        p_i241976_3_ = SeedBearer.giveMeSeed();
-        NoiseSettings noisesettings = dimensionsettings.noiseSettings();
-        this.height = noisesettings.height();
-        this.chunkHeight = noisesettings.noiseSizeVertical() * 4;
-        this.chunkWidth = noisesettings.noiseSizeHorizontal() * 4;
-        this.defaultBlock = dimensionsettings.getDefaultBlock();
-        this.defaultFluid = dimensionsettings.getDefaultFluid();
+        this.noiseSettings = dimensionsettings.noiseSettings();
+        initializeNoise(p_i241976_3_);
+        System.out.println("MobiusChunkGenerator initialized with seed: " + seed);
+    }
+
+    private void initializeNoise(long seed) {
+        this.height = noiseSettings.height();
+        this.chunkHeight = noiseSettings.noiseSizeVertical() * 4;
+        this.chunkWidth = noiseSettings.noiseSizeHorizontal() * 4;
+        this.defaultBlock = settings.get().getDefaultBlock();
+        this.defaultFluid = settings.get().getDefaultFluid();
         this.chunkCountX = 16 / this.chunkWidth;
-        this.chunkCountY = noisesettings.height() / this.chunkHeight;
+        this.chunkCountY = noiseSettings.height() / this.chunkHeight;
         this.chunkCountZ = 16 / this.chunkWidth;
-        this.random = new SharedSeedRandom(p_i241976_3_);
+        this.random = new SharedSeedRandom(seed);
         this.minLimitPerlinNoise = new OctavesNoiseGenerator(this.random, IntStream.rangeClosed(-15, 0));
         this.maxLimitPerlinNoise = new OctavesNoiseGenerator(this.random, IntStream.rangeClosed(-15, 0));
         this.mainPerlinNoise = new OctavesNoiseGenerator(this.random, IntStream.rangeClosed(-7, 0));
-        this.surfaceNoise = (INoiseGenerator)(noisesettings.useSimplexSurfaceNoise() ? new PerlinNoiseGenerator(this.random, IntStream.rangeClosed(-3, 0)) : new OctavesNoiseGenerator(this.random, IntStream.rangeClosed(-3, 0)));
+        this.surfaceNoise = (INoiseGenerator)(noiseSettings.useSimplexSurfaceNoise() ? new PerlinNoiseGenerator(this.random, IntStream.rangeClosed(-3, 0)) : new OctavesNoiseGenerator(this.random, IntStream.rangeClosed(-3, 0)));
         this.random.consumeCount(2620);
         this.depthNoise = new OctavesNoiseGenerator(this.random, IntStream.rangeClosed(-15, 0));
-        if (noisesettings.islandNoiseOverride()) {
-            SharedSeedRandom sharedseedrandom = new SharedSeedRandom(p_i241976_3_);
+        if (noiseSettings.islandNoiseOverride()) {
+            SharedSeedRandom sharedseedrandom = new SharedSeedRandom(this.seed);
             sharedseedrandom.consumeCount(17292);
             this.islandNoise = new SimplexNoiseGenerator(sharedseedrandom);
         } else {
             this.islandNoise = null;
         }
-        System.out.println("MobiusChunkGenerator initialized with seed: " + seed);
+        // Initialize other noise generators
+        System.out.println("Noise initialized with seed: " + seed);
     }
 
     private static final float[] BEARD_KERNEL = (float[])Util.make(new float[13824], (p_236094_0_) -> {
@@ -110,24 +118,24 @@ public class MobiusChunkGenerator extends ChunkGenerator {
     });
 
     private static final BlockState AIR;
-    private final int chunkHeight;
-    private final int chunkWidth;
-    private final int chunkCountX;
-    private final int chunkCountY;
-    private final int chunkCountZ;
-    protected final SharedSeedRandom random;
-    private final OctavesNoiseGenerator minLimitPerlinNoise;
-    private final OctavesNoiseGenerator maxLimitPerlinNoise;
-    private final OctavesNoiseGenerator mainPerlinNoise;
-    private final INoiseGenerator surfaceNoise;
-    private final OctavesNoiseGenerator depthNoise;
+    private int chunkHeight;
+    private int chunkWidth;
+    private int chunkCountX;
+    private int chunkCountY;
+    private int chunkCountZ;
+    protected SharedSeedRandom random;
+    private OctavesNoiseGenerator minLimitPerlinNoise;
+    private OctavesNoiseGenerator maxLimitPerlinNoise;
+    private OctavesNoiseGenerator mainPerlinNoise;
+    private INoiseGenerator surfaceNoise;
+    private OctavesNoiseGenerator depthNoise;
     @Nullable
-    private final SimplexNoiseGenerator islandNoise;
-    protected final BlockState defaultBlock;
-    protected final BlockState defaultFluid;
-    public final long seed = SeedBearer.giveMeSeed();
+    private SimplexNoiseGenerator islandNoise;
+    protected BlockState defaultBlock;
+    protected BlockState defaultFluid;
+    public final long seed = this.currentSeed;
     protected final Supplier<DimensionSettings> settings;
-    private final int height;
+    private int height;
 
     @Override
     protected Codec<? extends ChunkGenerator> codec() {

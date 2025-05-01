@@ -16,7 +16,6 @@ import net.minecraft.world.gen.DimensionSettings;
 import net.minecraft.world.server.ChunkManager;
 
 public class ModDimensions {
-        public static long seed = SeedBearer.giveMeSeed();
 
         public static final RegistryKey<World> MOBIUS_WORLD = RegistryKey.create(Registry.DIMENSION_REGISTRY,
                 new ResourceLocation(MobiusMod.MOD_ID, "mobius"));

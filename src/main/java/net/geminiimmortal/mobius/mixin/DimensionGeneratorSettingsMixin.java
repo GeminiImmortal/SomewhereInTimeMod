@@ -13,10 +13,14 @@ import java.util.Optional;
 
 @Mixin(DimensionGeneratorSettings.class)
 public class DimensionGeneratorSettingsMixin {
+
+    /**
+     * World seed for worldgen when not specified by JSON by Haven King
+     * https://github.com/Hephaestus-Dev/seedy-behavior/blob/master/src/main/java/dev/hephaestus/seedy/mixin/world/gen/GeneratorOptionsMixin.java
+     */
     @Inject(method = "<init>(JZZLnet/minecraft/util/registry/SimpleRegistry;Ljava/util/Optional;)V", at = @At(value = "RETURN"))
-    private void getSeedFromConstructor(long seed, boolean generateFeatures, boolean bonusChest, SimpleRegistry<Dimension> options, Optional<String> legacyOptions, CallbackInfo ci) {
-        SeedBearer.putInSeed(seed);
-        System.out.println("Captured world seed: " + seed); // Debug logging
+    private void atum_giveUsRandomSeeds(long seed, boolean generateFeatures, boolean bonusChest, SimpleRegistry<Dimension> registry, Optional<String> s, CallbackInfo ci) {
+        SeedBearer.setSeed(seed);
     }
 }
 

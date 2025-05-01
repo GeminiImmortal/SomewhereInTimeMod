@@ -3,6 +3,7 @@ package net.geminiimmortal.mobius.world.worldgen.feature.surface;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import net.geminiimmortal.mobius.block.ModBlocks;
+import net.geminiimmortal.mobius.world.dimension.SeedBearer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.SharedSeedRandom;
@@ -16,8 +17,6 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
 import java.util.Random;
 
-import static net.geminiimmortal.mobius.world.dimension.ModDimensions.seed;
-
 public class DraconicForelandsMountainSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig> {
     private static final int OCTAVES = 5;
     private final PerlinNoiseGenerator baseNoise;
@@ -26,7 +25,7 @@ public class DraconicForelandsMountainSurfaceBuilder extends SurfaceBuilder<Surf
 
     public DraconicForelandsMountainSurfaceBuilder(Codec<SurfaceBuilderConfig> codec) {
         super(codec);
-        SharedSeedRandom sharedSeedRandom = new SharedSeedRandom(seed);
+        SharedSeedRandom sharedSeedRandom = new SharedSeedRandom(SeedBearer.getSeed());
         this.baseNoise = new PerlinNoiseGenerator(sharedSeedRandom, ImmutableList.of(0, 1, 2));
         this.detailNoise = new PerlinNoiseGenerator(sharedSeedRandom, ImmutableList.of(3, 4));
         this.domainWarpNoise = new SimplexNoiseGenerator(sharedSeedRandom);
