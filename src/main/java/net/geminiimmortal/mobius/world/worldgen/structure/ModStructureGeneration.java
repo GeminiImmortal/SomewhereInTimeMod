@@ -46,6 +46,11 @@ public class ModStructureGeneration {
             structures.add(() -> ModStructureSetup.IMPERIAL_WATCHTOWER.get().configured(NoFeatureConfig.INSTANCE));
         }
 
+        if(Objects.equals(event.getName(), rollingExpanseValid)) {
+            List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
+            structures.add(() -> ModStructureSetup.SMUGGLER_CAMP.get().configured(NoFeatureConfig.INSTANCE));
+        }
+
         if(Objects.equals(event.getName(), gooLagoonValid)) {
             List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructureSetup.GOVERNOR_TOWER.get().configured(NoFeatureConfig.INSTANCE));

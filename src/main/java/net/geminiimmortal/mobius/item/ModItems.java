@@ -138,6 +138,7 @@ public class ModItems {
     public static final RegistryObject<Item> HUNTING_TABLE = ITEMS.register("hunting_table", () -> new BlockItem(ModBlocks.HUNTING_TABLE.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> SOUL_FORGE = ITEMS.register("soul_forge", () -> new BlockItem(ModBlocks.SOUL_FORGE.get(), new Item.Properties().stacksTo(64).tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> ESSENCE_CHANNELER = ITEMS.register("essence_channeler", () -> new BlockItem(ModBlocks.ESSENCE_CHANNELER.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> SMUGGLER_STRONGBOX = ITEMS.register("smuggler_strongbox", () -> new BlockItem(ModBlocks.SMUGGLER_STRONGBOX.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     //Crops and Food
     public static final RegistryObject<Item> MANA_WART = ITEMS.register("mana_wart",

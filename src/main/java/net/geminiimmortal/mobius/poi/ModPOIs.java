@@ -30,6 +30,10 @@ public class ModPOIs {
             POI.register("essence_channeler_poi", () -> new PointOfInterestType("essence_channeler_poi",
                     PointOfInterestType.getBlockStates(ModBlocks.ESSENCE_CHANNELER.get()), 1, 1));
 
+    public static final RegistryObject<PointOfInterestType> SMUGGLER_STRONGBOX =
+            POI.register("smuggler_strongbox_poi", () -> new PointOfInterestType("smuggler_strongbox_poi",
+                    PointOfInterestType.getBlockStates(ModBlocks.SMUGGLER_STRONGBOX.get()), 1, 1));
+
     public static void register(IEventBus eventBus) {
         POI.register(eventBus);
     }

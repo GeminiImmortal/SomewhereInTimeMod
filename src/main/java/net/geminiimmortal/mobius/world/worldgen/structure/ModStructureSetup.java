@@ -37,6 +37,7 @@ public class ModStructureSetup {
     public static final RegistryObject<Structure<NoFeatureConfig>> DRAGON_BONES = STRUCTURES.register("dragon_bones", () -> new DragonRibcage());
     public static final RegistryObject<Structure<NoFeatureConfig>> CELESTIAL_RUINS = STRUCTURES.register("celestial_ruins", () -> new CelestialRuins());
     public static final RegistryObject<Structure<NoFeatureConfig>> MOBIUS_PORTAL = STRUCTURES.register("mobius_portal", () -> new MobiusPortal());
+    public static final RegistryObject<Structure<NoFeatureConfig>> SMUGGLER_CAMP = STRUCTURES.register("smuggler_camp", () -> new SmugglerCamp());
 
 
     public static final class ConfiguredStructures {
@@ -49,7 +50,7 @@ public class ModStructureSetup {
         public static final StructureFeature<?, ?> DRAGON_BONES = ModStructureSetup.DRAGON_BONES.get().configured(IFeatureConfig.NONE);
         public static final StructureFeature<?, ?> CELESTIAL_RUINS = ModStructureSetup.CELESTIAL_RUINS.get().configured(IFeatureConfig.NONE);
         public static final StructureFeature<?, ?> MOBIUS_PORTAL = ModStructureSetup.MOBIUS_PORTAL.get().configured(IFeatureConfig.NONE);
-
+        public static final StructureFeature<?, ?> SMUGGLER_CAMP = ModStructureSetup.SMUGGLER_CAMP.get().configured(IFeatureConfig.NONE);
     }
 
     // Register the structures to the world
@@ -62,6 +63,7 @@ public class ModStructureSetup {
         setupStructure(DRAGON_BONES.get(), new StructureSeparationSettings(24, 8, 158390045), true);
         setupStructure(CELESTIAL_RUINS.get(), new StructureSeparationSettings(24, 8, 646357495), false);
         setupStructure(MOBIUS_PORTAL.get(), new StructureSeparationSettings(24, 8, 195837495), true);
+        setupStructure(SMUGGLER_CAMP.get(), new StructureSeparationSettings(42, 38, 684930387), true);
     }
 
     // Register configured structures
@@ -74,7 +76,7 @@ public class ModStructureSetup {
         Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(MobiusMod.MOD_ID, "dragon_bones"), DRAGON_BONES.get().configured(IFeatureConfig.NONE));
         Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(MobiusMod.MOD_ID, "celestial_ruins"), CELESTIAL_RUINS.get().configured(IFeatureConfig.NONE));
         Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(MobiusMod.MOD_ID, "mobius_portal"), MOBIUS_PORTAL.get().configured(IFeatureConfig.NONE));
-
+        Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(MobiusMod.MOD_ID, "smuggler_camp"), SMUGGLER_CAMP.get().configured(IFeatureConfig.NONE));
     }
 
     // Adjust dimensional spacing logic for structures
@@ -97,6 +99,7 @@ public class ModStructureSetup {
             tempMap.put(ModStructureSetup.DRAGON_BONES.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructureSetup.DRAGON_BONES.get()));
             tempMap.put(ModStructureSetup.CELESTIAL_RUINS.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructureSetup.CELESTIAL_RUINS.get()));
             tempMap.put(ModStructureSetup.MOBIUS_PORTAL.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructureSetup.MOBIUS_PORTAL.get()));
+            tempMap.put(ModStructureSetup.SMUGGLER_CAMP.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructureSetup.SMUGGLER_CAMP.get()));
             serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
         }
     }

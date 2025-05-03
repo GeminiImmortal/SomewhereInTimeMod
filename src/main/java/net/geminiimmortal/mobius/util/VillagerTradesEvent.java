@@ -101,5 +101,18 @@ public class VillagerTradesEvent {
                     new ItemStack(ModItems.STAFF_PROTECTION_OBSIDIAN_ROD_FAE_LEATHER_BINDING.get(), 1),
                     6, 12, 0.095f));
         }
+
+        if (event.getType() == ModVillagers.SMUGGLER.get()) {
+            Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
+
+            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 52),
+                    new ItemStack(ModItems.REJECTION_STAFF.get(), 1),
+                    10, 8, 0.06f));
+            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 48),
+                    new ItemStack(ModItems.FAE_LEATHER.get(), 24),
+                    6, 12, 0.095f));
+        }
     }
 }

@@ -5,6 +5,7 @@ import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.poi.ModPOIs;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
+import net.minecraft.util.SoundEvents;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -25,6 +26,10 @@ public class ModVillagers {
     public static final RegistryObject<VillagerProfession> SAGE =
             VILLAGER_PROFESSIONS.register("sage", () -> new VillagerProfession("sage",
                     ModPOIs.ESSENCE_CHANNELER.get(), ImmutableSet.of(), ImmutableSet.of(), ModSounds.SAGE_WORKS.get()));
+
+    public static final RegistryObject<VillagerProfession> SMUGGLER =
+            VILLAGER_PROFESSIONS.register("smuggler", () -> new VillagerProfession("smuggler",
+                    ModPOIs.SMUGGLER_STRONGBOX.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.FLINTANDSTEEL_USE));
 
     public static void register(IEventBus eventBus){
         VILLAGER_PROFESSIONS.register(eventBus);
