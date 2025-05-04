@@ -233,6 +233,7 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.WILD_MANA_WART.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOOMCAP.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.LATENT_MANA_COLLECTOR.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.SMUGGLER_STRONGBOX.get(), RenderType.cutout());
 
             RenderTypeLookup.setRenderLayer(ModBlocks.MOBIUS_PORTAL.get(), RenderType.translucent());
 

@@ -1,26 +1,51 @@
 {
 	"credit": "Made with Blockbench",
-	"ambientocclusion": false,
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "mobius:block/smuggler_strongbox",
-		"particle": "mobius:block/smuggler_strongbox"
+		"0": "mobius:block/smuggler_strongbox_two",
+		"particle": "mobius:block/smuggler_strongbox_two"
 	},
 	"elements": [
 		{
-			"from": [0, 0, 0],
-			"to": [16, 16, 16],
+			"from": [2, 0, 3],
+			"to": [14, 4, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 0, 7]},
 			"faces": {
-				"north": {"uv": [0, 0, 4, 4], "texture": "#0"},
-				"east": {"uv": [0, 4, 4, 8], "texture": "#0"},
-				"south": {"uv": [4, 0, 8, 4], "texture": "#0"},
-				"west": {"uv": [4, 4, 8, 8], "texture": "#0"},
-				"up": {"uv": [4, 12, 0, 8], "texture": "#0"},
-				"down": {"uv": [12, 0, 8, 4], "texture": "#0"}
+				"north": {"uv": [3, 4.5, 6, 5.5], "texture": "#0"},
+				"east": {"uv": [3, 5.5, 5.5, 6.5], "texture": "#0"},
+				"south": {"uv": [0, 5, 3, 6], "texture": "#0"},
+				"west": {"uv": [5.5, 5.5, 8, 6.5], "texture": "#0"},
+				"up": {"uv": [3, 2.5, 0, 0], "texture": "#0"},
+				"down": {"uv": [3, 2.5, 0, 5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [2, 4, 4],
+			"to": [14, 6, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 4, 7]},
+			"faces": {
+				"north": {"uv": [6, 1, 9, 1.5], "texture": "#0"},
+				"east": {"uv": [6, 2, 8.25, 2.5], "texture": "#0"},
+				"south": {"uv": [6, 1.5, 9, 2], "texture": "#0"},
+				"west": {"uv": [6, 2.5, 8.25, 3], "texture": "#0"},
+				"up": {"uv": [6, 2.25, 3, 0], "texture": "#0"},
+				"down": {"uv": [6, 2.25, 3, 4.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [5, 6, 6],
+			"to": [11, 7, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 6, 7]},
+			"faces": {
+				"north": {"uv": [1.5, 6, 3, 6.25], "texture": "#0"},
+				"east": {"uv": [6, 3.25, 7, 3.5], "texture": "#0"},
+				"south": {"uv": [6, 3, 7.5, 3.25], "texture": "#0"},
+				"west": {"uv": [6, 3.5, 7, 3.75], "texture": "#0"},
+				"up": {"uv": [1.5, 7, 0, 6], "texture": "#0"},
+				"down": {"uv": [7.5, 0, 6, 1], "texture": "#0"}
 			}
 		}
 	],
-	"gui_light": "front",
 	"display": {
 		"thirdperson_righthand": {
 			"rotation": [75, 45, 0],

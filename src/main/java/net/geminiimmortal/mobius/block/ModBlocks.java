@@ -305,7 +305,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> WARD_BLOCK = registerBlock("ward_block", WardBlock::new);
 
     public static final RegistryObject<Block> SMUGGLER_STRONGBOX = registerBlock("smuggler_strongbox",
-            () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE).sound(SoundType.METAL)));
+            () -> new SmugglerStrongbox());
 
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {

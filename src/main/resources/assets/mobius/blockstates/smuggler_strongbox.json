@@ -1,6 +1,18 @@
 {
   "variants": {
-    "": { "model": "mobius:block/smuggler_strongbox" }
+    "facing=east": {
+      "model": "mobius:block/smuggler_strongbox_east"
+    },
+    "facing=north": {
+      "model": "mobius:block/smuggler_strongbox"
+    },
+
+    "facing=south": {
+      "model": "mobius:block/smuggler_strongbox_south"
+    },
+    "facing=west": {
+      "model": "mobius:block/smuggler_strongbox_west"
+    }
   }
 }
 
