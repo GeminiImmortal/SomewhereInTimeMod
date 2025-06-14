@@ -15,10 +15,13 @@ public class MobiusRollingExpanseLayer implements IC0Transformer {
 
     @Override
     public int apply(INoiseRandom context, int value) {
-        // Example: 1 in 6 chance to generate Goo Lagoon
         if (context.nextRandom(3) == 0) {
+            if (context.nextRandom(8) == 0) {
+                return biomeRegistry.getId(biomeRegistry.get(ModBiomes.BIOME_KEYS.get(5)));
+            }
             return biomeRegistry.getId(biomeRegistry.get(ModBiomes.BIOME_KEYS.get(4)));
         }
-        return value; // fallback to parent value
+
+        return value;
     }
 }

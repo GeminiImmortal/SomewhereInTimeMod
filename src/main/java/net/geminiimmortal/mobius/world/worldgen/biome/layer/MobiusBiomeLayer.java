@@ -57,7 +57,7 @@ public class MobiusBiomeLayer implements IC0Transformer {
         addBiomeEntry(keys.get(3), 20);  // Draconic Forelands
         addBiomeEntry(keys.get(4), 25); // Rolling Expanse
     //    addBiomeEntry(keys.get(5), 10); // Draconic Foothills
-    //    addBiomeEntry(keys.get(5), 2); // Infected Bog
+        addBiomeEntry(keys.get(5), 0); // Infected Bog
     //    addBiomeEntry(keys.get(6), 2);  // Crimson Cascades
     //    addBiomeEntry(keys.get(7), 1);  // Shattered Plains
 

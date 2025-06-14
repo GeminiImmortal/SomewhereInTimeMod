@@ -3,7 +3,6 @@ package net.geminiimmortal.mobius.world.worldgen.feature.placement;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.world.worldgen.feature.surface.CustomSurfaceBuilders;
-import net.geminiimmortal.mobius.world.worldgen.feature.surface.DraconicForelandsSurfaceBuilder;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.WorldGenRegistries;
@@ -50,7 +49,7 @@ public class ModConfiguredSurfaceBuilders {
             ModBlocks.HEMATITE.get().defaultBlockState()
     )));
 
-    public static ConfiguredSurfaceBuilder<?> INFECTED_BOG = register("infected_bog", CustomSurfaceBuilders.INFECTED_BOG_SURFACE_BUILDER.get().configured(new SurfaceBuilderConfig(
+    public static ConfiguredSurfaceBuilder<?> TEAL_GLADES = register("infected_bog", CustomSurfaceBuilders.INFECTED_BOG_SURFACE_BUILDER.get().configured(new SurfaceBuilderConfig(
             ModBlocks.AURORA_GRASS_BLOCK.get().defaultBlockState(),
             ModBlocks.AURORA_DIRT.get().defaultBlockState(),
             ModBlocks.AURORA_DIRT.get().defaultBlockState()

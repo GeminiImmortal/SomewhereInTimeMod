@@ -342,5 +342,14 @@
         "volume": 0.5
       }
     ]
+  },
+  "underneath_a_new_sky": {
+    "sounds": [
+      {
+        "name": "mobius:underneath_a_new_sky",
+        "stream": true,
+        "volume": 0.5
+      }
+    ]
   }
 }

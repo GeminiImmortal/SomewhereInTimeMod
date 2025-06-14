@@ -1,13 +1,11 @@
 package net.geminiimmortal.mobius.world.worldgen.biome.layer;
 
 
-import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.world.worldgen.biome.ModBiomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.IExtendedNoiseRandom;
-import net.minecraft.world.gen.INoiseRandom;
 import net.minecraft.world.gen.LazyAreaLayerContext;
 import net.minecraft.world.gen.area.IArea;
 import net.minecraft.world.gen.area.IAreaFactory;
@@ -117,7 +115,7 @@ public class MobiusLayerUtil {
         GOO_LAGOON = getVerifiedBiomeID(biomeRegistry, ModBiomes.GOO_LAGOON.getId());
         ROLLING_EXPANSE = getVerifiedBiomeID(biomeRegistry, ModBiomes.ROLLING_EXPANSE.getId());
         MUSHROOM_FOREST = getVerifiedBiomeID(biomeRegistry, ModBiomes.MUSHROOM_FOREST.getId());
-        INFECTED_BOG = getVerifiedBiomeID(biomeRegistry, ModBiomes.INFECTED_BOG.getId());
+        INFECTED_BOG = getVerifiedBiomeID(biomeRegistry, ModBiomes.TEAL_GLADES.getId());
         SHATTERED_PLAINS = getVerifiedBiomeID(biomeRegistry, ModBiomes.SHATTERED_PLAINS.getId());
         DRACONIC_FOOTHILLS = getVerifiedBiomeID(biomeRegistry, ModBiomes.DRACONIC_FOOTHILLS.getId());
     }

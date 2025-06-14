@@ -17,7 +17,7 @@ public class ModTreeGeneration {
     public static void generateTrees(final BiomeLoadingEvent event) {
         ResourceLocation valid = ModBiomes.FORSAKEN_THICKET.getId();
         ResourceLocation mushroomForest = ModBiomes.MUSHROOM_FOREST.getId();
-        ResourceLocation infectedBog = ModBiomes.INFECTED_BOG.getId();
+        ResourceLocation infectedBog = ModBiomes.TEAL_GLADES.getId();
 
         if(Objects.equals(event.getName(), valid)) {
             List<Supplier<ConfiguredFeature<?, ?>>> base =

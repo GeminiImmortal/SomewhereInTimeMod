@@ -16,10 +16,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.*;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.carver.ConfiguredCarver;
-import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.Features;
-import net.minecraft.world.gen.feature.ProbabilityConfig;
 import net.minecraft.world.gen.surfacebuilders.ConfiguredSurfaceBuilder;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
@@ -51,8 +48,8 @@ public class ModBiomes {
     public static final RegistryObject<Biome> ROLLING_EXPANSE = BIOMES.register("rolling_expanse",
             () -> makeRollingExpanse(() -> ModConfiguredSurfaceBuilders.ROLLING_EXPANSE, 0.1f, 0.01f));
 
-    public static final RegistryObject<Biome> INFECTED_BOG = BIOMES.register("infected_bog",
-            () -> makeInfectedBog(() -> ModConfiguredSurfaceBuilders.INFECTED_BOG, -0.1f, 0.01f));
+    public static final RegistryObject<Biome> TEAL_GLADES = BIOMES.register("teal_glades",
+            () -> makeTealGlades(() -> ModConfiguredSurfaceBuilders.TEAL_GLADES, -0.1f, 0.01f));
 
     public static final RegistryObject<Biome> CRIMSON_CASCADES = BIOMES.register("crimson_cascades",
             () -> makeCrimsonCascades(() -> ModConfiguredSurfaceBuilders.CRIMSON_CASCADES, 1.3f, 1f));
@@ -71,7 +68,6 @@ public class ModBiomes {
     }
 
     public static void registerBiomes() {
-        // Actual registration code here
         BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
                 new ResourceLocation(MobiusMod.MOD_ID, "mushroom_forest")));
         BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
@@ -82,14 +78,14 @@ public class ModBiomes {
                 new ResourceLocation(MobiusMod.MOD_ID, "draconic_forelands")));
         BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
                 new ResourceLocation(MobiusMod.MOD_ID, "rolling_expanse")));
+//        BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
+//                new ResourceLocation(MobiusMod.MOD_ID, "draconic_foothills")));
         BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
-                new ResourceLocation(MobiusMod.MOD_ID, "draconic_foothills")));
-        BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
-                new ResourceLocation(MobiusMod.MOD_ID, "infected_bog")));
-        BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
-                new ResourceLocation(MobiusMod.MOD_ID, "crimson_cascades")));
-        BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
-                new ResourceLocation(MobiusMod.MOD_ID, "shattered_plains")));
+                new ResourceLocation(MobiusMod.MOD_ID, "teal_glades")));
+//        BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
+//                new ResourceLocation(MobiusMod.MOD_ID, "crimson_cascades")));
+//        BIOME_KEYS.add(RegistryKey.create(Registry.BIOME_REGISTRY,
+//                new ResourceLocation(MobiusMod.MOD_ID, "shattered_plains")));
 
         System.out.println("Registered: " + BIOME_KEYS);
     }
@@ -202,7 +198,7 @@ public class ModBiomes {
                 .mobSpawnSettings(mobspawninfo$builder.build()).generationSettings(biomegenerationsettings$builder.build()).build();
     }
 
-    private static Biome makeInfectedBog(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
+    private static Biome makeTealGlades(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
         MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
         mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
                 new MobSpawnInfo.Spawners(EntityType.ZOMBIE, 40, 1,3));
@@ -210,7 +206,9 @@ public class ModBiomes {
                 new MobSpawnInfo.Spawners(EntityType.SKELETON, 50, 1,1));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
-        DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);
+        DefaultBiomeFeatures.addSwampVegetation(biomegenerationsettings$builder);
+        DefaultBiomeFeatures.addSwampExtraVegetation(biomegenerationsettings$builder);
+        DefaultBiomeFeatures.addSwampClayDisk(biomegenerationsettings$builder);
 
         return (new Biome.Builder()).precipitation(Biome.RainType.RAIN).biomeCategory(Biome.Category.SWAMP).depth(depth).scale(scale)
                 .temperature(0.8F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(12057592).waterFogColor(7535809)
