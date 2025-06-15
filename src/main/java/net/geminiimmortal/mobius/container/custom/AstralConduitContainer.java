@@ -1,20 +1,28 @@
 package net.geminiimmortal.mobius.container.custom;
 
 import net.geminiimmortal.mobius.container.ModContainers;
+import net.geminiimmortal.mobius.recipe.AstralConduitRecipe;
+import net.geminiimmortal.mobius.recipe.ModRecipeTypes;
+import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.tileentity.AstralConduitTileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIntArray;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
+
+import java.util.Optional;
 
 public class AstralConduitContainer extends Container {
     private final TileEntity tileEntity;
@@ -41,7 +49,33 @@ public class AstralConduitContainer extends Container {
                 addSlot(new SlotItemHandler(h, 0, 80, 13));
                 addSlot(new SlotItemHandler(h, 1, 106, 22));
                 addSlot(new SlotItemHandler(h, 2, 54, 22));
-                addSlot(new SlotItemHandler(h, 3, 80, 61));
+                this.addSlot(new SlotItemHandler(h, 3, 80, 61) {
+                    @Override
+                    public boolean mayPlace(ItemStack stack) {
+                        return false; // No placing into output
+                    }
+
+                    @Override
+                    public ItemStack onTake(PlayerEntity player, ItemStack stack) {
+                        super.onTake(player, stack);
+
+                        // Remove one item from each input slot
+                        for (int i = 0; i < 3; i++) {
+                            ItemStack input = h.getStackInSlot(i);
+                            if (!input.isEmpty()) {
+                                h.extractItem(i, 1, false);
+                            }
+                        }
+
+                        // Recalculate output
+                        if (tileEntity.getLevel() != null && !tileEntity.getLevel().isClientSide) {
+                            ((AstralConduitTileEntity) tileEntity).updateCraftingResult(); // Ensure this method exists in your TileEntity
+                            broadcastChanges(); // Sync to client
+                        }
+                        return stack;
+                    }
+                });
+
             });
         } else {
             this.fields = fields; // Fallback if tileEntity is null or of the wrong type
@@ -57,7 +91,35 @@ public class AstralConduitContainer extends Container {
                 addSlot(new SlotItemHandler(h, 0, 80, 13));
                 addSlot(new SlotItemHandler(h, 1, 106, 22));
                 addSlot(new SlotItemHandler(h, 2, 54, 22));
-                addSlot(new SlotItemHandler(h, 3, 80, 61));
+                this.addSlot(new SlotItemHandler(h, 3, 80, 61) {
+                    @Override
+                    public boolean mayPlace(ItemStack stack) {
+                        return false; // Output only
+                    }
+
+                    @Override
+                    public ItemStack onTake(PlayerEntity player, ItemStack stack) {
+                        super.onTake(player, stack);
+                        assert tileEntity.getLevel() != null;
+                        tileEntity.getLevel().playSound(null, tileEntity.getBlockPos(), ModSounds.ASTRAL_CONDUIT.get(), SoundCategory.BLOCKS, 20.0f, 1.0f);
+                        // Consume 1 of each input
+                        for (int i = 0; i < 3; i++) {
+                            ItemStack input = h.getStackInSlot(i);
+                            if (!input.isEmpty()) {
+                                h.extractItem(i, 1, false);
+                            }
+                        }
+
+                        // Recalculate crafting result
+                        if (player.level instanceof ServerWorld) {
+                            ((AstralConduitTileEntity) tileEntity).updateCraftingResult();
+                            // Optional: sync container changes
+                            broadcastChanges();
+                        }
+                        return stack;
+                    }
+                });
+
             });
         }
     }
@@ -66,6 +128,25 @@ public class AstralConduitContainer extends Container {
         return (AstralConduitTileEntity) tileEntity;
     }
 
+    private void updateCraftingResult() {
+        if (this.tileEntity.getLevel() == null) return;
+
+        assert this.tileEntity.getLevel() != null;
+        Optional<AstralConduitRecipe> match = this.tileEntity.getLevel().getRecipeManager()
+                .getRecipeFor(ModRecipeTypes.ASTRAL_CONDUIT_RECIPE, new Inventory(
+                        this.slots.get(0).getItem(),
+                        this.slots.get(1).getItem(),
+                        this.slots.get(2).getItem()
+                ), this.tileEntity.getLevel());
+
+        if (match.isPresent()) {
+            this.slots.get(3).set(match.get().getResultItem().copy());
+        } else {
+            this.slots.get(3).set(ItemStack.EMPTY);
+        }
+
+        broadcastChanges(); // Sync with client
+    }
 
 
 

@@ -4,6 +4,7 @@ import net.geminiimmortal.mobius.recipe.AstralConduitRecipe;
 import net.geminiimmortal.mobius.recipe.ModRecipeTypes;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.RecipeManager;
@@ -22,6 +23,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Optional;
 
 public class AstralConduitTileEntity extends TileEntity implements ITickableTileEntity {
@@ -75,9 +77,15 @@ public class AstralConduitTileEntity extends TileEntity implements ITickableTile
         return new ItemStackHandler(4) {
             @Override
             protected void onContentsChanged(int slot) {
-                setChanged();
-
+                if (slot >= 0 && slot <= 2) {
+                    if (level != null && !level.isClientSide) {
+                        ((ServerPlayerEntity) Objects.requireNonNull(level.getNearestPlayer(getTileEntity().getBlockPos().getX(), getTileEntity().getBlockPos().getY(), getTileEntity().getBlockPos().getZ(), 10, false)))
+                                .containerMenu.broadcastChanges(); // triggers Container to update
+                    }
+                }
+                super.onContentsChanged(slot);
             }
+
 
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
@@ -112,22 +120,6 @@ public class AstralConduitTileEntity extends TileEntity implements ITickableTile
         return super.getCapability(cap, side);
     }
 
-    private void craft(AstralConduitRecipe recipe) {
-        // Consume one item from each input slot
-        itemHandler.getStackInSlot(0).shrink(1);
-        itemHandler.getStackInSlot(1).shrink(1);
-        itemHandler.getStackInSlot(2).shrink(1);
-
-        // Place the recipe's output in the output slot
-        ItemStack outputStack = itemHandler.getStackInSlot(3);
-        ItemStack recipeOutput = recipe.getResultItem();
-
-        if (outputStack.isEmpty()) {
-            itemHandler.insertItem(3, recipeOutput.copy(), false);
-        }
-    }
-
-
     private boolean canCraft(AstralConduitRecipe recipe) {
         ItemStack outputStack = itemHandler.getStackInSlot(3); // Slot 3 is the output slot
         ItemStack recipeOutput = recipe.getResultItem();
@@ -144,58 +136,36 @@ public class AstralConduitTileEntity extends TileEntity implements ITickableTile
     }
 
 
-    private void craftTheItem(ItemStack output) {
-        itemHandler.extractItem(0, 1, false);
-        itemHandler.extractItem(1, 1, false);
-        itemHandler.extractItem(2, 1, false);
-    }
-
-    private boolean hasCrafted = false; // Tracks whether crafting has occurred
-
-
     @Override
     public void tick() {
 
         assert this.level != null;
-        if (!this.level.isClientSide) { // Server-side only
-            RecipeManager recipeManager = this.level.getRecipeManager();
-            Optional<AstralConduitRecipe> recipe = recipeManager.getRecipeFor(
-                    ModRecipeTypes.ASTRAL_CONDUIT_RECIPE,
-                    new Inventory(itemHandler.getStackInSlot(0), itemHandler.getStackInSlot(1), itemHandler.getStackInSlot(2)),
-                    this.level
-            );
+        if (level == null || level.isClientSide) return;
 
-            if (recipe.isPresent() && !hasCrafted) {
-                ItemStack recipeOutput = recipe.get().getResultItem();
+        updateCraftingResult();
+    }
 
-                // Check if the output slot is empty or matches the recipe output
-                ItemStack outputSlotStack = itemHandler.getStackInSlot(3);
-                if (outputSlotStack.isEmpty() || (ItemStack.isSame(outputSlotStack, recipeOutput) &&
-                        outputSlotStack.getCount() + recipeOutput.getCount() <= outputSlotStack.getMaxStackSize())) {
+    public void updateCraftingResult() {
+        Inventory fakeInv = new Inventory(3);
+        fakeInv.setItem(0, itemHandler.getStackInSlot(0));
+        fakeInv.setItem(1, itemHandler.getStackInSlot(1));
+        fakeInv.setItem(2, itemHandler.getStackInSlot(2));
 
-                    if (this.itemHandler.getStackInSlot(3).isEmpty()){
-                        itemHandler.getStackInSlot(0).shrink(1);
-                        itemHandler.getStackInSlot(1).shrink(1);
-                        itemHandler.getStackInSlot(2).shrink(1);
+        Optional<AstralConduitRecipe> match = level.getRecipeManager()
+                .getRecipeFor(ModRecipeTypes.ASTRAL_CONDUIT_RECIPE, fakeInv, level);
 
-                        // Clear the output slot
-                        itemHandler.setStackInSlot(3, ItemStack.EMPTY);
-                    }
-
-                    // Set the output slot and mark as crafted
-                    itemHandler.setStackInSlot(3, recipeOutput.copy());
-                    hasCrafted = true;
-                    this.level.playSound(null,this.getBlockPos(), ModSounds.ASTRAL_CONDUIT.get(), SoundCategory.BLOCKS, 5.0f, 1.0f);
-                }
+        ItemStack currentOutput = itemHandler.getStackInSlot(3);
+        if (match.isPresent()) {
+            ItemStack result = match.get().getResultItem();
+            if (!ItemStack.isSame(currentOutput, result)) {
+                itemHandler.setStackInSlot(3, result.copy());
             }
-
-            // Reset the crafting flag if the output slot is empty
-            if (itemHandler.getStackInSlot(3).isEmpty()) {
-                hasCrafted = false;
+        } else {
+            if (!currentOutput.isEmpty()) {
+                itemHandler.setStackInSlot(3, ItemStack.EMPTY);
             }
         }
     }
-
 
 
 

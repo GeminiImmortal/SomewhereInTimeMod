@@ -76,7 +76,7 @@ public class ClientMusicHandler {
             minecraft.getSoundManager().play(SimpleSound.forMusic(track));
 
             trackStartTime = gameTime;
-            currentTrackDuration = TRACK_DURATIONS.getOrDefault(track, 3600);  // Set duration for the track, default 3 minutes (3600 ticks)
+            currentTrackDuration = TRACK_DURATIONS.getOrDefault(track, 3600);
             isPlayingCustomMusic = true;
         }
 
