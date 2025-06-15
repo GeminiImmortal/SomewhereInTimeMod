@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius.container.custom;
 
 import net.geminiimmortal.mobius.container.ModContainers;
+import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.tileentity.AstralConduitTileEntity;
 import net.geminiimmortal.mobius.tileentity.EssenceChannelerTileEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,6 +11,7 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIntArray;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -42,7 +44,35 @@ public class EssenceChannelerContainer extends Container {
                 addSlot(new SlotItemHandler(h, 0, 48, 16));
                 addSlot(new SlotItemHandler(h, 1, 41, 37));
                 addSlot(new SlotItemHandler(h, 2, 48, 59));
-                addSlot(new SlotItemHandler(h, 3, 124, 37));
+                this.addSlot(new SlotItemHandler(h, 3, 124, 37) {
+                    @Override
+                    public boolean mayPlace(ItemStack stack) {
+                        return false; // No placing into output
+                    }
+
+                    @Override
+                    public ItemStack onTake(PlayerEntity player, ItemStack stack) {
+                        assert tileEntity.getLevel() != null;
+                        tileEntity.getLevel().playSound(null, tileEntity.getBlockPos(), ModSounds.ESSENCE_CHANNELER.get(), SoundCategory.BLOCKS, 20.0f, 1.0f);
+
+                        super.onTake(player, stack);
+
+                        // Remove one item from each input slot
+                        for (int i = 0; i < 3; i++) {
+                            ItemStack input = h.getStackInSlot(i);
+                            if (!input.isEmpty()) {
+                                h.extractItem(i, 1, false);
+                            }
+                        }
+
+                        // Recalculate output
+                        if (tileEntity.getLevel() != null && !tileEntity.getLevel().isClientSide) {
+                            ((EssenceChannelerTileEntity) tileEntity).updateCraftingResult(); // Ensure this method exists in your TileEntity
+                            broadcastChanges(); // Sync to client
+                        }
+                        return stack;
+                    }
+                });
             });
         } else {
             this.fields = fields; // Fallback if tileEntity is null or of the wrong type
@@ -58,7 +88,35 @@ public class EssenceChannelerContainer extends Container {
                 addSlot(new SlotItemHandler(h, 0, 48, 16));
                 addSlot(new SlotItemHandler(h, 1, 41, 37));
                 addSlot(new SlotItemHandler(h, 2, 48, 59));
-                addSlot(new SlotItemHandler(h, 3, 124, 37));
+                this.addSlot(new SlotItemHandler(h, 3, 124, 37) {
+                    @Override
+                    public boolean mayPlace(ItemStack stack) {
+                        return false; // No placing into output
+                    }
+
+                    @Override
+                    public ItemStack onTake(PlayerEntity player, ItemStack stack) {
+                        assert tileEntity.getLevel() != null;
+                        tileEntity.getLevel().playSound(null, tileEntity.getBlockPos(), ModSounds.ESSENCE_CHANNELER.get(), SoundCategory.BLOCKS, 20.0f, 1.0f);
+
+                        super.onTake(player, stack);
+
+                        // Remove one item from each input slot
+                        for (int i = 0; i < 3; i++) {
+                            ItemStack input = h.getStackInSlot(i);
+                            if (!input.isEmpty()) {
+                                h.extractItem(i, 1, false);
+                            }
+                        }
+
+                        // Recalculate output
+                        if (tileEntity.getLevel() != null && !tileEntity.getLevel().isClientSide) {
+                            ((EssenceChannelerTileEntity) tileEntity).updateCraftingResult(); // Ensure this method exists in your TileEntity
+                            broadcastChanges(); // Sync to client
+                        }
+                        return stack;
+                    }
+                });
             });
         }
     }

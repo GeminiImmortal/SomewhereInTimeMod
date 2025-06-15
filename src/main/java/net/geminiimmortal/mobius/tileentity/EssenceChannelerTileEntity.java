@@ -1,5 +1,6 @@
 package net.geminiimmortal.mobius.tileentity;
 
+import net.geminiimmortal.mobius.recipe.AstralConduitRecipe;
 import net.geminiimmortal.mobius.recipe.EssenceChannelerRecipe;
 import net.geminiimmortal.mobius.recipe.ModRecipeTypes;
 import net.geminiimmortal.mobius.sound.ModSounds;
@@ -112,18 +113,25 @@ public class EssenceChannelerTileEntity extends TileEntity implements ITickableT
         return super.getCapability(cap, side);
     }
 
-    private void craft(EssenceChannelerRecipe recipe) {
-        // Consume one item from each input slot
-        itemHandler.getStackInSlot(0).shrink(1);
-        itemHandler.getStackInSlot(1).shrink(1);
-        itemHandler.getStackInSlot(2).shrink(1);
+    public void updateCraftingResult() {
+        Inventory fakeInv = new Inventory(3);
+        fakeInv.setItem(0, itemHandler.getStackInSlot(0));
+        fakeInv.setItem(1, itemHandler.getStackInSlot(1));
+        fakeInv.setItem(2, itemHandler.getStackInSlot(2));
 
-        // Place the recipe's output in the output slot
-        ItemStack outputStack = itemHandler.getStackInSlot(3);
-        ItemStack recipeOutput = recipe.getResultItem();
+        Optional<EssenceChannelerRecipe> match = level.getRecipeManager()
+                .getRecipeFor(ModRecipeTypes.ESSENCE_CHANNELER_RECIPE, fakeInv, level);
 
-        if (outputStack.isEmpty()) {
-            itemHandler.insertItem(3, recipeOutput.copy(), false);
+        ItemStack currentOutput = itemHandler.getStackInSlot(3);
+        if (match.isPresent()) {
+            ItemStack result = match.get().getResultItem();
+            if (!ItemStack.isSame(currentOutput, result)) {
+                itemHandler.setStackInSlot(3, result.copy());
+            }
+        } else {
+            if (!currentOutput.isEmpty()) {
+                itemHandler.setStackInSlot(3, ItemStack.EMPTY);
+            }
         }
     }
 
@@ -157,43 +165,9 @@ public class EssenceChannelerTileEntity extends TileEntity implements ITickableT
     public void tick() {
 
         assert this.level != null;
-        if (!this.level.isClientSide) { // Server-side only
-            RecipeManager recipeManager = this.level.getRecipeManager();
-            Optional<EssenceChannelerRecipe> recipe = recipeManager.getRecipeFor(
-                    ModRecipeTypes.ESSENCE_CHANNELER_RECIPE,
-                    new Inventory(itemHandler.getStackInSlot(0), itemHandler.getStackInSlot(1), itemHandler.getStackInSlot(2)),
-                    this.level
-            );
+        if (level == null || level.isClientSide) return;
 
-            if (recipe.isPresent() && !hasCrafted) {
-                ItemStack recipeOutput = recipe.get().getResultItem();
-
-                // Check if the output slot is empty or matches the recipe output
-                ItemStack outputSlotStack = itemHandler.getStackInSlot(3);
-                if (outputSlotStack.isEmpty() || (ItemStack.isSame(outputSlotStack, recipeOutput) &&
-                        outputSlotStack.getCount() + recipeOutput.getCount() <= outputSlotStack.getMaxStackSize())) {
-
-                    if (this.itemHandler.getStackInSlot(3).isEmpty()){
-                        itemHandler.getStackInSlot(0).shrink(1);
-                        itemHandler.getStackInSlot(1).shrink(1);
-                        itemHandler.getStackInSlot(2).shrink(1);
-
-                        // Clear the output slot
-                        itemHandler.setStackInSlot(3, ItemStack.EMPTY);
-                    }
-
-                    // Set the output slot and mark as crafted
-                    itemHandler.setStackInSlot(3, recipeOutput.copy());
-                    hasCrafted = true;
-                    this.level.playSound(null,this.getBlockPos(), ModSounds.ESSENCE_CHANNELER.get(), SoundCategory.BLOCKS, 5.0f, 1.0f);
-                }
-            }
-
-            // Reset the crafting flag if the output slot is empty
-            if (itemHandler.getStackInSlot(3).isEmpty()) {
-                hasCrafted = false;
-            }
-        }
+        updateCraftingResult();
     }
 
 

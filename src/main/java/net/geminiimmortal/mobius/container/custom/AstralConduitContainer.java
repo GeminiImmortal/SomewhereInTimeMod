@@ -57,6 +57,9 @@ public class AstralConduitContainer extends Container {
 
                     @Override
                     public ItemStack onTake(PlayerEntity player, ItemStack stack) {
+                        assert tileEntity.getLevel() != null;
+                        tileEntity.getLevel().playSound(null, tileEntity.getBlockPos(), ModSounds.ASTRAL_CONDUIT.get(), SoundCategory.BLOCKS, 20.0f, 1.0f);
+
                         super.onTake(player, stack);
 
                         // Remove one item from each input slot
