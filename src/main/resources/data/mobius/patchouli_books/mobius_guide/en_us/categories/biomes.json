@@ -1,0 +1,8 @@
+{
+  "name": "Biomes of Mobius",
+  "description": "A detailed guide on Mobius' biomes",
+  "icon": "mobius:manawood_sapling",
+  "entries": [
+    "mobius:rolling_expanse_guide"
+  ]
+}

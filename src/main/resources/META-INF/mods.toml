@@ -58,3 +58,10 @@ Upgrade your gear to new heights and overcome unique new challenges!
     versionRange="[1.16.5,1.17)"
     ordering="NONE"
     side="BOTH"
+[[dependencies.mobius]]
+modId="patchouli"
+mandatory=false
+versionRange="[1.16.4-53,)"
+ordering="AFTER"
+side="BOTH"
+

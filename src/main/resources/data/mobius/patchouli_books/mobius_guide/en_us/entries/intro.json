@@ -1,0 +1,15 @@
+{
+  "name": "Getting Started",
+  "category": "mobius:basics",
+  "icon": "minecraft:book",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To get started, locate a portal (they can be found in plains biomes), and craft this item. An exciting adventure awaits..."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "mobius:gaia_star"
+    }
+  ]
+}

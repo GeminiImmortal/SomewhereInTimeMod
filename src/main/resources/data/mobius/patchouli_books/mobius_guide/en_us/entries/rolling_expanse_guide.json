@@ -1,0 +1,15 @@
+{
+  "name": "The Rolling Expanse",
+  "category": "mobius:biomes",
+  "icon": "minecraft:grass",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": ["mobius:textures/gui/rolling_expanse.png"]
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The rolling expanse biome is a vast, grassy open field. Mobian villages can be found here, as well as the occasional smuggler camp... Read the chapter 'The Natives' for more information."
+    }
+  ]
+}

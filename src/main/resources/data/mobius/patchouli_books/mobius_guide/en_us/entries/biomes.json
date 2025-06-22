@@ -1,0 +1,11 @@
+{
+  "name": "A Guide to Mobius' Biomes",
+  "category": "mobius:basics",
+  "icon": "minecraft:compass",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "There are 6 biomes to be explored in Mobius. These include the rolling expanse, goo lagoon, draconic forelands, forsaken thicket, mushroom forest, and teal glades. See the chapter on biomes for more information on each individual biome."
+    }
+  ]
+}

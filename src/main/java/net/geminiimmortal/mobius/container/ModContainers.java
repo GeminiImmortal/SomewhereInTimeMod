@@ -1,10 +1,7 @@
 package net.geminiimmortal.mobius.container;
 
 import net.geminiimmortal.mobius.MobiusMod;
-import net.geminiimmortal.mobius.container.custom.AstralConduitContainer;
-import net.geminiimmortal.mobius.container.custom.EssenceChannelerContainer;
-import net.geminiimmortal.mobius.container.custom.LatentManaCollectorContainer;
-import net.geminiimmortal.mobius.container.custom.SoulForgeContainer;
+import net.geminiimmortal.mobius.container.custom.*;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -50,6 +47,11 @@ public class ModContainers {
                         World world = inv.player.level;
                         return new LatentManaCollectorContainer(windowId, world, pos, inv, inv.player);
                     })));
+
+    public static final RegistryObject<ContainerType<JournalContainer>> JOURNAL_CONTAINER =
+            CONTAINERS.register("journal", () ->
+                    IForgeContainerType.create((windowId, inv, data) ->
+                             new JournalContainer(windowId, inv)));
 
 
     public static void register(IEventBus eventBus) {

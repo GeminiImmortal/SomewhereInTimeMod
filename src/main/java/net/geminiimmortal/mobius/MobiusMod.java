@@ -1,8 +1,10 @@
 package net.geminiimmortal.mobius;
 
 import com.google.common.collect.Maps;
+import net.geminiimmortal.mobius.container.custom.JournalContainer;
 import net.geminiimmortal.mobius.effects.ModEffects;
 import net.geminiimmortal.mobius.fluid.ModFluids;
+import net.geminiimmortal.mobius.integration.MobiusModPatchouli;
 import net.geminiimmortal.mobius.item.custom.ModSpawnEgg;
 import net.geminiimmortal.mobius.network.ClientEffectHandler;
 import net.geminiimmortal.mobius.poi.ModPOIs;
@@ -15,6 +17,7 @@ import net.geminiimmortal.mobius.entity.render.*;
 import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.recipe.ModRecipeTypes;
+import net.geminiimmortal.mobius.render.JournalScreen;
 import net.geminiimmortal.mobius.sound.ClientMusicHandler;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.tileentity.ModTileEntities;
@@ -37,10 +40,12 @@ import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.AxeItem;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.BiomeDictionary;
@@ -50,6 +55,7 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -94,6 +100,10 @@ public class MobiusMod
         ModFeatures.FEATURES.register(eventBus);
         ModBlocks.register(eventBus);
         ModItems.register(eventBus);
+        if (ModList.get().isLoaded("patchouli")) {
+            MobiusModPatchouli.register(eventBus);
+            LOGGER.info("Patchouli detected. Loading compat.");
+        }
         ModFluids.register(eventBus);
         ModSounds.register(eventBus);
         ModPOIs.register(eventBus);
@@ -268,6 +278,9 @@ public class MobiusMod
                     EssenceChannelerScreen::new);
             ScreenManager.register(ModContainers.LATENT_MANA_COLLECTOR_CONTAINER.get(),
                     LatentManaCollectorScreen::new);
+            ScreenManager.register(ModContainers.JOURNAL_CONTAINER.get(),
+                    JournalScreen::new);
+
         });
 
 

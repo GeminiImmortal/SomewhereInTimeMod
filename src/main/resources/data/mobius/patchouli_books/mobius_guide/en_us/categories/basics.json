@@ -1,0 +1,9 @@
+{
+  "name": "Basics",
+  "description": "Getting started with the Mobius dimension.",
+  "icon": "minecraft:book",
+  "entries": [
+    "mobius:intro",
+    "mobius:biomes"
+  ]
+}
