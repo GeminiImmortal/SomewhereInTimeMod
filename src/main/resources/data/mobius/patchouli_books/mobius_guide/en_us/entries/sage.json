@@ -1,0 +1,20 @@
+{
+  "name": "Sage",
+  "category": "mobius:villagers",
+  "advancement": "mobius:rolling_expanse_discover",
+  "icon": "mobius:essence_channeler",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": ["mobius:textures/gui/sage.png"]
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sages specialize in a more direct approach to magic than magismiths. They are responsible for creating magical staffs and mana storage solutions. The sage's job site block is the essence channeler (picture on next page)."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["mobius:textures/gui/essence_channeler.png"]
+    }
+  ]
+}

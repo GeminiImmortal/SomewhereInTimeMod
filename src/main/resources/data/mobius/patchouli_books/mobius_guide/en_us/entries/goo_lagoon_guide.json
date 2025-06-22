@@ -1,0 +1,12 @@
+{
+  "name": "The Goo Lagoon",
+  "category": "mobius:biomes",
+  "advancement": "mobius:goo_lagoon_discover",
+  "icon": "minecraft:sponge",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TBA"
+    }
+  ]
+}

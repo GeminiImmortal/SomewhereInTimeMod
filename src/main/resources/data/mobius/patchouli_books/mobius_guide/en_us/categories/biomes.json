@@ -1,8 +1,13 @@
 {
   "name": "Biomes of Mobius",
-  "description": "A detailed guide on Mobius' biomes",
+  "description": "A detailed guide on Mobius' biomes.",
   "icon": "mobius:manawood_sapling",
   "entries": [
-    "mobius:rolling_expanse_guide"
+    "mobius:rolling_expanse_guide",
+    "mobius:draconic_forelands_guide",
+    "mobius:mushroom_forest_guide",
+    "mobius:goo_lagoon_guide",
+    "mobius:forsaken_thicket_guide",
+    "mobius:teal_glades_guide"
   ]
 }

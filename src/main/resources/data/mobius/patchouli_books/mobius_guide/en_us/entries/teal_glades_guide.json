@@ -1,0 +1,12 @@
+{
+  "name": "The Teal Glades",
+  "category": "mobius:biomes",
+  "advancement": "mobius:teal_glades_discover",
+  "icon": "mobius:gloamthorn_leaves",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TBA"
+    }
+  ]
+}

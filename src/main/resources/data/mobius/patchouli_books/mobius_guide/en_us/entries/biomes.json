@@ -1,5 +1,6 @@
 {
   "name": "A Guide to Mobius' Biomes",
+  "advancement": "mobius:a_ripple_in_time",
   "category": "mobius:basics",
   "icon": "minecraft:compass",
   "pages": [

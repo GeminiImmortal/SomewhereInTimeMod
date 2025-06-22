@@ -1,0 +1,16 @@
+{
+  "name": "The Draconic Forelands",
+  "category": "mobius:biomes",
+  "advancement": "mobius:draconic_forelands_discover",
+  "icon": "mobius:hematite",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": ["mobius:textures/gui/draconic_forelands.png"]
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The draconic forelands biome consists of tall, steep, imposing mountains of solid hematite rock. Skeletal remains of long-dead dragons litter these peaks. Nothing should be able to live here, but yet, something may yet lurk inside these desolate mountains..."
+    }
+  ]
+}

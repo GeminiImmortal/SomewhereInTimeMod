@@ -1,0 +1,12 @@
+{
+  "name": "The Forsaken Thicket",
+  "category": "mobius:biomes",
+  "advancement": "mobius:forsaken_thicket_discover",
+  "icon": "mobius:living_manawood_leaves",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TBA"
+    }
+  ]
+}

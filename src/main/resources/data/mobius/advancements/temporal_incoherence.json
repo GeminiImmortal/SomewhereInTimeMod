@@ -20,6 +20,11 @@
       }
     }
   },
+  "rewards": {
+    "loot": [
+      "mobius:advancements/temporal_incoherence"
+    ]
+  },
   "requirements": [
     [
       "found_mobius_portal"

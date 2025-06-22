@@ -1,0 +1,20 @@
+{
+  "name": "Smuggler",
+  "category": "mobius:villagers",
+  "advancement": "mobius:rolling_expanse_discover",
+  "icon": "mobius:smuggler_strongbox",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": ["mobius:textures/gui/smuggler.png"]
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Smugglers don't live in ordinary villages. They live a nomadic lifestyle, setting up camps from which to carry out their business. As their name would imply, they specialize in trading banned and illegal goods that the empire wouldn't want your average villager possessing."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["mobius:textures/gui/smuggler_strongbox.png"]
+    }
+  ]
+}

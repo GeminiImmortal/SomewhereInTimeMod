@@ -1,0 +1,11 @@
+{
+  "name": "Villagers of Mobius",
+  "description": "A detailed guide on Mobius' villager population.",
+  "icon": "minecraft:emerald",
+  "entries": [
+    "mobius:magismith",
+    "mobius:sage",
+    "mobius:monster_hunter",
+    "mobius:smuggler"
+  ]
+}

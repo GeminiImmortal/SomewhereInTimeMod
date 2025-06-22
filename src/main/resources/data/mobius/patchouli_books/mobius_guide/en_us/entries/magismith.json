@@ -1,0 +1,20 @@
+{
+  "name": "Magismith",
+  "category": "mobius:villagers",
+  "advancement": "mobius:rolling_expanse_discover",
+  "icon": "mobius:soul_forge",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": ["mobius:textures/gui/magismith.png"]
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Magismiths are villagers that specialize in forging magical artifacts, armor, and weapons. Their job site block is called the Soul Forge (picture of this on the next page)."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["mobius:textures/gui/soul_forge.png"]
+    }
+  ]
+}

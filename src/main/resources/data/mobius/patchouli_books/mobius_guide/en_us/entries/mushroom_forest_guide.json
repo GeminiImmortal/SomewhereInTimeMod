@@ -1,0 +1,12 @@
+{
+  "name": "Mushroom Forest",
+  "category": "mobius:biomes",
+  "advancement": "mobius:mushroom_forest_discover",
+  "icon": "mobius:giant_gloomcap_cap",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "TBA"
+    }
+  ]
+}
