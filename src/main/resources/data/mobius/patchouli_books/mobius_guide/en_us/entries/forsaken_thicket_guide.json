@@ -6,7 +6,29 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "TBA"
+      "text": "The forsaken thicket is the most magic-dense biome in Mobius. This biome is home to the bioluminescent faedeer, as well as their natural predator, the skeletal bone wolf. Wild manawart also thrives here, and can be raised as a crop."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["mobius:textures/gui/forsaken_thicket.png"]
+    },
+    {
+      "title": "Faedeer",
+      "type": "patchouli:image",
+      "images": ["mobius:textures/gui/faedeer.png"]
+    },
+    {
+      "title": "Manawood Trees",
+      "type": "patchouli:text",
+      "text": "Found only in the forsaken thicket, the manawood family of trees are the largest trees in Mobius by far. This group of trees contains two variants, the larger, regular manawood tree and the smaller living manawood tree."
+    },
+    {
+      "type": "patchouli:image",
+      "images": ["mobius:textures/gui/living_manawood_tree.png"]
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Raw mana can be extracted from this particular variant of manawood tree. Read the 'Magic' chapter for more information."
     }
   ]
 }
