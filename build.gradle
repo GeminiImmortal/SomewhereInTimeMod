@@ -30,7 +30,7 @@ mixin {
     add sourceSets.main, "mobius.refmap.json"
 }
 
-version = '1.16.5-0.6.1-indev'
+version = '1.16.5-0.6.2-indev'
 group = 'net.geminiimmortal.mobius' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'mobius'
 
@@ -151,8 +151,8 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.42'
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.16.5:3.0.106')
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-53.2")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.16.4-53.2")
+    implementation fg.deobf("vazkii.patchouli:Patchouli:1.16.4-53.2")
+
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
     // compile "some.group:artifact:version"

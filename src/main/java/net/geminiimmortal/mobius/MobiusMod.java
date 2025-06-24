@@ -96,10 +96,7 @@ public class MobiusMod
         ModFeatures.FEATURES.register(eventBus);
         ModBlocks.register(eventBus);
         ModItems.register(eventBus);
-        if (ModList.get().isLoaded("patchouli")) {
-            MobiusModPatchouli.register(eventBus);
-            LOGGER.info("Patchouli detected. Loading compat.");
-        }
+        MobiusModPatchouli.register(eventBus);
         ModFluids.register(eventBus);
         ModSounds.register(eventBus);
         ModPOIs.register(eventBus);

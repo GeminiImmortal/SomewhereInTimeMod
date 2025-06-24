@@ -60,7 +60,7 @@ Upgrade your gear to new heights and overcome unique new challenges!
     side="BOTH"
 [[dependencies.mobius]]
 modId="patchouli"
-mandatory=false
+mandatory=true
 versionRange="[1.16.4-53,)"
 ordering="AFTER"
 side="BOTH"
