@@ -1,0 +1,12 @@
+{
+  "name": "Log: 1st Moon of the Year 2157",
+  "category": "mobius:lore",
+  "advancement": "mobius:lore_smuggler_camp_0",
+  "icon": "mobius:lore_fragment",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "...of protection...in storage...wagon...hidden..."
+    }
+  ]
+}

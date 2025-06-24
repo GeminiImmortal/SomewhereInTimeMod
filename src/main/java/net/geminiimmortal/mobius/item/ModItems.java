@@ -258,8 +258,6 @@ public class ModItems {
     public static final RegistryObject<Item> OBSIDIAN_ROD = ITEMS.register("obsidian_rod", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<Item> MANA_TAP = ITEMS.register("mana_tap", () -> new ManaTap(new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).durability(128), ModBlocks.LIVING_MANAWOOD_LOG.get(), ModBlocks.MANAWOOD_LOG.get(), ModItems.RAW_MANA.get()));
     public static final RegistryObject<Item> OBLIVION_STONE = ITEMS.register("oblivion_stone", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.EPIC)));
-    public static final RegistryObject<Item> MYSTERIOUS_JOURNAL = ITEMS.register("mysterious_journal", () -> new MysteriousJournal(new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
-    public static final RegistryObject<Item> JOURNAL_PAGE = ITEMS.register("journal_page", () -> new JournalPage(new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.UNCOMMON)));
 
     //Fluid Bucket Items
     public static final RegistryObject<Item> ECTOPLASM_BUCKET = ITEMS.register("ectoplasm_bucket", () -> new BucketItem(() -> ModFluids.ECTOPLASM_FLUID.get(), new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_MISC)));

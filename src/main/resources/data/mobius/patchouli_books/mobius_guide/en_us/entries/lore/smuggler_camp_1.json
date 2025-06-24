@@ -1,0 +1,12 @@
+{
+  "name": "26th Moon of the Year 2159",
+  "category": "mobius:lore",
+  "advancement": "mobius:lore_smuggler_camp_1",
+  "icon": "mobius:lore_fragment",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Imperials found our camp today. Searched it thoroughly, but didn't find the..."
+    }
+  ]
+}

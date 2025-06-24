@@ -47,6 +47,19 @@
           "name": "minecraft:emerald"
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mobius:lore_fragment_smuggler_camp_0"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mobius:lore_fragment_smuggler_camp_1"
+        }
+      ]
     }
   ]
 }

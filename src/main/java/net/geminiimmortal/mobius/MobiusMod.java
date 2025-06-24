@@ -1,7 +1,6 @@
 package net.geminiimmortal.mobius;
 
 import com.google.common.collect.Maps;
-import net.geminiimmortal.mobius.container.custom.JournalContainer;
 import net.geminiimmortal.mobius.effects.ModEffects;
 import net.geminiimmortal.mobius.fluid.ModFluids;
 import net.geminiimmortal.mobius.integration.MobiusModPatchouli;
@@ -17,7 +16,6 @@ import net.geminiimmortal.mobius.entity.render.*;
 import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.recipe.ModRecipeTypes;
-import net.geminiimmortal.mobius.render.JournalScreen;
 import net.geminiimmortal.mobius.sound.ClientMusicHandler;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.tileentity.ModTileEntities;
@@ -40,12 +38,10 @@ import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.AxeItem;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.BiomeDictionary;
@@ -278,8 +274,6 @@ public class MobiusMod
                     EssenceChannelerScreen::new);
             ScreenManager.register(ModContainers.LATENT_MANA_COLLECTOR_CONTAINER.get(),
                     LatentManaCollectorScreen::new);
-            ScreenManager.register(ModContainers.JOURNAL_CONTAINER.get(),
-                    JournalScreen::new);
 
         });
 

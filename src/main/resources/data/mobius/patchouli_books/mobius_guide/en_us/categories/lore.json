@@ -1,0 +1,9 @@
+{
+  "name": "Lore",
+  "description": "",
+  "icon": "minecraft:paper",
+  "entries": [
+    "mobius:lore/smuggler_camp_0",
+    "mobius:lore/smuggler_camp_1"
+  ]
+}
