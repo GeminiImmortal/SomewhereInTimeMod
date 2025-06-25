@@ -1,10 +1,7 @@
 package net.geminiimmortal.mobius.item.custom.patchouli;
 
-import net.geminiimmortal.mobius.MobiusMod;
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementManager;
 import net.minecraft.advancements.AdvancementProgress;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -13,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.UseAction;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.*;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 public class LoreEntry extends Item {
@@ -37,18 +33,14 @@ public class LoreEntry extends Item {
     }
 
     @Override
-    public int getUseDuration(ItemStack stack) {return 32;}
+    public int getUseDuration(ItemStack stack) {return 1;}
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, World world, LivingEntity entity) {
-        if (!((PlayerEntity) entity).isCreative()) {
-            stack.shrink(1);
-            if (!world.isClientSide()) {
-                grantAdvancementIfPossible((ServerPlayerEntity) entity, new ResourceLocation(this.loreEntryType.getEntryAdv().toString()));
-                entity.level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, 1.0f);
-
-                ((ServerPlayerEntity) entity).sendMessage(new TranslationTextComponent("lore.mobius.lore_unlocked"), entity.getUUID());
-            }
+        stack.shrink(1);
+        if (!world.isClientSide()) {
+            grantAdvancementIfPossible((ServerPlayerEntity) entity, new ResourceLocation(this.loreEntryType.getEntryAdv().toString()));
+            entity.level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundCategory.PLAYERS, 1.0f, 1.0f);
         }
         return stack;
     }

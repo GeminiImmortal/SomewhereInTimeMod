@@ -69,6 +69,7 @@
   "item.mobius.mobius_guidebook": "Mobius: Traveller's Guide",
   "item.mobius.lore_fragment_smuggler_camp_0": "Lore Fragment: Smugglers #1",
   "item.mobius.lore_fragment_smuggler_camp_1": "Lore Fragment: Smugglers #2",
+  "item.mobius.imperial_decree_0": "Imperial Decree",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
@@ -224,7 +225,6 @@
   "screen.mobius.latent_mana_collector": "Latent Mana Collector",
   "item.mobius.ring_of_repulsion.used": "Cooldown: 4s",
   "item.mobius.ring_of_repulsion.cooldown": "This artifact is recharging!",
-  "item.mobius.ring_of_aggression.used": "Cooldown: 1s",
-  "lore.mobius.lore_unlocked": "New Lore Available in Guide!"
+  "item.mobius.ring_of_aggression.used": "Cooldown: 1s"
 
 }

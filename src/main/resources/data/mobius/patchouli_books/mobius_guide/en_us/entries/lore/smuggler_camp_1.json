@@ -1,12 +1,16 @@
 {
-  "name": "Smugglers #2",
+  "name": "A Smuggler's Tale",
   "category": "mobius:lore",
   "advancement": "mobius:lore/lore_smuggler_camp_1",
   "icon": "mobius:lore_fragment",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "26th Moon of the Year 2159: Imperials found our camp today. They searched it thoroughly, but didn't find the..."
+      "text": "$(l)Light of the First Moon, Year 2157$()$(br2)Close call earlier. Too close. If it hadn't been for my silver tongue, the patrol would have ratted us out for sure. Damned goons wanted a manifest. Oh, really? Well, I gave it to them alright! Told them I had a delivery for that so-called Governor up in his pompous flying tower. Is he compensating or what?"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Very important, I said. His personal collection of calabash marrowood pipes. And it was already running late. I want to see it, he said. Is that so? Governor won't be happy to know some grass-eating simpleton so much as looked at them, let alone inspected them. Shut him right up. Waved us along with an, “Off you go, then.”$(br2)Typical Imperial halfwit."
     }
   ]
 }

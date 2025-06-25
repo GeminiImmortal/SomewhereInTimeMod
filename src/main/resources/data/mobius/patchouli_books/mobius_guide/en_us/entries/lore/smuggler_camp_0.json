@@ -1,12 +1,12 @@
 {
-  "name": "Smugglers #1",
+  "name": "Smugglers -Placeholder-",
   "category": "mobius:lore",
   "advancement": "mobius:lore/lore_smuggler_camp_0",
   "icon": "mobius:lore_fragment",
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Log: 1st Moon of the Year 2157: ...of protection...in storage...wagon...hidden..."
+      "text": "-Placeholder Text-"
     }
   ]
 }

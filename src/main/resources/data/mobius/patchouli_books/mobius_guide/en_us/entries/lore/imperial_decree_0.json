@@ -1,0 +1,28 @@
+{
+  "name": "Imperial Decree: Tribute",
+  "category": "mobius:lore",
+  "advancement": "mobius:lore/imperial_decree_0",
+  "icon": "mobius:imperial_decree",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)BY ORDER OF HER GRACE, THE QUEEN ENOULIA$()$(br2)It is hereby declared that henceforth, beginning on the first moon of harvest season, and until the final sun, all village farmers whose crop yields are expected to exceed 45 PARCELS of manawart are to present 10 SUCH PARCELS before the Imperial Governor by sunfall of the day exactly one week following the final harvest."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Those who do not anticipate 45 PARCELS are to surrender one-fifth of the yearly harvest, unless the total yield is expected to be of a paltry sum, as determined by Imperial inspection."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Failure to surrender the specified portion, or failure to report to the Imperial Governor before sunfall of the first day of the first week following harvest season, will result in reprimand in the form of PENALTY BY TAXATION to the offending village farmer, as well as his immediate neighbors whom will be presumed to have had knowledge of his transgression."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Any attempt to obfuscate the amount surrendered, or any such willful defiance of this Decree, will result in immediate JAILING and subsequent tribunal. This tribunal will determine the offender's guilt, and as such, recommend punishment, which may include A TERM OF FORCED LABOR, DISMEMBERMENT, or DEATH."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br2)This Imperial Mandate is posted on the first sun of Year 2154, and shall be observed faithfully while it pleases Her Grace, the Queen.$(br2)$(l)ALL HAIL QUEEN ENOULIA$()"
+    }
+  ]
+}

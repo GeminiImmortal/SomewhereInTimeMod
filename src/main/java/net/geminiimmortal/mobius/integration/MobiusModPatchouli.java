@@ -17,6 +17,7 @@ public class MobiusModPatchouli {
     public static final RegistryObject<Item> MOBIUS_GUIDEBOOK = PATCHOULI_BOOKS.register("mobius_guidebook", MobiusGuidebook::new);
     public static final RegistryObject<Item> LORE_FRAGMENT_SMUGGLER_CAMP_0 = PATCHOULI_BOOKS.register("lore_fragment_smuggler_camp_0", () -> new LoreEntry(new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1), LoreEntryType.LORE_FRAGMENT_SMUGGLER_CAMP_0));
     public static final RegistryObject<Item> LORE_FRAGMENT_SMUGGLER_CAMP_1 = PATCHOULI_BOOKS.register("lore_fragment_smuggler_camp_1", () -> new LoreEntry(new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1), LoreEntryType.LORE_FRAGMENT_SMUGGLER_CAMP_1));
+    public static final RegistryObject<Item> IMPERIAL_DECREE_0 = PATCHOULI_BOOKS.register("imperial_decree_0", () -> new LoreEntry(new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1), LoreEntryType.IMPERIAL_DECREE_0));
 
 
     public static void register(IEventBus eventBus){

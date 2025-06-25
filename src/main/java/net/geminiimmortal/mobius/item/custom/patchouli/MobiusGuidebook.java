@@ -2,7 +2,6 @@ package net.geminiimmortal.mobius.item.custom.patchouli;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
 import vazkii.patchouli.api.PatchouliAPI;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
