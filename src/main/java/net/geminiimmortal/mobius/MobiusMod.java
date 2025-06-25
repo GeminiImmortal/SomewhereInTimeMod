@@ -206,12 +206,6 @@ public class MobiusMod
             AxeItem.STRIPABLES.put(ModBlocks.GLOAMTHORN_LOG.get(), ModBlocks.STRIPPED_GLOAMTHORN_LOG.get());
             AxeItem.STRIPABLES.put(ModBlocks.GLOAMTHORN_WOOD.get(), ModBlocks.STRIPPED_GLOAMTHORN_WOOD.get());
 
-            EntitySpawnPlacementRegistry.register(
-                    ModEntityTypes.ANGLERFISH.get(),
-                    EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS,
-                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                    AnglerfishEntity::canMobSpawn
-            );
 
             EntitySpawnPlacementRegistry.register(
                     ModEntityTypes.FAECOW.get(),
