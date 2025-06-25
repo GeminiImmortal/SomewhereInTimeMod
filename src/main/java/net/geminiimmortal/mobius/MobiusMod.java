@@ -214,6 +214,13 @@ public class MobiusMod
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                     AnglerfishEntity::canMobSpawn
             );
+
+            EntitySpawnPlacementRegistry.register(
+                    ModEntityTypes.FAECOW.get(),
+                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
+                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                    FaecowEntity::canMobSpawn
+            );
         });
     }
 
@@ -301,6 +308,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BARRIER.get(), BarrierEntityRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ARCANE_CIRCLE.get(), ArcaneCircleRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SPELL_PROJECTILE.get(), SpellProjectileRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.FAECOW.get(), FaecowRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -353,6 +361,7 @@ public class MobiusMod
             event.put(ModEntityTypes.INFERNAL_BRIAR.get(), InfernalBriarEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.ANGLERFISH.get(), AnglerfishEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.CAPTAIN_BOSS.get(), GuardCaptainBossEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.FAECOW.get(), FaecowEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent

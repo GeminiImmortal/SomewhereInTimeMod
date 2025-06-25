@@ -176,6 +176,14 @@ public class ModEntityTypes {
 
 
 
+    public static final RegistryObject<EntityType<FaecowEntity>> FAECOW =
+            ENTITY_TYPES.register("faecow",
+                    () -> EntityType.Builder.<FaecowEntity>of(FaecowEntity::new, EntityClassification.CREATURE)
+                        .sized(0.9F, 1.4F)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "faecow").toString()));
+
+
+
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

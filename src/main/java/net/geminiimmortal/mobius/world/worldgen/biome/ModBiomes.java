@@ -182,7 +182,7 @@ public class ModBiomes {
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(EntityType.SHEEP, 40, 1,3));
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
-                new MobSpawnInfo.Spawners(EntityType.COW, 50, 1,1));
+                new MobSpawnInfo.Spawners(ModEntityTypes.FAECOW.get(), 10, 1,2));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         biomegenerationsettings$builder.addFeature(GenerationStage.Decoration.LAKES, Features.SEAGRASS_RIVER);
