@@ -102,23 +102,6 @@ public class FaedeerEntity extends MobEntity implements IAnimatable {
     @Override
     public void tick() {
         super.tick();
-
-        /*particleTickCounter++;
-
-        if (particleTickCounter >= PARTICLE_SPAWN_INTERVAL) {
-            spawnGlowParticle();
-            particleTickCounter = 0;
-        }
-    }
-
-    private void spawnGlowParticle() {
-        for (int i = 0; i < 1; i++) {
-            this.level.addParticle(ModParticles.FAEDEER_PARTICLE.get(),
-                    this.getX() + (Math.random() - 0.5) * 2,
-                    this.getY() + 1.0,
-                    this.getZ() + (Math.random() - 0.5) * 2,
-                    0, 0.01, 0);
-        }*/
     }
 
     @Override
@@ -130,27 +113,16 @@ public class FaedeerEntity extends MobEntity implements IAnimatable {
     @Override
     public void registerControllers(AnimationData data) {
         AnimationController<FaedeerEntity> controller = new AnimationController<>(this, "controller", 0, this::predicate);
-        AnimationController<FaedeerEntity> alertedController = new AnimationController<>(this, "alertedController", 0, this::alertedPredicate);
-
         data.addAnimationController(controller);
-        data.addAnimationController(alertedController);
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (this.getFleeing()) {
+        if (this.getDeltaMovement().length() > 0.1) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("run", true));
             return PlayState.CONTINUE;
         }
-        return PlayState.STOP;
-    }
-
-
-    private <E extends IAnimatable> PlayState alertedPredicate(AnimationEvent<E> event) {
-        if (this.getAlerted() && !this.getFleeing()) {
-           event.getController().setAnimation(new AnimationBuilder().addAnimation("startled", false));
-            return PlayState.CONTINUE;
-        }
-        return PlayState.STOP;
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("startled", false));
+        return PlayState.CONTINUE;
     }
 
 
