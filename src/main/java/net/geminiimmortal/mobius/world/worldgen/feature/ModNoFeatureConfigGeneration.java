@@ -21,7 +21,6 @@ public class ModNoFeatureConfigGeneration {
     public static void generateNFC(final BiomeLoadingEvent event) {
         ResourceLocation forsakenThicket = ModBiomes.FORSAKEN_THICKET.getId();
         ResourceLocation mushroomForest = ModBiomes.MUSHROOM_FOREST.getId();
-        ResourceLocation shatteredPlains = ModBiomes.SHATTERED_PLAINS.getId();
         ResourceLocation rollingExpanse = ModBiomes.ROLLING_EXPANSE.getId();
 
         if (Objects.equals(event.getName(), mushroomForest)) {
@@ -53,17 +52,6 @@ public class ModNoFeatureConfigGeneration {
                     .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
                     .decorated(DenserTreesPlacement.DARK_OAK_TREE.configured(
                             new NoPlacementConfig()))
-                    .decorated(Placement.CHANCE.configured(
-                            new ChanceConfig(1)))
-                    .countRandom(10));
-        }
-
-        if (Objects.equals(event.getName(), shatteredPlains)) {
-            List<Supplier<ConfiguredFeature<?, ?>>> base =
-                    event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
-
-            base.add(() -> ModConfiguredFeatures.CONFIGURED_FLOATING_BLOCK_FEATURE
-                    .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
                     .decorated(Placement.CHANCE.configured(
                             new ChanceConfig(1)))
                     .countRandom(10));

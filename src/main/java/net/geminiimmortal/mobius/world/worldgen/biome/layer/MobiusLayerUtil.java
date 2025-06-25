@@ -16,15 +16,13 @@ import java.util.function.LongFunction;
 
 
 public class MobiusLayerUtil {
-    public static int CRIMSON_CASCADES;
+
     public static int DRACONIC_FORELANDS;
     public static int MUSHROOM_FOREST;
     public static int FORSAKEN_THICKET;
-    public static int SHATTERED_PLAINS;
     public static int GOO_LAGOON;
     public static int ROLLING_EXPANSE;
     public static int INFECTED_BOG;
-    public static int DRACONIC_FOOTHILLS;
 
     public static <T extends IArea, C extends IExtendedNoiseRandom<T>> IAreaFactory<T> buildMobiusLayers(int biomeSize, int riverSize, LongFunction<C> context, Registry<Biome> biomeRegistry) {
         IAreaFactory<T> layer = IslandLayer.INSTANCE.run(context.apply(1L));
@@ -100,24 +98,13 @@ public class MobiusLayerUtil {
         return new Layer(layer);
     }
 
-
-
-
-    /**
-     * Always call this in the Biome Source's constructor so we get the correct int biome id for this world.
-     * (this is because the int id for the biome in the dynamic registry can be different in a different world)
-     */
     private static void setupBiomeIntIDs(Registry<Biome> biomeRegistry) {
-        // Verify all biomes exist before getting IDs
-        CRIMSON_CASCADES = getVerifiedBiomeID(biomeRegistry, ModBiomes.CRIMSON_CASCADES.getId());
         DRACONIC_FORELANDS = getVerifiedBiomeID(biomeRegistry, ModBiomes.DRACONIC_FORELANDS.getId());
         FORSAKEN_THICKET = getVerifiedBiomeID(biomeRegistry, ModBiomes.FORSAKEN_THICKET.getId());
         GOO_LAGOON = getVerifiedBiomeID(biomeRegistry, ModBiomes.GOO_LAGOON.getId());
         ROLLING_EXPANSE = getVerifiedBiomeID(biomeRegistry, ModBiomes.ROLLING_EXPANSE.getId());
         MUSHROOM_FOREST = getVerifiedBiomeID(biomeRegistry, ModBiomes.MUSHROOM_FOREST.getId());
         INFECTED_BOG = getVerifiedBiomeID(biomeRegistry, ModBiomes.TEAL_GLADES.getId());
-        SHATTERED_PLAINS = getVerifiedBiomeID(biomeRegistry, ModBiomes.SHATTERED_PLAINS.getId());
-        DRACONIC_FOOTHILLS = getVerifiedBiomeID(biomeRegistry, ModBiomes.DRACONIC_FOOTHILLS.getId());
     }
 
     private static int getVerifiedBiomeID(Registry<Biome> registry, ResourceLocation id) {

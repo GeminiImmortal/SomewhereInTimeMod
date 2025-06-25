@@ -32,8 +32,8 @@ public class MobiusBiomeLayer implements IC0Transformer {
                     biomeKeys.add(key);
                 }
             }
-            if (biomeKeys.size() < 5) {
-                throw new IllegalStateException("Required 5 biomes but found: " + biomeKeys.size());
+            if (biomeKeys.size() < 6) {
+                throw new IllegalStateException("Required 6 biomes but found: " + biomeKeys.size());
             }
         }
         return biomeKeys;
@@ -56,10 +56,7 @@ public class MobiusBiomeLayer implements IC0Transformer {
         addBiomeEntry(keys.get(2), 20); // Forsaken Thicket
         addBiomeEntry(keys.get(3), 20);  // Draconic Forelands
         addBiomeEntry(keys.get(4), 25); // Rolling Expanse
-    //    addBiomeEntry(keys.get(5), 10); // Draconic Foothills
-        addBiomeEntry(keys.get(5), 0); // Infected Bog
-    //    addBiomeEntry(keys.get(6), 2);  // Crimson Cascades
-    //    addBiomeEntry(keys.get(7), 1);  // Shattered Plains
+        addBiomeEntry(keys.get(5), 0); // Teal Glades
 
     }
 
