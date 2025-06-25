@@ -150,6 +150,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> AMBIENT_LOOP_GOO_LAGOON =
             registerSoundEvent("ambient_loop_goo_lagoon");
 
+    public static final RegistryObject<SoundEvent> BACKGROUND_MUSIC =
+            registerSoundEvent("bgmusic");
+
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, name)));
     }

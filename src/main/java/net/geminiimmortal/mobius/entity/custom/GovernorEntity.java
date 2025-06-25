@@ -3,11 +3,8 @@ package net.geminiimmortal.mobius.entity.custom;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.*;
 import net.geminiimmortal.mobius.network.ModNetwork;
-import net.geminiimmortal.mobius.network.PlayMusicPacket;
-import net.geminiimmortal.mobius.sound.ClientMusicHandler;
 import net.geminiimmortal.mobius.util.TitleUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.command.impl.TitleCommand;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -51,10 +48,8 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class GovernorEntity extends VindicatorEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
@@ -209,13 +204,13 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
         super.startSeenByPlayer(player);
         this.bossInfo.addPlayer(player);
         if(FMLEnvironment.dist == Dist.CLIENT) {
-            ClientMusicHandler.playGovernorBossMusic();
-            ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
+        //    ClientMusicHandler.playGovernorBossMusic();
+        //    ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
         }
-        if(FMLEnvironment.dist == Dist.DEDICATED_SERVER) {
-            PlayMusicPacket packet = new PlayMusicPacket("governor_start");
+        /*if(FMLEnvironment.dist == Dist.DEDICATED_SERVER) {
+        //    PlayMusicPacket packet = new PlayMusicPacket("governor_start");
             ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), packet);
-        }
+        }*/
     }
 
     @Override
@@ -223,14 +218,14 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
         super.stopSeenByPlayer(player);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
-            ClientMusicHandler.setGovernor(false);
-            ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
+        //    ClientMusicHandler.setGovernor(false);
+        //    ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
         }
-        if(FMLEnvironment.dist == Dist.DEDICATED_SERVER) {
+        /*if(FMLEnvironment.dist == Dist.DEDICATED_SERVER) {
 
-            PlayMusicPacket packet = new PlayMusicPacket("governor_stop");
+        //    PlayMusicPacket packet = new PlayMusicPacket("governor_stop");
             ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), packet);
-        }
+        }*/
 
         this.bossInfo.removePlayer(player);
     }

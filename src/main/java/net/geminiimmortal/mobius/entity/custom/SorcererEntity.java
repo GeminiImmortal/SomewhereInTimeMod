@@ -1,11 +1,9 @@
 package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
-import net.geminiimmortal.mobius.entity.custom.spell.ObliteratorEntity;
 import net.geminiimmortal.mobius.entity.goals.*;
 import net.geminiimmortal.mobius.network.BeamEndPacket;
 import net.geminiimmortal.mobius.network.ModNetwork;
-import net.geminiimmortal.mobius.sound.ClientMusicHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -210,7 +208,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
             particleTickCounter = 0;
         }
         if (this.level.isClientSide) {
-            ClientMusicHandler.stopVanillaMusic(Minecraft.getInstance());
+        //    ClientMusicHandler.stopVanillaMusic(Minecraft.getInstance());
         }
         this.removeEffect(Effects.LEVITATION);
         summonCircle(this);
@@ -232,7 +230,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
         super.startSeenByPlayer(player);
         this.bossInfo.addPlayer(player);
         if (this.level.isClientSide) {
-            ClientMusicHandler.playCourtWizardBossMusic(Minecraft.getInstance());
+        //    ClientMusicHandler.playCourtWizardBossMusic(Minecraft.getInstance());
         }
     }
 
@@ -241,7 +239,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
         super.stopSeenByPlayer(player);
         this.bossInfo.removePlayer(player);
         if (this.level.isClientSide) {
-            ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
+        //    ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
         }
     }
 

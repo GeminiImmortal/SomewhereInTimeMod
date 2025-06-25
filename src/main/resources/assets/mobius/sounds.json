@@ -351,5 +351,24 @@
         "volume": 0.5
       }
     ]
+  },
+  "bgmusic": {
+    "sounds": [
+      {
+        "name": "mobius:underneath_a_new_sky",
+        "stream": true,
+        "volume": 0.5
+      },
+      {
+        "name": "mobius:colors",
+        "stream": true,
+        "volume": 0.5
+      },
+      {
+        "name": "mobius:dream_state",
+        "stream": true,
+        "volume": 0.5
+      }
+    ]
   }
 }

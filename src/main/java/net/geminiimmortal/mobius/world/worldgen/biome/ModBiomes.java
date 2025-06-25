@@ -1,11 +1,13 @@
 package net.geminiimmortal.mobius.world.worldgen.biome;
 
 import com.google.common.collect.Lists;
+import net.geminiimmortal.mobius.ASMHooks;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.world.worldgen.feature.placement.ModConfiguredSurfaceBuilders;
+import net.minecraft.client.audio.BackgroundMusicSelector;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.particles.ParticleTypes;
@@ -103,6 +105,7 @@ public class ModBiomes {
         return (new Biome.Builder()).precipitation(Biome.RainType.NONE).biomeCategory(Biome.Category.FOREST).depth(depth).scale(scale)
                 .temperature(1.5F).downfall(0.9F).specialEffects((new BiomeAmbience.Builder()).waterColor(16220377).waterFogColor(-3407872)
                         .fogColor(7535809).skyColor(11532160).foliageColorOverride(16220377).grassColorOverride(-3407872)
+                        .backgroundMusic(ASMHooks.music(new BackgroundMusicSelector(ModSounds.BACKGROUND_MUSIC.get(), 1, 10, true)))
                         .ambientParticle(new ParticleEffectAmbience(ParticleTypes.BUBBLE_POP, 0.003f))
                         .ambientLoopSound(ModSounds.WINDING_WOODS_AMBIENT_LOOP.get())
                         .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_WARPED_FOREST_MOOD, 6000, 8, 2.0D))
@@ -122,6 +125,7 @@ public class ModBiomes {
         return (new Biome.Builder()).precipitation(Biome.RainType.NONE).biomeCategory(Biome.Category.OCEAN).depth(depth).scale(scale)
                 .temperature(1.5F).downfall(0.9F).specialEffects((new BiomeAmbience.Builder()).waterColor(16220377).waterFogColor(-3407872)
                         .fogColor(7535809).skyColor(11532160).foliageColorOverride(16220377).grassColorOverride(-3407872)
+                        .backgroundMusic(ASMHooks.music(new BackgroundMusicSelector(ModSounds.BACKGROUND_MUSIC.get(), 1, 10, true)))
                         .ambientParticle(new ParticleEffectAmbience(ParticleTypes.BUBBLE_POP, 0.003f))
                         .ambientLoopSound(ModSounds.AMBIENT_LOOP_GOO_LAGOON.get())
                         .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_WARPED_FOREST_MOOD, 6000, 8, 2.0D))
@@ -146,6 +150,7 @@ public class ModBiomes {
         return (new Biome.Builder()).precipitation(Biome.RainType.SNOW).biomeCategory(Biome.Category.TAIGA).depth(depth).scale(scale)
                 .temperature(0.0F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(16220377).waterFogColor(4658242)
                         .fogColor(7535809).skyColor(11532160).foliageColorOverride(4658242).grassColorOverride(4658242)
+                        .backgroundMusic(ASMHooks.music(new BackgroundMusicSelector(ModSounds.BACKGROUND_MUSIC.get(), 1, 10, true)))
                         .ambientParticle(new ParticleEffectAmbience(ModParticles.FAEDEER_PARTICLE.get(), 0.001f))
                         .ambientLoopSound(ModSounds.WINDING_WOODS_AMBIENT_LOOP.get())
                         .ambientMoodSound(new MoodSoundAmbience(ModSounds.WINDING_WOODS_AMBIENT_MOOD.get(), 6000, 8, 2.0D))
@@ -167,6 +172,7 @@ public class ModBiomes {
         return (new Biome.Builder()).precipitation(Biome.RainType.SNOW).biomeCategory(Biome.Category.EXTREME_HILLS).depth(depth).scale(scale)
                 .temperature(0.0F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(4159204).waterFogColor(329011)
                         .fogColor(13557759).skyColor(11532160).foliageColorOverride(1064741).grassColorOverride(310708)
+                        .backgroundMusic(ASMHooks.music(new BackgroundMusicSelector(ModSounds.BACKGROUND_MUSIC.get(), 1, 10, true)))
                         .ambientParticle(new ParticleEffectAmbience(ParticleTypes.WHITE_ASH, 0.03f))
                         .ambientLoopSound(ModSounds.WINDING_WOODS_AMBIENT_LOOP.get())
                         .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_CAVE, 6000, 8, 2.0D))
@@ -191,6 +197,7 @@ public class ModBiomes {
         return (new Biome.Builder()).precipitation(Biome.RainType.RAIN).biomeCategory(Biome.Category.PLAINS).depth(depth).scale(scale)
                 .temperature(0.8F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(12057592).waterFogColor(7535809)
                         .fogColor(7535809).skyColor(11532160).foliageColorOverride(3570695).grassColorOverride(7008979)
+                        .backgroundMusic(ASMHooks.music(new BackgroundMusicSelector(ModSounds.BACKGROUND_MUSIC.get(), 1, 10, true)))
                         .ambientLoopSound(ModSounds.WINDING_WOODS_AMBIENT_LOOP.get())
                         .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_CAVE, 6000, 8, 2.0D))
                         .ambientAdditionsSound(new SoundAdditionsAmbience(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS, 0.0111D))
@@ -213,6 +220,7 @@ public class ModBiomes {
         return (new Biome.Builder()).precipitation(Biome.RainType.RAIN).biomeCategory(Biome.Category.SWAMP).depth(depth).scale(scale)
                 .temperature(0.8F).downfall(0.5F).specialEffects((new BiomeAmbience.Builder()).waterColor(12057592).waterFogColor(7535809)
                         .fogColor(7535809).skyColor(11532160).foliageColorOverride(3570695).grassColorOverride(7008979)
+                        .backgroundMusic(ASMHooks.music(new BackgroundMusicSelector(ModSounds.BACKGROUND_MUSIC.get(), 1, 10, true)))
                         .ambientLoopSound(SoundEvents.AMBIENT_BASALT_DELTAS_LOOP)
                         .ambientMoodSound(new MoodSoundAmbience(SoundEvents.AMBIENT_CAVE, 6000, 8, 2.0D))
                         .ambientAdditionsSound(new SoundAdditionsAmbience(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS, 0.0111D))

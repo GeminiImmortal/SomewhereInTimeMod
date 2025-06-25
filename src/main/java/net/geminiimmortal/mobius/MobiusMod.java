@@ -16,7 +16,6 @@ import net.geminiimmortal.mobius.entity.render.*;
 import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.recipe.ModRecipeTypes;
-import net.geminiimmortal.mobius.sound.ClientMusicHandler;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.tileentity.ModTileEntities;
 import net.geminiimmortal.mobius.tileentity.render.*;
@@ -51,7 +50,6 @@ import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -377,8 +375,6 @@ public class MobiusMod
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            MinecraftForge.EVENT_BUS.register(new ClientMusicHandler());
-            LOGGER.info("[MOBIUS] Setting up music manager.");
         }
     }
 
