@@ -205,7 +205,7 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
             return PlayState.CONTINUE;
         }
 
-        if (entity.getDeltaMovement().lengthSqr() > 0.003) {
+        if (entity.getDeltaMovement().length() > 0.05) {
             controller.setAnimation(new AnimationBuilder().addAnimation("animation.giant.walk", true));
             return PlayState.CONTINUE;
         }
