@@ -153,6 +153,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> BACKGROUND_MUSIC =
             registerSoundEvent("bgmusic");
 
+    public static final RegistryObject<SoundEvent> GIANT_STOMP =
+            registerSoundEvent("giant_stomp");
+
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, name)));
     }

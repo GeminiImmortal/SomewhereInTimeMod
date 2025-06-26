@@ -213,6 +213,12 @@ public class MobiusMod
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                     FaecowEntity::canMobSpawn
             );
+            EntitySpawnPlacementRegistry.register(
+                    ModEntityTypes.GIANT.get(),
+                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
+                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                    GiantEntity::canMobSpawn
+            );
         });
     }
 
@@ -301,6 +307,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.ARCANE_CIRCLE.get(), ArcaneCircleRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SPELL_PROJECTILE.get(), SpellProjectileRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.FAECOW.get(), FaecowRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GIANT.get(), GiantRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -354,6 +361,7 @@ public class MobiusMod
             event.put(ModEntityTypes.ANGLERFISH.get(), AnglerfishEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.CAPTAIN_BOSS.get(), GuardCaptainBossEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.FAECOW.get(), FaecowEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.GIANT.get(), GiantEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent

@@ -182,6 +182,12 @@ public class ModEntityTypes {
                         .sized(0.9F, 1.4F)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "faecow").toString()));
 
+    public static final RegistryObject<EntityType<GiantEntity>> GIANT =
+            ENTITY_TYPES.register("giant",
+                    () -> EntityType.Builder.of(GiantEntity::new,
+                                    EntityClassification.MONSTER).sized(1.25f, 5.5f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "giant").toString()));
+
 
 
 

@@ -145,6 +145,8 @@ public class ModBiomes {
         MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(EntityType.SHEEP, 100, 7, 10));
+        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
+                new MobSpawnInfo.Spawners(ModEntityTypes.GIANT.get(), 2, 1, 1));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);

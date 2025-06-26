@@ -78,6 +78,12 @@
       "mobius:lightning_spell_fx"
     ]
   },
+  "giant_stomp": {
+    "sounds": [
+      "mobius:giant_stomp"
+    ],
+    "subtitle": "Giant stomps"
+  },
   "obliterator": {
     "sonuds": [
       "mobius:obliterator"
