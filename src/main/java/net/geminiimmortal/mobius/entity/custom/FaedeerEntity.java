@@ -1,11 +1,14 @@
 package net.geminiimmortal.mobius.entity.custom;
 
+import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.FaedeerRunGoal;
 import net.geminiimmortal.mobius.entity.goals.LookForPlayerGoal;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.SwimGoal;
@@ -18,6 +21,7 @@ import net.minecraft.pathfinding.GroundPathNavigator;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -28,7 +32,9 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class FaedeerEntity extends MobEntity implements IAnimatable {
+import java.util.Random;
+
+public class FaedeerEntity extends CreatureEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final DataParameter<Boolean> ALERTED = EntityDataManager.defineId(FaedeerEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> FLEEING = EntityDataManager.defineId(FaedeerEntity.class, DataSerializers.BOOLEAN);
@@ -40,7 +46,7 @@ public class FaedeerEntity extends MobEntity implements IAnimatable {
 
 
 
-    public FaedeerEntity(EntityType<? extends MobEntity> type, World worldIn) {
+    public FaedeerEntity(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
         this.dropExperience();
         this.maxUpStep = 1;
@@ -72,6 +78,10 @@ public class FaedeerEntity extends MobEntity implements IAnimatable {
         this.goalSelector.addGoal(1, new SwimGoal(this));
         this.goalSelector.addGoal(2, new LookForPlayerGoal(this, 24));
         this.goalSelector.addGoal(3, new FaedeerRunGoal(this, 12, 1.2D));
+    }
+
+    public static boolean canMobSpawn(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
+        return (world.getBlockState(pos.below()) == ModBlocks.AURORA_GRASS_BLOCK.get().defaultBlockState());
     }
 
     protected int getXpToDrop() {

@@ -219,6 +219,24 @@ public class MobiusMod
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                     GiantEntity::canMobSpawn
             );
+            EntitySpawnPlacementRegistry.register(
+                    ModEntityTypes.ANGLERFISH.get(),
+                    EntitySpawnPlacementRegistry.PlacementType.IN_WATER,
+                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                    AnglerfishEntity::canMobSpawn
+            );
+            EntitySpawnPlacementRegistry.register(
+                    ModEntityTypes.FAEDEER.get(),
+                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
+                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                    FaedeerEntity::canMobSpawn
+            );
+            EntitySpawnPlacementRegistry.register(
+                    ModEntityTypes.BONE_WOLF.get(),
+                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
+                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                    BoneWolfEntity::canMobSpawn
+            );
         });
     }
 
