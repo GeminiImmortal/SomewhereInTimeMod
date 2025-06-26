@@ -136,7 +136,7 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
 
     @Override
     protected void playStepSound(BlockPos p_180429_1_, BlockState p_180429_2_) {
-        this.playSound(ModSounds.GIANT_STOMP.get(), 0.15f, 0.7f);
+        this.playSound(ModSounds.GIANT_STOMP.get(), 0.45f, 0.7f);
     }
 
     @Override
@@ -194,7 +194,6 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
         GiantEntity entity = (GiantEntity) event.getAnimatable();
         AnimationController<?> controller = event.getController();
 
-        // Don't interrupt if the current animation is stomp and it's not finished yet
         if (controller.getCurrentAnimation() != null &&
                 controller.getCurrentAnimation().animationName.equals("animation.giant.stomp") &&
                 !controller.getAnimationState().equals(AnimationState.Stopped)) {
@@ -203,7 +202,6 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
 
         if (this.getAttacking()) {
             controller.setAnimation(new AnimationBuilder().addAnimation("animation.giant.stomp", false));
-            //entity.setAttacking(false);
             return PlayState.CONTINUE;
         }
 
