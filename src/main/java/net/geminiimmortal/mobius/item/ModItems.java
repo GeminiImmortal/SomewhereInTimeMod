@@ -237,7 +237,10 @@ public class ModItems {
     public static final RegistryObject<ModSpawnEgg> MOLVAN_SPAWN_EGG = ITEMS.register("molvan_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.MOLVAN, 0xa2a090, 0xc5a090, new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<ModSpawnEgg> BONE_WOLF_SPAWN_EGG = ITEMS.register("bone_wolf_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.BONE_WOLF, 0x7A7A7A, 0x8B0000, new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<ModSpawnEgg> INFERNAL_BRIAR_SPAWN_EGG = ITEMS.register("infernal_briar_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.INFERNAL_BRIAR, 0x8B0000, 0x0f2310, new Item.Properties().tab(ItemGroup.TAB_MISC)));
-    public static final RegistryObject<ModSpawnEgg> ANGLERFISH_SPAWN_EGG = ITEMS.register("anglerfish_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.ANGLERFISH, 0x042315, 0x09ff91, new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<ModSpawnEgg> MANGLERFISH_SPAWN_EGG = ITEMS.register("manglerfish_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.ANGLERFISH, 0x042315, 0x09ff91, new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<ModSpawnEgg> FAECOW_SPAWN_EGG = ITEMS.register("faecow_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.FAECOW, 0x2c7a99, 0x35013f, new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<ModSpawnEgg> MOUNTAIN_GIANT_SPAWN_EGG = ITEMS.register("mountain_giant_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.GIANT, 0xead8c4, 0x80643d, new Item.Properties().tab(ItemGroup.TAB_MISC)));
+
 
     //Misc Gizmos
     public static final RegistryObject<Item> GAIA_STAR = ITEMS.register("gaia_star", GaiaStar::new);

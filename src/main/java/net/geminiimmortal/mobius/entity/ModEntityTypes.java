@@ -132,10 +132,10 @@ public class ModEntityTypes {
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "infernal_briar").toString()));
 
     public static final RegistryObject<EntityType<AnglerfishEntity>> ANGLERFISH =
-            ENTITY_TYPES.register("anglerfish",
+            ENTITY_TYPES.register("manglerfish",
                     () -> EntityType.Builder.of(AnglerfishEntity::new,
                                     EntityClassification.CREATURE).sized(2f, 2f)
-                            .build(new ResourceLocation(MobiusMod.MOD_ID, "anglerfish").toString()));
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "manglerfish").toString()));
 
     public static final RegistryObject<EntityType<TornadoEntity>> TORNADO =
             ENTITY_TYPES.register("tornado",
