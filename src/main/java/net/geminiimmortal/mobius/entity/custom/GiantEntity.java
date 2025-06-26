@@ -5,23 +5,29 @@ import net.geminiimmortal.mobius.entity.goals.GiantStompGoal;
 import net.geminiimmortal.mobius.network.GiantStompPacket;
 import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.CowEntity;
+import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -39,7 +45,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import java.util.List;
 import java.util.Random;
 
-public class GiantEntity extends CreatureEntity implements IAnimatable {
+public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
     private static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(GiantEntity.class, DataSerializers.BOOLEAN);
 
 
@@ -69,21 +75,27 @@ public class GiantEntity extends CreatureEntity implements IAnimatable {
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return CreatureEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 100.0D)
+                .add(Attributes.MAX_HEALTH, 180.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.7D)
-                .add(Attributes.ATTACK_DAMAGE, 15.0D)
+                .add(Attributes.ATTACK_DAMAGE, 22.0D)
                 .add(Attributes.FOLLOW_RANGE, 50.0D)
                 .add(Attributes.ATTACK_KNOCKBACK, 5.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1D);
     }
 
     @Override
+    public boolean isAggressive() {
+        return true;
+    }
+
+    @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new GiantStompGoal(this, 0.5D, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, VillagerEntity.class, true));
-        this.goalSelector.addGoal(4, new RandomWalkingGoal(this, 0.3D));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, VillagerEntity.class, true));
+        this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 0.3D));
     }
 
     @Override
@@ -107,6 +119,21 @@ public class GiantEntity extends CreatureEntity implements IAnimatable {
     public boolean doHurtTarget(Entity target) {
         super.doHurtTarget(target);
         return true;
+    }
+
+    @Override
+    protected void playStepSound(BlockPos p_180429_1_, BlockState p_180429_2_) {
+        this.playSound(ModSounds.GIANT_STOMP.get(), 0.15f, 0.7f);
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.GIANT_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return ModSounds.GIANT_HURT.get();
     }
 
     public void stompAttack() {

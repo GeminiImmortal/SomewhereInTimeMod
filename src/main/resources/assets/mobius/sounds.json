@@ -84,6 +84,12 @@
     ],
     "subtitle": "Giant stomps"
   },
+  "giant_hurt": {
+    "sounds": [
+      "mobius:giant_hurt"
+    ],
+    "subtitle": "Giant hurts"
+  },
   "obliterator": {
     "sonuds": [
       "mobius:obliterator"
