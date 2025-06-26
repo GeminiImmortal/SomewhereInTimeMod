@@ -1,5 +1,6 @@
 package net.geminiimmortal.mobius.entity.custom;
 
+import com.google.common.collect.ImmutableList;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.GiantStompGoal;
 import net.geminiimmortal.mobius.network.GiantStompPacket;
@@ -12,6 +13,7 @@ import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.ai.brain.task.FindNewAttackTargetTask;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
@@ -103,9 +105,9 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new GiantStompGoal(this, 0.5D, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, VillagerEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, false));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, VillagerEntity.class, false));
         this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 0.3D));
     }
 
@@ -201,7 +203,7 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
 
         if (this.getAttacking()) {
             controller.setAnimation(new AnimationBuilder().addAnimation("animation.giant.stomp", false));
-            entity.setAttacking(false);
+            //entity.setAttacking(false);
             return PlayState.CONTINUE;
         }
 
