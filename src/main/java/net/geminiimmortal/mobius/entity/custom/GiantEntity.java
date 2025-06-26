@@ -22,6 +22,7 @@ import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -71,6 +72,7 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
         super(type, worldIn);
         this.maxUpStep = 1;
         this.dropExperience();
+        this.setPersistenceRequired();
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -86,6 +88,11 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
     @Override
     public boolean isAggressive() {
         return true;
+    }
+
+    @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return false;
     }
 
     @Override
@@ -203,4 +210,15 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
             }
         }
     }
+
+    @Override
+    public void addAdditionalSaveData(CompoundNBT nbt) {
+        super.addAdditionalSaveData(nbt);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundNBT nbt) {
+        super.readAdditionalSaveData(nbt);
+    }
+
 }
