@@ -26,12 +26,16 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.BlockParticleData;
+import net.minecraft.particles.IParticleData;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -150,11 +154,38 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
                 e -> !(e instanceof GiantEntity) && e.isAlive()
 
         );
+
         for (LivingEntity entity : nearby) {
             this.doHurtTarget(entity);
         }
+        spawnStompParticles(3);
         this.setAttacking(false);
     }
+
+    private void spawnStompParticles(double radius) {
+        BlockState dirtState = Blocks.DIRT.defaultBlockState();
+
+        for (int i = 0; i < 20; i++) {
+            double angle = this.random.nextDouble() * 2 * Math.PI;
+            double dist = this.random.nextDouble() * radius;
+            double x = this.getX() + Math.cos(angle) * dist;
+            double z = this.getZ() + Math.sin(angle) * dist;
+            double y = this.getY();
+
+            // Check ground height for visual accuracy
+            BlockPos pos = new BlockPos(x, y - 0.1, z);
+            if (!level.getBlockState(pos.below()).isAir()) {
+                ((ServerWorld) this.level).sendParticles(
+                        new BlockParticleData(ParticleTypes.BLOCK, dirtState),
+                        x, y, z,
+                        5, // count
+                        0.25, 0.1, 0.25, // offset spread
+                        0.05 // speed
+                );
+            }
+        }
+    }
+
 
 
     private <E extends IAnimatable> PlayState creatureController(AnimationEvent<E> event) {
