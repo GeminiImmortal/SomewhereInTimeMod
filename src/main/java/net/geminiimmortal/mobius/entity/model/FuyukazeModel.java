@@ -22,7 +22,7 @@ public class FuyukazeModel extends AnimatedGeoModel<FuyukazeEntity> {
     }
 
     public ResourceLocation getEmissiveTextureLocation(FuyukazeEntity entity) {
-        return new ResourceLocation(MobiusMod.MOD_ID, "textures/entity/fuyukaze_emissive.png");
+        return new ResourceLocation(MobiusMod.MOD_ID, "textures/entity/fuyukaze_e.png");
     }
 
 }

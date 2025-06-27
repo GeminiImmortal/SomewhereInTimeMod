@@ -18,7 +18,7 @@ public class FuyukazeRendererEmissiveLayer extends GeoLayerRenderer<FuyukazeEnti
 
     @Override
     public void render(MatrixStack stack, IRenderTypeBuffer buffer, int packedLight, FuyukazeEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
-        ResourceLocation emissiveTexture = new ResourceLocation(MobiusMod.MOD_ID, "textures/entity/fuyukaze.png");
+        ResourceLocation emissiveTexture = new ResourceLocation(MobiusMod.MOD_ID, "textures/entity/fuyukaze_e.png");
 
         IVertexBuilder vertexConsumer = buffer.getBuffer(RenderType.eyes(emissiveTexture));
 
