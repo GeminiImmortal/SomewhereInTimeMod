@@ -240,6 +240,7 @@ public class ModItems {
     public static final RegistryObject<ModSpawnEgg> MANGLERFISH_SPAWN_EGG = ITEMS.register("manglerfish_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.ANGLERFISH, 0x042315, 0x09ff91, new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<ModSpawnEgg> FAECOW_SPAWN_EGG = ITEMS.register("faecow_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.FAECOW, 0x2c7a99, 0x35013f, new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<ModSpawnEgg> MOUNTAIN_GIANT_SPAWN_EGG = ITEMS.register("mountain_giant_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.GIANT, 0xead8c4, 0x80643d, new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<ModSpawnEgg> HARUKAZE_SPAWN_EGG = ITEMS.register("harukaze_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.FUYUKAZE, 0xffa500, 0xffbf00, new Item.Properties().tab(ItemGroup.TAB_MISC)));
 
 
     //Misc Gizmos

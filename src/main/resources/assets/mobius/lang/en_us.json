@@ -46,6 +46,7 @@
   "item.mobius.managloom_pie": "Managloom Pie",
   "item.mobius.bone_wolf_spawn_egg": "Bone Wolf Spawn Egg",
   "item.mobius.infernal_briar_spawn_egg": "Infernal Briar Spawn Egg",
+  "item.mobius.harukaze_spawn_egg": "Harukaze Spawn Egg",
   "item.mobius.raw_fae_venison": "Raw Fae-Venison",
   "item.mobius.cooked_fae_venison": "Cooked Fae-Venison",
   "item.mobius.astral_helmet": "Astral Helmet",
@@ -87,6 +88,7 @@
   "entity.mobius.captain_boss": "Royal Guard Captain",
   "entity.mobius.giant": "Mountain Giant",
   "entity.mobius.faecow": "Faecow",
+  "entity.mobius.harukaze": "Harukaze",
 
   "entity.minecraft.villager.mobius.monster_hunter": "Monster Hunter",
   "entity.minecraft.villager.mobius.magismith": "Magismith",
