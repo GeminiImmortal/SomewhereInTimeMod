@@ -159,6 +159,12 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> GIANT_HURT =
             registerSoundEvent("giant_hurt");
 
+    public static final RegistryObject<SoundEvent> HARUKAZE_AMBIENT =
+            registerSoundEvent("harukaze_ambient");
+
+    public static final RegistryObject<SoundEvent> HARUKAZE_DEATH =
+            registerSoundEvent("harukaze_death");
+
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, name)));
     }

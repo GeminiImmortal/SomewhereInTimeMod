@@ -3,6 +3,7 @@ package net.geminiimmortal.mobius.entity.custom;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.item.ModItems;
+import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -239,7 +240,7 @@ public class FuyukazeEntity extends WolfEntity implements IAnimatable {
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.WOLF_DEATH;
+        return ModSounds.HARUKAZE_DEATH.get();
     }
 
     @Override
@@ -249,7 +250,7 @@ public class FuyukazeEntity extends WolfEntity implements IAnimatable {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.WOLF_GROWL;
+        return ModSounds.HARUKAZE_AMBIENT.get();
     }
 
     @Override

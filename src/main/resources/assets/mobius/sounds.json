@@ -25,6 +25,18 @@
       }
     ]
   },
+  "harukaze_ambient": {
+    "sounds": [
+      "mobius:harukaze_ambient"
+    ],
+    "subtitle": "Harukaze howls"
+  },
+  "harukaze_death": {
+    "sounds": [
+      "mobius:harukaze_death"
+    ],
+    "subtitle": "Harukaze dies"
+  },
   "arcane_bolt_fx": {
     "sounds": [
       "mobius:arcane_bolt_fx"
