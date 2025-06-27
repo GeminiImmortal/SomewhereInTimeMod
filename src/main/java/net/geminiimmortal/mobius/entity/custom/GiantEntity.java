@@ -42,6 +42,8 @@ import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
+import software.bernie.geckolib3.core.builder.RawAnimation;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.SoundKeyframeEvent;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
@@ -54,7 +56,7 @@ import java.util.Random;
 
 public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
     private static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(GiantEntity.class, DataSerializers.BOOLEAN);
-
+    private boolean isAnimating = false;
 
     @Override
     protected void defineSynchedData() {
@@ -113,10 +115,10 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
 
     @Override
     public void registerControllers(AnimationData data) {
-        AnimationController<GiantEntity> controller = new AnimationController<>(this, "controller", 0, this::creatureController);
-
-        controller.registerSoundListener(this::soundListener);
+        AnimationController<GiantEntity> controller = new AnimationController<>(this, "controller", 5, this::creatureController);
         data.addAnimationController(controller);
+        controller.registerSoundListener(this::soundListener);
+
     }
 
     private <ENTITY extends IAnimatable> void soundListener(SoundKeyframeEvent<ENTITY> event) {
@@ -189,28 +191,31 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
     }
 
 
-
     private <E extends IAnimatable> PlayState creatureController(AnimationEvent<E> event) {
         GiantEntity entity = (GiantEntity) event.getAnimatable();
         AnimationController<?> controller = event.getController();
 
+        // Keep stomp playing until it ends
         if (controller.getCurrentAnimation() != null &&
                 controller.getCurrentAnimation().animationName.equals("animation.giant.stomp") &&
                 !controller.getAnimationState().equals(AnimationState.Stopped)) {
             return PlayState.CONTINUE;
         }
 
+        // If attacking, play stomp (one-shot)
         if (this.getAttacking()) {
-            controller.setAnimation(new AnimationBuilder().addAnimation("animation.giant.stomp", false));
+            controller.setAnimation(new AnimationBuilder().addAnimation("animation.giant.stomp", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
 
-        if (entity.getDeltaMovement().length() > 0.05) {
-            controller.setAnimation(new AnimationBuilder().addAnimation("animation.giant.walk", true));
+        // If moving, play walk loop
+        if (this.getDeltaMovement().length() > 0.05) {
+            controller.setAnimation(new AnimationBuilder().addAnimation("animation.giant.walk", ILoopType.EDefaultLoopTypes.LOOP));
             return PlayState.CONTINUE;
         }
 
-        controller.setAnimation(new AnimationBuilder().addAnimation("animation.giant.idle", true));
+        // Fallback idle
+        controller.setAnimation(new AnimationBuilder().addAnimation("animation.giant.idle", ILoopType.EDefaultLoopTypes.LOOP));
         return PlayState.CONTINUE;
     }
 
@@ -252,4 +257,11 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
         super.readAdditionalSaveData(nbt);
     }
 
+    public boolean isAnimating() {
+        return isAnimating;
+    }
+
+    public void setAnimating(boolean animating) {
+        isAnimating = animating;
+    }
 }
