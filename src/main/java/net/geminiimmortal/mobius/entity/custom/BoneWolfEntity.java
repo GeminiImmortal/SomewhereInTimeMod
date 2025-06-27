@@ -93,19 +93,19 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable {
                 ServerPlayerEntity owner = (ServerPlayerEntity) this.getOwner();
                 if (this.isOrderedToSit() && this.isTame()) {
                     assert owner != null;
-                    owner.displayClientMessage(new TranslationTextComponent("entity.mobius.harukaze.is_sitting.true") {
+                    owner.displayClientMessage(new TranslationTextComponent("entity.mobius.bone_wolf.is_sitting.true") {
                     }, true);
                     this.setSitting(false);
                     super.setOrderedToSit(orderedToSit);
                 } else if (!this.isOrderedToSit() && this.isTame()) {
                     assert owner != null;
-                    owner.displayClientMessage(new TranslationTextComponent("entity.mobius.harukaze.is_sitting.false") {
+                    owner.displayClientMessage(new TranslationTextComponent("entity.mobius.bone_wolf.is_sitting.false") {
                     }, true);
                     this.setSitting(true);
                     super.setOrderedToSit(orderedToSit);
                 } else {
                     assert owner != null;
-                    owner.displayClientMessage(new TranslationTextComponent("entity.mobius.harukaze.is_sitting.false") {
+                    owner.displayClientMessage(new TranslationTextComponent("entity.mobius.bone_wolf.is_sitting.false") {
                     }, true);
                     this.setSitting(true);
                     super.setOrderedToSit(orderedToSit);
