@@ -22,6 +22,11 @@ public class FuyukazeRendererEmissiveLayer extends GeoLayerRenderer<FuyukazeEnti
 
         IVertexBuilder vertexConsumer = buffer.getBuffer(RenderType.eyes(emissiveTexture));
 
+        if (entity.isBaby()) {
+            stack.pushPose();
+            stack.scale(2.0F, 2.0F, 2.0F);
+        }
+
         this.getRenderer().render(
                 this.getEntityModel().getModel(this.getEntityModel().getModelLocation(entity)),
                 entity,
@@ -34,6 +39,10 @@ public class FuyukazeRendererEmissiveLayer extends GeoLayerRenderer<FuyukazeEnti
                 OverlayTexture.NO_OVERLAY,
                 1.0F, 1.0F, 1.0F, 0.1F
         );
+
+        if (entity.isBaby()) {
+            stack.popPose();
+        }
     }
 }
 
