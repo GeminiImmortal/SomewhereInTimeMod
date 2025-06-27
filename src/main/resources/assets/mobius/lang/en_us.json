@@ -230,6 +230,8 @@
   "screen.mobius.latent_mana_collector": "Latent Mana Collector",
   "item.mobius.ring_of_repulsion.used": "Cooldown: 4s",
   "item.mobius.ring_of_repulsion.cooldown": "This artifact is recharging!",
-  "item.mobius.ring_of_aggression.used": "Cooldown: 1s"
+  "item.mobius.ring_of_aggression.used": "Cooldown: 1s",
+  "entity.mobius.harukaze.is_sitting.false": "Harukaze is staying",
+  "entity.mobius.harukaze.is_sitting.true": "Harukaze is following"
 
 }

@@ -188,6 +188,12 @@ public class ModEntityTypes {
                                     EntityClassification.MONSTER).sized(1.25f, 5.5f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "giant").toString()));
 
+    public static final RegistryObject<EntityType<FuyukazeEntity>> FUYUKAZE =
+            ENTITY_TYPES.register("harukaze",
+                    () -> EntityType.Builder.of(FuyukazeEntity::new,
+                                    EntityClassification.MONSTER).sized(3.5f, 2f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "harukaze").toString()));
+
 
 
 

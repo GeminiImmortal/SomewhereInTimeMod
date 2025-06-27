@@ -173,6 +173,8 @@ public class ModBiomes {
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(ModEntityTypes.FAECOW.get(), 100, 1,2));
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
+                new MobSpawnInfo.Spawners(ModEntityTypes.FUYUKAZE.get(), 10, 2,3));
+        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(ModEntityTypes.GIANT.get(), 5, 1, 2));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);

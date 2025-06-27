@@ -1,9 +1,13 @@
 package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
+import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.*;
+import net.minecraft.entity.CreatureEntity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
@@ -11,11 +15,11 @@ import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
@@ -35,25 +39,30 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-import java.util.Objects;
 import java.util.Random;
 
-public class BoneWolfEntity extends WolfEntity implements IAnimatable {
-    private static final DataParameter<Boolean> SITTING = EntityDataManager.defineId(BoneWolfEntity.class, DataSerializers.BOOLEAN);
+public class FuyukazeEntity extends WolfEntity implements IAnimatable {
+    private static final DataParameter<Boolean> SITTING = EntityDataManager.defineId(FuyukazeEntity.class, DataSerializers.BOOLEAN);
 
-    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
-    public BoneWolfEntity(EntityType<? extends WolfEntity> type, World worldIn) {
+
+    public FuyukazeEntity(EntityType<? extends WolfEntity> type, World worldIn) {
         super(type, worldIn);
+        this.fireImmune();
+        this.maxUpStep = 1;
     }
+    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 40.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.35)
+        return CreatureEntity.createLivingAttributes()
+                .add(Attributes.MAX_HEALTH, 20.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.ATTACK_DAMAGE, 4.0D)
-                .add(Attributes.FOLLOW_RANGE, 30.0D)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.7D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.8D);
+                .add(Attributes.FOLLOW_RANGE, 25.0D)
+                .add(Attributes.ARMOR, 0.0D)
+                .add(Attributes.ARMOR_TOUGHNESS, 0.0D)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.1D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.0D);
     }
 
     @Override
@@ -61,11 +70,11 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable {
         super.registerGoals();
 
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, FaecowEntity.class, true));
         this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, FaedeerEntity.class, true));
 
         // Basic wolf goals
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, true));
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.1D, true));
         this.goalSelector.addGoal(2, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
         this.goalSelector.addGoal(3, new SitGoal(this));
         this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
@@ -85,6 +94,7 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable {
     public boolean getSitting() {
         return this.entityData.get(SITTING);
     }
+
 
     @Override
     public void setOrderedToSit(boolean orderedToSit) {
@@ -114,6 +124,35 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable {
         }
     }
 
+    @Override
+    public void registerControllers(AnimationData data) {
+        AnimationController<FuyukazeEntity> controller = new AnimationController<>(this, "controller", 0, this::fuyukazeController);
+        data.addAnimationController(controller);
+    }
+
+
+    private static final RawAnimation IDLE = new RawAnimation("animation.fuyukaze.idle", true);
+    private static final RawAnimation RUN = new RawAnimation("animation.fuyukaze.run", true);
+    private static final RawAnimation SIT = new RawAnimation("animation.fuyukaze.sit", true);
+
+    private <E extends IAnimatable> PlayState fuyukazeController(AnimationEvent<E> event) {
+        FuyukazeEntity entity = (FuyukazeEntity) event.getAnimatable();
+
+
+
+        if (entity.getSitting()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation(SIT.animationName));
+            return PlayState.CONTINUE;
+        }
+
+        if (entity.getDeltaMovement().length() > 0.1) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation(RUN.animationName));
+            return PlayState.CONTINUE;
+        }
+
+        event.getController().setAnimation(new AnimationBuilder().addAnimation(IDLE.animationName));
+        return PlayState.CONTINUE;
+    }
 
     @Override
     public ActionResultType mobInteract(PlayerEntity player, Hand hand) {
@@ -124,7 +163,7 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable {
         Item item = player.getItemInHand(hand).getItem();
 
         // Tame with a specific item, e.g., Bones
-        if (item == Items.BONE) {
+        if (item == ModItems.RAW_MANA.get()) {
             if (!player.isCreative()) {
                 player.getItemInHand(hand).shrink(1);
             }
@@ -151,12 +190,12 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable {
 
     @Override
     protected SoundEvent getDeathSound() {
-        return ModSounds.BONE_WOLF_DEATH.get();
+        return SoundEvents.WOLF_DEATH;
     }
 
     @Override
     protected void playStepSound(BlockPos p_180429_1_, BlockState p_180429_2_) {
-        this.playSound(SoundEvents.SKELETON_STEP, 0.15f, 0.7f);
+        this.playSound(SoundEvents.WOLF_STEP, 0.15f, 0.7f);
     }
 
     @Override
@@ -166,39 +205,29 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable {
 
     @Override
     public boolean canAttack(LivingEntity type) {
-        return !this.isTame() && super.canAttack(type); // Don't attack if tamed
+        return super.canAttack(type);
     }
 
     @Override
-    public void registerControllers(AnimationData data) {
-        AnimationController<BoneWolfEntity> controller = new AnimationController<>(this, "controller", 0, this::boneWolfController);
-        data.addAnimationController(controller);
+    public boolean fireImmune() {
+        return true;
     }
 
-
-    private static final RawAnimation IDLE = new RawAnimation("animation.bone_wolf.idle", true);
-    private static final RawAnimation RUN = new RawAnimation("animation.bone_wolf.run", true);
-    private static final RawAnimation SIT = new RawAnimation("animation.bone_wolf.sit", true);
-
-    private <E extends IAnimatable> PlayState boneWolfController(AnimationEvent<E> event) {
-        BoneWolfEntity entity = (BoneWolfEntity) event.getAnimatable();
-
-
-
-        if (this.getSitting()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(SIT.animationName));
-            return PlayState.CONTINUE;
-        }
-
-        if (entity.getDeltaMovement().length() > 0.1) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(RUN.animationName));
-            return PlayState.CONTINUE;
-        }
-
-        event.getController().setAnimation(new AnimationBuilder().addAnimation(IDLE.animationName));
-        return PlayState.CONTINUE;
+    @Override
+    public void tick() {
+        super.tick();
+        spawnParticles();
     }
 
+    private void spawnParticles() {
+        for (int i = 0; i < 1; i++) {
+            this.level.addParticle(ParticleTypes.FLAME,
+                    this.getX() + (Math.random() - 0.5) * 2,
+                    this.getY() + 1.0,
+                    this.getZ() + (Math.random() - 0.5) * 2,
+                    0.1, 0.01, 0.1);
+        }
+    }
 
     @Override
     public AnimationFactory getFactory() {

@@ -237,6 +237,12 @@ public class MobiusMod
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                     BoneWolfEntity::canMobSpawn
             );
+            EntitySpawnPlacementRegistry.register(
+                    ModEntityTypes.FUYUKAZE.get(),
+                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
+                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                    FuyukazeEntity::canMobSpawn
+            );
         });
     }
 
@@ -326,6 +332,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SPELL_PROJECTILE.get(), SpellProjectileRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.FAECOW.get(), FaecowRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GIANT.get(), GiantRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.FUYUKAZE.get(), FuyukazeRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -380,6 +387,7 @@ public class MobiusMod
             event.put(ModEntityTypes.CAPTAIN_BOSS.get(), GuardCaptainBossEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.FAECOW.get(), FaecowEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.GIANT.get(), GiantEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.FUYUKAZE.get(), FuyukazeEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent
