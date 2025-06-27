@@ -13,7 +13,7 @@ public class FuyukazeModel extends AnimatedGeoModel<FuyukazeEntity> {
 
     @Override
     public ResourceLocation getModelLocation(FuyukazeEntity entity) {
-        return new ResourceLocation(MobiusMod.MOD_ID, "geo/fuyukaze.geo.json");
+        return new ResourceLocation(MobiusMod.MOD_ID, "geo/fuyukaze_scaled.geo.json");
     }
 
     @Override
