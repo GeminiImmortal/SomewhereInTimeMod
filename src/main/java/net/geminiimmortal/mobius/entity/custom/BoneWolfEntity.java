@@ -183,6 +183,11 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable {
     private <E extends IAnimatable> PlayState boneWolfController(AnimationEvent<E> event) {
         BoneWolfEntity entity = (BoneWolfEntity) event.getAnimatable();
 
+        if (entity.hurtTime > 0) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation(RUN.animationName));
+            this.setSitting(false);
+            return PlayState.CONTINUE;
+        }
 
 
         if (this.getSitting()) {
