@@ -27,7 +27,6 @@ public class GiantStompGoal extends MeleeAttackGoal {
     @Override
     public void stop() {
         super.stop();
-        this.giant.setAttacking(false);
     }
 }
 

@@ -1,6 +1,5 @@
 package net.geminiimmortal.mobius.entity.custom;
 
-import com.google.common.collect.ImmutableList;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.GiantStompGoal;
 import net.geminiimmortal.mobius.network.GiantStompPacket;
@@ -13,15 +12,13 @@ import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.brain.task.FindNewAttackTargetTask;
-import net.minecraft.entity.ai.goal.HurtByTargetGoal;
+import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.monster.IMob;
-import net.minecraft.entity.passive.CowEntity;
 import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -29,21 +26,20 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.BlockParticleData;
-import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
 import software.bernie.geckolib3.core.builder.ILoopType;
-import software.bernie.geckolib3.core.builder.RawAnimation;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.SoundKeyframeEvent;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
@@ -56,7 +52,6 @@ import java.util.Random;
 
 public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
     private static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(GiantEntity.class, DataSerializers.BOOLEAN);
-    private boolean isAnimating = false;
 
     @Override
     protected void defineSynchedData() {
@@ -107,20 +102,23 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new GiantStompGoal(this, 0.5D, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, false));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, VillagerEntity.class, false));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, VillagerEntity.class, true));
         this.goalSelector.addGoal(5, new RandomWalkingGoal(this, 0.3D));
     }
 
     @Override
     public void registerControllers(AnimationData data) {
-        AnimationController<GiantEntity> controller = new AnimationController<>(this, "controller", 5, this::creatureController);
-        data.addAnimationController(controller);
+        AnimationController<GiantEntity> controller = new AnimationController<>(this, "controller", 0, this::creatureController);
+
         controller.registerSoundListener(this::soundListener);
+        data.addAnimationController(controller);
+
 
     }
 
+    @OnlyIn(Dist.CLIENT)
     private <ENTITY extends IAnimatable> void soundListener(SoundKeyframeEvent<ENTITY> event) {
         ClientPlayerEntity player = Minecraft.getInstance().player;
         if (player != null) {
@@ -132,8 +130,7 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
 
     @Override
     public boolean doHurtTarget(Entity target) {
-        super.doHurtTarget(target);
-        return true;
+        return super.doHurtTarget(target);
     }
 
     @Override
@@ -151,6 +148,7 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
         return ModSounds.GIANT_HURT.get();
     }
 
+
     public void stompAttack() {
         List<LivingEntity> nearby = this.level.getEntitiesOfClass(
                 LivingEntity.class,
@@ -159,12 +157,15 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
 
         );
 
-        for (LivingEntity entity : nearby) {
-            this.doHurtTarget(entity);
+        if(!nearby.isEmpty()) {
+            for (LivingEntity entity : nearby) {
+                entity.hurt(DamageSource.mobAttack(this), (float) this.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+            }
         }
-        spawnStompParticles(3);
-        this.setAttacking(false);
+
+        spawnStompParticles(4);
     }
+
 
     private void spawnStompParticles(double radius) {
         BlockState dirtState = Blocks.DIRT.defaultBlockState();
@@ -188,6 +189,7 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
                 );
             }
         }
+        this.setAttacking(false);
     }
 
 
@@ -195,26 +197,16 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
         GiantEntity entity = (GiantEntity) event.getAnimatable();
         AnimationController<?> controller = event.getController();
 
-        // Keep stomp playing until it ends
-        if (controller.getCurrentAnimation() != null &&
-                controller.getCurrentAnimation().animationName.equals("animation.giant.stomp") &&
-                !controller.getAnimationState().equals(AnimationState.Stopped)) {
-            return PlayState.CONTINUE;
-        }
-
-        // If attacking, play stomp (one-shot)
         if (this.getAttacking()) {
             controller.setAnimation(new AnimationBuilder().addAnimation("animation.giant.stomp", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
             return PlayState.CONTINUE;
         }
 
-        // If moving, play walk loop
-        if (this.getDeltaMovement().length() > 0.05) {
+        if (this.getDeltaMovement().length() > 0.05 && !this.getAttacking()) {
             controller.setAnimation(new AnimationBuilder().addAnimation("animation.giant.walk", ILoopType.EDefaultLoopTypes.LOOP));
             return PlayState.CONTINUE;
         }
 
-        // Fallback idle
         controller.setAnimation(new AnimationBuilder().addAnimation("animation.giant.idle", ILoopType.EDefaultLoopTypes.LOOP));
         return PlayState.CONTINUE;
     }
@@ -257,11 +249,4 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
         super.readAdditionalSaveData(nbt);
     }
 
-    public boolean isAnimating() {
-        return isAnimating;
-    }
-
-    public void setAnimating(boolean animating) {
-        isAnimating = animating;
-    }
 }

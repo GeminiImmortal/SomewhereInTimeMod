@@ -26,10 +26,12 @@ public class GiantStompPacket {
 
     public static void handle(GiantStompPacket msg, Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            ServerWorld world = (ServerWorld) Objects.requireNonNull(ctx.get().getSender()).level;
-            Entity entity = world.getEntity(msg.giantId);
-            if (entity instanceof GiantEntity) {
-                ((GiantEntity) entity).stompAttack();
+            if (ctx.get().getSender() != null) {
+                ServerWorld world = (ServerWorld) ctx.get().getSender().level;
+                Entity entity = world.getEntity(msg.giantId);
+                if (entity instanceof GiantEntity) {
+                    ((GiantEntity) entity).stompAttack();
+                }
             }
         });
         ctx.get().setPacketHandled(true);
