@@ -21,7 +21,7 @@ modId="mobius" #mandatory
 # see the associated build.gradle script for how to populate this completely automatically during a build
 version="${file.jarVersion}" #mandatory
  # A display name for the mod
-displayName="Mobius" #mandatory
+displayName="Somewhere in Time" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
@@ -29,7 +29,7 @@ displayName="Mobius" #mandatory
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="mobius_icon.png" #optional
 # A text field displayed in the mod UI
-credits="Big thank you to quek of the Undergarden mod. Another big thank you to Bewonder for a significant contribution of assets for this project." #optional
+credits="Thank you to Bewonder for a significant contribution of assets for this project." #optional
 # A text field displayed in the mod UI
 authors="GeminiImmortal" #optional
 # The description text for the mod (multi line!) (#mandatory)
@@ -64,4 +64,11 @@ mandatory=true
 versionRange="[1.16.4-53,)"
 ordering="AFTER"
 side="BOTH"
+[[dependencies.mobius]]
+modId="geckolib3"
+mandatory=true
+versionRange="[3.0.0,4.0.0)"
+ordering="AFTER"
+side="BOTH"
+
 

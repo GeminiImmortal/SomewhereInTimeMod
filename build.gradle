@@ -30,9 +30,9 @@ mixin {
     add sourceSets.main, "mobius.refmap.json"
 }
 
-version = '1.16.5-0.6.3-indev'
+version = '1.16.5-0.1-alpha'
 group = 'net.geminiimmortal.mobius' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'mobius'
+archivesBaseName = 'somewhere_in_time'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8) // Mojang ships Java 8 to end users, so your mod should target Java 8.
 
