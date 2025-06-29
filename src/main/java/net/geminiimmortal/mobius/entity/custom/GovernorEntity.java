@@ -40,6 +40,7 @@ import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerBossInfo;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.network.PacketDistributor;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -94,6 +95,9 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
         this.maxUpStep = 1;
         this.setPersistenceRequired();
         this.setItemInHand(Hand.MAIN_HAND, new ItemStack(Items.DIAMOND_SWORD));
+        if (this.level.isClientSide()) {
+            playBossMusic();
+        }
     }
 
     @Override
@@ -161,11 +165,15 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
 
     @Override
     public void die(DamageSource source) {
+        if (this.level.isClientSide()) {
+            stopBossMusic();
+        }
+
         super.die(source);
 
         if (!this.level.isClientSide()) {
             int experiencePoints = this.getXpToDrop();
-            TitleUtils.sendTitle((ServerPlayerEntity) this.lastHurtByPlayer, "DUTY COMPLETE", "Legendary foe vanquished!", 10, 100, 40);
+            TitleUtils.sendTitle((ServerPlayerEntity) this.lastHurtByPlayer, "DUTY COMPLETE", "Champion foe vanquished!", 10, 100, 40);
 
             // Drop the experience orbs
             while (experiencePoints > 0) {
@@ -181,6 +189,10 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
 
     @Override
     public void tick() {
+        if (this.level.isClientSide() && !this.isAlive()) {
+            stopBossMusic();
+        }
+
         super.tick();
 
         if(!(this.getTarget() == null)) {
@@ -202,24 +214,33 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
         }
     }
 
+    @OnlyIn(Dist.CLIENT)
+    private void playBossMusic() {
+        MusicTickerHook.setMusicOverride(new BackgroundMusicSelector(ModSounds.BULLYRAG.get(), 0, 0, true));
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private void stopBossMusic() {
+        MusicTickerHook.clearMusicOverride();
+    }
+
     @Override
     public void startSeenByPlayer(ServerPlayerEntity player) {
-        super.startSeenByPlayer(player);
-        this.bossInfo.addPlayer(player);
-        if(FMLEnvironment.dist == Dist.CLIENT) {
-            MusicTickerHook.playCustomMusic(new BackgroundMusicSelector(ModSounds.BULLYRAG.get(), 0, 0, true));
+        if (this.level.isClientSide()) {
+            playBossMusic();
         }
 
+        super.startSeenByPlayer(player);
+        this.bossInfo.addPlayer(player);
     }
 
     @Override
     public void stopSeenByPlayer(ServerPlayerEntity player) {
-        super.stopSeenByPlayer(player);
-
-        if (FMLEnvironment.dist == Dist.CLIENT) {
-            MusicTickerHook.playCustomMusic(null);
+        if (this.level.isClientSide()) {
+            stopBossMusic();
         }
 
+        super.stopSeenByPlayer(player);
         this.bossInfo.removePlayer(player);
     }
 
