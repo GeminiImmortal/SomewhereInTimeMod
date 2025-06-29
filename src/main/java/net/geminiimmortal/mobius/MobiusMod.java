@@ -243,6 +243,12 @@ public class MobiusMod
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                     FuyukazeEntity::canMobSpawn
             );
+            EntitySpawnPlacementRegistry.register(
+                    ModEntityTypes.FOOTMAN.get(),
+                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
+                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                    FootmanEntity::canMobSpawn
+            );
         });
     }
 
@@ -333,6 +339,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.FAECOW.get(), FaecowRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GIANT.get(), GiantRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.FUYUKAZE.get(), FuyukazeRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.FOOTMAN.get(), FootmanRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -388,6 +395,7 @@ public class MobiusMod
             event.put(ModEntityTypes.FAECOW.get(), FaecowEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.GIANT.get(), GiantEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.FUYUKAZE.get(), FuyukazeEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.FOOTMAN.get(), FootmanEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent

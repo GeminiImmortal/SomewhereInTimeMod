@@ -194,6 +194,12 @@ public class ModEntityTypes {
                                     EntityClassification.CREATURE).sized(2f, 2f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "harukaze").toString()));
 
+    public static final RegistryObject<EntityType<FootmanEntity>> FOOTMAN =
+            ENTITY_TYPES.register("imperial_footman",
+                    () -> EntityType.Builder.of(FootmanEntity::new,
+                                    EntityClassification.MONSTER).sized(1f, 2.25f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "imperial_footman").toString()));
+
 
 
 
