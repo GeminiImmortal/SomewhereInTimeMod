@@ -1,12 +1,14 @@
 package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
+import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -37,10 +39,14 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import java.util.Objects;
 import java.util.Random;
+import java.util.function.Predicate;
 
 public class BoneWolfEntity extends WolfEntity implements IAnimatable {
     private static final DataParameter<Boolean> SITTING = EntityDataManager.defineId(BoneWolfEntity.class, DataSerializers.BOOLEAN);
-
+    public static final Predicate<LivingEntity> PREY_SELECTOR = (p_213440_0_) -> {
+        EntityType<?> entitytype = p_213440_0_.getType();
+        return entitytype == ModEntityTypes.FAEDEER.get();
+    };
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     public BoneWolfEntity(EntityType<? extends WolfEntity> type, World worldIn) {
         super(type, worldIn);
@@ -51,25 +57,26 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable {
                 .add(Attributes.MAX_HEALTH, 40.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.35)
                 .add(Attributes.ATTACK_DAMAGE, 3.0D)
-                .add(Attributes.FOLLOW_RANGE, 30.0D)
+                .add(Attributes.FOLLOW_RANGE, 24.0D)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.1D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.0D);
     }
 
     @Override
     protected void registerGoals() {
-        super.registerGoals();
-
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, FaedeerEntity.class, true));
-
-        // Basic wolf goals
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, true));
-        this.goalSelector.addGoal(2, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
+        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
+        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
+        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
+        this.targetSelector.addGoal(4, new NonTamedTargetGoal<>(this, PlayerEntity.class, false, null));
+        this.targetSelector.addGoal(5, new NonTamedTargetGoal<>(this, AnimalEntity.class, false, PREY_SELECTOR));
+        this.goalSelector.addGoal(1, new SwimGoal(this));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, true));
         this.goalSelector.addGoal(3, new SitGoal(this));
-        this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-        this.goalSelector.addGoal(5, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
+        this.goalSelector.addGoal(5, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
+        this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
     }
 
     @Override
@@ -92,21 +99,12 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable {
             if (this.getOwner() != null) {
                 ServerPlayerEntity owner = (ServerPlayerEntity) this.getOwner();
                 if (this.isOrderedToSit() && this.isTame()) {
-                    assert owner != null;
-                    owner.displayClientMessage(new TranslationTextComponent("entity.mobius.bone_wolf.is_sitting.true") {
-                    }, true);
                     this.setSitting(false);
                     super.setOrderedToSit(orderedToSit);
                 } else if (!this.isOrderedToSit() && this.isTame()) {
-                    assert owner != null;
-                    owner.displayClientMessage(new TranslationTextComponent("entity.mobius.bone_wolf.is_sitting.false") {
-                    }, true);
                     this.setSitting(true);
                     super.setOrderedToSit(orderedToSit);
                 } else {
-                    assert owner != null;
-                    owner.displayClientMessage(new TranslationTextComponent("entity.mobius.bone_wolf.is_sitting.false") {
-                    }, true);
                     this.setSitting(true);
                     super.setOrderedToSit(orderedToSit);
                 }

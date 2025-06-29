@@ -15,6 +15,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -41,10 +42,14 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import java.util.Random;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 public class FuyukazeEntity extends WolfEntity implements IAnimatable {
     private static final DataParameter<Boolean> SITTING = EntityDataManager.defineId(FuyukazeEntity.class, DataSerializers.BOOLEAN);
-
+    public static final Predicate<LivingEntity> PREY_SELECTOR = (p_213440_0_) -> {
+        EntityType<?> entitytype = p_213440_0_.getType();
+        return entitytype == ModEntityTypes.FAECOW.get() || entitytype == ModEntityTypes.FAEDEER.get();
+    };
 
     public FuyukazeEntity(EntityType<? extends WolfEntity> type, World worldIn) {
         super(type, worldIn);
@@ -71,7 +76,6 @@ public class FuyukazeEntity extends WolfEntity implements IAnimatable {
     @Override
     public FuyukazeEntity getBreedOffspring(ServerWorld world, AgeableEntity mate) {
         FuyukazeEntity baby = ModEntityTypes.FUYUKAZE.get().create(world);
-        System.out.println("Breeding attempted...");
         UUID uuid = this.getOwnerUUID();
         if (uuid != null) {
             baby.setOwnerUUID(uuid);
@@ -114,10 +118,8 @@ public class FuyukazeEntity extends WolfEntity implements IAnimatable {
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
         this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::isAngryAt));
-        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, FaecowEntity.class, true));
-        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, FaedeerEntity.class, true));
-
-        // Basic wolf goals
+        this.targetSelector.addGoal(5, new NonTamedTargetGoal<>(this, AnimalEntity.class, false, PREY_SELECTOR));
+        this.targetSelector.addGoal(6, new ResetAngerGoal<>(this, true));
         this.goalSelector.addGoal(1, new SwimGoal(this));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, true));
         this.goalSelector.addGoal(3, new SitGoal(this));
@@ -126,6 +128,7 @@ public class FuyukazeEntity extends WolfEntity implements IAnimatable {
         this.goalSelector.addGoal(6, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
         this.goalSelector.addGoal(8, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
     }
 
     @Override
@@ -149,21 +152,12 @@ public class FuyukazeEntity extends WolfEntity implements IAnimatable {
             if (this.getOwner() != null) {
                 ServerPlayerEntity owner = (ServerPlayerEntity) this.getOwner();
                 if (this.isOrderedToSit() && this.isTame()) {
-                    assert owner != null;
-                    owner.displayClientMessage(new TranslationTextComponent("entity.mobius.harukaze.is_sitting.true") {
-                    }, true);
                     this.setSitting(false);
                     super.setOrderedToSit(orderedToSit);
                 } else if (!this.isOrderedToSit() && this.isTame()) {
-                    assert owner != null;
-                    owner.displayClientMessage(new TranslationTextComponent("entity.mobius.harukaze.is_sitting.false") {
-                    }, true);
                     this.setSitting(true);
                     super.setOrderedToSit(orderedToSit);
                 } else {
-                    assert owner != null;
-                    owner.displayClientMessage(new TranslationTextComponent("entity.mobius.harukaze.is_sitting.false") {
-                    }, true);
                     this.setSitting(true);
                     super.setOrderedToSit(orderedToSit);
                 }
