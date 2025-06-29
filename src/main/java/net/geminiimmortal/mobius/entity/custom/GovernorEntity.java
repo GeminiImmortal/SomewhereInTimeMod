@@ -1,10 +1,13 @@
 package net.geminiimmortal.mobius.entity.custom;
 
+import net.geminiimmortal.mobius.MusicTickerHook;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.*;
 import net.geminiimmortal.mobius.network.ModNetwork;
+import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.util.TitleUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.BackgroundMusicSelector;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -204,13 +207,9 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
         super.startSeenByPlayer(player);
         this.bossInfo.addPlayer(player);
         if(FMLEnvironment.dist == Dist.CLIENT) {
-        //    ClientMusicHandler.playGovernorBossMusic();
-        //    ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
+            MusicTickerHook.playCustomMusic(new BackgroundMusicSelector(ModSounds.BULLYRAG.get(), 0, 0, true));
         }
-        /*if(FMLEnvironment.dist == Dist.DEDICATED_SERVER) {
-        //    PlayMusicPacket packet = new PlayMusicPacket("governor_start");
-            ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), packet);
-        }*/
+
     }
 
     @Override
@@ -218,14 +217,8 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
         super.stopSeenByPlayer(player);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
-        //    ClientMusicHandler.setGovernor(false);
-        //    ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
+            MusicTickerHook.playCustomMusic(null);
         }
-        /*if(FMLEnvironment.dist == Dist.DEDICATED_SERVER) {
-
-        //    PlayMusicPacket packet = new PlayMusicPacket("governor_stop");
-            ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), packet);
-        }*/
 
         this.bossInfo.removePlayer(player);
     }
