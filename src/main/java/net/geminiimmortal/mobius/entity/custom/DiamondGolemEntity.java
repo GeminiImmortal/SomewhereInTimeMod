@@ -2,6 +2,8 @@ package net.geminiimmortal.mobius.entity.custom;
 
 
 import net.geminiimmortal.mobius.entity.goals.*;
+import net.geminiimmortal.mobius.faction.FactionType;
+import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -13,7 +15,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class DiamondGolemEntity extends IronGolemEntity {
+public class DiamondGolemEntity extends IronGolemEntity implements IFactionCarrier {
     private int attackAnimationTimer = 0;
     private final int attackAnimationDuration = 20;
 
@@ -51,6 +53,10 @@ public class DiamondGolemEntity extends IronGolemEntity {
         int baseXp = this.random.nextInt(10) + 5; // Base XP drop
         int difficultyMultiplier = this.level.getDifficulty().getId(); // 0 = Peaceful, 1 = Easy, 2 = Normal, 3 = Hard
         return baseXp + difficultyMultiplier * 2;
+    }
+
+    public FactionType getFaction() {
+        return FactionType.IMPERIAL;
     }
 
     @Override

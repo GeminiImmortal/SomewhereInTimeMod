@@ -2,6 +2,8 @@ package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.goals.*;
+import net.geminiimmortal.mobius.faction.FactionType;
+import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.geminiimmortal.mobius.network.BeamEndPacket;
 import net.geminiimmortal.mobius.network.ModNetwork;
 import net.minecraft.client.Minecraft;
@@ -42,7 +44,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class SorcererEntity extends MobEntity implements IAnimatable {
+public class SorcererEntity extends MobEntity implements IAnimatable, IFactionCarrier {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final DataParameter<Boolean> CASTING = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> FLEEING = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
@@ -120,6 +122,10 @@ public class SorcererEntity extends MobEntity implements IAnimatable {
         this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 40f));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 
+    }
+
+    public FactionType getFaction() {
+        return FactionType.IMPERIAL;
     }
 
 

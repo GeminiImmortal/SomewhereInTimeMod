@@ -1,6 +1,8 @@
 package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.entity.goals.ShatterCloneGoal;
+import net.geminiimmortal.mobius.faction.FactionType;
+import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -29,17 +31,13 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class CloneEntity extends MobEntity implements IAnimatable, IRangedAttackMob {
+public class CloneEntity extends MobEntity implements IAnimatable, IRangedAttackMob, IFactionCarrier {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final DataParameter<Boolean> CASTING = EntityDataManager.defineId(CloneEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> RUNNING = EntityDataManager.defineId(CloneEntity.class, DataSerializers.BOOLEAN);
     private int particleTickCounter = 0;
     private static final int PARTICLE_SPAWN_INTERVAL = 5;
     private GovernorEntity owner = null;
-
-
-
-
 
     public CloneEntity(EntityType<? extends MobEntity> type, World worldIn) {
         super(type, worldIn);
@@ -84,6 +82,10 @@ public class CloneEntity extends MobEntity implements IAnimatable, IRangedAttack
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 30f));
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
 
+    }
+
+    public FactionType getFaction() {
+        return FactionType.IMPERIAL;
     }
 
     private void createExpandingCircleParticles(World world, double centerX, double centerY, double centerZ) {

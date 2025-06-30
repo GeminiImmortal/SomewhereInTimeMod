@@ -1,6 +1,8 @@
 package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.entity.goals.ChargeAttackGoal;
+import net.geminiimmortal.mobius.faction.FactionType;
+import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
@@ -34,7 +36,7 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class GuardCaptainBossEntity extends MonsterEntity implements IAnimatable {
+public class GuardCaptainBossEntity extends MonsterEntity implements IAnimatable, IFactionCarrier {
     private final AnimationFactory factory = new AnimationFactory(this);
 
     IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[CHAMPION FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.GOLD).withBold(true));
@@ -88,6 +90,10 @@ public class GuardCaptainBossEntity extends MonsterEntity implements IAnimatable
     public GuardCaptainBossEntity(EntityType<? extends MonsterEntity> type, World worldIn) {
         super(type, worldIn);
         this.shouldDropExperience();
+    }
+
+    public FactionType getFaction() {
+        return FactionType.IMPERIAL;
     }
 
     private int chargeCooldown = 0;

@@ -3,6 +3,8 @@ package net.geminiimmortal.mobius.entity.custom;
 import net.geminiimmortal.mobius.MusicTickerHook;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.*;
+import net.geminiimmortal.mobius.faction.FactionType;
+import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.util.TitleUtils;
@@ -55,7 +57,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GovernorEntity extends VindicatorEntity implements IAnimatable {
+public class GovernorEntity extends VindicatorEntity implements IAnimatable, IFactionCarrier {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final DataParameter<Boolean> CASTING = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> FLEEING = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
@@ -98,6 +100,10 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable {
         if (this.level.isClientSide()) {
             playBossMusic();
         }
+    }
+
+    public FactionType getFaction() {
+        return FactionType.IMPERIAL;
     }
 
     @Override

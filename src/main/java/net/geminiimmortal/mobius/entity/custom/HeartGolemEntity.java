@@ -1,6 +1,8 @@
 package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.entity.goals.HealInjuredAllyGoal;
+import net.geminiimmortal.mobius.faction.FactionType;
+import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -15,7 +17,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public class HeartGolemEntity extends IronGolemEntity {
+public class HeartGolemEntity extends IronGolemEntity implements IFactionCarrier {
 
     private LivingEntity targetAlly;
     private static final DataParameter<Boolean> HEALING = EntityDataManager.defineId(HeartGolemEntity.class, DataSerializers.BOOLEAN);
@@ -51,6 +53,11 @@ public class HeartGolemEntity extends IronGolemEntity {
         this.goalSelector.addGoal(1, new HealInjuredAllyGoal(this, this, 0.35, 10F, 6, 100));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomWalkingGoal(this, 0.6D));
     }
+
+    public FactionType getFaction() {
+        return FactionType.IMPERIAL;
+    }
+
     protected int getXpToDrop() {
         int baseXp = this.random.nextInt(7) + 5; // Base XP drop
         int difficultyMultiplier = this.level.getDifficulty().getId(); // 0 = Peaceful, 1 = Easy, 2 = Normal, 3 = Hard

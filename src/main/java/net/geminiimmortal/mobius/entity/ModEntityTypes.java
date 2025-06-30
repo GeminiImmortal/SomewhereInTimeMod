@@ -200,6 +200,12 @@ public class ModEntityTypes {
                                     EntityClassification.MONSTER).sized(1f, 2.25f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "imperial_footman").toString()));
 
+    public static final RegistryObject<EntityType<ImperialGuardEntity>> IMPERIAL_GUARD =
+            ENTITY_TYPES.register("imperial_guard",
+                    () -> EntityType.Builder.of(ImperialGuardEntity::new,
+                                    EntityClassification.CREATURE).sized(1f, 2.25f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "imperial_guard").toString()));
+
 
 
 

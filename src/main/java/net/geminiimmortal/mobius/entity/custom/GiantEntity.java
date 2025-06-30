@@ -2,6 +2,8 @@ package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.GiantStompGoal;
+import net.geminiimmortal.mobius.faction.FactionType;
+import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.geminiimmortal.mobius.network.GiantStompPacket;
 import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.sound.ModSounds;
@@ -12,7 +14,6 @@ import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.RandomWalkingGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
@@ -35,7 +36,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -50,7 +50,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import java.util.List;
 import java.util.Random;
 
-public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
+public class GiantEntity extends CreatureEntity implements IAnimatable, IMob, IFactionCarrier {
     private static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(GiantEntity.class, DataSerializers.BOOLEAN);
 
     @Override
@@ -91,6 +91,10 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob {
     @Override
     public boolean isAggressive() {
         return true;
+    }
+
+    public FactionType getFaction() {
+        return FactionType.DANGEROUS_TO_VILLAGES;
     }
 
     @Override

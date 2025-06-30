@@ -2,19 +2,18 @@ package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.FootmanAttackGoal;
-import net.geminiimmortal.mobius.faction.FactionType;
-import net.geminiimmortal.mobius.faction.IFactionCarrier;
+import net.geminiimmortal.mobius.entity.goals.target.TargetCriminalPlayerGoal;
+import net.geminiimmortal.mobius.entity.goals.target.TargetDangerousToVillagesGoal;
 import net.geminiimmortal.mobius.util.InfamyHelper;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.item.ExperienceOrbEntity;
-import net.minecraft.entity.monster.VindicatorEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.IronGolemEntity;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
@@ -25,7 +24,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -38,13 +36,12 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import java.util.Random;
-import java.util.stream.Collectors;
 
-public class FootmanEntity extends AbstractImperialEntity implements IAnimatable, IFactionCarrier {
+public class ImperialGuardEntity extends FootmanEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
-    private static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(FootmanEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(ImperialGuardEntity.class, DataSerializers.BOOLEAN);
 
-    public FootmanEntity(EntityType<? extends AbstractImperialEntity> type, World worldIn) {
+    public ImperialGuardEntity(EntityType<? extends FootmanEntity> type, World worldIn) {
         super(type, worldIn);
         this.dropExperience();
         this.maxUpStep = 1;
@@ -52,9 +49,16 @@ public class FootmanEntity extends AbstractImperialEntity implements IAnimatable
     }
 
     public static boolean canMobSpawn(EntityType<? extends AbstractImperialEntity> entityType, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
-        int existing = world.getEntitiesOfClass(FootmanEntity.class, new AxisAlignedBB(pos).inflate(20)).size();
-        return (world.getBlockState(pos.below()) == ModBlocks.HEMATITE.get().defaultBlockState()) && existing < 3;
+        int existing = world.getEntitiesOfClass(ImperialGuardEntity.class, new AxisAlignedBB(pos).inflate(24)).size();
+        return (world.getBlockState(pos.below()) == ModBlocks.AURORA_DIRT.get().defaultBlockState() || world.getBlockState(pos.below()) == ModBlocks.AURORA_GRASS_BLOCK.get().defaultBlockState()) && existing < 4;
     }
+
+    @Override
+    public boolean isAggressive() {
+        return false;
+    }
+
+
 
     @Override
     public boolean removeWhenFarAway(double distanceToClosestPlayer) {
@@ -76,30 +80,28 @@ public class FootmanEntity extends AbstractImperialEntity implements IAnimatable
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 30.0D)
+                .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.35D)
-                .add(Attributes.ATTACK_DAMAGE, 5.0D)
+                .add(Attributes.ATTACK_DAMAGE, 3.0D)
                 .add(Attributes.FOLLOW_RANGE, 30.0D)
-                .add(Attributes.ARMOR, 20.0D)
-                .add(Attributes.ARMOR_TOUGHNESS, 1.25D)
-                .add(Attributes.ATTACK_KNOCKBACK, 2.0D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.15D);
+                .add(Attributes.ARMOR, 5.0D)
+                .add(Attributes.ARMOR_TOUGHNESS, 0.0D)
+                .add(Attributes.ATTACK_KNOCKBACK, 0.1D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.05D);
     }
 
     @Override
     protected void registerGoals() {
-        super.registerGoals();
         this.goalSelector.addGoal(1, new SwimGoal(this));
-        this.goalSelector.addGoal(2, new FootmanAttackGoal(this, 1.0, true));
-        this.goalSelector.addGoal(3, new RandomWalkingGoal(this, 0.6D));
+        this.goalSelector.addGoal(2, new FootmanAttackGoal(this, 1.1, true));
+        this.goalSelector.addGoal(3, new WaterAvoidingRandomWalkingGoal(this, 0.6D));
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 3.0F, 1.0F));
-        this.goalSelector.addGoal(5, new LookAtGoal(this, MobEntity.class, 8.0F));
-        this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.goalSelector.addGoal(5, new LookAtGoal(this, VillagerEntity.class, 8.0F));
+        this.targetSelector.addGoal(0, new TargetCriminalPlayerGoal(this));
+        this.targetSelector.addGoal(1, new TargetDangerousToVillagesGoal(this));
+        this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers());
     }
 
-    public FactionType getFaction() {
-        return FactionType.IMPERIAL;
-    }
 
     protected int getXpToDrop() {
         int baseXp = this.random.nextInt(10) + 2;
@@ -122,11 +124,22 @@ public class FootmanEntity extends AbstractImperialEntity implements IAnimatable
             }
             if (source.getEntity() instanceof ServerPlayerEntity) {
                 ServerPlayerEntity serverPlayer = (ServerPlayerEntity) source.getEntity();
-                int infamy = 3;
+                int infamy = 5;
                 InfamyHelper.get(serverPlayer).addInfamy(infamy);
                 InfamyHelper.sync(serverPlayer);
             }
         }
+    }
+
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+        this.setTarget((LivingEntity) source.getEntity());
+        if (this.getTarget() instanceof PlayerEntity) {
+            int infamy = 1;
+            InfamyHelper.get((PlayerEntity) this.getTarget()).addInfamy(1);
+            InfamyHelper.sync((PlayerEntity) this.getTarget());
+        }
+        return super.hurt(source, amount);
     }
 
     @Override
@@ -147,7 +160,7 @@ public class FootmanEntity extends AbstractImperialEntity implements IAnimatable
 
     @Override
     public void registerControllers(AnimationData data) {
-        AnimationController<FootmanEntity> controller = new AnimationController<>(this, "controller", 0, this::predicate);
+        AnimationController<ImperialGuardEntity> controller = new AnimationController<>(this, "controller", 0, this::predicate);
         data.addAnimationController(controller);
     }
 

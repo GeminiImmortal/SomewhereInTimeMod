@@ -2,6 +2,8 @@ package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.entity.goals.GolemBackAwayGoal;
 import net.geminiimmortal.mobius.entity.goals.SpadeGolemRangedAttackGoal;
+import net.geminiimmortal.mobius.faction.FactionType;
+import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -19,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-public class SpadeGolemEntity extends IronGolemEntity {
+public class SpadeGolemEntity extends IronGolemEntity implements IFactionCarrier {
     private int attackAnimationTimer = 0;
     private final int attackAnimationDuration = 20;
 
@@ -56,6 +58,10 @@ public class SpadeGolemEntity extends IronGolemEntity {
         int baseXp = this.random.nextInt(10) + 5; // Base XP drop
         int difficultyMultiplier = this.level.getDifficulty().getId(); // 0 = Peaceful, 1 = Easy, 2 = Normal, 3 = Hard
         return baseXp + difficultyMultiplier * 2;
+    }
+
+    public FactionType getFaction() {
+        return FactionType.IMPERIAL;
     }
 
     @Override

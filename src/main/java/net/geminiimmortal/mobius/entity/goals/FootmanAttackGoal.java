@@ -1,8 +1,10 @@
 package net.geminiimmortal.mobius.entity.goals;
 
 import net.geminiimmortal.mobius.entity.custom.FootmanEntity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.monster.VindicatorEntity;
 
 public class FootmanAttackGoal extends MeleeAttackGoal {
     private final FootmanEntity footman;

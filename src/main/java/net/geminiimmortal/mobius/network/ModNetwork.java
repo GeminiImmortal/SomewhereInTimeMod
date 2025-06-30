@@ -54,6 +54,11 @@ public class ModNetwork {
                 .decoder(BeamCirclePacket::decode)
                 .consumer(BeamCirclePacket::handle)
                 .add();
+        NETWORK_CHANNEL.messageBuilder(SInfamySyncPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(SInfamySyncPacket::encode)
+                .decoder(SInfamySyncPacket::decode)
+                .consumer(SInfamySyncPacket::handle)
+                .add();
     }
 
     @SubscribeEvent

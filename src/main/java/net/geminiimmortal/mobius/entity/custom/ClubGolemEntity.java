@@ -2,6 +2,8 @@ package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.entity.goals.CustomMeleeAttackGoal;
 import net.geminiimmortal.mobius.entity.goals.DPSSupportOtherGolemsGoal;
+import net.geminiimmortal.mobius.faction.FactionType;
+import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -18,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 
-public class ClubGolemEntity extends IronGolemEntity {
+public class ClubGolemEntity extends IronGolemEntity implements IFactionCarrier {
     private int attackAnimationTimer = 0;
     private final int attackAnimationDuration = 20;
 
@@ -46,6 +48,10 @@ public class ClubGolemEntity extends IronGolemEntity {
         this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 0.2D));
         this.goalSelector.addGoal(3, new DPSSupportOtherGolemsGoal(this, 1.0D, 30, 7));
 //        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
+    }
+
+    public FactionType getFaction() {
+        return FactionType.IMPERIAL;
     }
 
 

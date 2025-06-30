@@ -16,6 +16,9 @@ import net.geminiimmortal.mobius.entity.render.*;
 import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.recipe.ModRecipeTypes;
+import net.geminiimmortal.mobius.capability.infamy.IInfamy;
+import net.geminiimmortal.mobius.capability.infamy.Infamy;
+import net.geminiimmortal.mobius.capability.infamy.InfamyStorage;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.tileentity.ModTileEntities;
 import net.geminiimmortal.mobius.tileentity.render.*;
@@ -45,6 +48,7 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -112,6 +116,7 @@ public class MobiusMod
 
 
 
+
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new CustomDamageEventHandler());
@@ -132,6 +137,8 @@ public class MobiusMod
             ModDimensions.registerDimensionStuff();
             ModStructureSetup.registerStructures();
             ModStructureSetup.registerConfiguredStructures();
+            CapabilityManager.INSTANCE.register(IInfamy.class, new InfamyStorage(), Infamy::new);
+
 
 
             BiomeDictionary.addTypes(
@@ -249,6 +256,12 @@ public class MobiusMod
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                     FootmanEntity::canMobSpawn
             );
+            EntitySpawnPlacementRegistry.register(
+                    ModEntityTypes.IMPERIAL_GUARD.get(),
+                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
+                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                    ImperialGuardEntity::canMobSpawn
+            );
         });
     }
 
@@ -340,6 +353,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GIANT.get(), GiantRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.FUYUKAZE.get(), FuyukazeRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.FOOTMAN.get(), FootmanRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.IMPERIAL_GUARD.get(), FootmanRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -396,6 +410,7 @@ public class MobiusMod
             event.put(ModEntityTypes.GIANT.get(), GiantEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.FUYUKAZE.get(), FuyukazeEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.FOOTMAN.get(), FootmanEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.IMPERIAL_GUARD.get(), ImperialGuardEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent
