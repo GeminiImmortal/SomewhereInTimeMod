@@ -89,6 +89,9 @@
   "entity.mobius.giant": "Mountain Giant",
   "entity.mobius.faecow": "Faecow",
   "entity.mobius.harukaze": "Harukaze",
+  "entity.mobius.imperial_footman": "Imperial Footman",
+  "entity.mobius.imperial_guard": "Imperial Guard",
+  "entity.mobius.bounty_hunter": "Bounty Hunter",
 
   "entity.minecraft.villager.mobius.monster_hunter": "Monster Hunter",
   "entity.minecraft.villager.mobius.magismith": "Magismith",

@@ -262,6 +262,12 @@ public class MobiusMod
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                     ImperialGuardEntity::canMobSpawn
             );
+            EntitySpawnPlacementRegistry.register(
+                    ModEntityTypes.BOUNTY_HUNTER.get(),
+                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
+                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                    BountyHunterEntity::canMobSpawn
+            );
         });
     }
 
@@ -354,6 +360,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.FUYUKAZE.get(), FuyukazeRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.FOOTMAN.get(), FootmanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.IMPERIAL_GUARD.get(), FootmanRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BOUNTY_HUNTER.get(), BountyHunterRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -411,6 +418,7 @@ public class MobiusMod
             event.put(ModEntityTypes.FUYUKAZE.get(), FuyukazeEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.FOOTMAN.get(), FootmanEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.IMPERIAL_GUARD.get(), ImperialGuardEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.BOUNTY_HUNTER.get(), BountyHunterEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent

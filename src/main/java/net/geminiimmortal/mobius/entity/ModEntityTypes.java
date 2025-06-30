@@ -206,6 +206,12 @@ public class ModEntityTypes {
                                     EntityClassification.CREATURE).sized(1f, 2.25f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "imperial_guard").toString()));
 
+    public static final RegistryObject<EntityType<BountyHunterEntity>> BOUNTY_HUNTER =
+            ENTITY_TYPES.register("bounty_hunter",
+                    () -> EntityType.Builder.of(BountyHunterEntity::new,
+                                    EntityClassification.MONSTER).sized(1f, 2.25f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "bounty_hunter").toString()));
+
 
 
 

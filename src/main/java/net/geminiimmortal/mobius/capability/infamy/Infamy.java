@@ -13,6 +13,19 @@ public class Infamy implements IInfamy {
     public void subtractInfamy(int amount) { this.infamy = Math.max(0, this.infamy - amount); }
     @Override
     public InfamyTier getInfamyTier() { return InfamyTier.fromPoints(infamy); }
+
+    private long triggerStart = -1;
+
+    @Override
+    public long getInfamyTriggerStart() {
+        return triggerStart;
+    }
+
+    @Override
+    public void setInfamyTriggerStart(long ticks) {
+        this.triggerStart = ticks;
+    }
+
 }
 
 

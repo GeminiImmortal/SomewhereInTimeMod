@@ -6,6 +6,10 @@ public interface IInfamy {
     void addInfamy(int amount);
     void subtractInfamy(int amount);
 
+    long getInfamyTriggerStart(); // epoch or ticks
+    void setInfamyTriggerStart(long ticks);
+
+
     InfamyTier getInfamyTier();
 
     enum InfamyTier {
