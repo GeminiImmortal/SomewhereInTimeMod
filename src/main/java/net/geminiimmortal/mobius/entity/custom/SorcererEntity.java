@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.entity.custom.spell.ObliteratorEntity;
 import net.geminiimmortal.mobius.entity.goals.*;
 import net.geminiimmortal.mobius.faction.FactionType;
 import net.geminiimmortal.mobius.faction.IFactionCarrier;
@@ -44,7 +45,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class SorcererEntity extends MobEntity implements IAnimatable, IFactionCarrier {
+public class SorcererEntity extends AbstractImperialEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final DataParameter<Boolean> CASTING = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> FLEEING = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
@@ -56,23 +57,13 @@ public class SorcererEntity extends MobEntity implements IAnimatable, IFactionCa
     ShatterCloneEntity spell = new ShatterCloneEntity(ModEntityTypes.SHATTER_CLONE.get(), this.level);
     private LaserTrackerAttackGoal laserTrackerGoal;
     private SonicBoomGoal sonicBoomGoal;
-
-
-    IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[CHAMPION FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.GOLD).withBold(true));
-    IFormattableTextComponent name = (StringTextComponent) new StringTextComponent("Lucius, The Court Wizard").setStyle(Style.EMPTY.withColor(TextFormatting.AQUA).withBold(false));
-    IFormattableTextComponent namePlate = rank.append(name);
-
-    private final ServerBossInfo bossInfo = new ServerBossInfo(
-            namePlate,  // Boss name
-            BossInfo.Color.BLUE,
-            BossInfo.Overlay.NOTCHED_10
-    );
+    private ArcaneBeamAttackGoal arcaneBeamAttackGoal;
 
 
 
 
 
-    public SorcererEntity(EntityType<? extends MobEntity> type, World worldIn) {
+    public SorcererEntity(EntityType<? extends AbstractImperialEntity> type, World worldIn) {
         super(type, worldIn);
         this.dropExperience();
         this.maxUpStep = 1;
@@ -91,14 +82,19 @@ public class SorcererEntity extends MobEntity implements IAnimatable, IFactionCa
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 200.0D)
+                .add(Attributes.MAX_HEALTH, 150.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.ATTACK_DAMAGE, 0.0D)
-                .add(Attributes.FOLLOW_RANGE, 0.0D)
+                .add(Attributes.FOLLOW_RANGE, 50.0D)
                 .add(Attributes.ARMOR, 15.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 2.5D)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.7D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1D);
+    }
+
+    @Override
+    public Rank getRank() {
+        return Rank.OFFICER;
     }
 
     @Override
@@ -109,23 +105,16 @@ public class SorcererEntity extends MobEntity implements IAnimatable, IFactionCa
 
     @Override
     protected void registerGoals() {
-        this.laserTrackerGoal = new LaserTrackerAttackGoal(this, 40, 100);
+        super.registerGoals();
+        this.arcaneBeamAttackGoal = new ArcaneBeamAttackGoal(this, new ObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), this.level), 1200);
+        this.laserTrackerGoal = new LaserTrackerAttackGoal(this, 60, 160);
         this.sonicBoomGoal = new SonicBoomGoal(this);
         this.goalSelector.addGoal(1, new SwimGoal(this));
-        this.goalSelector.addGoal(2, new AerialLightningBarrageGoal(this, 10, 6, 15));
+        this.goalSelector.addGoal(3, sonicBoomGoal);
         this.goalSelector.addGoal(4, laserTrackerGoal);
-    //    this.goalSelector.addGoal(3, new MagiDashGoal(this));
-    //    this.goalSelector.addGoal(6, new SorcererBackAwayGoal(this, 1.4, 5));
-    //    this.goalSelector.addGoal(6, new ArcaneBeamAttackGoal(this, new ObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), this.level)));
-    //    this.goalSelector.addGoal(3, sonicBoomGoal);
-        this.goalSelector.addGoal(5, new BubbleAttackGoal(this, 4, 20, 80));
+        this.goalSelector.addGoal(5, arcaneBeamAttackGoal);
+        this.goalSelector.addGoal(6, new SorcererBackAwayGoal(this, 1.4, 5));
         this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 40f));
-        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-
-    }
-
-    public FactionType getFaction() {
-        return FactionType.IMPERIAL;
     }
 
 
@@ -175,10 +164,6 @@ public class SorcererEntity extends MobEntity implements IAnimatable, IFactionCa
             );
         }
 
-        this.level.setSkyFlashTime(5);
-        this.level.playSound(null, this.position().x, this.position().y, this.position().z, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundCategory.HOSTILE, 100.0f, 1.1f);
-        this.level.playSound(null, this.position().x, this.position().y, this.position().z, SoundEvents.ENDER_CHEST_OPEN, SoundCategory.HOSTILE, 100.0f, 0.8f);
-
         if (!this.level.isClientSide()) {
             int experiencePoints = this.getXpToDrop();
 
@@ -194,7 +179,7 @@ public class SorcererEntity extends MobEntity implements IAnimatable, IFactionCa
     @Override
     public void tick() {
         super.tick();
-
+        System.out.println("Target is: " + this.getTarget());
         this.setRemainingFireTicks(0);
 
         if(laserTrackerGoal != null) {
@@ -205,19 +190,17 @@ public class SorcererEntity extends MobEntity implements IAnimatable, IFactionCa
             sonicBoomGoal.tickCooldown();
         }
 
+        if (arcaneBeamAttackGoal != null) {
+            arcaneBeamAttackGoal.tickCooldown();
+        }
 
-        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
         particleTickCounter++;
 
         if (particleTickCounter >= PARTICLE_SPAWN_INTERVAL) {
             spawnGlowParticle();
             particleTickCounter = 0;
         }
-        if (this.level.isClientSide) {
-        //    ClientMusicHandler.stopVanillaMusic(Minecraft.getInstance());
-        }
         this.removeEffect(Effects.LEVITATION);
-        summonCircle(this);
 
     }
 
@@ -229,24 +212,6 @@ public class SorcererEntity extends MobEntity implements IAnimatable, IFactionCa
             setDoesCircleExist(true);
         }
         spell.setPos(boss.getX(), boss.getY(), boss.getZ());
-    }
-
-    @Override
-    public void startSeenByPlayer(ServerPlayerEntity player) {
-        super.startSeenByPlayer(player);
-        this.bossInfo.addPlayer(player);
-        if (this.level.isClientSide) {
-        //    ClientMusicHandler.playCourtWizardBossMusic(Minecraft.getInstance());
-        }
-    }
-
-    @Override
-    public void stopSeenByPlayer(ServerPlayerEntity player) {
-        super.stopSeenByPlayer(player);
-        this.bossInfo.removePlayer(player);
-        if (this.level.isClientSide) {
-        //    ClientMusicHandler.stopCustomMusic(Minecraft.getInstance());
-        }
     }
 
 
@@ -262,17 +227,17 @@ public class SorcererEntity extends MobEntity implements IAnimatable, IFactionCa
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSourceIn){
-        return SoundEvents.PILLAGER_HURT;
+        return SoundEvents.EVOKER_HURT;
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.BEACON_AMBIENT;
+        return SoundEvents.EVOKER_AMBIENT;
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.PILLAGER_DEATH;
+        return SoundEvents.EVOKER_DEATH;
     }
 
     @Override
@@ -285,11 +250,11 @@ public class SorcererEntity extends MobEntity implements IAnimatable, IFactionCa
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (this.getFleeing()) {
+        if (this.getDeltaMovement().length() > 0.05) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.walk", true));
             return PlayState.CONTINUE;
         }
-        return PlayState.STOP;
+        return PlayState.CONTINUE;
     }
 
 

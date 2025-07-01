@@ -29,7 +29,7 @@ public class SonicBoomGoal extends Goal {
             cooldown--;
             return false;
         }
-        System.out.println("Target is: " + cachedTarget);
+
         if (cachedTarget == null || !cachedTarget.isAlive()) return false;
         double distSq = caster.distanceToSqr(cachedTarget);
         // Only use within 10 blocks (100 sq) and randomly (roughly once per 200 ticks)
@@ -39,7 +39,7 @@ public class SonicBoomGoal extends Goal {
     @Override
     public void start() {
         this.cachedTarget = caster.getTarget();
-
+        System.out.println("Target is: " + cachedTarget);
         if (cachedTarget != null && cooldown == 0) {
             SonicBoomHelper.doSonicBoom(caster, cachedTarget, caster.level);
             // 200-tick cooldown (~10 seconds)

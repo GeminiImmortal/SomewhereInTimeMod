@@ -6,6 +6,7 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.MathHelper;
 
 public class SorcererBackAwayGoal extends Goal {
     private final SorcererEntity sorcerer;
@@ -55,7 +56,7 @@ public class SorcererBackAwayGoal extends Goal {
         double ty = nearestPlayer.getY();
         double dz = this.sorcerer.getZ() - nearestPlayer.getZ();
         double tz = nearestPlayer.getZ();
-    /*
+
         double distance = MathHelper.sqrt(dx * dx + dz * dz);
 
         if (distance > 0) {
@@ -67,8 +68,7 @@ public class SorcererBackAwayGoal extends Goal {
 
 
         // Move the sorcerer in the opposite direction
-        this.sorcerer.getMoveControl().setWantedPosition(this.sorcerer.getX() + dx, this.sorcerer.getY(), this.sorcerer.getZ() + dz, this.speed); */
-        nearestPlayer.hurt(DamageSource.MAGIC, 2.5f);
+        this.sorcerer.getMoveControl().setWantedPosition(this.sorcerer.getX() + dx, this.sorcerer.getY(), this.sorcerer.getZ() + dz, this.speed);
     }
 
     private void strikeLightning(double x, double y, double z) {

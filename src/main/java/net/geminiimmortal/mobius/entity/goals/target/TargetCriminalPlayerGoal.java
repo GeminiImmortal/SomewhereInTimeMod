@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.entity.goals.target;
 
 import net.geminiimmortal.mobius.capability.ModCapabilities;
 import net.geminiimmortal.mobius.capability.infamy.IInfamy;
+import net.geminiimmortal.mobius.entity.custom.AbstractImperialEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
@@ -11,7 +12,7 @@ import javax.annotation.Nullable;
 
 public class TargetCriminalPlayerGoal extends NearestAttackableTargetGoal<PlayerEntity> {
 
-    public TargetCriminalPlayerGoal(MobEntity goalOwner) {
+    public TargetCriminalPlayerGoal(AbstractImperialEntity goalOwner) {
         // Always call super with `checkSight = true` and `nearbyOnly = false` or as needed
         super(goalOwner, PlayerEntity.class, 10, true, false, player -> isCriminal((PlayerEntity) player));
     }

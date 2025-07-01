@@ -1,24 +1,98 @@
 package net.geminiimmortal.mobius.entity.custom;
 
+import net.geminiimmortal.mobius.entity.goals.target.TargetCriminalPlayerGoal;
+import net.geminiimmortal.mobius.faction.IRankedImperial;
 import net.geminiimmortal.mobius.faction.FactionType;
 import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.IAngerable;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.DyeColor;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.RangedInteger;
+import net.minecraft.util.TickRangeConverter;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
-public abstract class AbstractImperialEntity extends CreatureEntity implements IFactionCarrier {
+import javax.annotation.Nullable;
+import java.util.UUID;
+
+public abstract class AbstractImperialEntity extends CreatureEntity implements IFactionCarrier, IRankedImperial, IAngerable {
+    private static final DataParameter<Integer> DATA_REMAINING_ANGER_TIME = EntityDataManager.defineId(AbstractImperialEntity.class, DataSerializers.INT);
+
+    private static final RangedInteger PERSISTENT_ANGER_TIME = TickRangeConverter.rangeOfSeconds(20, 39);
+    private UUID persistentAngerTarget;
+
     protected AbstractImperialEntity(EntityType<? extends CreatureEntity> entityType, World world) {
         super(entityType, world);
         this.setPersistenceRequired();
+    }
+
+    protected void defineSynchedData(){
+        super.defineSynchedData();
+        this.entityData.define(DATA_REMAINING_ANGER_TIME, 0);
+    }
+
+    IRankedImperial.Rank rank;
+
+    public IRankedImperial.Rank getRank() {
+        return rank;
     }
 
     public FactionType getFaction() {
         return FactionType.IMPERIAL;
     }
 
+    public int getRemainingPersistentAngerTime() {
+        return this.entityData.get(DATA_REMAINING_ANGER_TIME);
+    }
+
+    public void setRemainingPersistentAngerTime(int p_230260_1_) {
+        this.entityData.set(DATA_REMAINING_ANGER_TIME, p_230260_1_);
+    }
+
+    public void startPersistentAngerTimer() {
+        this.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.randomValue(this.random));
+    }
+
+    public void aiStep() {
+        super.aiStep();
+        if (!this.level.isClientSide) {
+            this.updatePersistentAnger((ServerWorld)this.level, true);
+        }
+    }
+
+    @Nullable
+    public UUID getPersistentAngerTarget() {
+        return this.persistentAngerTarget;
+    }
+
+    public void setPersistentAngerTarget(@Nullable UUID p_230259_1_) {
+        this.persistentAngerTarget = p_230259_1_;
+    }
+
     protected void registerGoals() {
-        this.targetSelector.addGoal(10, new HurtByTargetGoal(this, PlayerEntity.class).setAlertOthers(AbstractImperialEntity.class));
+        this.targetSelector.addGoal(9, (new HurtByTargetGoal(this)).setAlertOthers());
+        this.targetSelector.addGoal(10, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::isAngryAt));
+        this.targetSelector.addGoal(11, new TargetCriminalPlayerGoal(this));
+    }
+
+    public void addAdditionalSaveData(CompoundNBT p_213281_1_) {
+        super.addAdditionalSaveData(p_213281_1_);
+        this.addPersistentAngerSaveData(p_213281_1_);
+    }
+
+    public void readAdditionalSaveData(CompoundNBT p_70037_1_) {
+        super.readAdditionalSaveData(p_70037_1_);
+
+        if(!level.isClientSide)
+            this.readPersistentAngerSaveData((ServerWorld)this.level, p_70037_1_);
     }
 }

@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius.entity.goals;
 
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
 import net.geminiimmortal.mobius.entity.custom.spell.ObliteratorEntity;
 import net.geminiimmortal.mobius.network.BeamCirclePacket;
 import net.geminiimmortal.mobius.network.BeamRenderPacket;
@@ -8,7 +9,6 @@ import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.particles.IParticleData;
 import net.minecraft.particles.ParticleType;
@@ -22,22 +22,25 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 public class ArcaneBeamAttackGoal extends Goal {
-    private final MobEntity boss;
+    private final SorcererEntity sorcerer;
     private LivingEntity target;
     private int attackTick;
+    private int cooldownTicker = 0;
+    private int cooldown;
     private BlockPos beamTarget;
     private boolean hasFired;
     ObliteratorEntity obliterator;
 
-    public ArcaneBeamAttackGoal(MobEntity boss, ObliteratorEntity obliterator) {
-        this.boss = boss;
+    public ArcaneBeamAttackGoal(SorcererEntity sorcerer, ObliteratorEntity obliterator, int cooldown) {
+        this.sorcerer = sorcerer;
         this.obliterator = obliterator;
+        this.cooldown = cooldown;
     }
 
     @Override
     public boolean canUse() {
-        this.target = boss.getTarget();
-        return target != null && target.isAlive();
+        this.target = sorcerer.getTarget();
+        return target != null && target.isAlive() && cooldownTicker >= cooldown;
     }
 
     @Override
@@ -45,26 +48,26 @@ public class ArcaneBeamAttackGoal extends Goal {
         attackTick = 0;
         hasFired = false;
         beamTarget = target.blockPosition();
-        boss.getNavigation().stop();
+        sorcerer.getNavigation().stop();
 
-        if (!boss.level.isClientSide) {
+        if (!sorcerer.level.isClientSide) {
             // Tell clients tracking the boss to render the arcane circle
             ModNetwork.NETWORK_CHANNEL.send(
-                    PacketDistributor.TRACKING_ENTITY.with(() -> boss),
+                    PacketDistributor.TRACKING_ENTITY.with(() -> sorcerer),
                     new BeamCirclePacket(beamTarget)
             );
         }
 
-        this.obliterator = new ObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), boss.level);
+        this.obliterator = new ObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), sorcerer.level);
         obliterator.setPos(beamTarget.getX(), beamTarget.getY() + 16, beamTarget.getZ());
-        boss.level.addFreshEntity(obliterator);
+        sorcerer.level.addFreshEntity(obliterator);
 
         if (this.obliterator.level.isClientSide) {
             spawnGroundTelegraph((ClientWorld) this.obliterator.level, new Vector3d(beamTarget.getX(), beamTarget.getY() + 0.25, beamTarget.getZ()), 4D, 0.5, 100, ParticleTypes.FIREWORK);
             obliterator.startBeam();
         }
 
-        boss.level.playSound(null, beamTarget, ModSounds.ARCANE_NUKE_FX.get(), SoundCategory.HOSTILE, 50f, 1f);
+        sorcerer.level.playSound(null, beamTarget, ModSounds.ARCANE_NUKE_FX.get(), SoundCategory.HOSTILE, 50f, 1f);
     }
 
 
@@ -72,16 +75,16 @@ public class ArcaneBeamAttackGoal extends Goal {
     public void tick() {
         attackTick++;
 
-        if (!this.boss.isAlive()) {
+        if (!this.sorcerer.isAlive()) {
             stop();
         }
 
         if (attackTick == 80 && !hasFired && target != null) {
             hasFired = true;
 
-            if (!boss.level.isClientSide) {
+            if (!sorcerer.level.isClientSide) {
                 ModNetwork.NETWORK_CHANNEL.send(
-                        PacketDistributor.TRACKING_ENTITY.with(() -> boss),
+                        PacketDistributor.TRACKING_ENTITY.with(() -> sorcerer),
                         new BeamRenderPacket(
                                 new Vector3d(beamTarget.getX(), beamTarget.getY() + 24, beamTarget.getZ()),
                                 new Vector3d(beamTarget.getX(), beamTarget.getY(), beamTarget.getZ()),
@@ -91,7 +94,7 @@ public class ArcaneBeamAttackGoal extends Goal {
                 );
 
                 ModNetwork.NETWORK_CHANNEL.send(
-                        PacketDistributor.TRACKING_ENTITY.with(() -> boss),
+                        PacketDistributor.TRACKING_ENTITY.with(() -> sorcerer),
                         new BeamRenderPacket(
                                 new Vector3d(beamTarget.getX(), beamTarget.getY() + 24, beamTarget.getZ()),
                                 new Vector3d(beamTarget.getX(), beamTarget.getY(), beamTarget.getZ()),
@@ -101,7 +104,7 @@ public class ArcaneBeamAttackGoal extends Goal {
                 );
 
                 ModNetwork.NETWORK_CHANNEL.send(
-                        PacketDistributor.TRACKING_ENTITY.with(() -> boss),
+                        PacketDistributor.TRACKING_ENTITY.with(() -> sorcerer),
                         new BeamRenderPacket(
                                 new Vector3d(beamTarget.getX(), beamTarget.getY() + 24, beamTarget.getZ()),
                                 new Vector3d(beamTarget.getX(), beamTarget.getY(), beamTarget.getZ()),
@@ -111,12 +114,12 @@ public class ArcaneBeamAttackGoal extends Goal {
                 );
             }
 
-            boss.level.playSound(null, beamTarget, SoundEvents.LIGHTNING_BOLT_IMPACT, SoundCategory.HOSTILE, 3f, 0.7f);
+            sorcerer.level.playSound(null, beamTarget, SoundEvents.LIGHTNING_BOLT_IMPACT, SoundCategory.HOSTILE, 3f, 0.7f);
 
             AxisAlignedBB aoe = new AxisAlignedBB(beamTarget).inflate(4);
-            for (LivingEntity entity : boss.level.getEntitiesOfClass(LivingEntity.class, aoe)) {
-                if (entity != boss && !entity.isInvulnerable()) {
-                    entity.hurt(DamageSource.indirectMagic(boss, boss), 40.0f);
+            for (LivingEntity entity : sorcerer.level.getEntitiesOfClass(LivingEntity.class, aoe)) {
+                if (entity != sorcerer && !entity.isInvulnerable()) {
+                    entity.hurt(DamageSource.indirectMagic(sorcerer, sorcerer), 40.0f);
                 }
             }
         }
@@ -130,13 +133,8 @@ public class ArcaneBeamAttackGoal extends Goal {
 
     @Override
     public void stop() {
-        // Optional: tell client to fade beam or stop rendering
-        /*ModNetwork.NETWORK_CHANNEL.send(
-                PacketDistributor.TRACKING_CHUNK.with(() -> boss.level.getChunkAt(target.blockPosition())),
-                new BeamEndPacket(target.blockPosition())
-        );*/
-        obliterator.remove();
-
+        this.obliterator.remove();
+        cooldownTicker = 0;
     }
 
     public static void spawnGroundTelegraph(ClientWorld level, Vector3d center, double initialRadius, double speed, int count, ParticleType<?> particle) {
@@ -155,6 +153,10 @@ public class ArcaneBeamAttackGoal extends Goal {
             // Velocity moves outwards
             level.addParticle((IParticleData) particle, px, py, pz, dx * speed, 0, dz * speed);
         }
+    }
+
+    public void tickCooldown() {
+        cooldownTicker++;
     }
 
 }

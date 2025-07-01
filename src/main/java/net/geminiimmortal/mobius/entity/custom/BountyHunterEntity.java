@@ -65,6 +65,7 @@ public class BountyHunterEntity extends CreatureEntity implements IFactionCarrie
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(5, new LookAtGoal(this, MobEntity.class, 8.0F));
         this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
     }
 
     public static boolean canMobSpawn(EntityType<? extends BountyHunterEntity> entityType, IWorld world, SpawnReason reason, BlockPos pos, Random random) {

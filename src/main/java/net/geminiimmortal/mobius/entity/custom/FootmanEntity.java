@@ -40,7 +40,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class FootmanEntity extends AbstractImperialEntity implements IAnimatable, IFactionCarrier {
+public class FootmanEntity extends AbstractImperialEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(FootmanEntity.class, DataSerializers.BOOLEAN);
 
@@ -73,6 +73,11 @@ public class FootmanEntity extends AbstractImperialEntity implements IAnimatable
         this.entityData.define(ATTACKING, false);
     }
 
+    @Override
+    public Rank getRank() {
+        return Rank.GRUNT;
+    }
+
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
@@ -97,9 +102,6 @@ public class FootmanEntity extends AbstractImperialEntity implements IAnimatable
         this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
-    public FactionType getFaction() {
-        return FactionType.IMPERIAL;
-    }
 
     protected int getXpToDrop() {
         int baseXp = this.random.nextInt(10) + 2;
