@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius.entity.goals;
 
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.entity.custom.AbstractImperialEntity;
 import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
 import net.geminiimmortal.mobius.entity.custom.spell.ObliteratorEntity;
 import net.geminiimmortal.mobius.network.BeamCirclePacket;
@@ -118,7 +119,7 @@ public class ArcaneBeamAttackGoal extends Goal {
 
             AxisAlignedBB aoe = new AxisAlignedBB(beamTarget).inflate(4);
             for (LivingEntity entity : sorcerer.level.getEntitiesOfClass(LivingEntity.class, aoe)) {
-                if (entity != sorcerer && !entity.isInvulnerable()) {
+                if (entity != sorcerer && !entity.isInvulnerable() && !(entity instanceof AbstractImperialEntity)) {
                     entity.hurt(DamageSource.indirectMagic(sorcerer, sorcerer), 40.0f);
                 }
             }

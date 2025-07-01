@@ -4,7 +4,6 @@ import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.AbstractImperialEntity;
 import net.geminiimmortal.mobius.entity.custom.FootmanEntity;
-import net.geminiimmortal.mobius.entity.custom.ImperialGuardEntity;
 import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
 import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.minecraft.entity.SpawnReason;
