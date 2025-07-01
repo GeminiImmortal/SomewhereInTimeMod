@@ -1,5 +1,7 @@
 package net.geminiimmortal.mobius.entity.custom;
 
+import net.geminiimmortal.mobius.entity.goals.ImperialFollowPatrolLeaderGoal;
+import net.geminiimmortal.mobius.entity.goals.ImperialOfficerLeadPatrolGoal;
 import net.geminiimmortal.mobius.entity.goals.target.TargetCriminalPlayerGoal;
 import net.geminiimmortal.mobius.faction.IRankedImperial;
 import net.geminiimmortal.mobius.faction.FactionType;
@@ -9,9 +11,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IAngerable;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
-import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.DyeColor;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -26,6 +26,7 @@ import java.util.UUID;
 
 public abstract class AbstractImperialEntity extends CreatureEntity implements IFactionCarrier, IRankedImperial, IAngerable {
     private static final DataParameter<Integer> DATA_REMAINING_ANGER_TIME = EntityDataManager.defineId(AbstractImperialEntity.class, DataSerializers.INT);
+    private static final DataParameter<Boolean> IS_PART_OF_PATROL = EntityDataManager.defineId(AbstractImperialEntity.class, DataSerializers.BOOLEAN);
 
     private static final RangedInteger PERSISTENT_ANGER_TIME = TickRangeConverter.rangeOfSeconds(20, 39);
     private UUID persistentAngerTarget;
@@ -38,6 +39,16 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
     protected void defineSynchedData(){
         super.defineSynchedData();
         this.entityData.define(DATA_REMAINING_ANGER_TIME, 0);
+        this.entityData.define(IS_PART_OF_PATROL, false);
+    }
+
+    public void setIsPartOfPatrol(boolean isPartOfPatrol) {
+        this.entityData.set(IS_PART_OF_PATROL, isPartOfPatrol);
+    }
+
+
+    public boolean isPatrolMember() {
+        return this.entityData.get(IS_PART_OF_PATROL);
     }
 
     IRankedImperial.Rank rank;
@@ -79,6 +90,8 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
     }
 
     protected void registerGoals() {
+        this.goalSelector.addGoal(20, new ImperialOfficerLeadPatrolGoal(this, 1.0D));
+        this.goalSelector.addGoal(20, new ImperialFollowPatrolLeaderGoal(this, 1.1D));
         this.targetSelector.addGoal(9, (new HurtByTargetGoal(this)).setAlertOthers());
         this.targetSelector.addGoal(10, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::isAngryAt));
         this.targetSelector.addGoal(11, new TargetCriminalPlayerGoal(this));

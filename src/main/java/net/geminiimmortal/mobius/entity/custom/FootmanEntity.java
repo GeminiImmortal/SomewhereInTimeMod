@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.FootmanAttackGoal;
+import net.geminiimmortal.mobius.event.ImperialReinforcementHandler;
 import net.geminiimmortal.mobius.faction.FactionType;
 import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.geminiimmortal.mobius.util.InfamyHelper;
@@ -128,6 +129,13 @@ public class FootmanEntity extends AbstractImperialEntity implements IAnimatable
                 InfamyHelper.get(serverPlayer).addInfamy(infamy);
                 InfamyHelper.sync(serverPlayer);
             }
+        }
+        if (this.getRank() == Rank.GRUNT && !this.level.isClientSide()) {
+            this.level.getEntitiesOfClass(
+                    AbstractImperialEntity.class,
+                    this.getBoundingBox().inflate(32),
+                    e -> e.getRank().equals(Rank.OFFICER) && e.isAlive()
+            ).stream().findFirst().ifPresent(ImperialReinforcementHandler::queueReinforcements);
         }
     }
 
