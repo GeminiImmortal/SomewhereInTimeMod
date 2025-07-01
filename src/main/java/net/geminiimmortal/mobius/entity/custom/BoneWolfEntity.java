@@ -2,6 +2,8 @@ package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.faction.FactionType;
+import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
@@ -41,7 +43,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.function.Predicate;
 
-public class BoneWolfEntity extends WolfEntity implements IAnimatable {
+public class BoneWolfEntity extends WolfEntity implements IAnimatable, IFactionCarrier {
     private static final DataParameter<Boolean> SITTING = EntityDataManager.defineId(BoneWolfEntity.class, DataSerializers.BOOLEAN);
     public static final Predicate<LivingEntity> PREY_SELECTOR = (p_213440_0_) -> {
         EntityType<?> entitytype = p_213440_0_.getType();
@@ -85,6 +87,11 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable {
         this.entityData.define(SITTING, false);
     }
 
+    @Override
+    public FactionType getFaction() {
+        return FactionType.DANGEROUS_TO_VILLAGES;
+    }
+
     public void setSitting(Boolean bool){
         this.entityData.set(SITTING, bool);
     }
@@ -115,32 +122,7 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable {
 
     @Override
     public ActionResultType mobInteract(PlayerEntity player, Hand hand) {
-        if (this.isTame() || !this.isAlive()) {
-            return super.mobInteract(player, hand);
-        }
-
-        Item item = player.getItemInHand(hand).getItem();
-
-        // Tame with a specific item, e.g., Bones
-        if (item == Items.BONE) {
-            if (!player.isCreative()) {
-                player.getItemInHand(hand).shrink(1);
-            }
-
-            if (!this.level.isClientSide) {
-                if (this.random.nextInt(3) == 0) { // 33% chance to tame
-                    this.tame(player);
-                    this.setOrderedToSit(true);
-                    this.navigation.stop();
-                    this.setTarget(null);
-                    this.level.broadcastEntityEvent(this, (byte) 7); // Heart particles
-                } else {
-                    this.level.broadcastEntityEvent(this, (byte) 6); // Smoke particles
-                }
-            }
-            return ActionResultType.SUCCESS;
-        }
-        return super.mobInteract(player, hand);
+        return ActionResultType.FAIL;
     }
 
     public static boolean canMobSpawn(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
