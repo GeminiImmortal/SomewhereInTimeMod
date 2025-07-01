@@ -130,7 +130,7 @@ public class FootmanEntity extends AbstractImperialEntity implements IAnimatable
                 InfamyHelper.sync(serverPlayer);
             }
         }
-        if (this.getRank() == Rank.GRUNT && !this.level.isClientSide()) {
+        if (this.getRank() == Rank.GRUNT && !this.level.isClientSide() && source.getEntity() instanceof ServerPlayerEntity && this.isPatrolMember()) {
             this.level.getEntitiesOfClass(
                     AbstractImperialEntity.class,
                     this.getBoundingBox().inflate(32),

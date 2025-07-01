@@ -30,8 +30,8 @@ import java.util.*;
 public class ImperialPatrolHandler {
 
     private static final Map<UUID, Long> lastPatrolTimes = new HashMap<>();
-    private static final long MIN_TICKS = 12000; // ~10 minutes
-    private static final long MAX_TICKS = 18000; // ~15 minutes
+    private static final long MIN_TICKS = 36000; // ~30 minutes
+    private static final long MAX_TICKS = 144000; // ~2 hours
 
     private static final Random rand = new Random();
 

@@ -53,6 +53,7 @@ public class ImperialReinforcementHandler {
                 BlockPos pos = leader.blockPosition();
                 for (int i = 0; i < 3; i++) {
                     AbstractImperialEntity reinforcement = new FootmanEntity(ModEntityTypes.FOOTMAN.get(), level);
+                    reinforcement.setIsPartOfPatrol(true);
 
                     double dx = pos.getX() + leader.getRandom().nextInt(5) - 2;
                     double dz = pos.getZ() + leader.getRandom().nextInt(5) - 2;
@@ -62,6 +63,7 @@ public class ImperialReinforcementHandler {
                 List<ServerPlayerEntity> nearby = level.getEntitiesOfClass(ServerPlayerEntity.class,
                         new AxisAlignedBB(leader.blockPosition()).inflate(50), p -> !p.isSpectator());
                 for (ServerPlayerEntity player : nearby) {
+                    TitleUtils.sendTitle(player, null, "§cImperial reinforcements have arrived!", 10, 40, 10);
                     player.sendMessage(new StringTextComponent("Imperial reinforcements have arrived!").withStyle(TextFormatting.DARK_RED), player.getUUID());
                     player.getLevel().playSound(null, player.blockPosition(), SoundEvents.RAID_HORN, SoundCategory.HOSTILE, 50.0f, 1.05f);              }
             }

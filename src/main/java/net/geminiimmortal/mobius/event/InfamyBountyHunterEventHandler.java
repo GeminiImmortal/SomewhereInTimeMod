@@ -57,15 +57,14 @@ public class InfamyBountyHunterEventHandler {
     }
 
     private static void triggerBountyHunterEvent(ServerPlayerEntity player) {
-        player.sendMessage(new StringTextComponent("Bounty hunters have picked up your trail...").withStyle(TextFormatting.DARK_RED), player.getUUID());
+        player.sendMessage(new StringTextComponent("A bounty hunter has picked up your trail...").withStyle(TextFormatting.DARK_RED), player.getUUID());
 
-        for (int i = 0; i < 3; i++) {
-            BlockPos spawnPos = getValidSpawnNear(player);
-            BountyHunterEntity hunter = new BountyHunterEntity(ModEntityTypes.BOUNTY_HUNTER.get(), player.level);
-            hunter.setPos(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
-            hunter.setTarget(player);
-            player.level.addFreshEntity(hunter);
-        }
+        BlockPos spawnPos = getValidSpawnNear(player);
+        BountyHunterEntity hunter = new BountyHunterEntity(ModEntityTypes.BOUNTY_HUNTER.get(), player.level);
+        hunter.setPos(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
+        hunter.setTarget(player);
+        player.level.addFreshEntity(hunter);
+
     }
 
     private static BlockPos getValidSpawnNear(ServerPlayerEntity player) {

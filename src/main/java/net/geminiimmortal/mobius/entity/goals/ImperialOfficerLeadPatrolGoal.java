@@ -27,7 +27,7 @@ public class ImperialOfficerLeadPatrolGoal extends Goal {
     @Override
     public void start() {
         cooldown = 100 + leader.getRandom().nextInt(60); // cooldown before next move
-        Vector3d vec = RandomPositionGenerator.getLandPos(leader, 10, 5);
+        Vector3d vec = RandomPositionGenerator.getLandPos(leader, 20, 15);
         if (vec != null) {
             leader.getNavigation().moveTo(vec.x, vec.y, vec.z, speed);
         }

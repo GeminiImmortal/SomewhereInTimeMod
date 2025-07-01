@@ -47,8 +47,8 @@ public class BountyHunterEntity extends CreatureEntity implements IFactionCarrie
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 80.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.35D)
-                .add(Attributes.ATTACK_DAMAGE, 6.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.31D)
+                .add(Attributes.ATTACK_DAMAGE, 3.5D)
                 .add(Attributes.FOLLOW_RANGE, 60.0D)
                 .add(Attributes.ARMOR, 15.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 0.0D)
