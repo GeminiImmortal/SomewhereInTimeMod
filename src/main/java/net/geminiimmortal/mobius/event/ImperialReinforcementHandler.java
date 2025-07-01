@@ -53,7 +53,7 @@ public class ImperialReinforcementHandler {
                 BlockPos pos = leader.blockPosition();
                 for (int i = 0; i < 3; i++) {
                     AbstractImperialEntity reinforcement = new FootmanEntity(ModEntityTypes.FOOTMAN.get(), level);
-                    reinforcement.setIsPartOfPatrol(true);
+                    reinforcement.setIsPartOfPatrol(false);
 
                     double dx = pos.getX() + leader.getRandom().nextInt(5) - 2;
                     double dz = pos.getZ() + leader.getRandom().nextInt(5) - 2;

@@ -49,7 +49,7 @@ public class SonicBoomHelper {
         }
 
         // Damage and stun
-        target.hurt(DamageSource.MAGIC, 10.0F);
+        target.hurt(DamageSource.MAGIC, 4.0F);
         // Apply heavy slowness to simulate stun
         target.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, durationTicks, 255, false, false));
     }

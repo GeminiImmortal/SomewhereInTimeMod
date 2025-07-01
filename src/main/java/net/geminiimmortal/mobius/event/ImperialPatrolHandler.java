@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius.event;
 
 import net.geminiimmortal.mobius.MobiusMod;
+import net.geminiimmortal.mobius.capability.ModCapabilities;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.AbstractImperialEntity;
 import net.geminiimmortal.mobius.entity.custom.FootmanEntity;
@@ -43,17 +44,18 @@ public class ImperialPatrolHandler {
         for (ServerPlayerEntity player : server.getPlayerList().getPlayers()) {
             if (!shouldConsiderForPatrol(player)) continue;
 
-            UUID playerId = player.getUUID();
-            long currentTime = player.level.getGameTime();
-            long lastTime = lastPatrolTimes.getOrDefault(playerId, -1L);
+            player.getCapability(ModCapabilities.INFAMY_CAPABILITY).ifPresent(cap -> {
+                long currentTime = player.level.getGameTime();
+                long lastCheck = cap.getLastPatrolCheck();
 
-            long interval = getPlayerInterval(playerId);
+                long interval = getPlayerInterval(player.getUUID());
 
-            if (lastTime == -1 || currentTime - lastTime >= interval) {
-                if (trySpawnPatrolNear(player)) {
-                    lastPatrolTimes.put(playerId, currentTime);
+                if (currentTime - lastCheck >= interval) {
+                    if (trySpawnPatrolNear(player)) {
+                        cap.setLastPatrolCheck(currentTime);
+                    }
                 }
-            }
+            });
         }
     }
 
@@ -61,7 +63,8 @@ public class ImperialPatrolHandler {
         return !player.isSpectator() &&
                 player.level.dimension().location().equals(ModDimensions.MOBIUS_WORLD.location()) &&
                 player.level.getDifficulty() != Difficulty.PEACEFUL &&
-                player.isAlive();
+                player.isAlive() &&
+                player.level.canSeeSky(player.blockPosition());
     }
 
     private static long getPlayerInterval(UUID uuid) {

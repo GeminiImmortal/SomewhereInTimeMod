@@ -50,7 +50,6 @@ public class SonicBoomGoal extends Goal {
     @Override
     public void tick() {
         LivingEntity target = caster.getTarget();
-        System.out.println("Sonic goal ticking...");
         if (cachedTarget == null || !cachedTarget.isAlive()) {
             stop();
             return;

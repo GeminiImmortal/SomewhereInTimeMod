@@ -9,6 +9,10 @@ public interface IInfamy {
     long getInfamyTriggerStart(); // epoch or ticks
     void setInfamyTriggerStart(long ticks);
 
+    long getLastPatrolCheck();
+    void setLastPatrolCheck(long ticks);
+
+
 
     InfamyTier getInfamyTier();
 

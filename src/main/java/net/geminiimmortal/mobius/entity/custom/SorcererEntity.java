@@ -108,11 +108,9 @@ public class SorcererEntity extends AbstractImperialEntity implements IAnimatabl
         super.registerGoals();
         this.arcaneBeamAttackGoal = new ArcaneBeamAttackGoal(this, new ObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), this.level), 1200);
         this.laserTrackerGoal = new LaserTrackerAttackGoal(this, 60, 160);
-        this.sonicBoomGoal = new SonicBoomGoal(this);
         this.goalSelector.addGoal(1, new SwimGoal(this));
-        this.goalSelector.addGoal(3, sonicBoomGoal);
-        this.goalSelector.addGoal(4, laserTrackerGoal);
-        this.goalSelector.addGoal(5, arcaneBeamAttackGoal);
+        this.goalSelector.addGoal(2, laserTrackerGoal);
+        this.goalSelector.addGoal(3, arcaneBeamAttackGoal);
         this.goalSelector.addGoal(6, new SorcererBackAwayGoal(this, 1.4, 5));
         this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 40f));
     }
@@ -179,7 +177,7 @@ public class SorcererEntity extends AbstractImperialEntity implements IAnimatabl
     @Override
     public void tick() {
         super.tick();
-        System.out.println("Target is: " + this.getTarget());
+
         this.setRemainingFireTicks(0);
 
         if(laserTrackerGoal != null) {
@@ -254,7 +252,7 @@ public class SorcererEntity extends AbstractImperialEntity implements IAnimatabl
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.walk", true));
             return PlayState.CONTINUE;
         }
-        return PlayState.CONTINUE;
+        return PlayState.STOP;
     }
 
 

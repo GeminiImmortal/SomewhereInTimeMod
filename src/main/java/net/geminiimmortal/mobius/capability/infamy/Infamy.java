@@ -26,6 +26,19 @@ public class Infamy implements IInfamy {
         this.triggerStart = ticks;
     }
 
+    private long lastPatrolCheck = 0;
+
+    @Override
+    public long getLastPatrolCheck() {
+        return lastPatrolCheck;
+    }
+
+    @Override
+    public void setLastPatrolCheck(long time) {
+        this.lastPatrolCheck = time;
+    }
+
+
 }
 
 
