@@ -4,7 +4,6 @@ import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.FootmanAttackGoal;
 import net.geminiimmortal.mobius.entity.goals.target.TargetCriminalPlayerGoal;
 import net.geminiimmortal.mobius.entity.goals.target.TargetDangerousToVillagesGoal;
-import net.geminiimmortal.mobius.util.InfamyHelper;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
@@ -12,16 +11,12 @@ import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -59,18 +54,6 @@ public class ImperialGuardEntity extends FootmanEntity implements IAnimatable {
     }
 
 
-
-    @Override
-    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
-        return false; // Prevent despawning when the player moves far away
-    }
-
-    @Override
-    public void checkDespawn() {
-        // Do nothing to prevent the boss from despawning
-    }
-
-
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
@@ -97,64 +80,16 @@ public class ImperialGuardEntity extends FootmanEntity implements IAnimatable {
         this.goalSelector.addGoal(3, new WaterAvoidingRandomWalkingGoal(this, 0.6D));
         this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 3.0F, 1.0F));
         this.goalSelector.addGoal(5, new LookAtGoal(this, VillagerEntity.class, 8.0F));
-        this.targetSelector.addGoal(0, new TargetCriminalPlayerGoal(this));
+        this.targetSelector.addGoal(0, new HurtByTargetGoal(this).setAlertOthers());
         this.targetSelector.addGoal(1, new TargetDangerousToVillagesGoal(this));
-        this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers());
+        this.targetSelector.addGoal(2, new TargetCriminalPlayerGoal(this));
     }
 
-
-    protected int getXpToDrop() {
-        int baseXp = this.random.nextInt(10) + 2;
-        return baseXp;
-    }
-
-
-    @Override
-    public void die(DamageSource source) {
-        super.die(source);
-
-        if (!this.level.isClientSide()) {
-            int experiencePoints = this.getXpToDrop();
-
-            // Drop the experience orbs
-            while (experiencePoints > 0) {
-                int experienceToDrop = experiencePoints;
-                experiencePoints -= experienceToDrop;
-                this.level.addFreshEntity(new ExperienceOrbEntity(this.level, this.getX(), this.getY(), this.getZ(), experienceToDrop));
-            }
-            if (source.getEntity() instanceof ServerPlayerEntity) {
-                ServerPlayerEntity serverPlayer = (ServerPlayerEntity) source.getEntity();
-                int infamy = 5;
-                InfamyHelper.get(serverPlayer).addInfamy(infamy);
-                InfamyHelper.sync(serverPlayer);
-            }
-        }
-    }
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
         this.setTarget((LivingEntity) source.getEntity());
-        if (this.getTarget() instanceof PlayerEntity) {
-            int infamy = 1;
-            InfamyHelper.get((PlayerEntity) this.getTarget()).addInfamy(1);
-            InfamyHelper.sync((PlayerEntity) this.getTarget());
-        }
         return super.hurt(source, amount);
-    }
-
-    @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn){
-        return SoundEvents.PILLAGER_HURT;
-    }
-
-    @Override
-    protected SoundEvent getAmbientSound() {
-        return SoundEvents.VINDICATOR_AMBIENT;
-    }
-
-    @Override
-    protected SoundEvent getDeathSound() {
-        return SoundEvents.PILLAGER_DEATH;
     }
 
 

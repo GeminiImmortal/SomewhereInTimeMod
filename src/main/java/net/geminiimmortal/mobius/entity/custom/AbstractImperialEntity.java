@@ -3,19 +3,23 @@ package net.geminiimmortal.mobius.entity.custom;
 import net.geminiimmortal.mobius.entity.goals.ImperialFollowPatrolLeaderGoal;
 import net.geminiimmortal.mobius.entity.goals.ImperialOfficerLeadPatrolGoal;
 import net.geminiimmortal.mobius.entity.goals.target.TargetCriminalPlayerGoal;
+import net.geminiimmortal.mobius.event.ImperialReinforcementHandler;
 import net.geminiimmortal.mobius.faction.IRankedImperial;
 import net.geminiimmortal.mobius.faction.FactionType;
 import net.geminiimmortal.mobius.faction.IFactionCarrier;
+import net.geminiimmortal.mobius.util.InfamyHelper;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IAngerable;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.RangedInteger;
 import net.minecraft.util.TickRangeConverter;
 import net.minecraft.world.World;
@@ -107,5 +111,23 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
 
         if(!level.isClientSide)
             this.readPersistentAngerSaveData((ServerWorld)this.level, p_70037_1_);
+    }
+
+    public void givePlayerInfamyOnDeath(DamageSource source, int amount) {
+        if (source.getEntity() instanceof ServerPlayerEntity) {
+            ServerPlayerEntity serverPlayer = (ServerPlayerEntity) source.getEntity();
+            InfamyHelper.get(serverPlayer).addInfamy(amount);
+            InfamyHelper.sync(serverPlayer);
+        }
+    }
+
+    public void callForBackup(DamageSource source) {
+        if (this.getRank() == Rank.GRUNT && !this.level.isClientSide() && source.getEntity() instanceof ServerPlayerEntity && this.isPatrolMember()) {
+            this.level.getEntitiesOfClass(
+                    AbstractImperialEntity.class,
+                    this.getBoundingBox().inflate(32),
+                    e -> e.getRank().equals(Rank.OFFICER) && e.isAlive()
+            ).stream().findFirst().ifPresent(ImperialReinforcementHandler::queueReinforcements);
+        }
     }
 }

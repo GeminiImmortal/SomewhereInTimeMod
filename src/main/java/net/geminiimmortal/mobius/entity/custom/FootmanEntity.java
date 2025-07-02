@@ -2,10 +2,6 @@ package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.FootmanAttackGoal;
-import net.geminiimmortal.mobius.event.ImperialReinforcementHandler;
-import net.geminiimmortal.mobius.faction.FactionType;
-import net.geminiimmortal.mobius.faction.IFactionCarrier;
-import net.geminiimmortal.mobius.util.InfamyHelper;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
@@ -13,11 +9,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.item.ExperienceOrbEntity;
-import net.minecraft.entity.monster.VindicatorEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -26,7 +18,6 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -39,7 +30,6 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class FootmanEntity extends AbstractImperialEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
@@ -123,20 +113,10 @@ public class FootmanEntity extends AbstractImperialEntity implements IAnimatable
                 experiencePoints -= experienceToDrop;
                 this.level.addFreshEntity(new ExperienceOrbEntity(this.level, this.getX(), this.getY(), this.getZ(), experienceToDrop));
             }
-            if (source.getEntity() instanceof ServerPlayerEntity) {
-                ServerPlayerEntity serverPlayer = (ServerPlayerEntity) source.getEntity();
-                int infamy = 3;
-                InfamyHelper.get(serverPlayer).addInfamy(infamy);
-                InfamyHelper.sync(serverPlayer);
-            }
+            givePlayerInfamyOnDeath(source, 3);
+            callForBackup(source);
         }
-        if (this.getRank() == Rank.GRUNT && !this.level.isClientSide() && source.getEntity() instanceof ServerPlayerEntity && this.isPatrolMember()) {
-            this.level.getEntitiesOfClass(
-                    AbstractImperialEntity.class,
-                    this.getBoundingBox().inflate(32),
-                    e -> e.getRank().equals(Rank.OFFICER) && e.isAlive()
-            ).stream().findFirst().ifPresent(ImperialReinforcementHandler::queueReinforcements);
-        }
+
     }
 
     @Override

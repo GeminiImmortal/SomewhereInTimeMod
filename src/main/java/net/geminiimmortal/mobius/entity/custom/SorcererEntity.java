@@ -3,36 +3,26 @@ package net.geminiimmortal.mobius.entity.custom;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.spell.ObliteratorEntity;
 import net.geminiimmortal.mobius.entity.goals.*;
-import net.geminiimmortal.mobius.faction.FactionType;
-import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.geminiimmortal.mobius.network.BeamEndPacket;
 import net.geminiimmortal.mobius.network.ModNetwork;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.item.ExperienceOrbEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.pathfinding.GroundPathNavigator;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.text.*;
-import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerBossInfo;
 import net.minecraftforge.fml.network.PacketDistributor;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -48,20 +38,11 @@ import java.util.List;
 public class SorcererEntity extends AbstractImperialEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final DataParameter<Boolean> CASTING = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> FLEEING = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> DASHING = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
-    public GroundPathNavigator moveControl;
     private int particleTickCounter = 0;
     private static final int PARTICLE_SPAWN_INTERVAL = 5;
-    private static final DataParameter<Boolean> doesCircleExist = EntityDataManager.defineId(SorcererEntity.class, DataSerializers.BOOLEAN);
     ShatterCloneEntity spell = new ShatterCloneEntity(ModEntityTypes.SHATTER_CLONE.get(), this.level);
     private LaserTrackerAttackGoal laserTrackerGoal;
-    private SonicBoomGoal sonicBoomGoal;
     private ArcaneBeamAttackGoal arcaneBeamAttackGoal;
-
-
-
-
 
     public SorcererEntity(EntityType<? extends AbstractImperialEntity> type, World worldIn) {
         super(type, worldIn);
@@ -74,11 +55,7 @@ public class SorcererEntity extends AbstractImperialEntity implements IAnimatabl
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(CASTING, false);
-        this.entityData.define(FLEEING, false);
-        this.entityData.define(doesCircleExist, false);
-        this.entityData.define(DASHING, false);
     }
-
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
@@ -102,7 +79,6 @@ public class SorcererEntity extends AbstractImperialEntity implements IAnimatabl
         // Do nothing – prevents the mob from visually catching fire
     }
 
-
     @Override
     protected void registerGoals() {
         super.registerGoals();
@@ -111,7 +87,7 @@ public class SorcererEntity extends AbstractImperialEntity implements IAnimatabl
         this.goalSelector.addGoal(1, new SwimGoal(this));
         this.goalSelector.addGoal(2, laserTrackerGoal);
         this.goalSelector.addGoal(3, arcaneBeamAttackGoal);
-        this.goalSelector.addGoal(6, new SorcererBackAwayGoal(this, 1.4, 5));
+        this.goalSelector.addGoal(6, new SorcererBackAwayGoal(this, 1.1, 7));
         this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 40f));
     }
 
@@ -153,6 +129,7 @@ public class SorcererEntity extends AbstractImperialEntity implements IAnimatabl
                 entity.kill(); // Remove the entity
             }
         }
+        givePlayerInfamyOnDeath(source, 10);
 
         spell.kill();
         if(this.getTarget() != null) {
@@ -184,10 +161,6 @@ public class SorcererEntity extends AbstractImperialEntity implements IAnimatabl
             laserTrackerGoal.tickCooldown();
         }
 
-        if (sonicBoomGoal != null) {
-            sonicBoomGoal.tickCooldown();
-        }
-
         if (arcaneBeamAttackGoal != null) {
             arcaneBeamAttackGoal.tickCooldown();
         }
@@ -198,18 +171,7 @@ public class SorcererEntity extends AbstractImperialEntity implements IAnimatabl
             spawnGlowParticle();
             particleTickCounter = 0;
         }
-        this.removeEffect(Effects.LEVITATION);
 
-    }
-
-    private void summonCircle(SorcererEntity boss) {
-        LivingEntity target = this.getTarget();
-
-        if (target != null && target.isAlive() && !getDoesCircleExist()) {
-            this.level.addFreshEntity(spell);
-            setDoesCircleExist(true);
-        }
-        spell.setPos(boss.getX(), boss.getY(), boss.getZ());
     }
 
 
@@ -264,10 +226,6 @@ public class SorcererEntity extends AbstractImperialEntity implements IAnimatabl
             controller.markNeedsReload(); // Ensures GeckoLib resets its animation state
             controller.setAnimation(new AnimationBuilder().addAnimation("animation.model.cast", false));
             return PlayState.CONTINUE;
-        } else if (this.getDashing()) {
-            controller.markNeedsReload();
-            controller.setAnimation(new AnimationBuilder().addAnimation("animation.model.kneel", false));
-            return PlayState.CONTINUE;
         }
 
         // Clear animations if not casting
@@ -289,26 +247,10 @@ public class SorcererEntity extends AbstractImperialEntity implements IAnimatabl
     public void setCasting(boolean alerted) {
         this.entityData.set(CASTING, alerted);
     }
-    public void setDashing(boolean dashing) { this.entityData.set(DASHING, dashing); }
-    public void setFleeing(boolean fleeing) { this.entityData.set(FLEEING, fleeing); }
-    public void setDoesCircleExist(boolean exists) { this.entityData.set(doesCircleExist,exists); }
 
     public boolean getCasting() {
         return this.entityData.get(CASTING);
     }
-
-    public boolean getDashing() {
-        return this.entityData.get(DASHING);
-    }
-
-    public boolean getFleeing() {
-        return this.entityData.get(FLEEING);
-    }
-
-    public boolean getDoesCircleExist() {
-        return this.entityData.get(doesCircleExist);
-    }
-
 
 
 }

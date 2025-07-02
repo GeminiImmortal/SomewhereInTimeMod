@@ -1,7 +1,6 @@
 package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.event.ImperialReinforcementHandler;
-import net.geminiimmortal.mobius.util.InfamyHelper;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -82,12 +81,7 @@ public class ImperialRegularEntity extends FootmanEntity implements IAnimatable 
                 experiencePoints -= experienceToDrop;
                 this.level.addFreshEntity(new ExperienceOrbEntity(this.level, this.getX(), this.getY(), this.getZ(), experienceToDrop));
             }
-            if (source.getEntity() instanceof ServerPlayerEntity) {
-                ServerPlayerEntity serverPlayer = (ServerPlayerEntity) source.getEntity();
-                int infamy = 5;
-                InfamyHelper.get(serverPlayer).addInfamy(infamy);
-                InfamyHelper.sync(serverPlayer);
-            }
+            givePlayerInfamyOnDeath(source, 5);
         }
         if (this.getRank() == Rank.GRUNT && !this.level.isClientSide() && source.getEntity() instanceof ServerPlayerEntity && this.isPatrolMember()) {
             this.level.getEntitiesOfClass(

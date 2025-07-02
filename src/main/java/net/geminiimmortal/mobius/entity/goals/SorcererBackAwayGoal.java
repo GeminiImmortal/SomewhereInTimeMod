@@ -29,14 +29,12 @@ public class SorcererBackAwayGoal extends Goal {
 
     @Override
     public void start() {
-        this.sorcerer.setFleeing(true);
         moveAwayFromPlayer();
     }
 
     @Override
     public void stop() {
         this.nearestPlayer = null;
-        this.sorcerer.setFleeing(false);
     }
 
     @Override
