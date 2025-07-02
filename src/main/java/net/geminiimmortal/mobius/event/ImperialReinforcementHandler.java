@@ -4,6 +4,7 @@ import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.AbstractImperialEntity;
 import net.geminiimmortal.mobius.entity.custom.FootmanEntity;
+import net.geminiimmortal.mobius.entity.custom.ImperialRegularEntity;
 import net.geminiimmortal.mobius.util.TitleUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.server.MinecraftServer;
@@ -52,7 +53,7 @@ public class ImperialReinforcementHandler {
             if (leader != null && leader.isAlive()) {
                 BlockPos pos = leader.blockPosition();
                 for (int i = 0; i < 3; i++) {
-                    AbstractImperialEntity reinforcement = new FootmanEntity(ModEntityTypes.FOOTMAN.get(), level);
+                    AbstractImperialEntity reinforcement = new ImperialRegularEntity(ModEntityTypes.IMPERIAL_REGULAR.get(), level);
                     reinforcement.setIsPartOfPatrol(false);
 
                     double dx = pos.getX() + leader.getRandom().nextInt(5) - 2;
@@ -63,7 +64,6 @@ public class ImperialReinforcementHandler {
                 List<ServerPlayerEntity> nearby = level.getEntitiesOfClass(ServerPlayerEntity.class,
                         new AxisAlignedBB(leader.blockPosition()).inflate(50), p -> !p.isSpectator());
                 for (ServerPlayerEntity player : nearby) {
-                    TitleUtils.sendTitle(player, null, "§cImperial reinforcements have arrived!", 10, 40, 10);
                     player.sendMessage(new StringTextComponent("Imperial reinforcements have arrived!").withStyle(TextFormatting.DARK_RED), player.getUUID());
                     player.getLevel().playSound(null, player.blockPosition(), SoundEvents.RAID_HORN, SoundCategory.HOSTILE, 50.0f, 1.05f);              }
             }
