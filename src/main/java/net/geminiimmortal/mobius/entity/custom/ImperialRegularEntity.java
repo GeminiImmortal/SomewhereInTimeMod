@@ -42,11 +42,11 @@ public class ImperialRegularEntity extends FootmanEntity implements IAnimatable 
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 45.0D)
+                .add(Attributes.MAX_HEALTH, 35.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.35D)
                 .add(Attributes.ATTACK_DAMAGE, 6.5D)
                 .add(Attributes.FOLLOW_RANGE, 30.0D)
-                .add(Attributes.ARMOR, 25.0D)
+                .add(Attributes.ARMOR, 15.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 1.3D)
                 .add(Attributes.ATTACK_KNOCKBACK, 2.22D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.25D);

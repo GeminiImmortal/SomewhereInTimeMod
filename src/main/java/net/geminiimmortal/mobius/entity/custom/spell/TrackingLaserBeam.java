@@ -162,7 +162,7 @@ public class TrackingLaserBeam implements SpellTypeEntity {
 
     private void spawnWideLaserBeam(Vector3d start, Vector3d end) {
         if (!level.isClientSide && level instanceof ServerWorld) {
-            int steps = 30;
+            int steps = 10;
             double beamRadius = 0.3;
             Random rand = level.getRandom();
 
@@ -280,7 +280,7 @@ public class TrackingLaserBeam implements SpellTypeEntity {
         if (level.isClientSide || !(level instanceof ServerWorld)) return;
 
         ServerWorld serverWorld = (ServerWorld) level;
-        int particleCount = 20;
+        int particleCount = 10;
         double baseSpeed = 0.5;
 
         Random random = serverWorld.getRandom();

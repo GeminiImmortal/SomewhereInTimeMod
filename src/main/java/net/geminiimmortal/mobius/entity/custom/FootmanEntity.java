@@ -82,11 +82,11 @@ public class FootmanEntity extends AbstractImperialEntity implements IAnimatable
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 30.0D)
+                .add(Attributes.MAX_HEALTH, 25.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.35D)
                 .add(Attributes.ATTACK_DAMAGE, 5.0D)
                 .add(Attributes.FOLLOW_RANGE, 30.0D)
-                .add(Attributes.ARMOR, 20.0D)
+                .add(Attributes.ARMOR, 7.5D)
                 .add(Attributes.ARMOR_TOUGHNESS, 1.25D)
                 .add(Attributes.ATTACK_KNOCKBACK, 2.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.15D);

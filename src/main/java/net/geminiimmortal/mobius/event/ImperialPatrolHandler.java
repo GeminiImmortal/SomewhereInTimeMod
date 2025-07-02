@@ -3,9 +3,7 @@ package net.geminiimmortal.mobius.event;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.capability.ModCapabilities;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
-import net.geminiimmortal.mobius.entity.custom.AbstractImperialEntity;
-import net.geminiimmortal.mobius.entity.custom.FootmanEntity;
-import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
+import net.geminiimmortal.mobius.entity.custom.*;
 import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -101,7 +99,7 @@ public class ImperialPatrolHandler {
                 leader = pickRandomClasses(world);
             }
             leader.setIsPartOfPatrol(true);
-            FootmanEntity guard = new FootmanEntity(ModEntityTypes.FOOTMAN.get(), world);
+            ImperialGuardEntity guard = new ImperialGuardEntity(ModEntityTypes.IMPERIAL_GUARD.get(), world);
             guard.setIsPartOfPatrol(true);
             double x = pos.getX() + rand.nextInt(5) - 2;
             double z = pos.getZ() + rand.nextInt(5) - 2;

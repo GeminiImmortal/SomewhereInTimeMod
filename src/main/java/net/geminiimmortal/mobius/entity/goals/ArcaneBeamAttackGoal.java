@@ -120,7 +120,7 @@ public class ArcaneBeamAttackGoal extends Goal {
             AxisAlignedBB aoe = new AxisAlignedBB(beamTarget).inflate(4);
             for (LivingEntity entity : sorcerer.level.getEntitiesOfClass(LivingEntity.class, aoe)) {
                 if (entity != sorcerer && !entity.isInvulnerable() && !(entity instanceof AbstractImperialEntity)) {
-                    entity.hurt(DamageSource.indirectMagic(sorcerer, sorcerer), 40.0f);
+                    entity.hurt(DamageSource.indirectMagic(sorcerer, sorcerer), 20.0f);
                 }
             }
         }
