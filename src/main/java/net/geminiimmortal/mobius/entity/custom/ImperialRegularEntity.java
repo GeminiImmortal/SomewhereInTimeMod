@@ -81,7 +81,7 @@ public class ImperialRegularEntity extends FootmanEntity implements IAnimatable 
                 experiencePoints -= experienceToDrop;
                 this.level.addFreshEntity(new ExperienceOrbEntity(this.level, this.getX(), this.getY(), this.getZ(), experienceToDrop));
             }
-            givePlayerInfamyOnDeath(source, 5);
+            givePlayerInfamyOnDeath(source, 25);
         }
         if (this.getRank() == Rank.GRUNT && !this.level.isClientSide() && source.getEntity() instanceof ServerPlayerEntity && this.isPatrolMember()) {
             this.level.getEntitiesOfClass(

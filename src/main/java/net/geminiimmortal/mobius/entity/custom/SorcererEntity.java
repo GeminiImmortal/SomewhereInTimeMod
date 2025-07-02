@@ -129,7 +129,7 @@ public class SorcererEntity extends AbstractImperialEntity implements IAnimatabl
                 entity.kill(); // Remove the entity
             }
         }
-        givePlayerInfamyOnDeath(source, 10);
+        givePlayerInfamyOnDeath(source, 100);
 
         spell.kill();
         if(this.getTarget() != null) {

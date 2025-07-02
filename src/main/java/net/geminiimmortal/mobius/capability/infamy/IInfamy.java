@@ -25,10 +25,10 @@ public interface IInfamy {
         LIBERATOR;
 
         public static InfamyTier fromPoints(int points) {
-            if (points >= 250) return MENACE;
-            if (points >= 100) return CRIMINAL;
-            if (points >= 25) return NUISANCE;
-            if (points >= 10) return NOTICED;
+            if (points >= 25000) return MENACE;
+            if (points >= 10000) return CRIMINAL;
+            if (points >= 2500) return NUISANCE;
+            if (points >= 100) return NOTICED;
             return UNKNOWN;
         }
     }

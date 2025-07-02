@@ -113,7 +113,7 @@ public class FootmanEntity extends AbstractImperialEntity implements IAnimatable
                 experiencePoints -= experienceToDrop;
                 this.level.addFreshEntity(new ExperienceOrbEntity(this.level, this.getX(), this.getY(), this.getZ(), experienceToDrop));
             }
-            givePlayerInfamyOnDeath(source, 3);
+            givePlayerInfamyOnDeath(source, 10);
             callForBackup(source);
         }
 
