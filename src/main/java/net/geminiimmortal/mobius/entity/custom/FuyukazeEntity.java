@@ -12,21 +12,14 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -45,7 +38,6 @@ import java.util.UUID;
 import java.util.function.Predicate;
 
 public class FuyukazeEntity extends WolfEntity implements IAnimatable {
-    private static final DataParameter<Boolean> SITTING = EntityDataManager.defineId(FuyukazeEntity.class, DataSerializers.BOOLEAN);
     public static final Predicate<LivingEntity> PREY_SELECTOR = (p_213440_0_) -> {
         EntityType<?> entitytype = p_213440_0_.getType();
         return entitytype == ModEntityTypes.FAECOW.get() || entitytype == ModEntityTypes.FAEDEER.get();
@@ -64,7 +56,7 @@ public class FuyukazeEntity extends WolfEntity implements IAnimatable {
         return CreatureEntity.createLivingAttributes()
                 .add(Attributes.MAX_HEALTH, 40.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
-                .add(Attributes.ATTACK_DAMAGE, 10.0D)
+                .add(Attributes.ATTACK_DAMAGE, 8.0D)
                 .add(Attributes.FOLLOW_RANGE, 25.0D)
                 .add(Attributes.ARMOR, 0.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 0.0D)
@@ -134,35 +126,6 @@ public class FuyukazeEntity extends WolfEntity implements IAnimatable {
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
-        this.entityData.define(SITTING, false);
-    }
-
-    public void setSitting(Boolean bool){
-        this.entityData.set(SITTING, bool);
-    }
-
-    public boolean getSitting() {
-        return this.entityData.get(SITTING);
-    }
-
-
-    @Override
-    public void setOrderedToSit(boolean orderedToSit) {
-        if (!this.level.isClientSide()) {
-            if (this.getOwner() != null) {
-                ServerPlayerEntity owner = (ServerPlayerEntity) this.getOwner();
-                if (this.isOrderedToSit() && this.isTame()) {
-                    this.setSitting(false);
-                    super.setOrderedToSit(orderedToSit);
-                } else if (!this.isOrderedToSit() && this.isTame()) {
-                    this.setSitting(true);
-                    super.setOrderedToSit(orderedToSit);
-                } else {
-                    this.setSitting(true);
-                    super.setOrderedToSit(orderedToSit);
-                }
-            }
-        }
     }
 
     @Override
@@ -179,19 +142,12 @@ public class FuyukazeEntity extends WolfEntity implements IAnimatable {
     private <E extends IAnimatable> PlayState fuyukazeController(AnimationEvent<E> event) {
         FuyukazeEntity entity = (FuyukazeEntity) event.getAnimatable();
 
-        if (entity.hurtTime > 0) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation(RUN.animationName));
-            this.setSitting(false);
-            return PlayState.CONTINUE;
-        }
-
-
-        if (entity.getSitting()) {
+        if (entity.isInSittingPose()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation(SIT.animationName));
             return PlayState.CONTINUE;
         }
 
-        if (entity.getDeltaMovement().length() > 0.1) {
+        if (entity.getDeltaMovement().length() > 0.075) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation(RUN.animationName));
             return PlayState.CONTINUE;
         }
@@ -281,40 +237,5 @@ public class FuyukazeEntity extends WolfEntity implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return factory;
-    }
-
-    @Override
-    public void addPersistentAngerSaveData(CompoundNBT p_233682_1_) {
-        super.addPersistentAngerSaveData(p_233682_1_);
-    }
-
-    @Override
-    public void readPersistentAngerSaveData(ServerWorld p_241358_1_, CompoundNBT p_241358_2_) {
-        super.readPersistentAngerSaveData(p_241358_1_, p_241358_2_);
-    }
-
-    @Override
-    public void updatePersistentAnger(ServerWorld p_241359_1_, boolean p_241359_2_) {
-        super.updatePersistentAnger(p_241359_1_, p_241359_2_);
-    }
-
-    @Override
-    public boolean isAngryAt(LivingEntity p_233680_1_) {
-        return super.isAngryAt(p_233680_1_);
-    }
-
-    @Override
-    public boolean isAngryAtAllPlayers(World p_241357_1_) {
-        return super.isAngryAtAllPlayers(p_241357_1_);
-    }
-
-    @Override
-    public boolean isAngry() {
-        return super.isAngry();
-    }
-
-    @Override
-    public void stopBeingAngry() {
-        super.stopBeingAngry();
     }
 }
