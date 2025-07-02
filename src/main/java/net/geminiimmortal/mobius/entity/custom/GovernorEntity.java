@@ -179,7 +179,7 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable, IFa
 
         if (!this.level.isClientSide()) {
             int experiencePoints = this.getXpToDrop();
-            TitleUtils.sendTitle((ServerPlayerEntity) this.lastHurtByPlayer, "DUTY COMPLETE", "Champion foe vanquished!", 10, 100, 40);
+            TitleUtils.sendTitle((ServerPlayerEntity) this.lastHurtByPlayer, "DUTY COMPLETE", "Champion foe vanquished!", 10, 100, 40, TextFormatting.GOLD);
 
             // Drop the experience orbs
             while (experiencePoints > 0) {

@@ -394,5 +394,10 @@
         "volume": 0.5
       }
     ]
+  },
+  "infamy_rank_up_normal": {
+    "sounds": [
+      "mobius:infamy_rank_up_normal"
+    ]
   }
 }

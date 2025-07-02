@@ -42,6 +42,7 @@ public class ImperialPatrolHandler {
         MinecraftServer server = LogicalSidedProvider.INSTANCE.get(LogicalSide.SERVER);
 
         for (ServerPlayerEntity player : server.getPlayerList().getPlayers()) {
+            InfamyLevelNotifier.tick(player);
             if (!shouldConsiderForPatrol(player)) continue;
 
             player.getCapability(ModCapabilities.INFAMY_CAPABILITY).ifPresent(cap -> {
