@@ -12,7 +12,6 @@ import net.geminiimmortal.mobius.util.InfamyHelper;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IAngerable;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.player.PlayerEntity;
@@ -108,8 +107,9 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
         this.goalSelector.addGoal(20, new ImperialOfficerLeadPatrolGoal(this, 1.0D));
         this.goalSelector.addGoal(20, new ImperialFollowPatrolLeaderGoal(this, 1.1D));
         this.targetSelector.addGoal(9, (new HurtByTargetGoal(this)).setAlertOthers());
-        this.targetSelector.addGoal(10, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::isAngryAt));
-        this.targetSelector.addGoal(11, new TargetCriminalPlayerGoal(this));
+        this.targetSelector.addGoal(10, new NearestAttackableTargetGoal<>(this, AbstractRebelEntity.class, true, false));
+        this.targetSelector.addGoal(11, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::isAngryAt));
+        this.targetSelector.addGoal(12, new TargetCriminalPlayerGoal(this));
     }
 
     public void addAdditionalSaveData(CompoundNBT p_213281_1_) {

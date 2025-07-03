@@ -1,132 +1,76 @@
 package net.geminiimmortal.mobius.event;
 
 import net.geminiimmortal.mobius.MobiusMod;
-import net.geminiimmortal.mobius.capability.ModCapabilities;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
-import net.geminiimmortal.mobius.entity.custom.*;
+import net.geminiimmortal.mobius.entity.custom.ImperialGuardEntity;
+import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
 import net.geminiimmortal.mobius.world.dimension.ModDimensions;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.Difficulty;
-import net.minecraft.world.World;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.LogicalSidedProvider;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID)
 public class ImperialPatrolHandler {
 
-    private static final Map<UUID, Long> lastPatrolTimes = new HashMap<>();
-    private static final long MIN_TICKS = 36000; // ~30 minutes
-    private static final long MAX_TICKS = 144000; // ~2 hours
-
-    private static final Random rand = new Random();
+    private static final int PATROL_INTERVAL_TICKS = 144000;
+    private static final int SPAWN_RADIUS = 100;
+    private static final Map<UUID, Integer> tickCounters = new HashMap<>();
 
     @SubscribeEvent
-    public static void onServerTick(TickEvent.ServerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END || !(event.player instanceof ServerPlayerEntity) || !(event.player.level.dimension().equals(ModDimensions.MOBIUS_WORLD))) return;
+        ServerPlayerEntity player = (ServerPlayerEntity) event.player;
+        UUID playerId = player.getUUID();
 
-        MinecraftServer server = LogicalSidedProvider.INSTANCE.get(LogicalSide.SERVER);
+        int ticks = tickCounters.getOrDefault(playerId, 0) + 1;
+        if (ticks < PATROL_INTERVAL_TICKS) {
+            tickCounters.put(playerId, ticks);
+            return;
+        }
+        tickCounters.put(playerId, 0);
 
-        for (ServerPlayerEntity player : server.getPlayerList().getPlayers()) {
-            InfamyLevelNotifier.tick(player);
-            if (!shouldConsiderForPatrol(player)) continue;
+        ServerWorld world = player.getLevel();
+        BlockPos origin = player.blockPosition();
 
-            player.getCapability(ModCapabilities.INFAMY_CAPABILITY).ifPresent(cap -> {
-                long currentTime = player.level.getGameTime();
-                long lastCheck = cap.getLastPatrolCheck();
+        for (int attempts = 0; attempts < 50; attempts++) {
+            Random rand = world.random;
+            int x = origin.getX() + rand.nextInt(SPAWN_RADIUS * 2) - SPAWN_RADIUS;
+            int z = origin.getZ() + rand.nextInt(SPAWN_RADIUS * 2) - SPAWN_RADIUS;
+            int y = world.getHeight(Heightmap.Type.WORLD_SURFACE, x, z);
+            BlockPos pos = new BlockPos(x, y, z);
 
-                long interval = getPlayerInterval(player.getUUID());
+            if (world.canSeeSky(pos) && world.getBlockState(pos.below()).isSolidRender(world, pos.below())) {
+                SorcererEntity officer = ModEntityTypes.SORCERER.get().create(world);
+                if (officer != null) {
+                    officer.moveTo(pos, rand.nextFloat() * 360.0F, 0);
+                    world.addFreshEntity(officer);
 
-                if (currentTime - lastCheck >= interval) {
-                    if (trySpawnPatrolNear(player)) {
-                        cap.setLastPatrolCheck(currentTime);
+                    for (int i = 0; i < 3; i++) {
+                        BlockPos offset = pos.offset(rand.nextInt(6) - 3, 0, rand.nextInt(6) - 3);
+                        ImperialGuardEntity soldier = ModEntityTypes.IMPERIAL_GUARD.get().create(world);
+                        if (soldier != null) {
+                            soldier.setIsPartOfPatrol(true);
+                            soldier.moveTo(offset, rand.nextFloat() * 360.0F, 0);
+                            world.addFreshEntity(soldier);
+                        }
                     }
+
+                    player.sendMessage(new StringTextComponent("An imperial patrol is moving through the area...").withStyle(TextFormatting.DARK_GRAY), player.getUUID());
+                    break;
                 }
-            });
-        }
-    }
-
-    private static boolean shouldConsiderForPatrol(ServerPlayerEntity player) {
-        return !player.isSpectator() &&
-                player.level.dimension().location().equals(ModDimensions.MOBIUS_WORLD.location()) &&
-                player.level.getDifficulty() != Difficulty.PEACEFUL &&
-                player.isAlive() &&
-                player.level.canSeeSky(player.blockPosition());
-    }
-
-    private static long getPlayerInterval(UUID uuid) {
-        // Per-player randomized patrol interval between 10–15 min
-        Random seeded = new Random(uuid.hashCode());
-        return MIN_TICKS + seeded.nextInt((int)(MAX_TICKS - MIN_TICKS));
-    }
-
-    private static boolean trySpawnPatrolNear(ServerPlayerEntity player) {
-        BlockPos base = player.blockPosition();
-        World world = player.level;
-
-        for (int i = 0; i < 10; i++) {
-            int dx = rand.nextInt(64) - 24;
-            int dz = rand.nextInt(64) - 24;
-            BlockPos spawnPos = world.getHeightmapPos(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, base.offset(dx, 0, dz));
-
-            if (!world.canSeeSky(spawnPos)) continue;
-            if (!world.getBlockState(spawnPos.below()).isSolidRender(world, spawnPos.below())) continue;
-
-            spawnPatrol(world, spawnPos);
-            return true;
-        }
-
-        return false;
-    }
-
-    private static void spawnPatrol(World world, BlockPos pos) {
-        int count = 2 + rand.nextInt(3); // 2–4 guards
-        AbstractImperialEntity leader = null;
-        for (int i = 0; i < count; i++) {
-            if (i == 0) {
-                leader = pickRandomClasses(world);
             }
-            leader.setIsPartOfPatrol(true);
-            ImperialGuardEntity guard = new ImperialGuardEntity(ModEntityTypes.IMPERIAL_GUARD.get(), world);
-            guard.setIsPartOfPatrol(true);
-            double x = pos.getX() + rand.nextInt(5) - 2;
-            double z = pos.getZ() + rand.nextInt(5) - 2;
-            leader.setPos(x, pos.getY(), z);
-            leader.finalizeSpawn((ServerWorld) world, world.getCurrentDifficultyAt(pos), SpawnReason.EVENT, null, null);
-            guard.setPos(x, pos.getY(), z);
-            guard.finalizeSpawn((ServerWorld) world, world.getCurrentDifficultyAt(pos), SpawnReason.EVENT, null, null);
-            world.addFreshEntity(guard);
-            world.addFreshEntity(leader);
         }
-
-        // Optional: message nearby players
-        List<ServerPlayerEntity> nearby = world.getEntitiesOfClass(ServerPlayerEntity.class,
-                new AxisAlignedBB(pos).inflate(24), p -> !p.isSpectator());
-        for (ServerPlayerEntity player : nearby) {
-            player.sendMessage(new StringTextComponent("An Imperial patrol is moving through the area...").withStyle(TextFormatting.DARK_GRAY), player.getUUID());
-        }
-    }
-
-    private static AbstractImperialEntity pickRandomClasses(World world) {
-        Random rand = new Random();
-        int officerIndex = rand.nextInt(2);
-        officerIndex = 0; //TODO: REMOVE THIS WHEN DRAGOON IS IMPLEMENTED
-        if (officerIndex == 0) {
-            return new SorcererEntity(ModEntityTypes.SORCERER.get(), world);
-        }
-        return new FootmanEntity(ModEntityTypes.FOOTMAN.get(), world);
     }
 }
 

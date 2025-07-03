@@ -7,81 +7,67 @@ import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.BountyHunterEntity;
 import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.LogicalSidedProvider;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 @Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID)
 public class InfamyBountyHunterEventHandler {
 
-    private static int tickCounter = 0;
+    private static final int BOUNTY_INTERVAL_TICKS = 216000;
+    private static final int SPAWN_RADIUS = 60;
+    private static final Map<UUID, Integer> tickCounters = new HashMap<>();
 
     @SubscribeEvent
-    public static void onServerTick(TickEvent.ServerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END) return;
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END || !(event.player instanceof ServerPlayerEntity) || !(event.player.level.dimension().equals(ModDimensions.MOBIUS_WORLD))) return;
+        ServerPlayerEntity player = (ServerPlayerEntity) event.player;
+        UUID playerId = player.getUUID();
 
-        tickCounter++;
-        if (tickCounter < 200) return; // every 10 seconds
-        tickCounter = 0;
+        int ticks = tickCounters.getOrDefault(playerId, 0) + 1;
+        if (ticks < BOUNTY_INTERVAL_TICKS) {
+            tickCounters.put(playerId, ticks);
+            return;
+        }
+        tickCounters.put(playerId, 0);
 
-        MinecraftServer server = LogicalSidedProvider.INSTANCE.get(LogicalSide.SERVER);
+        player.getCapability(ModCapabilities.INFAMY_CAPABILITY).ifPresent(infamy -> {
+            if (infamy.getInfamyTier().ordinal() < IInfamy.InfamyTier.NUISANCE.ordinal()) return;
 
-        for (ServerPlayerEntity player : server.getPlayerList().getPlayers()) {
-            player.getCapability(ModCapabilities.INFAMY_CAPABILITY).ifPresent(cap -> {
-                if (cap.getInfamyTier().ordinal() >= IInfamy.InfamyTier.NOTICED.ordinal()) {
-                    long timeActive = player.level.getGameTime() - cap.getInfamyTriggerStart();
+            ServerWorld world = player.getLevel();
+            BlockPos origin = player.blockPosition();
 
-                    long targetTicks = getTargetTicksForPlayer(player); // 1–2 hours in ticks
-                    if (timeActive >= targetTicks && player.level.canSeeSky(player.blockPosition()) && player.level.dimension().location().equals(ModDimensions.MOBIUS_WORLD.location())) {
-                        cap.setInfamyTriggerStart(player.level.getGameTime());
-                        triggerBountyHunterEvent(player);
+            for (int attempts = 0; attempts < 50; attempts++) {
+                Random rand = world.random;
+                int x = origin.getX() + rand.nextInt(SPAWN_RADIUS * 2) - SPAWN_RADIUS;
+                int z = origin.getZ() + rand.nextInt(SPAWN_RADIUS * 2) - SPAWN_RADIUS;
+                int y = world.getHeight(Heightmap.Type.WORLD_SURFACE, x, z);
+                BlockPos pos = new BlockPos(x, y, z);
+
+                if (world.canSeeSky(pos) && world.getBlockState(pos.below()).isSolidRender(world, pos.below())) {
+                    for (int i = 0; i < 2; i++) {
+                        BountyHunterEntity hunter = ModEntityTypes.BOUNTY_HUNTER.get().create(world);
+                        if (hunter != null) {
+                            BlockPos offset = pos.offset(rand.nextInt(6) - 3, 0, rand.nextInt(6) - 3);
+                            hunter.moveTo(offset, rand.nextFloat() * 360.0F, 0);
+                            world.addFreshEntity(hunter);
+                        }
                     }
+
+                    player.sendMessage(new StringTextComponent("Bounty hunters are tracking you...").withStyle(TextFormatting.DARK_RED), player.getUUID());
+                    break;
                 }
-            });
-        }
-    }
-
-    private static long getTargetTicksForPlayer(ServerPlayerEntity player) {
-        // Use a seed based on UUID so it's random per player but stable
-        Random rand = new Random(player.getUUID().hashCode());
-        return 72000L + rand.nextInt(72000); // 1–2 hours in ticks
-    }
-
-    private static void triggerBountyHunterEvent(ServerPlayerEntity player) {
-        player.sendMessage(new StringTextComponent("A bounty hunter has picked up your trail...").withStyle(TextFormatting.DARK_RED), player.getUUID());
-
-        BlockPos spawnPos = getValidSpawnNear(player);
-        BountyHunterEntity hunter = new BountyHunterEntity(ModEntityTypes.BOUNTY_HUNTER.get(), player.level);
-        hunter.setPos(spawnPos.getX(), spawnPos.getY(), spawnPos.getZ());
-        hunter.setTarget(player);
-        player.level.addFreshEntity(hunter);
-
-    }
-
-    private static BlockPos getValidSpawnNear(ServerPlayerEntity player) {
-        BlockPos base = player.blockPosition();
-        Random rand = new Random();
-
-        for (int i = 0; i < 10; i++) {
-            int x = base.getX() + rand.nextInt(16) - 8;
-            int z = base.getZ() + rand.nextInt(16) - 8;
-            int y = player.level.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, x, z);
-            BlockPos pos = new BlockPos(x, y, z);
-            if (player.level.getBlockState(pos.below()).isSolidRender(player.level, pos.below())) {
-                return pos;
             }
-        }
-
-        return base;
+        });
     }
 }
-

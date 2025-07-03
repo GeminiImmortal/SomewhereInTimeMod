@@ -365,6 +365,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.IMPERIAL_GUARD.get(), FootmanRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.BOUNTY_HUNTER.get(), BountyHunterRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.IMPERIAL_REGULAR.get(), ImperialRegularRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.REBEL_INSTIGATOR.get(), RebelInstigatorRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -424,6 +425,7 @@ public class MobiusMod
             event.put(ModEntityTypes.IMPERIAL_GUARD.get(), ImperialGuardEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.BOUNTY_HUNTER.get(), BountyHunterEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.IMPERIAL_REGULAR.get(), ImperialRegularEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.REBEL_INSTIGATOR.get(), RebelInstigatorEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent
