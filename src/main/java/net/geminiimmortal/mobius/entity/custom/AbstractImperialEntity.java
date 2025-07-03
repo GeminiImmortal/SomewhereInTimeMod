@@ -1,5 +1,6 @@
 package net.geminiimmortal.mobius.entity.custom;
 
+import net.geminiimmortal.mobius.capability.infamy.IInfamy;
 import net.geminiimmortal.mobius.entity.goals.ImperialFollowPatrolLeaderGoal;
 import net.geminiimmortal.mobius.entity.goals.ImperialOfficerLeadPatrolGoal;
 import net.geminiimmortal.mobius.entity.goals.target.TargetCriminalPlayerGoal;
@@ -11,6 +12,7 @@ import net.geminiimmortal.mobius.util.InfamyHelper;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IAngerable;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.player.PlayerEntity;
@@ -86,6 +88,15 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
 
     @Nullable
     public UUID getPersistentAngerTarget() {
+        ServerPlayerEntity player;
+        if (this.getTarget() != null) {
+            if (this.getTarget().getClass().equals(ServerPlayerEntity.class)) {
+                player = (ServerPlayerEntity) this.getTarget();
+                if (InfamyHelper.get(player).getInfamyTier().ordinal() >= IInfamy.InfamyTier.NOTICED.ordinal()) {
+                    return this.persistentAngerTarget;
+                }
+            }
+        }
         return this.persistentAngerTarget;
     }
 

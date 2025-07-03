@@ -1,0 +1,7 @@
+{
+  "criteria": {
+    "youcantdoit": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

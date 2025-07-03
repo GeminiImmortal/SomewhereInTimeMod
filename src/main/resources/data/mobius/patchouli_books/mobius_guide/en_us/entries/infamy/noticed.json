@@ -1,0 +1,14 @@
+{
+  "name": "Noticed",
+  "category": "mobius:reputation",
+  "advancement": "mobius:infamy/noticed",
+  "icon": "minecraft:wooden_sword",
+  "sortnum": 1,
+  "pages": [
+    {
+      "title": "Infamy Tier: Noticed",
+      "type": "patchouli:text",
+      "text": "The Empire has taken note of your actions. Imperial troops will be wary around you."
+    }
+  ]
+}

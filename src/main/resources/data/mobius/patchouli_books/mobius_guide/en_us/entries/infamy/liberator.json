@@ -1,0 +1,14 @@
+{
+  "name": "Liberator",
+  "category": "mobius:reputation",
+  "advancement": "mobius:disabled",
+  "icon": "minecraft:netherite_sword",
+  "sortnum": 5,
+  "pages": [
+    {
+      "title": "Infamy Tier: Liberator",
+      "type": "patchouli:text",
+      "text": "The Queen is dead, the Empire gone. Today you are a hero to the people of Mobius, even if the ugly past will soon begin to fade from their memories. Only scattered Remnants remain of the old order."
+    }
+  ]
+}

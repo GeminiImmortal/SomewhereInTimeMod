@@ -1,0 +1,13 @@
+{
+  "name": "Imperial Infamy",
+  "description": "If they don't like you now, they definitely won't like you later.",
+  "icon": "minecraft:iron_sword",
+  "entries": [
+    "mobius:infamy/unknown",
+    "mobius:infamy/noticed",
+    "mobius:infamy/nuisance",
+    "mobius:infamy/criminal",
+    "mobius:infamy/menace",
+    "mobius:infamy/liberator"
+  ]
+}

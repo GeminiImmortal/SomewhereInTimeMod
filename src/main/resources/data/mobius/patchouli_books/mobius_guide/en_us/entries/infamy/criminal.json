@@ -1,0 +1,14 @@
+{
+  "name": "Criminal",
+  "category": "mobius:reputation",
+  "advancement": "mobius:infamy/criminal",
+  "icon": "minecraft:iron_sword",
+  "sortnum": 3,
+  "pages": [
+    {
+      "title": "Infamy Tier: Criminal",
+      "type": "patchouli:text",
+      "text": "Your face is well-known as that of a rebel conspirator. All Imperial troops will attack you on sight."
+    }
+  ]
+}

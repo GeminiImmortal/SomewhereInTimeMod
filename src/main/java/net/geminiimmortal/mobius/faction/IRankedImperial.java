@@ -7,6 +7,8 @@ public interface IRankedImperial {
         GRUNT,
         REGULAR,
         OFFICER,
-        ELITE;
+        COMMANDER,
+        ELITE,
+        CHAMPION
     }
 }

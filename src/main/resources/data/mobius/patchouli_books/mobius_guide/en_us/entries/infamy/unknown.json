@@ -1,0 +1,14 @@
+{
+  "name": "Unknown",
+  "category": "mobius:reputation",
+  "advancement": "mobius:a_ripple_in_time",
+  "icon": "minecraft:map",
+  "sortnum": 0,
+  "pages": [
+    {
+      "title": "Infamy Tier: Unknown",
+      "type": "patchouli:text",
+      "text": "Your face is unfamiliar. Imperial troops will not remember it after a fight."
+    }
+  ]
+}

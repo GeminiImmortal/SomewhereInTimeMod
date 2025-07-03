@@ -1,11 +1,14 @@
 package net.geminiimmortal.mobius.event;
 
+import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.capability.ModCapabilities;
 import net.geminiimmortal.mobius.capability.infamy.IInfamy;
+import net.geminiimmortal.mobius.item.custom.patchouli.LoreEntry;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.util.InfamyHelper;
 import net.geminiimmortal.mobius.util.TitleUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -54,21 +57,25 @@ public class InfamyLevelNotifier {
         TitleUtils.sendTitle(player,
                 newTier.name(),
                 "Imperial Infamy Increased",
-                10, 60, 10, getColor(newTier)
+                10, 60, 10, getColor(newTier, player)
         );
     }
 
-    private static TextFormatting getColor(IInfamy.InfamyTier tier) {
+    private static TextFormatting getColor(IInfamy.InfamyTier tier, ServerPlayerEntity player) {
         if (tier.equals(IInfamy.InfamyTier.MENACE)) {
+            LoreEntry.grantAdvancementIfPossible(player, new ResourceLocation(MobiusMod.MOD_ID, "infamy/menace"));
             return TextFormatting.DARK_RED;
         }
         if (tier.equals(IInfamy.InfamyTier.CRIMINAL)) {
+            LoreEntry.grantAdvancementIfPossible(player, new ResourceLocation(MobiusMod.MOD_ID, "infamy/criminal"));
             return TextFormatting.RED;
         }
         if (tier.equals(IInfamy.InfamyTier.NOTICED)) {
+            LoreEntry.grantAdvancementIfPossible(player, new ResourceLocation(MobiusMod.MOD_ID, "infamy/noticed"));
             return TextFormatting.DARK_GREEN;
         }
         if (tier.equals(IInfamy.InfamyTier.NUISANCE)) {
+            LoreEntry.grantAdvancementIfPossible(player, new ResourceLocation(MobiusMod.MOD_ID, "infamy/nuisance"));
             return TextFormatting.YELLOW;
         }
         return TextFormatting.GRAY;

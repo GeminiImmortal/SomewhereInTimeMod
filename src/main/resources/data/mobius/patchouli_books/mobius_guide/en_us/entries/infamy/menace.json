@@ -1,0 +1,14 @@
+{
+  "name": "Menace",
+  "category": "mobius:reputation",
+  "advancement": "mobius:infamy/menace",
+  "icon": "minecraft:diamond_sword",
+  "sortnum": 4,
+  "pages": [
+    {
+      "title": "Infamy Tier: Menace",
+      "type": "patchouli:text",
+      "text": "The Empire recognizes you as a top priority threat. They will go to any length to eliminate you."
+    }
+  ]
+}

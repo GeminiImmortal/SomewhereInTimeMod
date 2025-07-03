@@ -1,0 +1,7 @@
+{
+  "criteria": {
+    "use_scroll": {
+      "trigger": "minecraft:impossible"
+      }
+    }
+  }

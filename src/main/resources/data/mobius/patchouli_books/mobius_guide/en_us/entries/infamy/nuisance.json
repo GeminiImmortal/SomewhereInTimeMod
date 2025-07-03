@@ -1,0 +1,14 @@
+{
+  "name": "Nuisance",
+  "category": "mobius:reputation",
+  "advancement": "mobius:infamy/nuisance",
+  "icon": "minecraft:stone_sword",
+  "sortnum": 2,
+  "pages": [
+    {
+      "title": "Infamy Tier: Nuisance",
+      "type": "patchouli:text",
+      "text": "The Empire considers you a liability. They have put a price on your head."
+    }
+  ]
+}
