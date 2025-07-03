@@ -44,6 +44,10 @@ public class ModTileEntities {
                             ModBlocks.LATENT_MANA_COLLECTOR.get())
                     .build(null));
 
+    public static final RegistryObject<TileEntityType<WardingObeliskTileEntity>> WARDING_OBELISK =
+            TILE_ENTITIES.register("warding_obelisk", () -> TileEntityType.Builder.of(WardingObeliskTileEntity::new, ModBlocks.WARDING_OBELISK.get())
+                    .build(null));
+
     public static final RegistryObject<TileEntityType<GlowingBlockTileEntity>> GLOWING_BLOCK = TILE_ENTITIES.register("glowing_block",
             () -> TileEntityType.Builder.of(GlowingBlockTileEntity::new, ModBlocks.STANDING_GLOOMCAP.get()).build(null));
 

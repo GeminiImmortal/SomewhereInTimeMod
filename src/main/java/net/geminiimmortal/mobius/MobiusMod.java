@@ -21,6 +21,7 @@ import net.geminiimmortal.mobius.capability.infamy.Infamy;
 import net.geminiimmortal.mobius.capability.infamy.InfamyStorage;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.tileentity.ModTileEntities;
+import net.geminiimmortal.mobius.tileentity.WardingObeliskTileEntity;
 import net.geminiimmortal.mobius.tileentity.render.*;
 import net.geminiimmortal.mobius.util.CustomDamageEventHandler;
 import net.geminiimmortal.mobius.villager.ModVillagers;
@@ -311,6 +312,8 @@ public class MobiusMod
                     SignTileEntityRenderer::new);
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.GLOWING_BLOCK.get(),
                     GlowingBlockRenderer::new);
+            ClientRegistry.bindTileEntityRenderer(ModTileEntities.WARDING_OBELISK.get(), WardingObeliskRenderer::new);
+
 
 
             Atlases.addWoodType(ModWoodTypes.MARROWOOD);

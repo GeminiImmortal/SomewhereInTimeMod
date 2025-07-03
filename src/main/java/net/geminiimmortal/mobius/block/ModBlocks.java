@@ -307,6 +307,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> SMUGGLER_STRONGBOX = registerBlock("smuggler_strongbox",
             () -> new SmugglerStrongbox());
 
+    public static final RegistryObject<Block> WARDING_OBELISK = registerBlock("warding_obelisk",
+            () -> new WardingObeliskBlock(AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3).strength(30F, 1200F).noDrops().lightLevel(state -> 15)));
+
+
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
