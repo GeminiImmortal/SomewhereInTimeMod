@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.event;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.entity.custom.RebelInstigatorEntity;
 import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -80,6 +81,9 @@ public class SkirmishEventHandler {
     private static void spawnEntity(ServerWorld world, EntityType<? extends MobEntity> type, BlockPos pos) {
         MobEntity entity = type.create(world);
         if (entity != null) {
+            if (entity instanceof RebelInstigatorEntity) {
+                ((RebelInstigatorEntity) entity).setIsPartOfSkirmish(true);
+            }
             entity.moveTo(pos, world.random.nextFloat() * 360.0F, 0);
             world.addFreshEntity(entity);
         }

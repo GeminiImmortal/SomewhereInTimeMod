@@ -80,7 +80,7 @@
   "entity.mobius.spade_golem": "Golem of Spades",
   "entity.mobius.faedeer": "Faedeer",
   "entity.mobius.molvan": "Molvan",
-  "entity.mobius.sorcerer": "Sorcerer",
+  "entity.mobius.sorcerer": "Imperial Sorcerer",
   "entity.mobius.governor": "The Governor",
   "entity.mobius.bone_wolf": "Bone Wolf",
   "entity.mobius.infernal_briar": "Infernal Briar",
@@ -91,7 +91,9 @@
   "entity.mobius.harukaze": "Harukaze",
   "entity.mobius.imperial_footman": "Imperial Footman",
   "entity.mobius.imperial_guard": "Imperial Guard",
+  "entity.mobius.imperial_regular": "Imperial Regular",
   "entity.mobius.bounty_hunter": "Bounty Hunter",
+  "entity.mobius.rebel_instigator": "Rebel Instigator",
 
   "entity.minecraft.villager.mobius.monster_hunter": "Monster Hunter",
   "entity.minecraft.villager.mobius.magismith": "Magismith",
@@ -189,6 +191,7 @@
   "block.mobius.hueco_sand": "Hueco Sand",
   "block.mobius.latent_mana_collector": "Latent Mana Collector",
   "block.mobius.smuggler_strongbox": "Smuggler's Strongbox",
+  "block.mobius.warding_obelisk": "Warding Obelisk",
 
   "fluid.mobius.ectoplasm_fluid": "Ectoplasm",
   "fluid.mobius.bog_water_fluid": "Bog Water",
