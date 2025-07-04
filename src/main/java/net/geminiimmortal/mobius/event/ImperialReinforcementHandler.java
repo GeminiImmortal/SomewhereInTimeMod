@@ -59,6 +59,7 @@ public class ImperialReinforcementHandler {
                     double dx = pos.getX() + leader.getRandom().nextInt(5) - 2;
                     double dz = pos.getZ() + leader.getRandom().nextInt(5) - 2;
                     reinforcement.setPos(dx, pos.getY(), dz);
+                    reinforcement.setTarget(leader.getTarget());
                     level.addFreshEntity(reinforcement);
                 }
                 List<ServerPlayerEntity> nearby = level.getEntitiesOfClass(ServerPlayerEntity.class,
