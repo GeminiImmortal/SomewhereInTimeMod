@@ -25,7 +25,7 @@ import java.util.UUID;
 public class InfamyBountyHunterEventHandler {
 
     private static final int BOUNTY_INTERVAL_TICKS = 216000;
-    private static final int SPAWN_RADIUS = 60;
+    private static final int SPAWN_RADIUS = 40;
     private static final Map<UUID, Integer> tickCounters = new HashMap<>();
 
     @SubscribeEvent
@@ -51,7 +51,7 @@ public class InfamyBountyHunterEventHandler {
                 Random rand = world.random;
                 int x = origin.getX() + rand.nextInt(SPAWN_RADIUS * 2) - SPAWN_RADIUS;
                 int z = origin.getZ() + rand.nextInt(SPAWN_RADIUS * 2) - SPAWN_RADIUS;
-                int y = world.getHeight(Heightmap.Type.WORLD_SURFACE, x, z);
+                int y = world.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, x, z);
                 BlockPos pos = new BlockPos(x, y, z);
 
                 if (world.canSeeSky(pos) && world.getBlockState(pos.below()).isSolidRender(world, pos.below())) {
@@ -70,4 +70,14 @@ public class InfamyBountyHunterEventHandler {
             }
         });
     }
+    public static void forceSpawnFor(ServerPlayerEntity player) {
+        // Bypass tick counter
+        UUID id = player.getUUID();
+        tickCounters.put(id, BOUNTY_INTERVAL_TICKS);
+
+        // Simulate tick manually
+        onPlayerTick(new TickEvent.PlayerTickEvent(TickEvent.Phase.END, player));
+    }
+
+
 }

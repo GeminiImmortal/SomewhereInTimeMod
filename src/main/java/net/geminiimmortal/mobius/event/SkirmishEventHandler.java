@@ -2,11 +2,12 @@ package net.geminiimmortal.mobius.event;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.entity.custom.FootmanEntity;
 import net.geminiimmortal.mobius.entity.custom.RebelInstigatorEntity;
 import net.geminiimmortal.mobius.world.dimension.ModDimensions;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -24,76 +25,93 @@ import java.util.UUID;
 @Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID)
 public class SkirmishEventHandler {
 
-    private static final int SKIRMISH_INTERVAL_TICKS = 72000; // 1 hour of gameplay
-    private static final int SKIRMISH_RADIUS = 70;
-
-    private static final Map<UUID, Long> lastSkirmishTickMap = new HashMap<>();
+    private static final int SKIRMISH_INTERVAL_TICKS = 72000; // 1 hour of gameplay time
+    private static final int SPAWN_RADIUS = 45;
+    private static final Map<UUID, Integer> tickCounters = new HashMap<>();
 
     @SubscribeEvent
-    public static void onServerTick(TickEvent.PlayerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END || !(event.player instanceof ServerPlayerEntity) || !(event.player.level.dimension().equals(ModDimensions.MOBIUS_WORLD))) return;
-
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END || !(event.player instanceof ServerPlayerEntity)) return;
         ServerPlayerEntity player = (ServerPlayerEntity) event.player;
-        ServerWorld world = player.getLevel();
         UUID playerId = player.getUUID();
+        if (!player.level.dimension().equals(ModDimensions.MOBIUS_WORLD)) return;
 
-        long currentTick = world.getGameTime();
-        long lastTick = lastSkirmishTickMap.getOrDefault(playerId, 0L);
-
-        if (currentTick - lastTick < SKIRMISH_INTERVAL_TICKS) return;
-
-        BlockPos spawnPos = findValidSpawnPosition(world, player.blockPosition(), SKIRMISH_RADIUS);
-        if (spawnPos == null) return;
-
-        // Spawn imperials and rebels
-        for (int i = 0; i < 9; i++) {
-            spawnEntity(world, ModEntityTypes.REBEL_INSTIGATOR.get(), spawnPos.offset(randomOffset()));
+        int ticks = tickCounters.getOrDefault(playerId, 0) + 1;
+        if (ticks < SKIRMISH_INTERVAL_TICKS) {
+            tickCounters.put(playerId, ticks);
+            return;
         }
 
-        for (int j = 0; j < 3; j++) {
-            spawnEntity(world, ModEntityTypes.IMPERIAL_GUARD.get(), spawnPos.offset(randomOffset()));
-        }
-
-        for (int j = 0; j < 2; j++) {
-            spawnEntity(world, ModEntityTypes.IMPERIAL_REGULAR.get(), spawnPos.offset(randomOffset()));
-        }
-
-        lastSkirmishTickMap.put(playerId, currentTick);
-
-        player.sendMessage(new StringTextComponent("⚔ A skirmish has broken out nearby!").withStyle(TextFormatting.YELLOW), player.getUUID());
+        tickCounters.put(playerId, 0);
+        handleSkirmish(player);
     }
 
-    private static BlockPos findValidSpawnPosition(ServerWorld world, BlockPos origin, int radius) {
+    public static void handleSkirmish(ServerPlayerEntity player) {
+        ServerWorld world = player.getLevel();
+        BlockPos origin = player.blockPosition();
+        Random rand = world.random;
+
         for (int attempts = 0; attempts < 50; attempts++) {
-            int x = origin.getX() + world.getRandom().nextInt(radius * 2) - radius;
-            int z = origin.getZ() + world.getRandom().nextInt(radius * 2) - radius;
-            int y = world.getHeight(Heightmap.Type.WORLD_SURFACE, x, z);
+            int x = origin.getX() + rand.nextInt(SPAWN_RADIUS * 2) - SPAWN_RADIUS;
+            int z = origin.getZ() + rand.nextInt(SPAWN_RADIUS * 2) - SPAWN_RADIUS;
+            int y = world.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, x, z);
             BlockPos pos = new BlockPos(x, y, z);
 
-            // Check sky visibility and solid ground
             if (world.canSeeSky(pos) && world.getBlockState(pos.below()).isSolidRender(world, pos.below())) {
-                return pos;
+
+
+                for (int i = 0; i < 5; i++) {
+                    FootmanEntity soldier = ModEntityTypes.FOOTMAN.get().create(world);
+                    if (soldier != null) {
+                        soldier.setIsPartOfPatrol(true);
+                        soldier.moveTo(pos, rand.nextFloat() * 360.0F, 0);
+                        world.addFreshEntity(soldier);
+                    }
+                }
+
+                for (int i = 0; i < 8; i++) {
+                    RebelInstigatorEntity rebel = ModEntityTypes.REBEL_INSTIGATOR.get().create(world);
+                    if (rebel != null) {
+                        rebel.setIsPartOfSkirmish(true);
+                        rebel.moveTo(pos, rand.nextFloat() * 360.0F, 0);
+                        world.addFreshEntity(rebel);
+                        rebel.addEffect(new EffectInstance(Effects.DAMAGE_BOOST, 3));
+                        rebel.addEffect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 2));
+                        rebel.addEffect(new EffectInstance(Effects.REGENERATION, 2));
+                    }
+                }
+
+                player.sendMessage(new StringTextComponent("A skirmish has broken out nearby!").withStyle(TextFormatting.GOLD), player.getUUID());
+                return;
             }
         }
+    }
+
+    private static BlockPos findSafeSpawn(ServerWorld world, BlockPos center, int radius) {
+        Random rand = world.random;
+
+        for (int attempts = 0; attempts < 30; attempts++) {
+            int dx = rand.nextInt(radius * 2) - radius;
+            int dz = rand.nextInt(radius * 2) - radius;
+            int x = center.getX() + dx;
+            int z = center.getZ() + dz;
+            int y = world.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, x, z);
+            BlockPos pos = new BlockPos(x, y, z);
+
+            if (!world.canSeeSky(pos)) continue;
+            if (!world.getBlockState(pos.below()).isSolidRender(world, pos.below())) continue;
+            if (!world.isEmptyBlock(pos)) continue;
+            if (!world.isEmptyBlock(pos.above())) continue;
+
+            return pos;
+        }
+
         return null;
     }
 
-    private static void spawnEntity(ServerWorld world, EntityType<? extends MobEntity> type, BlockPos pos) {
-        MobEntity entity = type.create(world);
-        if (entity != null) {
-            if (entity instanceof RebelInstigatorEntity) {
-                ((RebelInstigatorEntity) entity).setIsPartOfSkirmish(true);
-            }
-            entity.moveTo(pos, world.random.nextFloat() * 360.0F, 0);
-            world.addFreshEntity(entity);
-        }
-    }
-
-    private static BlockPos randomOffset() {
-        Random rand = new Random();
-        int dx = rand.nextInt(10) - 5;
-        int dz = rand.nextInt(10) - 5;
-        return new BlockPos(dx, 0, dz);
+    public static void forceSpawnFor(ServerPlayerEntity player) {
+        tickCounters.put(player.getUUID(), SKIRMISH_INTERVAL_TICKS);
     }
 }
+
 

@@ -13,7 +13,7 @@ public class ImperialFollowPatrolLeaderGoal extends Goal {
     private final double speed;
     private final double minDistance = 4.0D;
     private final double maxDistance = 16.0D;
-    private final double stopDistance = 2.0D;
+    private final double stopDistance = 4.0D;
     private final double followDistance = 6.0D;
 
     public ImperialFollowPatrolLeaderGoal(AbstractImperialEntity soldier, double speed) {

@@ -1,24 +1,16 @@
 package net.geminiimmortal.mobius.entity.custom;
 
-import net.geminiimmortal.mobius.block.ModBlocks;
-import net.geminiimmortal.mobius.entity.goals.FootmanAttackGoal;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.item.ExperienceOrbEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -29,34 +21,38 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-import java.util.Random;
-
-public class FootmanEntity extends AbstractImperialEntity implements IAnimatable {
+public class ImperialSergeantEntity extends FootmanEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
-    private static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(FootmanEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(ImperialSergeantEntity.class, DataSerializers.BOOLEAN);
 
-    public FootmanEntity(EntityType<? extends AbstractImperialEntity> type, World worldIn) {
+    public ImperialSergeantEntity(EntityType<? extends AbstractImperialEntity> type, World worldIn) {
         super(type, worldIn);
         this.dropExperience();
         this.maxUpStep = 1;
         this.setPersistenceRequired();
     }
 
-    public static boolean canMobSpawn(EntityType<? extends AbstractImperialEntity> entityType, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
-        int existing = world.getEntitiesOfClass(FootmanEntity.class, new AxisAlignedBB(pos).inflate(20)).size();
-        return (world.getBlockState(pos.below()) == ModBlocks.HEMATITE.get().defaultBlockState()) && existing < 3;
+    @Override
+    public Rank getRank() {
+        return Rank.OFFICER;
+    }
+
+    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
+        return MobEntity.createLivingAttributes()
+                .add(Attributes.MAX_HEALTH, 60.0D)
+                .add(Attributes.MOVEMENT_SPEED, 0.35D)
+                .add(Attributes.ATTACK_DAMAGE, 7.5D)
+                .add(Attributes.FOLLOW_RANGE, 30.0D)
+                .add(Attributes.ARMOR, 16.0D)
+                .add(Attributes.ARMOR_TOUGHNESS, 1.35D)
+                .add(Attributes.ATTACK_KNOCKBACK, 2.22D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.35D);
     }
 
     @Override
-    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
-        return false; // Prevent despawning when the player moves far away
+    protected void registerGoals() {
+        super.registerGoals();
     }
-
-    @Override
-    public void checkDespawn() {
-        // Do nothing to prevent the boss from despawning
-    }
-
 
     @Override
     protected void defineSynchedData() {
@@ -64,40 +60,10 @@ public class FootmanEntity extends AbstractImperialEntity implements IAnimatable
         this.entityData.define(ATTACKING, false);
     }
 
-    @Override
-    public Rank getRank() {
-        return Rank.GRUNT;
-    }
-
-
-    public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
-        return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 25.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.35D)
-                .add(Attributes.ATTACK_DAMAGE, 5.0D)
-                .add(Attributes.FOLLOW_RANGE, 30.0D)
-                .add(Attributes.ARMOR, 7.5D)
-                .add(Attributes.ARMOR_TOUGHNESS, 1.25D)
-                .add(Attributes.ATTACK_KNOCKBACK, 2.0D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.15D);
-    }
-
-    @Override
-    protected void registerGoals() {
-        super.registerGoals();
-        this.goalSelector.addGoal(1, new SwimGoal(this));
-        this.goalSelector.addGoal(2, new FootmanAttackGoal(this, 1.0, true));
-        this.goalSelector.addGoal(3, new RandomWalkingGoal(this, 0.6D));
-        this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 3.0F, 1.0F));
-        this.goalSelector.addGoal(5, new LookAtGoal(this, MobEntity.class, 8.0F));
-    }
-
-
     protected int getXpToDrop() {
-        int baseXp = this.random.nextInt(10) + 2;
+        int baseXp = this.random.nextInt(15) + 15;
         return baseXp;
     }
-
 
     @Override
     public void die(DamageSource source) {
@@ -112,16 +78,12 @@ public class FootmanEntity extends AbstractImperialEntity implements IAnimatable
                 experiencePoints -= experienceToDrop;
                 this.level.addFreshEntity(new ExperienceOrbEntity(this.level, this.getX(), this.getY(), this.getZ(), experienceToDrop));
             }
-            givePlayerInfamyOnDeath(source, 10);
-            callForBackup(source);
+            givePlayerInfamyOnDeath(source, 100);
         }
-
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn){
-        return SoundEvents.PILLAGER_HURT;
-    }
+    protected SoundEvent getHurtSound(DamageSource source) { return SoundEvents.VINDICATOR_HURT; }
 
     @Override
     protected SoundEvent getAmbientSound() {
@@ -129,30 +91,27 @@ public class FootmanEntity extends AbstractImperialEntity implements IAnimatable
     }
 
     @Override
-    protected SoundEvent getDeathSound() {
-        return SoundEvents.PILLAGER_DEATH;
-    }
-
+    protected SoundEvent getDeathSound() { return SoundEvents.VINDICATOR_DEATH; }
 
     @Override
     public void registerControllers(AnimationData data) {
-        AnimationController<FootmanEntity> controller = new AnimationController<>(this, "controller", 0, this::predicate);
+        AnimationController<ImperialSergeantEntity> controller = new AnimationController<>(this, "controller", 0, this::predicate);
         data.addAnimationController(controller);
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (this.getAttacking()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.footman.attack", false));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.imperial_sergeant.attack", false));
             this.setAttacking(false);
             return PlayState.CONTINUE;
         }
 
         if (this.getDeltaMovement().length() > 0.075) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.footman.run", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.imperial_sergeant.run", true));
             return PlayState.CONTINUE;
         }
 
-        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.footman.idle", true));
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.imperial_sergeant.idle", true));
         return PlayState.CONTINUE;
     }
 
@@ -170,5 +129,3 @@ public class FootmanEntity extends AbstractImperialEntity implements IAnimatable
         return this.entityData.get(ATTACKING);
     }
 }
-
-

@@ -34,9 +34,9 @@ public class RebelInstigatorEntity extends AbstractRebelEntity implements IAnima
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 24.0D)
+                .add(Attributes.MAX_HEALTH, 40.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.31D)
-                .add(Attributes.ATTACK_DAMAGE, 1.5D)
+                .add(Attributes.ATTACK_DAMAGE, 2.5D)
                 .add(Attributes.FOLLOW_RANGE, 30.0D)
                 .add(Attributes.ARMOR, 2.5D)
                 .add(Attributes.ARMOR_TOUGHNESS, 0.0D)

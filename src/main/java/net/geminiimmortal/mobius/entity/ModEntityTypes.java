@@ -197,7 +197,7 @@ public class ModEntityTypes {
     public static final RegistryObject<EntityType<FootmanEntity>> FOOTMAN =
             ENTITY_TYPES.register("imperial_footman",
                     () -> EntityType.Builder.of(FootmanEntity::new,
-                                    EntityClassification.MONSTER).sized(1f, 2.25f)
+                                    EntityClassification.CREATURE).sized(1f, 2.25f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "imperial_footman").toString()));
 
     public static final RegistryObject<EntityType<ImperialGuardEntity>> IMPERIAL_GUARD =
@@ -209,14 +209,20 @@ public class ModEntityTypes {
     public static final RegistryObject<EntityType<BountyHunterEntity>> BOUNTY_HUNTER =
             ENTITY_TYPES.register("bounty_hunter",
                     () -> EntityType.Builder.of(BountyHunterEntity::new,
-                                    EntityClassification.MONSTER).sized(1f, 2.25f)
+                                    EntityClassification.CREATURE).sized(1f, 2.25f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "bounty_hunter").toString()));
 
     public static final RegistryObject<EntityType<ImperialRegularEntity>> IMPERIAL_REGULAR =
             ENTITY_TYPES.register("imperial_regular",
                     () -> EntityType.Builder.of(ImperialRegularEntity::new,
-                                    EntityClassification.MONSTER).sized(1f, 2.25f)
+                                    EntityClassification.CREATURE).sized(1f, 2.25f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "imperial_regular").toString()));
+
+    public static final RegistryObject<EntityType<ImperialSergeantEntity>> IMPERIAL_SERGEANT =
+            ENTITY_TYPES.register("imperial_sergeant",
+                    () -> EntityType.Builder.of(ImperialSergeantEntity::new,
+                                    EntityClassification.CREATURE).sized(1f, 2.25f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "imperial_sergeant").toString()));
 
     public static final RegistryObject<EntityType<RebelInstigatorEntity>> REBEL_INSTIGATOR =
             ENTITY_TYPES.register("rebel_instigator",

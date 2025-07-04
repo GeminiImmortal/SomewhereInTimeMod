@@ -2,8 +2,8 @@ package net.geminiimmortal.mobius.event;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
-import net.geminiimmortal.mobius.entity.custom.ImperialGuardEntity;
-import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
+import net.geminiimmortal.mobius.entity.custom.FootmanEntity;
+import net.geminiimmortal.mobius.entity.custom.ImperialSergeantEntity;
 import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
@@ -24,7 +24,7 @@ import java.util.UUID;
 public class ImperialPatrolHandler {
 
     private static final int PATROL_INTERVAL_TICKS = 144000;
-    private static final int SPAWN_RADIUS = 100;
+    private static final int SPAWN_RADIUS = 60;
     private static final Map<UUID, Integer> tickCounters = new HashMap<>();
 
     @SubscribeEvent
@@ -47,21 +47,21 @@ public class ImperialPatrolHandler {
             Random rand = world.random;
             int x = origin.getX() + rand.nextInt(SPAWN_RADIUS * 2) - SPAWN_RADIUS;
             int z = origin.getZ() + rand.nextInt(SPAWN_RADIUS * 2) - SPAWN_RADIUS;
-            int y = world.getHeight(Heightmap.Type.WORLD_SURFACE, x, z);
+            int y = world.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, x, z);
             BlockPos pos = new BlockPos(x, y, z);
 
             if (world.canSeeSky(pos) && world.getBlockState(pos.below()).isSolidRender(world, pos.below())) {
-                SorcererEntity officer = ModEntityTypes.SORCERER.get().create(world);
+                ImperialSergeantEntity officer = ModEntityTypes.IMPERIAL_SERGEANT.get().create(world);
                 if (officer != null) {
+                    officer.setIsPartOfPatrol(true);
                     officer.moveTo(pos, rand.nextFloat() * 360.0F, 0);
                     world.addFreshEntity(officer);
 
                     for (int i = 0; i < 3; i++) {
-                        BlockPos offset = pos.offset(rand.nextInt(6) - 3, 0, rand.nextInt(6) - 3);
-                        ImperialGuardEntity soldier = ModEntityTypes.IMPERIAL_GUARD.get().create(world);
+                        FootmanEntity soldier = ModEntityTypes.FOOTMAN.get().create(world);
                         if (soldier != null) {
                             soldier.setIsPartOfPatrol(true);
-                            soldier.moveTo(offset, rand.nextFloat() * 360.0F, 0);
+                            soldier.moveTo(officer.blockPosition(), rand.nextFloat() * 360.0F, 0);
                             world.addFreshEntity(soldier);
                         }
                     }
@@ -72,5 +72,35 @@ public class ImperialPatrolHandler {
             }
         }
     }
+
+    private static BlockPos findSafeSpawn(ServerWorld world, BlockPos center, int radius) {
+        Random rand = world.random;
+
+        for (int attempts = 0; attempts < 30; attempts++) {
+            int dx = rand.nextInt(radius * 2) - radius;
+            int dz = rand.nextInt(radius * 2) - radius;
+            int x = center.getX() + dx;
+            int z = center.getZ() + dz;
+            int y = world.getHeight(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, x, z);
+            BlockPos pos = new BlockPos(x, y, z);
+
+            if (!world.canSeeSky(pos)) continue;
+            if (!world.getBlockState(pos.below()).isSolidRender(world, pos.below())) continue;
+            if (!world.isEmptyBlock(pos)) continue;
+            if (!world.isEmptyBlock(pos.above())) continue;
+
+            return pos;
+        }
+
+        return null; // No safe position found
+    }
+
+
+    public static void forceSpawnFor(ServerPlayerEntity player) {
+        UUID id = player.getUUID();
+        tickCounters.put(id, PATROL_INTERVAL_TICKS);
+        onPlayerTick(new TickEvent.PlayerTickEvent(TickEvent.Phase.END, player));
+    }
+
 }
 
