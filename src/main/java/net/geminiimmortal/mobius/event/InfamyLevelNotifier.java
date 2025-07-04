@@ -10,38 +10,49 @@ import net.geminiimmortal.mobius.util.TitleUtils;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
+@Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID)
 public class InfamyLevelNotifier {
 
     private static final Map<UUID, IInfamy.InfamyTier> previousTiers = new HashMap<>();
 
-    public static void tick(ServerPlayerEntity player) {
+    @SubscribeEvent
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END) return;
+        if (!(event.player instanceof ServerPlayerEntity)) return;
+
+        ServerPlayerEntity player = (ServerPlayerEntity) event.player;
+        UUID playerId = player.getUUID();
+
         player.getCapability(ModCapabilities.INFAMY_CAPABILITY).ifPresent(infamy -> {
             IInfamy.InfamyTier currentTier = InfamyHelper.get(player).getInfamyTier();
-            IInfamy.InfamyTier previousTier = previousTiers.get(player.getUUID());
+            IInfamy.InfamyTier previousTier = previousTiers.get(playerId);
 
             if (previousTier == null) {
-                previousTiers.put(player.getUUID(), currentTier);
+                previousTiers.put(playerId, currentTier);
                 return;
             }
 
             if (currentTier.ordinal() > previousTier.ordinal()) {
                 triggerNotification(player, currentTier);
-                previousTiers.put(player.getUUID(), currentTier);
+                previousTiers.put(playerId, currentTier);
             } else if (currentTier.ordinal() < previousTier.ordinal()) {
-                previousTiers.put(player.getUUID(), currentTier); // downgrade silently
+                previousTiers.put(playerId, currentTier); // downgrade silently
             }
         });
     }
 
     private static void triggerNotification(ServerPlayerEntity player, IInfamy.InfamyTier newTier) {
-        // 🔊 Play sound
+        // Play sound
         player.getLevel().playSound(
                 null,
                 player.getX(),
@@ -53,32 +64,27 @@ public class InfamyLevelNotifier {
                 1.0F
         );
 
-        // 📝 Send title
+        // Send title
         TitleUtils.sendTitle(player,
                 newTier.name(),
                 "Imperial Infamy Increased",
-                10, 60, 10, getColor(newTier, player)
+                10, 60, 10,
+                getColor(newTier)
         );
+
+        // Grant advancement
+        LoreEntry.grantAdvancementIfPossible(player, new ResourceLocation(MobiusMod.MOD_ID, "infamy/" + newTier.name().toLowerCase()));
     }
 
-    private static TextFormatting getColor(IInfamy.InfamyTier tier, ServerPlayerEntity player) {
-        if (tier.equals(IInfamy.InfamyTier.MENACE)) {
-            LoreEntry.grantAdvancementIfPossible(player, new ResourceLocation(MobiusMod.MOD_ID, "infamy/menace"));
-            return TextFormatting.DARK_RED;
+    private static TextFormatting getColor(IInfamy.InfamyTier tier) {
+        switch (tier) {
+            case MENACE: return TextFormatting.DARK_RED;
+            case CRIMINAL: return TextFormatting.RED;
+            case NOTICED: return TextFormatting.DARK_GREEN;
+            case NUISANCE: return TextFormatting.YELLOW;
+            default: return TextFormatting.GRAY;
         }
-        if (tier.equals(IInfamy.InfamyTier.CRIMINAL)) {
-            LoreEntry.grantAdvancementIfPossible(player, new ResourceLocation(MobiusMod.MOD_ID, "infamy/criminal"));
-            return TextFormatting.RED;
-        }
-        if (tier.equals(IInfamy.InfamyTier.NOTICED)) {
-            LoreEntry.grantAdvancementIfPossible(player, new ResourceLocation(MobiusMod.MOD_ID, "infamy/noticed"));
-            return TextFormatting.DARK_GREEN;
-        }
-        if (tier.equals(IInfamy.InfamyTier.NUISANCE)) {
-            LoreEntry.grantAdvancementIfPossible(player, new ResourceLocation(MobiusMod.MOD_ID, "infamy/nuisance"));
-            return TextFormatting.YELLOW;
-        }
-        return TextFormatting.GRAY;
     }
 }
+
 
