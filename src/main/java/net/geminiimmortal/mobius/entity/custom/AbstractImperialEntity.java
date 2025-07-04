@@ -106,9 +106,9 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
     protected void registerGoals() {
         this.goalSelector.addGoal(20, new ImperialOfficerLeadPatrolGoal(this, 0.7D));
         this.goalSelector.addGoal(20, new ImperialFollowPatrolLeaderGoal(this, 0.9D));
-        this.targetSelector.addGoal(9, (new HurtByTargetGoal(this)).setAlertOthers());
-        this.targetSelector.addGoal(10, new NearestAttackableTargetGoal<>(this, AbstractRebelEntity.class, true, false));
-        this.targetSelector.addGoal(11, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::isAngryAt));
+        this.targetSelector.addGoal(9, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, 10, true, false, this::isAngryAt));
+        this.targetSelector.addGoal(10, (new HurtByTargetGoal(this)).setAlertOthers());
+        this.targetSelector.addGoal(11, new NearestAttackableTargetGoal<>(this, AbstractRebelEntity.class, true, false));
         this.targetSelector.addGoal(12, new TargetCriminalPlayerGoal(this));
     }
 
