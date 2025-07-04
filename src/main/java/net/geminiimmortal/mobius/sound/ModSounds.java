@@ -168,6 +168,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> INFAMY_RANK_UP_NORMAL =
             registerSoundEvent("infamy_rank_up_normal");
 
+    public static final RegistryObject<SoundEvent> LANCE_IMPACT =
+            registerSoundEvent("lance_impact");
+
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, name)));
     }

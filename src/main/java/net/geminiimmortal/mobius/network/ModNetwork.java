@@ -59,6 +59,11 @@ public class ModNetwork {
                 .decoder(SInfamySyncPacket::decode)
                 .consumer(SInfamySyncPacket::handle)
                 .add();
+        NETWORK_CHANNEL.messageBuilder(LanceHitPacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(LanceHitPacket::encode)
+                .decoder(LanceHitPacket::decode)
+                .consumer(LanceHitPacket::handle)
+                .add();
     }
 
     @SubscribeEvent

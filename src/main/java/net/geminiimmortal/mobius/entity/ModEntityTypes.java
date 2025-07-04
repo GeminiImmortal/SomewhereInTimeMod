@@ -230,6 +230,12 @@ public class ModEntityTypes {
                                     EntityClassification.CREATURE).sized(1f, 2.25f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "rebel_instigator").toString()));
 
+    public static final RegistryObject<EntityType<ImperialCommanderEntity>> IMPERIAL_COMMANDER =
+            ENTITY_TYPES.register("imperial_commander",
+                    () -> EntityType.Builder.of(ImperialCommanderEntity::new,
+                                    EntityClassification.CREATURE).sized(1f, 2.25f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "imperial_commander").toString()));
+
 
 
 

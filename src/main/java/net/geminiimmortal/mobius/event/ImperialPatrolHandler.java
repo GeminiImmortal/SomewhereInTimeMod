@@ -15,10 +15,7 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 @Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID)
 public class ImperialPatrolHandler {
@@ -54,6 +51,7 @@ public class ImperialPatrolHandler {
                 ImperialSergeantEntity officer = ModEntityTypes.IMPERIAL_SERGEANT.get().create(world);
                 if (officer != null) {
                     officer.setIsPartOfPatrol(true);
+                    officer.setPatrolLeader(Optional.of(officer.getUUID()));
                     officer.moveTo(pos, rand.nextFloat() * 360.0F, 0);
                     world.addFreshEntity(officer);
 
@@ -61,6 +59,7 @@ public class ImperialPatrolHandler {
                         FootmanEntity soldier = ModEntityTypes.FOOTMAN.get().create(world);
                         if (soldier != null) {
                             soldier.setIsPartOfPatrol(true);
+                            soldier.setPatrolLeader(Optional.of(officer.getUUID()));
                             soldier.moveTo(officer.blockPosition(), rand.nextFloat() * 360.0F, 0);
                             world.addFreshEntity(soldier);
                         }

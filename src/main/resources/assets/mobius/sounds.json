@@ -399,5 +399,10 @@
     "sounds": [
       "mobius:infamy_rank_up_normal"
     ]
+  },
+  "lance_impact": {
+    "sounds": [
+      "mobius:lance_impact"
+    ]
   }
 }

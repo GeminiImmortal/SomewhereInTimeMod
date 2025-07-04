@@ -63,7 +63,7 @@ public class SkirmishEventHandler {
                 for (int i = 0; i < 5; i++) {
                     FootmanEntity soldier = ModEntityTypes.FOOTMAN.get().create(world);
                     if (soldier != null) {
-                        soldier.setIsPartOfPatrol(true);
+                        soldier.setIsPartOfPatrol(false);
                         soldier.moveTo(pos, rand.nextFloat() * 360.0F, 0);
                         world.addFreshEntity(soldier);
                     }

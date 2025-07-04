@@ -1,0 +1,356 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.imperial_commander.idle": {
+			"loop": true,
+			"animation_length": 1.5,
+			"bones": {
+				"head": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.75": {
+							"vector": [0, -0.5, 0]
+						},
+						"1.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"body": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.75": {
+							"vector": [0, -0.5, 0],
+							"easing": "easeInSine"
+						},
+						"1.5": {
+							"vector": [0, 0, 0],
+							"easing": "easeInSine"
+						}
+					}
+				},
+				"right_arm": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 5]
+						},
+						"0.75": {
+							"vector": [0, -0.25, 2.5]
+						},
+						"1.5": {
+							"vector": [0, 0, 5]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.75": {
+							"vector": [0, 0, 0]
+						},
+						"1.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"left_arm": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.75": {
+							"vector": [0, -0.15, 0]
+						},
+						"1.5": {
+							"vector": [0, 0, 0]
+						}
+					}
+				}
+			}
+		},
+		"animation.imperial_commander.walk": {
+			"loop": true,
+			"animation_length": 0.75,
+			"bones": {
+				"head": {
+					"rotation": {
+						"0.0": {
+							"vector": [10, 0, 0]
+						},
+						"0.375": {
+							"vector": [12.5, 0, 0]
+						},
+						"0.75": {
+							"vector": [10, 0, 0]
+						}
+					},
+					"position": {
+						"vector": [0, -1, -1]
+					}
+				},
+				"right_arm": {
+					"rotation": {
+						"0.0": {
+							"vector": [24.47761, -5.24826, 11.36081]
+						},
+						"0.2917": {
+							"vector": [33.97819, -7.30303, 15.94682]
+						},
+						"0.75": {
+							"vector": [24.47761, -5.24826, 11.36081]
+						}
+					}
+				},
+				"left_arm": {
+					"rotation": {
+						"0.0": {
+							"vector": [-45, 0, 0]
+						},
+						"0.375": {
+							"vector": [25, 0, 0]
+						},
+						"0.75": {
+							"vector": [-45, 0, 0]
+						}
+					},
+					"position": {
+						"vector": [0, -1, -1]
+					}
+				},
+				"right_leg": {
+					"rotation": {
+						"0.0": {
+							"vector": [-20, 0, 0]
+						},
+						"0.375": {
+							"vector": [35, 0, 0]
+						},
+						"0.75": {
+							"vector": [-20, 0, 0]
+						}
+					}
+				},
+				"left_leg": {
+					"rotation": {
+						"0.0": {
+							"vector": [27.5, 0, 0]
+						},
+						"0.375": {
+							"vector": [-25, 0, 0]
+						},
+						"0.75": {
+							"vector": [27.5, 0, 0]
+						}
+					}
+				}
+			}
+		},
+		"animation.imperial_commander.run": {
+			"loop": true,
+			"animation_length": 0.5,
+			"bones": {
+				"head": {
+					"rotation": {
+						"0.0": {
+							"vector": [10, 0, 0]
+						},
+						"0.25": {
+							"vector": [12.5, 0, 0]
+						},
+						"0.5": {
+							"vector": [10, 0, 0]
+						}
+					},
+					"position": {
+						"vector": [0, -1, -1]
+					}
+				},
+				"body": {
+					"rotation": {
+						"0.0": {
+							"vector": [17.5, 0, 0]
+						},
+						"0.25": {
+							"vector": [12.5, 0, 0]
+						},
+						"0.5": {
+							"vector": [17.5, 0, 0]
+						}
+					}
+				},
+				"right_arm": {
+					"rotation": {
+						"0.0": {
+							"vector": [35.63506, -27.6355, 62.37561]
+						},
+						"0.25": {
+							"vector": [58.13506, -27.6355, 62.37561]
+						},
+						"0.5": {
+							"vector": [35.63506, -27.6355, 62.37561]
+						}
+					}
+				},
+				"left_arm": {
+					"rotation": {
+						"0.0": {
+							"vector": [-45, 0, 0]
+						},
+						"0.25": {
+							"vector": [25, 0, 0]
+						},
+						"0.5": {
+							"vector": [-45, 0, 0]
+						}
+					},
+					"position": {
+						"vector": [0, -1, -1]
+					}
+				},
+				"right_leg": {
+					"rotation": {
+						"0.0": {
+							"vector": [-20, 0, 0]
+						},
+						"0.25": {
+							"vector": [35, 0, 0]
+						},
+						"0.5": {
+							"vector": [-20, 0, 0]
+						}
+					}
+				},
+				"left_leg": {
+					"rotation": {
+						"0.0": {
+							"vector": [27.5, 0, 0]
+						},
+						"0.25": {
+							"vector": [-25, 0, 0]
+						},
+						"0.5": {
+							"vector": [27.5, 0, 0]
+						}
+					}
+				}
+			}
+		},
+		"animation.imperial_commander.attack": {
+			"animation_length": 1.25,
+			"bones": {
+				"imperial_dragoon": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.375": {
+							"vector": [0, 0, 0]
+						},
+						"0.5833": {
+							"vector": [0, 0, -2]
+						}
+					}
+				},
+				"head": {
+					"rotation": {
+						"0.0": {
+							"vector": [7.5, 0, 0]
+						},
+						"0.5": {
+							"vector": [10, 0, 0]
+						},
+						"0.6667": {
+							"vector": [7.5, 0, 0]
+						}
+					},
+					"position": {
+						"vector": [0, 0, -1]
+					}
+				},
+				"body": {
+					"rotation": {
+						"0.0": {
+							"vector": [17.64168, 7.15102, 2.26708]
+						},
+						"0.375": {
+							"vector": [17.89807, 11.91276, 3.81397]
+						},
+						"0.625": {
+							"vector": [17.64168, 7.15102, 2.26708],
+							"easing": "easeInQuad"
+						},
+						"0.75": {
+							"vector": [17.51565, -2.38422, -0.7522]
+						}
+					}
+				},
+				"right_arm": {
+					"rotation": {
+						"0.0": {
+							"vector": [43.13506, -27.6355, 62.37561]
+						},
+						"0.5833": {
+							"vector": [58.13506, -27.6355, 62.37561]
+						},
+						"0.625": {
+							"vector": [-14.93564, -30.53935, 142.3065]
+						},
+						"0.6667": {
+							"vector": [-63.74087, 5.35188, 173.08144]
+						}
+					}
+				},
+				"left_arm": {
+					"rotation": {
+						"0.0": {
+							"vector": [-15, 0, -7.5]
+						},
+						"0.4167": {
+							"vector": [-22.5, 0, -7.5]
+						},
+						"0.5": {
+							"vector": [-15, 0, -7.5]
+						},
+						"0.5417": {
+							"vector": [18.125, 0, -7.5]
+						},
+						"0.6667": {
+							"vector": [27.5, 0, -7.5],
+							"easing": "easeInSine"
+						}
+					}
+				},
+				"right_leg": {
+					"rotation": {
+						"0.0": {
+							"vector": [-12.5, 0, 0]
+						},
+						"0.625": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"left_leg": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"0.6667": {
+							"vector": [15, 0, 0]
+						}
+					}
+				}
+			},
+			"sound_effects": {
+				"0.75": {
+					"effect": "lance_impact"
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

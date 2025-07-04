@@ -2,7 +2,10 @@ package net.geminiimmortal.mobius.entity.goals;
 
 import net.geminiimmortal.mobius.entity.custom.AbstractImperialEntity;
 import net.geminiimmortal.mobius.faction.IRankedImperial;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
+import net.minecraft.pathfinding.Path;
+import net.minecraft.world.server.ServerWorld;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -12,7 +15,7 @@ public class ImperialFollowPatrolLeaderGoal extends Goal {
     private AbstractImperialEntity leader;
     private final double speed;
     private final double minDistance = 4.0D;
-    private final double maxDistance = 16.0D;
+    private final double maxDistance = 32.0D;
     private final double stopDistance = 4.0D;
     private final double followDistance = 6.0D;
 
@@ -21,6 +24,7 @@ public class ImperialFollowPatrolLeaderGoal extends Goal {
         this.speed = speed;
         this.setFlags(EnumSet.of(Goal.Flag.MOVE));
     }
+
 
     @Override
     public boolean canUse() {
@@ -34,12 +38,17 @@ public class ImperialFollowPatrolLeaderGoal extends Goal {
         );
 
         if (!nearby.isEmpty()) {
-            leader = nearby.get(0); // could improve with closest selection
+            if (!soldier.level.isClientSide()) {
+                ServerWorld world = (ServerWorld) soldier.level;
+                leader = (AbstractImperialEntity) soldier.getLeaderEntity(world);
+            }
             return true;
         }
 
         return false;
     }
+
+
 
     @Override
     public boolean canContinueToUse() {
@@ -68,7 +77,14 @@ public class ImperialFollowPatrolLeaderGoal extends Goal {
     }
 
     private void moveToLeader() {
-        if (leader != null) {
+        if (leader != null && soldier.distanceToSqr(leader) > minDistance * minDistance) {
+            Path pathToLeader = soldier.getNavigation().getPath();
+            if (pathToLeader != null) {
+                boolean canReach = soldier.getNavigation().getPath().canReach();
+                if (!canReach) {
+                    soldier.getNavigation().recomputePath();
+                }
+            }
             soldier.getNavigation().moveTo(leader, speed);
         }
     }
