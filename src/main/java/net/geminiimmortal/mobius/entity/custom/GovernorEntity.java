@@ -65,8 +65,8 @@ public class GovernorEntity extends AbstractImperialEntity implements IAnimatabl
     private static final int MAX_CLONES = 6;
     private static boolean isAttacking;
 
-    IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[CHAMPION FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.GOLD).withBold(true));
-    IFormattableTextComponent name = (StringTextComponent) new StringTextComponent("His Lordship, The Governor").setStyle(Style.EMPTY.withColor(TextFormatting.DARK_BLUE).withBold(false));
+    IFormattableTextComponent rank = new StringTextComponent("[CHAMPION FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.GOLD).withBold(true));
+    IFormattableTextComponent name = new StringTextComponent("His Lordship, The Governor").setStyle(Style.EMPTY.withColor(TextFormatting.DARK_BLUE).withBold(false));
     IFormattableTextComponent namePlate = rank.append(name);
 
     private final ServerBossInfo bossInfo = new ServerBossInfo(

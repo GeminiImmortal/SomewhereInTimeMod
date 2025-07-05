@@ -13,18 +13,11 @@ import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.text.IFormattableTextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.world.BossInfo;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerBossInfo;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -38,62 +31,10 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-import java.util.Random;
-
 public class ImperialCommanderEntity extends AbstractImperialEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final DataParameter<Boolean> ATTACKING = EntityDataManager.defineId(ImperialCommanderEntity.class, DataSerializers.BOOLEAN);
 
-    private static final String[] TITLES = {
-            "the Cruel of House", "the Unbroken of House", "the Destroyer of House"
-    };
-
-    private static final String[] FIRST_NAMES = {
-            "Vorak", "Kel'dan", "Zaroth", "Morthas", "Draven", "Syrix", "Velkor"
-    };
-
-    private static final String[] HOUSE_NAMES = {
-            "Skullsplitter", "Ironfist", "Blackthorn", "Duskwalker", "Stormrage"
-    };
-
-    public static String generateBossName(Random rand) {
-        String first = FIRST_NAMES[rand.nextInt(FIRST_NAMES.length)];
-        String last = HOUSE_NAMES[rand.nextInt(HOUSE_NAMES.length)];
-        String title = TITLES[rand.nextInt(TITLES.length)];
-
-        return first + " " + title + " " + last;
-    }
-
-    IFormattableTextComponent rank = (StringTextComponent) new StringTextComponent("[ELITE FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.GRAY).withBold(true));
-    IFormattableTextComponent name = (StringTextComponent) new StringTextComponent(generateBossName(new Random())).setStyle(Style.EMPTY.withColor(TextFormatting.DARK_PURPLE).withBold(false));
-    IFormattableTextComponent namePlate = rank.append(name);
-
-    private final ServerBossInfo bossInfo = new ServerBossInfo(
-            namePlate,  // Boss name
-            BossInfo.Color.PURPLE,
-            BossInfo.Overlay.NOTCHED_10
-    );
-
-    @Override
-    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
-        return false;
-    }
-
-    @Override
-    public void checkDespawn() {
-    }
-
-    @Override
-    public void startSeenByPlayer(ServerPlayerEntity player) {
-        super.startSeenByPlayer(player);
-        this.bossInfo.addPlayer(player);
-    }
-
-    @Override
-    public void stopSeenByPlayer(ServerPlayerEntity player) {
-        super.stopSeenByPlayer(player);
-        this.bossInfo.removePlayer(player);
-    }
 
     public ImperialCommanderEntity(EntityType<? extends ImperialCommanderEntity> entityType, World world) {
         super(entityType, world);
@@ -117,7 +58,7 @@ public class ImperialCommanderEntity extends AbstractImperialEntity implements I
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new ImperialCommanderLanceHitGoal(this, 1.4D, true));
         this.goalSelector.addGoal(2, new WaterAvoidingRandomWalkingGoal(this, 0.95));
-        this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true, false));
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
     @Override
