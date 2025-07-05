@@ -1,0 +1,141 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.governor.idle": {
+			"loop": true,
+			"animation_length": 4,
+			"bones": {
+				"RightLeg": {
+					"rotation": {
+						"vector": [-2.5, 0, 2.5]
+					}
+				},
+				"LowerRightLeg": {
+					"rotation": {
+						"vector": [0, 0, -2.5]
+					},
+					"position": {
+						"vector": [-0.25, 0, 0]
+					}
+				},
+				"RightArm": {
+					"rotation": {
+						"0.0": {
+							"vector": [-82.32005, 12.39135, 1.6575]
+						},
+						"1.0": {
+							"vector": [-77.32005, 12.39135, 1.6575]
+						},
+						"2.0": {
+							"vector": [-82.32005, 12.39135, 1.6575]
+						},
+						"3.0": {
+							"vector": [-77.32005, 12.39135, 1.6575]
+						},
+						"4.0": {
+							"vector": [-82.32005, 12.39135, 1.6575]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0": {
+							"vector": [0, 1, 0]
+						},
+						"2.0": {
+							"vector": [0, 0, 0]
+						},
+						"3.0": {
+							"vector": [0, 1, 0]
+						},
+						"4.0": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"LeftArm": {
+					"rotation": {
+						"vector": [0, 0, -22.5]
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0833": {
+							"vector": [0, 1, 0]
+						},
+						"2.0": {
+							"vector": [0, 0, 0]
+						},
+						"3.0833": {
+							"vector": [0, 1, 0]
+						},
+						"4.0": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"LowerLeftArm": {
+					"rotation": {
+						"vector": [0, 0, 32.5]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"Neck": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0": {
+							"vector": [0, 1, 0]
+						},
+						"2.0": {
+							"vector": [0, 0, 0]
+						},
+						"3.0": {
+							"vector": [0, 1, 0]
+						},
+						"3.75": {
+							"vector": [0, 0, 0],
+							"easing": "step"
+						},
+						"4.0": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"UpperAttachClothes": {
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"1.0": {
+							"vector": [0, 1, 0]
+						},
+						"2.0": {
+							"vector": [0, 0, 0]
+						},
+						"3.0": {
+							"vector": [0, 1, 0]
+						},
+						"4.0": {
+							"vector": [0, 0, 0]
+						}
+					}
+				},
+				"Weapon": {
+					"rotation": {
+						"vector": [2.5, 0, 0]
+					},
+					"position": {
+						"vector": [-3, 0, 2]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

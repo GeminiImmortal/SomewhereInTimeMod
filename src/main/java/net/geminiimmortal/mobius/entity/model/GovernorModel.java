@@ -8,17 +8,17 @@ import software.bernie.geckolib3.model.AnimatedGeoModel;
 public class GovernorModel extends AnimatedGeoModel<GovernorEntity> {
     @Override
     public ResourceLocation getAnimationFileLocation(GovernorEntity entity) {
-        return new ResourceLocation(MobiusMod.MOD_ID, "animations/governor.animation.json");
+        return new ResourceLocation(MobiusMod.MOD_ID, "animations/governor_new.animation.json");
     }
 
     @Override
     public ResourceLocation getModelLocation(GovernorEntity entity) {
-        return new ResourceLocation(MobiusMod.MOD_ID, "geo/governor.geo.json");
+        return new ResourceLocation(MobiusMod.MOD_ID, "geo/governor_new.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(GovernorEntity entity) {
-        return new ResourceLocation(MobiusMod.MOD_ID, "textures/entity/governor.png");
+        return new ResourceLocation(MobiusMod.MOD_ID, "textures/entity/governor_new.png");
     }
 
 }

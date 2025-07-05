@@ -13,7 +13,7 @@ public class GovernorRenderer extends GeoEntityRenderer<GovernorEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(GovernorEntity entity) {
-        return new ResourceLocation("mobius", "textures/entity/governor.png");
+        return new ResourceLocation("mobius", "textures/entity/governor_new.png");
     }
 }
 
