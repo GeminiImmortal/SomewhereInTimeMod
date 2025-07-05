@@ -67,11 +67,11 @@ public class GovernorEntity extends AbstractImperialEntity implements IAnimatabl
 
 
     private static final String[] FIRST_NAMES = {
-            "Vorak", "Kel'dan", "Zaroth", "Morthas", "Draven", "Syrix", "Velkor"
+            "Vorak", "Kel'dan", "Zaroth", "Morthas", "Draven", "Syrix", "Velkor", "Belethor", "Nazeem", "Alaric", "Oswin", "Berengar", "Wulfric", "Cedric"
     };
 
     private static final String[] LAST_NAMES = {
-            "Skullsplitter", "Ironfist", "Blackthorn", "Duskwalker", "Stormrage"
+            "Skullsplitter", "Ironfist", "Blackthorn", "Duskwalker", "Stormrage", "Dawnfist", "Grimshaw", "Ravenshield", "Ironhand", "Redwyne", "Hollowmere", "Ashdown", "Stonehelm", "Steelbringer"
     };
 
     public static String generateBossName(Random rand) {
