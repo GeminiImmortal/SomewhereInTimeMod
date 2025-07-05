@@ -16,7 +16,6 @@ import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
-import net.minecraft.entity.monster.VindicatorEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -52,6 +51,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GovernorEntity extends AbstractImperialEntity implements IAnimatable, IFactionCarrier {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
@@ -65,8 +65,25 @@ public class GovernorEntity extends AbstractImperialEntity implements IAnimatabl
     private static final int MAX_CLONES = 6;
     private static boolean isAttacking;
 
+
+    private static final String[] FIRST_NAMES = {
+            "Vorak", "Kel'dan", "Zaroth", "Morthas", "Draven", "Syrix", "Velkor"
+    };
+
+    private static final String[] LAST_NAMES = {
+            "Skullsplitter", "Ironfist", "Blackthorn", "Duskwalker", "Stormrage"
+    };
+
+    public static String generateBossName(Random rand) {
+        String first = FIRST_NAMES[rand.nextInt(FIRST_NAMES.length)];
+        String last = LAST_NAMES[rand.nextInt(LAST_NAMES.length)];
+
+        return first + " " + last;
+    }
+
+
     IFormattableTextComponent rank = new StringTextComponent("[CHAMPION FOE] ").setStyle(Style.EMPTY.withColor(TextFormatting.GOLD).withBold(true));
-    IFormattableTextComponent name = new StringTextComponent("His Lordship, The Governor").setStyle(Style.EMPTY.withColor(TextFormatting.DARK_BLUE).withBold(false));
+    IFormattableTextComponent name = new StringTextComponent("Governor " + generateBossName(new Random())).setStyle(Style.EMPTY.withColor(TextFormatting.DARK_BLUE).withBold(false));
     IFormattableTextComponent namePlate = rank.append(name);
 
     private final ServerBossInfo bossInfo = new ServerBossInfo(
