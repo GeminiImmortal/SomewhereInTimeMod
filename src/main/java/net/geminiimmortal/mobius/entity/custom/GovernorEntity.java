@@ -5,10 +5,8 @@ import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.*;
 import net.geminiimmortal.mobius.faction.FactionType;
 import net.geminiimmortal.mobius.faction.IFactionCarrier;
-import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.util.TitleUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.BackgroundMusicSelector;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -43,8 +41,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerBossInfo;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.loading.FMLEnvironment;
-import net.minecraftforge.fml.network.PacketDistributor;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -57,7 +53,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GovernorEntity extends VindicatorEntity implements IAnimatable, IFactionCarrier {
+public class GovernorEntity extends AbstractImperialEntity implements IAnimatable, IFactionCarrier {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final DataParameter<Boolean> CASTING = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> FLEEING = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
@@ -91,7 +87,7 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable, IFa
         return activeClones.size() < MAX_CLONES;
     }
 
-    public GovernorEntity(EntityType<? extends VindicatorEntity> type, World worldIn) {
+    public GovernorEntity(EntityType<? extends GovernorEntity> type, World worldIn) {
         super(type, worldIn);
         this.dropExperience();
         this.maxUpStep = 1;
@@ -124,11 +120,6 @@ public class GovernorEntity extends VindicatorEntity implements IAnimatable, IFa
         if (tag.getBoolean("IsPersistentBoss")) {
             this.setPersistenceRequired();
         }
-    }
-
-    @Override
-    public void checkDespawn() {
-        // Do nothing to prevent the boss from despawning
     }
 
 

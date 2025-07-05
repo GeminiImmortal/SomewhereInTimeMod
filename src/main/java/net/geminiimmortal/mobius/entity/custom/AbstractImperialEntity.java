@@ -41,9 +41,6 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
     private static final RangedInteger PERSISTENT_ANGER_TIME = TickRangeConverter.rangeOfSeconds(20, 39);
     private UUID persistentAngerTarget;
 
-    @Nullable
-    private UUID patrolLeader;
-    private boolean inPatrol;
 
 
     protected AbstractImperialEntity(EntityType<? extends CreatureEntity> entityType, World world) {
@@ -51,6 +48,7 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
         this.setPersistenceRequired();
     }
 
+    @Override
     protected void defineSynchedData(){
         super.defineSynchedData();
         this.entityData.define(PATROL_LEADER, Optional.empty());
@@ -60,7 +58,6 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
 
     public void setIsPartOfPatrol(boolean isPartOfPatrol) {
         this.entityData.set(IS_PART_OF_PATROL, isPartOfPatrol);
-        this.inPatrol = isPatrolMember();
     }
 
 
@@ -91,6 +88,7 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
         this.setRemainingPersistentAngerTime(PERSISTENT_ANGER_TIME.randomValue(this.random));
     }
 
+    @Override
     public void aiStep() {
         super.aiStep();
         if (!this.level.isClientSide) {
@@ -116,6 +114,7 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
         this.persistentAngerTarget = p_230259_1_;
     }
 
+    @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(19, new WaterAvoidingRandomWalkingGoal(this, 0.95D));
         this.goalSelector.addGoal(20, new ImperialOfficerLeadPatrolGoal(this, 0.7D));
@@ -126,7 +125,7 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
         this.targetSelector.addGoal(12, new TargetCriminalPlayerGoal(this));
     }
 
-
+    @Override
     public void addAdditionalSaveData(CompoundNBT p_213281_1_) {
         super.addAdditionalSaveData(p_213281_1_);
         this.addPersistentAngerSaveData(p_213281_1_);
@@ -134,6 +133,7 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
         p_213281_1_.putBoolean("InPatrol", this.isInPatrol());
     }
 
+    @Override
     public void readAdditionalSaveData(CompoundNBT p_70037_1_) {
         super.readAdditionalSaveData(p_70037_1_);
 

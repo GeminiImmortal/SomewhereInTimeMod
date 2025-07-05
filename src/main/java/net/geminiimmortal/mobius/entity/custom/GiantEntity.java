@@ -36,6 +36,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import software.bernie.geckolib3.core.AnimationState;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -201,6 +202,10 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob, IF
         GiantEntity entity = (GiantEntity) event.getAnimatable();
         AnimationController<?> controller = event.getController();
 
+        if (controller.getAnimationState().equals(AnimationState.Stopped)) {
+            controller.markNeedsReload();
+        }
+
         if (this.getAttacking()) {
             controller.setAnimation(new AnimationBuilder().addAnimation("animation.giant.stomp", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
             return PlayState.CONTINUE;
@@ -213,6 +218,8 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob, IF
 
         controller.setAnimation(new AnimationBuilder().addAnimation("animation.giant.idle", ILoopType.EDefaultLoopTypes.LOOP));
         return PlayState.CONTINUE;
+
+
     }
 
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
