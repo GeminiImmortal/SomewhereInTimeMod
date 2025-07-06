@@ -1,12 +1,16 @@
 package net.geminiimmortal.mobius.entity.goals;
 
 
+import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.GovernorCloneEntity;
 import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.concurrent.TickDelayedTask;
+import net.minecraft.util.math.BlockPos;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Random;
 
 public class CloneExplodeOnProximityGoal extends Goal {
 
@@ -22,13 +26,16 @@ public class CloneExplodeOnProximityGoal extends Goal {
     @Override
     public boolean canUse() {
         List<PlayerEntity> players = clone.level.getEntitiesOfClass(PlayerEntity.class, clone.getBoundingBox().inflate(detonationRange));
-        return !players.isEmpty() && clone.getOriginalGovernor().getGrinning() && clone.getOriginalGovernor().getGCD() == 1;
+        return !players.isEmpty();
     }
 
     @Override
     public void start() {
-        clone.startCountdown();
-        clone.explode();
+            int delayTicks = new Random().nextInt(30);
+            this.clone.level.getServer().tell(new TickDelayedTask(this.clone.level.getServer().getTickCount() + delayTicks, () -> {
+                clone.startCountdown();
+                clone.explode();
+            }));
     }
 }
 

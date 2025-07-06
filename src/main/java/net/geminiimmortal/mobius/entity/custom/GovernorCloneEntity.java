@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.damage.CloneShatterDamageSource;
+import net.geminiimmortal.mobius.effects.ModEffects;
 import net.geminiimmortal.mobius.entity.goals.CloneExplodeOnProximityGoal;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -14,6 +15,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -128,9 +130,15 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
     public void explode() {
         if (this.level.isClientSide) return;
 
-        List<PlayerEntity> nearby = this.level.getEntitiesOfClass(PlayerEntity.class, new AxisAlignedBB(this.blockPosition()).inflate(3.0D));
+        List<PlayerEntity> nearby = this.level.getEntitiesOfClass(PlayerEntity.class, new AxisAlignedBB(this.blockPosition()).inflate(4.0D));
         for (PlayerEntity player : nearby) {
-            player.hurt((CLONE_SHATTER), 6.0F);
+            if (!player.isBlocking()) {
+
+                player.hurt(CloneShatterDamageSource.CLONE_SHATTER, 12f);
+                player.addEffect(new EffectInstance(ModEffects.EXPOSED_EFFECT.get(), 100));
+            } else {
+                player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.SHIELD_BLOCK, SoundCategory.HOSTILE, 1f, 1f);
+            }
         }
 
         this.level.playSound(null, blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 0.2F, 1.0F);

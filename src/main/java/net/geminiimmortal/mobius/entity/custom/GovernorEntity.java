@@ -13,10 +13,14 @@ import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -28,7 +32,14 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
+import java.util.List;
+
 public class GovernorEntity extends AbstractImperialBossEntity implements IAnimatable {
+    private static final String[] TAUNTS = {
+            "Over here, dumbo!", "Don't blink! You might miss me! HA!",
+            "Hit me already, fool!", "Stop trying to hit me and hit me!"
+    };
+
     private int cloneCooldown = 300;
     private static final DataParameter<Integer> GCD = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.INT);
     private static final DataParameter<Boolean> GRINNING = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
@@ -103,6 +114,16 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
             setGCD(300);
         }
         if (current == 40) {
+            // Taunt nearby players
+            if (!this.level.isClientSide) {
+                List<ServerPlayerEntity> players = this.level.getEntitiesOfClass(ServerPlayerEntity.class, this.getBoundingBox().inflate(50));
+                for (ServerPlayerEntity player : players) {
+                    player.sendMessage(
+                            new StringTextComponent(TAUNTS[random.nextInt(TAUNTS.length)]).withStyle(TextFormatting.DARK_PURPLE),
+                            player.getUUID()
+                    );
+                }
+            }
             setGrinning(true);
         }
     }
