@@ -1,9 +1,12 @@
 package net.geminiimmortal.mobius.entity.custom;
 
+import net.geminiimmortal.mobius.effects.ModEffects;
 import net.geminiimmortal.mobius.entity.goals.CloneSpellGoal;
 import net.geminiimmortal.mobius.entity.goals.GovernorSummonCloneGoal;
 import net.geminiimmortal.mobius.entity.goals.ShatterCloneGoal;
+import net.geminiimmortal.mobius.entity.goals.util.TeleportUtil;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -17,11 +20,16 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -102,6 +110,30 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
 
     public void setGrinning(boolean grinning) {
         this.entityData.set(GRINNING, grinning);
+    }
+
+    public void preCloneSummonEvent() {
+        ServerWorld world = (ServerWorld) this.level;
+
+        if (this.level != null && !this.level.isClientSide() && this.getTarget() != null) {
+
+
+            this.addEffect(new EffectInstance(Effects.INVISIBILITY, 160, 1));
+            this.getTarget().addEffect(new EffectInstance(ModEffects.EXPOSED_EFFECT.get(), 160, 1));
+            this.playSound(ModSounds.GOVERNOR_POOF.get(), 12.0F, 1.0F);
+            this.playSound(ModSounds.GOVERNOR_ILLUSION.get(), 12.0f, 0.9f);
+
+            world.sendParticles(
+                    ParticleTypes.CLOUD,
+                    this.getX(), this.getY(), this.getZ(),
+                    20, 0.1, 0.1, 0.1, 0.1
+            );
+
+            Vector3d safePos = TeleportUtil.findSafeTeleportPosition(this.level, this, 16, 20);
+            if (safePos != null) {
+                this.moveTo(safePos);
+            }
+        }
     }
 
     public void decrementCloneSummonCooldown() {

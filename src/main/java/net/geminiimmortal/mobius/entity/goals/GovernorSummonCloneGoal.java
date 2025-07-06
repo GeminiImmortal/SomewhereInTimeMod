@@ -11,6 +11,8 @@ import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.concurrent.TickDelayedTask;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;
@@ -30,7 +32,7 @@ public class GovernorSummonCloneGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        return governor.getTarget() != null && governor.getGrinning() && governor.getGCD() == 10;
+        return governor.getTarget() != null && governor.getGrinning() && governor.getGCD() <= 10;
     }
 
     @Override
@@ -51,48 +53,27 @@ public class GovernorSummonCloneGoal extends Goal {
         if (target == null) return;
 
         // Visual/audio feedback
-        governor.addEffect(new EffectInstance(Effects.INVISIBILITY, 160, 1));
-        target.addEffect(new EffectInstance(ModEffects.EXPOSED_EFFECT.get(), 160, 1));
-        governor.playSound(ModSounds.GOVERNOR_POOF.get(), 12.0F, 1.0F);
-        governor.playSound(ModSounds.GOVERNOR_ILLUSION.get(), 12.0f, 0.9f);
-
-        world.sendParticles(
-                ParticleTypes.CLOUD,
-                governor.getX(), governor.getY(), governor.getZ(),
-                20, 0.1, 0.1, 0.1, 0.1
-        );
-
-        Vector3d safePos = TeleportUtil.findSafeTeleportPosition(governor.level, governor, 16, 20);
-        if (safePos != null) {
-            governor.moveTo(safePos);
+        if (governor.getGCD() == 10) {
+            governor.preCloneSummonEvent();
         }
 
-        for (int i = 0; i < 24; i++) {
-            int delayTicks = i * 5; // 5 ticks between each summon
+        for (int i = 0; i < 2; i++) {
 
-            int index = i; // for lambda capture
-            world.getServer().tell(new TickDelayedTask(world.getServer().getTickCount() + delayTicks, () -> {
-                BlockPos spawnPos = target.blockPosition().offset(
-                        governor.getRandom().nextInt(8) - 3,
-                        0,
-                        governor.getRandom().nextInt(8) - 3
-                );
+            BlockPos spawnPos = target.blockPosition().offset(
+                    governor.getRandom().nextInt(8) - 3,
+                    0,
+                    governor.getRandom().nextInt(8) - 3
+            );
 
-                GovernorCloneEntity clone = ModEntityTypes.GOVERNOR_CLONE.get().create(world);
-                if (clone != null) {
-                    clone.setFromGovernor(governor);
-                    clone.moveTo(spawnPos, 0.0F, 0.0F);
-                    clone.setOriginalGovernor(governor, governor.getUUID());
-                    world.addFreshEntity(clone);
-                }
-            }));
+            GovernorCloneEntity clone = ModEntityTypes.GOVERNOR_CLONE.get().create(world);
+            if (clone != null) {
+                clone.setFromGovernor(governor);
+                clone.moveTo(spawnPos, 0.0F, 0.0F);
+                clone.setOriginalGovernor(governor, governor.getUUID());
+                world.addFreshEntity(clone);
+                clone.level.playSound(null, clone.blockPosition() ,SoundEvents.ENDERMAN_TELEPORT, SoundCategory.HOSTILE, 1.0f, 1.0f);
+            }
         }
-
-
-
-
-
-
     }
 }
 
