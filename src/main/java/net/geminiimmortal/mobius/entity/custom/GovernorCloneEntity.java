@@ -121,8 +121,6 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
 
     public void setFromGovernor(GovernorEntity governor) {
         this.setItemInHand(Hand.MAIN_HAND, governor.getMainHandItem().copy());
-        this.setCustomName(new StringTextComponent("Clone of " + governor.getName().getString()));
-        this.setCustomNameVisible(true);
         this.setHealth(this.getMaxHealth() * 0.5F); // clones have half HP
     }
 
