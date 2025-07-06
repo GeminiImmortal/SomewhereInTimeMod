@@ -2,7 +2,6 @@ package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.damage.CloneShatterDamageSource;
 import net.geminiimmortal.mobius.effects.ModEffects;
-import net.geminiimmortal.mobius.entity.goals.CloneExplodeOnProximityGoal;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -38,14 +37,12 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import java.util.List;
 import java.util.UUID;
 
-import static net.geminiimmortal.mobius.damage.CloneShatterDamageSource.CLONE_SHATTER;
-
 public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
     AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private GovernorEntity governor;
     private static final DataParameter<Boolean> IS_COUNTDOWN = EntityDataManager.defineId(GovernorCloneEntity.class, DataSerializers.BOOLEAN);
     private int lifetimeTicks = 0;
-    private static final int MAX_LIFETIME = 40; // 2 seconds
+    private static final int MAX_LIFETIME = 60; // 2 seconds
 
     public GovernorCloneEntity(EntityType<? extends MonsterEntity> type, World world) {
         super(type, world);
@@ -71,21 +68,36 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
         this.entityData.define(IS_COUNTDOWN, false);
     }
 
+    private void triggerExplodeOnHit() {
+        if (this.hurtTime > 1) {
+            this.explode();
+        }
+    }
+
     @Override
     public void tick() {
         super.tick();
 
-        if (!this.level.isClientSide) {
-            lifetimeTicks++;
-            if (lifetimeTicks > MAX_LIFETIME) {
-                this.explode();
-            }
 
-            if (this.entityData.get(IS_COUNTDOWN)) {
-                if (lifetimeTicks % 20 == 0) {
-                    level.playSound(null, blockPosition(), SoundEvents.ILLUSIONER_CAST_SPELL, SoundCategory.HOSTILE, 1.0F, 1.5F);
+        if (this.getOriginalGovernor() != null) {
+            if (!this.level.isClientSide && !this.getOriginalGovernor().getCorrectHit() && this.getOriginalGovernor().getGCD() <= 59) {
+                this.startCountdown();
+                this.triggerExplodeOnHit();
+                lifetimeTicks++;
+                if (this.getOriginalGovernor().getGCD() <= 2) {
+                    this.explode();
                 }
-                this.setGlowing(true);
+
+                if (this.entityData.get(IS_COUNTDOWN)) {
+                    if (lifetimeTicks % 20 == 0) {
+                        level.playSound(null, blockPosition(), SoundEvents.ILLUSIONER_CAST_SPELL, SoundCategory.HOSTILE, 1.0F, 1.5F);
+                    }
+                }
+            }
+            if (!this.level.isClientSide() && this.getOriginalGovernor().getGCD() <= 59) {
+                if (this.getOriginalGovernor().getCorrectHit()) {
+                    this.remove();
+                }
             }
         }
     }
@@ -117,10 +129,7 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new SwimGoal(this));
-        this.goalSelector.addGoal(1, new CloneExplodeOnProximityGoal(this, 2.5));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.2D, false));
-        this.goalSelector.addGoal(3, new RandomWalkingGoal(this, 1.0D));
-        this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 50.0F));
     }
 
     public void startCountdown() {
@@ -142,7 +151,7 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
         }
 
         this.level.playSound(null, blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 0.2F, 1.0F);
-        this.level.explode(this, this.getX(), this.getY(), this.getZ(), 1.5F, Explosion.Mode.NONE);
+//        this.level.explode(this, this.getX(), this.getY(), this.getZ(), 1.5F, Explosion.Mode.NONE);
         this.remove();
     }
 
