@@ -19,6 +19,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
@@ -147,6 +148,7 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
 
     public void decrementCloneSummonCooldown() {
         int current = getGCD();
+
         if (current > 0) {
             setGCD(current - 1);
         }
@@ -174,12 +176,9 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
             setGrinning(true);
         }
         if (current < 60 && !this.getCorrectHit() && !this.level.isClientSide()) {
-            if (this.hurtTime > 0) {
+            if (this.hurtTime == 10 && current < 59) {
                 setCorrectHit(true);
             }
-        }
-        if (current >= 58) {
-            setCorrectHit(false);
         }
     }
 

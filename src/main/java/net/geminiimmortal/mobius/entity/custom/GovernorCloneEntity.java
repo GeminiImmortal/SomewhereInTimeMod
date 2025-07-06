@@ -141,13 +141,9 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
 
         List<PlayerEntity> nearby = this.level.getEntitiesOfClass(PlayerEntity.class, new AxisAlignedBB(this.blockPosition()).inflate(4.0D));
         for (PlayerEntity player : nearby) {
-            if (!player.isBlocking()) {
 
-                player.hurt(CloneShatterDamageSource.CLONE_SHATTER, 12f);
-                player.addEffect(new EffectInstance(ModEffects.EXPOSED_EFFECT.get(), 100));
-            } else {
-                player.level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.SHIELD_BLOCK, SoundCategory.HOSTILE, 1f, 1f);
-            }
+            player.hurt(CloneShatterDamageSource.CLONE_SHATTER, 12f);
+            player.addEffect(new EffectInstance(ModEffects.EXPOSED_EFFECT.get(), 100));
         }
 
         this.level.playSound(null, blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundCategory.HOSTILE, 0.2F, 1.0F);
