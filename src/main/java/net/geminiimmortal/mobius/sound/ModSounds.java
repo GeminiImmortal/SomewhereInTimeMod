@@ -171,6 +171,12 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> LANCE_IMPACT =
             registerSoundEvent("lance_impact");
 
+    public static final RegistryObject<SoundEvent> GOVERNOR_POOF =
+            registerSoundEvent("governor_poof");
+
+    public static final RegistryObject<SoundEvent> GOVERNOR_ILLUSION =
+            registerSoundEvent("governor_illusion");
+
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, name)));
     }

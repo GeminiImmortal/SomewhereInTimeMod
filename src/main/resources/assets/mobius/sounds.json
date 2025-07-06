@@ -404,5 +404,16 @@
     "sounds": [
       "mobius:lance_impact"
     ]
+  },
+  "governor_poof": {
+    "sounds": [
+      "mobius:governor_poof"
+    ],
+    "subtitle": "Governor disappears"
+  },
+  "governor_illusion": {
+    "sounds": [
+      "mobius:governor_illusion"
+    ]
   }
 }

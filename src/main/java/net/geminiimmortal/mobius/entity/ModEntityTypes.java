@@ -71,6 +71,12 @@ public class ModEntityTypes {
                                     EntityClassification.MONSTER).sized(1f, 3f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "governor").toString()));
 
+    public static final RegistryObject<EntityType<GovernorCloneEntity>> GOVERNOR_CLONE =
+            ENTITY_TYPES.register("governor_clone",
+                    () -> EntityType.Builder.of(GovernorCloneEntity::new,
+                                    EntityClassification.MONSTER).sized(1f, 3f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "governor_clone").toString()));
+
     public static final RegistryObject<EntityType<SpellEntity>> SPELL =
             ENTITY_TYPES.register("spell",
                     () -> EntityType.Builder.of(SpellEntity::new,

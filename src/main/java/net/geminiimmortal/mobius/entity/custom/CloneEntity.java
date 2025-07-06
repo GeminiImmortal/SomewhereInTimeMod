@@ -214,29 +214,16 @@ public class CloneEntity extends MobEntity implements IAnimatable, IRangedAttack
     @Override
     public void registerControllers(AnimationData data) {
         AnimationController<CloneEntity> controller = new AnimationController<>(this, "controller", 0, this::predicate);
-        AnimationController<CloneEntity> alertedController = new AnimationController<>(this, "alertedController", 0, this::alertedPredicate);
 
         data.addAnimationController(controller);
-        data.addAnimationController(alertedController);
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (!this.getRunning()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.idle", true));
-            return PlayState.CONTINUE;
-        } else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.run", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.governor.idle", true));
             return PlayState.CONTINUE;
         }
-    }
-
-
-    private <E extends IAnimatable> PlayState alertedPredicate(AnimationEvent<E> event) {
-        if (this.getCasting()) {
-           event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.model.attack", true));
-            return PlayState.CONTINUE;
-        }
-        return PlayState.STOP;
+        return PlayState.CONTINUE;
     }
 
 

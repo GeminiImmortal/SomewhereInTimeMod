@@ -1,5 +1,6 @@
 package net.geminiimmortal.mobius.entity.render;
 
+import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.custom.CloneEntity;
 import net.geminiimmortal.mobius.entity.model.CloneModel;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -13,7 +14,7 @@ public class CloneRenderer extends GeoEntityRenderer<CloneEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(CloneEntity entity) {
-        return new ResourceLocation("mobius", "textures/entity/governor.png");
+        return new ResourceLocation(MobiusMod.MOD_ID, "textures/entity/governor_new.png");
     }
 }
 

@@ -1,5 +1,6 @@
 package net.geminiimmortal.mobius.entity.render;
 
+import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.custom.GovernorEntity;
 import net.geminiimmortal.mobius.entity.model.GovernorModel;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -13,7 +14,11 @@ public class GovernorRenderer extends GeoEntityRenderer<GovernorEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(GovernorEntity entity) {
-        return new ResourceLocation("mobius", "textures/entity/governor_new.png");
+        if (entity.getGrinning()) {
+            return new ResourceLocation(MobiusMod.MOD_ID, "textures/entity/governor_new_grin.png");
+        }
+
+        return new ResourceLocation(MobiusMod.MOD_ID, "textures/entity/governor_new.png");
     }
 }
 
