@@ -149,6 +149,16 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
                 this.moveTo(safePos);
                 setCorrectHit(false);
             }
+            if (target != null) {
+                double dx = target.getX() - this.getX();
+                double dz = target.getZ() - this.getZ();
+
+                float yaw = (float) (Math.toDegrees(Math.atan2(dz, dx))) - 90F;
+
+                this.yRot = yaw;
+                this.yHeadRot = yaw;
+                this.yBodyRot = yaw;
+            }
         }
     }
 
@@ -182,7 +192,7 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
             setGrinning(true);
         }
         if (current < 60 && !this.getCorrectHit() && !this.level.isClientSide()) {
-            if (this.hurtTime == 10 && current < 59) {
+            if (this.hurtTime == 10 && current < 58) {
                 setCorrectHit(true);
             }
         }

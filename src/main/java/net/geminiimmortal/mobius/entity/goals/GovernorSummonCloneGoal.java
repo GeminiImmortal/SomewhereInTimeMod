@@ -76,6 +76,15 @@ public class GovernorSummonCloneGoal extends Goal {
                 Vector3d safeSpawnPos = TeleportUtil.findSafeTeleportPosition(this.governor.level, clone, 6, 40);
                 if (safeSpawnPos != null) {
                     clone.moveTo(safeSpawnPos);
+                    double dx = target.getX() - clone.getX();
+                    double dz = target.getZ() - clone.getZ();
+                    double dy = target.getEyeY() - clone.getEyeY();
+
+                    float yaw = (float)(Math.toDegrees(Math.atan2(dz, dx))) - 90F;
+
+                    clone.yRot = yaw;
+                    clone.yHeadRot = yaw;
+                    clone.yBodyRot = yaw;
                 }
             }
         }
