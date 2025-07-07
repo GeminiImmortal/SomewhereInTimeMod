@@ -37,12 +37,14 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class GovernorEntity extends AbstractImperialBossEntity implements IAnimatable {
     private static final String[] TAUNTS = {
             "Over here, dumbo!", "Don't blink! You might miss me! HA!",
-            "Hit me already, fool!", "Stop trying to hit me and hit me!"
+            "Hit me already, fool!", "Stop trying to hit me and hit me!",
+            "Think fast!"
     };
 
     private static final DataParameter<Integer> GCD = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.INT);
@@ -53,6 +55,7 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
 
     public GovernorEntity(EntityType<? extends CreatureEntity> entityType, World worldIn) {
         super(entityType, worldIn);
+        this.setPersistenceRequired();
     }
 
     @Override
@@ -165,7 +168,7 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
                 setGrinning(false);
             }
         }
-        if (current == 60) {
+        if (current == 65) {
             // Taunt nearby players
             if (!this.level.isClientSide) {
                 List<ServerPlayerEntity> players = this.level.getEntitiesOfClass(ServerPlayerEntity.class, this.getBoundingBox().inflate(50));
@@ -188,6 +191,12 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
     @Override
     public void stopBossMusic() {
         super.stopBossMusic();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
+        return ModSounds.GOVERNOR_HURT.get();
     }
 
     @Override

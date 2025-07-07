@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius.event;
 
 import net.geminiimmortal.mobius.MobiusMod;
+import net.geminiimmortal.mobius.hook.MusicTickerHook;
 import net.geminiimmortal.mobius.util.InfamyHelper;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -16,6 +17,7 @@ public class InfamySyncEvents {
     @SubscribeEvent
     public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
         InfamyHelper.sync(event.getPlayer());
+        MusicTickerHook.clearMusicOverride();
     }
 }
 

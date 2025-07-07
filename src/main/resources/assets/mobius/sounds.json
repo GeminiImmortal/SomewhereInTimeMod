@@ -421,5 +421,11 @@
       "mobius:governor_laugh"
     ],
     "subtitle": "Governor cackles"
+  },
+  "governor_hurt": {
+    "sounds": [
+      "mobius:governor_hurt"
+    ],
+    "subtitle": "Governor hurts"
   }
 }

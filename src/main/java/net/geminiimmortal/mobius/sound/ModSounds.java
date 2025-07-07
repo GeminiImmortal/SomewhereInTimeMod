@@ -180,6 +180,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> GOVERNOR_LAUGH =
             registerSoundEvent("governor_laugh");
 
+    public static final RegistryObject<SoundEvent> GOVERNOR_HURT =
+            registerSoundEvent("governor_hurt");
+
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, name)));
     }
