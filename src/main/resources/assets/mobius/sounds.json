@@ -424,7 +424,10 @@
   },
   "governor_hurt": {
     "sounds": [
-      "mobius:governor_hurt"
+      {
+       "name": "mobius:governor_hurt",
+        "pitch": 1.2
+      }
     ],
     "subtitle": "Governor hurts"
   }
