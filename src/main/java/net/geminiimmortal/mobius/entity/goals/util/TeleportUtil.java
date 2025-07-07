@@ -1,6 +1,5 @@
 package net.geminiimmortal.mobius.entity.goals.util;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.vector.Vector3d;

@@ -72,7 +72,7 @@ public class GovernorSummonCloneGoal extends Goal {
                     world.addFreshEntity(clone);
                 }
             if (clone != null) {
-                Vector3d safeSpawnPos = TeleportUtil.findSafeTeleportPosition(this.governor.level, clone, 12, 40);
+                Vector3d safeSpawnPos = TeleportUtil.findSafeTeleportPosition(this.governor.level, clone, 9, 50);
                 if (safeSpawnPos != null) {
                     clone.moveTo(safeSpawnPos);
                     double dx = target.getX() - clone.getX();

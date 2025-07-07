@@ -156,7 +156,6 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
             this.addEffect(new EffectInstance(Effects.INVISIBILITY, 5, 1));
 
             this.playSound(ModSounds.GOVERNOR_POOF.get(), 12.0F, 1.0F);
-//            this.playSound(ModSounds.GOVERNOR_ILLUSION.get(), 12.0f, 0.9f);
             setCorrectHit(false);
             world.sendParticles(
                     ParticleTypes.CLOUD,
@@ -170,7 +169,7 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
                 this.moveTo(target.getX(), this.getY(), target.getZ());
             }
             setCorrectHit(false);
-            Vector3d safePos = TeleportUtil.findSafeTeleportPosition(this.level, this, 12, 40);
+            Vector3d safePos = TeleportUtil.findSafeTeleportPosition(this.level, this, 9, 50);
             if (safePos != null) {
                 this.moveTo(safePos);
                 setCorrectHit(false);
