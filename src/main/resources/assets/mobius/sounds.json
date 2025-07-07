@@ -415,5 +415,11 @@
     "sounds": [
       "mobius:governor_illusion"
     ]
+  },
+  "governor_laugh": {
+    "sounds": [
+      "mobius:governor_laugh"
+    ],
+    "subtitle": "Governor cackles"
   }
 }

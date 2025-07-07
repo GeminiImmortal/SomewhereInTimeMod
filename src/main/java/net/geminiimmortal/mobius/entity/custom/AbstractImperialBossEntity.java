@@ -1,6 +1,6 @@
 package net.geminiimmortal.mobius.entity.custom;
 
-import net.geminiimmortal.mobius.MusicTickerHook;
+import net.geminiimmortal.mobius.hook.MusicTickerHook;
 import net.geminiimmortal.mobius.faction.FactionType;
 import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.geminiimmortal.mobius.faction.IRankedImperial;

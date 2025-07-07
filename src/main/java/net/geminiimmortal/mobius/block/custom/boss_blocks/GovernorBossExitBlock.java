@@ -1,5 +1,7 @@
 package net.geminiimmortal.mobius.block.custom.boss_blocks;
 
+import net.geminiimmortal.mobius.world.data.MobiusDataManager;
+import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -13,6 +15,10 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.storage.DimensionSavedDataManager;
+
+import static java.lang.reflect.AccessibleObject.setAccessible;
 
 public class GovernorBossExitBlock extends Block {
     public GovernorBossExitBlock(Properties p_i48440_1_) {
@@ -36,6 +42,8 @@ public class GovernorBossExitBlock extends Block {
             world.playSound(null, targetX, targetY, targetZ, SoundEvents.ENDERMAN_TELEPORT, SoundCategory.AMBIENT, 1.0F, 1.0F);
 
             world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+            MobiusDataManager data = MobiusDataManager.get((ServerWorld) world, ModDimensions.MOBIUS_WORLD);
+            data.setGovernorTowerDefeated(true);
 
             return ActionResultType.SUCCESS;
         }

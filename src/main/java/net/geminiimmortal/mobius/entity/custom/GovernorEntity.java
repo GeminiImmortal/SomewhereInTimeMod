@@ -20,6 +20,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
@@ -125,6 +126,8 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
             ServerPlayerEntity target = (ServerPlayerEntity) this.level.getNearestPlayer(this, 50);
 
             this.addEffect(new EffectInstance(Effects.INVISIBILITY, 5, 1));
+            this.level.playSound(null, this.blockPosition(), ModSounds.GOVERNOR_LAUGH.get(), SoundCategory.HOSTILE, 16.0f, 1.2f);
+
             this.playSound(ModSounds.GOVERNOR_POOF.get(), 12.0F, 1.0F);
             this.playSound(ModSounds.GOVERNOR_ILLUSION.get(), 12.0f, 0.9f);
             setCorrectHit(false);

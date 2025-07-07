@@ -1,9 +1,6 @@
 package net.geminiimmortal.mobius.mixin;
 
-import net.geminiimmortal.mobius.MusicTickerHook;
-import net.geminiimmortal.mobius.sound.ModSounds;
-import net.geminiimmortal.mobius.world.dimension.ModDimensions;
-import net.minecraft.client.Minecraft;
+import net.geminiimmortal.mobius.hook.MusicTickerHook;
 import net.minecraft.client.audio.BackgroundMusicSelector;
 import net.minecraft.client.audio.MusicTicker;
 import org.spongepowered.asm.mixin.Mixin;

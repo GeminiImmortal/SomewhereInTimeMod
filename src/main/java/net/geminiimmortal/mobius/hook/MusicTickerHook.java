@@ -1,4 +1,4 @@
-package net.geminiimmortal.mobius;
+package net.geminiimmortal.mobius.hook;
 
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.world.dimension.ModDimensions;
