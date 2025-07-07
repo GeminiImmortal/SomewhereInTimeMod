@@ -1,5 +1,6 @@
 package net.geminiimmortal.mobius.entity.custom;
 
+import net.geminiimmortal.mobius.capability.ModCapabilities;
 import net.geminiimmortal.mobius.capability.infamy.IInfamy;
 import net.geminiimmortal.mobius.entity.goals.ImperialFollowPatrolLeaderGoal;
 import net.geminiimmortal.mobius.entity.goals.ImperialOfficerLeadPatrolGoal;
@@ -102,8 +103,10 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
         if (this.getTarget() != null) {
             if (this.getTarget().getClass().equals(ServerPlayerEntity.class)) {
                 player = (ServerPlayerEntity) this.getTarget();
-                if (InfamyHelper.get(player).getInfamyTier().ordinal() >= IInfamy.InfamyTier.NOTICED.ordinal()) {
-                    return this.persistentAngerTarget;
+                if (player.getCapability(ModCapabilities.INFAMY_CAPABILITY).isPresent()) {
+                    if (InfamyHelper.get(player).getInfamyTier().ordinal() >= IInfamy.InfamyTier.NOTICED.ordinal()) {
+                        return this.persistentAngerTarget;
+                    }
                 }
             }
         }

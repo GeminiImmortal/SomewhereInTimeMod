@@ -27,7 +27,7 @@ public class GovernorSummonCloneGoal extends Goal {
 
     @Override
     public boolean canUse() {
-        return governor.getGCD() == 59;
+        return governor.getGCD() == 99;
     }
 
     @Override
@@ -70,10 +70,9 @@ public class GovernorSummonCloneGoal extends Goal {
                 clone.moveTo(spawnPos, 0.0f, 0.0f);
                     clone.setOriginalGovernor(governor, governor.getUUID());
                     world.addFreshEntity(clone);
-                    clone.level.playSound(null, clone.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundCategory.HOSTILE, 1.0f, 1.0f);
                 }
             if (clone != null) {
-                Vector3d safeSpawnPos = TeleportUtil.findSafeTeleportPosition(this.governor.level, clone, 6, 40);
+                Vector3d safeSpawnPos = TeleportUtil.findSafeTeleportPosition(this.governor.level, clone, 12, 40);
                 if (safeSpawnPos != null) {
                     clone.moveTo(safeSpawnPos);
                     double dx = target.getX() - clone.getX();

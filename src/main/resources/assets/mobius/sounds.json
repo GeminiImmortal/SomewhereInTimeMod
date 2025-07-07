@@ -275,7 +275,7 @@
       {
         "name": "mobius:bullyrag",
         "stream": true,
-        "volume": 0.5
+        "volume": 0.4
       }
     ]
   },
@@ -418,17 +418,43 @@
   },
   "governor_laugh": {
     "sounds": [
-      "mobius:governor_laugh"
+      {
+        "name": "mobius:governor_laugh",
+        "weight": 20
+      },
+      {
+        "name": "mobius:governor_laugh_short",
+        "weight": 40
+      },
+      {
+        "name": "mobius:governor_laugh_short_alt",
+        "weight": 40
+      }
     ],
     "subtitle": "Governor cackles"
   },
   "governor_hurt": {
     "sounds": [
       {
-       "name": "mobius:governor_hurt",
-        "pitch": 1.2
+       "name": "mobius:governor_ow",
+        "weight": 25
+      },
+      {
+        "name": "mobius:governor_ow_",
+        "weight": 75
       }
     ],
     "subtitle": "Governor hurts"
+  },
+  "governor_death": {
+    "sounds": [
+      {
+        "name": "mobius:governor_death_no"
+      },
+      {
+        "name": "mobius:governor_death_impossible"
+      }
+    ],
+    "subtitle": "Governor dies"
   }
 }

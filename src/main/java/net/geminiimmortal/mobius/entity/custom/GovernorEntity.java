@@ -13,6 +13,7 @@ import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -22,6 +23,7 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -50,12 +52,14 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
     private static final DataParameter<Integer> GCD = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.INT);
     private static final DataParameter<Boolean> GRINNING = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> CORRECT_HIT = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> FIGHT_STARTED = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> INTRO_OVER = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
     AnimationFactory factory = GeckoLibUtil.createFactory(this);
-    GovernorSummonCloneGoal governorSummonCloneGoal;
 
     public GovernorEntity(EntityType<? extends CreatureEntity> entityType, World worldIn) {
         super(entityType, worldIn);
         this.setPersistenceRequired();
+        this.setNoAi(true);
     }
 
     @Override
@@ -64,6 +68,8 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
         this.entityData.define(GCD, 140);
         this.entityData.define(GRINNING, false);
         this.entityData.define(CORRECT_HIT, false);
+        this.entityData.define(FIGHT_STARTED, false);
+        this.entityData.define(INTRO_OVER, false);
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -87,15 +93,34 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
     }
 
     @Override
+    protected void playBossMusic() {
+        super.playBossMusic();
+    }
+
+    @Override
     public void tick() {
         if (level.isClientSide) {
             if (!this.isAlive() || this.removed) {
                 stopBossMusic();
             }
         }
-        decrementCloneSummonCooldown();
+        if (this.getFightStarted()) {
+
+            decrementCloneSummonCooldown();
+        }
+        this.setBossbarPercent();
+
+        if (this.hurtTime > 0 && !this.getFightStarted()) {
+            this.setGCD(112);
+            this.setFightStarted(true);
+            this.setNoAi(false);
+        }
         super.tick();
     }
+
+    public boolean getFightStarted() { return this.entityData.get(FIGHT_STARTED); }
+
+    public void setFightStarted(boolean fightStarted) { this.entityData.set(FIGHT_STARTED, fightStarted); }
 
     public int getGCD() {
         return this.entityData.get(GCD);
@@ -129,10 +154,9 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
             ServerPlayerEntity target = (ServerPlayerEntity) this.level.getNearestPlayer(this, 50);
 
             this.addEffect(new EffectInstance(Effects.INVISIBILITY, 5, 1));
-            this.level.playSound(null, this.blockPosition(), ModSounds.GOVERNOR_LAUGH.get(), SoundCategory.HOSTILE, 16.0f, 1.2f);
 
             this.playSound(ModSounds.GOVERNOR_POOF.get(), 12.0F, 1.0F);
-            this.playSound(ModSounds.GOVERNOR_ILLUSION.get(), 12.0f, 0.9f);
+//            this.playSound(ModSounds.GOVERNOR_ILLUSION.get(), 12.0f, 0.9f);
             setCorrectHit(false);
             world.sendParticles(
                     ParticleTypes.CLOUD,
@@ -141,10 +165,12 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
             );
             setCorrectHit(false);
             if (target != null) {
+                this.playSound(ModSounds.GOVERNOR_LAUGH.get(), 50.0f, 1.0f);
+
                 this.moveTo(target.getX(), this.getY(), target.getZ());
             }
             setCorrectHit(false);
-            Vector3d safePos = TeleportUtil.findSafeTeleportPosition(this.level, this, 6, 40);
+            Vector3d safePos = TeleportUtil.findSafeTeleportPosition(this.level, this, 12, 40);
             if (safePos != null) {
                 this.moveTo(safePos);
                 setCorrectHit(false);
@@ -170,15 +196,15 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
         }
         if (current <= 0) {
             if (!getCorrectHit()) {
-                setGCD(60);
+                setGCD(100);
                 setGrinning(true);
             }
             if (getCorrectHit()) {
-                setGCD(160);
+                setGCD(200);
                 setGrinning(false);
             }
         }
-        if (current == 65) {
+        if (current == 105) {
             // Taunt nearby players
             if (!this.level.isClientSide) {
                 List<ServerPlayerEntity> players = this.level.getEntitiesOfClass(ServerPlayerEntity.class, this.getBoundingBox().inflate(50));
@@ -191,8 +217,8 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
             }
             setGrinning(true);
         }
-        if (current < 60 && !this.getCorrectHit() && !this.level.isClientSide()) {
-            if (this.hurtTime == 10 && current < 58) {
+        if (current < 100 && !this.getCorrectHit() && !this.level.isClientSide()) {
+            if (this.hurtTime == 10 && current < 98) {
                 setCorrectHit(true);
             }
         }
@@ -203,10 +229,32 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
         super.stopBossMusic();
     }
 
+    @Override
+    public void load(CompoundNBT nbt) {
+        this.setFightStarted(nbt.getBoolean("HasFightStarted"));
+        this.setGCD(nbt.getInt("GlobalCooldown"));
+        this.entityData.set(INTRO_OVER, nbt.getBoolean("IntroOver"));
+        super.load(nbt);
+    }
+
+    @Override
+    public boolean save(CompoundNBT nbt) {
+        nbt.putBoolean("HasFightStarted", this.getFightStarted());
+        nbt.putInt("GlobalCooldown", this.getGCD());
+        nbt.putBoolean("IntroOver", this.entityData.get(INTRO_OVER));
+        return super.save(nbt);
+    }
+
     @Nullable
     @Override
     protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
         return ModSounds.GOVERNOR_HURT.get();
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return ModSounds.GOVERNOR_DEATH.get();
     }
 
     @Override

@@ -2,7 +2,6 @@ package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.damage.CloneShatterDamageSource;
 import net.geminiimmortal.mobius.effects.ModEffects;
-import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -10,6 +9,7 @@ import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -39,7 +39,7 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
     private GovernorEntity governor;
     private static final DataParameter<Boolean> IS_COUNTDOWN = EntityDataManager.defineId(GovernorCloneEntity.class, DataSerializers.BOOLEAN);
     private int lifetimeTicks = 0;
-    private static final int MAX_LIFETIME = 60; // 2 seconds
+    private static final int MAX_LIFETIME = 100; // 2 seconds
 
     public GovernorCloneEntity(EntityType<? extends MonsterEntity> type, World world) {
         super(type, world);
@@ -72,12 +72,33 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
     }
 
     @Override
+    public boolean save(CompoundNBT nbt) {
+        nbt.putUUID("OriginalGovernor", this.getOriginalGovernor().getUUID());
+        return super.save(nbt);
+    }
+
+    @Override
+    public void load(CompoundNBT nbt) {
+        UUID governorOriginal = nbt.getUUID("OriginalGovernor");
+        if (level instanceof ServerWorld) {
+            GovernorEntity governorEntity;
+            Entity entity = ((ServerWorld) level).getEntity(governorOriginal);
+            if (entity instanceof GovernorEntity) {
+                governorEntity = (GovernorEntity) entity;
+                this.setOriginalGovernor(governorEntity, governorOriginal);
+            }
+        }
+        this.explode();
+        super.load(nbt);
+    }
+
+    @Override
     public void tick() {
         super.tick();
 
 
         if (this.getOriginalGovernor() != null) {
-            if (!this.level.isClientSide && !this.getOriginalGovernor().getCorrectHit() && this.getOriginalGovernor().getGCD() <= 59) {
+            if (!this.level.isClientSide && !this.getOriginalGovernor().getCorrectHit() && this.getOriginalGovernor().getGCD() <= 99) {
                 this.startCountdown();
                 this.triggerExplodeOnHit();
                 lifetimeTicks++;
@@ -85,13 +106,13 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
                     this.explode();
                 }
 
-                if (this.entityData.get(IS_COUNTDOWN)) {
+                /*if (this.entityData.get(IS_COUNTDOWN)) {
                     if (lifetimeTicks % 20 == 0) {
                         level.playSound(null, blockPosition(), SoundEvents.ILLUSIONER_CAST_SPELL, SoundCategory.HOSTILE, 1.0F, 1.5F);
                     }
-                }
+                }*/
             }
-            if (!this.level.isClientSide() && this.getOriginalGovernor().getGCD() <= 59) {
+            if (!this.level.isClientSide() && this.getOriginalGovernor().getGCD() <= 99) {
                 if (this.getOriginalGovernor().getCorrectHit()) {
                     this.remove();
                 }

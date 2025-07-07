@@ -33,12 +33,12 @@ public abstract class AbstractImperialBossEntity extends CreatureEntity implemen
         super(entityType, worldIn);
         this.setPersistenceRequired();
         this.maxUpStep = 1;
-        if (this.level.isClientSide() && this.isAlive()) {
+        if (this.level.isClientSide()) {
             playBossMusic();
         }
     }
 
-    private final ServerBossInfo bossInfo = new ServerBossInfo(
+    protected final ServerBossInfo bossInfo = new ServerBossInfo(
             getBossTitle(bossName),  // Boss name
             BossInfo.Color.PURPLE,
             BossInfo.Overlay.NOTCHED_20
@@ -68,7 +68,7 @@ public abstract class AbstractImperialBossEntity extends CreatureEntity implemen
     }
 
     @OnlyIn(Dist.CLIENT)
-    private void playBossMusic() {
+    protected void playBossMusic() {
         if (this.level.dimension().equals(ModDimensions.MOBIUS_WORLD)) {
             MusicTickerHook.setMusicOverride(new BackgroundMusicSelector(setBossMusic(), 0, 0, true));
         }
@@ -117,8 +117,12 @@ public abstract class AbstractImperialBossEntity extends CreatureEntity implemen
     public void tick() {
 
         super.tick();
-        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
+        setBossbarPercent();
 
+    }
+
+    public void setBossbarPercent() {
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
     }
 
     protected int getXpToDrop() {
