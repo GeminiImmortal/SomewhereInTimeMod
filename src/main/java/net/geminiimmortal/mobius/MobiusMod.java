@@ -365,6 +365,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.IMPERIAL_SERGEANT.get(), ImperialSergeantRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.IMPERIAL_COMMANDER.get(), ImperialCommanderRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GOVERNOR_CLONE.get(), GovernorCloneRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.REBEL_QUARTERMASTER.get(), RebelQuartermasterRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -428,6 +429,7 @@ public class MobiusMod
             event.put(ModEntityTypes.IMPERIAL_SERGEANT.get(), ImperialSergeantEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.IMPERIAL_COMMANDER.get(), ImperialCommanderEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.GOVERNOR_CLONE.get(), GovernorCloneEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.REBEL_QUARTERMASTER.get(), RebelQuartermasterEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent

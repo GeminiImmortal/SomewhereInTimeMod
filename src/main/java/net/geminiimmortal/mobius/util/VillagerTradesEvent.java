@@ -114,5 +114,18 @@ public class VillagerTradesEvent {
                     new ItemStack(ModItems.FAE_LEATHER.get(), 24),
                     6, 12, 0.095f));
         }
+
+        if (event.getType() == ModVillagers.QUARTERMASTER.get()) {
+            Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
+
+            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 4),
+                    new ItemStack(ModItems.MANAWOOD_LOG.get(), 64),
+                    1, 1, 0.00f));
+            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 16),
+                    new ItemStack(ModItems.LIVING_MANAWOOD_SAPLING.get(), 1),
+                    1, 1, 0.00f));
+        }
     }
 }

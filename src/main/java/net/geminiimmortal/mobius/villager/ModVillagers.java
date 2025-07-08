@@ -31,6 +31,10 @@ public class ModVillagers {
             VILLAGER_PROFESSIONS.register("smuggler", () -> new VillagerProfession("smuggler",
                     ModPOIs.SMUGGLER_STRONGBOX.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.FLINTANDSTEEL_USE));
 
+    public static final RegistryObject<VillagerProfession> QUARTERMASTER =
+            VILLAGER_PROFESSIONS.register("rebel_quartermaster", () -> new VillagerProfession("rebel_quartermaster",
+                    ModPOIs.REBEL_CLAIM.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.FLINTANDSTEEL_USE));
+
     public static void register(IEventBus eventBus){
         VILLAGER_PROFESSIONS.register(eventBus);
     }

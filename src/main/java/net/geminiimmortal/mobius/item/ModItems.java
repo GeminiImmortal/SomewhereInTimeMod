@@ -108,6 +108,7 @@ public class ModItems {
     public static final RegistryObject<Item> MARROWOOD_SAPLING = ITEMS.register("marrowood_sapling", () -> new BlockItem(ModBlocks.MARROWOOD_SAPLING.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> MANAWOOD_SAPLING = ITEMS.register("manawood_sapling", () -> new BlockItem(ModBlocks.MANAWOOD_SAPLING.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> GLOAMTHORN_SAPLING = ITEMS.register("gloamthorn_sapling", () -> new BlockItem(ModBlocks.GLOAMTHORN_SAPLING.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> LIVING_MANAWOOD_SAPLING = ITEMS.register("living_manawood_sapling", () -> new BlockItem(ModBlocks.LIVING_MANAWOOD_SAPLING.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     //Boats
     public static final RegistryObject<Item> MARROWOOD_BOAT = ITEMS.register("marrowood_boat", () -> new CustomBoatItem(new Item.Properties().tab(ItemGroup.TAB_TRANSPORTATION), "marrowood"));

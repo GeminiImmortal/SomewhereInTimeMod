@@ -9,6 +9,7 @@ import net.geminiimmortal.mobius.block.custom.flora.Gloomcap;
 import net.geminiimmortal.mobius.block.custom.flora.StandingGloomcap;
 import net.geminiimmortal.mobius.block.custom.flora.WildManaWart;
 import net.geminiimmortal.mobius.block.custom.trees.GloamthornTree;
+import net.geminiimmortal.mobius.block.custom.trees.LivingManawoodTree;
 import net.geminiimmortal.mobius.block.custom.trees.ManawoodTree;
 import net.geminiimmortal.mobius.block.custom.trees.MarrowoodTree;
 import net.minecraft.block.*;
@@ -209,6 +210,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> MANAWOOD_SAPLING = registerBlock("manawood_sapling",
             () -> new SaplingBlock(new ManawoodTree(), AbstractBlock.Properties.copy(Blocks.OAK_SAPLING)));
 
+    public static final RegistryObject<Block> LIVING_MANAWOOD_SAPLING = registerBlock("living_manawood_sapling",
+            () -> new SaplingBlock(new LivingManawoodTree(), AbstractBlock.Properties.copy(Blocks.OAK_SAPLING)));
+
     public static final RegistryObject<Block> MANAWOOD_BUTTON = registerBlock("manawood_button",
             () -> new WoodButtonBlock(AbstractBlock.Properties.copy(Blocks.OAK_BUTTON)));
 
@@ -312,6 +316,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> CAPTURE_POINT = registerBlock("capture_point",
             () -> new CapturePointBlock(AbstractBlock.Properties.copy(Blocks.BEDROCK).noDrops().noCollission().noOcclusion().sound(SoundType.METAL)));
+
+    public static final RegistryObject<Block> REBEL_CLAIM = registerBlock("rebel_claim",
+            () -> new RebelClaimBlock(AbstractBlock.Properties.copy(Blocks.BEDROCK).noDrops().noCollission().noOcclusion().sound(SoundType.METAL)));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

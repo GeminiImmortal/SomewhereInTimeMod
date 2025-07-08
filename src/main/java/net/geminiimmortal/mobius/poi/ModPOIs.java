@@ -34,6 +34,10 @@ public class ModPOIs {
             POI.register("smuggler_strongbox_poi", () -> new PointOfInterestType("smuggler_strongbox_poi",
                     PointOfInterestType.getBlockStates(ModBlocks.SMUGGLER_STRONGBOX.get()), 1, 1));
 
+    public static final RegistryObject<PointOfInterestType> REBEL_CLAIM =
+            POI.register("rebel_claim_poi", () -> new PointOfInterestType("rebel_claim_poi",
+                    PointOfInterestType.getBlockStates(ModBlocks.REBEL_CLAIM.get()), 1, 1));
+
     public static void register(IEventBus eventBus) {
         POI.register(eventBus);
     }

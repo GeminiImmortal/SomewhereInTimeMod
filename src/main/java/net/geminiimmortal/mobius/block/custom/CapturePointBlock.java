@@ -1,11 +1,15 @@
 package net.geminiimmortal.mobius.block.custom;
 
+import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.capability.ModCapabilities;
+import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.AbstractImperialEntity;
+import net.geminiimmortal.mobius.entity.custom.RebelQuartermasterEntity;
 import net.geminiimmortal.mobius.tileentity.CapturePointTileEntity;
 import net.geminiimmortal.mobius.tileentity.ModTileEntities;
 import net.geminiimmortal.mobius.util.CelebrationFireworksHelper;
 import net.geminiimmortal.mobius.util.InfamyHelper;
+import net.geminiimmortal.mobius.villager.ModVillagers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -116,8 +120,15 @@ public class CapturePointBlock extends Block {
                     InfamyHelper.get(nearestPlayer).addInfamy(250);
                 }
                 CelebrationFireworksHelper.spawnCelebrationFireworks((ServerWorld) world, pos);
+                RebelQuartermasterEntity rebelQuartermaster = ModEntityTypes.REBEL_QUARTERMASTER.get().create(serverWorld);
+                if (rebelQuartermaster != null) {
+                    rebelQuartermaster.moveTo(pos.getX(), pos.getY(), pos.getZ());
+                    world.addFreshEntity(rebelQuartermaster);
+                }
                 world.removeBlockEntity(pos);
                 world.removeBlock(pos, false);
+                world.setBlock(pos, ModBlocks.REBEL_CLAIM.get().defaultBlockState(), 0, 0);
+
             } else if (nearestPlayer != null) {
                 nearestPlayer.sendMessage(new StringTextComponent("This structure cannot be captured until all nearby enemies are eliminated!").withStyle(TextFormatting.YELLOW), nearestPlayer.getUUID());
             }

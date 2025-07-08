@@ -95,11 +95,14 @@
   "entity.mobius.imperial_sergeant": "Imperial Sergeant",
   "entity.mobius.bounty_hunter": "Bounty Hunter",
   "entity.mobius.rebel_instigator": "Rebel Instigator",
+  "entity.mobius.rebel_quartermaster": "Rebel Quartermaster",
 
   "entity.minecraft.villager.mobius.monster_hunter": "Monster Hunter",
   "entity.minecraft.villager.mobius.magismith": "Magismith",
   "entity.minecraft.villager.mobius.sage": "Sage",
   "entity.minecraft.villager.mobius.smuggler": "Smuggler",
+
+  "entity.mobius.rebel_quartermaster.mobius.rebel_quartermaster": "Rebel Quartermaster",
 
   
   "block.mobius.bone_leaves": "Bone Leaves",
@@ -193,6 +196,7 @@
   "block.mobius.latent_mana_collector": "Latent Mana Collector",
   "block.mobius.smuggler_strongbox": "Smuggler's Strongbox",
   "block.mobius.warding_obelisk": "Warding Obelisk",
+  "block.mobius.living_manawood_sapling": "Living Manawood Sapling",
 
   "fluid.mobius.ectoplasm_fluid": "Ectoplasm",
   "fluid.mobius.bog_water_fluid": "Bog Water",

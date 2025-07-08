@@ -5,6 +5,7 @@ import net.geminiimmortal.mobius.entity.custom.*;
 import net.geminiimmortal.mobius.entity.custom.spell.*;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
@@ -241,6 +242,12 @@ public class ModEntityTypes {
                     () -> EntityType.Builder.of(ImperialCommanderEntity::new,
                                     EntityClassification.CREATURE).sized(1f, 2.25f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "imperial_commander").toString()));
+
+    public static final RegistryObject<EntityType<RebelQuartermasterEntity>> REBEL_QUARTERMASTER =
+            ENTITY_TYPES.register("rebel_quartermaster",
+                    () -> EntityType.Builder.<RebelQuartermasterEntity>of(RebelQuartermasterEntity::new,
+                                    EntityClassification.CREATURE).sized(1f, 2.25f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "rebel_quartermaster").toString()));
 
 
 
