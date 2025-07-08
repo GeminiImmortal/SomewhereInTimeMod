@@ -113,7 +113,7 @@ public class CapturePointBlock extends Block {
             // If none found, remove the block
             if (nearbyImperials.isEmpty()) {
                 if (player.getCapability(ModCapabilities.INFAMY_CAPABILITY).isPresent() && ((ServerPlayerEntity) nearestPlayer != null)) {
-                    InfamyHelper.get(nearestPlayer).addInfamy(500);
+                    InfamyHelper.get(nearestPlayer).addInfamy(250);
                 }
                 CelebrationFireworksHelper.spawnCelebrationFireworks((ServerWorld) world, pos);
                 world.removeBlockEntity(pos);
