@@ -38,6 +38,7 @@ public class ModStructureSetup {
     public static final RegistryObject<Structure<NoFeatureConfig>> CELESTIAL_RUINS = STRUCTURES.register("celestial_ruins", () -> new CelestialRuins());
     public static final RegistryObject<Structure<NoFeatureConfig>> MOBIUS_PORTAL = STRUCTURES.register("mobius_portal", () -> new MobiusPortal());
     public static final RegistryObject<Structure<NoFeatureConfig>> SMUGGLER_CAMP = STRUCTURES.register("smuggler_camp", () -> new SmugglerCamp());
+    public static final RegistryObject<Structure<NoFeatureConfig>> LUMBER_MILL_CAMP = STRUCTURES.register("lumber_mill_camp", () -> new LumberMillCamp());
 
 
     public static final class ConfiguredStructures {
@@ -51,6 +52,7 @@ public class ModStructureSetup {
         public static final StructureFeature<?, ?> CELESTIAL_RUINS = ModStructureSetup.CELESTIAL_RUINS.get().configured(IFeatureConfig.NONE);
         public static final StructureFeature<?, ?> MOBIUS_PORTAL = ModStructureSetup.MOBIUS_PORTAL.get().configured(IFeatureConfig.NONE);
         public static final StructureFeature<?, ?> SMUGGLER_CAMP = ModStructureSetup.SMUGGLER_CAMP.get().configured(IFeatureConfig.NONE);
+        public static final StructureFeature<?, ?> LUMBER_MILL_CAMP = ModStructureSetup.LUMBER_MILL_CAMP.get().configured(IFeatureConfig.NONE);
     }
 
     // Register the structures to the world
@@ -59,11 +61,12 @@ public class ModStructureSetup {
         setupStructure(MOLVAN_SETTLEMENT_B.get(), new StructureSeparationSettings(24, 8, 276321489), false);
         setupStructure(IMPERIAL_WATCHTOWER.get(), new StructureSeparationSettings(39, 26, 218590045), true);
         setupStructure(GOVERNOR_TOWER.get(), new StructureSeparationSettings(70, 50, 276357495), false);
-        setupStructure(MOBIUS_VILLAGE.get(), new StructureSeparationSettings(24, 16, 221375889), true);
+        setupStructure(MOBIUS_VILLAGE.get(), new StructureSeparationSettings(40, 24, 221375889), true);
         setupStructure(DRAGON_BONES.get(), new StructureSeparationSettings(24, 8, 158390045), true);
         setupStructure(CELESTIAL_RUINS.get(), new StructureSeparationSettings(24, 8, 646357495), false);
         setupStructure(MOBIUS_PORTAL.get(), new StructureSeparationSettings(24, 8, 195837495), true);
         setupStructure(SMUGGLER_CAMP.get(), new StructureSeparationSettings(42, 38, 684930387), true);
+        setupStructure(LUMBER_MILL_CAMP.get(), new StructureSeparationSettings(28, 16, 10871350), true);
     }
 
     // Register configured structures
@@ -77,6 +80,7 @@ public class ModStructureSetup {
         Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(MobiusMod.MOD_ID, "celestial_ruins"), CELESTIAL_RUINS.get().configured(IFeatureConfig.NONE));
         Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(MobiusMod.MOD_ID, "mobius_portal"), MOBIUS_PORTAL.get().configured(IFeatureConfig.NONE));
         Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(MobiusMod.MOD_ID, "smuggler_camp"), SMUGGLER_CAMP.get().configured(IFeatureConfig.NONE));
+        Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(MobiusMod.MOD_ID, "lumber_mill"), LUMBER_MILL_CAMP.get().configured(IFeatureConfig.NONE));
     }
 
     // Adjust dimensional spacing logic for structures
@@ -100,6 +104,7 @@ public class ModStructureSetup {
             tempMap.put(ModStructureSetup.CELESTIAL_RUINS.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructureSetup.CELESTIAL_RUINS.get()));
             tempMap.put(ModStructureSetup.MOBIUS_PORTAL.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructureSetup.MOBIUS_PORTAL.get()));
             tempMap.put(ModStructureSetup.SMUGGLER_CAMP.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructureSetup.SMUGGLER_CAMP.get()));
+            tempMap.put(ModStructureSetup.LUMBER_MILL_CAMP.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructureSetup.LUMBER_MILL_CAMP.get()));
             serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
         }
     }

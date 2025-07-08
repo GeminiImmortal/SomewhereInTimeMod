@@ -38,6 +38,7 @@ public class ModStructureGeneration {
         if(Objects.equals(event.getName(), rollingExpanseValid)) {
             List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructureSetup.MOBIUS_VILLAGE.get().configured(NoFeatureConfig.INSTANCE));
+            structures.add(() -> ModStructureSetup.LUMBER_MILL_CAMP.get().configured(NoFeatureConfig.INSTANCE));
         }
 
         if(Objects.equals(event.getName(), rollingExpanseValid)) {
