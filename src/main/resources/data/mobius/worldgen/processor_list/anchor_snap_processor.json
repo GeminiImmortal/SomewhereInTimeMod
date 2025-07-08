@@ -1,0 +1,7 @@
+{
+  "processors": [
+    {
+      "processor_type": "mobius:anchor_snap_processor"
+    }
+  ]
+}

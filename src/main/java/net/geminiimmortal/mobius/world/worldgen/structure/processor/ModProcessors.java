@@ -21,6 +21,12 @@ public class ModProcessors {
                     new ResourceLocation(MobiusMod.MOD_ID, "ward_orientation_fix"),
                     () -> WardOrientationFixProcessor.CODEC
             );
+    public static final IStructureProcessorType<AnchorSnapProcessor> ANCHOR_SNAP_PROCESSOR =
+            Registry.register(
+                    Registry.STRUCTURE_PROCESSOR,
+                    new ResourceLocation(MobiusMod.MOD_ID, "anchor_snap_processor"),
+                    () -> AnchorSnapProcessor.CODEC
+            );
 }
 
 

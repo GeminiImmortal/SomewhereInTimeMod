@@ -16,13 +16,16 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.event.world.WorldEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import java.util.HashMap;
 import java.util.Map;
 
+@Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID)
 public class ModStructureSetup {
 
     // Registering structures via Deferred Register
@@ -84,6 +87,7 @@ public class ModStructureSetup {
     }
 
     // Adjust dimensional spacing logic for structures
+    @SubscribeEvent
     public static void addDimensionalSpacing(final WorldEvent.Load event) {
         if (event.getWorld() instanceof ServerWorld) {
             ServerWorld serverWorld = (ServerWorld) event.getWorld();

@@ -17,10 +17,7 @@ import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
-import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructureStart;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
+import net.minecraft.world.gen.feature.structure.*;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
 public class LumberMillCamp extends Structure<NoFeatureConfig> {
@@ -73,7 +70,6 @@ public class LumberMillCamp extends Structure<NoFeatureConfig> {
                             .get(new ResourceLocation(MobiusMod.MOD_ID, "camp/lumber_mill_center")),
                             6), AbstractVillagePiece::new, chunkGenerator, templateManagerIn,
                     blockpos, this.pieces, this.random, false, true);
-//            this.pieces.forEach(pieces -> pieces.move(0, -2, 0));
             this.calculateBoundingBox();
         }
     }

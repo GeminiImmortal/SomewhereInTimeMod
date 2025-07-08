@@ -310,7 +310,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> WARDING_OBELISK = registerBlock("warding_obelisk",
             () -> new WardingObeliskBlock(AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3).strength(30F, 1200F).noDrops().lightLevel(state -> 15)));
 
-
+    public static final RegistryObject<Block> CAPTURE_POINT = registerBlock("capture_point",
+            () -> new CapturePointBlock(AbstractBlock.Properties.copy(Blocks.BEDROCK).noDrops().noCollission().noOcclusion().sound(SoundType.METAL)));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

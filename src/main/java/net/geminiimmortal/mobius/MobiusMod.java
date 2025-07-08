@@ -21,7 +21,6 @@ import net.geminiimmortal.mobius.capability.infamy.Infamy;
 import net.geminiimmortal.mobius.capability.infamy.InfamyStorage;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.geminiimmortal.mobius.tileentity.ModTileEntities;
-import net.geminiimmortal.mobius.tileentity.WardingObeliskTileEntity;
 import net.geminiimmortal.mobius.tileentity.render.*;
 import net.geminiimmortal.mobius.util.CustomDamageEventHandler;
 import net.geminiimmortal.mobius.villager.ModVillagers;
@@ -82,7 +81,7 @@ public class MobiusMod
         bus.addListener(this::setup);
 
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
-        forgeBus.addListener(ModStructureSetup::addDimensionalSpacing);
+
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
         // Register the enqueueIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
@@ -129,9 +128,6 @@ public class MobiusMod
 
     private void setup(final FMLCommonSetupEvent event)
     {
-
-
-
         event.enqueueWork(() -> {
             ModProcessors.WARD_ORIENTATION_FIX.toString();
             ModBiomes.registerBiomes();
@@ -139,7 +135,6 @@ public class MobiusMod
             ModStructureSetup.registerStructures();
             ModStructureSetup.registerConfiguredStructures();
             CapabilityManager.INSTANCE.register(IInfamy.class, new InfamyStorage(), Infamy::new);
-
 
 
             BiomeDictionary.addTypes(
@@ -313,6 +308,7 @@ public class MobiusMod
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.GLOWING_BLOCK.get(),
                     GlowingBlockRenderer::new);
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.WARDING_OBELISK.get(), WardingObeliskRenderer::new);
+            ClientRegistry.bindTileEntityRenderer(ModTileEntities.CAPTURE_POINT.get(), CapturePointRenderer::new);
 
 
 

@@ -29,6 +29,7 @@ public class ModStructureGeneration {
         ResourceLocation gooLagoonValid = ModBiomes.GOO_LAGOON.getId();
         ResourceLocation forsakenThicketValid = ModBiomes.FORSAKEN_THICKET.getId();
         ResourceLocation validPortal = Biomes.PLAINS.location();
+        ResourceLocation mushroomForestValid = ModBiomes.MUSHROOM_FOREST.getId();
 
         if(Objects.equals(event.getName(), draconicForelandsValid)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
@@ -38,7 +39,6 @@ public class ModStructureGeneration {
         if(Objects.equals(event.getName(), rollingExpanseValid)) {
             List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructureSetup.MOBIUS_VILLAGE.get().configured(NoFeatureConfig.INSTANCE));
-            structures.add(() -> ModStructureSetup.LUMBER_MILL_CAMP.get().configured(NoFeatureConfig.INSTANCE));
         }
 
         if(Objects.equals(event.getName(), rollingExpanseValid)) {
@@ -54,6 +54,7 @@ public class ModStructureGeneration {
         if(Objects.equals(event.getName(), rollingExpanseValid)) {
             List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructureSetup.IMPERIAL_WATCHTOWER.get().configured(NoFeatureConfig.INSTANCE));
+            structures.add(() -> ModStructureSetup.LUMBER_MILL_CAMP.get().configured(NoFeatureConfig.INSTANCE));
         }
 
         if(Objects.equals(event.getName(), rollingExpanseValid)) {
@@ -74,6 +75,10 @@ public class ModStructureGeneration {
         if(Objects.equals(event.getName(), forsakenThicketValid)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructureSetup.CELESTIAL_RUINS.get().configured(NoFeatureConfig.INSTANCE));
+        }
+
+        if(Objects.equals(event.getName(), mushroomForestValid)) {
+            List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
         }
     }
 
