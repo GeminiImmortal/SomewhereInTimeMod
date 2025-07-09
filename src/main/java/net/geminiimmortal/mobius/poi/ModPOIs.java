@@ -3,11 +3,15 @@ package net.geminiimmortal.mobius.poi;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.ModBlocks;
+import net.geminiimmortal.mobius.block.custom.CampClaimType;
 import net.minecraft.village.PointOfInterestType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 
+import java.util.stream.Collectors;
+
+import static net.geminiimmortal.mobius.block.custom.RebelClaimBlock.TYPE;
 import static net.minecraftforge.registries.ForgeRegistries.POI_TYPES;
 
 public class ModPOIs {
@@ -34,9 +38,20 @@ public class ModPOIs {
             POI.register("smuggler_strongbox_poi", () -> new PointOfInterestType("smuggler_strongbox_poi",
                     PointOfInterestType.getBlockStates(ModBlocks.SMUGGLER_STRONGBOX.get()), 1, 1));
 
-    public static final RegistryObject<PointOfInterestType> REBEL_CLAIM =
-            POI.register("rebel_claim_poi", () -> new PointOfInterestType("rebel_claim_poi",
-                    PointOfInterestType.getBlockStates(ModBlocks.REBEL_CLAIM.get()), 1, 1));
+    public static final RegistryObject<PointOfInterestType> REBEL_CLAIM_MILL =
+            POI.register("rebel_claim_mill_poi", () -> new PointOfInterestType("rebel_claim_mill_poi",
+                    PointOfInterestType.getBlockStates(ModBlocks.REBEL_CLAIM.get()).stream().filter((state ->
+                            state.getValue(TYPE) == CampClaimType.LUMBER_MILL)).collect(Collectors.toSet()), 1, 1));
+
+    public static final RegistryObject<PointOfInterestType> REBEL_CLAIM_FARM =
+            POI.register("rebel_claim_farm_poi", () -> new PointOfInterestType("rebel_claim_farm_poi",
+                    PointOfInterestType.getBlockStates(ModBlocks.REBEL_CLAIM.get()).stream().filter((state ->
+                            state.getValue(TYPE) == CampClaimType.FARM)).collect(Collectors.toSet()), 1, 1));
+
+    public static final RegistryObject<PointOfInterestType> REBEL_CLAIM_QUARRY =
+            POI.register("rebel_claim_quarry_poi", () -> new PointOfInterestType("rebel_claim_quarry_poi",
+                    PointOfInterestType.getBlockStates(ModBlocks.REBEL_CLAIM.get()).stream().filter((state ->
+                            state.getValue(TYPE) == CampClaimType.QUARRY)).collect(Collectors.toSet()), 1, 1));
 
     public static void register(IEventBus eventBus) {
         POI.register(eventBus);

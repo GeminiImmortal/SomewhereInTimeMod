@@ -102,9 +102,12 @@
   "entity.minecraft.villager.mobius.sage": "Sage",
   "entity.minecraft.villager.mobius.smuggler": "Smuggler",
 
-  "entity.mobius.rebel_quartermaster.mobius.rebel_quartermaster": "Rebel Quartermaster",
+  "entity.mobius.rebel_quartermaster.mobius.rebel_quartermaster_mill": "Rebel Quartermaster",
+  "entity.mobius.rebel_quartermaster.mobius.rebel_quartermaster_farm": "Rebel Quartermaster",
+  "entity.mobius.rebel_quartermaster.mobius.rebel_quartermaster_quarry": "Rebel Quartermaster",
 
-  
+
+
   "block.mobius.bone_leaves": "Bone Leaves",
   "block.mobius.living_manawood_leaves": "Living Manawood Leaves",
   "block.mobius.marrowood_door": "Marrowood Door",

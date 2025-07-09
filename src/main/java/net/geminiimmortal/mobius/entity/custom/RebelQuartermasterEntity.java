@@ -1,7 +1,5 @@
 package net.geminiimmortal.mobius.entity.custom;
 
-import net.geminiimmortal.mobius.item.ModItems;
-import net.geminiimmortal.mobius.villager.ModVillagers;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -9,8 +7,8 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.merchant.IMerchant;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.villager.VillagerType;
-import net.minecraft.item.*;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -32,7 +30,7 @@ public class RebelQuartermasterEntity extends VillagerEntity implements IMerchan
 
     public RebelQuartermasterEntity(EntityType<? extends VillagerEntity> entityType, World world, VillagerType villagerType) {
         super(entityType, world);
-        this.setVillagerData(this.getVillagerData().setType(villagerType).setProfession(ModVillagers.QUARTERMASTER.get()));
+        this.setVillagerData(this.getVillagerData().setType(villagerType).setProfession(VillagerProfession.NONE));
         this.maxUpStep = 1;
     }
 

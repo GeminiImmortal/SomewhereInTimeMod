@@ -20,6 +20,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -40,11 +41,12 @@ import java.util.Random;
 
 public class CapturePointBlock extends Block {
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 14.0, 48.0, 14.0);
+    public static final EnumProperty<CampClaimType> TYPE = EnumProperty.create("type", CampClaimType.class);
 
 
     public CapturePointBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(TYPE, CampClaimType.NONE));
     }
 
     @Override
@@ -85,6 +87,7 @@ public class CapturePointBlock extends Block {
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING);
+        builder.add(TYPE);
     }
 
     @Override
@@ -92,6 +95,10 @@ public class CapturePointBlock extends Block {
         // Set the block’s facing direction based on the player’s placement
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
 
+    }
+
+    private CampClaimType getCampType(CampClaimType type) {
+        return this.getBlock().defaultBlockState().getBlockState().getValue(TYPE);
     }
 
     @Override
@@ -132,9 +139,11 @@ public class CapturePointBlock extends Block {
                         world.addFreshEntity(rebelSoldier);
                     }
                 }
+                CampClaimType type = world.getBlockState(pos).getValue(TYPE);
                 world.removeBlockEntity(pos);
                 world.removeBlock(pos, false);
-                world.setBlock(pos, ModBlocks.REBEL_CLAIM.get().defaultBlockState(), 0, 0);
+                world.setBlock(pos, ModBlocks.REBEL_CLAIM.get().defaultBlockState().setValue(TYPE, type), 3);
+
 
             } else if (nearestPlayer != null) {
                 nearestPlayer.sendMessage(new StringTextComponent("This structure cannot be captured until all nearby enemies are eliminated!").withStyle(TextFormatting.YELLOW), nearestPlayer.getUUID());

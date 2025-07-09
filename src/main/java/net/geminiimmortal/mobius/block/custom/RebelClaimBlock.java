@@ -9,6 +9,7 @@ import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -23,11 +24,12 @@ import javax.annotation.Nullable;
 
 public class RebelClaimBlock extends Block {
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 14.0, 48.0, 14.0);
+    public static final EnumProperty<CampClaimType> TYPE = EnumProperty.create("type", CampClaimType.class);
 
 
     public RebelClaimBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(TYPE, CampClaimType.NONE));
     }
 
     @Override
@@ -40,6 +42,7 @@ public class RebelClaimBlock extends Block {
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING);
+        builder.add(TYPE);
     }
 
     @Override

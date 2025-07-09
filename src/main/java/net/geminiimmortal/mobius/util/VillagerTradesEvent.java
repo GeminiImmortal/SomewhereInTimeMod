@@ -115,7 +115,7 @@ public class VillagerTradesEvent {
                     6, 12, 0.095f));
         }
 
-        if (event.getType() == ModVillagers.QUARTERMASTER.get()) {
+        if (event.getType() == ModVillagers.QUARTERMASTER_MILL.get()) {
             Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
 
             trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
