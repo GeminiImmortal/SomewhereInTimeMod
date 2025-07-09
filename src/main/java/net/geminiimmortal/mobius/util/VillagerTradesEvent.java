@@ -127,5 +127,18 @@ public class VillagerTradesEvent {
                     new ItemStack(ModItems.LIVING_MANAWOOD_SAPLING.get(), 1),
                     1, 0, 0.00f));
         }
+
+        if (event.getType() == ModVillagers.QUARTERMASTER_FARM.get()) {
+            Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
+
+            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 4),
+                    new ItemStack(Items.WHEAT, 64),
+                    1, 0, 0.00f));
+            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 24),
+                    new ItemStack(ModItems.MANAGLOOM_PIE.get(), 8),
+                    1, 0, 0.00f));
+        }
     }
 }

@@ -30,6 +30,7 @@ public class ModStructureGeneration {
         ResourceLocation forsakenThicketValid = ModBiomes.FORSAKEN_THICKET.getId();
         ResourceLocation validPortal = Biomes.PLAINS.location();
         ResourceLocation mushroomForestValid = ModBiomes.MUSHROOM_FOREST.getId();
+        ResourceLocation tealGladesValid = ModBiomes.TEAL_GLADES.getId();
 
         if(Objects.equals(event.getName(), draconicForelandsValid)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
@@ -55,6 +56,11 @@ public class ModStructureGeneration {
             List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructureSetup.IMPERIAL_WATCHTOWER.get().configured(NoFeatureConfig.INSTANCE));
             structures.add(() -> ModStructureSetup.LUMBER_MILL_CAMP.get().configured(NoFeatureConfig.INSTANCE));
+        }
+
+        if(Objects.equals(event.getName(), tealGladesValid)) {
+            List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
+            structures.add(() -> ModStructureSetup.FARM_CAMP.get().configured(NoFeatureConfig.INSTANCE));
         }
 
         if(Objects.equals(event.getName(), rollingExpanseValid)) {

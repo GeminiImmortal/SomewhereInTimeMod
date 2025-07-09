@@ -1,0 +1,15 @@
+{
+  "name": "mobius:camp/farm_field.json",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "mobius:camp/farm_field",
+        "processors": "mobius:anchor_snap_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

@@ -193,10 +193,12 @@ public class ModBiomes {
 
     private static Biome makeTealGlades(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
         MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
-        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
-                new MobSpawnInfo.Spawners(EntityType.ZOMBIE, 40, 1,3));
-        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
-                new MobSpawnInfo.Spawners(EntityType.SKELETON, 50, 1,1));
+        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
+                new MobSpawnInfo.Spawners(EntityType.HORSE, 100, 2, 3));
+        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
+                new MobSpawnInfo.Spawners(EntityType.SHEEP, 400, 1,3));
+        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
+                new MobSpawnInfo.Spawners(ModEntityTypes.FAECOW.get(), 100, 1,2));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addSwampVegetation(biomegenerationsettings$builder);
