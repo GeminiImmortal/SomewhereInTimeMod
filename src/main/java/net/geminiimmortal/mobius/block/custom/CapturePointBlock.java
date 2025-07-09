@@ -4,19 +4,17 @@ import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.capability.ModCapabilities;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.AbstractImperialEntity;
+import net.geminiimmortal.mobius.entity.custom.RebelInstigatorEntity;
 import net.geminiimmortal.mobius.entity.custom.RebelQuartermasterEntity;
 import net.geminiimmortal.mobius.tileentity.CapturePointTileEntity;
 import net.geminiimmortal.mobius.tileentity.ModTileEntities;
 import net.geminiimmortal.mobius.util.CelebrationFireworksHelper;
 import net.geminiimmortal.mobius.util.InfamyHelper;
-import net.geminiimmortal.mobius.villager.ModVillagers;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
@@ -124,6 +122,13 @@ public class CapturePointBlock extends Block {
                 if (rebelQuartermaster != null) {
                     rebelQuartermaster.moveTo(pos.getX(), pos.getY(), pos.getZ());
                     world.addFreshEntity(rebelQuartermaster);
+                }
+                for (int i = 0; i < 4; i++) {
+                    RebelInstigatorEntity rebelSoldier = ModEntityTypes.REBEL_INSTIGATOR.get().create(serverWorld);
+                    if (rebelSoldier != null) {
+                        rebelSoldier.moveTo(pos.getX(), pos.getY(), pos.getZ());
+                        world.addFreshEntity(rebelSoldier);
+                    }
                 }
                 world.removeBlockEntity(pos);
                 world.removeBlock(pos, false);

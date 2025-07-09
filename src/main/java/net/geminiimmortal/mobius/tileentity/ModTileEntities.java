@@ -52,6 +52,10 @@ public class ModTileEntities {
             TILE_ENTITIES.register("capture_point", () -> TileEntityType.Builder.of(CapturePointTileEntity::new, ModBlocks.CAPTURE_POINT.get())
                     .build(null));
 
+    public static final RegistryObject<TileEntityType<RebelClaimTileEntity>> REBEL_CLAIM =
+            TILE_ENTITIES.register("rebel_claim", () -> TileEntityType.Builder.of(RebelClaimTileEntity::new, ModBlocks.REBEL_CLAIM.get())
+                    .build(null));
+
     public static final RegistryObject<TileEntityType<GlowingBlockTileEntity>> GLOWING_BLOCK = TILE_ENTITIES.register("glowing_block",
             () -> TileEntityType.Builder.of(GlowingBlockTileEntity::new, ModBlocks.STANDING_GLOOMCAP.get()).build(null));
 

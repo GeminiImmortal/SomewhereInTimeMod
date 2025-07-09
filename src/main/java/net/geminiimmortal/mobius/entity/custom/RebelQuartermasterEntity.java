@@ -9,12 +9,10 @@ import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.merchant.IMerchant;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
-import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.villager.VillagerType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.MerchantOffer;
-import net.minecraft.item.MerchantOffers;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -39,6 +37,7 @@ public class RebelQuartermasterEntity extends VillagerEntity implements IMerchan
     public RebelQuartermasterEntity(EntityType<? extends VillagerEntity> entityType, World world, VillagerType villagerType) {
         super(entityType, world);
         this.setVillagerData(this.getVillagerData().setType(VillagerType.register("rebel_quartermaster")).setProfession(ModVillagers.QUARTERMASTER.get()));
+        this.maxUpStep = 1;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {

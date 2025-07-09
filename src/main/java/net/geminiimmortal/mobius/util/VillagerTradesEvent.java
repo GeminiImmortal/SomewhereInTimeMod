@@ -121,11 +121,11 @@ public class VillagerTradesEvent {
             trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
                     new ItemStack(Items.EMERALD, 4),
                     new ItemStack(ModItems.MANAWOOD_LOG.get(), 64),
-                    1, 1, 0.00f));
+                    1, 0, 0.00f));
             trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
                     new ItemStack(Items.EMERALD, 16),
                     new ItemStack(ModItems.LIVING_MANAWOOD_SAPLING.get(), 1),
-                    1, 1, 0.00f));
+                    1, 0, 0.00f));
         }
     }
 }

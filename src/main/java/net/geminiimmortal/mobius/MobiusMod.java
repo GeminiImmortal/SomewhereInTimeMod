@@ -272,6 +272,7 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.BONE_LEAVES.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.LIVING_MANAWOOD_LEAVES.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.MARROWOOD_SAPLING.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.LIVING_MANAWOOD_SAPLING.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.MANAWOOD_DOOR.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.ESSENCE_CHANNELER.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.MANAWOOD_SAPLING.get(), RenderType.cutout());
@@ -309,6 +310,7 @@ public class MobiusMod
                     GlowingBlockRenderer::new);
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.WARDING_OBELISK.get(), WardingObeliskRenderer::new);
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.CAPTURE_POINT.get(), CapturePointRenderer::new);
+            ClientRegistry.bindTileEntityRenderer(ModTileEntities.REBEL_CLAIM.get(), RebelClaimRenderer::new);
 
 
 
