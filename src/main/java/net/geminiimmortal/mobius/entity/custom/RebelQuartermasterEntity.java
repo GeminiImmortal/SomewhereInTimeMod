@@ -10,9 +10,7 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.merchant.IMerchant;
 import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.entity.villager.VillagerType;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.MerchantOffer;
+import net.minecraft.item.*;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -28,15 +26,13 @@ import javax.annotation.Nullable;
 
 public class RebelQuartermasterEntity extends VillagerEntity implements IMerchant, IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
-    private boolean tradesInitialized = false;
-    private final MerchantOffer basic = new MerchantOffer((new ItemStack(Items.EMERALD)), new ItemStack(ModItems.MANAWOOD_LOG.get()), 1, 16, 0.05f);
     public RebelQuartermasterEntity(EntityType<? extends VillagerEntity> entityType, World world){
-        this(entityType, world, VillagerType.register("rebel_quartermaster"));
+        this(entityType, world, VillagerType.PLAINS);
     }
 
     public RebelQuartermasterEntity(EntityType<? extends VillagerEntity> entityType, World world, VillagerType villagerType) {
         super(entityType, world);
-        this.setVillagerData(this.getVillagerData().setType(VillagerType.register("rebel_quartermaster")).setProfession(ModVillagers.QUARTERMASTER.get()));
+        this.setVillagerData(this.getVillagerData().setType(villagerType).setProfession(ModVillagers.QUARTERMASTER.get()));
         this.maxUpStep = 1;
     }
 
@@ -50,27 +46,6 @@ public class RebelQuartermasterEntity extends VillagerEntity implements IMerchan
                 .add(Attributes.ARMOR_TOUGHNESS, 0.0D)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.25D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.15D);
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-        if (!tradesInitialized && !level.isClientSide) {
-        //    setupTrades();
-            tradesInitialized = true;
-        }
-    }
-
-    private void setupTrades() {
-        assert this.offers != null;
-        this.basic.createTag();
-        this.offers.add(basic);
-        // Prevent restocking and leveling up
-        this.xpReward = 0;
-    }
-
-    @Override
-    protected void rewardTradeXp(MerchantOffer offer) {
     }
 
     @Nullable

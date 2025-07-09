@@ -121,12 +121,14 @@ public class CapturePointBlock extends Block {
                 RebelQuartermasterEntity rebelQuartermaster = ModEntityTypes.REBEL_QUARTERMASTER.get().create(serverWorld);
                 if (rebelQuartermaster != null) {
                     rebelQuartermaster.moveTo(pos.getX(), pos.getY(), pos.getZ());
+                    rebelQuartermaster.setPersistenceRequired();
                     world.addFreshEntity(rebelQuartermaster);
                 }
                 for (int i = 0; i < 4; i++) {
                     RebelInstigatorEntity rebelSoldier = ModEntityTypes.REBEL_INSTIGATOR.get().create(serverWorld);
                     if (rebelSoldier != null) {
                         rebelSoldier.moveTo(pos.getX(), pos.getY(), pos.getZ());
+                        rebelSoldier.setPersistenceRequired();
                         world.addFreshEntity(rebelSoldier);
                     }
                 }
