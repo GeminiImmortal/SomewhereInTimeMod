@@ -24,13 +24,23 @@ public class ManaVial extends Item {
     private final Rarity rarity;
 
     private static final String MANA_TAG = "StoredMana";
-    private boolean active = false;
 
     public ManaVial(Properties properties, FlaskType flaskType, Rarity rarity) {
         super(properties);
         this.flaskType = flaskType;
         this.rarity = rarity;
     }
+
+    public static final String TAG_ACTIVE = "IsActive";
+
+    public boolean isActive(ItemStack stack) {
+        return stack.getOrCreateTag().getBoolean(TAG_ACTIVE);
+    }
+
+    public void setActive(ItemStack stack, boolean active) {
+        stack.getOrCreateTag().putBoolean(TAG_ACTIVE, active);
+    }
+
 
     @Override
     public int getDamage(ItemStack itemStack) {
@@ -49,21 +59,21 @@ public class ManaVial extends Item {
 
     @Override
     public ActionResult<ItemStack> use (World level, PlayerEntity player, Hand hand) {
-        if(!level.isClientSide()) {
-            if (!active) {
-                active = true;
-                int absorbedMana = absorbMana(Objects.requireNonNull(player), player.getItemInHand(hand));
+        ItemStack stack = player.getItemInHand(hand);
+        if (!level.isClientSide()) {
+            if (!isActive(stack)) {
+                setActive(stack, true);
+                int absorbedMana = absorbMana(player, stack);
                 if (absorbedMana > 0) {
                     player.displayClientMessage(new TranslationTextComponent("item.mobius.mana_vial.active"), true);
-                    absorbMana(player, player.getItemInHand(hand));
-                    return ActionResult.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
+                    return ActionResult.sidedSuccess(stack, false);
                 }
             } else {
-                active = false;
-                return ActionResult.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
+                setActive(stack, false);
             }
         }
-        return ActionResult.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
+        return ActionResult.sidedSuccess(stack, level.isClientSide());
+
     }
 
     public int getMaxManalevel() {
@@ -71,46 +81,63 @@ public class ManaVial extends Item {
     }
 
     private int absorbMana(PlayerEntity player, ItemStack vial) {
-        int totalAbsorbed = 0;
+        if (vial.isEmpty()) return 0;
+
         int capacity = getMaxManalevel();
         int currentMana = getStoredMana(vial);
+        int remainingSpace = capacity - currentMana;
 
+        if (remainingSpace <= 0) {
+            return 0; // Already full
+        }
+
+        int totalAbsorbed = 0;
+
+        // Loop through inventory and find RAW_MANA
         for (ItemStack stack : player.inventory.items) {
-            if (stack.getItem().equals(ModItems.RAW_MANA.get())) {
-                int transferable = Math.min(stack.getCount(), capacity - currentMana);
+            if (stack.getItem() == ModItems.RAW_MANA.get() && !stack.isEmpty()) {
+                int transferable = Math.min(stack.getCount(), remainingSpace);
+
                 if (transferable > 0) {
                     stack.shrink(transferable);
-                    currentMana += transferable;
                     totalAbsorbed += transferable;
-                    if (currentMana >= capacity) {
-                        break;
+                    remainingSpace -= transferable;
+
+                    if (remainingSpace <= 0) {
+                        break; // Reached capacity
                     }
                 }
             }
         }
 
-        addMana(vial, currentMana);
+        if (totalAbsorbed > 0) {
+            addMana(vial, totalAbsorbed);
+        }
+
         return totalAbsorbed;
     }
+
 
     public int getStoredMana(ItemStack stack) {
         CompoundNBT tag = stack.getOrCreateTag();
         return tag.getInt(MANA_TAG);
     }
 
-    public boolean addMana(ItemStack stack, int amount) {
-        if (stack.isEmpty()) return false; // Prevents issues with empty stacks
+    public boolean addMana(ItemStack stack, int amountToAdd) {
+        if (stack.isEmpty() || amountToAdd <= 0) return false;
 
         CompoundNBT tag = stack.getOrCreateTag();
         int currentMana = tag.getInt(MANA_TAG);
-        int maxMana = this.getMaxManalevel();
-        int newMana = Math.min(currentMana + amount, maxMana);
+        int maxMana = getMaxManalevel();
+        int newMana = Math.min(currentMana + amountToAdd, maxMana);
 
         if (newMana != currentMana) {
             tag.putInt(MANA_TAG, newMana);
             stack.setTag(tag);
             return true;
         }
+
         return false;
     }
+
 }
