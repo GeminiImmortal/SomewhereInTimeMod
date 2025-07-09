@@ -43,6 +43,7 @@ public class ModStructureSetup {
     public static final RegistryObject<Structure<NoFeatureConfig>> SMUGGLER_CAMP = STRUCTURES.register("smuggler_camp", () -> new SmugglerCamp());
     public static final RegistryObject<Structure<NoFeatureConfig>> LUMBER_MILL_CAMP = STRUCTURES.register("lumber_mill_camp", () -> new LumberMillCamp());
     public static final RegistryObject<Structure<NoFeatureConfig>> FARM_CAMP = STRUCTURES.register("farm_camp", () -> new FarmCamp());
+    public static final RegistryObject<Structure<NoFeatureConfig>> QUARRY_CAMP = STRUCTURES.register("quarry_camp", () -> new QuarryCamp());
 
 
     public static final class ConfiguredStructures {
@@ -58,6 +59,7 @@ public class ModStructureSetup {
         public static final StructureFeature<?, ?> SMUGGLER_CAMP = ModStructureSetup.SMUGGLER_CAMP.get().configured(IFeatureConfig.NONE);
         public static final StructureFeature<?, ?> LUMBER_MILL_CAMP = ModStructureSetup.LUMBER_MILL_CAMP.get().configured(IFeatureConfig.NONE);
         public static final StructureFeature<?, ?> FARM_CAMP = ModStructureSetup.FARM_CAMP.get().configured(IFeatureConfig.NONE);
+        public static final StructureFeature<?, ?> QUARRY_CAMP = ModStructureSetup.QUARRY_CAMP.get().configured(IFeatureConfig.NONE);
     }
 
     // Register the structures to the world
@@ -73,6 +75,7 @@ public class ModStructureSetup {
         setupStructure(SMUGGLER_CAMP.get(), new StructureSeparationSettings(42, 38, 684930387), true);
         setupStructure(LUMBER_MILL_CAMP.get(), new StructureSeparationSettings(28, 16, 10871350), true);
         setupStructure(FARM_CAMP.get(), new StructureSeparationSettings(28, 16, 947294573), true);
+        setupStructure(QUARRY_CAMP.get(), new StructureSeparationSettings(28, 16, 57385738), false);
     }
 
     // Register configured structures
@@ -88,6 +91,7 @@ public class ModStructureSetup {
         Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(MobiusMod.MOD_ID, "smuggler_camp"), SMUGGLER_CAMP.get().configured(IFeatureConfig.NONE));
         Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(MobiusMod.MOD_ID, "lumber_mill"), LUMBER_MILL_CAMP.get().configured(IFeatureConfig.NONE));
         Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(MobiusMod.MOD_ID, "farm_camp"), FARM_CAMP.get().configured(IFeatureConfig.NONE));
+        Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(MobiusMod.MOD_ID, "quarry_camp"), QUARRY_CAMP.get().configured(IFeatureConfig.NONE));
     }
 
     // Adjust dimensional spacing logic for structures
@@ -114,6 +118,7 @@ public class ModStructureSetup {
             tempMap.put(ModStructureSetup.SMUGGLER_CAMP.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructureSetup.SMUGGLER_CAMP.get()));
             tempMap.put(ModStructureSetup.LUMBER_MILL_CAMP.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructureSetup.LUMBER_MILL_CAMP.get()));
             tempMap.put(ModStructureSetup.FARM_CAMP.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructureSetup.FARM_CAMP.get()));
+            tempMap.put(ModStructureSetup.QUARRY_CAMP.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructureSetup.QUARRY_CAMP.get()));
             serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
         }
     }

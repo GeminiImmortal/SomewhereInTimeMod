@@ -51,6 +51,9 @@ public class ModStructures {
     public static final RegistryObject<Structure<NoFeatureConfig>> FARM_CAMP =
             STRUCTURES.register("farm_camp", FarmCamp::new);
 
+    public static final RegistryObject<Structure<NoFeatureConfig>> QUARRY_CAMP =
+            STRUCTURES.register("quarry_camp", QuarryCamp::new);
+
 
     public static void setupStructures() {
         setupMapSpacingAndLand(MOLVAN_SETTLEMENT_A.get(),

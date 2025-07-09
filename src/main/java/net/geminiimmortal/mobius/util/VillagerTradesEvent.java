@@ -140,5 +140,18 @@ public class VillagerTradesEvent {
                     new ItemStack(ModItems.MANAGLOOM_PIE.get(), 8),
                     1, 0, 0.00f));
         }
+
+        if (event.getType() == ModVillagers.QUARTERMASTER_QUARRY.get()) {
+            Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
+
+            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 4),
+                    new ItemStack(ModItems.HEMATITE.get(), 64),
+                    1, 0, 0.00f));
+            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 24),
+                    new ItemStack(ModItems.NICKEL_ORE.get(), 8),
+                    1, 0, 0.00f));
+        }
     }
 }

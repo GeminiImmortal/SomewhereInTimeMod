@@ -35,6 +35,7 @@ public class ModStructureGeneration {
         if(Objects.equals(event.getName(), draconicForelandsValid)) {
             List<Supplier<StructureFeature<?, ?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructureSetup.MOLVAN_SETTLEMENT_A.get().configured(NoFeatureConfig.INSTANCE));
+            structures.add(() -> ModStructureSetup.QUARRY_CAMP.get().configured(NoFeatureConfig.INSTANCE));
         }
 
         if(Objects.equals(event.getName(), rollingExpanseValid)) {
