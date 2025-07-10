@@ -1,8 +1,6 @@
 package net.geminiimmortal.mobius;
 
 import com.google.common.collect.Maps;
-import net.geminiimmortal.mobius.client.MobiusRenderInfo;
-import net.geminiimmortal.mobius.client.MobiusSkyRenderer;
 import net.geminiimmortal.mobius.effects.ModEffects;
 import net.geminiimmortal.mobius.fluid.ModFluids;
 import net.geminiimmortal.mobius.integration.MobiusModPatchouli;
@@ -40,28 +38,22 @@ import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
-import net.minecraft.client.world.ClientWorld;
-import net.minecraft.client.world.DimensionRenderInfo;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.AxeItem;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.DimensionType;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
-import net.minecraftforge.fml.client.ClientModLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -72,8 +64,6 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.lang.reflect.Field;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -279,19 +269,6 @@ public class MobiusMod
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            /*try {
-                Field field = DimensionRenderInfo.class.getDeclaredField("field_239208_a_"); // SRG name for renderInfoMap
-                field.setAccessible(true);
-                @SuppressWarnings("unchecked")
-                Map<RegistryKey<DimensionType>, DimensionRenderInfo> renderMap = (Map<RegistryKey<DimensionType>, DimensionRenderInfo>) field.get(null);
-
-                RegistryKey<DimensionType> dimKey = ModDimensions.MOBIUS_TYPE;
-                renderMap.put(dimKey, new MobiusRenderInfo(128.0f, true, DimensionRenderInfo.FogType.NORMAL, false, false));
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }*/
-
             RenderTypeLookup.setRenderLayer(ModBlocks.BONE_LEAVES.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.LIVING_MANAWOOD_LEAVES.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.MARROWOOD_SAPLING.get(), RenderType.cutout());
