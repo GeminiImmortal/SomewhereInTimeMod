@@ -18,6 +18,7 @@ import net.minecraft.world.Blockreader;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.biome.provider.EndBiomeProvider;
@@ -46,7 +47,7 @@ import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 
-public class MobiusChunkGenerator extends ChunkGenerator {
+public class MobiusChunkGenerator extends NoiseChunkGenerator {
     private long currentSeed;
     NoiseSettings noiseSettings;
 
@@ -61,13 +62,12 @@ public class MobiusChunkGenerator extends ChunkGenerator {
     });
 
     private MobiusChunkGenerator(BiomeProvider p_i241976_1_, long p_i241976_3_, Supplier<DimensionSettings> p_i241976_5_) {
-        super(p_i241976_1_, ((DimensionSettings)p_i241976_5_.get()).structureSettings());
+        super(p_i241976_1_, p_i241976_3_, p_i241976_5_);
         this.currentSeed = p_i241976_3_;
         DimensionSettings dimensionsettings = (DimensionSettings)p_i241976_5_.get();
         this.settings = p_i241976_5_;
         this.noiseSettings = dimensionsettings.noiseSettings();
         initializeNoise(p_i241976_3_);
-        System.out.println("MobiusChunkGenerator initialized with seed: " + seed);
     }
 
     private void initializeNoise(long seed) {
@@ -93,8 +93,11 @@ public class MobiusChunkGenerator extends ChunkGenerator {
         } else {
             this.islandNoise = null;
         }
-        // Initialize other noise generators
-        System.out.println("Noise initialized with seed: " + seed);
+    }
+
+    @Override
+    public void applyCarvers(long p_230350_1_, BiomeManager p_230350_3_, IChunk p_230350_4_, GenerationStage.Carving p_230350_5_) {
+        super.applyCarvers(p_230350_1_, p_230350_3_, p_230350_4_, p_230350_5_);
     }
 
     private static final float[] BEARD_KERNEL = (float[])Util.make(new float[13824], (p_236094_0_) -> {

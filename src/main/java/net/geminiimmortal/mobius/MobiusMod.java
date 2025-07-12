@@ -25,6 +25,8 @@ import net.geminiimmortal.mobius.tileentity.render.*;
 import net.geminiimmortal.mobius.util.CustomDamageEventHandler;
 import net.geminiimmortal.mobius.villager.ModVillagers;
 import net.geminiimmortal.mobius.world.dimension.ModDimensions;
+import net.geminiimmortal.mobius.world.worldgen.carver.ModCarvers;
+import net.geminiimmortal.mobius.world.worldgen.carver.ModConfiguredCarvers;
 import net.geminiimmortal.mobius.world.worldgen.feature.surface.CustomSurfaceBuilders;
 import net.geminiimmortal.mobius.world.worldgen.biome.ModBiomes;
 import net.geminiimmortal.mobius.world.worldgen.feature.ModFeatures;
@@ -96,6 +98,7 @@ public class MobiusMod
 
         ModFeaturePlacement.DECORATORS.register(eventBus);
         ModFeatures.FEATURES.register(eventBus);
+        ModCarvers.CARVERS.register(eventBus);
         ModBlocks.register(eventBus);
         ModItems.register(eventBus);
         MobiusModPatchouli.register(eventBus);
@@ -129,6 +132,7 @@ public class MobiusMod
     private void setup(final FMLCommonSetupEvent event)
     {
         event.enqueueWork(() -> {
+            ModConfiguredCarvers.registerConfiguredCarvers();
             ModProcessors.WARD_ORIENTATION_FIX.toString();
             ModBiomes.registerBiomes();
             ModDimensions.registerDimensionStuff();

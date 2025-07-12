@@ -39,8 +39,6 @@ public class MobiusBiomeProvider extends BiomeProvider {
     public MobiusBiomeProvider(boolean largeBiomes, Registry<Biome> lookupRegistry, long seed) {
         super(ModBiomes.BIOME_KEYS.stream().map(lookupRegistry::getOrThrow).collect(Collectors.toList()));
 
-
-        System.out.println("MobiusBiomeProvider initialized with seed: " + seed);
         this.largeBiomes = largeBiomes;
         this.lookupRegistry = lookupRegistry;
         updateLayers(seed);
@@ -50,7 +48,6 @@ public class MobiusBiomeProvider extends BiomeProvider {
         if (seed != lastSeed) {
             this.genBiomes = MobiusLayerUtil.getNoiseLayer(seed, largeBiomes ? 6 : 4, 6, lookupRegistry);
             this.lastSeed = seed;
-            System.out.println("Biome layers updated with seed: " + seed);
         }
     }
 
