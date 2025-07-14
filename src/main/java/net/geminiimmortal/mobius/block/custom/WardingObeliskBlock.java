@@ -1,28 +1,45 @@
 package net.geminiimmortal.mobius.block.custom;
 
+import net.geminiimmortal.mobius.block.ModBlocks;
+import net.geminiimmortal.mobius.capability.ModCapabilities;
+import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.entity.custom.AbstractImperialEntity;
+import net.geminiimmortal.mobius.entity.custom.RebelInstigatorEntity;
+import net.geminiimmortal.mobius.entity.custom.RebelQuartermasterEntity;
+import net.geminiimmortal.mobius.tileentity.CapturePointTileEntity;
 import net.geminiimmortal.mobius.tileentity.WardingObeliskTileEntity;
 import net.geminiimmortal.mobius.tileentity.ModTileEntities;
+import net.geminiimmortal.mobius.util.CelebrationFireworksHelper;
+import net.geminiimmortal.mobius.util.InfamyHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Random;
+
+import static net.geminiimmortal.mobius.block.custom.RebelClaimBlock.TYPE;
 
 public class WardingObeliskBlock extends Block {
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 14.0, 100.0, 14.0);
@@ -83,8 +100,38 @@ public class WardingObeliskBlock extends Block {
     @Override
     public ActionResultType use(BlockState state, World worldIn, BlockPos pos,
                                 PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if (!worldIn.isClientSide) {
+            ServerWorld serverWorld = (ServerWorld) worldIn;
 
-        return ActionResultType.FAIL;
+            // Define the radius
+            double radius = 64.0D;
+
+            // Check for AbstractImperialEntity within radius
+            List<AbstractImperialEntity> nearbyImperials = serverWorld.getEntitiesOfClass(
+                    AbstractImperialEntity.class,
+                    new AxisAlignedBB(
+                            pos.getX() - radius, pos.getY() - radius, pos.getZ() - radius,
+                            pos.getX() + radius, pos.getY() + radius, pos.getZ() + radius
+                    )
+            );
+            PlayerEntity nearestPlayer = worldIn.getNearestPlayer(pos.getX(), pos.getY(), pos.getZ(), 32D, false);
+
+            // If none found, remove the block
+            if (nearbyImperials.isEmpty()) {
+                if (player.getCapability(ModCapabilities.INFAMY_CAPABILITY).isPresent() && ((ServerPlayerEntity) nearestPlayer != null)) {
+                    InfamyHelper.get(nearestPlayer).addInfamy(500);
+                }
+                CelebrationFireworksHelper.spawnCelebrationFireworks((ServerWorld) worldIn, pos);
+
+                worldIn.removeBlockEntity(pos);
+                worldIn.removeBlock(pos, false);
+                worldIn.setBlock(pos, ModBlocks.REBEL_CLAIM.get().defaultBlockState().setValue(TYPE, CampClaimType.WARDING_TOWER), 3);
+            } else if (nearestPlayer != null) {
+                nearestPlayer.sendMessage(new StringTextComponent("This structure cannot be captured until all nearby enemies are eliminated!").withStyle(TextFormatting.YELLOW), nearestPlayer.getUUID());
+            }
+        }
+
+        return ActionResultType.SUCCESS;
     }
 
     @Override

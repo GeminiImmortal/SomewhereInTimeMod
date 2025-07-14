@@ -8,7 +8,8 @@ public enum CampClaimType implements IStringSerializable {
     NONE,
     LUMBER_MILL,
     FARM,
-    QUARRY;
+    QUARRY,
+    WARDING_TOWER;
 
     @Override
     public String getSerializedName() {

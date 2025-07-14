@@ -5,7 +5,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import it.unimi.dsi.fastutil.objects.ObjectListIterator;
-import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.geminiimmortal.mobius.world.dimension.SeedBearer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
