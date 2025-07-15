@@ -1,15 +1,18 @@
 package net.geminiimmortal.mobius.block.custom.boss_blocks;
 
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.entity.custom.GovernorEntity;
 import net.geminiimmortal.mobius.util.TitleUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityPredicate;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.*;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.StringTextComponent;
@@ -38,6 +41,23 @@ public class GovernorBossBlock extends Block {
             double bossX = pos.getX();
             double bossY = pos.getY() + offsetY;
             double bossZ = pos.getZ();
+
+            AxisAlignedBB searchArea = new AxisAlignedBB(
+                    pos.getX() - 128, pos.getY() - 128, pos.getZ() - 128,
+                    pos.getX() + 128, pos.getY() + 128, pos.getZ() + 128
+            );
+
+            // Find any Governor boss entities in the area
+            List<GovernorEntity> bosses = world.getEntitiesOfClass(GovernorEntity.class, searchArea);
+
+            if (!bosses.isEmpty()) {
+                BlockPos validPos = findTeleportPosition(new BlockPos(bossX, bossY, bossZ), world);
+
+                player.teleportTo(validPos.getX() + 0.5, validPos.getY(), validPos.getZ() + 0.5);
+                player.sendMessage(new StringTextComponent("You join the fight!"), player.getUUID());
+                TitleUtils.sendTitle((ServerPlayerEntity) player, "Duty Commenced!", null, 10, 40, 40, TextFormatting.GOLD);
+                return ActionResultType.SUCCESS;
+            }
 
             BlockPos validPos = findTeleportPosition(new BlockPos(bossX, bossY, bossZ), world);
 

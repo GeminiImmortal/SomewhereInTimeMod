@@ -1,8 +1,10 @@
 package net.geminiimmortal.mobius.entity.custom;
 
+import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.GovernorSummonCloneGoal;
 import net.geminiimmortal.mobius.entity.goals.util.TeleportUtil;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
@@ -243,6 +245,12 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
         nbt.putInt("GlobalCooldown", this.getGCD());
         nbt.putBoolean("IntroOver", this.entityData.get(INTRO_OVER));
         return super.save(nbt);
+    }
+
+    @Override
+    public void die(DamageSource source) {
+        this.level.setBlock(this.blockPosition(), ModBlocks.GOVERNOR_BOSS_EXIT_BLOCK.get().defaultBlockState(),3);
+        super.die(source);
     }
 
     @Nullable
