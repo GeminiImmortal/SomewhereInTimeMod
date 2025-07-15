@@ -55,7 +55,7 @@ public class GovernorSummonCloneGoal extends Goal {
 
             GovernorCloneEntity clone = ModEntityTypes.GOVERNOR_CLONE.get().create(world);
 
-            BlockPos spawnPos = target.blockPosition().offset(
+            BlockPos spawnPos = governor.blockPosition().offset(
                     governor.getRandom().nextInt(18) - 3,
                     0,
                     governor.getRandom().nextInt(18) - 3
@@ -77,7 +77,7 @@ public class GovernorSummonCloneGoal extends Goal {
                     clone.moveTo(safeSpawnPos);
                     double dx = target.getX() - clone.getX();
                     double dz = target.getZ() - clone.getZ();
-                    double dy = target.getEyeY() - clone.getEyeY();
+                    double dy = this.governor.getY();
 
                     float yaw = (float)(Math.toDegrees(Math.atan2(dz, dx))) - 90F;
 
