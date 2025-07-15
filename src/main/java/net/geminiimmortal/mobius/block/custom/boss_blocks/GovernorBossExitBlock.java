@@ -16,9 +16,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
-import net.minecraft.world.storage.DimensionSavedDataManager;
-
-import static java.lang.reflect.AccessibleObject.setAccessible;
 
 public class GovernorBossExitBlock extends Block {
     public GovernorBossExitBlock(Properties p_i48440_1_) {
