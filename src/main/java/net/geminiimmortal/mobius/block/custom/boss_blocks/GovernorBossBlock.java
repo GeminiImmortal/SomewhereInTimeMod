@@ -51,7 +51,6 @@ public class GovernorBossBlock extends Block {
                 world.playSound(null, targetX, targetY, targetZ, SoundEvents.WITHER_SPAWN, SoundCategory.HOSTILE, 1.0F, 1.0F);
             }
             TitleUtils.sendTitle((ServerPlayerEntity) player, "Duty Commenced!", null, 10, 40, 40, TextFormatting.GOLD);
-            world.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
 
             return ActionResultType.SUCCESS;
         }
