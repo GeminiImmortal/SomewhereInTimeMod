@@ -41,6 +41,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 
 public class GovernorEntity extends AbstractImperialBossEntity implements IAnimatable {
     private static final String[] TAUNTS = {
@@ -217,7 +218,7 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
             setGrinning(true);
         }
         if (current < 100 && !this.getCorrectHit() && !this.level.isClientSide()) {
-            if (this.hurtTime == 10 && current < 98) {
+            if (this.hurtTime == 10 && current < 98 && !Objects.equals(this.getLastDamageSource(), DamageSource.ON_FIRE)) {
                 setCorrectHit(true);
             }
         }

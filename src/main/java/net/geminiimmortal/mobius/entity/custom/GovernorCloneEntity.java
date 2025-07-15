@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.damage.CloneShatterDamageSource;
 import net.geminiimmortal.mobius.effects.ModEffects;
+import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -14,10 +15,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
@@ -32,6 +30,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
@@ -66,7 +65,7 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
     }
 
     private void triggerExplodeOnHit() {
-        if (this.hurtTime > 1) {
+        if (this.hurtTime > 1 && !Objects.equals(this.getLastDamageSource(), DamageSource.ON_FIRE)) {
             this.explode();
         }
     }
@@ -98,6 +97,9 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
 
 
         if (this.getOriginalGovernor() != null) {
+            if (this.getOriginalGovernor().isOnFire()) {
+                this.setSecondsOnFire(10);
+            }
             if (!this.level.isClientSide && !this.getOriginalGovernor().getCorrectHit() && this.getOriginalGovernor().getGCD() <= 99) {
                 this.startCountdown();
                 this.triggerExplodeOnHit();
@@ -175,6 +177,11 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
     public boolean hurt(DamageSource source, float amount) {
         // You can make clones tanky or immune to arrows, etc.
         return super.hurt(source, amount);
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
+        return ModSounds.GOVERNOR_HURT.get();
     }
 
     @Override
