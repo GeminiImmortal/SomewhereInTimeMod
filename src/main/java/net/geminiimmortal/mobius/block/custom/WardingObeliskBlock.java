@@ -2,11 +2,7 @@ package net.geminiimmortal.mobius.block.custom;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.capability.ModCapabilities;
-import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.AbstractImperialEntity;
-import net.geminiimmortal.mobius.entity.custom.RebelInstigatorEntity;
-import net.geminiimmortal.mobius.entity.custom.RebelQuartermasterEntity;
-import net.geminiimmortal.mobius.tileentity.CapturePointTileEntity;
 import net.geminiimmortal.mobius.tileentity.WardingObeliskTileEntity;
 import net.geminiimmortal.mobius.tileentity.ModTileEntities;
 import net.geminiimmortal.mobius.util.CelebrationFireworksHelper;
@@ -21,6 +17,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -37,17 +34,16 @@ import net.minecraft.world.server.ServerWorld;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
-
-import static net.geminiimmortal.mobius.block.custom.RebelClaimBlock.TYPE;
 
 public class WardingObeliskBlock extends Block {
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 14.0, 100.0, 14.0);
-
+    public static final EnumProperty<WardingObeliskType> TYPE = EnumProperty.create("type", WardingObeliskType.class);
 
     public WardingObeliskBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(TYPE, WardingObeliskType.NONE));
     }
 
     @Override
@@ -88,6 +84,7 @@ public class WardingObeliskBlock extends Block {
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING);
+        builder.add(TYPE);
     }
 
     @Override
@@ -101,10 +98,15 @@ public class WardingObeliskBlock extends Block {
     public ActionResultType use(BlockState state, World worldIn, BlockPos pos,
                                 PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isClientSide) {
+            if (Objects.equals(state.getValue(TYPE), WardingObeliskType.GOVERNOR_TOWER)) {
+                worldIn.removeBlockEntity(pos);
+                worldIn.removeBlock(pos, false);
+                return ActionResultType.SUCCESS;
+            }
             ServerWorld serverWorld = (ServerWorld) worldIn;
 
             // Define the radius
-            double radius = 64.0D;
+            double radius = 24.0D;
 
             // Check for AbstractImperialEntity within radius
             List<AbstractImperialEntity> nearbyImperials = serverWorld.getEntitiesOfClass(
@@ -122,12 +124,19 @@ public class WardingObeliskBlock extends Block {
                     InfamyHelper.get(nearestPlayer).addInfamy(500);
                 }
                 CelebrationFireworksHelper.spawnCelebrationFireworks((ServerWorld) worldIn, pos);
-
+                TileEntity tileEntity = worldIn.getBlockEntity(pos);
+                if (tileEntity instanceof WardingObeliskTileEntity) {
+                    TileEntity te = worldIn.getBlockEntity(pos);
+                    if (te instanceof WardingObeliskTileEntity) {
+             //           ((WardingObeliskTileEntity) te).handleObeliskDestroyed();
+                    }
+                }
                 worldIn.removeBlockEntity(pos);
                 worldIn.removeBlock(pos, false);
-                worldIn.setBlock(pos, ModBlocks.REBEL_CLAIM.get().defaultBlockState().setValue(TYPE, CampClaimType.WARDING_TOWER), 3);
+                worldIn.setBlock(pos, ModBlocks.REBEL_CLAIM.get().defaultBlockState().setValue(RebelClaimBlock.TYPE, CampClaimType.WARDING_TOWER), 3);
             } else if (nearestPlayer != null) {
                 nearestPlayer.sendMessage(new StringTextComponent("This structure cannot be captured until all nearby enemies are eliminated!").withStyle(TextFormatting.YELLOW), nearestPlayer.getUUID());
+                return ActionResultType.FAIL;
             }
         }
 
@@ -136,15 +145,19 @@ public class WardingObeliskBlock extends Block {
 
     @Override
     public void onRemove(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
+
         if (!state.is(newState.getBlock())) { // Check if the block is being replaced by the same type
             TileEntity tileEntity = world.getBlockEntity(pos);
             if (tileEntity instanceof WardingObeliskTileEntity) {
-                // Remove the tile entity
-                world.removeBlockEntity(pos);
+                TileEntity te = world.getBlockEntity(pos);
+                /*if (te instanceof WardingObeliskTileEntity) {
+                    ((WardingObeliskTileEntity) te).handleObeliskDestroyed();
+                }*/
             }
             if (world.isClientSide()) {
                 world.playSound(null, pos, SoundEvents.BEACON_DEACTIVATE, SoundCategory.BLOCKS, 1.0f, 1.0f);
             }
+            world.removeBlockEntity(pos);
             super.onRemove(state, world, pos, newState, isMoving); // Call the super method to finalize
         }
     }
