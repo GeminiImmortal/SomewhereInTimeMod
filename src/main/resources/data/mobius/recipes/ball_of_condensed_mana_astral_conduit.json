@@ -5,10 +5,10 @@
       "item": "mobius:raw_mana"
     },
     {
-      "item": "mobius:ectoplasm_bucket"
+      "item": "mobius:mana_wart"
     },
     {
-      "item": "mobius:mana_wart"
+      "item": "mobius:raw_mana"
     }
   ],
   "output": {

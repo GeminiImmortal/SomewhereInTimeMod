@@ -2,7 +2,7 @@
   "type": "mobius:essence_channeler",
   "ingredients": [
     {
-      "item": "mobius:cube_of_stabilized_void_energy"
+      "item": "minecraft:fire_charge"
     },
     {
       "item": "mobius:fae_leather"
@@ -12,6 +12,6 @@
     }
   ],
   "output": {
-    "item": "mobius:hurricane_staff"
+    "item": "mobius:staff_fire_obsidian_rod_fae_leather_binding"
   }
 }

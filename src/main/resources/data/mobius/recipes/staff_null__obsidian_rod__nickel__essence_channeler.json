@@ -2,10 +2,10 @@
   "type": "mobius:essence_channeler",
   "ingredients": [
     {
-      "item": "mobius:oblivion_stone"
+      "item": "mobius:cube_of_stabilized_void_energy"
     },
     {
-      "item": "mobius:molvansteel_ingot"
+      "item": "mobius:nickel_ingot"
     },
     {
       "item": "mobius:obsidian_rod"
