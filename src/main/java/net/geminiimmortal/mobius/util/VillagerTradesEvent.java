@@ -64,8 +64,8 @@ public class VillagerTradesEvent {
                 Int2ObjectMap<List<VillagerTrades.ITrade>> trades = event.getTrades();
 
                 trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
-                        new ItemStack(ModItems.FAE_LEATHER.get(), 2),
-                        new ItemStack(Items.EMERALD, 6),
+                        new ItemStack(ModItems.FAE_LEATHER.get(), 8),
+                        new ItemStack(Items.EMERALD, 4),
                         10, 8, 0.06f));
                 trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
                         new ItemStack(Items.COAL_BLOCK, 1),
@@ -94,12 +94,32 @@ public class VillagerTradesEvent {
 
             trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
                     new ItemStack(ModItems.FAE_LEATHER.get(), 8),
-                    new ItemStack(ModItems.RAW_MANA.get(), 4),
+                    new ItemStack(Items.EMERALD, 4),
                     10, 8, 0.06f));
             trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
-                    new ItemStack(ModItems.RAW_MANA.get(), 48),
+                    new ItemStack(ModItems.RAW_MANA.get(), 1),
+                    new ItemStack(Items.EMERALD, 6),
+                    6, 12, 0.095f));
+            trades.get(2).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(ModItems.BLOODROP_GEMSTONE.get(), 4),
+                    new ItemStack(Items.EMERALD, 16),
+                    10, 8, 0.065f));
+            trades.get(2).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 4),
+                    new ItemStack(ModItems.OBSIDIAN_ROD.get(), 1),
+                    10, 8, 0.065f));
+            trades.get(3).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 24),
+                    new ItemStack(ModItems.MANA_VIAL.get(), 1),
+                    6, 12, 0.069f));
+            trades.get(4).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 48),
                     new ItemStack(ModItems.STAFF_PROTECTION_OBSIDIAN_ROD_FAE_LEATHER_BINDING.get(), 1),
                     6, 12, 0.095f));
+            trades.get(5).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 64),
+                    new ItemStack(ModItems.RING_OF_REPULSION.get(), 1),
+                    6, 12, 0.1f));
         }
 
         if (event.getType() == ModVillagers.SMUGGLER.get()) {
@@ -111,7 +131,7 @@ public class VillagerTradesEvent {
                     10, 8, 0.06f));
             trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
                     new ItemStack(Items.EMERALD, 48),
-                    new ItemStack(ModItems.FAE_LEATHER.get(), 24),
+                    new ItemStack(ModItems.FAE_LEATHER.get(), 16),
                     6, 12, 0.095f));
         }
 

@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "XXX",
+    "   ",
     "XOX",
     "XXX"
   ],
@@ -10,7 +10,7 @@
       "item": "mobius:mana_vial"
     },
     "X": {
-      "item": "minecraft:diamond"
+      "item": "mobius:bloodrop_gemstone"
     }
   },
   "result": {

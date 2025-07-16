@@ -1,16 +1,19 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "###",
+    "XXX",
     "#O ",
     "#  "
   ],
   "key": {
     "#": {
-      "item": "mobius:manawood_wood"
+      "item": "mobius:manawood_planks"
     },
     "O": {
       "item": "mobius:raw_mana"
+    },
+    "X": {
+      "item": "mobius:nickel_ingot"
     }
   },
   "result": {

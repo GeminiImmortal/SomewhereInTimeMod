@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "XXX",
+    " U ",
     "XOX",
     "XXX"
   ],
@@ -11,6 +11,9 @@
     },
     "X": {
       "item": "minecraft:lapis_lazuli"
+    },
+    "U": {
+      "item": "mobius:fae_leather"
     }
   },
   "result": {
