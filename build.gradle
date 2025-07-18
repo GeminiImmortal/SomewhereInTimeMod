@@ -30,7 +30,7 @@ mixin {
     add sourceSets.main, "mobius.refmap.json"
 }
 
-version = '1.16.5-v1.0-R'
+version = '1.16.5-v1.0-R-hotfix'
 group = 'net.geminiimmortal.mobius' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'somewhere_in_time'
 
