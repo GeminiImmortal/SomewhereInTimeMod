@@ -1,5 +1,6 @@
 
-<img width="850" height="478" alt="Mobius media 1" src="https://github.com/user-attachments/assets/83f7fce2-d74a-47bf-becb-f0b101b127bf" />
+<img width="850" height="478" alt="Governor New Render_Post_Text_Main_curse" src="https://github.com/user-attachments/assets/f9f0d220-33d5-4729-bbca-0e8557dbafb7" />
+
 
 Save an ancient realm lost in time which has fallen under the iron grip of the evil illager empire!
 
