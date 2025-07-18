@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "mobius:block_of_nickel"
+    }
+  ],
+  "result": {
+    "item": "mobius:nickel_ingot",
+    "count": 9
+  }
+}
