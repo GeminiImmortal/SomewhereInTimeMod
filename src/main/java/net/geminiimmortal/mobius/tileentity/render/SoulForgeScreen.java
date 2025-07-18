@@ -12,7 +12,7 @@ import net.minecraft.util.text.ITextComponent;
 
 public class SoulForgeScreen extends ContainerScreen<SoulForgeContainer> {
     private final ResourceLocation GUI = new ResourceLocation(MobiusMod.MOD_ID,
-            "textures/gui/soul_forge_gui_2.png");
+            "textures/gui/soul_forge_gui_redux.png");
 
     public SoulForgeScreen(SoulForgeContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
@@ -36,7 +36,7 @@ public class SoulForgeScreen extends ContainerScreen<SoulForgeContainer> {
         blit(matrixStack, posX, posY + 2, 0, 0, this.imageWidth, this.imageHeight);
 
         // Progess arrow
-        blit(matrixStack, posX + 79, posY + 34, 176, 14, 16, menu.getProgressArrowScale() + 1);
+        blit(matrixStack, posX + 85, posY + 32, 176, 0, 13, menu.getProgressArrowScale() + 1);
 
     }
 }
