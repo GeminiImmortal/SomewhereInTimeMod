@@ -8,7 +8,6 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.ModBlocks;
-import net.geminiimmortal.mobius.recipe.AstralConduitRecipe;
 import net.geminiimmortal.mobius.recipe.SoulForgeRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
