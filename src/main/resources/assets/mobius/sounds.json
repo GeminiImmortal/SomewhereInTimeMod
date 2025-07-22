@@ -49,6 +49,12 @@
     ],
     "subtitle": "Spell of aggression casts"
   },
+  "tier_three_prot_staff_cast": {
+    "sounds": [
+      "mobius:tier_three_prot_staff_cast"
+    ],
+    "subtitle": "Major protection spell casts"
+  },
   "arcane_bolt_fx_deep": {
     "sounds": [
       "mobius:arcane_bolt_fx_deep"

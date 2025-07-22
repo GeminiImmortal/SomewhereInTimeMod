@@ -15,7 +15,8 @@ public enum StaffType {
     FIRE_OBSIDIAN_FAE_LEATHER(20 * 20, Effects.FIRE_RESISTANCE, 0, 8, 30, LazyOptional.of(ModSounds.TIER_ONE_FIRE_CAST::get)),
     GRAVITAS(0, Effects.BLINDNESS, 0, 64, 2, LazyOptional.of(ModSounds.GRAVITAS::get)),
     HURRICANE_STAFF(0, Effects.BLINDNESS, 0, 64, 200, LazyOptional.of(ModSounds.HURRICANE::get)),
-    REJECTION_STAFF(0, Effects.BLINDNESS, 0, 24, 2, LazyOptional.of(ModSounds.GRAVITAS::get));
+    REJECTION_STAFF(0, Effects.BLINDNESS, 0, 24, 2, LazyOptional.of(ModSounds.GRAVITAS::get)),
+    MAJOR_PROTECTION_STAFF(20 * 20, Effects.REGENERATION, 2, 32, 2400, LazyOptional.of(ModSounds.TIER_THREE_PROT_CAST::get));
 
     private final int effectDuration;
     private final Effect effect;

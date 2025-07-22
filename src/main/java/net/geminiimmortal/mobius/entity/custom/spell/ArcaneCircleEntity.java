@@ -9,9 +9,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 public class ArcaneCircleEntity extends Entity implements SpellTypeEntity {
@@ -44,6 +46,26 @@ public class ArcaneCircleEntity extends Entity implements SpellTypeEntity {
         }
     }
 
+    @Override
+    public boolean hurt(DamageSource source, float amount) {
+        Entity projectile = source.getDirectEntity();
+
+        if (source.isProjectile() && projectile instanceof Entity) {
+            this.level.playSound(null, this.position().x, this.position().y, this.position().z, ModSounds.BARRIER_NEGATE.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
+
+            spawnParticles();
+            damageShield(amount);
+
+            projectile.remove();
+
+            return false;
+        }
+
+        // Handle all other damage types normally
+        return super.hurt(source, amount);
+    }
+
+
 
     @Override
     public void tick() {
@@ -61,6 +83,8 @@ public class ArcaneCircleEntity extends Entity implements SpellTypeEntity {
                 caster.getY() + caster.getEyeHeight() + look.y * distance,
                 caster.getZ() + look.z * distance
         );
+
+
 
         if (level.isClientSide) {
             spawnParticles();

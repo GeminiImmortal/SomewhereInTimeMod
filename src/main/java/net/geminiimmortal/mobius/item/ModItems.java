@@ -187,6 +187,7 @@ public class ModItems {
     public static final RegistryObject<Item> HURRICANE_STAFF = ITEMS.register("hurricane_staff", () -> new HurricaneStaff(new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1).rarity(Rarity.EPIC), StaffType.HURRICANE_STAFF));
     public static final RegistryObject<Item> REJECTION_STAFF = ITEMS.register("rejection_staff", () -> new RejectionStaff(new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1).rarity(Rarity.EPIC), StaffType.REJECTION_STAFF));
     public static final RegistryObject<Item> RING_OF_REPULSION = ITEMS.register("ring_of_warding", () -> new RingOfWarding(new Item.Properties().tab(ItemGroup.TAB_COMBAT).stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> STAFF_OF_MAJOR_PROTECTION = ITEMS.register("staff_of_major_protection", () -> new StaffMajorProtection(new Item.Properties().stacksTo(1).tab(ItemGroup.TAB_COMBAT).rarity(Rarity.EPIC), StaffType.MAJOR_PROTECTION_STAFF));
 
     //Weapons and Tools
     public static final RegistryObject<Item> VORPAL_SWORD = ITEMS.register("vorpal_sword", () -> new VorpalSword(ItemTier.NETHERITE, 3, -2.8f, new Item.Properties().rarity(Rarity.RARE).tab(ItemGroup.TAB_COMBAT).stacksTo(1).durability(2032)));
