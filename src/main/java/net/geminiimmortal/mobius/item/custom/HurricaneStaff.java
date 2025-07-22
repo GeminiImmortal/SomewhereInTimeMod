@@ -37,12 +37,6 @@ public class HurricaneStaff extends ModularStaff {
             return ActionResult.fail(stack);
         }
 
-        if (player.level.isClientSide() && !manaVial.isEmpty()) {
-            assert Minecraft.getInstance().player != null;
-            Minecraft.getInstance().player.playSound(ModSounds.TIER_TWO_PROT_CAST.get(), 1.0F, 1.0F);
-            Minecraft.getInstance().player.playSound(this.staffType.getSound().resolve().get(), 1.0F, 1.0F);
-        }
-
         if (!player.level.isClientSide()) {
 
             if (tag.contains("LastUsedTime")) {
@@ -70,8 +64,13 @@ public class HurricaneStaff extends ModularStaff {
                 summonTornadoes(world, player);
                 stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
             }
+
             tag.putLong("LastUsedTime", currentTime);
             stack.setTag(tag);
+        }
+        if (world.isClientSide() && !(currentTime - lastUsed < this.staffType.getCooldown())) {
+            player.playSound(ModSounds.TIER_TWO_PROT_CAST.get(), 1.0f, 1.0f);
+            player.playSound(ModSounds.HURRICANE.get(), 1.0f, 1.0f);
         }
         return ActionResult.success(stack);
     }
