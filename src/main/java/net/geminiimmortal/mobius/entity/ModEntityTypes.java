@@ -249,7 +249,11 @@ public class ModEntityTypes {
                                     EntityClassification.CREATURE).sized(1f, 2.25f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "rebel_quartermaster").toString()));
 
-
+    public static final RegistryObject<EntityType<ImperialTowerRegularEntity>> IMPERIAL_TOWER_GUARD =
+            ENTITY_TYPES.register("imperial_tower_guard",
+                    () -> EntityType.Builder.of(ImperialTowerRegularEntity::new,
+                                    EntityClassification.CREATURE).sized(1f, 2.25f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "imperial_tower_guard").toString()));
 
 
     public static void register(IEventBus eventBus) {

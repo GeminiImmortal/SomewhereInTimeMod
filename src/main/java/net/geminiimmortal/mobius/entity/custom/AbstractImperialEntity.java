@@ -182,8 +182,10 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
     public void givePlayerInfamyOnDeath(DamageSource source, int amount) {
         if (source.getEntity() instanceof ServerPlayerEntity) {
             ServerPlayerEntity serverPlayer = (ServerPlayerEntity) source.getEntity();
-            InfamyHelper.get(serverPlayer).addInfamy(amount);
-            InfamyHelper.sync(serverPlayer);
+            if (serverPlayer.getCapability(ModCapabilities.INFAMY_CAPABILITY).isPresent()) {
+                InfamyHelper.get(serverPlayer).addInfamy(amount);
+                InfamyHelper.sync(serverPlayer);
+            }
         }
     }
 

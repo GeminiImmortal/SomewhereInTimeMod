@@ -96,14 +96,14 @@ public class ModStructureGeneration {
             event.addEntitySpawns(EntityClassification.MONSTER, spawners);
         }
         if(event.getStructure().equals(ModStructureSetup.GOVERNOR_TOWER.get())) {
-            MobSpawnInfo.Spawners footmanSpawn = new MobSpawnInfo.Spawners(ModEntityTypes.FOOTMAN.get(), 75, 6, 9);
+            MobSpawnInfo.Spawners footmanSpawn = new MobSpawnInfo.Spawners(ModEntityTypes.IMPERIAL_TOWER_GUARD.get(), 75, 6, 9);
             MobSpawnInfo.Spawners diamondGolemSpawn = new MobSpawnInfo.Spawners(ModEntityTypes.DIAMOND_GOLEM.get(), 10, 2, 4);
             MobSpawnInfo.Spawners heartGolemSpawn = new MobSpawnInfo.Spawners(ModEntityTypes.HEART_GOLEM.get(), 2, 1, 3);
             MobSpawnInfo.Spawners clubGolemSpawn = new MobSpawnInfo.Spawners(ModEntityTypes.CLUB_GOLEM.get(), 8, 2, 4);
             MobSpawnInfo.Spawners spadeGolemSpawn = new MobSpawnInfo.Spawners(ModEntityTypes.SPADE_GOLEM.get(), 10, 1, 1);
             List<MobSpawnInfo.Spawners> spawners = new ArrayList<>();
             spawners.add(footmanSpawn);
-            MobSpawnInfo spawnInfo = new MobSpawnInfo.Builder().creatureGenerationProbability(0.001f).addMobCharge(ModEntityTypes.FOOTMAN.get(), 1000, 900).addSpawn(EntityClassification.MONSTER, spawners.stream().findAny().get()).build();
+            MobSpawnInfo spawnInfo = new MobSpawnInfo.Builder().creatureGenerationProbability(0.001f).addMobCharge(ModEntityTypes.IMPERIAL_TOWER_GUARD.get(), 1000, 900).addSpawn(EntityClassification.MONSTER, spawners.stream().findAny().get()).build();
             event.addEntitySpawns(EntityClassification.MONSTER, spawnInfo.getMobs(EntityClassification.MONSTER));
         }
 

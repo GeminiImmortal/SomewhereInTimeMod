@@ -268,6 +268,12 @@ public class MobiusMod
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                     BountyHunterEntity::canMobSpawn
             );
+            EntitySpawnPlacementRegistry.register(
+                    ModEntityTypes.IMPERIAL_TOWER_GUARD.get(),
+                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
+                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                    ImperialTowerRegularEntity::canMobSpawn
+            );
         });
     }
 
@@ -372,6 +378,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.IMPERIAL_COMMANDER.get(), ImperialCommanderRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GOVERNOR_CLONE.get(), GovernorCloneRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.REBEL_QUARTERMASTER.get(), RebelQuartermasterRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.IMPERIAL_TOWER_GUARD.get(), ImperialTowerRegularRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -436,6 +443,7 @@ public class MobiusMod
             event.put(ModEntityTypes.IMPERIAL_COMMANDER.get(), ImperialCommanderEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.GOVERNOR_CLONE.get(), GovernorCloneEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.REBEL_QUARTERMASTER.get(), RebelQuartermasterEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.IMPERIAL_TOWER_GUARD.get(), ImperialTowerRegularEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent

@@ -19,7 +19,6 @@ import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.server.TicketType;
-import net.minecraftforge.common.util.ITeleporter;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 
@@ -28,10 +27,10 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class MTeleporter implements ITeleporter {
+public class ITeleporter implements net.minecraftforge.common.util.ITeleporter {
     protected final ServerWorld world;
 
-    public MTeleporter(ServerWorld worldIn) {
+    public ITeleporter(ServerWorld worldIn) {
         this.world = worldIn;
     }
 

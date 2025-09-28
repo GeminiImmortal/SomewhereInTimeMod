@@ -31,7 +31,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.Cancelable;
 import net.geminiimmortal.mobius.util.ModTags;
-import net.geminiimmortal.mobius.world.MTeleporter;
+import net.geminiimmortal.mobius.world.ITeleporter;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -130,7 +130,7 @@ public class MobiusPortalBlock extends Block {
                         if(destinationWorld != null && minecraftserver.isNetherEnabled() && !entity.isPassenger()) {
                             entity.level.getProfiler().push("mobius_portal");
                             entity.setPortalCooldown();
-                            entity.changeDimension(destinationWorld, new MTeleporter(destinationWorld));
+                            entity.changeDimension(destinationWorld, new ITeleporter(destinationWorld));
                             entity.level.getProfiler().pop();
                         }
                     }
