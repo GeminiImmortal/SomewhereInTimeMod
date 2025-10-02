@@ -2,10 +2,10 @@ package net.geminiimmortal.mobius;
 
 import com.google.common.collect.Maps;
 import net.geminiimmortal.mobius.effects.ModEffects;
+import net.geminiimmortal.mobius.event.DieselytraClientSetup;
 import net.geminiimmortal.mobius.fluid.ModFluids;
 import net.geminiimmortal.mobius.integration.MobiusModPatchouli;
 import net.geminiimmortal.mobius.item.custom.ModSpawnEgg;
-import net.geminiimmortal.mobius.item.render.DieselytraLayer;
 import net.geminiimmortal.mobius.network.ClientEffectHandler;
 import net.geminiimmortal.mobius.poi.ModPOIs;
 import net.geminiimmortal.mobius.block.ModBlocks;
@@ -36,12 +36,10 @@ import net.geminiimmortal.mobius.world.worldgen.structure.ModStructureSetup;
 import net.geminiimmortal.mobius.world.worldgen.structure.processor.ModProcessors;
 import net.minecraft.block.Block;
 import net.minecraft.block.WoodType;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.client.renderer.entity.ArmorStandRenderer;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
@@ -474,35 +472,11 @@ public class MobiusMod
 
 
     @Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class ClientEventSubscriber {
-
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-            net.minecraft.client.renderer.entity.PlayerRenderer renderer =
-                    (net.minecraft.client.renderer.entity.PlayerRenderer)
-                            net.minecraft.client.Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap().get("default");
-            renderer.addLayer(new DieselytraLayer<>(renderer));
-
-            renderer = (net.minecraft.client.renderer.entity.PlayerRenderer)
-                    net.minecraft.client.Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap().get("slim");
-            renderer.addLayer(new DieselytraLayer<>(renderer));
-
-            // Add to armor stand renderer
-            if (Minecraft.getInstance().getEntityRenderDispatcher().renderers.containsKey(EntityType.ARMOR_STAND)) {
-                @SuppressWarnings("unchecked")
-                ArmorStandRenderer armorStandRenderer =
-                        (ArmorStandRenderer) Minecraft.getInstance().getEntityRenderDispatcher().renderers.get(EntityType.ARMOR_STAND);
-
-                armorStandRenderer.addLayer(new DieselytraLayer<>(armorStandRenderer));
-            }
-        }
-    }
-
-    @Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MinecraftForge.EVENT_BUS.addListener(ClientEffectHandler::onClientTick);
+            MinecraftForge.EVENT_BUS.addListener(DieselytraClientSetup::onClientSetup);
         }
     }
 

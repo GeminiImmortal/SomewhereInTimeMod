@@ -3,7 +3,11 @@ package net.geminiimmortal.mobius.event;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.capability.boost.BoostDataProvider;
 import net.geminiimmortal.mobius.item.custom.Dieselytra;
+import net.geminiimmortal.mobius.item.render.DieselytraLayer;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.ArmorStandRenderer;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -15,10 +19,12 @@ import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID)
 public class DieselytraEvents {
@@ -142,7 +148,30 @@ public class DieselytraEvents {
                     1, 0.0, 0.0, 0.0, 0.01);
         }
     }
+    @Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class ClientEventSubscriber {
 
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            net.minecraft.client.renderer.entity.PlayerRenderer renderer =
+                    (net.minecraft.client.renderer.entity.PlayerRenderer)
+                            net.minecraft.client.Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap().get("default");
+            renderer.addLayer(new DieselytraLayer<>(renderer));
+
+            renderer = (net.minecraft.client.renderer.entity.PlayerRenderer)
+                    net.minecraft.client.Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap().get("slim");
+            renderer.addLayer(new DieselytraLayer<>(renderer));
+
+            // Add to armor stand renderer
+            if (Minecraft.getInstance().getEntityRenderDispatcher().renderers.containsKey(EntityType.ARMOR_STAND)) {
+                @SuppressWarnings("unchecked")
+                ArmorStandRenderer armorStandRenderer =
+                        (ArmorStandRenderer) Minecraft.getInstance().getEntityRenderDispatcher().renderers.get(EntityType.ARMOR_STAND);
+
+                armorStandRenderer.addLayer(new DieselytraLayer<>(armorStandRenderer));
+            }
+        }
+    }
 
 }
 

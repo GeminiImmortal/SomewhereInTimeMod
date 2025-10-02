@@ -93,19 +93,18 @@ public class DieselytraModel<T extends LivingEntity> extends EntityModel<T> {
                 float spinSpeed = (float) (ageInTicks * 0.3F * speed * 2.0F);
                 this.engine_left.zRot = spinSpeed;
                 this.engine_right.zRot = -spinSpeed;
-                ParticlePacket packetL = new ParticlePacket(this.engine_left.x, this.engine_left.y, this.engine_left.z, "smoke");
-                ParticlePacket packetFlameL = new ParticlePacket(this.engine_left.x, this.engine_left.y, this.engine_left.z, "flame");
-                ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.ALL.noArg(), packetL);
-                ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.ALL.noArg(), packetL);
-                ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.ALL.noArg(), packetL);
-                ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.ALL.noArg(), packetFlameL);
 
-                ParticlePacket packetR = new ParticlePacket(this.engine_right.x, this.engine_right.y, this.engine_right.z, "smoke");
-                ParticlePacket packetFlameR = new ParticlePacket(this.engine_right.x, this.engine_right.y, this.engine_right.z, "flame");
-                ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.ALL.noArg(), packetR);
-                ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.ALL.noArg(), packetR);
-                ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.ALL.noArg(), packetR);
-                ModNetwork.NETWORK_CHANNEL.send(PacketDistributor.ALL.noArg(), packetFlameR);
+                entity.level.addParticle(ParticleTypes.FLAME, this.engine_left.x, this.engine_left.y, this.engine_left.z, 0D, 0D, 0D);
+                entity.level.addParticle(ParticleTypes.FLAME, this.engine_right.x, this.engine_right.y, this.engine_right.z, 0D, 0D, 0D);
+
+                entity.level.addParticle(ParticleTypes.SMOKE, this.engine_left.x, this.engine_left.y, this.engine_left.z, 0D, 0D, 0D);
+                entity.level.addParticle(ParticleTypes.SMOKE, this.engine_right.x, this.engine_right.y, this.engine_right.z, 0D, 0D, 0D);
+                entity.level.addParticle(ParticleTypes.SMOKE, this.engine_left.x, this.engine_left.y, this.engine_left.z, 0D, 0D, 0D);
+                entity.level.addParticle(ParticleTypes.SMOKE, this.engine_right.x, this.engine_right.y, this.engine_right.z, 0D, 0D, 0D);
+                entity.level.addParticle(ParticleTypes.SMOKE, this.engine_left.x, this.engine_left.y, this.engine_left.z, 0D, 0D, 0D);
+                entity.level.addParticle(ParticleTypes.SMOKE, this.engine_right.x, this.engine_right.y, this.engine_right.z, 0D, 0D, 0D);
+                entity.level.addParticle(ParticleTypes.SMOKE, this.engine_left.x, this.engine_left.y, this.engine_left.z, 0D, 0D, 0D);
+                entity.level.addParticle(ParticleTypes.SMOKE, this.engine_right.x, this.engine_right.y, this.engine_right.z, 0D, 0D, 0D);
 
             } else {
                 this.engine_left.zRot = 0F;
