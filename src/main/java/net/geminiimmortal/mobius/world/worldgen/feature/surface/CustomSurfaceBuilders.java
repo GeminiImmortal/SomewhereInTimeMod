@@ -26,16 +26,16 @@ public class CustomSurfaceBuilders {
     );
 
     public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> DRACONIC_FORELANDS_SURFACE_BUILDER = SURFACE_BUILDERS.register(
-            "draconic_forelands_surface_builder", () -> new DraconicForelandsSurfaceBuilder(SurfaceBuilderConfig.CODEC)
+            "draconic_forelands_surface_builder", () -> new DraconicForelandsMountainSurfaceBuilder(SurfaceBuilderConfig.CODEC)
     );
 
-    public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> DRACONIC_FORELANDS_MOUNTAINS_SURFACE_BUILDER = SURFACE_BUILDERS.register(
+    /*public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> DRACONIC_FORELANDS_MOUNTAINS_SURFACE_BUILDER = SURFACE_BUILDERS.register(
             "draconic_forelands_mountain_builder", () -> new DraconicForelandsMountainSurfaceBuilder(SurfaceBuilderConfig.CODEC)
-    );
+    );*/
 
-    public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> DRACONIC_FOOTHILLS_SURFACE_BUILDER = SURFACE_BUILDERS.register(
+    /*public static final RegistryObject<SurfaceBuilder<SurfaceBuilderConfig>> DRACONIC_FOOTHILLS_SURFACE_BUILDER = SURFACE_BUILDERS.register(
             "draconic_foothills_surface_builder", () -> new DraconicFoothillsSurfaceBuilder(SurfaceBuilderConfig.CODEC)
-    );
+    );*/
 
     public static void register(IEventBus eventBus) {
         SURFACE_BUILDERS.register(eventBus);

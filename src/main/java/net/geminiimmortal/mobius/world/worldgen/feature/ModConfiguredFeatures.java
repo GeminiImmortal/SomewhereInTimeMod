@@ -7,12 +7,14 @@ import net.minecraft.world.gen.blockstateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.foliageplacer.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliageplacer.DarkOakFoliagePlacer;
+import net.minecraft.world.gen.foliageplacer.JungleFoliagePlacer;
 import net.minecraft.world.gen.foliageplacer.SpruceFoliagePlacer;
 import net.minecraft.world.gen.placement.CountPlacement;
 import net.minecraft.world.gen.placement.NoPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.trunkplacer.FancyTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.GiantTrunkPlacer;
+import net.minecraft.world.gen.trunkplacer.MegaJungleTrunkPlacer;
 import net.minecraft.world.gen.trunkplacer.StraightTrunkPlacer;
 
 public class ModConfiguredFeatures {
@@ -26,6 +28,18 @@ public class ModConfiguredFeatures {
                     new StraightTrunkPlacer(6, 4, 3),
                     new TwoLayerFeature(1, 0, 1)
             ).ignoreVines().build()));
+
+    public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CONFIGURED_STRANGEWOOD_TREE =
+            register("strangewood_tree", Feature.TREE.configured(
+                    new BaseTreeFeatureConfig.Builder(
+                            new SimpleBlockStateProvider(ModBlocks.STRANGEWOOD_LOG.get().defaultBlockState()),
+                            new SimpleBlockStateProvider(ModBlocks.STRANGEWOOD_LEAVES.get().defaultBlockState()),
+                            new JungleFoliagePlacer(FeatureSpread.of(2, 0),
+                                    FeatureSpread.of(0, 0),
+                                    4),
+                            new GiantTrunkPlacer(25, 10, 25),
+                            new TwoLayerFeature(1, 1, 1)
+                    ).build()));
 
     public static final ConfiguredFeature<BaseTreeFeatureConfig, ?> CONFIGURED_LIVING_MANAWOOD_TREE_FEATURE =
             register("living_manawood_tree", LivingManawoodTreeFeature.TREE.configured(
@@ -69,6 +83,10 @@ public class ModConfiguredFeatures {
     public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_STANDING_GLOOMCAP_FEATURE =
             register("standing_gloomcap",
                     ModFeatures.CLUSTERED_STANDING_GLOOMCAP_FEATURE.get().configured(new NoFeatureConfig()));
+
+    public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_STANDING_SKYCAP_FEATURE =
+            register("standing_skycap",
+                    ModFeatures.CLUSTERED_STANDING_SKYCAP_FEATURE.get().configured(new NoFeatureConfig()));
 
     public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_WILD_MANA_WART_FEATURE =
             register("wild_mana_wart",

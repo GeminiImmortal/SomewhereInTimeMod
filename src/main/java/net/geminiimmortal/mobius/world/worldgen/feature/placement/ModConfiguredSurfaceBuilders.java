@@ -31,13 +31,7 @@ public class ModConfiguredSurfaceBuilders {
             ModBlocks.HEMATITE.get().defaultBlockState()
     )));
 
-    public static ConfiguredSurfaceBuilder<?> DRACONIC_FORELANDS = register("draconic_forelands", CustomSurfaceBuilders.DRACONIC_FORELANDS_MOUNTAINS_SURFACE_BUILDER.get().configured(new SurfaceBuilderConfig(
-            ModBlocks.AURORA_GRASS_BLOCK.get().defaultBlockState(),
-            ModBlocks.BLOODSTONE.get().defaultBlockState(),
-            ModBlocks.HEMATITE.get().defaultBlockState()
-    )));
-
-    public static ConfiguredSurfaceBuilder<?> DRACONIC_FOOTHILLS = register("draconic_foothills", CustomSurfaceBuilders.DRACONIC_FOOTHILLS_SURFACE_BUILDER.get().configured(new SurfaceBuilderConfig(
+    public static ConfiguredSurfaceBuilder<?> DRACONIC_FORELANDS = register("draconic_forelands", SurfaceBuilder.DEFAULT.configured(new SurfaceBuilderConfig(
             ModBlocks.AURORA_GRASS_BLOCK.get().defaultBlockState(),
             ModBlocks.AURORA_DIRT.get().defaultBlockState(),
             ModBlocks.HEMATITE.get().defaultBlockState()

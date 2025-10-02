@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "boat",
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "mobius:strangewood_planks"
+    }
+  },
+  "result": {
+    "item": "mobius:strangewood_boat"
+  }
+}

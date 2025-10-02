@@ -462,5 +462,32 @@
       }
     ],
     "subtitle": "Governor dies"
+  },
+  "dieselytra_boost": {
+    "sounds": [
+      {
+        "name": "mobius:dieselytra_boost",
+        "volume": 0.4
+      }
+    ],
+    "subtitle": "Dieselytra boosts"
+  },
+  "dieselytra_engine": {
+    "sounds": [
+      {
+        "name": "mobius:dieselytra_engine",
+        "volume": 0.75
+      }
+    ],
+    "subtitle": "Dieselytra whirs"
+  },
+  "dieselytra_lands": {
+    "sounds": [
+      {
+        "name": "mobius:dieselytra_lands",
+        "volume": 0.5
+      }
+    ],
+    "subtitle": "Dieselytra shifts gears"
   }
 }

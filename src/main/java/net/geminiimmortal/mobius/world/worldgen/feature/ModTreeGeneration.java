@@ -18,6 +18,7 @@ public class ModTreeGeneration {
         ResourceLocation valid = ModBiomes.FORSAKEN_THICKET.getId();
         ResourceLocation mushroomForest = ModBiomes.MUSHROOM_FOREST.getId();
         ResourceLocation infectedBog = ModBiomes.TEAL_GLADES.getId();
+        ResourceLocation draconicForelands = ModBiomes.DRACONIC_FORELANDS.getId();
 
         if(Objects.equals(event.getName(), valid)) {
             List<Supplier<ConfiguredFeature<?, ?>>> base =
@@ -67,11 +68,24 @@ public class ModTreeGeneration {
             List<Supplier<ConfiguredFeature<?, ?>>> base =
                     event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
 
-            base.add(() -> ModConfiguredFeatures.BOG_TREE
+            base.add(() -> ModConfiguredFeatures.CONFIGURED_STRANGEWOOD_TREE
                     .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
                     .decorated(Placement.CHANCE.configured(
                             new ChanceConfig(2)))
                     .countRandom(6));
+        }
+
+        if(Objects.equals(event.getName(), draconicForelands)) {
+            List<Supplier<ConfiguredFeature<?, ?>>> base =
+                    event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
+
+            base.add(() -> ModConfiguredFeatures.CONFIGURED_MARROWOOD_TREE
+                    .decorated(Features.Placements.HEIGHTMAP_DOUBLE)
+                    .decorated(DenserTreesPlacement.COUNT_EXTRA.configured(
+                            new AtSurfaceWithExtraConfig(3, 0.7f, 1)))
+                    .decorated(Placement.CHANCE.configured(
+                            new ChanceConfig(2)))
+                    .countRandom(1));
         }
 
     }

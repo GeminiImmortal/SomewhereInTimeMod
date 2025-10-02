@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "mobius:strangewood_planks"
+    }
+  ],
+  "result": {
+    "item": "mobius:strangewood_button"
+  }
+}

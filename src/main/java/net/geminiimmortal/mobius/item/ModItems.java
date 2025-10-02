@@ -32,91 +32,110 @@ public class ModItems {
     public static final RegistryObject<Item> MANAWOOD_LEAVES = ITEMS.register("manawood_leaves", () -> new BlockItem(ModBlocks.MANAWOOD_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> LIVING_MANAWOOD_LEAVES = ITEMS.register("living_manawood_leaves", () -> new BlockItem(ModBlocks.LIVING_MANAWOOD_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> GLOAMTHORN_LEAVES = ITEMS.register("gloamthorn_leaves", () -> new BlockItem(ModBlocks.GLOAMTHORN_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> STRANGEWOOD_LEAVES = ITEMS.register("strangewood_leaves", () -> new BlockItem(ModBlocks.STRANGEWOOD_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS))); //1.1 Update
 
     //Logs
     public static final RegistryObject<Item> MARROWOOD_LOG = ITEMS.register("marrowood_log", () -> new BlockItem(ModBlocks.MARROWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MANAWOOD_LOG = ITEMS.register("manawood_log", () -> new BlockItem(ModBlocks.MANAWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> LIVING_MANAWOOD_LOG = ITEMS.register("living_manawood_log", () -> new BlockItem(ModBlocks.LIVING_MANAWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> GLOAMTHORN_LOG = ITEMS.register("gloamthorn_log", () -> new BlockItem(ModBlocks.GLOAMTHORN_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> STRANGEWOOD_LOG = ITEMS.register("strangewood_log", () -> new BlockItem(ModBlocks.STRANGEWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS))); //1.1 Update
 
     //Stripped Logs
     public static final RegistryObject<Item> STRIPPED_MARROWOOD_LOG = ITEMS.register("stripped_marrowood_log", () -> new BlockItem(ModBlocks.STRIPPED_MARROWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> STRIPPED_MANAWOOD_LOG = ITEMS.register("stripped_manawood_log", () -> new BlockItem(ModBlocks.STRIPPED_MANAWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> STRIPPED_GLOAMTHORN_LOG = ITEMS.register("stripped_gloamthorn_log", () -> new BlockItem(ModBlocks.STRIPPED_GLOAMTHORN_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> STRIPPED_STRANGEWOOD_LOG = ITEMS.register("stripped_strangewood_log", () -> new BlockItem(ModBlocks.STRIPPED_STRANGEWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Bark Blocks
     public static final RegistryObject<Item> MARROWOOD_WOOD = ITEMS.register("marrowood_wood", () -> new BlockItem(ModBlocks.MARROWOOD_WOOD.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MANAWOOD_WOOD = ITEMS.register("manawood_wood", () -> new BlockItem(ModBlocks.MANAWOOD_WOOD.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> GLOAMTHORN_WOOD = ITEMS.register("gloamthorn_wood", () -> new BlockItem(ModBlocks.GLOAMTHORN_WOOD.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> STRANGEWOOD_WOOD = ITEMS.register("strangewood_wood", () -> new BlockItem(ModBlocks.STRANGEWOOD_WOOD.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Stripped Bark Blocks
     public static final RegistryObject<Item> STRIPPED_MARROWOOD_WOOD = ITEMS.register("stripped_marrowood_wood", () -> new BlockItem(ModBlocks.STRIPPED_MARROWOOD_WOOD.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> STRIPPED_MANAWOOD_WOOD = ITEMS.register("stripped_manawood_wood", () -> new BlockItem(ModBlocks.STRIPPED_MANAWOOD_WOOD.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> STRIPPED_GLOAMTHORN_WOOD = ITEMS.register("stripped_gloamthorn_wood", () -> new BlockItem(ModBlocks.STRIPPED_GLOAMTHORN_WOOD.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> STRIPPED_STRANGEWOOD_WOOD = ITEMS.register("stripped_strangewood_wood", () -> new BlockItem(ModBlocks.STRIPPED_STRANGEWOOD_WOOD.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Planks
     public static final RegistryObject<Item> MARROWOOD_PLANKS = ITEMS.register("marrowood_planks", () -> new BlockItem(ModBlocks.MARROWOOD_PLANKS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MANAWOOD_PLANKS = ITEMS.register("manawood_planks", () -> new BlockItem(ModBlocks.MANAWOOD_PLANKS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> GLOAMTHORN_PLANKS = ITEMS.register("gloamthorn_planks", () -> new BlockItem(ModBlocks.GLOAMTHORN_PLANKS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> STRANGEWOOD_PLANKS = ITEMS.register("strangewood_planks", () -> new BlockItem(ModBlocks.STRANGEWOOD_PLANKS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Wooden Stairs
     public static final RegistryObject<Item> MARROWOOD_STAIRS = ITEMS.register("marrowood_stairs", () -> new BlockItem(ModBlocks.MARROWOOD_STAIRS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MANAWOOD_STAIRS = ITEMS.register("manawood_stairs", () -> new BlockItem(ModBlocks.MANAWOOD_STAIRS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> GLOAMTHORN_STAIRS = ITEMS.register("gloamthorn_stairs", () -> new BlockItem(ModBlocks.GLOAMTHORN_STAIRS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> STRANGEWOOD_STAIRS = ITEMS.register("strangewood_stairs", () -> new BlockItem(ModBlocks.STRANGEWOOD_STAIRS.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Wooden Slabs
     public static final RegistryObject<Item> MARROWOOD_SLAB = ITEMS.register("marrowood_slab", () -> new BlockItem(ModBlocks.MARROWOOD_SLAB.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MANAWOOD_SLAB = ITEMS.register("manawood_slab", () -> new BlockItem(ModBlocks.MANAWOOD_SLAB.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> GLOAMTHORN_SLAB = ITEMS.register("gloamthorn_slab", () -> new BlockItem(ModBlocks.GLOAMTHORN_SLAB.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> STRANGEWOOD_SLAB = ITEMS.register("strangewood_slab", () -> new BlockItem(ModBlocks.STRANGEWOOD_SLAB.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Wooden Fences
     public static final RegistryObject<Item> MARROWOOD_FENCE = ITEMS.register("marrowood_fence", () -> new BlockItem(ModBlocks.MARROWOOD_FENCE.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> MANAWOOD_FENCE = ITEMS.register("manawood_fence", () -> new BlockItem(ModBlocks.MANAWOOD_FENCE.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> GLOAMTHORN_FENCE = ITEMS.register("gloamthorn_fence", () -> new BlockItem(ModBlocks.GLOAMTHORN_FENCE.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> STRANGEWOOD_FENCE = ITEMS.register("strangewood_fence", () -> new BlockItem(ModBlocks.STRANGEWOOD_FENCE.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     //Wooden Fence Gates
     public static final RegistryObject<Item> MARROWOOD_FENCE_GATE = ITEMS.register("marrowood_fence_gate", () -> new BlockItem(ModBlocks.MARROWOOD_FENCE_GATE.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
     public static final RegistryObject<Item> MANAWOOD_FENCE_GATE = ITEMS.register("manawood_fence_gate", () -> new BlockItem(ModBlocks.MANAWOOD_FENCE_GATE.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
     public static final RegistryObject<Item> GLOAMTHORN_FENCE_GATE = ITEMS.register("gloamthorn_fence_gate", () -> new BlockItem(ModBlocks.GLOAMTHORN_FENCE_GATE.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
+    public static final RegistryObject<Item> STRANGEWOOD_FENCE_GATE = ITEMS.register("strangewood_fence_gate", () -> new BlockItem(ModBlocks.STRANGEWOOD_FENCE_GATE.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
 
     //Wooden Doors
     public static final RegistryObject<Item> MARROWOOD_DOOR = ITEMS.register("marrowood_door", () -> new BlockItem(ModBlocks.MARROWOOD_DOOR.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
     public static final RegistryObject<Item> MANAWOOD_DOOR = ITEMS.register("manawood_door", () -> new BlockItem(ModBlocks.MANAWOOD_DOOR.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
     public static final RegistryObject<Item> GLOAMTHORN_DOOR = ITEMS.register("gloamthorn_door", () -> new BlockItem(ModBlocks.GLOAMTHORN_DOOR.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
+    public static final RegistryObject<Item> STRANGEWOOD_DOOR = ITEMS.register("strangewood_door", () -> new BlockItem(ModBlocks.STRANGEWOOD_DOOR.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
 
     //Wooden Trapdoors
     public static final RegistryObject<Item> MARROWOOD_TRAPDOOR = ITEMS.register("marrowood_trapdoor", () -> new BlockItem(ModBlocks.MARROWOOD_TRAPDOOR.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
     public static final RegistryObject<Item> MANAWOOD_TRAPDOOR = ITEMS.register("manawood_trapdoor", () -> new BlockItem(ModBlocks.MANAWOOD_TRAPDOOR.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
     public static final RegistryObject<Item> GLOAMTHORN_TRAPDOOR = ITEMS.register("gloamthorn_trapdoor", () -> new BlockItem(ModBlocks.GLOAMTHORN_TRAPDOOR.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
+    public static final RegistryObject<Item> STRANGEWOOD_TRAPDOOR = ITEMS.register("strangewood_trapdoor", () -> new BlockItem(ModBlocks.STRANGEWOOD_TRAPDOOR.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
 
     //Wooden Pressure Plates
     public static final RegistryObject<Item> MARROWOOD_PRESSURE_PLATE = ITEMS.register("marrowood_pressure_plate", () -> new BlockItem(ModBlocks.MARROWOOD_PRESSURE_PLATE.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
     public static final RegistryObject<Item> MANAWOOD_PRESSURE_PLATE = ITEMS.register("manawood_pressure_plate", () -> new BlockItem(ModBlocks.MANAWOOD_PRESSURE_PLATE.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
     public static final RegistryObject<Item> GLOAMTHORN_PRESSURE_PLATE = ITEMS.register("gloamthorn_pressure_plate", () -> new BlockItem(ModBlocks.GLOAMTHORN_PRESSURE_PLATE.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
+    public static final RegistryObject<Item> STRANGEWOOD_PRESSURE_PLATE = ITEMS.register("strangewood_pressure_plate", () -> new BlockItem(ModBlocks.STRANGEWOOD_PRESSURE_PLATE.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
 
     //Wooden Buttons
     public static final RegistryObject<Item> MARROWOOD_BUTTON = ITEMS.register("marrowood_button", () -> new BlockItem(ModBlocks.MARROWOOD_BUTTON.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
     public static final RegistryObject<Item> MANAWOOD_BUTTON = ITEMS.register("manawood_button", () -> new BlockItem(ModBlocks.MANAWOOD_BUTTON.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
     public static final RegistryObject<Item> GLOAMTHORN_BUTTON = ITEMS.register("gloamthorn_button", () -> new BlockItem(ModBlocks.GLOAMTHORN_BUTTON.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
+    public static final RegistryObject<Item> STRANGEWOOD_BUTTON = ITEMS.register("strangewood_button", () -> new BlockItem(ModBlocks.STRANGEWOOD_BUTTON.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
 
     //Signs
     public static final RegistryObject<Item> MARROWOOD_SIGN = ITEMS.register("marrowood_sign", () -> new SignItem(new Item.Properties().tab(ItemGroup.TAB_DECORATIONS).stacksTo(16),ModBlocks.MARROWOOD_SIGN.get(), ModBlocks.MARROWOOD_WALL_SIGN.get()));
     public static final RegistryObject<Item> MANAWOOD_SIGN = ITEMS.register("manawood_sign", () -> new SignItem(new Item.Properties().tab(ItemGroup.TAB_DECORATIONS).stacksTo(16),ModBlocks.MANAWOOD_SIGN.get(), ModBlocks.MANAWOOD_WALL_SIGN.get()));
     public static final RegistryObject<Item> GLOAMTHORN_SIGN = ITEMS.register("gloamthorn_sign", () -> new SignItem(new Item.Properties().tab(ItemGroup.TAB_DECORATIONS).stacksTo(16),ModBlocks.GLOAMTHORN_SIGN.get(), ModBlocks.GLOAMTHORN_WALL_SIGN.get()));
+    public static final RegistryObject<Item> STRANGEWOOD_SIGN = ITEMS.register("strangewood_sign", () -> new SignItem(new Item.Properties().tab(ItemGroup.TAB_DECORATIONS).stacksTo(16),ModBlocks.STRANGEWOOD_SIGN.get(), ModBlocks.STRANGEWOOD_WALL_SIGN.get()));
 
     //Saplings
     public static final RegistryObject<Item> MARROWOOD_SAPLING = ITEMS.register("marrowood_sapling", () -> new BlockItem(ModBlocks.MARROWOOD_SAPLING.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> MANAWOOD_SAPLING = ITEMS.register("manawood_sapling", () -> new BlockItem(ModBlocks.MANAWOOD_SAPLING.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> GLOAMTHORN_SAPLING = ITEMS.register("gloamthorn_sapling", () -> new BlockItem(ModBlocks.GLOAMTHORN_SAPLING.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> LIVING_MANAWOOD_SAPLING = ITEMS.register("living_manawood_sapling", () -> new BlockItem(ModBlocks.LIVING_MANAWOOD_SAPLING.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> STRANGEWOOD_SAPLING = ITEMS.register("strangewood_sapling", () -> new BlockItem(ModBlocks.STRANGEWOOD_SAPLING.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+
 
     //Boats
     public static final RegistryObject<Item> MARROWOOD_BOAT = ITEMS.register("marrowood_boat", () -> new CustomBoatItem(new Item.Properties().tab(ItemGroup.TAB_TRANSPORTATION), "marrowood"));
     public static final RegistryObject<Item> MANAWOOD_BOAT = ITEMS.register("manawood_boat", () -> new ManawoodBoatItem(new Item.Properties().tab(ItemGroup.TAB_TRANSPORTATION), "manawood"));
     public static final RegistryObject<Item> GLOAMTHORN_BOAT = ITEMS.register("gloamthorn_boat", () -> new GloamthornBoatItem(new Item.Properties().tab(ItemGroup.TAB_TRANSPORTATION), "gloamthorn"));
+    public static final RegistryObject<Item> STRANGEWOOD_BOAT = ITEMS.register("strangewood_boat", () -> new StrangewoodBoatItem(new Item.Properties().tab(ItemGroup.TAB_TRANSPORTATION), "strangewood"));
 
     //Flora
     public static final RegistryObject<Item> STANDING_GLOOMCAP = ITEMS.register("standing_gloomcap", () -> new BlockItem(ModBlocks.STANDING_GLOOMCAP.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> STANDING_SKYCAP = ITEMS.register("standing_skycap", () -> new BlockItem(ModBlocks.STANDING_SKYCAP.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS))); //1.1 Update
     public static final RegistryObject<Item> GIANT_GLOOMCAP_CAP = ITEMS.register("giant_gloomcap_cap", () -> new BlockItem(ModBlocks.GIANT_GLOOMCAP_CAP.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> GIANT_GLOOMCAP_STEM = ITEMS.register("giant_gloomcap_stem", () -> new BlockItem(ModBlocks.GIANT_GLOOMCAP_STEM.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
@@ -149,6 +168,8 @@ public class ModItems {
     public static final RegistryObject<Item> MANAGLOOM_PIE = ITEMS.register("managloom_pie", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(new Food.Builder().nutrition(8).saturationMod(0.5f).effect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 200), 1f).build())));
     public static final RegistryObject<Item> GLOOMCAP = ITEMS.register("gloomcap",
             () -> new BlockItem(ModBlocks.GLOOMCAP.get() ,new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> SKYCAP = ITEMS.register("skycap",
+            () -> new BlockItem(ModBlocks.SKYCAP.get() ,new Item.Properties().tab(ItemGroup.TAB_DECORATIONS))); //1.1 Update
     public static final RegistryObject<Item> RAW_FAE_VENISON = ITEMS.register("raw_fae_venison", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(new Food.Builder().nutrition(3).saturationMod(0.1f).meat().build())));
     public static final RegistryObject<Item> COOKED_FAE_VENISON = ITEMS.register("cooked_fae_venison", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(new Food.Builder().nutrition(10).saturationMod(0.8f).effect(new EffectInstance(Effects.GLOWING, 100), 1f).meat().build())));
 
@@ -243,6 +264,7 @@ public class ModItems {
     public static final RegistryObject<ModSpawnEgg> FAECOW_SPAWN_EGG = ITEMS.register("faecow_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.FAECOW, 0x2c7a99, 0x35013f, new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<ModSpawnEgg> MOUNTAIN_GIANT_SPAWN_EGG = ITEMS.register("mountain_giant_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.GIANT, 0xead8c4, 0x80643d, new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<ModSpawnEgg> HARUKAZE_SPAWN_EGG = ITEMS.register("harukaze_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.FUYUKAZE, 0xffa500, 0xffbf00, new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<ModSpawnEgg> JACKALOPE_SPAWN_EGG = ITEMS.register("jackalope_spawn_egg", () -> new ModSpawnEgg(ModEntityTypes.JACKALOPE, 0x7a7a7a, 0xcfcfcf, new Item.Properties().tab(ItemGroup.TAB_MISC)));
 
 
     //Misc Gizmos
@@ -276,6 +298,10 @@ public class ModItems {
     public static final RegistryObject<Item> MUSIC_DISC_THE_LADY_RED = ITEMS.register("music_disc_the_lady_red", () -> new MusicDiscItem(3 , ModSounds.MUSIC_DISC_THE_LADY_RED, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
 
 
+    //Misc Update 1.1 Stuff
+    public static final RegistryObject<Item> DIESELYTRA = ITEMS.register("dieselytra", () -> new Dieselytra(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).tab(ItemGroup.TAB_TRANSPORTATION).durability(864)));
+
+    
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

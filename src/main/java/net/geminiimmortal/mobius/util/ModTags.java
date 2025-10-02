@@ -30,6 +30,9 @@ public class ModTags {
         public static final Tags.IOptionalNamedTag<Block> GLOAMTHORN_LOGS =
                 createTag("gloamthorn_logs");
 
+        public static final Tags.IOptionalNamedTag<Block> STRANGEWOOD_LOGS =
+                createTag("strangewood_logs");
+
         private static Tags.IOptionalNamedTag<Block> createTag(String name) {
             return BlockTags.createOptional(new ResourceLocation(MobiusMod.MOD_ID, name));
         }
@@ -51,6 +54,9 @@ public class ModTags {
 
         public static final Tags.IOptionalNamedTag<Item> GLOAMTHORN_LOGS =
                 createTag("gloamthorn_logs");
+
+        public static final Tags.IOptionalNamedTag<Item> STRANGEWOOD_LOGS =
+                createTag("strangewood_logs");
 
         private static Tags.IOptionalNamedTag<Item> createTag(String name) {
             return ItemTags.createOptional(new ResourceLocation(MobiusMod.MOD_ID, name));

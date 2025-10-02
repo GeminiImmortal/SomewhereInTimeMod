@@ -16,6 +16,9 @@ public class ModFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> CLUSTERED_STANDING_GLOOMCAP_FEATURE = registerFeat("clustered_standing_gloomcap_feature", () ->
             new ClusteredStandingGloomcapMushroomFeature(NoFeatureConfig.CODEC, ModBlocks.STANDING_GLOOMCAP.get().defaultBlockState()));
 
+    public static final RegistryObject<Feature<NoFeatureConfig>> CLUSTERED_STANDING_SKYCAP_FEATURE = registerFeat("clustered_standing_skycap_feature", () ->
+            new ClusteredStandingSkycapMushroomFeature(NoFeatureConfig.CODEC, ModBlocks.STANDING_SKYCAP.get().defaultBlockState()));
+
     public static final RegistryObject<Feature<NoFeatureConfig>> CLUSTERED_WILD_MANA_WART_FEATURE = registerFeat("clustered_wild_mana_wart_feature", () ->
             new ClusteredWildManaWartFeature(NoFeatureConfig.CODEC, ModBlocks.WILD_MANA_WART.get().defaultBlockState()));
 

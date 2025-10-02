@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "mobius:block/strangewood_log",
+    "side": "mobius:block/strangewood_log"
+  }
+}

@@ -255,6 +255,18 @@ public class ModEntityTypes {
                                     EntityClassification.CREATURE).sized(1f, 2.25f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "imperial_tower_guard").toString()));
 
+    public static final RegistryObject<EntityType<JackalopeEntity>> JACKALOPE =
+            ENTITY_TYPES.register("jackalope",
+                    () -> EntityType.Builder.of(JackalopeEntity::new,
+                                    EntityClassification.CREATURE).sized(0.5f, 0.75f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "jackalope").toString()));
+
+    public static final RegistryObject<EntityType<StrangewoodBoatEntity>> STRANGEWOOD_BOAT =
+            ENTITY_TYPES.register("strangewood_boat",
+                    () -> EntityType.Builder.<StrangewoodBoatEntity>of(StrangewoodBoatEntity::new,
+                                    EntityClassification.MISC).sized(0.5f, 0.5f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "strangewood_boat").toString()));
+
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

@@ -43,7 +43,7 @@ public class ModBiomes {
             () -> makeForsakenThicket(() -> ModConfiguredSurfaceBuilders.FORSAKEN_THICKET, 0.12f, 0.03f));
 
     public static final RegistryObject<Biome> DRACONIC_FORELANDS = BIOMES.register("draconic_forelands",
-            () -> makeDraconicForelands(() -> ModConfiguredSurfaceBuilders.DRACONIC_FORELANDS, 2f, 0.7f));
+            () -> makeDraconicForelands(() -> ModConfiguredSurfaceBuilders.DRACONIC_FORELANDS, 2f, 1.4f));
 
     public static final RegistryObject<Biome> ROLLING_EXPANSE = BIOMES.register("rolling_expanse",
             () -> makeRollingExpanse(() -> ModConfiguredSurfaceBuilders.ROLLING_EXPANSE, 0.1f, 0.01f));
@@ -146,6 +146,8 @@ public class ModBiomes {
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(EntityType.SHEEP, 100, 7, 10));
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
+                new MobSpawnInfo.Spawners(ModEntityTypes.JACKALOPE.get(), 40, 1, 2));
+        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(ModEntityTypes.GIANT.get(), 2, 1, 1));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
@@ -201,8 +203,9 @@ public class ModBiomes {
                 new MobSpawnInfo.Spawners(ModEntityTypes.FAECOW.get(), 100, 1,2));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
-        DefaultBiomeFeatures.addSwampVegetation(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addSwampExtraVegetation(biomegenerationsettings$builder);
+        DefaultBiomeFeatures.addJungleExtraVegetation(biomegenerationsettings$builder);
+        DefaultBiomeFeatures.addJungleGrass(biomegenerationsettings$builder);
         DefaultBiomeFeatures.addSwampClayDisk(biomegenerationsettings$builder);
 
         return (new Biome.Builder()).precipitation(Biome.RainType.RAIN).biomeCategory(Biome.Category.SWAMP).depth(depth).scale(scale)

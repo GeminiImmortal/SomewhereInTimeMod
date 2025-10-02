@@ -189,6 +189,15 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> GOVERNOR_DEATH =
             registerSoundEvent("governor_death");
 
+    public static final RegistryObject<SoundEvent> DIESELYTRA_BOOST =
+            registerSoundEvent("dieselytra_boost");
+
+    public static final RegistryObject<SoundEvent> DIESELYTRA_ENGINE =
+            registerSoundEvent("dieselytra_engine");
+
+    public static final RegistryObject<SoundEvent> DIESELYTRA_LANDS =
+            registerSoundEvent("dieselytra_lands");
+
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, name)));
     }

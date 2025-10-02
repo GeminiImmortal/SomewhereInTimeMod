@@ -13,4 +13,7 @@ public class ModWoodTypes {
 
     public static final WoodType GLOAMTHORN =
             WoodType.create(new ResourceLocation(MobiusMod.MOD_ID, "gloamthorn").toString());
+
+    public static final WoodType STRANGEWOOD =
+            WoodType.create(new ResourceLocation(MobiusMod.MOD_ID, "strangewood").toString());
 }

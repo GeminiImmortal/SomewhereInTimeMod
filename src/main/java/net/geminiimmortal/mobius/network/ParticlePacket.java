@@ -66,6 +66,16 @@ public class ParticlePacket {
             assert Minecraft.getInstance().level != null;
             Minecraft.getInstance().level.addParticle(ParticleTypes.SWEEP_ATTACK, x, y, z, 0.0D, 0.0D, 0.0D);
         }
+
+        if (particleType.equals("smoke")) {
+            assert Minecraft.getInstance().level != null;
+            Minecraft.getInstance().level.addParticle(ParticleTypes.SMOKE, x, y, z, 0.0D, 0.0D, 0.0D);
+        }
+
+        if (particleType.equals("flame")) {
+            assert Minecraft.getInstance().level != null;
+            Minecraft.getInstance().level.addParticle(ParticleTypes.FLAME, x, y, z, 0.0D, 0.0D, 0.0D);
+        }
     }
 }
 

@@ -21,7 +21,9 @@ public class ModTileEntities {
                     ModBlocks.MANAWOOD_SIGN.get(),
                     ModBlocks.MANAWOOD_WALL_SIGN.get(),
                     ModBlocks.GLOAMTHORN_SIGN.get(),
-                    ModBlocks.GLOAMTHORN_WALL_SIGN.get())
+                    ModBlocks.GLOAMTHORN_WALL_SIGN.get(),
+                    ModBlocks.STRANGEWOOD_SIGN.get(),
+                    ModBlocks.STRANGEWOOD_WALL_SIGN.get())
                     .build(null));
 
     public static final RegistryObject<TileEntityType<SoulForgeTileEntity>> SOUL_FORGE_TILE_ENTITY =

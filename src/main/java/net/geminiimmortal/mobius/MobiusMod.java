@@ -5,6 +5,7 @@ import net.geminiimmortal.mobius.effects.ModEffects;
 import net.geminiimmortal.mobius.fluid.ModFluids;
 import net.geminiimmortal.mobius.integration.MobiusModPatchouli;
 import net.geminiimmortal.mobius.item.custom.ModSpawnEgg;
+import net.geminiimmortal.mobius.item.render.DieselytraLayer;
 import net.geminiimmortal.mobius.network.ClientEffectHandler;
 import net.geminiimmortal.mobius.poi.ModPOIs;
 import net.geminiimmortal.mobius.block.ModBlocks;
@@ -35,10 +36,12 @@ import net.geminiimmortal.mobius.world.worldgen.structure.ModStructureSetup;
 import net.geminiimmortal.mobius.world.worldgen.structure.processor.ModProcessors;
 import net.minecraft.block.Block;
 import net.minecraft.block.WoodType;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.entity.ArmorStandRenderer;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
@@ -203,6 +206,7 @@ public class MobiusMod
             WoodType.register(ModWoodTypes.MARROWOOD);
             WoodType.register(ModWoodTypes.MANAWOOD);
             WoodType.register(ModWoodTypes.GLOAMTHORN);
+            WoodType.register(ModWoodTypes.STRANGEWOOD);
 
 
             AxeItem.STRIPABLES = Maps.newHashMap(AxeItem.STRIPABLES);
@@ -212,6 +216,8 @@ public class MobiusMod
             AxeItem.STRIPABLES.put(ModBlocks.MANAWOOD_WOOD.get(), ModBlocks.STRIPPED_MANAWOOD_WOOD.get());
             AxeItem.STRIPABLES.put(ModBlocks.GLOAMTHORN_LOG.get(), ModBlocks.STRIPPED_GLOAMTHORN_LOG.get());
             AxeItem.STRIPABLES.put(ModBlocks.GLOAMTHORN_WOOD.get(), ModBlocks.STRIPPED_GLOAMTHORN_WOOD.get());
+            AxeItem.STRIPABLES.put(ModBlocks.STRANGEWOOD_LOG.get(), ModBlocks.STRIPPED_STRANGEWOOD_LOG.get());
+            AxeItem.STRIPABLES.put(ModBlocks.STRANGEWOOD_WOOD.get(), ModBlocks.STRIPPED_STRANGEWOOD_WOOD.get());
 
 
             EntitySpawnPlacementRegistry.register(
@@ -274,6 +280,12 @@ public class MobiusMod
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                     ImperialTowerRegularEntity::canMobSpawn
             );
+            EntitySpawnPlacementRegistry.register(
+                    ModEntityTypes.JACKALOPE.get(),
+                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
+                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                    JackalopeEntity::canMobSpawn
+            );
         });
     }
 
@@ -283,6 +295,7 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.LIVING_MANAWOOD_LEAVES.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.MARROWOOD_SAPLING.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.LIVING_MANAWOOD_SAPLING.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.STRANGEWOOD_SAPLING.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.MANAWOOD_DOOR.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.ESSENCE_CHANNELER.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.MANAWOOD_SAPLING.get(), RenderType.cutout());
@@ -293,9 +306,11 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_DOOR.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOAMTHORN_TRAPDOOR.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.STANDING_GLOOMCAP.get(), RenderType.translucent());
+            RenderTypeLookup.setRenderLayer(ModBlocks.STANDING_SKYCAP.get(), RenderType.translucent());
             RenderTypeLookup.setRenderLayer(ModBlocks.MANA_WART.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.WILD_MANA_WART.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.GLOOMCAP.get(), RenderType.cutout());
+            RenderTypeLookup.setRenderLayer(ModBlocks.SKYCAP.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.LATENT_MANA_COLLECTOR.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.SMUGGLER_STRONGBOX.get(), RenderType.cutout());
 
@@ -327,6 +342,7 @@ public class MobiusMod
             Atlases.addWoodType(ModWoodTypes.MARROWOOD);
             Atlases.addWoodType(ModWoodTypes.MANAWOOD);
             Atlases.addWoodType(ModWoodTypes.GLOAMTHORN);
+            Atlases.addWoodType(ModWoodTypes.STRANGEWOOD);
 
             ScreenManager.register(ModContainers.SOUL_FORGE_CONTAINER.get(),
                     SoulForgeScreen::new);
@@ -348,6 +364,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MARROWOOD_BOAT.get(), CustomBoatRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MANAWOOD_BOAT.get(), ManawoodBoatRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GLOAMTHORN_BOAT.get(), GloamthornBoatRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.STRANGEWOOD_BOAT.get(), StrangewoodBoatRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SORCERER.get(), SorcererRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.SPELL.get(), SpellRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GOVERNOR.get(), GovernorRenderer::new);
@@ -379,6 +396,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GOVERNOR_CLONE.get(), GovernorCloneRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.REBEL_QUARTERMASTER.get(), RebelQuartermasterRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.IMPERIAL_TOWER_GUARD.get(), ImperialTowerRegularRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.JACKALOPE.get(), JackalopeRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -444,6 +462,7 @@ public class MobiusMod
             event.put(ModEntityTypes.GOVERNOR_CLONE.get(), GovernorCloneEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.REBEL_QUARTERMASTER.get(), RebelQuartermasterEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.IMPERIAL_TOWER_GUARD.get(), ImperialTowerRegularEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.JACKALOPE.get(), JackalopeEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent
@@ -459,6 +478,23 @@ public class MobiusMod
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
+            net.minecraft.client.renderer.entity.PlayerRenderer renderer =
+                    (net.minecraft.client.renderer.entity.PlayerRenderer)
+                            net.minecraft.client.Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap().get("default");
+            renderer.addLayer(new DieselytraLayer<>(renderer));
+
+            renderer = (net.minecraft.client.renderer.entity.PlayerRenderer)
+                    net.minecraft.client.Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap().get("slim");
+            renderer.addLayer(new DieselytraLayer<>(renderer));
+
+            // Add to armor stand renderer
+            if (Minecraft.getInstance().getEntityRenderDispatcher().renderers.containsKey(EntityType.ARMOR_STAND)) {
+                @SuppressWarnings("unchecked")
+                ArmorStandRenderer armorStandRenderer =
+                        (ArmorStandRenderer) Minecraft.getInstance().getEntityRenderDispatcher().renderers.get(EntityType.ARMOR_STAND);
+
+                armorStandRenderer.addLayer(new DieselytraLayer<>(armorStandRenderer));
+            }
         }
     }
 

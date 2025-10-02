@@ -5,13 +5,8 @@ import net.geminiimmortal.mobius.block.custom.*;
 import net.geminiimmortal.mobius.block.custom.boss_blocks.GovernorBossBlock;
 import net.geminiimmortal.mobius.block.custom.boss_blocks.GovernorBossExitBlock;
 import net.geminiimmortal.mobius.block.custom.crop.ManaWartCrop;
-import net.geminiimmortal.mobius.block.custom.flora.Gloomcap;
-import net.geminiimmortal.mobius.block.custom.flora.StandingGloomcap;
-import net.geminiimmortal.mobius.block.custom.flora.WildManaWart;
-import net.geminiimmortal.mobius.block.custom.trees.GloamthornTree;
-import net.geminiimmortal.mobius.block.custom.trees.LivingManawoodTree;
-import net.geminiimmortal.mobius.block.custom.trees.ManawoodTree;
-import net.geminiimmortal.mobius.block.custom.trees.MarrowoodTree;
+import net.geminiimmortal.mobius.block.custom.flora.*;
+import net.geminiimmortal.mobius.block.custom.trees.*;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.common.ToolType;
@@ -319,6 +314,65 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> REBEL_CLAIM = registerBlock("rebel_claim",
             () -> new RebelClaimBlock(AbstractBlock.Properties.copy(Blocks.BEDROCK).noDrops().noCollission().noOcclusion().sound(SoundType.METAL)));
+
+    //1.1 Stuff
+
+    public static final RegistryObject<Block> STANDING_SKYCAP = registerBlock("standing_skycap",
+            () -> new StandingSkycap(AbstractBlock.Properties.copy(Blocks.BROWN_MUSHROOM).lightLevel(state -> 15).instabreak().noOcclusion().randomTicks()));
+
+    public static final RegistryObject<Block> SKYCAP = registerBlock("skycap",
+            () -> new Skycap(AbstractBlock.Properties.copy(Blocks.BROWN_MUSHROOM).lightLevel(state -> 5).instabreak().noOcclusion()));
+
+    public static final RegistryObject<Block> STRANGEWOOD_LOG = registerBlock("strangewood_log",
+            () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_LOG).lightLevel(state -> 8)));
+
+    public static final RegistryObject<Block> STRANGEWOOD_LEAVES = registerBlock("strangewood_leaves",
+            () -> new LeavesBlock(AbstractBlock.Properties.copy(Blocks.JUNGLE_LEAVES)));
+
+    public static final RegistryObject<Block> STRANGEWOOD_FENCE = registerBlock("strangewood_fence",
+            () -> new FenceBlock(AbstractBlock.Properties.copy(Blocks.OAK_FENCE)));
+
+    public static final RegistryObject<Block> STRANGEWOOD_FENCE_GATE = registerBlock("strangewood_fence_gate",
+            () -> new FenceGateBlock(AbstractBlock.Properties.copy(Blocks.OAK_FENCE_GATE)));
+
+    public static final RegistryObject<Block> STRANGEWOOD_SAPLING = registerBlock("strangewood_sapling",
+            () -> new SaplingBlock(new StrangewoodTree(), AbstractBlock.Properties.copy(Blocks.OAK_SAPLING)));
+
+    public static final RegistryObject<Block> STRANGEWOOD_BUTTON = registerBlock("strangewood_button",
+            () -> new WoodButtonBlock(AbstractBlock.Properties.copy(Blocks.OAK_BUTTON)));
+
+    public static final RegistryObject<Block> STRANGEWOOD_PRESSURE_PLATE = registerBlock("strangewood_pressure_plate",
+            () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,AbstractBlock.Properties.copy(Blocks.OAK_PRESSURE_PLATE)));
+
+    public static final RegistryObject<Block> STRANGEWOOD_TRAPDOOR = registerBlock("strangewood_trapdoor",
+            () -> new TrapDoorBlock(AbstractBlock.Properties.copy(Blocks.OAK_TRAPDOOR)));
+
+    public static final RegistryObject<Block> STRANGEWOOD_PLANKS = registerBlock("strangewood_planks",
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.OAK_PLANKS)));
+
+    public static final RegistryObject<Block> STRANGEWOOD_SLAB = registerBlock("strangewood_slab",
+            () -> new SlabBlock(AbstractBlock.Properties.copy(Blocks.OAK_SLAB)));
+
+    public static final RegistryObject<Block> STRANGEWOOD_STAIRS = registerBlock("strangewood_stairs",
+            () -> new StairsBlock(STRANGEWOOD_PLANKS.get().defaultBlockState(), AbstractBlock.Properties.copy(Blocks.OAK_STAIRS)));
+
+    public static final RegistryObject<Block> STRANGEWOOD_DOOR = registerBlock("strangewood_door",
+            () -> new DoorBlock(AbstractBlock.Properties.copy(Blocks.OAK_DOOR)));
+
+    public static final RegistryObject<Block> STRANGEWOOD_WOOD = registerBlock("strangewood_wood",
+            () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.OAK_WOOD)));
+
+    public static final RegistryObject<Block> STRANGEWOOD_SIGN = registerBlock("strangewood_sign",
+            () -> new ModStandingSignBlock(AbstractBlock.Properties.of(Material.WOOD), ModWoodTypes.STRANGEWOOD));
+
+    public static final RegistryObject<Block> STRANGEWOOD_WALL_SIGN = registerBlock("strangewood_wall_sign",
+            () -> new ModWallSignBlock(AbstractBlock.Properties.of(Material.WOOD), ModWoodTypes.STRANGEWOOD));
+
+    public static final RegistryObject<Block> STRIPPED_STRANGEWOOD_LOG = registerBlock("stripped_strangewood_log",
+            () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
+
+    public static final RegistryObject<Block> STRIPPED_STRANGEWOOD_WOOD = registerBlock("stripped_strangewood_wood",
+            () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

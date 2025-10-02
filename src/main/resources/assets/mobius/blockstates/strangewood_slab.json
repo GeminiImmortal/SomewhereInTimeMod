@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "mobius:block/strangewood_slab"
+    },
+    "type=double": {
+      "model": "mobius:block/strangewood_planks"
+    },
+    "type=top": {
+      "model": "mobius:block/strangewood_slab_top"
+    }
+  }
+}

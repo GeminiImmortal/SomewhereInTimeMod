@@ -13,6 +13,9 @@
     "mobius:gloamthorn_log",
     "mobius:gloamthorn_wood",
     "mobius:stripped_gloamthorn_log",
-    "mobius:stripped_gloamthorn_wood"
+    "mobius:stripped_gloamthorn_wood",
+    "mobius:strangewood_log",
+    "mobius:stripped_strangewood_log",
+    "mobius:stripped_strangewood_wood"
   ]
 }

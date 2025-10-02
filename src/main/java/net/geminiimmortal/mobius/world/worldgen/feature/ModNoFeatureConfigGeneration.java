@@ -22,6 +22,8 @@ public class ModNoFeatureConfigGeneration {
         ResourceLocation forsakenThicket = ModBiomes.FORSAKEN_THICKET.getId();
         ResourceLocation mushroomForest = ModBiomes.MUSHROOM_FOREST.getId();
         ResourceLocation rollingExpanse = ModBiomes.ROLLING_EXPANSE.getId();
+        ResourceLocation draconicForelands = ModBiomes.DRACONIC_FORELANDS.getId();
+        ResourceLocation tealGlades = ModBiomes.TEAL_GLADES.getId();
 
         if (Objects.equals(event.getName(), mushroomForest)) {
             List<Supplier<ConfiguredFeature<?, ?>>> base =
@@ -57,6 +59,21 @@ public class ModNoFeatureConfigGeneration {
                     .countRandom(10));
         }
 
+
+        if (Objects.equals(event.getName(), draconicForelands)) {
+            List<Supplier<ConfiguredFeature<?, ?>>> base =
+                    event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
+
+            base.add(() -> ModConfiguredFeatures.CONFIGURED_STANDING_SKYCAP_FEATURE
+                    .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
+                    .decorated(DenserTreesPlacement.DARK_OAK_TREE.configured(
+                            new NoPlacementConfig()))
+                    .decorated(Placement.CHANCE.configured(
+                            new ChanceConfig(1)))
+                    .countRandom(10));
+        }
+
+
         if (Objects.equals(event.getName(), rollingExpanse)) {
             List<Supplier<ConfiguredFeature<?, ?>>> base =
                     event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
@@ -70,6 +87,27 @@ public class ModNoFeatureConfigGeneration {
 
             base.add(() -> ModConfiguredFeatures.CONFIGURED_BOULDER_FEATURE
                     .decorated(Features.Placements.HEIGHTMAP_SQUARE).count(2).chance(12));
+        }
+
+        if (Objects.equals(event.getName(), tealGlades)) {
+            List<Supplier<ConfiguredFeature<?, ?>>> base =
+                    event.getGeneration().getFeatures(GenerationStage.Decoration.VEGETAL_DECORATION);
+
+            base.add(() -> ModConfiguredFeatures.CONFIGURED_STANDING_SKYCAP_FEATURE
+                    .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
+                    .decorated(DenserTreesPlacement.DARK_OAK_TREE.configured(
+                            new NoPlacementConfig()))
+                    .decorated(Placement.CHANCE.configured(
+                            new ChanceConfig(1)))
+                    .countRandom(7));
+
+            base.add(() -> ModConfiguredFeatures.CONFIGURED_WILD_MANA_WART_FEATURE
+                    .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
+                    .decorated(DenserTreesPlacement.DARK_OAK_TREE.configured(
+                            new NoPlacementConfig()))
+                    .decorated(Placement.CHANCE.configured(
+                            new ChanceConfig(1)))
+                    .countRandom(10));
         }
     }
 }
