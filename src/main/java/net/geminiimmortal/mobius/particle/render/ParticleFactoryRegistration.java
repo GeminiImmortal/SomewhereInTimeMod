@@ -24,6 +24,10 @@ public class ParticleFactoryRegistration {
                 ModParticles.SPORE_PARTICLE.get(),
                 SporeParticleRenderer::new
         );
+        Minecraft.getInstance().particleEngine.register(
+                ModParticles.HELLFIRE_PARTICLE.get(),
+                HellfireParticleRenderer::new
+        );
     }
 }
 
