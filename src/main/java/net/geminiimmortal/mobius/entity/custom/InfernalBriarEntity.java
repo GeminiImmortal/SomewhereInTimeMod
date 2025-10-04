@@ -1,18 +1,32 @@
 package net.geminiimmortal.mobius.entity.custom;
 
+import net.geminiimmortal.mobius.block.ModBlocks;
+import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.goals.ShootFireballGoal;
+import net.geminiimmortal.mobius.faction.FactionType;
+import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.LookAtWithoutMovingGoal;
 import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.IWorld;
+import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -23,7 +37,10 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
-public class InfernalBriarEntity extends MobEntity implements IAnimatable {
+import javax.annotation.Nullable;
+import java.util.Random;
+
+public class InfernalBriarEntity extends MobEntity implements IAnimatable, IFactionCarrier, IMob {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private int particleTickCounter = 0;
     private static final int PARTICLE_SPAWN_INTERVAL = 5;
@@ -42,6 +59,44 @@ public class InfernalBriarEntity extends MobEntity implements IAnimatable {
         return true;
     }
 
+    @Override
+    public boolean isAggressive() {
+        return true;
+    }
+
+    @Override
+    public ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+        return ActionResultType.FAIL;
+    }
+
+    public static boolean canMobSpawn(EntityType<? extends MobEntity> entityType,
+                                      IWorld world, SpawnReason reason, BlockPos pos, Random random) {
+        int existing = world.getEntitiesOfClass(InfernalBriarEntity.class,
+                new AxisAlignedBB(pos).inflate(36)).size();
+        int quartermasters = world.getEntitiesOfClass(RebelQuartermasterEntity.class,
+                new AxisAlignedBB(pos).inflate(40)).size();
+
+        // Normalize day time (0–23999)
+        long timeOfDay = world.dayTime() % 24000;
+
+        // Allow night or thunderstorm
+        boolean isNight = (timeOfDay >= 13000 && timeOfDay <= 23000) || world.getLevelData().isThundering();
+
+        boolean isPeaceful = world.getLevelData().getDifficulty().equals(Difficulty.PEACEFUL);
+
+        // Ground check
+        BlockState ground = world.getBlockState(pos.below());
+        boolean validGround = ground.is(ModBlocks.SOUL_PODZOL.get())
+                || ground.is(ModBlocks.HEMATITE.get())
+                || ground.is(ModBlocks.AURORA_GRASS_BLOCK.get());
+
+        // Light-level check (hostiles require block light ≤ 7)
+        int blockLight = world.getBrightness(LightType.BLOCK, pos);
+
+        boolean darkEnough = blockLight <= 7;
+
+        return validGround && isNight && darkEnough && existing < 1 && quartermasters < 1 && !isPeaceful;
+    }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
@@ -91,12 +146,26 @@ public class InfernalBriarEntity extends MobEntity implements IAnimatable {
     public void tick() {
         super.tick();
 
+        if (!this.level.isClientSide && this.level.isDay() && !this.level.getLevelData().isThundering()) {
+            this.remove();
+        }
+
+        if(this.level.getLevelData().getDifficulty().equals(Difficulty.PEACEFUL)) {
+            this.remove();
+        }
+
         particleTickCounter++;
 
         if (particleTickCounter >= PARTICLE_SPAWN_INTERVAL) {
             spawnGlowParticle();
             particleTickCounter = 0;
         }
+    }
+
+    @Override
+    public boolean checkSpawnRules(IWorld world, SpawnReason reason) {
+        return super.checkSpawnRules(world, reason)
+                && canMobSpawn(ModEntityTypes.INFERNAL_BRIAR.get(), world, reason, this.blockPosition(), world.getRandom());
     }
 
     private void spawnGlowParticle() {
@@ -114,6 +183,15 @@ public class InfernalBriarEntity extends MobEntity implements IAnimatable {
         return ModSounds.INFERNAL_BRIAR_AMBIENT.get();
     }
 
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.CROP_BREAK;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource p_184601_1_) {
+        return SoundEvents.CROP_BREAK;
+    }
 
     @Override
     public void registerControllers(AnimationData data) {
@@ -139,6 +217,10 @@ public class InfernalBriarEntity extends MobEntity implements IAnimatable {
         return factory;
     }
 
+    @Override
+    public FactionType getFaction() {
+        return FactionType.DANGEROUS_TO_VILLAGES;
+    }
 }
 
 

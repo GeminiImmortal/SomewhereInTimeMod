@@ -10,7 +10,10 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.merchant.villager.VillagerEntity;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.IronGolemEntity;
 import net.minecraft.entity.passive.WolfEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -22,8 +25,11 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -39,7 +45,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import java.util.Random;
 import java.util.function.Predicate;
 
-public class BoneWolfEntity extends WolfEntity implements IAnimatable, IFactionCarrier {
+public class BoneWolfEntity extends WolfEntity implements IAnimatable, IFactionCarrier, IMob {
     private static final DataParameter<Boolean> SITTING = EntityDataManager.defineId(BoneWolfEntity.class, DataSerializers.BOOLEAN);
     public static final Predicate<LivingEntity> PREY_SELECTOR = (p_213440_0_) -> {
         EntityType<?> entitytype = p_213440_0_.getType();
@@ -61,12 +67,28 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable, IFactionC
     }
 
     @Override
+    public void tick() {
+        super.tick();
+
+        if(this.level.getLevelData().getDifficulty().equals(Difficulty.PEACEFUL)) {
+            this.remove();
+        }
+    }
+
+    @Override
+    public boolean isAggressive() {
+        return true;
+    }
+
+    @Override
     protected void registerGoals() {
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
         this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
         this.targetSelector.addGoal(4, new NonTamedTargetGoal<>(this, PlayerEntity.class, false, null));
         this.targetSelector.addGoal(5, new NonTamedTargetGoal<>(this, AnimalEntity.class, false, PREY_SELECTOR));
+        this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, VillagerEntity.class, true));
+        this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
         this.goalSelector.addGoal(1, new SwimGoal(this));
         this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, true));
         this.goalSelector.addGoal(3, new SitGoal(this));
@@ -120,15 +142,63 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable, IFactionC
         }
     }
 
+    @Override
+    public void aiStep() {
+        super.aiStep();
+
+        if (this.level.isDay() && !this.level.isClientSide) {
+            float brightness = this.getBrightness();
+            BlockPos pos = this.blockPosition();
+
+            if (brightness > 0.5F && this.level.canSeeSky(pos)) {
+                this.setSecondsOnFire(8);
+            }
+        }
+    }
+
+
 
     @Override
     public ActionResultType mobInteract(PlayerEntity player, Hand hand) {
         return ActionResultType.FAIL;
     }
 
-    public static boolean canMobSpawn(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
-        return (world.getBlockState(pos.below()) == ModBlocks.AURORA_GRASS_BLOCK.get().defaultBlockState());
+    @Override
+    public boolean checkSpawnRules(IWorld world, SpawnReason reason) {
+        return canMobSpawn(ModEntityTypes.BONE_WOLF.get(), world, reason, this.blockPosition(), world.getRandom());
     }
+
+
+    public static boolean canMobSpawn(EntityType<? extends CreatureEntity> entityType,
+                                      IWorld world, SpawnReason reason, BlockPos pos, Random random) {
+        int existing = world.getEntitiesOfClass(BoneWolfEntity.class,
+                new AxisAlignedBB(pos).inflate(12)).size();
+        int quartermasters = world.getEntitiesOfClass(RebelQuartermasterEntity.class,
+                new AxisAlignedBB(pos).inflate(40)).size();
+
+        // Normalize day time (0–23999)
+        long timeOfDay = world.dayTime() % 24000;
+
+        // Allow night or thunderstorm
+        boolean isNight = (timeOfDay >= 13000 && timeOfDay <= 23000) || world.getLevelData().isThundering();
+
+        boolean isPeaceful = world.getLevelData().getDifficulty().equals(Difficulty.PEACEFUL);
+
+        // Ground check
+        BlockState ground = world.getBlockState(pos.below());
+        boolean validGround = ground.is(ModBlocks.SOUL_PODZOL.get())
+                || ground.is(ModBlocks.HEMATITE.get())
+                || ground.is(ModBlocks.AURORA_GRASS_BLOCK.get());
+
+        // Light-level check (hostiles require block light ≤ 7)
+        int blockLight = world.getBrightness(LightType.BLOCK, pos);
+
+        boolean darkEnough = blockLight <= 7;
+
+        return validGround && isNight && darkEnough && existing < 1 && quartermasters < 1 && !isPeaceful;
+    }
+
+
 
     @Override
     protected SoundEvent getDeathSound() {

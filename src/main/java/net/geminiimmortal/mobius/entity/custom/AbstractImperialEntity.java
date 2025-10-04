@@ -23,6 +23,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.RangedInteger;
 import net.minecraft.util.TickRangeConverter;
@@ -47,6 +48,7 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
     protected AbstractImperialEntity(EntityType<? extends CreatureEntity> entityType, World world) {
         super(entityType, world);
         this.setPersistenceRequired();
+        this.maxUpStep = 1;
     }
 
     @Override

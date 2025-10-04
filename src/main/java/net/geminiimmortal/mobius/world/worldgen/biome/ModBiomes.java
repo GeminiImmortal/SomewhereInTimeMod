@@ -80,6 +80,14 @@ public class ModBiomes {
         DefaultBiomeFeatures.farmAnimals(mobspawninfo$builder);
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(EntityType.MOOSHROOM, 100, 7, 10));
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(ModEntityTypes.BONE_WOLF.get(), 9, 1, 3));
+        /*mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(EntityType.CREEPER, 20, 1, 3));
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(EntityType.CAVE_SPIDER, 70, 1, 3));*/
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(ModEntityTypes.GIANT.get(), 1, 1, 1));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addMushroomFieldVegetation(biomegenerationsettings$builder);
@@ -123,8 +131,12 @@ public class ModBiomes {
                 new MobSpawnInfo.Spawners(EntityType.BAT, 35, 7, 10));
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(ModEntityTypes.FAEDEER.get(), 60, 3,5));
-        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
-                new MobSpawnInfo.Spawners(ModEntityTypes.BONE_WOLF.get(), 5, 2, 3));
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(ModEntityTypes.BONE_WOLF.get(), 9, 2, 3));
+        /*mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(EntityType.STRAY, 90, 2, 3));*/
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(ModEntityTypes.GIANT.get(), 1, 1, 1));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);
@@ -147,8 +159,12 @@ public class ModBiomes {
                 new MobSpawnInfo.Spawners(EntityType.SHEEP, 100, 7, 10));
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(ModEntityTypes.JACKALOPE.get(), 40, 1, 2));
-        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
-                new MobSpawnInfo.Spawners(ModEntityTypes.GIANT.get(), 2, 1, 1));
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(ModEntityTypes.GIANT.get(), 1, 1, 1));
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(ModEntityTypes.BONE_WOLF.get(), 9, 1, 2));
+        /*mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(EntityType.HUSK, 90, 1, 2));*/
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);
@@ -176,8 +192,14 @@ public class ModBiomes {
                 new MobSpawnInfo.Spawners(ModEntityTypes.FAECOW.get(), 100, 1,2));
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(ModEntityTypes.FUYUKAZE.get(), 10, 2,3));
-        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
-                new MobSpawnInfo.Spawners(ModEntityTypes.GIANT.get(), 5, 1, 2));
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(ModEntityTypes.GIANT.get(), 1, 1, 1));
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(ModEntityTypes.INFERNAL_BRIAR.get(), 2, 1, 1));
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(ModEntityTypes.BONE_WOLF.get(), 27, 1, 2));
+        /*mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(EntityType.ZOMBIE, 90, 1, 3));*/
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         biomegenerationsettings$builder.addFeature(GenerationStage.Decoration.LAKES, Features.SEAGRASS_RIVER);
@@ -201,6 +223,12 @@ public class ModBiomes {
                 new MobSpawnInfo.Spawners(EntityType.SHEEP, 400, 1,3));
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
                 new MobSpawnInfo.Spawners(ModEntityTypes.FAECOW.get(), 100, 1,2));
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(ModEntityTypes.INFERNAL_BRIAR.get(), 1, 1,1));
+        mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(ModEntityTypes.BONE_WOLF.get(), 19, 1,1));
+        /*mobspawninfo$builder.addSpawn(EntityClassification.MONSTER,
+                new MobSpawnInfo.Spawners(EntityType.SPIDER, 90, 1,1));*/
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addSwampExtraVegetation(biomegenerationsettings$builder);

@@ -20,6 +20,9 @@ public class ModParticles {
     public static final RegistryObject<BasicParticleType> SPORE_PARTICLE = PARTICLES.register("spore",
             () -> new BasicParticleType(true));
 
+    public static final RegistryObject<BasicParticleType> HELLFIRE_PARTICLE = PARTICLES.register("hellfire",
+            () -> new BasicParticleType(true));
+
     public static void register(IEventBus eventBus) {
         PARTICLES.register(eventBus);
     }

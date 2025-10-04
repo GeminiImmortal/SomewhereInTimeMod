@@ -198,6 +198,9 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> DIESELYTRA_LANDS =
             registerSoundEvent("dieselytra_lands");
 
+    public static final RegistryObject<SoundEvent> OGRE_ROAR =
+            registerSoundEvent("ogre_roar");
+
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, name)));
     }

@@ -489,5 +489,14 @@
       }
     ],
     "subtitle": "Dieselytra shifts gears"
+  },
+  "ogre_roar": {
+    "sounds": [
+      {
+        "name": "mobius:ogre_roar",
+        "volume": 1.0
+      }
+    ],
+    "subtitle": "Ogre roars"
   }
 }

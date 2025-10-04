@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
+import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.goals.GiantStompGoal;
 import net.geminiimmortal.mobius.faction.FactionType;
 import net.geminiimmortal.mobius.faction.IFactionCarrier;
@@ -28,10 +29,15 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.particles.BlockParticleData;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.LightType;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
@@ -60,8 +66,57 @@ public class GiantEntity extends CreatureEntity implements IAnimatable, IMob, IF
         this.entityData.define(ATTACKING, false);
     }
 
-    public static boolean canMobSpawn(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
-        return (world.getBlockState(pos.below()) == ModBlocks.HEMATITE.get().defaultBlockState()) || (world.getBlockState(pos.below()) == ModBlocks.AURORA_GRASS_BLOCK.get().defaultBlockState());
+    @Override
+    public ActionResultType mobInteract(PlayerEntity player, Hand hand) {
+        return ActionResultType.FAIL;
+    }
+
+    @Override
+    public boolean checkSpawnRules(IWorld world, SpawnReason reason) {
+        return super.checkSpawnRules(world, reason)
+                && canMobSpawn(ModEntityTypes.GIANT.get(), world, reason, this.blockPosition(), world.getRandom());
+    }
+
+    public static boolean canMobSpawn(EntityType<? extends CreatureEntity> entityType,
+                                      IWorld world, SpawnReason reason, BlockPos pos, Random random) {
+        int existing = world.getEntitiesOfClass(GiantEntity.class,
+                new AxisAlignedBB(pos).inflate(70)).size();
+        int quartermasters = world.getEntitiesOfClass(RebelQuartermasterEntity.class,
+                new AxisAlignedBB(pos).inflate(70)).size();
+
+        // Normalize day time (0–23999)
+        long timeOfDay = world.dayTime() % 24000;
+
+        // Allow night or thunderstorm
+        boolean isNight = (timeOfDay >= 13000 && timeOfDay <= 23000) || world.getLevelData().isThundering();
+
+        boolean isPeaceful = world.getLevelData().getDifficulty().equals(Difficulty.PEACEFUL);
+
+        // Ground check
+        BlockState ground = world.getBlockState(pos.below());
+        boolean validGround = ground.is(ModBlocks.SOUL_PODZOL.get())
+                || ground.is(ModBlocks.HEMATITE.get())
+                || ground.is(ModBlocks.AURORA_GRASS_BLOCK.get());
+
+        // Light-level check (hostiles require block light ≤ 7)
+        int blockLight = world.getBrightness(LightType.BLOCK, pos);
+
+        boolean darkEnough = blockLight <= 7;
+
+        return validGround && isNight && darkEnough && existing < 1 && quartermasters < 1 && !isPeaceful;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (!this.level.isClientSide && this.level.isDay() && !this.level.getLevelData().isThundering()) {
+            this.remove();
+        }
+
+        if(this.level.getLevelData().getDifficulty().equals(Difficulty.PEACEFUL)) {
+            this.remove();
+        }
     }
 
     public void setAttacking(boolean bool) {
