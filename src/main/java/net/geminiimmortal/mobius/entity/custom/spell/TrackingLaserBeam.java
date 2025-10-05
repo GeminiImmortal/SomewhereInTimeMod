@@ -1,6 +1,5 @@
 package net.geminiimmortal.mobius.entity.custom.spell;
 
-import net.geminiimmortal.mobius.entity.custom.SpellEntity;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -151,10 +150,10 @@ public class TrackingLaserBeam implements SpellTypeEntity {
             level.playSound(null, soundPos.x, soundPos.y, soundPos.z, ModSounds.ARCANE_BOLT_FX.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
         }
 
-        if (ticksAlive % 10 == 0 && !level.isClientSide) {
+        /*if (ticksAlive % 10 == 0 && !level.isClientSide) {
             Vector3d soundPos = target.position();
             level.playSound(null, soundPos.x, soundPos.y, soundPos.z, ModSounds.ARCANE_BOLT_FX.get(), SoundCategory.HOSTILE, 1.0F, 1.0F);
-        }
+        }*/
 
 
     }
@@ -162,7 +161,7 @@ public class TrackingLaserBeam implements SpellTypeEntity {
 
     private void spawnWideLaserBeam(Vector3d start, Vector3d end) {
         if (!level.isClientSide && level instanceof ServerWorld) {
-            int steps = 10;
+            int steps = 4;
             double beamRadius = 0.3;
             Random rand = level.getRandom();
 

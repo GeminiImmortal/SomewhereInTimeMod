@@ -1,10 +1,10 @@
 package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
+import net.geminiimmortal.mobius.entity.goals.GovernorCurseGoal;
 import net.geminiimmortal.mobius.entity.goals.GovernorSummonCloneGoal;
 import net.geminiimmortal.mobius.entity.goals.util.TeleportUtil;
 import net.geminiimmortal.mobius.sound.ModSounds;
-import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -49,17 +49,35 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
             "Think fast!"
     };
 
+    private static final String PHASE = "I will not have my death rendered upon me by the likes of YOU!";
+    
+    private static final String LOSE = "HA! See you next time!";
+
     private static final DataParameter<Integer> GCD = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.INT);
     private static final DataParameter<Boolean> GRINNING = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> CORRECT_HIT = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> FIGHT_STARTED = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> INTRO_OVER = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> HALF_HEALTH = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> SAID_HIS_PEACE = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
     AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
-    public GovernorEntity(EntityType<? extends CreatureEntity> entityType, World worldIn) {
+    public GovernorEntity(EntityType<? extends AbstractImperialBossEntity> entityType, World worldIn) {
         super(entityType, worldIn);
         this.setPersistenceRequired();
-        this.setNoAi(true);
+        this.xpReward = 300;
+    }
+
+    private void phaseShift(String phaseText){
+        if (!this.level.isClientSide) {
+            List<ServerPlayerEntity> players = this.level.getEntitiesOfClass(ServerPlayerEntity.class, this.getBoundingBox().inflate(50));
+            for (ServerPlayerEntity player : players) {
+                player.sendMessage(
+                        new StringTextComponent(PHASE).withStyle(TextFormatting.DARK_RED),
+                        player.getUUID()
+                );
+            }
+        }
     }
 
     @Override
@@ -70,6 +88,26 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
         this.entityData.define(CORRECT_HIT, false);
         this.entityData.define(FIGHT_STARTED, false);
         this.entityData.define(INTRO_OVER, false);
+        this.entityData.define(HALF_HEALTH, false);
+        this.entityData.define(SAID_HIS_PEACE, false);
+    }
+
+    private void ifTargetDies() {
+        if (this.getTarget() != null && !this.level.isClientSide()) {
+            if (this.getTarget().getClass().equals(ServerPlayerEntity.class)) {
+                ServerPlayerEntity target = (ServerPlayerEntity) this.getTarget();
+                if (!target.isAlive()) {
+                    List<ServerPlayerEntity> players = this.level.getEntitiesOfClass(ServerPlayerEntity.class, this.getBoundingBox().inflate(50));
+                    for (ServerPlayerEntity player : players) {
+                        player.sendMessage(
+                                new StringTextComponent(LOSE).withStyle(TextFormatting.LIGHT_PURPLE),
+                                player.getUUID()
+                        );
+                    }
+                    this.remove();
+                }
+            }
+        }
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -88,7 +126,8 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new SwimGoal(this));
         this.goalSelector.addGoal(1, new GovernorSummonCloneGoal(this));
-        this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 30.0f));
+        this.goalSelector.addGoal(2, new GovernorCurseGoal(this));
+        this.goalSelector.addGoal(3, new LookAtGoal(this, PlayerEntity.class, 30.0f));
         this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, false));
     }
 
@@ -109,12 +148,20 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
             decrementCloneSummonCooldown();
         }
         this.setBossbarPercent();
-
-        if (this.hurtTime > 0 && !this.getFightStarted()) {
-            this.setGCD(112);
+        this.ifTargetDies();
+        if (!this.getFightStarted()) {
+            this.setGCD(99);
             this.setFightStarted(true);
-            this.setNoAi(false);
         }
+
+        if (this.getHealth() < (this.getMaxHealth() * 0.5)) {
+            this.entityData.set(HALF_HEALTH, true);
+            if (this.entityData.get(HALF_HEALTH) && !this.entityData.get(SAID_HIS_PEACE)) {
+                phaseShift(PHASE);
+                this.entityData.set(SAID_HIS_PEACE, true);
+            }
+        }
+
         super.tick();
     }
 

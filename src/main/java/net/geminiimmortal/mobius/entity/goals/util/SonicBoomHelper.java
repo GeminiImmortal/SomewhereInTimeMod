@@ -1,24 +1,24 @@
 package net.geminiimmortal.mobius.entity.goals.util;
 
 
+import net.geminiimmortal.mobius.damage.CloneShatterDamageSource;
+import net.geminiimmortal.mobius.effects.ModEffects;
+import net.geminiimmortal.mobius.particle.ModParticles;
+import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
 public class SonicBoomHelper {
     /**
-     * Spawns particle rings and applies damage and stun.
      * @param caster the entity casting the attack
      * @param target the target entity
      * @param world  the world in which to spawn particles
      */
     public static void doSonicBoom(LivingEntity caster, LivingEntity target, World world) {
-        // Use server world for particle broadcasting
         if (!(world instanceof ServerWorld)) return;
         ServerWorld serverWorld = (ServerWorld) world;
 
@@ -28,30 +28,29 @@ public class SonicBoomHelper {
         double totalDist = direction.length();
         Vector3d unitDir = direction.normalize();
 
-        int rings = 3;
-        int segments = 32;
-        double baseRadius = 1.0D;
-        int durationTicks = 40; // 2 seconds at 20 TPS
+        int rings = 12;
+        int segments = 1;
+        double baseRadius = 0.1D;
+        int durationTicks = 40;
 
-        // Spawn rings at evenly-spaced points along the line
         for (int i = 1; i <= rings; i++) {
             double fraction = (double) i / (rings + 1);
             Vector3d center = start.add(unitDir.scale(fraction * totalDist));
             double radius = baseRadius * i;
 
             for (int j = 0; j < segments; j++) {
-                double angle = 2 * Math.PI * j / segments;
+                double angle = 1 * Math.PI * j / segments;
                 double x = center.x + Math.cos(angle) * radius;
                 double y = center.y;
                 double z = center.z + Math.sin(angle) * radius;
-                serverWorld.sendParticles(ParticleTypes.DRAGON_BREATH, x, y, z, 1, 0, 0, 0, 0);
+                serverWorld.sendParticles(ModParticles.FAEDEER_PARTICLE.get(), x, y, z, 1, 0, 0, 0, 0);
             }
         }
 
-        // Damage and stun
-        target.hurt(DamageSource.MAGIC, 4.0F);
-        // Apply heavy slowness to simulate stun
-        target.addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, durationTicks, 255, false, false));
+        target.hurt(CloneShatterDamageSource.CLONE_SHATTER, 2.0F);
+
+        target.addEffect(new EffectInstance(ModEffects.LORD_DECREE_EFFECT.get(), durationTicks, 1, false, false));
+        target.level.playSound(null, target.blockPosition().getX(), target.blockPosition().getY(), target.blockPosition().getZ(), ModSounds.ARCANE_BOLT_FX.get(), SoundCategory.HOSTILE, 1.0f, 1.0f);
     }
 }
 

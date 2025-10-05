@@ -1,13 +1,17 @@
 package net.geminiimmortal.mobius.entity.custom.spell;
 
+import net.geminiimmortal.mobius.damage.CloneShatterDamageSource;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.entity.custom.GovernorEntity;
+import net.geminiimmortal.mobius.particle.ModParticles;
+import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
@@ -44,8 +48,8 @@ public class SpellProjectileEntity extends ThrowableEntity implements SpellTypeE
     }
 
     private void spawnRingParticles() {
-        double radius = 0.5D;
-        int points = 20;
+        double radius = 0.05D;
+        int points = 8;
         for (int i = 0; i < points; i++) {
             double angle = 2 * Math.PI * i / points;
             double xOffset = Math.cos(angle) * radius;
@@ -53,7 +57,7 @@ public class SpellProjectileEntity extends ThrowableEntity implements SpellTypeE
             double yOffset = Math.sin(angle) * radius;
 
             Vector3d particlePos = this.position().add(xOffset, yOffset, zOffset);
-            this.level.addParticle(ParticleTypes.DRAGON_BREATH,
+            this.level.addParticle(ModParticles.FAEDEER_PARTICLE.get(),
                     particlePos.x, particlePos.y, particlePos.z,
                     0, 0, 0);
         }
@@ -62,8 +66,11 @@ public class SpellProjectileEntity extends ThrowableEntity implements SpellTypeE
     @Override
     protected void onHitEntity(EntityRayTraceResult result) {
         super.onHitEntity(result);
+        if (result.getEntity() instanceof GovernorEntity) { return; }
         if (result.getEntity() instanceof SpellTypeEntity) onCollideWith((SpellTypeEntity) result.getEntity());
-        result.getEntity().hurt(DamageSource.MAGIC, 2f);
+        if (result.getEntity() instanceof ServerPlayerEntity) {
+            result.getEntity().hurt(CloneShatterDamageSource.CLONE_SHATTER, 5.5f);
+        }
         this.remove();
     }
 
@@ -95,6 +102,7 @@ public class SpellProjectileEntity extends ThrowableEntity implements SpellTypeE
             return;
         }
         if (other.getSpellType() == SpellType.DEFENSIVE) {
+            this.level.playSound(null, this.position().x, this.position().y, this.position().z, ModSounds.BARRIER_NEGATE.get(), SoundCategory.PLAYERS, 1.0F, 1.0F);
             this.remove();
         }
     }

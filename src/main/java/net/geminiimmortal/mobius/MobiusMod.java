@@ -69,12 +69,11 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.stream.Collectors;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(MobiusMod.MOD_ID)
 public class MobiusMod
 {
     public static final String MOD_ID = "mobius";
-    // Directly reference a log4j logger.
+
     private static final Logger LOGGER = LogManager.getLogger();
 
     public MobiusMod() {
@@ -83,14 +82,10 @@ public class MobiusMod
 
         bus.addListener(this::setup);
 
-        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
-
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        // Register the enqueueIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        // Register the processIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-        // Register the doClientStuff method for modloading
+
         if (FMLEnvironment.dist == Dist.CLIENT) {
             FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
         }
@@ -401,6 +396,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.REBEL_QUARTERMASTER.get(), RebelQuartermasterRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.IMPERIAL_TOWER_GUARD.get(), ImperialTowerRegularRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.JACKALOPE.get(), JackalopeRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.INTRO_GOVERNOR_CLONE.get(), IntroGovernorCloneRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -467,6 +463,7 @@ public class MobiusMod
             event.put(ModEntityTypes.REBEL_QUARTERMASTER.get(), RebelQuartermasterEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.IMPERIAL_TOWER_GUARD.get(), ImperialTowerRegularEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.JACKALOPE.get(), JackalopeEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.INTRO_GOVERNOR_CLONE.get(), IntroGovernorCloneEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent

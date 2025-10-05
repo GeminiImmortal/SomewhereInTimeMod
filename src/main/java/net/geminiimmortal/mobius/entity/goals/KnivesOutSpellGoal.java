@@ -1,8 +1,6 @@
 package net.geminiimmortal.mobius.entity.goals;
 
-import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
-import net.geminiimmortal.mobius.entity.custom.GovernorEntity;
 import net.geminiimmortal.mobius.entity.custom.GovernorKnivesOutEntity;
 import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
 import net.geminiimmortal.mobius.network.ModNetwork;
@@ -95,7 +93,7 @@ public class KnivesOutSpellGoal extends Goal {
             double endZ = target.getZ();
 
             // Calculate the number of particles and interpolate their position
-            int particleCount = 500; // Example count
+            int particleCount = 150; // Example count
             for (int i = 0; i < particleCount; i++) {
                 double t = (double) i / (particleCount - 1);
                 double particleX = startX + (endX - startX) * t;

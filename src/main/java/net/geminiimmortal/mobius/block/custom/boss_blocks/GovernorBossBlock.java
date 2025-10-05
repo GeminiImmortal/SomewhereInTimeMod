@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.block.custom.boss_blocks;
 
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.GovernorEntity;
+import net.geminiimmortal.mobius.entity.custom.IntroGovernorCloneEntity;
 import net.geminiimmortal.mobius.util.TitleUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -47,8 +48,9 @@ public class GovernorBossBlock extends Block {
 
             // Find any Governor boss entities in the area
             List<GovernorEntity> bosses = world.getEntitiesOfClass(GovernorEntity.class, searchArea);
+            List<IntroGovernorCloneEntity> cloneEntities = world.getEntitiesOfClass(IntroGovernorCloneEntity.class, searchArea);
 
-            if (!bosses.isEmpty()) {
+            if (!bosses.isEmpty() && !cloneEntities.isEmpty()) {
                 BlockPos validPos = findTeleportPosition(new BlockPos(bossX, bossY, bossZ), world);
 
                 player.teleportTo(validPos.getX() + 0.5, validPos.getY(), validPos.getZ() + 0.5);
@@ -61,12 +63,12 @@ public class GovernorBossBlock extends Block {
 
             player.teleportTo(validPos.getX() + 0.5, validPos.getY(), validPos.getZ() + 0.5);
 
-            EntityType<?> bossEntityType = ModEntityTypes.GOVERNOR.get();
+            EntityType<?> bossEntityType = ModEntityTypes.INTRO_GOVERNOR_CLONE.get();
             Entity bossEntity = bossEntityType.create(world);
             if (bossEntity != null) {
                 bossEntity.moveTo(bossX, bossY, bossZ, 0.0F, 0.0F);
                 world.addFreshEntity(bossEntity);
-                world.playSound(null, targetX, targetY, targetZ, SoundEvents.WITHER_SPAWN, SoundCategory.HOSTILE, 1.0F, 1.0F);
+                //world.playSound(null, targetX, targetY, targetZ, SoundEvents.WITHER_SPAWN, SoundCategory.HOSTILE, 1.0F, 1.0F);
             }
             TitleUtils.sendTitle((ServerPlayerEntity) player, "Duty Commenced!", null, 10, 40, 40, TextFormatting.GOLD);
 

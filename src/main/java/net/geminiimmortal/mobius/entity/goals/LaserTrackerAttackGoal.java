@@ -1,12 +1,12 @@
 package net.geminiimmortal.mobius.entity.goals;
 
-import net.geminiimmortal.mobius.entity.custom.SorcererEntity;
+import net.geminiimmortal.mobius.entity.custom.GovernorCloneEntity;
 import net.geminiimmortal.mobius.entity.custom.spell.TrackingLaserBeam;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.Goal;
 
 public class LaserTrackerAttackGoal extends Goal {
-    private final SorcererEntity sorcerer;
+    private final GovernorCloneEntity sorcerer;
     private final int duration;
     private final int cooldownDuration;
     private LivingEntity cachedTarget; // Add this field
@@ -14,7 +14,7 @@ public class LaserTrackerAttackGoal extends Goal {
     private int laserTimer = 0;
     private TrackingLaserBeam currentBeam;
 
-    public LaserTrackerAttackGoal(SorcererEntity sorcerer, int duration, int cooldown) {
+    public LaserTrackerAttackGoal(GovernorCloneEntity sorcerer, int duration, int cooldown) {
         this.sorcerer = sorcerer;
         this.duration = duration;
         this.cooldownDuration = cooldown;
@@ -47,7 +47,7 @@ public class LaserTrackerAttackGoal extends Goal {
                     duration,
                     0.8f
             );
-            sorcerer.setCasting(true);
+
         }
     }
 
@@ -79,7 +79,7 @@ public class LaserTrackerAttackGoal extends Goal {
     public void stop() {
         cooldownTimer = cooldownDuration;
         laserTimer = 0;
-        sorcerer.setCasting(false);
+
         currentBeam = null;
     }
 

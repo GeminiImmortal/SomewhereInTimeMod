@@ -2,11 +2,13 @@ package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.damage.CloneShatterDamageSource;
 import net.geminiimmortal.mobius.effects.ModEffects;
+import net.geminiimmortal.mobius.entity.goals.SonicBoomGoal;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -38,7 +40,7 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
     private GovernorEntity governor;
     private static final DataParameter<Boolean> IS_COUNTDOWN = EntityDataManager.defineId(GovernorCloneEntity.class, DataSerializers.BOOLEAN);
     private int lifetimeTicks = 0;
-    private static final int MAX_LIFETIME = 100; // 2 seconds
+    private static final int MAX_LIFETIME = 100;
 
     public GovernorCloneEntity(EntityType<? extends MonsterEntity> type, World world) {
         super(type, world);
@@ -64,7 +66,7 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
         this.entityData.define(IS_COUNTDOWN, false);
     }
 
-    private void triggerExplodeOnHit() {
+    protected void triggerExplodeOnHit() {
         if (this.hurtTime > 1 && !Objects.equals(this.getLastDamageSource(), DamageSource.ON_FIRE)) {
             this.explode();
         }
@@ -119,6 +121,9 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
                     this.remove();
                 }
             }
+            if (this.getOriginalGovernor().getHealth() < (this.getOriginalGovernor().getMaxHealth() * 0.5)){
+                this.goalSelector.addGoal(1, new SonicBoomGoal(this));
+            }
         }
     }
 
@@ -141,13 +146,14 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
 
     public void setFromGovernor(GovernorEntity governor) {
         this.setItemInHand(Hand.MAIN_HAND, governor.getMainHandItem().copy());
-        this.setHealth(this.getMaxHealth() * 0.5F); // clones have half HP
+        this.setHealth(this.getMaxHealth() * 0.5F);
     }
 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new SwimGoal(this));
-        this.goalSelector.addGoal(1, new LookAtGoal(this, PlayerEntity.class, 50.0F));
+        this.goalSelector.addGoal(2, new LookAtGoal(this, PlayerEntity.class, 50.0F));
+        this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
     public void startCountdown() {

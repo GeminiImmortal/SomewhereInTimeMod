@@ -83,7 +83,7 @@ public class SorcererEntity extends AbstractImperialEntity implements IAnimatabl
     protected void registerGoals() {
         super.registerGoals();
         this.arcaneBeamAttackGoal = new ArcaneBeamAttackGoal(this, new ObliteratorEntity(ModEntityTypes.OBLITERATOR.get(), this.level), 1200);
-        this.laserTrackerGoal = new LaserTrackerAttackGoal(this, 60, 160);
+       // this.laserTrackerGoal = new LaserTrackerAttackGoal(this, 60, 160);
         this.goalSelector.addGoal(1, new SwimGoal(this));
         this.goalSelector.addGoal(2, laserTrackerGoal);
         this.goalSelector.addGoal(3, arcaneBeamAttackGoal);

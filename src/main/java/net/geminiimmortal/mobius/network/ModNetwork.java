@@ -64,6 +64,11 @@ public class ModNetwork {
                 .decoder(LanceHitPacket::decode)
                 .consumer(LanceHitPacket::handle)
                 .add();
+        NETWORK_CHANNEL.messageBuilder(GovernorCursePacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
+                .encoder(GovernorCursePacket::encode)
+                .decoder(GovernorCursePacket::decode)
+                .consumer(GovernorCursePacket::handle)
+                .add();
     }
 
     @SubscribeEvent

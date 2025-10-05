@@ -5,7 +5,6 @@ import net.geminiimmortal.mobius.entity.custom.*;
 import net.geminiimmortal.mobius.entity.custom.spell.*;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.merchant.villager.VillagerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
@@ -266,6 +265,12 @@ public class ModEntityTypes {
                     () -> EntityType.Builder.<StrangewoodBoatEntity>of(StrangewoodBoatEntity::new,
                                     EntityClassification.MISC).sized(0.5f, 0.5f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "strangewood_boat").toString()));
+
+    public static final RegistryObject<EntityType<IntroGovernorCloneEntity>> INTRO_GOVERNOR_CLONE =
+            ENTITY_TYPES.register("intro_governor_clone",
+                    () -> EntityType.Builder.of(IntroGovernorCloneEntity::new,
+                                    EntityClassification.MONSTER).sized(1f, 3f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "intro_governor_clone").toString()));
 
 
     public static void register(IEventBus eventBus) {
