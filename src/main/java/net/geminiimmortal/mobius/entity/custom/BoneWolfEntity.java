@@ -5,6 +5,7 @@ import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.faction.FactionType;
 import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
@@ -27,10 +28,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Difficulty;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.LightType;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
 import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -45,14 +43,14 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import java.util.Random;
 import java.util.function.Predicate;
 
-public class BoneWolfEntity extends WolfEntity implements IAnimatable, IFactionCarrier, IMob {
+public class BoneWolfEntity extends CreatureEntity implements IAnimatable, IFactionCarrier, IMob {
     private static final DataParameter<Boolean> SITTING = EntityDataManager.defineId(BoneWolfEntity.class, DataSerializers.BOOLEAN);
     public static final Predicate<LivingEntity> PREY_SELECTOR = (p_213440_0_) -> {
         EntityType<?> entitytype = p_213440_0_.getType();
         return entitytype == ModEntityTypes.FAEDEER.get();
     };
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
-    public BoneWolfEntity(EntityType<? extends WolfEntity> type, World worldIn) {
+    public BoneWolfEntity(EntityType<? extends CreatureEntity> type, World worldIn) {
         super(type, worldIn);
     }
 
@@ -70,6 +68,10 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable, IFactionC
     public void tick() {
         super.tick();
 
+        if (!this.level.isClientSide && this.level.isDay() && !this.level.getLevelData().isThundering()) {
+            this.remove();
+        }
+
         if(this.level.getLevelData().getDifficulty().equals(Difficulty.PEACEFUL)) {
             this.remove();
         }
@@ -82,19 +84,14 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable, IFactionC
 
     @Override
     protected void registerGoals() {
-        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
-        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
-        this.targetSelector.addGoal(4, new NonTamedTargetGoal<>(this, PlayerEntity.class, false, null));
-        this.targetSelector.addGoal(5, new NonTamedTargetGoal<>(this, AnimalEntity.class, false, PREY_SELECTOR));
+        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, FaecowEntity.class, true));
+        this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, FaedeerEntity.class, true));
         this.targetSelector.addGoal(6, new NearestAttackableTargetGoal<>(this, VillagerEntity.class, true));
         this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
-        this.goalSelector.addGoal(1, new SwimGoal(this));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.1D, true));
-        this.goalSelector.addGoal(3, new SitGoal(this));
+        this.goalSelector.addGoal(0, new SwimGoal(this));
+        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, true));
         this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
-        this.goalSelector.addGoal(5, new FollowOwnerGoal(this, 1.0D, 10.0F, 2.0F, false));
-        this.goalSelector.addGoal(6, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
         this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
     }
@@ -124,79 +121,42 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable, IFactionC
     }
 
     @Override
-    public void setOrderedToSit(boolean orderedToSit) {
-        if (!this.level.isClientSide()) {
-            if (this.getOwner() != null) {
-                ServerPlayerEntity owner = (ServerPlayerEntity) this.getOwner();
-                if (this.isOrderedToSit() && this.isTame()) {
-                    this.setSitting(false);
-                    super.setOrderedToSit(orderedToSit);
-                } else if (!this.isOrderedToSit() && this.isTame()) {
-                    this.setSitting(true);
-                    super.setOrderedToSit(orderedToSit);
-                } else {
-                    this.setSitting(true);
-                    super.setOrderedToSit(orderedToSit);
-                }
-            }
-        }
-    }
-
-    @Override
-    public void aiStep() {
-        super.aiStep();
-
-        if (this.level.isDay() && !this.level.isClientSide) {
-            float brightness = this.getBrightness();
-            BlockPos pos = this.blockPosition();
-
-            if (brightness > 0.5F && this.level.canSeeSky(pos)) {
-                this.setSecondsOnFire(8);
-            }
-        }
-    }
-
-
-
-    @Override
     public ActionResultType mobInteract(PlayerEntity player, Hand hand) {
         return ActionResultType.FAIL;
     }
 
-    @Override
-    public boolean checkSpawnRules(IWorld world, SpawnReason reason) {
-        return canMobSpawn(ModEntityTypes.BONE_WOLF.get(), world, reason, this.blockPosition(), world.getRandom());
-    }
+    public static boolean canMobSpawn(EntityType<? extends BoneWolfEntity> entityType,
+                                      IServerWorld world, SpawnReason reason, BlockPos pos, Random random) {
+        ServerWorld level = world.getLevel();
 
+        int existing = level.getEntitiesOfClass(BoneWolfEntity.class,
+                new AxisAlignedBB(pos).inflate(28)).size();
+        int quartermasters = level.getEntitiesOfClass(RebelQuartermasterEntity.class,
+                new AxisAlignedBB(pos).inflate(70)).size();
+        int villagers = level.getEntitiesOfClass(VillagerEntity.class,
+                new AxisAlignedBB(pos).inflate(50)).size();
 
-    public static boolean canMobSpawn(EntityType<? extends CreatureEntity> entityType,
-                                      IWorld world, SpawnReason reason, BlockPos pos, Random random) {
-        int existing = world.getEntitiesOfClass(BoneWolfEntity.class,
-                new AxisAlignedBB(pos).inflate(12)).size();
-        int quartermasters = world.getEntitiesOfClass(RebelQuartermasterEntity.class,
-                new AxisAlignedBB(pos).inflate(40)).size();
+        long timeOfDay = level.getDayTime() % 24000;
+        boolean isMobius = level.dimension() == ModDimensions.MOBIUS_WORLD;
+        boolean isNight = (isMobius && (timeOfDay >= 13600 && timeOfDay <= 23000)) || (level.isThundering() && isMobius);
+        boolean isPeaceful = level.getDifficulty() == Difficulty.PEACEFUL;
 
-        // Normalize day time (0–23999)
-        long timeOfDay = world.dayTime() % 24000;
-
-        // Allow night or thunderstorm
-        boolean isNight = (timeOfDay >= 13000 && timeOfDay <= 23000) || world.getLevelData().isThundering();
-
-        boolean isPeaceful = world.getLevelData().getDifficulty().equals(Difficulty.PEACEFUL);
-
-        // Ground check
-        BlockState ground = world.getBlockState(pos.below());
+        BlockState ground = level.getBlockState(pos.below());
         boolean validGround = ground.is(ModBlocks.SOUL_PODZOL.get())
                 || ground.is(ModBlocks.HEMATITE.get())
                 || ground.is(ModBlocks.AURORA_GRASS_BLOCK.get());
 
-        // Light-level check (hostiles require block light ≤ 7)
-        int blockLight = world.getBrightness(LightType.BLOCK, pos);
+        boolean darkEnough = level.getBrightness(LightType.BLOCK, pos) <= 7;
 
-        boolean darkEnough = blockLight <= 7;
+        boolean canSeeSky = level.canSeeSkyFromBelowWater(pos);
+        if (canSeeSky && timeOfDay < 13600 && !level.isThundering() && !darkEnough) {
+            return false;
+        }
 
-        return validGround && isNight && darkEnough && existing < 1 && quartermasters < 1 && !isPeaceful;
+        return validGround && isNight && darkEnough && existing < 1 && quartermasters < 1 && !isPeaceful && villagers < 1;
     }
+
+
 
 
 
@@ -213,11 +173,6 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable, IFactionC
     @Override
     protected SoundEvent getAmbientSound() {
         return SoundEvents.WOLF_GROWL;
-    }
-
-    @Override
-    public boolean canAttack(LivingEntity type) {
-        return !this.isTame() && super.canAttack(type); // Don't attack if tamed
     }
 
     @Override
@@ -259,40 +214,5 @@ public class BoneWolfEntity extends WolfEntity implements IAnimatable, IFactionC
     @Override
     public AnimationFactory getFactory() {
         return factory;
-    }
-
-    @Override
-    public void addPersistentAngerSaveData(CompoundNBT p_233682_1_) {
-        super.addPersistentAngerSaveData(p_233682_1_);
-    }
-
-    @Override
-    public void readPersistentAngerSaveData(ServerWorld p_241358_1_, CompoundNBT p_241358_2_) {
-        super.readPersistentAngerSaveData(p_241358_1_, p_241358_2_);
-    }
-
-    @Override
-    public void updatePersistentAnger(ServerWorld p_241359_1_, boolean p_241359_2_) {
-        super.updatePersistentAnger(p_241359_1_, p_241359_2_);
-    }
-
-    @Override
-    public boolean isAngryAt(LivingEntity p_233680_1_) {
-        return super.isAngryAt(p_233680_1_);
-    }
-
-    @Override
-    public boolean isAngryAtAllPlayers(World p_241357_1_) {
-        return super.isAngryAtAllPlayers(p_241357_1_);
-    }
-
-    @Override
-    public boolean isAngry() {
-        return super.isAngry();
-    }
-
-    @Override
-    public void stopBeingAngry() {
-        super.stopBeingAngry();
     }
 }

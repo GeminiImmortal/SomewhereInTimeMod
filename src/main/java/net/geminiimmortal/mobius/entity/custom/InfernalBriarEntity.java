@@ -6,6 +6,7 @@ import net.geminiimmortal.mobius.entity.goals.ShootFireballGoal;
 import net.geminiimmortal.mobius.faction.FactionType;
 import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.geminiimmortal.mobius.world.dimension.ModDimensions;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.CreatureEntity;
 import net.minecraft.entity.EntityType;
@@ -24,10 +25,8 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Difficulty;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.LightType;
-import net.minecraft.world.World;
+import net.minecraft.world.*;
+import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -70,33 +69,36 @@ public class InfernalBriarEntity extends MobEntity implements IAnimatable, IFact
     }
 
     public static boolean canMobSpawn(EntityType<? extends MobEntity> entityType,
-                                      IWorld world, SpawnReason reason, BlockPos pos, Random random) {
-        int existing = world.getEntitiesOfClass(InfernalBriarEntity.class,
-                new AxisAlignedBB(pos).inflate(36)).size();
-        int quartermasters = world.getEntitiesOfClass(RebelQuartermasterEntity.class,
-                new AxisAlignedBB(pos).inflate(40)).size();
+                                      IServerWorld world, SpawnReason reason, BlockPos pos, Random random) {
+        ServerWorld level = world.getLevel();
 
-        // Normalize day time (0–23999)
-        long timeOfDay = world.dayTime() % 24000;
+        int existing = level.getEntitiesOfClass(InfernalBriarEntity.class,
+                new AxisAlignedBB(pos).inflate(28)).size();
+        int quartermasters = level.getEntitiesOfClass(RebelQuartermasterEntity.class,
+                new AxisAlignedBB(pos).inflate(70)).size();
+        int villagers = level.getEntitiesOfClass(VillagerEntity.class,
+                new AxisAlignedBB(pos).inflate(50)).size();
 
-        // Allow night or thunderstorm
-        boolean isNight = (timeOfDay >= 13000 && timeOfDay <= 23000) || world.getLevelData().isThundering();
+        long timeOfDay = level.getDayTime() % 24000;
+        boolean isMobius = level.dimension() == ModDimensions.MOBIUS_WORLD;
+        boolean isNight = (isMobius && (timeOfDay >= 13600 && timeOfDay <= 23000)) || (level.isThundering() && isMobius);
+        boolean isPeaceful = level.getDifficulty() == Difficulty.PEACEFUL;
 
-        boolean isPeaceful = world.getLevelData().getDifficulty().equals(Difficulty.PEACEFUL);
-
-        // Ground check
-        BlockState ground = world.getBlockState(pos.below());
+        BlockState ground = level.getBlockState(pos.below());
         boolean validGround = ground.is(ModBlocks.SOUL_PODZOL.get())
                 || ground.is(ModBlocks.HEMATITE.get())
                 || ground.is(ModBlocks.AURORA_GRASS_BLOCK.get());
 
-        // Light-level check (hostiles require block light ≤ 7)
-        int blockLight = world.getBrightness(LightType.BLOCK, pos);
+        boolean darkEnough = level.getBrightness(LightType.BLOCK, pos) <= 7;
 
-        boolean darkEnough = blockLight <= 7;
+        boolean canSeeSky = level.canSeeSkyFromBelowWater(pos);
+        if (canSeeSky && timeOfDay < 13600 && !level.isThundering() && !darkEnough) {
+            return false;
+        }
 
-        return validGround && isNight && darkEnough && existing < 1 && quartermasters < 1 && !isPeaceful;
+        return validGround && isNight && darkEnough && existing < 1 && quartermasters < 1 && !isPeaceful && villagers < 1;
     }
+
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
@@ -160,12 +162,6 @@ public class InfernalBriarEntity extends MobEntity implements IAnimatable, IFact
             spawnGlowParticle();
             particleTickCounter = 0;
         }
-    }
-
-    @Override
-    public boolean checkSpawnRules(IWorld world, SpawnReason reason) {
-        return super.checkSpawnRules(world, reason)
-                && canMobSpawn(ModEntityTypes.INFERNAL_BRIAR.get(), world, reason, this.blockPosition(), world.getRandom());
     }
 
     private void spawnGlowParticle() {
