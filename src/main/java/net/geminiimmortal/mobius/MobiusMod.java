@@ -21,6 +21,7 @@ import net.geminiimmortal.mobius.capability.infamy.IInfamy;
 import net.geminiimmortal.mobius.capability.infamy.Infamy;
 import net.geminiimmortal.mobius.capability.infamy.InfamyStorage;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.geminiimmortal.mobius.spawn.ModSpawns;
 import net.geminiimmortal.mobius.tileentity.ModTileEntities;
 import net.geminiimmortal.mobius.tileentity.render.*;
 import net.geminiimmortal.mobius.util.CustomDamageEventHandler;
@@ -41,13 +42,11 @@ import net.minecraft.client.renderer.Atlases;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
-import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.AxeItem;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.MinecraftForge;
@@ -134,6 +133,7 @@ public class MobiusMod
             ModDimensions.registerDimensionStuff();
             ModStructureSetup.registerStructures();
             ModStructureSetup.registerConfiguredStructures();
+            ModSpawns.setupSpawns();
             CapabilityManager.INSTANCE.register(IInfamy.class, new InfamyStorage(), Infamy::new);
 
 
@@ -212,79 +212,6 @@ public class MobiusMod
             AxeItem.STRIPABLES.put(ModBlocks.STRANGEWOOD_LOG.get(), ModBlocks.STRIPPED_STRANGEWOOD_LOG.get());
             AxeItem.STRIPABLES.put(ModBlocks.STRANGEWOOD_WOOD.get(), ModBlocks.STRIPPED_STRANGEWOOD_WOOD.get());
 
-
-            EntitySpawnPlacementRegistry.register(
-                    ModEntityTypes.FAECOW.get(),
-                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
-                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                    FaecowEntity::canMobSpawn
-            );
-            EntitySpawnPlacementRegistry.register(
-                    ModEntityTypes.GIANT.get(),
-                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
-                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                    GiantEntity::canMobSpawn
-            );
-            EntitySpawnPlacementRegistry.register(
-                    ModEntityTypes.ANGLERFISH.get(),
-                    EntitySpawnPlacementRegistry.PlacementType.IN_WATER,
-                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                    AnglerfishEntity::canMobSpawn
-            );
-            EntitySpawnPlacementRegistry.register(
-                    ModEntityTypes.FAEDEER.get(),
-                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
-                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                    FaedeerEntity::canMobSpawn
-            );
-            EntitySpawnPlacementRegistry.register(
-                    ModEntityTypes.BONE_WOLF.get(),
-                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
-                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                    BoneWolfEntity::canMobSpawn
-            );
-            EntitySpawnPlacementRegistry.register(
-                    ModEntityTypes.FUYUKAZE.get(),
-                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
-                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                    FuyukazeEntity::canMobSpawn
-            );
-            EntitySpawnPlacementRegistry.register(
-                    ModEntityTypes.FOOTMAN.get(),
-                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
-                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                    FootmanEntity::canMobSpawn
-            );
-            EntitySpawnPlacementRegistry.register(
-                    ModEntityTypes.IMPERIAL_GUARD.get(),
-                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
-                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                    ImperialGuardEntity::canMobSpawn
-            );
-            EntitySpawnPlacementRegistry.register(
-                    ModEntityTypes.BOUNTY_HUNTER.get(),
-                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
-                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                    BountyHunterEntity::canMobSpawn
-            );
-            EntitySpawnPlacementRegistry.register(
-                    ModEntityTypes.IMPERIAL_TOWER_GUARD.get(),
-                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
-                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                    ImperialTowerRegularEntity::canMobSpawn
-            );
-            EntitySpawnPlacementRegistry.register(
-                    ModEntityTypes.JACKALOPE.get(),
-                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
-                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                    JackalopeEntity::canMobSpawn
-            );
-            EntitySpawnPlacementRegistry.register(
-                    ModEntityTypes.INFERNAL_BRIAR.get(),
-                    EntitySpawnPlacementRegistry.PlacementType.ON_GROUND,
-                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
-                    InfernalBriarEntity::canMobSpawn
-            );
         });
     }
 
