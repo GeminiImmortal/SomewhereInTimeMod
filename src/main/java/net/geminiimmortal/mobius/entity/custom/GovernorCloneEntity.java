@@ -36,8 +36,10 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
-    AnimationFactory factory = GeckoLibUtil.createFactory(this);
+    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private GovernorEntity governor;
+    private UUID governorUUID;
+
     private static final DataParameter<Boolean> IS_COUNTDOWN = EntityDataManager.defineId(GovernorCloneEntity.class, DataSerializers.BOOLEAN);
     private int lifetimeTicks = 0;
     private static final int MAX_LIFETIME = 100;
@@ -45,7 +47,6 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
     public GovernorCloneEntity(EntityType<? extends MonsterEntity> type, World world) {
         super(type, world);
         this.xpReward = 0;
-        this.governor = getOriginalGovernor();
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -66,68 +67,65 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
         this.entityData.define(IS_COUNTDOWN, false);
     }
 
-    protected void triggerExplodeOnHit() {
-        if (this.hurtTime > 1 && !Objects.equals(this.getLastDamageSource(), DamageSource.ON_FIRE)) {
-            this.explode();
-        }
-    }
-
     @Override
     public boolean save(CompoundNBT nbt) {
-        nbt.putUUID("OriginalGovernor", this.getOriginalGovernor().getUUID());
+        if (governorUUID != null) {
+            nbt.putUUID("OriginalGovernor", governorUUID);
+        }
         return super.save(nbt);
     }
 
     @Override
     public void load(CompoundNBT nbt) {
-        UUID governorOriginal = nbt.getUUID("OriginalGovernor");
-        if (level instanceof ServerWorld) {
-            GovernorEntity governorEntity;
-            Entity entity = ((ServerWorld) level).getEntity(governorOriginal);
-            if (entity instanceof GovernorEntity) {
-                governorEntity = (GovernorEntity) entity;
-                this.setOriginalGovernor(governorEntity, governorOriginal);
+        super.load(nbt);
+
+        if (nbt.hasUUID("OriginalGovernor")) {
+            governorUUID = nbt.getUUID("OriginalGovernor");
+            if (level instanceof ServerWorld) {
+                Entity entity = ((ServerWorld) level).getEntity(governorUUID);
+                if (entity instanceof GovernorEntity) {
+                    governor = (GovernorEntity) entity;
+                }
             }
         }
-        this.explode();
-        super.load(nbt);
     }
 
     @Override
     public void tick() {
         super.tick();
 
-
-        if (this.getOriginalGovernor() != null) {
-            if (this.getOriginalGovernor().isOnFire()) {
+        GovernorEntity gov = this.getOriginalGovernor();
+        if (gov != null) {
+            if (gov.isOnFire()) {
                 this.setSecondsOnFire(10);
             }
-            if (!this.level.isClientSide && !this.getOriginalGovernor().getCorrectHit() && this.getOriginalGovernor().getGCD() <= 99) {
-                this.startCountdown();
-                this.triggerExplodeOnHit();
-                lifetimeTicks++;
-                if (this.getOriginalGovernor().getGCD() <= 2) {
-                    this.explode();
+
+            if (!this.level.isClientSide) {
+                if (!gov.getCorrectHit() && gov.getGCD() <= 99) {
+                    this.startCountdown();
+                    this.triggerExplodeOnHit();
+                    lifetimeTicks++;
+                    if (gov.getGCD() <= 2) {
+                        this.explode();
+                    }
                 }
 
-                /*if (this.entityData.get(IS_COUNTDOWN)) {
-                    if (lifetimeTicks % 20 == 0) {
-                        level.playSound(null, blockPosition(), SoundEvents.ILLUSIONER_CAST_SPELL, SoundCategory.HOSTILE, 1.0F, 1.5F);
-                    }
-                }*/
-            }
-            if (!this.level.isClientSide() && this.getOriginalGovernor().getGCD() <= 99) {
-                if (this.getOriginalGovernor().getCorrectHit()) {
+                if (gov.getCorrectHit()) {
                     this.remove();
                 }
-            }
-            if (this.getOriginalGovernor().getHealth() < (this.getOriginalGovernor().getMaxHealth() * 0.5)){
-                this.goalSelector.addGoal(1, new SonicBoomGoal(this));
+
+                if (gov.getHealth() < gov.getMaxHealth() * 0.5) {
+                    this.goalSelector.addGoal(1, new SonicBoomGoal(this));
+                }
             }
         }
     }
 
-    private UUID governorUUID;
+    private void triggerExplodeOnHit() {
+        if (this.hurtTime > 1 && !Objects.equals(this.getLastDamageSource(), DamageSource.ON_FIRE)) {
+            this.explode();
+        }
+    }
 
     public void setOriginalGovernor(GovernorEntity governor, UUID governorUUID) {
         this.governor = governor;
@@ -135,14 +133,14 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
     }
 
     public GovernorEntity getOriginalGovernor() {
-        if (governor == null) return null;
-        if (level instanceof ServerWorld) {
-            Entity entity = ((ServerWorld) level).getEntity(governorUUID);
-            if (entity instanceof GovernorEntity) return governor = (GovernorEntity) entity;
-        }
-        return null;
-    }
+        if (governor != null) return governor;
 
+        if (level instanceof ServerWorld && governorUUID != null) {
+            Entity entity = ((ServerWorld) level).getEntity(governorUUID);
+            if (entity instanceof GovernorEntity) governor = (GovernorEntity) entity;
+        }
+        return governor;
+    }
 
     public void setFromGovernor(GovernorEntity governor) {
         this.setItemInHand(Hand.MAIN_HAND, governor.getMainHandItem().copy());
@@ -165,7 +163,6 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
 
         List<PlayerEntity> nearby = this.level.getEntitiesOfClass(PlayerEntity.class, new AxisAlignedBB(this.blockPosition()).inflate(4.0D));
         for (PlayerEntity player : nearby) {
-
             player.hurt(CloneShatterDamageSource.CLONE_SHATTER, 12f);
             player.addEffect(new EffectInstance(ModEffects.EXPOSED_EFFECT.get(), 100));
         }
@@ -181,7 +178,6 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        // You can make clones tanky or immune to arrows, etc.
         return super.hurt(source, amount);
     }
 
@@ -206,4 +202,3 @@ public class GovernorCloneEntity extends MonsterEntity implements IAnimatable {
         return factory;
     }
 }
-
