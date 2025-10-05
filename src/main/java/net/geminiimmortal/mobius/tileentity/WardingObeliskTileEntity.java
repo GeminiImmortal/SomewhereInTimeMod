@@ -151,8 +151,8 @@ public class WardingObeliskTileEntity extends TileEntity implements IAnimatable,
                                     Field velocityField = Entity.class.getDeclaredField("hasImpulse");
                                     velocityField.setAccessible(true);
                                     velocityField.setBoolean(nearbyPlayers, true);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+                                } catch (Exception ignored) {
+
                                 }
 
                                 if (nearbyPlayers instanceof ServerPlayerEntity) {
