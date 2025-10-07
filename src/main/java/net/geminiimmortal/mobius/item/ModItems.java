@@ -296,7 +296,7 @@ public class ModItems {
     public static final RegistryObject<Item> MUSIC_DISC_MARCH_OF_THE_ILLAGERS = ITEMS.register("music_disc_march_of_the_illagers", () -> new MusicDiscItem(1 , ModSounds.MUSIC_DISC_MARCH_OF_THE_ILLAGERS, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> MUSIC_DISC_BULLYRAG = ITEMS.register("music_disc_bullyrag", () -> new MusicDiscItem(2 , ModSounds.MUSIC_DISC_BULLYRAG, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> MUSIC_DISC_THE_LADY_RED = ITEMS.register("music_disc_the_lady_red", () -> new MusicDiscItem(3 , ModSounds.MUSIC_DISC_THE_LADY_RED, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
-
+    public static final RegistryObject<Item> MUSIC_DISC_BONES_OF_DRAGONCRAG = ITEMS.register("music_disc_bones_of_dragoncrag", () -> new MusicDiscItem(4 , ModSounds.MUSIC_DISC_BONES_OF_DRAGONCRAG, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
 
     //Misc Update 1.1 Stuff
     public static final RegistryObject<Item> DIESELYTRA = ITEMS.register("dieselytra", () -> new Dieselytra(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).tab(ItemGroup.TAB_TRANSPORTATION).durability(864)));

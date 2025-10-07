@@ -6,11 +6,11 @@
   "pages": [
     {
       "type": "patchouli:image",
-      "images": ["mobius:textures/gui/draconic_forelands.png"]
+      "images": ["mobius:textures/gui/jackalope.png"]
     },
     {
       "type": "patchouli:text",
-      "text": "The draconic forelands biome consists of tall, steep, imposing mountains of solid hematite rock. Skeletal remains of long-dead dragons litter these peaks. Nothing should be able to live here, but yet, something may yet lurk in these desolate mountains..."
+      "text": "The draconic forelands biome consists of tall, steep, imposing mountains of solid hematite rock. Skeletal remains of long-dead dragons litter these peaks. Skycap mushrooms grow abundantly here, and this biome is also home to the passive jackalope."
     }
   ]
 }
