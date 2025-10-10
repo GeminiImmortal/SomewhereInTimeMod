@@ -30,69 +30,69 @@ public class GovernorBossBarRenderer {
 
     @SubscribeEvent
     public static void onBossBarRender(RenderGameOverlayEvent.BossInfo event) {
-        event.setCanceled(true);
+        if (event.getBossInfo().getName().getContents().equals("Governor Cassian Moxley")) {
+            event.setCanceled(true);
 
-        Minecraft mc = Minecraft.getInstance();
-        MatrixStack matrixStack = event.getMatrixStack();
-        BossInfo bossInfo = event.getBossInfo();
+            Minecraft mc = Minecraft.getInstance();
+            MatrixStack matrixStack = event.getMatrixStack();
+            BossInfo bossInfo = event.getBossInfo();
 
-        int screenWidth = mc.getWindow().getGuiScaledWidth();
-        int x = (screenWidth / 2) - 91;
-        int y = 10;
+            int screenWidth = mc.getWindow().getGuiScaledWidth();
+            int x = (screenWidth / 2) - 91;
+            int y = 10;
 
-        int texWidth = 192;
-        int texHeight = 30;
+            int texWidth = 192;
+            int texHeight = 30;
 
 
+            mc.getTextureManager().bind(GOVERNOR_BOSSBAR_TEXTURE);
 
-        mc.getTextureManager().bind(GOVERNOR_BOSSBAR_TEXTURE);
+            AbstractGui.blit(matrixStack, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
 
-        AbstractGui.blit(matrixStack, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
-
-        int filled = (int)(bossInfo.getPercent() * texWidth);
-        if (filled > 0) {
-            mc.getTextureManager().bind(GOVERNOR_HEALTHBAR);
-            AbstractGui.blit(matrixStack, x, y, 0, 0, filled, texHeight, texWidth, texHeight);
-        }
-
-        mc.getTextureManager().bind(GOVERNOR_PROGRESS_OVERLAY);
-
-        AbstractGui.blit(matrixStack, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
-
-        if(Minecraft.getInstance().level != null) {
-            Random rand = Minecraft.getInstance().level.random;
-
-            if (rand.nextFloat() < 0.08f) {
-                float px = x + rand.nextInt(texWidth);
-                float py = y + rand.nextInt(texHeight);
-                float vx = (rand.nextFloat() - 0.5f) * 0.3f;
-                float vy = -0.05f;
-                int lifetime = 20 + rand.nextInt(20);
-                PARTICLES.add(new GovernorBossBarParticleRenderer(px, py, vx, vy, lifetime));
+            int filled = (int) (bossInfo.getPercent() * texWidth);
+            if (filled > 0) {
+                mc.getTextureManager().bind(GOVERNOR_HEALTHBAR);
+                AbstractGui.blit(matrixStack, x, y, 0, 0, filled, texHeight, texWidth, texHeight);
             }
 
-            mc.getTextureManager().bind(PARTICLE_TEXTURE);
-            int spriteSize = 8;
+            mc.getTextureManager().bind(GOVERNOR_PROGRESS_OVERLAY);
 
-            Iterator<GovernorBossBarParticleRenderer> iter = PARTICLES.iterator();
-            while (iter.hasNext()) {
-                GovernorBossBarParticleRenderer p = iter.next();
-                if (!p.tick()) {
-                    iter.remove();
-                    continue;
+            AbstractGui.blit(matrixStack, x, y, 0, 0, texWidth, texHeight, texWidth, texHeight);
+
+            if (Minecraft.getInstance().level != null) {
+                Random rand = Minecraft.getInstance().level.random;
+
+                if (rand.nextFloat() < 0.08f) {
+                    float px = x + rand.nextInt(texWidth);
+                    float py = y + rand.nextInt(texHeight);
+                    float vx = (rand.nextFloat() - 0.5f) * 0.3f;
+                    float vy = -0.05f;
+                    int lifetime = 20 + rand.nextInt(20);
+                    PARTICLES.add(new GovernorBossBarParticleRenderer(px, py, vx, vy, lifetime));
                 }
 
-                AbstractGui.blit(matrixStack,
-                        (int) p.x, (int) p.y,
-                        0, 0,
-                        spriteSize, spriteSize,
-                        spriteSize, spriteSize);
-            }
-        }
+                mc.getTextureManager().bind(PARTICLE_TEXTURE);
+                int spriteSize = 8;
 
-        String name = bossInfo.getName().getString();
-        int textX = (screenWidth / 2) - (mc.font.width(name) / 2);
-        mc.font.draw(matrixStack, name, textX + 5, y - 2, 0x8e2dea);
+                Iterator<GovernorBossBarParticleRenderer> iter = PARTICLES.iterator();
+                while (iter.hasNext()) {
+                    GovernorBossBarParticleRenderer p = iter.next();
+                    if (!p.tick()) {
+                        iter.remove();
+                        continue;
+                    }
+
+                    AbstractGui.blit(matrixStack,
+                            (int) p.x, (int) p.y,
+                            0, 0,
+                            spriteSize, spriteSize,
+                            spriteSize, spriteSize);
+                }
+            }
+
+            String name = bossInfo.getName().getString();
+            int textX = (screenWidth / 2) - (mc.font.width(name) / 2);
+            mc.font.draw(matrixStack, name, textX + 5, y - 2, 0x8e2dea);
+        }
     }
 }
-
