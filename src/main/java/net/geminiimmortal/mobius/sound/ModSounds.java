@@ -204,6 +204,18 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> MUSIC_DISC_BONES_OF_DRAGONCRAG =
             registerSoundEvent("music_disc_bones_of_dragoncrag");
 
+    public static final RegistryObject<SoundEvent> HIGH_OCTANE =
+            registerSoundEvent("high_octane");
+
+    public static final RegistryObject<SoundEvent> MUSIC_DISC_HIGH_OCTANE =
+            registerSoundEvent("music_disc_high_octane");
+
+    public static final RegistryObject<SoundEvent> MOBIUS_PORTAL_ACTIVATES =
+            registerSoundEvent("mobius_portal_activates");
+
+    public static final RegistryObject<SoundEvent> TESLA_SPARK =
+            registerSoundEvent("tesla_spark");
+
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, name)));
     }

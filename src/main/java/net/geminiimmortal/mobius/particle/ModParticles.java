@@ -23,6 +23,9 @@ public class ModParticles {
     public static final RegistryObject<BasicParticleType> HELLFIRE_PARTICLE = PARTICLES.register("hellfire",
             () -> new BasicParticleType(true));
 
+    public static final RegistryObject<BasicParticleType> TESLA_SPARK_PARTICLE = PARTICLES.register("tesla_spark",
+            () -> new BasicParticleType(true));
+
     public static void register(IEventBus eventBus) {
         PARTICLES.register(eventBus);
     }

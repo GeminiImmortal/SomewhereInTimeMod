@@ -4,6 +4,7 @@ import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.block.custom.*;
 import net.geminiimmortal.mobius.block.custom.boss_blocks.GovernorBossBlock;
 import net.geminiimmortal.mobius.block.custom.boss_blocks.GovernorBossExitBlock;
+import net.geminiimmortal.mobius.block.custom.crop.AuroraBerryCrop;
 import net.geminiimmortal.mobius.block.custom.crop.ManaWartCrop;
 import net.geminiimmortal.mobius.block.custom.flora.*;
 import net.geminiimmortal.mobius.block.custom.trees.*;
@@ -134,7 +135,7 @@ public class ModBlocks {
             () -> new ModStandingSignBlock(AbstractBlock.Properties.of(Material.WOOD), ModWoodTypes.MARROWOOD));
 
     public static final RegistryObject<Block> MAGIC_KEYSTONE = registerBlock("magic_keystone",
-            () -> new Block(AbstractBlock.Properties.copy(Blocks.OBSIDIAN)));
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.BEDROCK).lightLevel(state -> 15)));
 
     public static final RegistryObject<Block> HEMATITE_IRON_ORE = registerBlock("hematite_iron_ore",
             () -> new OreBlock(AbstractBlock.Properties.copy(Blocks.STONE)));
@@ -315,8 +316,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> REBEL_CLAIM = registerBlock("rebel_claim",
             () -> new RebelClaimBlock(AbstractBlock.Properties.copy(Blocks.BEDROCK).noDrops().noCollission().noOcclusion().sound(SoundType.METAL)));
 
-    //1.1 Stuff
-
     public static final RegistryObject<Block> STANDING_SKYCAP = registerBlock("standing_skycap",
             () -> new StandingSkycap(AbstractBlock.Properties.copy(Blocks.BROWN_MUSHROOM).lightLevel(state -> 15).instabreak().noOcclusion().randomTicks()));
 
@@ -373,6 +372,15 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> STRIPPED_STRANGEWOOD_WOOD = registerBlock("stripped_strangewood_wood",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_WOOD)));
+
+    public static final RegistryObject<Block> HULL_BLOCK = registerBlock("hull_block",
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.BEDROCK).sound(SoundType.METAL)));
+
+    public static final RegistryObject<Block> JUMP_PAD = registerBlock("jump_pad",
+            () -> new JumpPadBlock(AbstractBlock.Properties.of(Material.METAL).noDrops().noOcclusion().lightLevel(light -> 10).randomTicks().strength(1000000f, 1000000f)));
+
+    public static final RegistryObject<Block> AURORA_BERRY = BLOCKS.register("aurora_berry",
+            () -> new AuroraBerryCrop(AbstractBlock.Properties.of(Material.PLANT).lightLevel(state -> 2).instabreak().noOcclusion().sound(SoundType.CROP).noCollission()));
 
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);

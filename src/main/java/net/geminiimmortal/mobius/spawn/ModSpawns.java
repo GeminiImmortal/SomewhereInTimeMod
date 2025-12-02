@@ -79,5 +79,11 @@ public class ModSpawns {
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
                     InfernalBriarEntity::canMobSpawn
             );
+            EntitySpawnPlacementRegistry.register(
+                    ModEntityTypes.GRIMCROW.get(),
+                    EntitySpawnPlacementRegistry.PlacementType.NO_RESTRICTIONS,
+                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES,
+                    GrimcrowEntity::canMobSpawn
+            );
     }
 }

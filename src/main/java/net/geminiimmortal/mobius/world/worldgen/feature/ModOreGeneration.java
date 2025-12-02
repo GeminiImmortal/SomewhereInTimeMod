@@ -1,5 +1,6 @@
 package net.geminiimmortal.mobius.world.worldgen.feature;
 
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.GenerationStage;

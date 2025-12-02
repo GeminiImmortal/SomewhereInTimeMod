@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "food",
+  "pattern": [
+    "XAX",
+    "A#A"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bread"
+    },
+    "A": {
+      "item": "mobius:aurora_berry"
+    },
+    "X": {
+      "item": "mobius:skycap"
+    }
+  },
+  "result": {
+    "item": "mobius:aurora_nut_bread",
+    "count": 1
+  }
+}

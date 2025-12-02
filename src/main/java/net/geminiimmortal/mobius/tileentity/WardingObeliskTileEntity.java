@@ -105,7 +105,8 @@ public class WardingObeliskTileEntity extends TileEntity implements IAnimatable,
         super.save(compound);
         compound.putBoolean("Active", isActive());
         compound.putBoolean("WardActive", wardIsCurrentlyActive);
-        compound.putString("type", this.getBlockState().getValue(WardingObeliskBlock.TYPE).getSerializedName());
+        compound.putString("type", this.
+                getBlockState().getValue(WardingObeliskBlock.TYPE).getSerializedName());
         return compound;
     }
 

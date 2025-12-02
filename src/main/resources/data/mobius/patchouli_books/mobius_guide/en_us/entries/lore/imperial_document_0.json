@@ -1,0 +1,40 @@
+{
+  "name": "Report: Insubordination",
+  "category": "mobius:lore",
+  "advancement": "mobius:lore/imperial_document_0",
+  "icon": "mobius:imperial_decree",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(l)WARNING$()$(br2)$(l)THIS IS AN OFFICIAL IMPERIAL REPORT.$(br2)$()$(l)THE INFORMATION CONTAINED HEREIN IS SENSITIVE TO THE WELLBEING OF THE REALM.$(br2)$()$(l)IT SHALL NOT BE READ BY ANY WITHOUT BLESSING FROM HER GRACE,$()"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br)$(l) THE QUEEN ENOULIA, OR ONE WHO HAS SWORN FEALTY BEFORE HER.$(br2)$()$(l)VIOLATION OF THIS DECREE SHALL BE DEEMED TREASON WITHOUT EXCEPTION.$()"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br2)$(l)REPORT OF INSUBORDINATION$(br2)$(br2)INCITING INCIDENT$()$(br)Collection of Imperial Tribute$(br2)$(l)DATE$()$(br)Third Moon of Summer's Eve, Year 2156"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(l)NAME(S), RANKS(S), AND STATION OF OFFENDING PERSON(S)$()$(br)Country bumpkins,$(br)the middle of nowhere,$(br)ugh... what's even the point$(br2)$(l)BODY OF REPORT$()$(br2)I guess this thing will suffice to vent my frustrations.$(br2)Another gaggle of bumbling mud-shovellers showed up today offering an outsized, fly-ridden pile of warts at my feet."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "As if that's sufficient to glorify our illustrious empire. I'd almost be compelled to offer a second chance to the small folk if they weren't so frightfully uncouth. Honestly, what does the queen see in trying to bring discipline to these rabble? I could think of a myriad of better uses for them than demanding a tribute of horse droppings."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Why should I be appointed to this backwater, anyhow? My calling is that of a leader. A ruler. A beacon of culture and refinement. The Great Civilizer. The architect of a new golden era. The sole arbiter of the future of Mobius.$(br2)Alas, here I remain. Entertained only by the antics of plow-pushing clodhoppers and the mindless oafs who keep them at bay."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "But I will never lose sight of my purpose. My glorious ascent will become the song of the ages. Tales of my exploits the stuff of legends. With unclouded eyes, a superior intellect, and a mastery of the magical arts, my chapter in the history of the realm has only just begun.$(br2)I WILL wear that crown someday. I suppose that means I'll have to marry the queen. Ah well. At least she's beautiful..."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The road to power is never straight, it seems.$(br2)$(l)NAME AND RANK OF COMMANDING OFFICER$()$(br)Governor Cassian Enzo Moxley, First of His Name$(br2)$(l)DISCIPLINARY RECOMMENDATION$()$(br)Don't underestimate one who is born for greatness. To do so will surely prove a grave folly..."
+    }
+  ]
+}

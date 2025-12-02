@@ -272,6 +272,24 @@ public class ModEntityTypes {
                                     EntityClassification.MONSTER).sized(1f, 3f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "intro_governor_clone").toString()));
 
+    public static final RegistryObject<EntityType<GrimcrowCaptainBossEntity>> GRIMCROW_CAPTAIN =
+            ENTITY_TYPES.register("grimcrow_captain",
+                    () -> EntityType.Builder.of(GrimcrowCaptainBossEntity::new,
+                                    EntityClassification.CREATURE).sized(1.25f, 3f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "grimcrow_captain").toString()));
+
+    public static final RegistryObject<EntityType<MarkerEntity>> MARKER =
+            ENTITY_TYPES.register("marker",
+                    () -> EntityType.Builder.<MarkerEntity>of(MarkerEntity::new,
+                            EntityClassification.MISC).sized(0f, 0f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "marker").toString()));
+
+    public static final RegistryObject<EntityType<GrimcrowEntity>> GRIMCROW =
+            ENTITY_TYPES.register("grimcrow",
+                    () -> EntityType.Builder.<GrimcrowEntity>of(GrimcrowEntity::new,
+                            EntityClassification.MONSTER).sized(1f, 2f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "grimcrow").toString()));
+
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

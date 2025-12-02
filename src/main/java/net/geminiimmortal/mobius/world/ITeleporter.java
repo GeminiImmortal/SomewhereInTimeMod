@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.world;
 
 import net.geminiimmortal.mobius.poi.ModPOIs;
 import net.geminiimmortal.mobius.block.custom.MobiusPortalBlock;
+import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -206,6 +207,6 @@ public class ITeleporter implements net.minecraftforge.common.util.ITeleporter {
 
     @Override
     public boolean playTeleportSound(ServerPlayerEntity player, ServerWorld sourceWorld, ServerWorld destWorld) {
-        return false;
+        return true;
     }
 }

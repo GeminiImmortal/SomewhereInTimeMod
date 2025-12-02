@@ -71,6 +71,22 @@ public class ModNoFeatureConfigGeneration {
                     .decorated(Placement.CHANCE.configured(
                             new ChanceConfig(1)))
                     .countRandom(10));
+
+            base.add(() -> ModConfiguredFeatures.CONFIGURED_AURORA_BERRY_BUSHES_FEATURE
+                    .decorated(Features.Placements.HEIGHTMAP_DOUBLE_SQUARE)
+                    .decorated(Placement.DARK_OAK_TREE.configured(
+                            new NoPlacementConfig()))
+                    .decorated(Placement.CHANCE.configured(
+                            new ChanceConfig(1)))
+                    .countRandom(4));
+
+            base.add(() -> ModConfiguredFeatures.CONFIGURED_BLOODSTONE_BLOB_FEATURE
+                    .decorated(Features.Placements.RANGE_10_20_ROOFED)
+                    .decorated(Placement.COUNT.configured(
+                            new FeatureSpreadConfig(2)))
+                    .decorated(Placement.CHANCE.configured(
+                            new ChanceConfig(1)))
+                    .countRandom(7));
         }
 
 

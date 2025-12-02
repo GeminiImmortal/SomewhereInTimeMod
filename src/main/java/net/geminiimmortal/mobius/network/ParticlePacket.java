@@ -76,6 +76,11 @@ public class ParticlePacket {
             assert Minecraft.getInstance().level != null;
             Minecraft.getInstance().level.addParticle(ParticleTypes.FLAME, x, y, z, 0.0D, 0.0D, 0.0D);
         }
+
+        if (particleType.equals("tesla_spark")) {
+            assert Minecraft.getInstance().level != null;
+            Minecraft.getInstance().level.addParticle(ModParticles.TESLA_SPARK_PARTICLE.get(), x, y, z, 0.0D, 0.0D, 0.0D);
+        }
     }
 }
 

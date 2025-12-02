@@ -6,7 +6,7 @@ import net.minecraftforge.common.util.Lazy;
 
 public enum BloodstoneGemOreType {
 
-    BLOODSTONE_GEM_ORE_TYPE(Lazy.of(ModBlocks.BLOODSTONE_GEM_ORE), 8, 30, 110);
+    BLOODSTONE_GEM_ORE_TYPE(Lazy.of(ModBlocks.BLOODSTONE_GEM_ORE), 8, 10, 50);
 
     private final Lazy<Block> block;
     private final int maxVeinSize;

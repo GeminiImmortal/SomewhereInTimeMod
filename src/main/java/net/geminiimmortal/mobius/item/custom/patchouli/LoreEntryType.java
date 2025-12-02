@@ -5,7 +5,8 @@ import net.minecraft.util.ResourceLocation;
 
 public enum LoreEntryType {
     LORE_FRAGMENT_SMUGGLER_CAMP_1("lore/smuggler_camp_1", "lore/lore_smuggler_camp_1"),
-    IMPERIAL_DECREE_0("lore/imperial_decree_0", "lore/imperial_decree_0");
+    IMPERIAL_DECREE_0("lore/imperial_decree_0", "lore/imperial_decree_0"),
+    IMPERIAL_DOCUMENT_0("lore/imperial_document_0", "lore/imperial_document_0");
 
     private final ResourceLocation entryId;
     private final ResourceLocation entryAdv;

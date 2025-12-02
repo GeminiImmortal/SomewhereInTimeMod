@@ -3,6 +3,7 @@
   "item.mobius.vorpal_sword": "Vorpal Sword",
   "item.mobius.marrowood_sign": "Marrowood Sign",
   "item.mobius.raw_mana": "Raw Mana",
+  "item.mobius.aurora_berry": "Aurora Berry",
   "item.mobius.music_disc_march_of_the_illagers": "Music Disc",
   "item.mobius.music_disc_march_of_the_illagers.desc": "Bewonder - March of the Illagers",
   "item.mobius.music_disc_bones_of_dragoncrag": "Music Disc",
@@ -11,6 +12,8 @@
   "item.mobius.music_disc_bullyrag.desc": "Bewonder - Bullyrag",
   "item.mobius.music_disc_the_lady_red": "Music Disc",
   "item.mobius.music_disc_the_lady_red.desc": "rainydaysgone - Army of Ghosts",
+  "item.mobius.music_disc_high_octane": "Music Disc",
+  "item.mobius.music_disc_high_octane.desc": "rainydaysgone - High Octane",
   "item.mobius.manawood_boat": "Manawood Boat",
   "item.mobius.marrowood_boat": "Marrowood Boat",
   "item.mobius.gloamthorn_boat": "Gloamthorn Boat",
@@ -76,6 +79,7 @@
   "item.mobius.mobius_guidebook": "Mobius: Traveller's Guide",
   "item.mobius.lore_fragment_smuggler_camp_1": "Lore Fragment: Smugglers",
   "item.mobius.imperial_decree_0": "Lore Fragment: Imperial Decree",
+  "item.mobius.imperial_document_0": "Lore Fragment: Imperial Insubordination Report",
   "item.mobius.dieselytra": "Dieselytra",
   "item.mobius.oblivion_stone": "Oblivion Stone [NYI]",
   "item.mobius.standing_skycap": "Standing Skycap",
@@ -99,6 +103,8 @@
   "item.mobius.stripped_strangewood_log": "Stripped Strangewood Log",
   "item.mobius.stripped_strangewood_wood": "Stripped Strangewood Wood",
   "item.mobius.strangewood_boat": "Strangewood Boat",
+  "item.mobius.hull_block": "Hull Block",
+  "item.mobius.aurora_nut_bread": "Aurora-Nut Bread",
 
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
@@ -134,8 +140,8 @@
   "entity.mobius.rebel_quartermaster.mobius.rebel_quartermaster_farm": "Rebel Quartermaster",
   "entity.mobius.rebel_quartermaster.mobius.rebel_quartermaster_quarry": "Rebel Quartermaster",
 
-
-
+  "block.mobius.jump_pad": "Jump Pad",
+  "block.mobius.hull_block": "Hull Block",
   "block.mobius.bone_leaves": "Bone Leaves",
   "block.mobius.living_manawood_leaves": "Living Manawood Leaves",
   "block.mobius.marrowood_door": "Marrowood Door",
@@ -187,7 +193,7 @@
   "block.mobius.aurora_dirt": "Aurora Dirt",
   "block.mobius.aurora_grass_block": "Aurora Grass Block",
   "block.mobius.nickel_ore": "Nickel Ore",
-  "block.mobius.magic_keystone": "Sorcerer's Enchanted Keystone",
+  "block.mobius.magic_keystone": "Space-Time Relocation Engine",
   "block.mobius.hematite_iron_ore": "Hematite Iron Ore",
   "block.mobius.astral_conduit": "Astral Conduit",
   "block.mobius.block_of_nickel": "Block of Nickel",
@@ -247,6 +253,7 @@
   "block.mobius.stripped_strangewood_wood": "Stripped Strangewood Wood",
   "block.mobius.strangewood_sign": "Strangewood Sign",
   "block.mobius.strangewood_wall_sign": "Strangewood Wall Sign",
+  "block.mobius.aurora_berry": "Aurora Berry",
 
   "fluid.mobius.ectoplasm_fluid": "Ectoplasm",
   "fluid.mobius.bog_water_fluid": "Bog Water",
@@ -260,9 +267,11 @@
 
   "effect.mobius.lord_decree": "Lord's Decree",
   "effect.mobius.exposed": "Exposed",
+  "effect.mobius.charged": "Charged",
 
-  "effect.mobius.exposed.description": "Amplifies damage taken",
+  "effect.mobius.exposed.description": "Amplifies damage taken by 20% per stack",
   "effect.mobius.lord_decree.description": "Continuously applies slowness and nausea",
+  "effect.mobius.charged.description": "Amplifies Grimcrow Captain Davy Van Diesel's attack and movement speed by 1% and 0.5% per stack respectively",
 
   "tooltip.mobius.vorpal_sword": "Steals life on hit",
 
@@ -293,6 +302,9 @@
   "item.mobius.ring_of_repulsion.cooldown": "This artifact is recharging!",
   "item.mobius.ring_of_aggression.used": "Cooldown: 1s",
   "entity.mobius.harukaze.is_sitting.false": "Harukaze is staying",
-  "entity.mobius.harukaze.is_sitting.true": "Harukaze is following"
+  "entity.mobius.harukaze.is_sitting.true": "Harukaze is following",
+  "entity.mobius.grimcrow_captain.summon": "COWARD! A'right lads, force this scurvy dog back out here!",
+  "overlay.mobius.loading_two": "ERROR: PARADOX DETECTED",
+  "overlay.mobius.loading_one": "--INITIATING EMERGENCY PORTAL PLACEMENT--"
 
 }

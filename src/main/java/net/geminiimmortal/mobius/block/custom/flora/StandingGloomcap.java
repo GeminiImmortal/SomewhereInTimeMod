@@ -50,7 +50,7 @@ public class StandingGloomcap extends Block {
         return reader.getBlockState(pos.below()).equals(ModBlocks.SOUL_PODZOL.get().defaultBlockState());
     }
 
-   /* @Override
+    /* @Override
     public boolean growMushroom(ServerWorld p_226940_1_, BlockPos p_226940_2_, BlockState p_226940_3_, Random p_226940_4_) {
         return false;
     }

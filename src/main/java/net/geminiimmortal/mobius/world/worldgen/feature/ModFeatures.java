@@ -34,6 +34,12 @@ public class ModFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> BOULDER = registerFeat("boulder", () ->
             new BoulderFeature(NoFeatureConfig.CODEC, Blocks.MOSSY_COBBLESTONE.defaultBlockState()));
 
+    public static final RegistryObject<Feature<NoFeatureConfig>> CLUSTERED_AURORA_BERRY_BUSHES_FEATURE = registerFeat("clustered_aurora_berry_bushes_feature", () ->
+            new ClusteredAuroraBerryBushesFeature(NoFeatureConfig.CODEC, ModBlocks.AURORA_BERRY.get().defaultBlockState()));
+
+    public static final RegistryObject<Feature<NoFeatureConfig>> BLOODSTONE_BLOB_FEATURE = registerFeat("bloodstone_blob_feature", () ->
+            new BloodstoneBlobFeature(NoFeatureConfig.CODEC, ModBlocks.BLOODSTONE.get().defaultBlockState()));
+
 
     private static <T extends Feature<?>> RegistryObject<T> registerFeat(String name, final Supplier<T> sup) {
         return FEATURES.register(name, sup);

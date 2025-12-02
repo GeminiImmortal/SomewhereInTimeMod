@@ -6,5 +6,6 @@ public enum FactionType {
     REBEL,
     DANGEROUS_TO_VILLAGES,
     BOUNTY_HUNTER,
-    NIGHTMARE
+    NIGHTMARE,
+    GRIMCROW
 }

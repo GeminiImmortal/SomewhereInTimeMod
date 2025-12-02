@@ -64,6 +64,9 @@ public abstract class AbstractImperialBossEntity extends CreatureEntity implemen
         if (this instanceof GovernorEntity) {
             return this.bossTitle = new StringTextComponent("Governor Cassian Moxley").setStyle(Style.EMPTY).withStyle(TextFormatting.GOLD);
         }
+        if (this instanceof GrimcrowCaptainBossEntity) {
+            return this.bossTitle = new StringTextComponent("Grimcrow Captain Davy Van Diesel").setStyle(Style.EMPTY).withStyle(TextFormatting.DARK_RED);
+        }
         return this.bossTitle = new StringTextComponent(bossName + " " + generateBossName(new Random())).setStyle(Style.EMPTY).withStyle(TextFormatting.DARK_RED);
     }
 

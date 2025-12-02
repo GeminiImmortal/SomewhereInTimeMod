@@ -108,6 +108,13 @@ public class ModConfiguredFeatures {
             register("boulder",
                     ModFeatures.BOULDER.get().configured(new NoFeatureConfig()));
 
+    public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_AURORA_BERRY_BUSHES_FEATURE =
+            register("aurora_berry_bushes",
+                    ModFeatures.CLUSTERED_AURORA_BERRY_BUSHES_FEATURE.get().configured(new NoFeatureConfig()));
+
+    public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_BLOODSTONE_BLOB_FEATURE =
+            register("bloodstone_blob",
+                    ModFeatures.BLOODSTONE_BLOB_FEATURE.get().configured(new NoFeatureConfig()));
 
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key,
                                                                                  ConfiguredFeature<FC, ?> configuredFeature) {

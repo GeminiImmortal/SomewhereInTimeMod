@@ -1,7 +1,9 @@
 package net.geminiimmortal.mobius.world.worldgen.structure;
 
+import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.world.worldgen.biome.ModBiomes;
+import net.geminiimmortal.mobius.world.worldgen.structure.config.FlyingStructureConfig;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.util.ResourceLocation;
@@ -41,6 +43,7 @@ public class ModStructureGeneration {
         if(Objects.equals(event.getName(), rollingExpanseValid)) {
             List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructureSetup.MOBIUS_VILLAGE.get().configured(NoFeatureConfig.INSTANCE));
+            structures.add(() -> ModStructureSetup.GRIMCROW_FLAGSHIP.get().configured(NoFeatureConfig.INSTANCE));
         }
 
         if(Objects.equals(event.getName(), rollingExpanseValid)) {
@@ -71,7 +74,7 @@ public class ModStructureGeneration {
 
         if(Objects.equals(event.getName(), gooLagoonValid)) {
             List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
-            structures.add(() -> ModStructureSetup.GOVERNOR_TOWER.get().configured(NoFeatureConfig.INSTANCE));
+            structures.add(() -> ModStructureSetup.GOVERNOR_TOWER.get().configured(new FlyingStructureConfig(40, 50, 40)));
         }
 
         if(Objects.equals(event.getName(), draconicForelandsValid)) {
@@ -106,7 +109,13 @@ public class ModStructureGeneration {
             MobSpawnInfo spawnInfo = new MobSpawnInfo.Builder().creatureGenerationProbability(0.001f).addMobCharge(ModEntityTypes.IMPERIAL_TOWER_GUARD.get(), 1000, 900).addSpawn(EntityClassification.MONSTER, spawners.stream().findAny().get()).build();
             event.addEntitySpawns(EntityClassification.MONSTER, spawnInfo.getMobs(EntityClassification.MONSTER));
         }
-
+        if(event.getStructure().equals(ModStructureSetup.GRIMCROW_FLAGSHIP.get())) {
+            MobSpawnInfo.Spawners grimcrowSpawn = new MobSpawnInfo.Spawners(ModEntityTypes.GRIMCROW.get(), 100, 1, 2);
+            List<MobSpawnInfo.Spawners> spawners = new ArrayList<>();
+            spawners.add(grimcrowSpawn);
+            MobSpawnInfo spawnInfo = new MobSpawnInfo.Builder().creatureGenerationProbability(0.001f).addMobCharge(ModEntityTypes.GRIMCROW.get(), 1000, 900).addSpawn(EntityClassification.MONSTER, spawners.stream().findAny().get()).build();
+            event.addEntitySpawns(EntityClassification.MONSTER, spawnInfo.getMobs(EntityClassification.MONSTER));
+        }
     }
 }
 

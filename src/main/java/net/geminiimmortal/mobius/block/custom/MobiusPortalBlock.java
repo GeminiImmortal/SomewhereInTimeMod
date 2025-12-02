@@ -316,14 +316,23 @@ public class MobiusPortalBlock extends Block {
         }
 
         public void placePortalBlocks() {
-            for(int i = 0; i < this.width; ++i) {
+            for (int i = 0; i < this.width; ++i) {
                 BlockPos blockpos = this.bottomLeft.relative(this.rightDir, i);
 
-                for(int j = 0; j < this.height; ++j) {
+                for (int j = 0; j < this.height; ++j) {
                     this.world.setBlock(blockpos.above(j), ModBlocks.MOBIUS_PORTAL.get().defaultBlockState().setValue(MobiusPortalBlock.AXIS, this.axis), 18);
                 }
             }
-
+            if (this.bottomLeft != null && !this.world.isClientSide()) {
+                world.playSound(
+                        null,
+                        this.bottomLeft,
+                        ModSounds.MOBIUS_PORTAL_ACTIVATES.get(),
+                        SoundCategory.BLOCKS,
+                        1.0F,
+                        1.0F
+                );
+            }
         }
 
         private boolean isPortalCountValidForSize() {

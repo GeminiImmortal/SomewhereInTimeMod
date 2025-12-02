@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "mobius:block/crop/aurora_berry_stage2"
+  }
+}

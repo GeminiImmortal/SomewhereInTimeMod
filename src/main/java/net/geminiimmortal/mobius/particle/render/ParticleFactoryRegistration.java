@@ -28,6 +28,10 @@ public class ParticleFactoryRegistration {
                 ModParticles.HELLFIRE_PARTICLE.get(),
                 HellfireParticleRenderer::new
         );
+        Minecraft.getInstance().particleEngine.register(
+                ModParticles.TESLA_SPARK_PARTICLE.get(),
+                TeslaSparkParticleRenderer::new
+        );
     }
 }
 

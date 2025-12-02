@@ -3,6 +3,7 @@ package net.geminiimmortal.mobius.world.worldgen.structure;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import net.geminiimmortal.mobius.MobiusMod;
+import net.geminiimmortal.mobius.world.worldgen.structure.config.FlyingStructureConfig;
 import net.geminiimmortal.mobius.world.worldgen.structure.structures.*;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
@@ -36,7 +37,7 @@ public class ModStructures {
     public static final RegistryObject<Structure<NoFeatureConfig>> MOLVAN_SETTLEMENT_B =
             STRUCTURES.register("molvan_settlement_b", MolvanSettlementB::new);
 
-    public static final RegistryObject<Structure<NoFeatureConfig>> GOVERNOR_TOWER =
+    public static final RegistryObject<Structure<FlyingStructureConfig>> GOVERNOR_TOWER =
             STRUCTURES.register("governor_tower", GovernorTower::new);
 
     public static final RegistryObject<Structure<NoFeatureConfig>> DRAGON_BONES =

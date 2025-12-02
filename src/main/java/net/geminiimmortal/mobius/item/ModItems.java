@@ -32,14 +32,14 @@ public class ModItems {
     public static final RegistryObject<Item> MANAWOOD_LEAVES = ITEMS.register("manawood_leaves", () -> new BlockItem(ModBlocks.MANAWOOD_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> LIVING_MANAWOOD_LEAVES = ITEMS.register("living_manawood_leaves", () -> new BlockItem(ModBlocks.LIVING_MANAWOOD_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> GLOAMTHORN_LEAVES = ITEMS.register("gloamthorn_leaves", () -> new BlockItem(ModBlocks.GLOAMTHORN_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
-    public static final RegistryObject<Item> STRANGEWOOD_LEAVES = ITEMS.register("strangewood_leaves", () -> new BlockItem(ModBlocks.STRANGEWOOD_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS))); //1.1 Update
+    public static final RegistryObject<Item> STRANGEWOOD_LEAVES = ITEMS.register("strangewood_leaves", () -> new BlockItem(ModBlocks.STRANGEWOOD_LEAVES.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     //Logs
     public static final RegistryObject<Item> MARROWOOD_LOG = ITEMS.register("marrowood_log", () -> new BlockItem(ModBlocks.MARROWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> MANAWOOD_LOG = ITEMS.register("manawood_log", () -> new BlockItem(ModBlocks.MANAWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> LIVING_MANAWOOD_LOG = ITEMS.register("living_manawood_log", () -> new BlockItem(ModBlocks.LIVING_MANAWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> GLOAMTHORN_LOG = ITEMS.register("gloamthorn_log", () -> new BlockItem(ModBlocks.GLOAMTHORN_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
-    public static final RegistryObject<Item> STRANGEWOOD_LOG = ITEMS.register("strangewood_log", () -> new BlockItem(ModBlocks.STRANGEWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS))); //1.1 Update
+    public static final RegistryObject<Item> STRANGEWOOD_LOG = ITEMS.register("strangewood_log", () -> new BlockItem(ModBlocks.STRANGEWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
 
     //Stripped Logs
     public static final RegistryObject<Item> STRIPPED_MARROWOOD_LOG = ITEMS.register("stripped_marrowood_log", () -> new BlockItem(ModBlocks.STRIPPED_MARROWOOD_LOG.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
@@ -135,7 +135,7 @@ public class ModItems {
 
     //Flora
     public static final RegistryObject<Item> STANDING_GLOOMCAP = ITEMS.register("standing_gloomcap", () -> new BlockItem(ModBlocks.STANDING_GLOOMCAP.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
-    public static final RegistryObject<Item> STANDING_SKYCAP = ITEMS.register("standing_skycap", () -> new BlockItem(ModBlocks.STANDING_SKYCAP.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS))); //1.1 Update
+    public static final RegistryObject<Item> STANDING_SKYCAP = ITEMS.register("standing_skycap", () -> new BlockItem(ModBlocks.STANDING_SKYCAP.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> GIANT_GLOOMCAP_CAP = ITEMS.register("giant_gloomcap_cap", () -> new BlockItem(ModBlocks.GIANT_GLOOMCAP_CAP.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> GIANT_GLOOMCAP_STEM = ITEMS.register("giant_gloomcap_stem", () -> new BlockItem(ModBlocks.GIANT_GLOOMCAP_STEM.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
@@ -163,15 +163,38 @@ public class ModItems {
     //Crops and Food
     public static final RegistryObject<Item> MANA_WART = ITEMS.register("mana_wart",
             () -> new BlockItem(ModBlocks.MANA_WART.get(), new Item.Properties()
-                    .food(new Food.Builder().nutrition(1).saturationMod(0.1f).build())
+                    .food(new Food.Builder().nutrition(1).saturationMod(0.1f)
+                            .build())
                     .tab(ItemGroup.TAB_FOOD)));
-    public static final RegistryObject<Item> MANAGLOOM_PIE = ITEMS.register("managloom_pie", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(new Food.Builder().nutrition(8).saturationMod(0.5f).effect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 200), 1f).build())));
+    public static final RegistryObject<Item> AURORA_BERRY = ITEMS.register("aurora_berry",
+            () -> new BlockItem(ModBlocks.AURORA_BERRY.get(), new Item.Properties()
+                    .food(new Food.Builder().nutrition(1).saturationMod(0.1f)
+                            .effect(new EffectInstance(Effects.JUMP, 60), 1f).fast()
+                            .build())
+                    .tab(ItemGroup.TAB_FOOD)));
+    public static final RegistryObject<Item> AURORA_NUT_BREAD = ITEMS.register("aurora_nut_bread",
+            () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD)
+            .food(new Food.Builder().nutrition(6).saturationMod(0.5f)
+                    .effect(new EffectInstance(Effects.JUMP, 1200, 2), 1f)
+                    .build())));
+    public static final RegistryObject<Item> MANAGLOOM_PIE = ITEMS.register("managloom_pie",
+            () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD)
+            .food(new Food.Builder().nutrition(8).saturationMod(0.5f)
+                    .effect(new EffectInstance(Effects.DAMAGE_RESISTANCE, 200), 1f)
+                    .build())));
     public static final RegistryObject<Item> GLOOMCAP = ITEMS.register("gloomcap",
             () -> new BlockItem(ModBlocks.GLOOMCAP.get() ,new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> SKYCAP = ITEMS.register("skycap",
-            () -> new BlockItem(ModBlocks.SKYCAP.get() ,new Item.Properties().tab(ItemGroup.TAB_DECORATIONS))); //1.1 Update
-    public static final RegistryObject<Item> RAW_FAE_VENISON = ITEMS.register("raw_fae_venison", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(new Food.Builder().nutrition(3).saturationMod(0.1f).meat().build())));
-    public static final RegistryObject<Item> COOKED_FAE_VENISON = ITEMS.register("cooked_fae_venison", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD).food(new Food.Builder().nutrition(10).saturationMod(0.8f).effect(new EffectInstance(Effects.GLOWING, 100), 1f).meat().build())));
+            () -> new BlockItem(ModBlocks.SKYCAP.get() ,new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> RAW_FAE_VENISON = ITEMS.register("raw_fae_venison",
+            () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD)
+            .food(new Food.Builder().nutrition(3).saturationMod(0.1f).meat()
+                    .build())));
+    public static final RegistryObject<Item> COOKED_FAE_VENISON = ITEMS.register("cooked_fae_venison",
+            () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD)
+            .food(new Food.Builder().nutrition(10).saturationMod(0.8f)
+                    .effect(new EffectInstance(Effects.GLOWING, 100), 1f).meat()
+                    .build())));
 
     //Workstations Misc.
     public static final RegistryObject<Item> ASTRAL_CONDUIT = ITEMS.register("astral_conduit", () -> new BlockItem(ModBlocks.ASTRAL_CONDUIT.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
@@ -183,6 +206,8 @@ public class ModItems {
     public static final RegistryObject<Item> BLOCK_OF_NICKEL = ITEMS.register("block_of_nickel", () -> new BlockItem(ModBlocks.BLOCK_OF_NICKEL.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> DUNGEON_BLOCK = ITEMS.register("dungeon_block", () -> new BlockItem(ModBlocks.DUNGEON_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
     public static final RegistryObject<Item> CRYSTAL_KEEP_BLOCK = ITEMS.register("crystal_keep_block", () -> new BlockItem(ModBlocks.CRYSTAL_KEEP_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> HULL_BLOCK = ITEMS.register("hull_block", () -> new BlockItem(ModBlocks.HULL_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
+    public static final RegistryObject<Item> JUMP_PAD = ITEMS.register("jump_pad", () -> new BlockItem(ModBlocks.JUMP_PAD.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS).rarity(Rarity.RARE).stacksTo(16)));
 
     //Bloodstone
     public static final RegistryObject<Item> BLOODSTONE = ITEMS.register("bloodstone", () -> new BlockItem(ModBlocks.BLOODSTONE.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
@@ -297,6 +322,8 @@ public class ModItems {
     public static final RegistryObject<Item> MUSIC_DISC_BULLYRAG = ITEMS.register("music_disc_bullyrag", () -> new MusicDiscItem(2 , ModSounds.MUSIC_DISC_BULLYRAG, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> MUSIC_DISC_THE_LADY_RED = ITEMS.register("music_disc_the_lady_red", () -> new MusicDiscItem(3 , ModSounds.MUSIC_DISC_THE_LADY_RED, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> MUSIC_DISC_BONES_OF_DRAGONCRAG = ITEMS.register("music_disc_bones_of_dragoncrag", () -> new MusicDiscItem(4 , ModSounds.MUSIC_DISC_BONES_OF_DRAGONCRAG, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> MUSIC_DISC_HIGH_OCTANE = ITEMS.register("music_disc_high_octane", () -> new MusicDiscItem(5 , ModSounds.MUSIC_DISC_HIGH_OCTANE, new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).rarity(Rarity.RARE)));
+
 
     //Misc Update 1.1 Stuff
     public static final RegistryObject<Item> DIESELYTRA = ITEMS.register("dieselytra", () -> new Dieselytra(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).tab(ItemGroup.TAB_TRANSPORTATION).durability(864)));

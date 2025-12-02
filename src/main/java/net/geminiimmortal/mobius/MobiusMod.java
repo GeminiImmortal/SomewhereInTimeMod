@@ -38,9 +38,7 @@ import net.geminiimmortal.mobius.world.worldgen.structure.processor.ModProcessor
 import net.minecraft.block.Block;
 import net.minecraft.block.WoodType;
 import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.client.renderer.Atlases;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.tileentity.SignTileEntityRenderer;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.AxeItem;
@@ -66,13 +64,14 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Mod(MobiusMod.MOD_ID)
 public class MobiusMod
 {
     public static final String MOD_ID = "mobius";
-
     private static final Logger LOGGER = LogManager.getLogger();
 
     public MobiusMod() {
@@ -135,7 +134,6 @@ public class MobiusMod
             ModStructureSetup.registerConfiguredStructures();
             ModSpawns.setupSpawns();
             CapabilityManager.INSTANCE.register(IInfamy.class, new InfamyStorage(), Infamy::new);
-
 
             BiomeDictionary.addTypes(
                     RegistryKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(MobiusMod.MOD_ID, "draconic_forelands")),
@@ -239,7 +237,7 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.SKYCAP.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.LATENT_MANA_COLLECTOR.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.SMUGGLER_STRONGBOX.get(), RenderType.cutout());
-
+            RenderTypeLookup.setRenderLayer(ModBlocks.AURORA_BERRY.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.MOBIUS_PORTAL.get(), RenderType.translucent());
 
             RenderTypeLookup.setRenderLayer(ModBlocks.GIANT_GLOOMCAP_CAP.get(), RenderType.translucent());
@@ -262,7 +260,7 @@ public class MobiusMod
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.WARDING_OBELISK.get(), WardingObeliskRenderer::new);
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.CAPTURE_POINT.get(), CapturePointRenderer::new);
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.REBEL_CLAIM.get(), RebelClaimRenderer::new);
-
+            ClientRegistry.bindTileEntityRenderer(ModTileEntities.JUMP_PAD.get(), JumpPadRenderer::new);
 
 
             Atlases.addWoodType(ModWoodTypes.MARROWOOD);
@@ -324,6 +322,9 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.IMPERIAL_TOWER_GUARD.get(), ImperialTowerRegularRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.JACKALOPE.get(), JackalopeRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.INTRO_GOVERNOR_CLONE.get(), IntroGovernorCloneRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GRIMCROW_CAPTAIN.get(), GrimcrowCaptainRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MARKER.get(), MarkerRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GRIMCROW.get(), GrimcrowRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -391,6 +392,8 @@ public class MobiusMod
             event.put(ModEntityTypes.IMPERIAL_TOWER_GUARD.get(), ImperialTowerRegularEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.JACKALOPE.get(), JackalopeEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.INTRO_GOVERNOR_CLONE.get(), IntroGovernorCloneEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.GRIMCROW_CAPTAIN.get(), GrimcrowCaptainBossEntity.createCustomAttributes().build());
+            event.put(ModEntityTypes.GRIMCROW.get(), GrimcrowEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent

@@ -12,6 +12,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -24,6 +25,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class IntroGovernorCloneEntity extends CreatureEntity implements IAnimatable {
     AnimationFactory factory = GeckoLibUtil.createFactory(this);
@@ -41,6 +43,15 @@ public class IntroGovernorCloneEntity extends CreatureEntity implements IAnimata
     protected void triggerExplodeOnHit() {
         this.playSound(ModSounds.GOVERNOR_POOF.get(), 12.0F, 1.0F);
         this.playSound(ModSounds.GOVERNOR_LAUGH.get(), 12.0F, 1.0F);
+        AxisAlignedBB markerDetection = new AxisAlignedBB(this.blockPosition()).inflate(25);
+        List<MarkerEntity> marker = this.level.getEntitiesOfClass(MarkerEntity.class, markerDetection);
+        if (!marker.isEmpty()) {
+            marker.forEach(markerEntity -> {
+                if (markerEntity.governorBossSealMarker) {
+                    markerEntity.governorSealBlocks(this);
+                }
+            });
+        }
     }
 
     @Override

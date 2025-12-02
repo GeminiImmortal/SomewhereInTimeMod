@@ -23,6 +23,7 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -41,6 +42,7 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class GovernorEntity extends AbstractImperialBossEntity implements IAnimatable {
     private static final String[] TAUNTS = {
@@ -61,6 +63,7 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
     private static final DataParameter<Boolean> HALF_HEALTH = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> SAID_HIS_PEACE = EntityDataManager.defineId(GovernorEntity.class, DataSerializers.BOOLEAN);
     AnimationFactory factory = GeckoLibUtil.createFactory(this);
+    protected boolean playerHasDied = false;
 
     public GovernorEntity(EntityType<? extends AbstractImperialBossEntity> entityType, World worldIn) {
         super(entityType, worldIn);
@@ -104,6 +107,21 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
                                 player.getUUID()
                         );
                     }
+                    this.playerHasDied = true;
+                    AxisAlignedBB markerDetection = new AxisAlignedBB(this.blockPosition()).inflate(25);
+                    List<MarkerEntity> marker = this.level.getEntitiesOfClass(MarkerEntity.class, markerDetection);
+                    if (!marker.isEmpty()) {
+                        marker.forEach(markerEntity -> {
+                            if (markerEntity.governorBossSealMarker) {
+                                markerEntity.governorUnSealBlocks(this);
+                            }
+                        });
+                        marker.forEach(markerEntity -> {
+                            if (markerEntity.governorBossSpawnMarker) {
+                                markerEntity.resetGovernorFight(this);
+                            }
+                        });
+                    }
                     this.remove();
                 }
             }
@@ -141,6 +159,17 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
         if (level.isClientSide) {
             if (!this.isAlive() || this.removed) {
                 stopBossMusic();
+            }
+        }
+        if (!this.isAlive() || this.removed) {
+            AxisAlignedBB markerDetection = new AxisAlignedBB(this.blockPosition()).inflate(25);
+            List<MarkerEntity> marker = this.level.getEntitiesOfClass(MarkerEntity.class, markerDetection);
+            if (!marker.isEmpty()) {
+                marker.forEach(markerEntity -> {
+                    if (markerEntity.governorBossSealMarker) {
+                        markerEntity.governorUnSealBlocks(this);
+                    }
+                });
             }
         }
         if (this.getFightStarted()) {
@@ -293,7 +322,7 @@ public class GovernorEntity extends AbstractImperialBossEntity implements IAnima
 
     @Override
     public void die(DamageSource source) {
-        this.level.setBlock(this.blockPosition(), ModBlocks.GOVERNOR_BOSS_EXIT_BLOCK.get().defaultBlockState(),3);
+    //    this.level.setBlock(this.blockPosition(), ModBlocks.GOVERNOR_BOSS_EXIT_BLOCK.get().defaultBlockState(),3);
         super.die(source);
     }
 

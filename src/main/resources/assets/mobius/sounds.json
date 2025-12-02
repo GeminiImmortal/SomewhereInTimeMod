@@ -507,5 +507,39 @@
         "volume": 0.2
       }
     ]
+  },
+  "high_octane": {
+    "sounds": [
+      {
+        "name": "mobius:high_octane",
+        "stream": true,
+        "volume": 0.5
+      }
+    ]
+  },
+  "music_disc_high_octane": {
+    "sounds": [
+      {
+        "name": "mobius:music_disc_high_octane",
+        "stream": true,
+        "volume": 0.5
+      }
+    ]
+  },
+  "mobius_portal_activates": {
+    "sounds": [
+      {
+        "name": "mobius:mobius_portal_activates"
+      }
+    ],
+    "subtitle": "Mobius portal activates"
+  },
+  "tesla_spark": {
+    "sounds": [
+      {
+        "name": "mobius:tesla_spark"
+      }
+    ],
+    "subtitle": "Electricity surges"
   }
 }

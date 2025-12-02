@@ -103,8 +103,8 @@ public class DieselytraEvents {
         if (entity instanceof PlayerEntity) {
             entity.getCapability(BoostDataProvider.BOOST_CAP).ifPresent(boostData -> {
                 if (boostData.shouldIgnoreNextFall()) {
-                    event.setCanceled(true); // cancel fall damage entirely
-                    boostData.setIgnoreNextFall(false); // consume the flag
+                    event.setCanceled(true);
+                    boostData.setIgnoreNextFall(false);
                     entity.level.playSound(null, entity.blockPosition(),
                             ModSounds.DIESELYTRA_LANDS.get(),
                             SoundCategory.PLAYERS, 1.0F, 1.0F);

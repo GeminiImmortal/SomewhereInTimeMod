@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius.effects;
 
 import net.geminiimmortal.mobius.MobiusMod;
+import net.geminiimmortal.mobius.effects.custom.ChargedEffect;
 import net.geminiimmortal.mobius.effects.custom.ExposedEffect;
 import net.geminiimmortal.mobius.effects.custom.LordDecreeEffect;
 import net.minecraft.potion.Effect;
@@ -21,6 +22,9 @@ public class ModEffects {
 
     public static final RegistryObject<Effect> EXPOSED_EFFECT = EFFECTS.register("exposed",
             () -> new ExposedEffect(EffectType.HARMFUL, 0xFF00FF));
+
+    public static final RegistryObject<Effect> CHARGED_EFFECT = EFFECTS.register("charged",
+            () -> new ChargedEffect(EffectType.BENEFICIAL, 0x28A99E));
 
     public static void register(IEventBus eventBus) {
         EFFECTS.register(eventBus);

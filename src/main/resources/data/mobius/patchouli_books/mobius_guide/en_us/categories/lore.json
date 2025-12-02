@@ -4,6 +4,7 @@
   "icon": "minecraft:paper",
   "entries": [
     "mobius:lore/smuggler_camp_0",
-    "mobius:lore/smuggler_camp_1"
+    "mobius:lore/smuggler_camp_1",
+    "mobius:lore/imperial_document_0"
   ]
 }
