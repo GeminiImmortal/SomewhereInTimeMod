@@ -24,10 +24,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> MOBIUS_PORTAL = BLOCKS.register("mobius_portal", MobiusPortalBlock::new);
 
     public static final RegistryObject<Block> AURORA_DIRT = registerBlock("aurora_dirt",
-            () -> new Block(AbstractBlock.Properties.copy(Blocks.DIRT)));
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.DIRT).harvestTool(ToolType.SHOVEL).harvestLevel(0)));
 
     public static final RegistryObject<Block> AURORA_GRASS_BLOCK = registerBlock("aurora_grass_block",
-            () -> new AuroraGrassBlock(AbstractBlock.Properties.copy(Blocks.GRASS_BLOCK)));
+            () -> new AuroraGrassBlock(AbstractBlock.Properties.copy(Blocks.GRASS_BLOCK).harvestTool(ToolType.SHOVEL).harvestLevel(0)));
 
     public static final RegistryObject<Block> HEMATITE = registerBlock("hematite",
             () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
@@ -87,7 +87,7 @@ public class ModBlocks {
             () -> new TrapDoorBlock(AbstractBlock.Properties.copy(Blocks.OAK_TRAPDOOR)));
 
     public static final RegistryObject<Block> SOUL_PODZOL = registerBlock("soul_podzol",
-            () -> new SoulPodzol(AbstractBlock.Properties.copy(Blocks.GRASS_BLOCK)));
+            () -> new SoulPodzol(AbstractBlock.Properties.copy(Blocks.GRASS_BLOCK).harvestTool(ToolType.SHOVEL).harvestLevel(0)));
 
     public static final RegistryObject<Block> STRIPPED_MARROWOOD_LOG = registerBlock("stripped_marrowood_log",
             () -> new RotatedPillarBlock(AbstractBlock.Properties.copy(Blocks.STRIPPED_OAK_LOG)));
@@ -294,7 +294,7 @@ public class ModBlocks {
             () -> new Block(AbstractBlock.Properties.copy(Blocks.STONE)));
 
     public static final RegistryObject<Block> HUECO_SAND = registerBlock("hueco_sand",
-            () -> new Block(AbstractBlock.Properties.copy(Blocks.SAND)));
+            () -> new Block(AbstractBlock.Properties.copy(Blocks.SAND).harvestTool(ToolType.SHOVEL).harvestLevel(0)));
 
     public static final RegistryObject<Block> LATENT_MANA_COLLECTOR = registerBlock("latent_mana_collector",
             () -> new LatentManaCollector(AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3).strength(30F, 1200F).requiresCorrectToolForDrops().noOcclusion()));

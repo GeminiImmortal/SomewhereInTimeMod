@@ -2,11 +2,13 @@ package net.geminiimmortal.mobius.entity.custom.spell;
 
 import net.geminiimmortal.mobius.damage.CloneShatterDamageSource;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
+import net.geminiimmortal.mobius.entity.custom.GovernorCloneEntity;
 import net.geminiimmortal.mobius.entity.custom.GovernorEntity;
 import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.ThrowableEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -15,10 +17,15 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+import java.util.List;
+
 public class SpellProjectileEntity extends ThrowableEntity implements SpellTypeEntity {
+    private static final String IMMUNITY_TAUNT = "You ACTUALLY think you can use my own spells against me? HA! Think again!";
 
     public SpellProjectileEntity(EntityType<? extends SpellProjectileEntity> type, World world) {
         super(type, world);
@@ -27,6 +34,18 @@ public class SpellProjectileEntity extends ThrowableEntity implements SpellTypeE
     public SpellProjectileEntity(World world, double x, double y, double z) {
         super(ModEntityTypes.SPELL_PROJECTILE.get(), world); // Replace with your registry
         this.setPos(x, y, z);
+    }
+
+    private void governorImmunityTaunt(){
+        if (!this.level.isClientSide) {
+            List<ServerPlayerEntity> players = this.level.getEntitiesOfClass(ServerPlayerEntity.class, this.getBoundingBox().inflate(50));
+            for (ServerPlayerEntity player : players) {
+                player.sendMessage(
+                        new StringTextComponent(IMMUNITY_TAUNT).withStyle(TextFormatting.LIGHT_PURPLE),
+                        player.getUUID()
+                );
+            }
+        }
     }
 
     public SpellProjectileEntity(World world, LivingEntity shooter) {
@@ -66,9 +85,21 @@ public class SpellProjectileEntity extends ThrowableEntity implements SpellTypeE
     @Override
     protected void onHitEntity(EntityRayTraceResult result) {
         super.onHitEntity(result);
-        if (result.getEntity() instanceof GovernorEntity) { return; }
+        if (result.getEntity() instanceof GovernorEntity) {
+            governorImmunityTaunt();
+            this.remove();
+            return;
+        }
+        if (result.getEntity() instanceof GovernorCloneEntity) {
+            governorImmunityTaunt();
+            this.remove();
+            return;
+        }
         if (result.getEntity() instanceof SpellTypeEntity) onCollideWith((SpellTypeEntity) result.getEntity());
         if (result.getEntity() instanceof ServerPlayerEntity) {
+            result.getEntity().hurt(CloneShatterDamageSource.CLONE_SHATTER, 5.5f);
+        }
+        if (result.getEntity() instanceof MobEntity) {
             result.getEntity().hurt(CloneShatterDamageSource.CLONE_SHATTER, 5.5f);
         }
         this.remove();
