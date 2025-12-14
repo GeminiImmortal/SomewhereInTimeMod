@@ -290,6 +290,12 @@ public class ModEntityTypes {
                             EntityClassification.MONSTER).sized(1f, 2f)
                             .build(new ResourceLocation(MobiusMod.MOD_ID, "grimcrow").toString()));
 
+    public static final RegistryObject<EntityType<FaestagEntity>> FAESTAG =
+            ENTITY_TYPES.register("faestag",
+                    () -> EntityType.Builder.of(FaestagEntity::new,
+                            EntityClassification.CREATURE).sized(1f, 2f)
+                            .build(new ResourceLocation(MobiusMod.MOD_ID, "faestag").toString()));
+
 
     public static void register(IEventBus eventBus) {
         ENTITY_TYPES.register(eventBus);

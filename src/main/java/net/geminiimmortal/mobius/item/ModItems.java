@@ -328,6 +328,8 @@ public class ModItems {
     //Misc Update 1.1 Stuff
     public static final RegistryObject<Item> DIESELYTRA = ITEMS.register("dieselytra", () -> new Dieselytra(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).tab(ItemGroup.TAB_TRANSPORTATION).durability(864)));
 
+    //Update 1.2.1 Stuff
+    public static final RegistryObject<Item> MYSTIC_HEART = ITEMS.register("mystic_heart", () -> new MysticHeart(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).tab(ItemGroup.TAB_TRANSPORTATION), StaffType.MYSTIC_HEART));
     
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

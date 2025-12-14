@@ -1,4 +1,5 @@
 {
+  "item.mobius.mystic_heart": "Mystic Heart",
   "item.mobius.fae_leather": "Fae Leather",
   "item.mobius.vorpal_sword": "Vorpal Sword",
   "item.mobius.marrowood_sign": "Marrowood Sign",
@@ -106,6 +107,7 @@
   "item.mobius.hull_block": "Hull Block",
   "item.mobius.aurora_nut_bread": "Aurora-Nut Bread",
 
+  "entity.mobius.faestag": "Faestag",
   "entity.mobius.club_golem": "Golem of Clubs",
   "entity.mobius.heart_golem": "Golem of Hearts",
   "entity.mobius.diamond_golem": "Golem of Diamonds",
@@ -140,6 +142,7 @@
   "entity.mobius.rebel_quartermaster.mobius.rebel_quartermaster_farm": "Rebel Quartermaster",
   "entity.mobius.rebel_quartermaster.mobius.rebel_quartermaster_quarry": "Rebel Quartermaster",
 
+  "block.mobius.mystic_tear": "Mystic Tear",
   "block.mobius.jump_pad": "Jump Pad",
   "block.mobius.hull_block": "Hull Block",
   "block.mobius.bone_leaves": "Bone Leaves",

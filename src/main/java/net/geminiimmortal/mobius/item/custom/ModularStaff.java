@@ -35,6 +35,7 @@ public class ModularStaff extends Item {
     private static final List<StaffType> lightningStaffType = new ArrayList<>();
     private static final List<StaffType> galeStaffType = new ArrayList<>();
     private static final List<StaffType> fireStaffType = new ArrayList<>();
+    private static final List<StaffType> specialStaffType = new ArrayList<>();
 
     static {
         lightningStaffType.add(StaffType.LIGHTNING_OBSIDIAN_MOLVAN_STEEL);

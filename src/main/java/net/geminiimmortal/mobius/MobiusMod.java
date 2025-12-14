@@ -251,6 +251,7 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModFluids.ECTOPLASM_FLUID.get(), RenderType.translucent());
 
             RenderTypeLookup.setRenderLayer(ModBlocks.WARD_BLOCK.get(), RenderType.translucent());
+            RenderTypeLookup.setRenderLayer(ModBlocks.MYSTIC_TEAR.get(), RenderType.translucent());
 
 
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.SIGN_TILE_ENTITIES.get(),
@@ -325,6 +326,7 @@ public class MobiusMod
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GRIMCROW_CAPTAIN.get(), GrimcrowCaptainRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.MARKER.get(), MarkerRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.GRIMCROW.get(), GrimcrowRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(ModEntityTypes.FAESTAG.get(), FaestagRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -394,6 +396,7 @@ public class MobiusMod
             event.put(ModEntityTypes.INTRO_GOVERNOR_CLONE.get(), IntroGovernorCloneEntity.setCustomAttributes().build());
             event.put(ModEntityTypes.GRIMCROW_CAPTAIN.get(), GrimcrowCaptainBossEntity.createCustomAttributes().build());
             event.put(ModEntityTypes.GRIMCROW.get(), GrimcrowEntity.setCustomAttributes().build());
+            event.put(ModEntityTypes.FAESTAG.get(), FaestagEntity.setCustomAttributes().build());
         }
 
         @SubscribeEvent

@@ -65,6 +65,10 @@ public class ModTileEntities {
             TILE_ENTITIES.register("jump_pad", () -> TileEntityType.Builder.of(JumpPadTileEntity::new, ModBlocks.JUMP_PAD.get())
                     .build(null));
 
+    public static final RegistryObject<TileEntityType<MysticTearTileEntity>> MYSTIC_TEAR =
+            TILE_ENTITIES.register("mystic_tear", () -> TileEntityType.Builder.of(MysticTearTileEntity::new, ModBlocks.MYSTIC_TEAR.get())
+                    .build(null));
+
 
     public static void register(IEventBus eventBus) {
         TILE_ENTITIES.register(eventBus);

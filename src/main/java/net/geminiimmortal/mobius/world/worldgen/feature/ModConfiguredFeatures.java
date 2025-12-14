@@ -116,6 +116,10 @@ public class ModConfiguredFeatures {
             register("bloodstone_blob",
                     ModFeatures.BLOODSTONE_BLOB_FEATURE.get().configured(new NoFeatureConfig()));
 
+    public static final ConfiguredFeature<NoFeatureConfig, ?> CONFIGURED_MYSTIC_TEAR_FEATURE =
+            register("mystic_tear",
+                    ModFeatures.MYSTIC_TEAR.get().configured(new NoFeatureConfig()));
+
     private static <FC extends IFeatureConfig> ConfiguredFeature<FC, ?> register(String key,
                                                                                  ConfiguredFeature<FC, ?> configuredFeature) {
         return Registry.register(WorldGenRegistries.CONFIGURED_FEATURE, key, configuredFeature);

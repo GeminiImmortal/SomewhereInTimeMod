@@ -1,0 +1,31 @@
+{
+  "parent": "mobius:a_ripple_in_time",
+  "display": {
+    "icon": {
+      "item": "mobius:mystic_heart"
+    },
+    "title": "Chronophantasma",
+    "description": "Track down and tame the legendary Faestag",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "faestag_tamed": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "mobius:mystic_heart"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "faestag_tamed"
+    ]
+  ]
+}

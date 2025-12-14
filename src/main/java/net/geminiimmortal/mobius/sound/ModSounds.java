@@ -216,6 +216,15 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> TESLA_SPARK =
             registerSoundEvent("tesla_spark");
 
+    public static final RegistryObject<SoundEvent> FAESTAG_AMBIENT =
+            registerSoundEvent("faestag_ambient");
+
+    public static final RegistryObject<SoundEvent> FAESTAG_GALLOP =
+            registerSoundEvent("faestag_gallop");
+
+    public static final RegistryObject<SoundEvent> MYSTIC_TEAR_AMBIENT =
+            registerSoundEvent("mystic_tear_ambient");
+
     private static RegistryObject<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> new SoundEvent(new ResourceLocation(MobiusMod.MOD_ID, name)));
     }

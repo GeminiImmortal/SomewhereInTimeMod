@@ -59,6 +59,16 @@ public class ModNoFeatureConfigGeneration {
                     .countRandom(10));
         }
 
+        if (Objects.equals(event.getName(), forsakenThicket)) {
+            event.getGeneration().addFeature(
+                    GenerationStage.Decoration.VEGETAL_DECORATION,
+                    ModConfiguredFeatures.CONFIGURED_MYSTIC_TEAR_FEATURE
+                            .decorated(Placement.CHANCE.configured(new ChanceConfig(99)))
+                            .decorated(Features.Placements.HEIGHTMAP_SQUARE)
+            );
+        }
+
+
 
         if (Objects.equals(event.getName(), draconicForelands)) {
             List<Supplier<ConfiguredFeature<?, ?>>> base =

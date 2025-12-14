@@ -40,6 +40,9 @@ public class ModFeatures {
     public static final RegistryObject<Feature<NoFeatureConfig>> BLOODSTONE_BLOB_FEATURE = registerFeat("bloodstone_blob_feature", () ->
             new BloodstoneBlobFeature(NoFeatureConfig.CODEC, ModBlocks.BLOODSTONE.get().defaultBlockState()));
 
+    public static final RegistryObject<Feature<NoFeatureConfig>> MYSTIC_TEAR = registerFeat("mystic_tear", () ->
+            new MysticTearFeature(NoFeatureConfig.CODEC, ModBlocks.MYSTIC_TEAR.get().defaultBlockState()));
+
 
     private static <T extends Feature<?>> RegistryObject<T> registerFeat(String name, final Supplier<T> sup) {
         return FEATURES.register(name, sup);

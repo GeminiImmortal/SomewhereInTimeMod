@@ -382,6 +382,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> AURORA_BERRY = BLOCKS.register("aurora_berry",
             () -> new AuroraBerryCrop(AbstractBlock.Properties.of(Material.PLANT).lightLevel(state -> 2).instabreak().noOcclusion().sound(SoundType.CROP).noCollission()));
 
+    public static final RegistryObject<Block> MYSTIC_TEAR = registerBlock("mystic_tear",
+            () -> new MysticTearBlock(AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3).strength(30F, 100F).lightLevel(state -> 15).noOcclusion()));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         return toReturn;

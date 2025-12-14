@@ -541,5 +541,47 @@
       }
     ],
     "subtitle": "Electricity surges"
+  },
+  "faestag_ambient": {
+    "sounds": [
+      {
+        "name": "mobius:faestag_ambient"
+      }
+    ],
+    "subtitle": "Faestag cries"
+  },
+  "faestag_gallop": {
+    "sounds": [
+      {
+        "name": "mobius:faestag_gallop", "pitch": 1.0
+      },
+      {
+        "name": "mobius:faestag_gallop", "pitch": 0.6
+      },
+      {
+        "name": "mobius:faestag_gallop", "pitch": 1.2
+      },
+      {
+        "name": "mobius:faestag_gallop", "pitch": 0.4
+      },
+      {
+        "name": "mobius:faestag_gallop", "pitch": 0.8
+      }
+    ],
+    "subtitle": "Faestag gallops"
+  },
+  "mystic_tear_ambient": {
+    "sounds": [
+      {
+        "name": "mobius:mystic_tear_ambient", "pitch": 1.0
+      },
+      {
+        "name": "mobius:mystic_tear_ambient", "pitch": 0.8
+      },
+      {
+        "name": "mobius:mystic_tear_ambient", "pitch": 1.2
+      }
+    ],
+    "subtitle": "Mystic tear hums"
   }
 }
