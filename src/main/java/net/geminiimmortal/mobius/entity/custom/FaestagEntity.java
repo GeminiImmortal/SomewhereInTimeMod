@@ -298,21 +298,6 @@ public class FaestagEntity extends AbstractHorseEntity implements IAnimatable, I
         return false;
     }
 
-    /*@Override
-    public void onPlayerJump(int jumpPower) {
-        this.setJumping(true);
-        if (jumpPower < 0) {
-            jumpPower = 0;
-        }
-
-        if (jumpPower >= 90) {
-            this.playerJumpPendingScale = 1.0F;
-        } else {
-            this.playerJumpPendingScale = 0.4F + 0.4F * (float)jumpPower / 90.0F;
-        }
-    }*/
-
-
     @Override
     public void handleStartJump(int p_184775_1_) {
         super.handleStartJump(p_184775_1_);
