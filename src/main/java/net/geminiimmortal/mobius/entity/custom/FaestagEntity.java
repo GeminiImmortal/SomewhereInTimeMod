@@ -21,6 +21,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import software.bernie.geckolib3.core.IAnimatable;
@@ -96,20 +97,14 @@ public class FaestagEntity extends AbstractHorseEntity implements IAnimatable, I
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createLivingAttributes()
-                .add(Attributes.MAX_HEALTH, 100.0D)
+                .add(Attributes.MAX_HEALTH, 40.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.4D)
                 .add(Attributes.ATTACK_DAMAGE, 0.0D)
                 .add(Attributes.FOLLOW_RANGE, 0.0D)
                 .add(Attributes.ARMOR, 0.0D)
                 .add(Attributes.ARMOR_TOUGHNESS, 0.0D)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0D)
-                .add(Attributes.KNOCKBACK_RESISTANCE, 0.85D)
-                .add(Attributes.JUMP_STRENGTH, 4.0D);
-    }
-
-    @Override
-    protected double generateRandomJumpStrength() {
-        return 4.0D;
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.85D);
     }
 
     @Override
@@ -119,7 +114,7 @@ public class FaestagEntity extends AbstractHorseEntity implements IAnimatable, I
 
     @Override
     protected float generateRandomMaxHealth() {
-        return 100f;
+        return 40f;
     }
 
     @Override
@@ -231,37 +226,13 @@ public class FaestagEntity extends AbstractHorseEntity implements IAnimatable, I
             this.yHeadRot = this.yRot;
             this.xRot = rider.xRot * 0.5F;
 
-            float forward = rider.zza;
-            float strafe = rider.xxa;
+            float forward = MathHelper.clamp(rider.zza, -1.0F, 1.0F);
+            float strafe  = MathHelper.clamp(rider.xxa, -1.0F, 1.0F);
 
             freezeWaterUnderStag();
 
-            if (rider.isSprinting()) {
-                this.setSpeed(0.75F);
-            }
-
-            /*if (this.playerJumpPendingScale > 0.0F && !this.isJumping() && this.onGround) {
-                double d0 = this.getCustomJump() * (double)this.playerJumpPendingScale * (double)this.getBlockJumpFactor();
-                double d1;
-                if (this.hasEffect(Effects.JUMP)) {
-                    d1 = d0 + (double)((float)(this.getEffect(Effects.JUMP).getAmplifier() + 1) * 0.1F);
-                } else {
-                    d1 = d0;
-                }
-
-                Vector3d vector3d = this.getDeltaMovement();
-                this.setDeltaMovement(vector3d.x * 15, d1 * 4, vector3d.z * 15);
-                this.setIsJumping(true);
-                this.hasImpulse = true;
-                net.minecraftforge.common.ForgeHooks.onLivingJump(this);
-
-                this.playerJumpPendingScale = 0.0F;
-
-            }*/
-
-            this.setIsJumping(false);
-
-            this.setSpeed(0.4F);
+            float speed = rider.isSprinting() ? 0.5F : 0.4F;
+            this.setSpeed(speed);
 
             super.travel(new Vector3d(strafe, travelVector.y, forward));
 
