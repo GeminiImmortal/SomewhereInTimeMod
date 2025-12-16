@@ -1,13 +1,9 @@
 package net.geminiimmortal.mobius.entity.custom;
 
-import net.geminiimmortal.mobius.block.custom.MysticTearBlock;
 import net.geminiimmortal.mobius.entity.goals.ReturnToPortalGoal;
-import net.geminiimmortal.mobius.hook.MusicTickerHook;
-import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
-import net.minecraft.client.audio.BackgroundMusicSelector;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -18,7 +14,6 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
