@@ -49,6 +49,20 @@ public class FaestagEntity extends AbstractHorseEntity implements IAnimatable, I
     }
 
     @Override
+    public boolean isSaddleable() {
+        return false;
+    }
+
+    @Override
+    public void equipSaddle(@Nullable SoundCategory p_230266_1_) {
+    }
+
+    @Override
+    public boolean isSaddled() {
+        return false;
+    }
+
+    @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(ALERTED, false);
