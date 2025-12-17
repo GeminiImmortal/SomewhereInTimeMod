@@ -33,7 +33,7 @@ public class MysticHeart extends ModularStaff {
         CompoundNBT tag = stack.getOrCreateTag();
         FaestagEntity stag = new FaestagEntity(ModEntityTypes.FAESTAG.get(), player.level);
         if (tag.contains("StagUUID") && !player.level.isClientSide()) {
-            FaestagEntity currentStag = (FaestagEntity) ((ServerWorld) player.level).getEntity(tag.getUUID("StagUUID"));;
+            FaestagEntity currentStag = (FaestagEntity) ((ServerWorld) player.level).getEntity(tag.getUUID("StagUUID"));
             if (currentStag != null) {
                 tag.remove("StagUUID");
                 currentStag.remove();
