@@ -17,7 +17,7 @@ public enum StaffType {
     HURRICANE_STAFF(0, Effects.BLINDNESS, 0, 64, 200, LazyOptional.of(ModSounds.HURRICANE::get)),
     REJECTION_STAFF(0, Effects.BLINDNESS, 0, 24, 2, LazyOptional.of(ModSounds.GRAVITAS::get)),
     MAJOR_PROTECTION_STAFF(20 * 20, Effects.REGENERATION, 2, 32, 2400, LazyOptional.of(ModSounds.TIER_THREE_PROT_CAST::get)),
-    MYSTIC_HEART(0, Effects.CONDUIT_POWER, 1, 256, 300, LazyOptional.of(ModSounds.MYSTIC_TEAR_AMBIENT::get));
+    MYSTIC_HEART(0, Effects.CONDUIT_POWER, 1, 256, 0, LazyOptional.of(ModSounds.MYSTIC_TEAR_AMBIENT::get));
 
     private final int effectDuration;
     private final Effect effect;

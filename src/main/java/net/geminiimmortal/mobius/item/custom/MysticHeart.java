@@ -37,6 +37,8 @@ public class MysticHeart extends ModularStaff {
             if (currentStag != null) {
                 tag.remove("StagUUID");
                 currentStag.remove();
+            } else {
+                tag.remove("StagUUID");
             }
             return ActionResult.success(stack);
         }
