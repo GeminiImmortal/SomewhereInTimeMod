@@ -1,6 +1,5 @@
 package net.geminiimmortal.mobius.entity.custom;
 
-import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.faction.FactionType;
 import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.minecraft.block.BlockState;

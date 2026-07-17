@@ -36,6 +36,11 @@ public class IntroGovernorCloneEntity extends CreatureEntity implements IAnimata
     }
 
     @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return false;
+    }
+
+    @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new SwimGoal(this));
     }

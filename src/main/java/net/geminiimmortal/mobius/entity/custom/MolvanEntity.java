@@ -43,6 +43,11 @@ public class MolvanEntity extends CreatureEntity implements IAnimatable {
     }
 
     @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return false;
+    }
+
+    @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.setPersistenceRequired();

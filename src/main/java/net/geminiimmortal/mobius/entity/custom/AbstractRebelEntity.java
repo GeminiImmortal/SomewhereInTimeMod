@@ -20,6 +20,11 @@ public abstract class AbstractRebelEntity extends CreatureEntity implements IFac
         super(entityType, world);
     }
 
+    @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return false;
+    }
+
     protected void defineSynchedData(){
         super.defineSynchedData();
         this.entityData.define(IS_PART_OF_SKIRMISH, false);

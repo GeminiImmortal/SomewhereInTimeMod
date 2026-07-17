@@ -38,6 +38,11 @@ public abstract class AbstractImperialBossEntity extends CreatureEntity implemen
         }
     }
 
+    @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return false;
+    }
+
     protected final ServerBossInfo bossInfo = new ServerBossInfo(
             getBossTitle(bossName),  // Boss name
             BossInfo.Color.PURPLE,

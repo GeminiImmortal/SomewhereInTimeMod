@@ -1,6 +1,5 @@
 package net.geminiimmortal.mobius.entity.custom;
 
-import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.entity.goals.GovernorCurseGoal;
 import net.geminiimmortal.mobius.entity.goals.GovernorSummonCloneGoal;
 import net.geminiimmortal.mobius.entity.goals.util.TeleportUtil;
@@ -42,7 +41,6 @@ import software.bernie.geckolib3.util.GeckoLibUtil;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 public class GovernorEntity extends AbstractImperialBossEntity implements IAnimatable {
     private static final String[] TAUNTS = {

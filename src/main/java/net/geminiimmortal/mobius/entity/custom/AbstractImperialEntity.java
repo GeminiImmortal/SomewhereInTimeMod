@@ -52,6 +52,11 @@ public abstract class AbstractImperialEntity extends CreatureEntity implements I
     }
 
     @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return false;
+    }
+
+    @Override
     protected void defineSynchedData(){
         super.defineSynchedData();
         this.entityData.define(PATROL_LEADER, Optional.empty());
