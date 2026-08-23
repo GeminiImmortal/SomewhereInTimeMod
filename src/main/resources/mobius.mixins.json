@@ -8,7 +8,8 @@
   ],
   "minVersion": "0.8",
   "client": [
-    "MusicTickerMixin"
+    "MusicTickerMixin",
+    "MobiusLoadingScreenMixin"
   ],
   "server": [
     "ServerPlayNetworkHandlerMixin"
