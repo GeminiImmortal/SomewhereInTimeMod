@@ -1,0 +1,17 @@
+{
+  "type": "mobius:essence_channeler",
+  "ingredients": [
+    {
+      "item": "mobius:ball_of_condensed_mana"
+    },
+    {
+      "item": "mobius:bloodrop_gemstone"
+    },
+    {
+      "item": "mobius:molvansteel_ingot"
+    }
+  ],
+  "output": {
+    "item": "mobius:orichalcum_ingot"
+  }
+}

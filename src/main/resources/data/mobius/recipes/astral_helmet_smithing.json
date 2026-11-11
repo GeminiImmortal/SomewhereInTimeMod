@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smithing",
   "base": {
-    "item": "mobius:nickel_helmet"
+    "item": "mobius:orichalcum_helmet"
   },
   "addition": {
     "item": "mobius:astral_ingot"

@@ -318,6 +318,7 @@ public class ModItems {
     public static final RegistryObject<Item> MOLVANSTEEL_INGOT = ITEMS.register("molvansteel_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> BLOODROP_GEMSTONE = ITEMS.register("bloodrop_gemstone", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<Item> NICKEL_INGOT = ITEMS.register("nickel_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
+    public static final RegistryObject<Item> ORICHALCUM_INGOT = ITEMS.register("orichalcum_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC)));
     public static final RegistryObject<Item> ASTRAL_INGOT = ITEMS.register("astral_ingot", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> VIAL_OF_LIQUID_SCREAMS = ITEMS.register("vial_of_liquid_screams", () -> new Item(new Item.Properties().tab(ItemGroup.TAB_MISC).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> MANA_VIAL = ITEMS.register("mana_vial", () -> new ManaVial(new Item.Properties().tab(ItemGroup.TAB_MISC).stacksTo(1).durability(FlaskType.MANA_VIAL.getManaCapacity()).rarity(FlaskType.MANA_VIAL.getRarity()), FlaskType.MANA_VIAL, FlaskType.MANA_VIAL.getRarity()));

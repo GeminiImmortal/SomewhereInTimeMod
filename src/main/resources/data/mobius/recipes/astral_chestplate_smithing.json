@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smithing",
   "base": {
-    "item": "mobius:nickel_chestplate"
+    "item": "mobius:orichalcum_chestplate"
   },
   "addition": {
     "item": "mobius:astral_ingot"

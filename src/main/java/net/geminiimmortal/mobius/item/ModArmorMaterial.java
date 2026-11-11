@@ -22,7 +22,7 @@ public enum ModArmorMaterial implements IArmorMaterial {
 
     ORICHALCUM("orichalcum", 38, new int[] { 4, 7, 9, 4 }, 18,
     SoundEvents.ARMOR_EQUIP_NETHERITE, 3.35f, 0.2f, () -> {
-        return Ingredient.of(ModItems.BLOODROP_GEMSTONE.get());
+        return Ingredient.of(ModItems.ORICHALCUM_INGOT.get());
     });
 
     private static final int[] MAX_DAMAGE_ARRAY = new int[]{13, 15, 16, 11};

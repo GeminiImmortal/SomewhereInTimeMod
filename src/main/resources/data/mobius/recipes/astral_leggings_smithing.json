@@ -1,7 +1,7 @@
 {
   "type": "minecraft:smithing",
   "base": {
-    "item": "mobius:nickel_leggings"
+    "item": "mobius:orichalcum_leggings"
   },
   "addition": {
     "item": "mobius:astral_ingot"
