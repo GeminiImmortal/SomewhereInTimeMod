@@ -18,6 +18,11 @@ public enum ModArmorMaterial implements IArmorMaterial {
     NICKEL("nickel", 37, new int[] { 3, 6, 8, 3 }, 18,
             SoundEvents.ARMOR_EQUIP_NETHERITE, 3.25f, 0.15f, () -> {
         return Ingredient.of(ModItems.NICKEL_INGOT.get());
+    }),
+
+    ORICHALCUM("orichalcum", 38, new int[] { 4, 7, 9, 4 }, 18,
+    SoundEvents.ARMOR_EQUIP_NETHERITE, 3.35f, 0.2f, () -> {
+        return Ingredient.of(ModItems.BLOODROP_GEMSTONE.get());
     });
 
     private static final int[] MAX_DAMAGE_ARRAY = new int[]{13, 15, 16, 11};

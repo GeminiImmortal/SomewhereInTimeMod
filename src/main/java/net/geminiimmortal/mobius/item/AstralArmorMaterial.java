@@ -14,8 +14,8 @@ import java.util.function.Supplier;
 
 public enum AstralArmorMaterial implements IArmorMaterial {
 
-    ASTRAL("astral", 40, new int[] { 4, 7, 9, 4 }, 18,
-            SoundEvents.ARMOR_EQUIP_NETHERITE, 3.5f, 0.2f, () -> {
+    ASTRAL("astral", 40, new int[] { 5, 8, 10, 6 }, 18,
+            SoundEvents.ARMOR_EQUIP_NETHERITE, 3.5f, 0.25f, () -> {
         return Ingredient.of(ModItems.ASTRAL_INGOT.get());
     });
 

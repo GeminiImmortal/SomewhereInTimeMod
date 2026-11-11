@@ -106,6 +106,10 @@
   "item.mobius.strangewood_boat": "Strangewood Boat",
   "item.mobius.hull_block": "Hull Block",
   "item.mobius.aurora_nut_bread": "Aurora-Nut Bread",
+  "item.mobius.orichalcum_helmet": "Orichalcum Helmet",
+  "item.mobius.orichalcum_chestplate": "Orichalcum Chestplate",
+  "item.mobius.orichalcum_leggings": "Orichalcum Leggings",
+  "item.mobius.orichalcum_boots": "Orichalcum Boots",
 
   "entity.mobius.faestag": "Faestag",
   "entity.mobius.club_golem": "Golem of Clubs",
@@ -271,10 +275,12 @@
   "effect.mobius.lord_decree": "Lord's Decree",
   "effect.mobius.exposed": "Exposed",
   "effect.mobius.charged": "Charged",
+  "effect.mobius.astral_grace": "Astral Grace",
 
   "effect.mobius.exposed.description": "Amplifies damage taken by 20% per stack",
   "effect.mobius.lord_decree.description": "Continuously applies slowness and nausea",
   "effect.mobius.charged.description": "Amplifies Grimcrow Captain Davy Van Diesel's attack and movement speed by 1% and 0.5% per stack respectively",
+  "effect.mobius.astral_grace.description": "Wearing a complete set of astral armor makes you 20% faster and adds 10 hearts of health.",
 
   "tooltip.mobius.vorpal_sword": "Steals life on hit",
 

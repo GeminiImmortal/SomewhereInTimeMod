@@ -260,6 +260,22 @@ public class ModItems {
             () -> new ArmorItem(ModArmorMaterial.NICKEL, EquipmentSlotType.HEAD,
                     new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
 
+    public static final RegistryObject<Item> ORICHALCUM_BOOTS = ITEMS.register("orichalcum_boots",
+            () -> new SetBonusArmor(ModArmorMaterial.ORICHALCUM, EquipmentSlotType.FEET,
+                    new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
+
+    public static final RegistryObject<Item> ORICHALCUM_CHESTPLATE = ITEMS.register("orichalcum_chestplate",
+            () -> new SetBonusArmor(ModArmorMaterial.ORICHALCUM, EquipmentSlotType.CHEST,
+                    new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
+
+    public static final RegistryObject<Item> ORICHALCUM_LEGGINGS = ITEMS.register("orichalcum_leggings",
+            () -> new SetBonusArmor(ModArmorMaterial.ORICHALCUM, EquipmentSlotType.LEGS,
+                    new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
+
+    public static final RegistryObject<Item> ORICHALCUM_HELMET = ITEMS.register("orichalcum_helmet",
+            () -> new SetBonusArmor(ModArmorMaterial.ORICHALCUM, EquipmentSlotType.HEAD,
+                    new Item.Properties().tab(ItemGroup.TAB_COMBAT)));
+
     public static final RegistryObject<Item> ASTRAL_BOOTS = ITEMS.register("astral_boots",
             () -> new AstralArmor(AstralArmorMaterial.ASTRAL, EquipmentSlotType.FEET,
                     new Item.Properties().tab(ItemGroup.TAB_COMBAT)));

@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius.effects;
 
 import net.geminiimmortal.mobius.MobiusMod;
+import net.geminiimmortal.mobius.effects.custom.AstralGraceEffect;
 import net.geminiimmortal.mobius.effects.custom.ChargedEffect;
 import net.geminiimmortal.mobius.effects.custom.ExposedEffect;
 import net.geminiimmortal.mobius.effects.custom.LordDecreeEffect;
@@ -25,6 +26,9 @@ public class ModEffects {
 
     public static final RegistryObject<Effect> CHARGED_EFFECT = EFFECTS.register("charged",
             () -> new ChargedEffect(EffectType.BENEFICIAL, 0x28A99E));
+
+    public static final RegistryObject<Effect> ASTRAL_GRACE = EFFECTS.register("astral_grace",
+            () -> new AstralGraceEffect(EffectType.BENEFICIAL, 0xFFFFFF));
 
     public static void register(IEventBus eventBus) {
         EFFECTS.register(eventBus);
