@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius.tileentity;
 
 import net.geminiimmortal.mobius.entity.custom.AbstractImperialEntity;
+import net.geminiimmortal.mobius.entity.custom.SpadeGolemEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
@@ -31,7 +32,7 @@ public class CapturePointTileEntity extends TileEntity implements IAnimatable, I
             double radius = 40.0;
             double leashRadius = 20.0;
             List<AbstractImperialEntity> entities = serverWorld.getEntitiesOfClass(
-                    AbstractImperialEntity.class,
+                    (AbstractImperialEntity.class),
                     new AxisAlignedBB(
                             origin.offset(-radius, -radius, -radius),
                             origin.offset(radius, radius, radius)

@@ -1,10 +1,9 @@
 package net.geminiimmortal.mobius.entity.goals;
 
 import net.geminiimmortal.mobius.MobiusMod;
-import net.geminiimmortal.mobius.entity.custom.ClubGolemEntity;
-import net.geminiimmortal.mobius.entity.custom.DiamondGolemEntity;
-import net.geminiimmortal.mobius.entity.custom.HeartGolemEntity;
-import net.geminiimmortal.mobius.entity.custom.SpadeGolemEntity;
+import net.geminiimmortal.mobius.entity.custom.*;
+import net.geminiimmortal.mobius.faction.FactionType;
+import net.geminiimmortal.mobius.faction.IFactionCarrier;
 import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.network.ParticlePacket;
 import net.geminiimmortal.mobius.sound.ModSounds;
@@ -187,7 +186,7 @@ public class HealInjuredAllyGoal extends Goal {
             }
 
             private boolean isAlly (LivingEntity entity){
-                return entity instanceof HeartGolemEntity || entity instanceof ClubGolemEntity || entity instanceof DiamondGolemEntity|| entity instanceof SpadeGolemEntity;
+                return entity instanceof AbstractImperialEntity;
             }
 
             public void spawnHealingParticles (World world, Entity healer, Entity target){
