@@ -60,6 +60,7 @@ public class ModStructureGeneration {
             List<Supplier<StructureFeature<?,?>>> structures = event.getGeneration().getStructures();
             structures.add(() -> ModStructureSetup.IMPERIAL_WATCHTOWER.get().configured(NoFeatureConfig.INSTANCE));
             structures.add(() -> ModStructureSetup.LUMBER_MILL_CAMP.get().configured(NoFeatureConfig.INSTANCE));
+            structures.add(() -> ModStructureSetup.IMPERIAL_FORT.get().configured(NoFeatureConfig.INSTANCE));
         }
 
         if(Objects.equals(event.getName(), tealGladesValid)) {

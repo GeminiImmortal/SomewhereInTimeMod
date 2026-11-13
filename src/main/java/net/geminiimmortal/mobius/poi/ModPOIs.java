@@ -53,6 +53,11 @@ public class ModPOIs {
                     PointOfInterestType.getBlockStates(ModBlocks.REBEL_CLAIM.get()).stream().filter((state ->
                             state.getValue(TYPE) == CampClaimType.QUARRY)).collect(Collectors.toSet()), 1, 1));
 
+    public static final RegistryObject<PointOfInterestType> REBEL_CLAIM_FORT =
+            POI.register("rebel_claim_fort_poi", () -> new PointOfInterestType("rebel_claim_fort_poi",
+                    PointOfInterestType.getBlockStates(ModBlocks.REBEL_CLAIM.get()).stream().filter((state ->
+                            state.getValue(TYPE) == CampClaimType.WARDING_TOWER)).collect(Collectors.toSet()), 1, 1));
+
     public static void register(IEventBus eventBus) {
         POI.register(eventBus);
     }

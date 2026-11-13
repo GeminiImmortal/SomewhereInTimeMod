@@ -1,0 +1,15 @@
+{
+  "name": "mobius:imperial_fort/imperial_fort_start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "mobius:imperial_fort",
+        "processors": "mobius:anchor_snap_processor",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

@@ -47,6 +47,7 @@ public class ModStructureSetup {
     public static final RegistryObject<Structure<NoFeatureConfig>> FARM_CAMP = STRUCTURES.register("farm_camp", () -> new FarmCamp());
     public static final RegistryObject<Structure<NoFeatureConfig>> QUARRY_CAMP = STRUCTURES.register("quarry_camp", () -> new QuarryCamp());
     public static final RegistryObject<Structure<NoFeatureConfig>> GRIMCROW_FLAGSHIP = STRUCTURES.register("grimcrow_flagship", () -> new GrimcrowFlagship());
+    public static final RegistryObject<Structure<NoFeatureConfig>> IMPERIAL_FORT = STRUCTURES.register("imperial_fort", () -> new ImperialFort());
 
 
     public static final class ConfiguredStructures {
@@ -65,6 +66,7 @@ public class ModStructureSetup {
         public static final StructureFeature<?, ?> FARM_CAMP = ModStructureSetup.FARM_CAMP.get().configured(IFeatureConfig.NONE);
         public static final StructureFeature<?, ?> QUARRY_CAMP = ModStructureSetup.QUARRY_CAMP.get().configured(IFeatureConfig.NONE);
         public static final StructureFeature<?, ?> GRIMCROW_FLAGSHIP = ModStructureSetup.GRIMCROW_FLAGSHIP.get().configured(IFeatureConfig.NONE);
+        public static final StructureFeature<?, ?> IMPERIAL_FORT = ModStructureSetup.IMPERIAL_FORT.get().configured(IFeatureConfig.NONE);
     }
 
     // Register the structures to the world
@@ -82,6 +84,7 @@ public class ModStructureSetup {
         setupStructure(FARM_CAMP.get(), new StructureSeparationSettings(28, 16, 947294573), true);
         setupStructure(QUARRY_CAMP.get(), new StructureSeparationSettings(28, 16, 57385738), false);
         setupStructure(GRIMCROW_FLAGSHIP.get(), new StructureSeparationSettings(80, 60, 903456212), false);
+        setupStructure(IMPERIAL_FORT.get(), new StructureSeparationSettings(40, 24, 654487894), true);
     }
 
     // Register configured structures
@@ -100,6 +103,7 @@ public class ModStructureSetup {
         Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(MobiusMod.MOD_ID, "farm_camp"), FARM_CAMP.get().configured(IFeatureConfig.NONE));
         Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(MobiusMod.MOD_ID, "quarry_camp"), QUARRY_CAMP.get().configured(IFeatureConfig.NONE));
         Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(MobiusMod.MOD_ID, "grimcrow_flagship"), GRIMCROW_FLAGSHIP.get().configured(IFeatureConfig.NONE));
+        Registry.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, new ResourceLocation(MobiusMod.MOD_ID, "imperial_fort"), IMPERIAL_FORT.get().configured(IFeatureConfig.NONE));
     }
 
     // Adjust dimensional spacing logic for structures
@@ -128,6 +132,7 @@ public class ModStructureSetup {
             tempMap.put(ModStructureSetup.FARM_CAMP.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructureSetup.FARM_CAMP.get()));
             tempMap.put(ModStructureSetup.QUARRY_CAMP.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructureSetup.QUARRY_CAMP.get()));
             tempMap.put(ModStructureSetup.GRIMCROW_FLAGSHIP.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructureSetup.GRIMCROW_FLAGSHIP.get()));
+            tempMap.put(ModStructureSetup.IMPERIAL_FORT.get(), DimensionStructuresSettings.DEFAULTS.get(ModStructureSetup.IMPERIAL_FORT.get()));
             serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
         }
     }

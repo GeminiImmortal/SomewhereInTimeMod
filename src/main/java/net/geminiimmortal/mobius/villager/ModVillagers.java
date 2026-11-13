@@ -43,6 +43,10 @@ public class ModVillagers {
             VILLAGER_PROFESSIONS.register("rebel_quartermaster_quarry", () -> new VillagerProfession("rebel_quartermaster_quarry",
                     ModPOIs.REBEL_CLAIM_QUARRY.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.STONE_BREAK));
 
+    public static final RegistryObject<VillagerProfession> QUARTERMASTER_FORT =
+            VILLAGER_PROFESSIONS.register("rebel_quartermaster_fort", () -> new VillagerProfession("rebel_quartermaster_fort",
+                    ModPOIs.REBEL_CLAIM_FORT.get(), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.SMITHING_TABLE_USE));
+
     public static void register(IEventBus eventBus){
         VILLAGER_PROFESSIONS.register(eventBus);
     }
