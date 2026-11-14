@@ -239,7 +239,7 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.SMUGGLER_STRONGBOX.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.AURORA_BERRY.get(), RenderType.cutout());
             RenderTypeLookup.setRenderLayer(ModBlocks.MOBIUS_PORTAL.get(), RenderType.translucent());
-
+            RenderTypeLookup.setRenderLayer(ModBlocks.MANA_REFINERY.get(), RenderType.translucent());
             RenderTypeLookup.setRenderLayer(ModBlocks.GIANT_GLOOMCAP_CAP.get(), RenderType.translucent());
 
             RenderTypeLookup.setRenderLayer(ModFluids.BOG_WATER_BLOCK.get(), RenderType.translucent());
@@ -277,6 +277,8 @@ public class MobiusMod
                     EssenceChannelerScreen::new);
             ScreenManager.register(ModContainers.LATENT_MANA_COLLECTOR_CONTAINER.get(),
                     LatentManaCollectorScreen::new);
+            ScreenManager.register(ModContainers.MANA_REFINERY_CONTAINER.get(),
+                    ManaRefineryScreen::new);
 
         });
 

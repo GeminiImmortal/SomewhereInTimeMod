@@ -69,6 +69,11 @@ public class ModTileEntities {
             TILE_ENTITIES.register("mystic_tear", () -> TileEntityType.Builder.of(MysticTearTileEntity::new, ModBlocks.MYSTIC_TEAR.get())
                     .build(null));
 
+    public static final RegistryObject<TileEntityType<ManaRefineryTileEntity>> MANA_REFINERY_TILE_ENTITY =
+            TILE_ENTITIES.register("mana_refinery_tile_entity", () -> TileEntityType.Builder.of(ManaRefineryTileEntity::new,
+                            ModBlocks.MANA_REFINERY.get())
+                    .build(null));
+
 
     public static void register(IEventBus eventBus) {
         TILE_ENTITIES.register(eventBus);

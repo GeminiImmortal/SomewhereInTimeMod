@@ -53,6 +53,14 @@ public class ModContainers {
                     IForgeContainerType.create((windowId, inv, data) ->
                              new JournalContainer(windowId, inv)));
 
+    public static final RegistryObject<ContainerType<ManaRefineryContainer>> MANA_REFINERY_CONTAINER =
+            CONTAINERS.register("mana_refinery_container",
+                    () -> IForgeContainerType.create(((windowId, inv, data) -> {
+                        BlockPos pos = data.readBlockPos();
+                        World world = inv.player.level;
+                        return new ManaRefineryContainer(windowId, world, pos, inv, inv.player);
+                    })));
+
 
     public static void register(IEventBus eventBus) {
         CONTAINERS.register(eventBus);

@@ -22,6 +22,9 @@ public class ModRecipeTypes {
     public static final RegistryObject<EssenceChannelerRecipe.Serializer> ESSENCE_CHANNELER_SERIALIZER
             = RECIPE_SERIALIZER.register("essence_channeler", EssenceChannelerRecipe.Serializer::new);
 
+    public static final RegistryObject<ManaRefineryRecipe.Serializer> MANA_REFINERY_SERIALIZER
+            = RECIPE_SERIALIZER.register("mana_refinery", ManaRefineryRecipe.Serializer::new);
+
     public static IRecipeType<SoulForgeRecipe> SOUL_FORGE_RECIPE
             = new SoulForgeRecipe.SoulForgeRecipeType();
 
@@ -31,11 +34,15 @@ public class ModRecipeTypes {
     public static IRecipeType<EssenceChannelerRecipe> ESSENCE_CHANNELER_RECIPE
             = new EssenceChannelerRecipe.EssenceChannelerRecipeType();
 
+    public static IRecipeType<ManaRefineryRecipe> MANA_REFINERY_RECIPE
+            = new ManaRefineryRecipe.ManaRefineryRecipeType();
+
     public static void register(IEventBus eventBus) {
         RECIPE_SERIALIZER.register(eventBus);
 
         Registry.register(Registry.RECIPE_TYPE, SoulForgeRecipe.TYPE_ID, SOUL_FORGE_RECIPE);
         Registry.register(Registry.RECIPE_TYPE, AstralConduitRecipe.TYPE_ID, ASTRAL_CONDUIT_RECIPE);
         Registry.register(Registry.RECIPE_TYPE, EssenceChannelerRecipe.TYPE_ID, ESSENCE_CHANNELER_RECIPE);
+        Registry.register(Registry.RECIPE_TYPE, ManaRefineryRecipe.TYPE_ID, MANA_REFINERY_RECIPE);
     }
 }

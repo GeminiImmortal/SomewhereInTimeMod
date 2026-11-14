@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "OXO",
+    "UUU"
+  ],
+  "key": {
+    "O": {
+      "item": "mobius:mana_vial"
+    },
+    "X": {
+      "item": "mobius:molvansteel_ingot"
+    },
+    "#": {
+      "item": "minecraft:glass"
+    },
+    "U": {
+      "item": "mobius:living_manawood_log"
+    }
+  },
+  "result": {
+    "item": "mobius:mana_refinery"
+  }
+}

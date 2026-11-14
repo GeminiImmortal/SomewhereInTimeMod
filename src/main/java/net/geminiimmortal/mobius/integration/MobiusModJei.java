@@ -5,10 +5,7 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.geminiimmortal.mobius.MobiusMod;
-import net.geminiimmortal.mobius.recipe.AstralConduitRecipe;
-import net.geminiimmortal.mobius.recipe.EssenceChannelerRecipe;
-import net.geminiimmortal.mobius.recipe.ModRecipeTypes;
-import net.geminiimmortal.mobius.recipe.SoulForgeRecipe;
+import net.geminiimmortal.mobius.recipe.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.util.ResourceLocation;
@@ -31,6 +28,8 @@ public class MobiusModJei implements IModPlugin {
                 new EssenceChannelerRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(
                 new SoulForgeRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(
+                new ManaRefineryRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -45,5 +44,8 @@ public class MobiusModJei implements IModPlugin {
         registration.addRecipes(rm.getAllRecipesFor(ModRecipeTypes.SOUL_FORGE_RECIPE).stream()
                         .filter(r -> r instanceof SoulForgeRecipe).collect(Collectors.toList()),
                 SoulForgeRecipeCategory.UID);
+        registration.addRecipes(rm.getAllRecipesFor(ModRecipeTypes.MANA_REFINERY_RECIPE).stream()
+                        .filter(r -> r instanceof ManaRefineryRecipe).collect(Collectors.toList()),
+                ManaRefineryRecipeCategory.UID);
     }
 }

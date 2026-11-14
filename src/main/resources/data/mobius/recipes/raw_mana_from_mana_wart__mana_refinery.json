@@ -1,0 +1,15 @@
+{
+  "type": "mobius:mana_refinery",
+  "ingredients": [
+    {
+      "item": "mobius:raw_mana"
+    },
+    {
+      "item": "mobius:mana_wart"
+    }
+  ],
+  "output": {
+    "item": "mobius:raw_mana",
+    "count": 4
+  }
+}

@@ -385,6 +385,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> MYSTIC_TEAR = registerBlock("mystic_tear",
             () -> new MysticTearBlock(AbstractBlock.Properties.of(Material.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(3).strength(30F, 100F).lightLevel(state -> 15).noOcclusion()));
 
+    public static final RegistryObject<Block> MANA_REFINERY = registerBlock("mana_refinery",
+            () -> new ManaRefinery(AbstractBlock.Properties.of(Material.GLASS).harvestTool(ToolType.PICKAXE).harvestLevel(0).strength(15f, 20f).sound(SoundType.GLASS).lightLevel(state -> 12).noOcclusion()));
+
     private static <T extends Block>RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         return toReturn;

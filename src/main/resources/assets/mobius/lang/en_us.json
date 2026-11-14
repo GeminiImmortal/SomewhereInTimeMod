@@ -165,6 +165,7 @@
   "block.mobius.stripped_marrowood_log": "Stripped Marrowood Log",
   "block.mobius.wasp_paper_block": "Wasp Paper Block",
   "block.mobius.hunting_table": "Hunting Table",
+  "block.mobius.mana_refinery": "Mana Refinery",
   "block.mobius.marrowood_sapling": "Marrowood Sapling",
   "block.mobius.marrowood_button": "Marrowood Button",
   "block.mobius.marrowood_pressure_plate": "Marrowood Pressure Plate",
@@ -269,6 +270,7 @@
 
   "screen.mobius.soul_forge": "Soul Forge",
   "screen.mobius.astral_conduit": "Astral Conduit",
+  "screen.mobius.mana_refinery": "Mana Refinery",
 
   "death.attack.knives_out": "%1$s was cut to ribbons",
   "death.attack.clone_shatter": "%1$s had their mind scrambled",
@@ -308,6 +310,7 @@
   "item.mobius.staff.not_enough_mana": "You don't have enough mana!",
   "item.mobius.staff.cooldown": "This staff is recharging!",
   "container.mobius.latent_mana_collector": "Latent Mana Collector",
+  "container.mobius.mana_refinery": "Mana Refinery",
   "screen.mobius.latent_mana_collector": "Latent Mana Collector",
   "item.mobius.ring_of_repulsion.used": "Cooldown: 4s",
   "item.mobius.ring_of_repulsion.cooldown": "This artifact is recharging!",

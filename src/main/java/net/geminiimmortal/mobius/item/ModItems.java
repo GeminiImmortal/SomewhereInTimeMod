@@ -199,6 +199,7 @@ public class ModItems {
     //Workstations Misc.
     public static final RegistryObject<Item> ASTRAL_CONDUIT = ITEMS.register("astral_conduit", () -> new BlockItem(ModBlocks.ASTRAL_CONDUIT.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> LATENT_MANA_COLLECTOR = ITEMS.register("latent_mana_collector", () -> new BlockItem(ModBlocks.LATENT_MANA_COLLECTOR.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
+    public static final RegistryObject<Item> MANA_REFINERY = ITEMS.register("mana_refinery", () -> new BlockItem(ModBlocks.MANA_REFINERY.get(), new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
 
     //Uncategorized Building Blocks
     public static final RegistryObject<Item> WASP_PAPER_BLOCK = ITEMS.register("wasp_paper_block", () -> new BlockItem(ModBlocks.WASP_PAPER_BLOCK.get(), new Item.Properties().tab(ItemGroup.TAB_BUILDING_BLOCKS)));
