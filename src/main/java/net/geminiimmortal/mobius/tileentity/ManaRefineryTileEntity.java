@@ -11,6 +11,7 @@ import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -30,6 +31,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
@@ -43,6 +45,13 @@ public class ManaRefineryTileEntity extends TileEntity implements ITickableTileE
 
     private final ItemStackHandler itemHandler = createHandler();
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
+    private final LazyOptional<IItemHandlerModifiable> topHandler = LazyOptional.of(() -> new ManaRefinerySidedItemHandler(itemHandler, Direction.UP));
+    private final LazyOptional<IItemHandlerModifiable> bottomHandler = LazyOptional.of(() -> new ManaRefinerySidedItemHandler(itemHandler, Direction.DOWN));
+    private final LazyOptional<IItemHandlerModifiable> eastHandler = LazyOptional.of(() -> new ManaRefinerySidedItemHandler(itemHandler, Direction.EAST));
+    private final LazyOptional<IItemHandlerModifiable> westHandler = LazyOptional.of(() -> new ManaRefinerySidedItemHandler(itemHandler, Direction.WEST));
+    private final LazyOptional<IItemHandlerModifiable> northHandler = LazyOptional.of(() -> new ManaRefinerySidedItemHandler(itemHandler, Direction.NORTH));
+    private final LazyOptional<IItemHandlerModifiable> southHandler = LazyOptional.of(() -> new ManaRefinerySidedItemHandler(itemHandler, Direction.SOUTH));
+
 
     public ManaRefineryTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
@@ -125,11 +134,27 @@ public class ManaRefineryTileEntity extends TileEntity implements ITickableTileE
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        if (side == null) {
             return handler.cast();
         }
 
-        return super.getCapability(cap, side);
+        switch (side) {
+            case EAST:
+                return eastHandler.cast();
+            case WEST:
+                return westHandler.cast();
+            case NORTH:
+                return northHandler.cast();
+            case SOUTH:
+                return southHandler.cast();
+            case UP:
+                return topHandler.cast();
+            case DOWN:
+                return bottomHandler.cast();
+            default:
+                return super.getCapability(cap, side);
+        }
+
     }
 
 
@@ -196,5 +221,17 @@ public class ManaRefineryTileEntity extends TileEntity implements ITickableTileE
 
 
         craft();
+    }
+
+    @Override
+    public void invalidateCaps() {
+        super.invalidateCaps();
+        handler.invalidate();
+        topHandler.invalidate();
+        bottomHandler.invalidate();
+        eastHandler.invalidate();
+        westHandler.invalidate();
+        northHandler.invalidate();
+        southHandler.invalidate();
     }
 }
