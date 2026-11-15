@@ -29,10 +29,10 @@ public class ManaRefinerySidedItemHandler implements IItemHandlerModifiable {
     @Override
     public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
         // Allow top and side hoppers to insert into INPUT_SLOT only
-        if (side != Direction.DOWN && slot == 1) {
+        if (side != Direction.DOWN && side != Direction.UP && slot == 0) {
             return inner.insertItem(slot, stack, simulate);
         }
-        if (side != Direction.DOWN && side != Direction.UP && slot == 0) {
+        if (side != Direction.DOWN && side != Direction.EAST && side != Direction.WEST && side != Direction.NORTH && side != Direction.SOUTH && slot == 1) {
             return inner.insertItem(slot, stack, simulate);
         }
         return stack;
