@@ -3,6 +3,7 @@ package net.geminiimmortal.mobius.integration;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.mojang.blaze3d.matrix.MatrixStack;
+import net.geminiimmortal.mobius.hook.CompatHooks;
 import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.item.custom.Dieselytra;
 import net.geminiimmortal.mobius.item.render.DieselytraCurioRenderer;
@@ -24,6 +25,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import top.theillusivec4.curios.api.*;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
@@ -35,6 +37,13 @@ public class CuriosCompat {
 
     public static void init() {
         MinecraftForge.EVENT_BUS.addGenericListener(ItemStack.class, CuriosCompat::attachCapabilities);
+
+        CompatHooks.getCurioElytraStack = entity -> CuriosApi.getCuriosHelper()
+                .findEquippedCurio(stack ->
+                        stack.getItem() == ModItems.DIESELYTRA.get() && ElytraItem.isFlyEnabled(stack), entity)
+                .map(ImmutableTriple::getRight)
+                .orElse(ItemStack.EMPTY);
+
     }
 
     public static void registerSlots() {

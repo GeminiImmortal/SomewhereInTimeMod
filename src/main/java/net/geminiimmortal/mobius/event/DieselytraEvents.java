@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.event;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.capability.boost.BoostDataProvider;
+import net.geminiimmortal.mobius.hook.CompatHooks;
 import net.geminiimmortal.mobius.integration.CuriosCompat;
 import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.item.custom.Dieselytra;
@@ -21,6 +22,7 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -134,10 +136,6 @@ public class DieselytraEvents {
                 // allow player to glide like normal elytra
                 if (player.isFallFlying()) {
                     spawnEngineParticles(player);
-                    // same logic vanilla uses for durability tick damage
-                    if (!player.level.isClientSide && (player.tickCount % 20 == 0)) {
-                        chest.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(EquipmentSlotType.CHEST));
-                    }
                     if (!player.level.isClientSide && (player.tickCount % 200 == 0)) {
                         player.level.playSound(null, player.blockPosition(), ModSounds.DIESELYTRA_ENGINE.get(), SoundCategory.PLAYERS, 1.0f, 1.0f);
                     }

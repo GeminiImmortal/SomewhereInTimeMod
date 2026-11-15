@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius.item.custom;
 
 
+import net.geminiimmortal.mobius.hook.CompatHooks;
 import net.geminiimmortal.mobius.item.ModItems;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -37,8 +38,16 @@ public class Dieselytra extends ElytraItem implements IForgeItem {
     }
 
     public static boolean handleFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {
+        ItemStack activeElytra = CompatHooks.getActiveElytraStack(entity);
         if (!entity.level.isClientSide() && (flightTicks + 1) % 20 == 0) {
-            stack.hurtAndBreak(1, entity, e -> e.broadcastBreakEvent(net.minecraft.inventory.EquipmentSlotType.CHEST));
+            if (CompatHooks.hasCurioElytra(entity)) {
+                activeElytra.hurtAndBreak(1, entity, e -> {
+                    // Plays break animation on chest if worn there; Curios handles its own break sync
+                    if (entity.getItemBySlot(EquipmentSlotType.CHEST) == activeElytra) {
+                        e.getItemBySlot(EquipmentSlotType.CHEST).hurtAndBreak(1, entity, livingEntity -> e.broadcastBreakEvent(EquipmentSlotType.CHEST));
+                    }
+                });
+            }
         }
         return true;
     }
