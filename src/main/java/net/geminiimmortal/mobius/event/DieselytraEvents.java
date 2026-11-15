@@ -2,6 +2,8 @@ package net.geminiimmortal.mobius.event;
 
 import net.geminiimmortal.mobius.MobiusMod;
 import net.geminiimmortal.mobius.capability.boost.BoostDataProvider;
+import net.geminiimmortal.mobius.integration.CuriosCompat;
+import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.item.custom.Dieselytra;
 import net.geminiimmortal.mobius.item.render.DieselytraLayer;
 import net.geminiimmortal.mobius.sound.ModSounds;
@@ -11,7 +13,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.SoundCategory;
@@ -23,13 +24,14 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
 @Mod.EventBusSubscriber(modid = MobiusMod.MOD_ID)
 public class DieselytraEvents {
     private static final int BOOST_COOLDOWN = 40; // 2 seconds
-
+    static boolean CURIOS_LOADED = ModList.get().isLoaded("curios");
     @SubscribeEvent
     public static void onLivingJump(LivingEvent.LivingJumpEvent event) {
         if (!(event.getEntityLiving() instanceof PlayerEntity)) return;
@@ -74,11 +76,59 @@ public class DieselytraEvents {
     }
 
     @SubscribeEvent
+    public static void onLivingJumpCurio(LivingEvent.LivingJumpEvent event) {
+        if (!(event.getEntityLiving() instanceof PlayerEntity)) return;
+        PlayerEntity player = (PlayerEntity) event.getEntityLiving();
+
+        if (CURIOS_LOADED) {
+            boolean equipped = CuriosCompat.hasCurioEquipped(player, ModItems.DIESELYTRA.get());
+            if (!(equipped)) return;
+        }
+
+        if (player.isShiftKeyDown() && player.isOnGround()) {
+            player.getCapability(BoostDataProvider.BOOST_CAP).ifPresent(boostData -> {
+                long gameTime = player.level.getGameTime();
+
+                if (gameTime - boostData.getLastBoost() >= BOOST_COOLDOWN) {
+                    // Apply boost
+                    Vector3d motion = player.getDeltaMovement();
+                    player.setDeltaMovement(motion.x, 1.1D, motion.z);
+                    player.hasImpulse = true;
+                    player.level.playSound(null, player.blockPosition(),
+                            ModSounds.DIESELYTRA_BOOST.get(),
+                            SoundCategory.PLAYERS, 1.0F, 1.0F);
+
+                    // Prevent fall damage from this jump
+                    boostData.setIgnoreNextFall(true);
+
+                    // Update cooldown
+                    boostData.setLastBoost(gameTime);
+
+                    // Feedback
+                    player.level.playSound(null, player.blockPosition(),
+                            SoundEvents.FIREWORK_ROCKET_LAUNCH,
+                            SoundCategory.PLAYERS, 1.0F, 1.0F);
+
+                    if (player.level instanceof ServerWorld) {
+                        ((ServerWorld) player.level).sendParticles(ParticleTypes.CLOUD,
+                                player.getX(), player.getY(), player.getZ(),
+                                10, 0.3, 0.1, 0.3, 0.02);
+                    }
+                }
+
+            });
+        }
+    }
+
+    @SubscribeEvent
     public static void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
         LivingEntity entity = event.getEntityLiving();
         ItemStack chest = entity.getItemBySlot(EquipmentSlotType.CHEST);
-
-        if (chest.getItem() instanceof Dieselytra && ElytraItem.isFlyEnabled(chest)) {
+        boolean curioEquipped = false;
+        if (CURIOS_LOADED) {
+            curioEquipped = CuriosCompat.hasCurioEquipped(entity, ModItems.DIESELYTRA.get());
+        }
+        if (((chest.getItem() instanceof Dieselytra) || (curioEquipped))) {
             if (entity instanceof PlayerEntity) {
                 PlayerEntity player = (PlayerEntity) entity;
                 // allow player to glide like normal elytra

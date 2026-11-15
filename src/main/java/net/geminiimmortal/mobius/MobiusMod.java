@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import net.geminiimmortal.mobius.effects.ModEffects;
 import net.geminiimmortal.mobius.event.DieselytraClientSetup;
 import net.geminiimmortal.mobius.fluid.ModFluids;
+import net.geminiimmortal.mobius.integration.CuriosCompat;
 import net.geminiimmortal.mobius.integration.MobiusModPatchouli;
 import net.geminiimmortal.mobius.item.custom.ModSpawnEgg;
 import net.geminiimmortal.mobius.network.ClientEffectHandler;
@@ -53,7 +54,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -64,24 +65,27 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Mod(MobiusMod.MOD_ID)
 public class MobiusMod
 {
     public static final String MOD_ID = "mobius";
-    private static final Logger LOGGER = LogManager.getLogger();
 
+    private static final Logger LOGGER = LogManager.getLogger();
     public MobiusMod() {
 
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        eventBus.addListener(this::enqueueIMC);
+        boolean CURIOS_LOADED = ModList.get().isLoaded("curios");
 
+        if (CURIOS_LOADED) {
+            CuriosCompat.init();
+        }
         bus.addListener(this::setup);
 
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
+
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -333,8 +337,11 @@ public class MobiusMod
 
     private void enqueueIMC(final InterModEnqueueEvent event)
     {
-        // some example code to dispatch IMC to another mod
-        InterModComms.sendTo("examplemod", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
+        boolean CURIOS_LOADED = ModList.get().isLoaded("curios");
+
+        if (CURIOS_LOADED) {
+            CuriosCompat.registerSlots();
+        }
     }
 
     private void processIMC(final InterModProcessEvent event)
