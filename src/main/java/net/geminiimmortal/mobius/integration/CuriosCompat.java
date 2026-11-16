@@ -14,6 +14,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -87,8 +88,16 @@ public class CuriosCompat {
 
                 @Override
                 public void curioTick(String identifier, int index, LivingEntity livingEntity) {
-                    if (Dieselytra.isFlyEnabled(stack) && livingEntity.isFallFlying() && !livingEntity.level.isClientSide()) {
+                    if (Dieselytra.isFlyEnabled(stack) && livingEntity.isFallFlying() && livingEntity.level.isClientSide()) {
                         Dieselytra.handleFlightTick(stack, livingEntity, livingEntity.getFallFlyingTicks());
+
+                    }
+                    if (!livingEntity.level.isClientSide && livingEntity.isFallFlying()) {
+                        if ((livingEntity.tickCount + 1) % 20 == 0) {
+                            stack.hurtAndBreak(1, livingEntity, entity ->
+                                    CuriosApi.getCuriosHelper().onBrokenCurio(identifier, index, entity)
+                            );
+                        }
                     }
                 }
 

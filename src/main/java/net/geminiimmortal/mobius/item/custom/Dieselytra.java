@@ -38,16 +38,12 @@ public class Dieselytra extends ElytraItem implements IForgeItem {
     }
 
     public static boolean handleFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {
-        ItemStack activeElytra = CompatHooks.getActiveElytraStack(entity);
-        if (!entity.level.isClientSide() && (flightTicks + 1) % 20 == 0) {
-            if (CompatHooks.hasCurioElytra(entity)) {
-                activeElytra.hurtAndBreak(1, entity, e -> {
-                    // Plays break animation on chest if worn there; Curios handles its own break sync
-                    if (entity.getItemBySlot(EquipmentSlotType.CHEST) == activeElytra) {
-                        e.getItemBySlot(EquipmentSlotType.CHEST).hurtAndBreak(1, entity, livingEntity -> e.broadcastBreakEvent(EquipmentSlotType.CHEST));
-                    }
-                });
-            }
+        if (!entity.level.isClientSide() && entity.isFallFlying() && (flightTicks + 1) % 20 == 0) {
+            stack.hurtAndBreak(1, entity, e -> {
+                if (e.getItemBySlot(EquipmentSlotType.CHEST) == stack) {
+                    e.broadcastBreakEvent(EquipmentSlotType.CHEST);
+                }
+            });
         }
         return true;
     }

@@ -16,16 +16,16 @@ public class CompatHooks {
     }
 
     public static ItemStack getActiveElytraStack(LivingEntity entity) {
-        ItemStack curioStack = getCurioElytraStack.apply(entity);
-        if (!curioStack.isEmpty()) {
-            return curioStack;
-        }
+            ItemStack curioStack = getCurioElytraStack.apply(entity);
+            if (!curioStack.isEmpty()) {
+                return curioStack;
+            }
 
-        ItemStack chestStack = entity.getItemBySlot(EquipmentSlotType.CHEST);
-        if (chestStack.getItem() == ModItems.DIESELYTRA.get() && ElytraItem.isFlyEnabled(chestStack)) {
-            return chestStack;
-        }
+            ItemStack chestStack = entity.getItemBySlot(EquipmentSlotType.CHEST);
+            if (chestStack.getItem() == ModItems.DIESELYTRA.get() && ElytraItem.isFlyEnabled(chestStack)) {
+                return chestStack;
+            }
 
-        return ItemStack.EMPTY;
+            return ItemStack.EMPTY;
     }
 }
