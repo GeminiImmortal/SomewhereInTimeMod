@@ -48,7 +48,7 @@ public class CuriosCompat {
 
     public static void registerSlots() {
         InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
-                () -> SlotTypePreset.BODY.getMessageBuilder().size(1).build());
+                () -> SlotTypePreset.BACK.getMessageBuilder().size(1).build());
     }
 
     private static void attachCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
