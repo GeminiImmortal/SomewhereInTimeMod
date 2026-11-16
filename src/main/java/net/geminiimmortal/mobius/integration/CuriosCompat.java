@@ -6,12 +6,14 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import net.geminiimmortal.mobius.hook.CompatHooks;
 import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.item.custom.Dieselytra;
+import net.geminiimmortal.mobius.item.custom.ManaVial;
 import net.geminiimmortal.mobius.item.render.DieselytraCurioRenderer;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,7 +33,10 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.UUID;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class CuriosCompat {
 
@@ -47,8 +52,10 @@ public class CuriosCompat {
     }
 
     public static void registerSlots() {
-        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE,
+        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE,
                 () -> SlotTypePreset.BACK.getMessageBuilder().size(1).build());
+        InterModComms.sendTo(CuriosApi.MODID, SlotTypeMessage.REGISTER_TYPE,
+                () -> SlotTypePreset.BELT.getMessageBuilder().size(1).build());
     }
 
     private static void attachCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
@@ -123,6 +130,10 @@ public class CuriosCompat {
     // Safe helper to call from your shared mod code
     public static boolean hasCurioEquipped(LivingEntity entity, Item item) {
         return CuriosApi.getCuriosHelper().findEquippedCurio(item, entity).isPresent();
+    }
+    public static void getCurioVials(PlayerEntity player, List<ItemStack> manaSources) {
+        CuriosApi.getCuriosHelper().findCurios(player, stack -> stack.getItem() instanceof ManaVial)
+                .forEach(slotResult -> manaSources.add(slotResult.getStack()));
     }
 }
 

@@ -4,6 +4,7 @@ import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.GovernorKnivesOutEntity;
 import net.geminiimmortal.mobius.entity.custom.SpellEntity;
 import net.geminiimmortal.mobius.item.StaffType;
+import net.geminiimmortal.mobius.item.util.ManaHelper;
 import net.geminiimmortal.mobius.network.ModNetwork;
 import net.geminiimmortal.mobius.network.ParticlePacket;
 import net.geminiimmortal.mobius.sound.ModSounds;
@@ -35,6 +36,7 @@ import java.util.UUID;
 public class GravitasStaff extends ModularStaff {
     private final Map<UUID, Vector3d> frozenProjectiles = new HashMap<>();
     private final StaffType staffType;
+
 
     public GravitasStaff(Properties properties, StaffType staffType) {
         super(properties, staffType);
@@ -91,30 +93,22 @@ public class GravitasStaff extends ModularStaff {
 
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-        ItemStack stack = player.getItemInHand(hand);
-        ItemStack manaVial = findManaVial(player);
-        if (manaVial == null || getStoredMana(manaVial) < staffType.getManaCost()) {
-            player.displayClientMessage(new TranslationTextComponent("item.mobius.staff.not_enough_mana"), true);
-            return ActionResult.fail(stack);
-        }
-
-        int currentMana = getStoredMana(manaVial);
-        if (currentMana < this.staffType.getManaCost()) {
-            player.displayClientMessage(new TranslationTextComponent("item.mobius.staff_of_protection.not_enough_mana"), true);
-            return ActionResult.fail(stack);
-        }
-
-        if (world.isClientSide() && !manaVial.isEmpty()) {
-            assert Minecraft.getInstance().player != null;
-            Minecraft.getInstance().player.playSound(this.staffType.getSound().resolve().get(), 1.0F, 1.0F);
-        }
-
         player.startUsingItem(hand);
-        setStoredMana(manaVial, currentMana - this.staffType.getManaCost());
+        if (player.level.isClientSide()) {
+            boolean isSuccess = ManaHelper.consumeMana(player, this.staffType.getManaCost(), true);
+            if (!isSuccess) {
+                return ActionResult.fail(player.getItemInHand(hand));
+            }
+        }
+        if (!player.level.isClientSide()) {
+            boolean isSuccess = ManaHelper.consumeMana(player, this.staffType.getManaCost(), false);
+            if (!isSuccess) {
+                return ActionResult.fail(player.getItemInHand(hand));
+            }
+        }
         player.level.playSound(null, player.blockPosition(), ModSounds.TIER_TWO_PROT_CAST.get(), SoundCategory.AMBIENT, 1.0F, 1.0F);
 
         if (player.isAlive()) {
-            // Summon the spell entity
             SpellEntity spell = new SpellEntity(ModEntityTypes.SPELL.get(), player.level);
             spell.setPos(player.getX(), player.getY() + 0.1, player.getZ());
             player.level.addFreshEntity(spell);
@@ -122,23 +116,5 @@ public class GravitasStaff extends ModularStaff {
         }
 
         return ActionResult.sidedSuccess(player.getItemInHand(hand), world.isClientSide());
-    }
-
-    private ItemStack findManaVial(PlayerEntity player) {
-        for (ItemStack stack : player.inventory.items) {
-            if (stack.getItem() instanceof ManaVial && getStoredMana(stack) > 0) {
-                return stack;
-            }
-        }
-        return ItemStack.EMPTY;
-    }
-
-    private int getStoredMana(ItemStack stack) {
-        CompoundNBT tag = stack.getOrCreateTag();
-        return tag.getInt("StoredMana");
-    }
-
-    private void setStoredMana(ItemStack stack, int amount) {
-        stack.getOrCreateTag().putInt("StoredMana", amount);
     }
 }

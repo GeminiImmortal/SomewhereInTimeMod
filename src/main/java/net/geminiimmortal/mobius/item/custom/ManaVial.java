@@ -118,9 +118,13 @@ public class ManaVial extends Item {
     }
 
 
-    public int getStoredMana(ItemStack stack) {
+    public static int getStoredMana(ItemStack stack) {
         CompoundNBT tag = stack.getOrCreateTag();
         return tag.getInt(MANA_TAG);
+    }
+
+    public static void setStoredMana(ItemStack stack, int amount) {
+        stack.getOrCreateTag().putInt("StoredMana", amount);
     }
 
     public boolean addMana(ItemStack stack, int amountToAdd) {

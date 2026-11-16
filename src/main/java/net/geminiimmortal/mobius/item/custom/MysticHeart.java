@@ -3,6 +3,7 @@ package net.geminiimmortal.mobius.item.custom;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.FaestagEntity;
 import net.geminiimmortal.mobius.item.StaffType;
+import net.geminiimmortal.mobius.item.util.ManaHelper;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -29,8 +30,19 @@ public class MysticHeart extends ModularStaff {
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        ItemStack manaVial = findManaVial(player);
         CompoundNBT tag = stack.getOrCreateTag();
+        if (player.level.isClientSide()) {
+            boolean isSuccess = ManaHelper.consumeMana(player, this.staffType.getManaCost(), true);
+            if (!isSuccess) {
+                return ActionResult.fail(player.getItemInHand(hand));
+            }
+        }
+        if (!player.level.isClientSide()) {
+            boolean isSuccess = ManaHelper.consumeMana(player, this.staffType.getManaCost(), false);
+            if (!isSuccess) {
+                return ActionResult.fail(player.getItemInHand(hand));
+            }
+        }
         FaestagEntity stag = new FaestagEntity(ModEntityTypes.FAESTAG.get(), player.level);
         if (tag.contains("StagUUID") && !player.level.isClientSide()) {
             FaestagEntity currentStag = (FaestagEntity) ((ServerWorld) player.level).getEntity(tag.getUUID("StagUUID"));
@@ -43,21 +55,11 @@ public class MysticHeart extends ModularStaff {
             return ActionResult.success(stack);
         }
 
-        if (manaVial == null || getStoredMana(manaVial) < staffType.getManaCost()) {
-            player.displayClientMessage(new TranslationTextComponent("item.mobius.staff.not_enough_mana"), true);
-            return ActionResult.fail(stack);
-        }
-
         if (player.level.isClientSide()) {
             assert Minecraft.getInstance().player != null;
             Minecraft.getInstance().player.playSound(ModSounds.MYSTIC_TEAR_AMBIENT.get(), 1.0F, 1.0F);
             Minecraft.getInstance().player.playSound(this.staffType.getSound().resolve().get(), 1.0F, 1.0F);
         } else {
-            if (manaVial.isEmpty() || getStoredMana(manaVial) < this.staffType.getManaCost()) {
-                player.displayClientMessage(new TranslationTextComponent("item.mobius.staff.not_enough_mana"), true);
-                return ActionResult.fail(stack);
-            }
-
             if (!tag.contains("StagUUID")) {
 
                 Vector3d spawnPos = player.position().add(player.getLookAngle().scale(2.0)).add(0, 1.5, 0);
@@ -71,9 +73,6 @@ public class MysticHeart extends ModularStaff {
 
                 world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundCategory.PLAYERS, 1.0f, 1.2f);
 
-
-                setStoredMana(manaVial, getStoredMana(manaVial) - this.staffType.getManaCost());
-
                 stack.setTag(tag);
                 return ActionResult.success(stack);
             }
@@ -81,36 +80,6 @@ public class MysticHeart extends ModularStaff {
 
         player.startUsingItem(hand);
         return ActionResult.success(stack);
-    }
-
-    /*@Override
-    public int getUseDuration(ItemStack stack) {
-        return 72000;
-    }
-
-    @Override
-    public UseAction getUseAnimation(ItemStack stack) {
-        return UseAction.BLOCK;
-    }*/
-
-    // [your findManaVial, getStoredMana, setStoredMana, durability bar, cooldown, etc., stay unchanged]
-
-    private ItemStack findManaVial(PlayerEntity player) {
-        for (ItemStack stack : player.inventory.items) {
-            if (stack.getItem() instanceof ManaVial && getStoredMana(stack) > 0) {
-                return stack;
-            }
-        }
-        return ItemStack.EMPTY;
-    }
-
-    private int getStoredMana(ItemStack stack) {
-        CompoundNBT tag = stack.getOrCreateTag();
-        return tag.getInt("StoredMana");
-    }
-
-    private void setStoredMana(ItemStack stack, int amount) {
-        stack.getOrCreateTag().putInt("StoredMana", amount);
     }
 
     private void updateCooldown(ItemStack stack, World level) {

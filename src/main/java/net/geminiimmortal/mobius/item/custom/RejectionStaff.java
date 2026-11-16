@@ -4,6 +4,7 @@ package net.geminiimmortal.mobius.item.custom;
 import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.spell.ArcaneCircleEntity;
 import net.geminiimmortal.mobius.item.StaffType;
+import net.geminiimmortal.mobius.item.util.ManaHelper;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -34,14 +35,21 @@ public class RejectionStaff extends ModularStaff {
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        ItemStack manaVial = findManaVial(player);
+        if (player.level.isClientSide()) {
+            boolean isSuccess = ManaHelper.consumeMana(player, this.staffType.getManaCost(), true);
+            if (!isSuccess) {
+                return ActionResult.fail(player.getItemInHand(hand));
+            }
+        }
+        if (!player.level.isClientSide()) {
+            boolean isSuccess = ManaHelper.consumeMana(player, this.staffType.getManaCost(), false);
+            if (!isSuccess) {
+                return ActionResult.fail(player.getItemInHand(hand));
+            }
+        }
         CompoundNBT tag = stack.getOrCreateTag();
         long currentTime = player.level.getGameTime();
 
-        if (manaVial == null || getStoredMana(manaVial) < staffType.getManaCost()) {
-            player.displayClientMessage(new TranslationTextComponent("item.mobius.staff.not_enough_mana"), true);
-            return ActionResult.fail(stack);
-        }
 
         if (player.level.isClientSide()) {
             assert Minecraft.getInstance().player != null;
@@ -56,12 +64,6 @@ public class RejectionStaff extends ModularStaff {
                 }
             }
 
-            if (manaVial.isEmpty() || getStoredMana(manaVial) < this.staffType.getManaCost()) {
-                player.displayClientMessage(new TranslationTextComponent("item.mobius.staff.not_enough_mana"), true);
-                return ActionResult.fail(stack);
-            }
-
-            setStoredMana(manaVial, getStoredMana(manaVial) - this.staffType.getManaCost());
 
             stack.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
             tag.putLong("LastUsedTime", currentTime);
@@ -76,7 +78,6 @@ public class RejectionStaff extends ModularStaff {
             // Save the shield's UUID to the item's tag
             tag.putUUID("ShieldUUID", shield.getUUID());
             stack.setTag(tag);
-
             world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundCategory.PLAYERS, 1.0f, 1.2f);
         }
 
@@ -108,26 +109,6 @@ public class RejectionStaff extends ModularStaff {
     @Override
     public UseAction getUseAnimation(ItemStack stack) {
         return UseAction.BOW;
-    }
-
-    // [your findManaVial, getStoredMana, setStoredMana, durability bar, cooldown, etc., stay unchanged]
-
-    private ItemStack findManaVial(PlayerEntity player) {
-        for (ItemStack stack : player.inventory.items) {
-            if (stack.getItem() instanceof ManaVial && getStoredMana(stack) > 0) {
-                return stack;
-            }
-        }
-        return ItemStack.EMPTY;
-    }
-
-    private int getStoredMana(ItemStack stack) {
-        CompoundNBT tag = stack.getOrCreateTag();
-        return tag.getInt("StoredMana");
-    }
-
-    private void setStoredMana(ItemStack stack, int amount) {
-        stack.getOrCreateTag().putInt("StoredMana", amount);
     }
 
     private void updateCooldown(ItemStack stack, World level) {

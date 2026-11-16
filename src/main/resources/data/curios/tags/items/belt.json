@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "mobius:mana_vial",
+    "mobius:mana_flask",
+    "mobius:mana_alembic",
+    "mobius:gaia_flask"
+  ]
+}

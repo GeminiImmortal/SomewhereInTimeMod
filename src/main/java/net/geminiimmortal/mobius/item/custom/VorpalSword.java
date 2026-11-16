@@ -2,6 +2,7 @@ package net.geminiimmortal.mobius.item.custom;
 
 
 import net.geminiimmortal.mobius.entity.custom.spell.SpellProjectileEntity;
+import net.geminiimmortal.mobius.item.util.ManaHelper;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
@@ -41,7 +42,18 @@ public class VorpalSword extends SwordItem {
     @Override
     public ActionResult<ItemStack> use(World level, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getItemInHand(hand);
-
+        if (player.level.isClientSide()) {
+            boolean isSuccess = ManaHelper.consumeMana(player, MANA_COST, true);
+            if (!isSuccess) {
+                return ActionResult.fail(player.getItemInHand(hand));
+            }
+        }
+        if (!player.level.isClientSide()) {
+            boolean isSuccess = ManaHelper.consumeMana(player, MANA_COST, false);
+            if (!isSuccess) {
+                return ActionResult.fail(player.getItemInHand(hand));
+            }
+        }
         if (!level.isClientSide()) {
             long currentTime = level.getGameTime();
             CompoundNBT tag = stack.getOrCreateTag();
@@ -54,29 +66,12 @@ public class VorpalSword extends SwordItem {
                 }
             }
 
-            // Find a mana vial with sufficient mana
-            ItemStack manaVial = findManaVial(player);
-            if (manaVial.isEmpty()) {
-                player.displayClientMessage(new TranslationTextComponent("item.mobius.staff_of_protection.no_mana"), true);
-                return ActionResult.fail(stack);
-            }
-
-            int currentMana = getStoredMana(manaVial);
-            if (currentMana < MANA_COST) {
-                player.displayClientMessage(new TranslationTextComponent("item.mobius.staff_of_protection.not_enough_mana"), true);
-                return ActionResult.fail(stack);
-            }
-
             World world = player.level;
 
             castSpell(world, player);
 
 
             world.playSound(null, player.getX(), player.getY(), player.getZ(), ModSounds.SPELL_OF_AGGRESSION.get(), SoundCategory.PLAYERS, 50.0f, 1.0f);
-
-
-            // Deduct mana and apply effect
-            setStoredMana(manaVial, currentMana - MANA_COST);
 
             // Set cooldown
             tag.putLong("LastUsedTime", currentTime);
@@ -86,24 +81,6 @@ public class VorpalSword extends SwordItem {
         }
 
         return ActionResult.sidedSuccess(stack, level.isClientSide());
-    }
-
-    private ItemStack findManaVial(PlayerEntity player) {
-        for (ItemStack stack : player.inventory.items) {
-            if (stack.getItem() instanceof ManaVial && getStoredMana(stack) > 0) {
-                return stack;
-            }
-        }
-        return ItemStack.EMPTY;
-    }
-
-    private int getStoredMana(ItemStack stack) {
-        CompoundNBT tag = stack.getOrCreateTag();
-        return tag.getInt("StoredMana");
-    }
-
-    private void setStoredMana(ItemStack stack, int amount) {
-        stack.getOrCreateTag().putInt("StoredMana", amount);
     }
 
     public static void castSpell(World world, PlayerEntity player) {

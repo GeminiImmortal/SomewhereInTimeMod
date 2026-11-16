@@ -4,6 +4,7 @@ import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.custom.spell.BarrierEntity;
 import net.geminiimmortal.mobius.entity.custom.spell.MajorProtectionEntity;
 import net.geminiimmortal.mobius.item.StaffType;
+import net.geminiimmortal.mobius.item.util.ManaHelper;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
@@ -30,15 +31,22 @@ public class StaffMajorProtection extends ModularStaff {
     @Override
     public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        ItemStack manaVial = findManaVial(player);
+        if (player.level.isClientSide()) {
+            boolean isSuccess = ManaHelper.consumeMana(player, this.staffType.getManaCost(), true);
+            if (!isSuccess) {
+                return ActionResult.fail(player.getItemInHand(hand));
+            }
+        }
+        if (!player.level.isClientSide()) {
+            boolean isSuccess = ManaHelper.consumeMana(player, this.staffType.getManaCost(), false);
+            if (!isSuccess) {
+                return ActionResult.fail(player.getItemInHand(hand));
+            }
+        }
         CompoundNBT tag = stack.getOrCreateTag();
         long currentTime = player.level.getGameTime();
         long lastUsed = tag.getLong("LastUsedTime");
 
-        if (manaVial == null || getStoredMana(manaVial) < staffType.getManaCost()) {
-            player.displayClientMessage(new TranslationTextComponent("item.mobius.staff.not_enough_mana"), true);
-            return ActionResult.fail(stack);
-        }
 
         if (!player.level.isClientSide()) {
 
@@ -49,19 +57,6 @@ public class StaffMajorProtection extends ModularStaff {
                     return ActionResult.fail(stack);
                 }
             }
-
-            if (manaVial.isEmpty()) {
-                player.displayClientMessage(new TranslationTextComponent("item.mobius.staff_of_protection.no_mana"), true);
-                return ActionResult.fail(stack);
-            }
-
-            int currentMana = getStoredMana(manaVial);
-            if (currentMana < this.staffType.getManaCost()) {
-                player.displayClientMessage(new TranslationTextComponent("item.mobius.staff_of_protection.not_enough_mana"), true);
-                return ActionResult.fail(stack);
-            }
-
-            setStoredMana(manaVial, currentMana - this.staffType.getManaCost());
 
             if (!world.isClientSide) {
                 summonWards(world, player);
@@ -91,23 +86,6 @@ public class StaffMajorProtection extends ModularStaff {
     @Override
     public UseAction getUseAnimation(ItemStack stack) {
         return UseAction.BOW;
-    }
-    private ItemStack findManaVial(PlayerEntity player) {
-        for (ItemStack stack : player.inventory.items) {
-            if (stack.getItem() instanceof ManaVial && getStoredMana(stack) > 0) {
-                return stack;
-            }
-        }
-        return ItemStack.EMPTY;
-    }
-
-    private int getStoredMana(ItemStack stack) {
-        CompoundNBT tag = stack.getOrCreateTag();
-        return tag.getInt("StoredMana");
-    }
-
-    private void setStoredMana(ItemStack stack, int amount) {
-        stack.getOrCreateTag().putInt("StoredMana", amount);
     }
 
     @Override
