@@ -28,12 +28,10 @@ public class ManaHelper {
 
         List<ItemStack> manaSources = new ArrayList<>();
 
-        // 1. Gather Mana Vials from Curios slots (prioritize belt/curios)
         if (ModList.get().isLoaded("curios")) {
             CuriosCompat.getCurioVials(player, manaSources);
         }
 
-        // 2. Gather Mana Vials from main inventory & offhand
         for (int i = 0; i < player.inventory.getContainerSize(); i++) {
             ItemStack stack = player.inventory.getItem(i);
             if (stack.getItem() instanceof ManaVial) {
@@ -41,10 +39,9 @@ public class ManaHelper {
             }
         }
 
-        // 3. Calculate total available mana across all sources
         int totalAvailable = 0;
         for (ItemStack vial : manaSources) {
-            totalAvailable += ManaVial.getStoredMana(vial); // Replace with your NBT/Capability getter
+            totalAvailable += ManaVial.getStoredMana(vial);
             if (totalAvailable >= amount && simulate) {
                 return true;
             }
@@ -59,12 +56,11 @@ public class ManaHelper {
             return true;
         }
 
-        // 4. Drain mana sequentially across vials until the requirement is met
         int remainingToDrain = amount;
         for (ItemStack vial : manaSources) {
             int current = ManaVial.getStoredMana(vial);
             int toExtract = Math.min(current, remainingToDrain);
-            ManaVial.setStoredMana(vial, current - toExtract); // Replace with your NBT/Capability setter
+            ManaVial.setStoredMana(vial, current - toExtract);
             remainingToDrain -= toExtract;
 
             if (remainingToDrain <= 0) {
