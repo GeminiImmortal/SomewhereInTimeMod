@@ -9,16 +9,19 @@ import net.geminiimmortal.mobius.item.custom.Dieselytra;
 import net.geminiimmortal.mobius.item.custom.ManaVial;
 import net.geminiimmortal.mobius.item.render.DieselytraCurioRenderer;
 import net.geminiimmortal.mobius.sound.ModSounds;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
+import net.minecraft.util.math.vector.Vector3f;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -36,8 +39,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class CuriosCompat {
 
@@ -78,13 +79,7 @@ public class CuriosCompat {
                                     matrixStack, renderTypeBuffer, light, livingEntity, stack,
                                     limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch
                             );
-
-
                 }
-
-
-
-
 
                 @Override
                 public void curioTick(String identifier, int index, LivingEntity livingEntity) {
@@ -135,8 +130,55 @@ public class CuriosCompat {
             });
             event.addListener(curioOpt::invalidate);
         }
+        if (stack.getItem() instanceof ManaVial) {
+            ICurio vialCurio = new ICurio() {
+                @Override
+                public boolean canRender(String identifier, int index, LivingEntity livingEntity) {
+                    return true;
+                }
+
+                @OnlyIn(Dist.CLIENT)
+                @Override
+                public void render(String identifier, int index, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity livingEntity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
+                    matrixStack.pushPose();
+
+                    if (livingEntity.isCrouching()) {
+                        matrixStack.translate(0.0D, 0.2D, 0.0D);
+                        matrixStack.mulPose(Vector3f.XP.rotationDegrees(90.0F / (float) Math.PI));
+                    }
+
+                    float sideOffset = (index % 2 == 0) ? 0.18F : -0.18F;
+                    matrixStack.translate(sideOffset, 0.68D, -0.22D);
+
+                    matrixStack.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
+
+                    float scale = 0.45F;
+                    matrixStack.scale(scale, scale, scale);
+
+                    Minecraft.getInstance().getItemRenderer().renderStatic(
+                            stack,
+                            ItemCameraTransforms.TransformType.FIXED,
+                            light,
+                            OverlayTexture.NO_OVERLAY,
+                            matrixStack,
+                            renderTypeBuffer
+                    );
+
+                    matrixStack.popPose();
+                }
+            };
+            LazyOptional<ICurio> curioOpt = LazyOptional.of(() -> vialCurio);
+            event.addCapability(CuriosCapability.ID_ITEM, new ICapabilityProvider() {
+                @Nonnull
+                @Override
+                public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+                    return CuriosCapability.ITEM.orEmpty(cap, curioOpt);
+                }
+            });
+            event.addListener(curioOpt::invalidate);
+        }
     }
-    // Safe helper to call from your shared mod code
+
     public static boolean hasCurioEquipped(LivingEntity entity, Item item) {
         return CuriosApi.getCuriosHelper().findEquippedCurio(item, entity).isPresent();
     }
