@@ -10,6 +10,9 @@ import java.util.function.Function;
 
 public class CompatHooks {
     public static Function<LivingEntity, ItemStack> getCurioElytraStack = entity -> ItemStack.EMPTY;
+    public static Function<LivingEntity, ItemStack> getCurioRingOfWardingStack = entity -> ItemStack.EMPTY;
+    public static Function<LivingEntity, ItemStack> getCurioRingOfTheBerserkerStack = entity -> ItemStack.EMPTY;
+
 
     public static boolean hasCurioElytra(LivingEntity entity) {
         return !getCurioElytraStack.apply(entity).isEmpty();

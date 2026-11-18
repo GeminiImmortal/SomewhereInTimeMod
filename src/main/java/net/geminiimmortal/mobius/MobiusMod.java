@@ -1,6 +1,7 @@
 package net.geminiimmortal.mobius;
 
 import com.google.common.collect.Maps;
+import net.geminiimmortal.mobius.client.ModKeybinds;
 import net.geminiimmortal.mobius.effects.ModEffects;
 import net.geminiimmortal.mobius.event.DieselytraClientSetup;
 import net.geminiimmortal.mobius.fluid.ModFluids;
@@ -257,6 +258,9 @@ public class MobiusMod
             RenderTypeLookup.setRenderLayer(ModBlocks.WARD_BLOCK.get(), RenderType.translucent());
             RenderTypeLookup.setRenderLayer(ModBlocks.MYSTIC_TEAR.get(), RenderType.translucent());
 
+            if (ModList.get().isLoaded("curios")) {
+                ModKeybinds.register();
+            }
 
             ClientRegistry.bindTileEntityRenderer(ModTileEntities.SIGN_TILE_ENTITIES.get(),
                     SignTileEntityRenderer::new);

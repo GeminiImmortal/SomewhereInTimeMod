@@ -111,6 +111,7 @@
   "item.mobius.orichalcum_chestplate": "Orichalcum Chestplate",
   "item.mobius.orichalcum_leggings": "Orichalcum Leggings",
   "item.mobius.orichalcum_boots": "Orichalcum Boots",
+  "item.mobius.ring_of_the_berserker": "Ring of the Berserker",
 
   "entity.mobius.faestag": "Faestag",
   "entity.mobius.club_golem": "Golem of Clubs",
@@ -319,6 +320,11 @@
   "entity.mobius.harukaze.is_sitting.true": "Harukaze is following",
   "entity.mobius.grimcrow_captain.summon": "COWARD! A'right lads, force this scurvy dog back out here!",
   "overlay.mobius.loading_two": "ERROR: PARADOX DETECTED",
-  "overlay.mobius.loading_one": "--INITIATING EMERGENCY PORTAL PLACEMENT--"
+  "overlay.mobius.loading_one": "--INITIATING EMERGENCY PORTAL PLACEMENT--",
+
+  "key.categories.mobius": "Somewhere in Time",
+  "key.mobius.activate_warding_ring": "Activate Ring of Warding in Curios slot",
+  "key.mobius.activate_berserker_ring": "Toggle Berserker Ring in Curios slot",
+  "item.mobius.ring_of_the_berserker_no_mana_left": "Mana depleted! Your rage subsides."
 
 }

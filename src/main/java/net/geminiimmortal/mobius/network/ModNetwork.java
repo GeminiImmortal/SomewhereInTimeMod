@@ -3,6 +3,7 @@ package net.geminiimmortal.mobius.network;
 import net.geminiimmortal.mobius.MobiusMod;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -14,6 +15,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 public class ModNetwork {
     public static SimpleChannel NETWORK_CHANNEL;
     public static final String PROTOCOL_VERSION = "1";
+    private static final boolean CURIOS_LOADED = ModList.get().isLoaded("curios");
 
     public static void init() {
         NETWORK_CHANNEL = NetworkRegistry.ChannelBuilder.named(new ResourceLocation(MobiusMod.MOD_ID, "main_channel"))
@@ -69,6 +71,13 @@ public class ModNetwork {
                 .decoder(GovernorCursePacket::decode)
                 .consumer(GovernorCursePacket::handle)
                 .add();
+        if (CURIOS_LOADED) {
+            NETWORK_CHANNEL.messageBuilder(ActivateRingPacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
+                    .encoder(ActivateRingPacket::encode)
+                    .decoder(ActivateRingPacket::decode)
+                    .consumer(ActivateRingPacket::handle)
+                    .add();
+        }
     }
 
     @SubscribeEvent

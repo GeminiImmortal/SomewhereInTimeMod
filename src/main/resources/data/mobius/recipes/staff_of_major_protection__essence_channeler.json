@@ -1,0 +1,17 @@
+{
+  "type": "mobius:essence_channeler",
+  "ingredients": [
+    {
+      "item": "mobius:cube_of_stabilized_void_energy"
+    },
+    {
+      "item": "mobius:orichalcum_ingot"
+    },
+    {
+      "item": "mobius:obsidian_rod"
+    }
+  ],
+  "output": {
+    "item": "mobius:staff_of_major_protection"
+  }
+}
