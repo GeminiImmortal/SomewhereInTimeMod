@@ -7,9 +7,7 @@ import net.geminiimmortal.mobius.hook.CompatHooks;
 import net.geminiimmortal.mobius.item.ModItems;
 import net.geminiimmortal.mobius.item.custom.Dieselytra;
 import net.geminiimmortal.mobius.item.custom.ManaVial;
-import net.geminiimmortal.mobius.item.custom.RingOfWarding;
 import net.geminiimmortal.mobius.item.render.DieselytraCurioRenderer;
-import net.geminiimmortal.mobius.item.util.ManaHelper;
 import net.geminiimmortal.mobius.sound.ModSounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -19,20 +17,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
 import net.minecraft.util.Direction;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.vector.Vector3f;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -50,8 +39,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
-
-import static net.geminiimmortal.mobius.item.custom.ManaVial.TAG_ACTIVE;
 
 public class CuriosCompat {
 

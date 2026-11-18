@@ -184,6 +184,10 @@ public class VillagerTradesEvent {
                     new ItemStack(Items.EMERALD, 12),
                     new ItemStack(ModItems.BLOODROP_GEMSTONE.get(), 8),
                     1, 0, 0.00f));
+            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
+                    new ItemStack(Items.EMERALD, 48),
+                    new ItemStack(ModItems.RING_OF_THE_BERSERKER.get(), 1),
+                    1, 0, 0.00f));
         }
     }
 }

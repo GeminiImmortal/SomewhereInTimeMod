@@ -1,8 +1,6 @@
 package net.geminiimmortal.mobius.network;
 
 import net.geminiimmortal.mobius.item.custom.IActivatableRing;
-import net.geminiimmortal.mobius.item.custom.RingOfTheBerserker;
-import net.geminiimmortal.mobius.item.custom.RingOfWarding;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
