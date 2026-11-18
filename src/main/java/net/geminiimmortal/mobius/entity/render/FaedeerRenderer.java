@@ -1,7 +1,10 @@
 package net.geminiimmortal.mobius.entity.render;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.geminiimmortal.mobius.entity.custom.FaedeerEntity;
 import net.geminiimmortal.mobius.entity.model.FaedeerModel;
+import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 
 import net.minecraft.util.ResourceLocation;
@@ -17,6 +20,18 @@ public class FaedeerRenderer extends GeoEntityRenderer<FaedeerEntity> {
     @Override
     public ResourceLocation getTextureLocation(FaedeerEntity entity) {
         return new ResourceLocation("mobius", "textures/entity/faedeer_buck.png");
+    }
+
+    @Override
+    public void renderEarly(FaedeerEntity entity, MatrixStack matrixStack, float ticks, IRenderTypeBuffer renderTypeBuffer,
+                            IVertexBuilder vertexBuilder, int packedLightIn, int packedOverlayIn, float red, float green, float blue,
+                            float partialTicks) {
+        if (entity.isBaby()) {
+            matrixStack.scale(0.5F, 0.5F, 0.5F);
+            this.shadowRadius = 0.25f;
+        }
+
+        super.renderEarly(entity, matrixStack, ticks, renderTypeBuffer, vertexBuilder, packedLightIn, packedOverlayIn, red, green, blue, partialTicks);
     }
 }
 

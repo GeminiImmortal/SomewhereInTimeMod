@@ -16,12 +16,17 @@ public class FaedeerRendererEmissiveLayer extends GeoLayerRenderer<FaedeerEntity
         super(entityRendererIn);
     }
 
+    private float shadowRadius = 0.5f;
+
     @Override
     public void render(MatrixStack stack, IRenderTypeBuffer buffer, int packedLight, FaedeerEntity entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         ResourceLocation emissiveTexture = new ResourceLocation(MobiusMod.MOD_ID, "textures/entity/faedeer_buck_emissive.png");
 
         IVertexBuilder vertexConsumer = buffer.getBuffer(RenderType.eyes(emissiveTexture));
-
+        if (entity.isBaby()) {
+            stack.scale(2.0F, 2.0F, 2.0F);
+            this.shadowRadius = 0.25f;
+        }
         this.getRenderer().render(
                 this.getEntityModel().getModel(this.getEntityModel().getModelLocation(entity)),
                 entity,

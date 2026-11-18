@@ -1,19 +1,21 @@
 package net.geminiimmortal.mobius.entity.custom;
 
 import net.geminiimmortal.mobius.block.ModBlocks;
+import net.geminiimmortal.mobius.entity.ModEntityTypes;
 import net.geminiimmortal.mobius.entity.goals.FaedeerRunGoal;
 import net.geminiimmortal.mobius.entity.goals.LookForPlayerGoal;
-import net.geminiimmortal.mobius.particle.ModParticles;
 import net.geminiimmortal.mobius.sound.ModSounds;
-import net.minecraft.entity.CreatureEntity;
+import net.geminiimmortal.mobius.world.worldgen.biome.ModBiomes;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.item.ExperienceOrbEntity;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
@@ -23,6 +25,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -32,9 +35,10 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 import software.bernie.geckolib3.util.GeckoLibUtil;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
-public class FaedeerEntity extends CreatureEntity implements IAnimatable {
+public class FaedeerEntity extends AnimalEntity implements IAnimatable {
     private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
     private static final DataParameter<Boolean> ALERTED = EntityDataManager.defineId(FaedeerEntity.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> FLEEING = EntityDataManager.defineId(FaedeerEntity.class, DataSerializers.BOOLEAN);
@@ -46,10 +50,16 @@ public class FaedeerEntity extends CreatureEntity implements IAnimatable {
 
 
 
-    public FaedeerEntity(EntityType<? extends CreatureEntity> type, World worldIn) {
+    public FaedeerEntity(EntityType<? extends AnimalEntity> type, World worldIn) {
         super(type, worldIn);
         this.dropExperience();
         this.maxUpStep = 1;
+    }
+
+    @Nullable
+    @Override
+    public AgeableEntity getBreedOffspring(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
+        return ModEntityTypes.FAEDEER.get().create(p_241840_1_);
     }
 
     @Override
@@ -80,8 +90,8 @@ public class FaedeerEntity extends CreatureEntity implements IAnimatable {
         this.goalSelector.addGoal(3, new FaedeerRunGoal(this, 12, 1.2D));
     }
 
-    public static boolean canMobSpawn(EntityType<? extends CreatureEntity> entityType, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
-        return (world.getBlockState(pos.below()) == ModBlocks.AURORA_GRASS_BLOCK.get().defaultBlockState());
+    public static boolean canMobSpawn(EntityType<? extends AnimalEntity> entityType, IWorld world, SpawnReason reason, BlockPos pos, Random random) {
+        return (world.getBlockState(pos.below()) == Blocks.GRASS.defaultBlockState()) || (world.getBlockState(pos.below()) == ModBlocks.AURORA_GRASS_BLOCK.get().defaultBlockState());
     }
 
     protected int getXpToDrop() {

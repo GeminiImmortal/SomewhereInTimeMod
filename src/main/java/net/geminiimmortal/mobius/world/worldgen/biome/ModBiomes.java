@@ -120,9 +120,7 @@ public class ModBiomes {
     private static Biome makeForsakenThicket(final Supplier<ConfiguredSurfaceBuilder<?>> surfaceBuilder, float depth, float scale) {
         MobSpawnInfo.Builder mobspawninfo$builder = new MobSpawnInfo.Builder();
         mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
-                new MobSpawnInfo.Spawners(EntityType.BAT, 35, 7, 10));
-        mobspawninfo$builder.addSpawn(EntityClassification.CREATURE,
-                new MobSpawnInfo.Spawners(ModEntityTypes.FAEDEER.get(), 60, 3,5));
+                new MobSpawnInfo.Spawners(ModEntityTypes.FAEDEER.get(), 60, 3,8));
         BiomeGenerationSettings.Builder biomegenerationsettings$builder =
                 (new BiomeGenerationSettings.Builder()).surfaceBuilder(surfaceBuilder);
         DefaultBiomeFeatures.addTaigaGrass(biomegenerationsettings$builder);
