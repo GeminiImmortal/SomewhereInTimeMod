@@ -281,11 +281,13 @@
   "effect.mobius.exposed": "Exposed",
   "effect.mobius.charged": "Charged",
   "effect.mobius.astral_grace": "Astral Grace",
+  "effect.mobius.disguised": "Disguised",
 
   "effect.mobius.exposed.description": "Amplifies damage taken by 20% per stack",
   "effect.mobius.lord_decree.description": "Continuously applies slowness and nausea",
   "effect.mobius.charged.description": "Amplifies Grimcrow Captain Davy Van Diesel's attack and movement speed by 1% and 0.5% per stack respectively",
   "effect.mobius.astral_grace.description": "Wearing a complete set of astral armor makes you 20% faster and adds 10 hearts of health.",
+  "effect.mobius.disguised.description": "Illusion magic allows you to fool imperial guards into not attacking, but interacting will break the disguise.",
 
   "tooltip.mobius.vorpal_sword": "Steals life on hit",
 

@@ -1,10 +1,7 @@
 package net.geminiimmortal.mobius.effects;
 
 import net.geminiimmortal.mobius.MobiusMod;
-import net.geminiimmortal.mobius.effects.custom.AstralGraceEffect;
-import net.geminiimmortal.mobius.effects.custom.ChargedEffect;
-import net.geminiimmortal.mobius.effects.custom.ExposedEffect;
-import net.geminiimmortal.mobius.effects.custom.LordDecreeEffect;
+import net.geminiimmortal.mobius.effects.custom.*;
 import net.minecraft.potion.Effect;
 
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -29,6 +26,9 @@ public class ModEffects {
 
     public static final RegistryObject<Effect> ASTRAL_GRACE = EFFECTS.register("astral_grace",
             () -> new AstralGraceEffect(EffectType.BENEFICIAL, 0xFFFFFF));
+
+    public static final RegistryObject<Effect> DISGUISED = EFFECTS.register("disguised",
+            () -> new DisguisedEffect(EffectType.BENEFICIAL, 0xFF0000));
 
     public static void register(IEventBus eventBus) {
         EFFECTS.register(eventBus);
