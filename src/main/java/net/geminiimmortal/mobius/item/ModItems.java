@@ -188,12 +188,12 @@ public class ModItems {
             () -> new BlockItem(ModBlocks.SKYCAP.get() ,new Item.Properties().tab(ItemGroup.TAB_DECORATIONS)));
     public static final RegistryObject<Item> RAW_FAE_VENISON = ITEMS.register("raw_fae_venison",
             () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD)
-            .food(new Food.Builder().nutrition(3).saturationMod(0.1f).meat()
+            .food(new Food.Builder().nutrition(3).saturationMod(0.1f)
+                    .effect(new EffectInstance(Effects.GLOWING, 100), 1f).meat()
                     .build())));
     public static final RegistryObject<Item> COOKED_FAE_VENISON = ITEMS.register("cooked_fae_venison",
             () -> new Item(new Item.Properties().tab(ItemGroup.TAB_FOOD)
-            .food(new Food.Builder().nutrition(10).saturationMod(0.8f)
-                    .effect(new EffectInstance(Effects.GLOWING, 100), 1f).meat()
+            .food(new Food.Builder().nutrition(10).saturationMod(0.8f).meat()
                     .build())));
 
     //Workstations Misc.
