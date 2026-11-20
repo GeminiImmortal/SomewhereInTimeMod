@@ -1,17 +1,21 @@
 package net.geminiimmortal.mobius.item.custom;
 
 
-import net.geminiimmortal.mobius.hook.CompatHooks;
+import net.geminiimmortal.mobius.integration.CuriosCompat;
 import net.geminiimmortal.mobius.item.ModItems;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ElytraItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.extensions.IForgeItem;
+import net.minecraftforge.fml.ModList;
 
 import javax.annotation.Nullable;
 
-public class Dieselytra extends ElytraItem implements IForgeItem {
+public class Dieselytra extends Item implements IForgeItem {
     public Dieselytra(Properties properties) {
         super(properties);
     }
@@ -46,5 +50,14 @@ public class Dieselytra extends ElytraItem implements IForgeItem {
             });
         }
         return true;
+    }
+
+    @Nullable
+    @Override
+    public ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundNBT nbt) {
+        if (ModList.get().isLoaded("curios")) {
+            return CuriosCompat.createElytraProvider(stack);
+        }
+        return super.initCapabilities(stack, nbt);
     }
 }

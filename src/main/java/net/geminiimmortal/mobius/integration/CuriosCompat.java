@@ -29,6 +29,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModList;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
@@ -76,65 +77,6 @@ public class CuriosCompat {
 
     private static void attachCapabilities(AttachCapabilitiesEvent<ItemStack> event) {
         ItemStack stack = event.getObject();
-        if (stack.getItem() == ModItems.DIESELYTRA.get()) {
-            ICurio curio = new ICurio() {
-                @OnlyIn(Dist.CLIENT)
-                @Override
-                public boolean canRender(String identifier, int index, LivingEntity livingEntity) {
-                    return true;
-                }
-
-                @OnlyIn(Dist.CLIENT)
-                public void render(String identifier, int index, MatrixStack matrixStack,
-                                   IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity livingEntity,
-                                   float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
-                                   float netHeadYaw, float headPitch) {
-                    DieselytraCurioRenderer.renderElytra(
-                            matrixStack, renderTypeBuffer, light, livingEntity, stack,
-                            limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch
-                    );
-                }
-
-                @Override
-                public void curioTick(String identifier, int index, LivingEntity livingEntity) {
-                    if (Dieselytra.isFlyEnabled(stack) && livingEntity.isFallFlying() && livingEntity.level.isClientSide()) {
-                        Dieselytra.handleFlightTick(stack, livingEntity, livingEntity.getFallFlyingTicks());
-
-                    }
-                    if (!livingEntity.level.isClientSide && livingEntity.isFallFlying()) {
-                        if ((livingEntity.tickCount + 1) % 20 == 0) {
-                            stack.hurtAndBreak(1, livingEntity, entity ->
-                                    CuriosApi.getCuriosHelper().onBrokenCurio(identifier, index, entity)
-                            );
-                        }
-                    }
-                }
-
-                @Override
-                public boolean canEquipFromUse(SlotContext slotContext) {
-                    return true;
-                }
-
-                @Nonnull
-                @Override
-                public SoundInfo getEquipSound(SlotContext slotContext) {
-                    return new SoundInfo(ModSounds.DIESELYTRA_BOOST.get(), 1.0f, 1.0f);
-                }
-
-                private final UUID CURIO_ELYTRA_UUID = UUID.fromString("8f3a1c4e-2b7d-4e9a-9c1f-6d5b4a3e2f10");
-
-                @Override
-                public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid) {
-                    Multimap<Attribute, AttributeModifier> attributes = HashMultimap.create();
-
-                    if (ModList.get().isLoaded("caelus") && ElytraItem.isFlyEnabled(stack)) {
-                        CaelusCompat.addFallFlyingModifier(attributes, CURIO_ELYTRA_UUID);
-                    }
-
-                    return attributes;
-                }
-            };
-        }
         if (stack.getItem() instanceof ManaVial) {
             ICurio vialCurio = new ICurio() {
                 @Override
@@ -190,6 +132,71 @@ public class CuriosCompat {
     public static void getCurioVials(PlayerEntity player, List<ItemStack> manaSources) {
         CuriosApi.getCuriosHelper().findCurios(player, stack -> stack.getItem() instanceof ManaVial)
                 .forEach(slotResult -> manaSources.add(slotResult.getStack()));
+    }
+
+    public static ICapabilityProvider createElytraProvider(ItemStack stack) {
+        ICurio curio = new ICurio() {
+            @Override
+            public void curioTick(String identifier, int index, LivingEntity livingEntity) {
+                if (!livingEntity.level.isClientSide && livingEntity.isFallFlying()) {
+                    if ((livingEntity.tickCount + 1) % 20 == 0) {
+                        stack.hurtAndBreak(1, livingEntity, entity ->
+                                CuriosApi.getCuriosHelper().onBrokenCurio(identifier, index, entity)
+                        );
+                    }
+                }
+            }
+
+            @Nonnull
+            @Override
+            public SoundInfo getEquipSound(SlotContext slotContext) {
+                return new SoundInfo(ModSounds.DIESELYTRA_BOOST.get(), 1.0f, 1.0f);
+            }
+
+            private final UUID CURIO_ELYTRA_UUID = UUID.fromString("8f3a1c4e-2b7d-4e9a-9c1f-6d5b4a3e2f10");
+
+            @Override
+            public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid) {
+                Multimap<Attribute, AttributeModifier> attributes = HashMultimap.create();
+
+                if (ModList.get().isLoaded("caelus") && ElytraItem.isFlyEnabled(stack)) {
+                    CaelusCompat.addFallFlyingModifier(attributes, CURIO_ELYTRA_UUID);
+                }
+                return attributes;
+            }
+
+            @OnlyIn(Dist.CLIENT)
+            @Override
+            public boolean canRender(String identifier, int index, LivingEntity livingEntity) {
+                return true;
+            }
+
+            @OnlyIn(Dist.CLIENT)
+            public void render(String identifier, int index, MatrixStack matrixStack,
+                               IRenderTypeBuffer renderTypeBuffer, int light, LivingEntity livingEntity,
+                               float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks,
+                               float netHeadYaw, float headPitch) {
+                DieselytraCurioRenderer.renderElytra(
+                        matrixStack, renderTypeBuffer, light, livingEntity, stack,
+                        limbSwing, limbSwingAmount, partialTicks, ageInTicks, netHeadYaw, headPitch
+                );
+            }
+
+            @Override
+            public boolean canEquipFromUse(SlotContext slotContext) {
+                return true;
+            }
+        };
+
+        LazyOptional<ICurio> curioOpt = LazyOptional.of(() -> curio);
+
+        return new ICapabilityProvider() {
+            @Nonnull
+            @Override
+            public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
+                return CuriosCapability.ITEM.orEmpty(cap, curioOpt);
+            }
+        };
     }
 }
 
