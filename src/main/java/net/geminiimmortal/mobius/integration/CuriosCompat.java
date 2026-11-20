@@ -128,21 +128,12 @@ public class CuriosCompat {
                     Multimap<Attribute, AttributeModifier> attributes = HashMultimap.create();
 
                     if (ModList.get().isLoaded("caelus") && ElytraItem.isFlyEnabled(stack)) {
-                        CaelusCompat.addFallFlyingModifier(attributes, uuid);
+                        CaelusCompat.addFallFlyingModifier(attributes, CURIO_ELYTRA_UUID);
                     }
 
                     return attributes;
                 }
             };
-            LazyOptional<ICurio> curioOpt = LazyOptional.of(() -> curio);
-            event.addCapability(CuriosCapability.ID_ITEM, new ICapabilityProvider() {
-                @Nonnull
-                @Override
-                public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-                    return CuriosCapability.ITEM.orEmpty(cap, curioOpt);
-                }
-            });
-            event.addListener(curioOpt::invalidate);
         }
         if (stack.getItem() instanceof ManaVial) {
             ICurio vialCurio = new ICurio() {
