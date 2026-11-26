@@ -1,5 +1,6 @@
 package net.geminiimmortal.mobius.block.custom.crop;
 
+import net.geminiimmortal.mobius.api.crop.ICropCompat;
 import net.geminiimmortal.mobius.block.ModBlocks;
 import net.geminiimmortal.mobius.item.ModItems;
 import net.minecraft.block.Block;
@@ -10,10 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -22,9 +20,11 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
-public class AuroraBerryCrop extends BushBlock {
+public class AuroraBerryCrop extends BushBlock implements ICropCompat {
     public static final IntegerProperty AGE = IntegerProperty.create("age", 0, getMaxAge());
 
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
@@ -92,5 +92,25 @@ public class AuroraBerryCrop extends BushBlock {
     @Override
     protected boolean mayPlaceOn(BlockState p_200014_1_, IBlockReader p_200014_2_, BlockPos p_200014_3_) {
         return p_200014_1_.is(ModBlocks.AURORA_GRASS_BLOCK.get()) || p_200014_1_.is(ModBlocks.AURORA_DIRT.get());
+    }
+
+    @Override
+    public String getCropName() {
+        return "aurora_berry";
+    }
+
+    @Override
+    public CropCategory getCropCategory() {
+        return CropCategory.BERRY;
+    }
+
+    @Override
+    public IItemProvider getProduceItem() {
+        return ModItems.AURORA_BERRY.get();
+    }
+
+    @Override
+    public Set<Season> getFertileSeasons() {
+        return new HashSet<>();
     }
 }
